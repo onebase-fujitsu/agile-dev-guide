@@ -1,5 +1,5 @@
 ---
-title: "求められる心構え"
+title: "E2E Test"
 weight: 2
 # bookFlatSection: false
 # bookToc: true
@@ -9,5 +9,4 @@ weight: 2
 # bookSearchExclude: false
 ---
 
-# 求められる心構え
-心
+# E2E Test

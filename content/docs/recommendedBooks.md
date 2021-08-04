@@ -1,6 +1,6 @@
 ---
-title: "求められる心構え"
-weight: 2
+title: "推奨書籍"
+weight: 5
 # bookFlatSection: false
 # bookToc: true
 # bookHidden: false
@@ -9,5 +9,7 @@ weight: 2
 # bookSearchExclude: false
 ---
 
-# 求められる心構え
-心
+# 推奨書籍
+
+## aaa
+### aaa

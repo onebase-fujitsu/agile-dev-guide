@@ -14,7 +14,8 @@ draft: true
 
 ## ソースコード
 
-本書のソースコードは  で公開しています。
+本書のソースコードは [https://github.com/Onebase-Fujitsu/agile-dev-guide](https://github.com/Onebase-Fujitsu/agile-dev-guide) にあります。
+現在非公開リポジトリとなっています。
 
 ## ライセンス
 
