@@ -25,4 +25,4 @@ draft: true
 
 こちらから本編に進めます。
 
-{{< button relref="/docs/about/about" >}}はじめに{{< /button >}}
+{{< button relref="/docs/about/agileOverview" >}}はじめに{{< /button >}}

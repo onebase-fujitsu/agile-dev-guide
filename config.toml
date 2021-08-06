@@ -2,3 +2,8 @@ baseURL = 'http://example.org/'
 languageCode = 'en-us'
 title = 'Fujitsu Agile Development Guide'
 theme = "book"
+
+[params]
+    BookSearch = true
+    BookTheme = 'auto'
+    BookSearch = false
