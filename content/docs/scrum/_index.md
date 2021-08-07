@@ -1,6 +1,6 @@
 ---
 title: "スクラム"
-weight: 2
+weight: 3
 bookFlatSection: false
 bookToc: true
 bookCollapseSection: true

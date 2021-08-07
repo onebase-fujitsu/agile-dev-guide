@@ -6,7 +6,7 @@ bookToc: true
 
 # アジャイル開発12の原則
 
-[アジャイルソフトウェア開発宣言]({{< ref "/docs/about/agileManifest" >}}) で宣言されていた内容は、
+[アジャイルソフトウェア開発宣言]({{< ref "/docs/agile/agileManifest" >}}) で宣言されていた内容は、
 アジャイル開発をする上で大事なマインドセットを述べたものでした。
 ではその背景にもなる [アジャイル開発12の原則](https://agilemanifesto.org/iso/ja/principles.html) を見ていきましょう。先のアジャイルソフトウェア開発宣言のページにリンクがあります。
 

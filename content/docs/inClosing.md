@@ -1,12 +1,7 @@
 ---
 title: "おわりに"
 weight: 7
-# bookFlatSection: false
 bookToc: true
-# bookHidden: false
-# bookCollapseSection: false
-# bookComments: false
-# bookSearchExclude: false
 ---
 
 # おわりに
@@ -30,7 +25,7 @@ bookToc: true
 どんなスキルや知識も時間とともに陳腐化していきます。
 
 ここで大事なのは**日頃から技術者として自己研鑽を積み、学び続ける姿勢**です。
-ここで [アジャイル開発12の原則]({{< ref "/docs/about/agilePrinciple#技術や設計をレベルアップさせる意識が俊敏アジャイルさを高める" >}}) を思い出してほしいのですが、
+ここで [アジャイル開発12の原則]({{< ref "/docs/agile/agilePrinciple#技術や設計をレベルアップさせる意識が俊敏アジャイルさを高める" >}}) を思い出してほしいのですが、
 原則の中に「技術や設計をレベルアップさせる意識が、俊敏（アジャイル）さを高める」という一節があったと思います。
 
 なんでも作れるようになるのは難しくても、何でも作れる技術者を目指すことは誰でもできます。
