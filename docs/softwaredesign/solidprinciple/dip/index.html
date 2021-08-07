@@ -1,0 +1,166 @@
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="依存性逆転の原則(The Dependency Inversion Principle) #  ">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="依存性逆転の原則(DIP)">
+<meta property="og:description" content="依存性逆転の原則(The Dependency Inversion Principle) #  ">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://example.org/docs/softwaredesign/solidprinciple/dip/"><meta property="article:section" content="docs">
+<title>依存性逆転の原則(DIP) | Fujitsu Agile Development Guide</title>
+<link rel=manifest href=/manifest.json>
+<link rel=icon href=/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a href=/><span>Fujitsu Agile Development Guide</span>
+</a>
+</h2>
+<ul>
+<li>
+<input type=checkbox id=section-a61b294d5fe4a63fddde070933328b8a class=toggle>
+<label for=section-a61b294d5fe4a63fddde070933328b8a class="flex justify-between">
+<a role=button>はじめに</a>
+</label>
+<ul>
+<li>
+<a href=http://example.org/docs/about/welcometoagile/>アジャイル開発にようこそ</a>
+</li>
+<li>
+<a href=http://example.org/docs/about/agilemanifest/>アジャイルソフトウェア開発宣言</a>
+</li>
+<li>
+<a href=http://example.org/docs/about/agileprinciple/>アジャイル開発12の原則</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-488859b49087c05cd9f2afa3c2804c61 class=toggle>
+<label for=section-488859b49087c05cd9f2afa3c2804c61 class="flex justify-between">
+<a role=button>スクラム</a>
+</label>
+<ul>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-f43a50e4d00e3398d279579a5a9a0783 class=toggle>
+<label for=section-f43a50e4d00e3398d279579a5a9a0783 class="flex justify-between">
+<a role=button>エクストリームプログラミング</a>
+</label>
+<ul>
+<li>
+<a href=http://example.org/docs/xp/about/>XP概要</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-4881c8ea96a48f6fd2540db502c204e0 class=toggle>
+<label for=section-4881c8ea96a48f6fd2540db502c204e0 class="flex justify-between">
+<a role=button>ソフトウェアテスト</a>
+</label>
+<ul>
+<li>
+<a href=http://example.org/docs/softwaretest/unittest/>Unit Test</a>
+</li>
+<li>
+<a href=http://example.org/docs/softwaretest/e2etest/>E2E Test</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-6668e94793f2c3410fae208f25d1f417 class=toggle checked>
+<label for=section-6668e94793f2c3410fae208f25d1f417 class="flex justify-between">
+<a role=button>ソフトウェア設計原則</a>
+</label>
+<ul>
+<li>
+<a href=http://example.org/docs/softwaredesign/about/>アジャイル開発に求められるソフトウェア設計</a>
+</li>
+<li>
+<input type=checkbox id=section-fd21b9cd7e31d8e1d2ba14b32452065e class=toggle checked>
+<label for=section-fd21b9cd7e31d8e1d2ba14b32452065e class="flex justify-between">
+<a role=button>SOLID原則</a>
+</label>
+<ul>
+<li>
+<a href=http://example.org/docs/softwaredesign/solidprinciple/srp/>単一責任の原則(SRP)</a>
+</li>
+<li>
+<a href=http://example.org/docs/softwaredesign/solidprinciple/ocp/>オープン・クローズドの原則(OCP)</a>
+</li>
+<li>
+<a href=http://example.org/docs/softwaredesign/solidprinciple/lsp/>リスコフの置換原則(LSP)</a>
+</li>
+<li>
+<a href=http://example.org/docs/softwaredesign/solidprinciple/isp/>インターフェース分離の原則(ISP)</a>
+</li>
+<li>
+<a href=http://example.org/docs/softwaredesign/solidprinciple/dip/ class=active>依存性逆転の原則(DIP)</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-ee4c81ada0b6a9ee859cebeab00ca76e class=toggle>
+<label for=section-ee4c81ada0b6a9ee859cebeab00ca76e class="flex justify-between">
+<a role=button>デザインパターン</a>
+</label>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href=http://example.org/docs/inclosing/>おわりに</a>
+</li>
+<li>
+<a href=http://example.org/docs/recommendedbooks/>推奨書籍</a>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/svg/menu.svg class=book-icon alt=Menu>
+</label>
+<strong>依存性逆転の原則(DIP)</strong>
+<label for=toc-control>
+<img src=/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents></nav>
+</aside>
+</header>
+<article class=markdown><h1 id=依存性逆転の原則the-dependency-inversion-principle>
+依存性逆転の原則(The Dependency Inversion Principle)
+<a class=anchor href=#%e4%be%9d%e5%ad%98%e6%80%a7%e9%80%86%e8%bb%a2%e3%81%ae%e5%8e%9f%e5%89%87the-dependency-inversion-principle>#</a>
+</h1>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents></nav>
+</div>
+</aside>
+</main>
+</body>
+</html>

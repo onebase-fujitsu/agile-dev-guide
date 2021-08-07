@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docs on Fujitsu Agile Development Guide</title><link>http://example.org/docs/</link><description>Recent content in Docs on Fujitsu Agile Development Guide</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="http://example.org/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>おわりに</title><link>http://example.org/docs/inclosing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/inclosing/</guid><description>おわりに # まず、あなたは本書を最後まで読み切りました！お疲れさまです！ あなたはアジャイル開発者への第一歩を踏み出しました。
+「本書を理解したらアジャイル開発者なのでは？」と思われたかもしれません。 しかし、残念ながらそうではなく、本書はアジャイル開発者への第一歩に過ぎません。 また、特定の研修やプログラムを受けたらアジャイル開発者になるかというとそういうものでありません。
+本書ではスクラムやXPの所作について説明してきました。 また、変更に強いソフトウェア設計についても述べてきました。これらをマスターしたらアジャイル開発者として十分なのでしょうか？
+答えはNOです。アジャイルデベロッパに求められるのは「エンドユーザが必要としている価値を素早く実現して形にできる」ことです。 これは極論ですが「なにが必要になるかわからないけど、なんでも作れるようになれ」ということに他なりません。 もちろんそんなことは無理でしょう。 現代のプロダクト開発に求められる知識やスキルは、非常に多岐にわたっており、それを一人でカバーすることはできません。
+プロジェクトによって求められるアーキテクチャやフレームワーク、開発言語は異なりますし、 どんなスキルや知識も時間とともに陳腐化していきます。
+ここで大事なのは日頃から技術者として自己研鑽を積み、学び続ける姿勢です。 なんでも作れるようになるのは難しくても、何でも作れる技術者を目指すことは誰でもできます。 日頃から様々なことに興味を持って、積極的に学習して試してみることが大事です。
+すなわちアジャイルデベロッパとは、アジャイル開発に求められる様々な所作を会得し、その上で日頃から技術の研鑽に努め続けることができる人材のことをいいます。 あなたはアジャイルデベロッパの第一歩を踏み出すことができました、 ここから先は皆さんの日頃からの研鑽がとても大事になってきます。
+本書の最後に推薦書籍を掲載します。 繰り返しになりますが、本書はアジャイルデベロッパへの第一歩に過ぎません。 アジャイルデベロッパを共に目指していきましょう！
+推薦書籍</description></item><item><title>推奨書籍</title><link>http://example.org/docs/recommendedbooks/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/recommendedbooks/</guid><description>推奨書籍 # アジャイル # aaa #</description></item></channel></rss>
