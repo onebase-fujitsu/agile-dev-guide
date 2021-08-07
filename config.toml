@@ -1,4 +1,4 @@
-baseURL = 'http://example.org/'
+baseURL = 'https://onebase-fujitsu.github.io/agile-dev-guide/'
 languageCode = 'en-us'
 title = 'Fujitsu Agile Development Guide'
 theme = "book"
