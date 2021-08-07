@@ -1,6 +1,6 @@
 ---
-title: "ソフトウェア設計原則"
-weight: 5
+title: "スクラム"
+weight: 2
 bookFlatSection: false
 bookToc: true
 bookCollapseSection: true

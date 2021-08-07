@@ -5,5 +5,5 @@ theme = "book"
 
 [params]
     BookSearch = true
-    BookTheme = 'auto'
+    BookTheme = 'light'
     BookSearch = false
