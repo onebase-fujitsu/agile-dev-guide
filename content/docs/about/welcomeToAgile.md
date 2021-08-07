@@ -11,4 +11,7 @@ weight: 1
 
 # アジャイル開発にようこそ
 
+// TODO
+!このセクションは最後に書きます。
+
 {{< button relref="/docs/about/agileManifest" >}}アジャイルソフトウェア開発宣言{{< /button >}}

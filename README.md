@@ -1,5 +1,10 @@
 # Fujitsu Agile Development Guide
 
+![build](https://img.shields.io/badge/build-passing-brightgreen?style=flat-square)
+![License](https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-green?style=flat-square)
+![go-lang](https://img.shields.io/badge/Go-^1.16.6-76E1FE.svg?logo=go&style=flat-square)
+![Hugo](https://img.shields.io/badge/Hugo-%5E0.87.0-ff4088?style=flat-square&logo=hugo)
+
 This is the development repository for Fujitsu agile development guide.
 
 ## How to read
@@ -12,12 +17,16 @@ We are currently not accepting contributions from outside Fujitsu.
 
 1. install Go  
    download [go sdk](https://golang.org/dl/) and install.
-1. install Hugo
+2. install Hugo
     ```shell
     brew install hugo
     ```
-1. launch development server
+3. launch development server
     ```shell
     hugo server -D
     ```
-1. browse [http://localhost:1313/ ](http://localhost:1313/) 🚀
+4. browse [http://localhost:1313/ ](http://localhost:1313/) 🚀
+
+## Author
+
+Takayuki Tominaga

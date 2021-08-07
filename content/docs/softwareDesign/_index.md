@@ -1,5 +1,5 @@
 ---
-title: "ソフトウェア設計原則"
+title: "ソフトウェア設計"
 weight: 5
 bookFlatSection: false
 bookToc: true
