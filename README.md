@@ -2,7 +2,13 @@
 
 This is the development repository for Fujitsu agile development guide.
 
+## How to read
+
+You can read this [here](https://onebase-fujitsu.github.io/agile-dev-guide/).
+
 ## How to develop
+
+We are currently not accepting contributions from outside Fujitsu.
 
 1. install Go  
    download [go sdk](https://golang.org/dl/) and install.
