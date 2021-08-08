@@ -1,5 +1,5 @@
 ---
-title: "XP概要"
+title: "エクストリームプログラミングとは"
 weight: 1
 # bookFlatSection: false
 # bookToc: true
@@ -9,4 +9,4 @@ weight: 1
 # bookSearchExclude: false
 ---
 
-# 概要
+# エクストリームプログラミングとは

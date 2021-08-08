@@ -25,7 +25,7 @@ We are currently not accepting contributions from outside Fujitsu.
     ```shell
     hugo server -D
     ```
-4. browse [http://localhost:1313/ ](http://localhost:1313/) 🚀
+4. browse [http://localhost:1313/agile-dev-guide/](http://localhost:1313/agile-dev-guide/) 🚀
 
 ## Author
 

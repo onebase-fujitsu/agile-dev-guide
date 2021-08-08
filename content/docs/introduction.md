@@ -9,4 +9,6 @@ bookToc: true
 // TODO
 !このセクションは最後に書きます。
 
-{{< button relref="/docs/agile/agileManifest" >}}アジャイルソフトウェア開発宣言{{< /button >}}
+では早速アジャイルとは何かについて学んでいきましょう。
+
+{{< button relref="/docs/agile/manifest" >}}アジャイルとは{{< /button >}}
