@@ -44,4 +44,4 @@ This guide book and its source code are licensed under a [Creative Commons Attri
 
 ## Author 🖋
 
-Takayuki Tominaga
+Takayuki Tominaga, Fujitsu Ltd.
