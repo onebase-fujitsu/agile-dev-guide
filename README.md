@@ -7,26 +7,29 @@
 
 This is the development repository for Fujitsu agile development guide.
 
-## How to read
+## How to read 📕
 
 You can read this [here](https://onebase-fujitsu.github.io/agile-dev-guide/).
 
-## How to develop
+## How to develop 🛠
 
 We are currently not accepting contributions from outside Fujitsu.
 
 1. install Go  
    download [go sdk](https://golang.org/dl/) and install.
 2. install Hugo
-    ```shell
-    brew install hugo
-    ```
+   install [hugo](https://gohugo.io/getting-started/installing/).
 3. launch development server
     ```shell
     hugo server -D
     ```
 4. browse [http://localhost:1313/agile-dev-guide/](http://localhost:1313/agile-dev-guide/) 🚀
 
-## Author
+## How to deploy 📦
+
+Just commit the changes to the master branch and push the changes to this repository.
+Deployment to the public site is done automatically by GitHub Actions.👋
+
+## Author 🖋
 
 Takayuki Tominaga
