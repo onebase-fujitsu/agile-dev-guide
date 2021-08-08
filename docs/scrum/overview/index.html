@@ -2,12 +2,12 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="E2E Test #  ">
-<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="E2E Test">
-<meta property="og:description" content="E2E Test #  ">
+<meta name=description content="スクラムとは # スクラムはアジャイルの開発手法の1つです。1990年代にJeff SutherlandとKen Schwaberによって策定されま">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="スクラムとは">
+<meta property="og:description" content="スクラムとは # スクラムはアジャイルの開発手法の1つです。1990年代にJeff SutherlandとKen Schwaberによって策定されま">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2etest/"><meta property="article:section" content="docs">
-<title>E2E Test | Fujitsu Agile Development Guide</title>
+<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/overview/"><meta property="article:section" content="docs">
+<title>スクラムとは | Fujitsu Agile Development Guide</title>
 <link rel=manifest href=/agile-dev-guide/manifest.json>
 <link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
@@ -45,13 +45,13 @@
 </ul>
 </li>
 <li>
-<input type=checkbox id=section-488859b49087c05cd9f2afa3c2804c61 class=toggle>
+<input type=checkbox id=section-488859b49087c05cd9f2afa3c2804c61 class=toggle checked>
 <label for=section-488859b49087c05cd9f2afa3c2804c61 class="flex justify-between">
 <a role=button>スクラム</a>
 </label>
 <ul>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/overview/>スクラムとは</a>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/overview/ class=active>スクラムとは</a>
 </li>
 <li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/roles/>ロール</a>
@@ -79,7 +79,7 @@
 </ul>
 </li>
 <li>
-<input type=checkbox id=section-4881c8ea96a48f6fd2540db502c204e0 class=toggle checked>
+<input type=checkbox id=section-4881c8ea96a48f6fd2540db502c204e0 class=toggle>
 <label for=section-4881c8ea96a48f6fd2540db502c204e0 class="flex justify-between">
 <a role=button>ソフトウェアテスト</a>
 </label>
@@ -88,7 +88,7 @@
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/unittest/>Unit Test</a>
 </li>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2etest/ class=active>E2E Test</a>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2etest/>E2E Test</a>
 </li>
 </ul>
 </li>
@@ -151,7 +151,7 @@
 <label for=menu-control>
 <img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu>
 </label>
-<strong>E2E Test</strong>
+<strong>スクラムとは</strong>
 <label for=toc-control>
 <img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents">
 </label>
@@ -160,10 +160,31 @@
 <nav id=TableOfContents></nav>
 </aside>
 </header>
-<article class=markdown><h1 id=e2e-test>
-E2E Test
-<a class=anchor href=#e2e-test>#</a>
+<article class=markdown><h1 id=スクラムとは>
+スクラムとは
+<a class=anchor href=#%e3%82%b9%e3%82%af%e3%83%a9%e3%83%a0%e3%81%a8%e3%81%af>#</a>
 </h1>
+<p>スクラムはアジャイルの開発手法の1つです。1990年代にJeff SutherlandとKen Schwaberによって策定されました。
+スクラムには以下の特徴があります。</p>
+<ul>
+<li>要求を価値やリスクや必要性を基準にして並べ替えて、その順にプロダクトを作ることで成果を最大化します</li>
+<li>スクラムでは固定の短い時間に区切って作業を進めます。固定の時間のことを<strong>タイムボックス</strong>と呼びます</li>
+<li>現在の状況や問題点を常に明らかにします。これを<strong>透明性</strong>と呼びます</li>
+<li>定期的に進捗状況や作っているプロダクトで期待されている成果を得られているか、仕事の進め方に問題がないかどうかを確認します。これを<strong>検査</strong>と呼びます</li>
+<li>やり方に問題があったり、もっとうまくできる方法があるのであれば、やり方そのものを変えます。これを<strong>適応</strong>と呼びます</li>
+</ul>
+<p>スクラムでは<strong>開発チームが行うべきイベント、ロール、作成すべき成果物</strong>を規定しているのみで、
+そのルールを実際にどのように適用していくかは自分たちで考えていく必要があります。
+また、スクラムではコードの書き方といったプロダクトを作る上で必要な点も特に定めておらず、自分たちで考える必要があります。
+そのため、スクラムはアジャイル開発におけるフレームワークとも言えるものになっています。</p>
+<p>スクラムのルールは <a href=https://scrumguides.org/>スクラムガイド</a> として定義されています。
+<a href=https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-Japanese-2.0.pdf>日本語版</a> も公開されています。</p>
+<p>このスクラムガイドは1~2年周期で内容が改定されおり、先の日本語版は2020年版です。
+スクラムのルール自体も検査と適応を繰り返しているというわけです。</p>
+<p>それでは早速スクラムのルールについて見ていきましょう。</p>
+<a href=/agile-dev-guide/docs/scrum/roles/ class=book-btn>
+スクラムにおけるロール
+</a>
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
