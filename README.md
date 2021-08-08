@@ -38,6 +38,10 @@ We are currently not accepting contributions from outside Fujitsu.
 Just commit the changes to the master branch and push the changes to this repository.
 Deployment to the public site is done automatically by GitHub Actions.👋
 
+## License 🔑
+
+This guide book and its source code are licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+
 ## Author 🖋
 
 Takayuki Tominaga
