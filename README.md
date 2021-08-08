@@ -16,13 +16,21 @@ You can read this [here](https://onebase-fujitsu.github.io/agile-dev-guide/).
 We are currently not accepting contributions from outside Fujitsu.
 
 1. install Go  
-   download [go sdk](https://golang.org/dl/) and install.
+
+   Download [go-lang sdk](https://golang.org/dl/) and install.
+
 2. install Hugo
-   install [hugo](https://gohugo.io/getting-started/installing/).
+
+   Follow the instructions on the [Hugo](https://gohugo.io/getting-started/installing/) website for installation.
+
 3. launch development server
+
+   After moving to the working directory...
+   
     ```shell
     hugo server -D
     ```
+   
 4. browse [http://localhost:1313/agile-dev-guide/](http://localhost:1313/agile-dev-guide/) 🚀
 
 ## How to deploy 📦
