@@ -1,0 +1,380 @@
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="エクストリームプログラミングのプラクティス # チームメンバーとしての顧客 # 顧客と開発者は同じ空間で机を突き合わせて、親密に仕事をするのが望まし">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="エクストリームプログラミングのプラクティス">
+<meta property="og:description" content="エクストリームプログラミングのプラクティス # チームメンバーとしての顧客 # 顧客と開発者は同じ空間で机を突き合わせて、親密に仕事をするのが望まし">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/"><meta property="article:section" content="docs">
+<title>エクストリームプログラミングのプラクティス | Fujitsu Agile Development Guide</title>
+<link rel=manifest href=/agile-dev-guide/manifest.json>
+<link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span>
+</a>
+</h2>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/>はじめに</a>
+</li>
+<li>
+<input type=checkbox id=section-b077c62e2cf275f367b13c9cd484dcf6 class=toggle>
+<label for=section-b077c62e2cf275f367b13c9cd484dcf6 class="flex justify-between">
+<a role=button>アジャイル</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/>アジャイル開発12の原則</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-488859b49087c05cd9f2afa3c2804c61 class=toggle>
+<label for=section-488859b49087c05cd9f2afa3c2804c61 class="flex justify-between">
+<a role=button>スクラム</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/overview/>スクラムとは</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/roles/>ロール</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/products/>成果物</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/events/>イベント</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-f43a50e4d00e3398d279579a5a9a0783 class=toggle checked>
+<label for=section-f43a50e4d00e3398d279579a5a9a0783 class="flex justify-between">
+<a role=button>エクストリームプログラミング</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/>エクストリームプログラミングとは</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/ class=active>エクストリームプログラミングのプラクティス</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-4881c8ea96a48f6fd2540db502c204e0 class=toggle>
+<label for=section-4881c8ea96a48f6fd2540db502c204e0 class="flex justify-between">
+<a role=button>ソフトウェアテスト</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/unittest/>Unit Test</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2etest/>E2E Test</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-6668e94793f2c3410fae208f25d1f417 class=toggle>
+<label for=section-6668e94793f2c3410fae208f25d1f417 class="flex justify-between">
+<a role=button>ソフトウェア設計</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/>アジャイル開発に求められるソフトウェア設計</a>
+</li>
+<li>
+<input type=checkbox id=section-fd21b9cd7e31d8e1d2ba14b32452065e class=toggle>
+<label for=section-fd21b9cd7e31d8e1d2ba14b32452065e class="flex justify-between">
+<a role=button>SOLID原則</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/>単一責任の原則(SRP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/>オープン・クローズドの原則(OCP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/>リスコフの置換原則(LSP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/>インターフェース分離の原則(ISP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>依存性逆転の原則(DIP)</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-ee4c81ada0b6a9ee859cebeab00ca76e class=toggle>
+<label for=section-ee4c81ada0b6a9ee859cebeab00ca76e class="flex justify-between">
+<a role=button>デザインパターン</a>
+</label>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/>おわりに</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/>推奨書籍</a>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu>
+</label>
+<strong>エクストリームプログラミングのプラクティス</strong>
+<label for=toc-control>
+<img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#チームメンバーとしての顧客>チームメンバーとしての顧客</a></li>
+<li><a href=#ユーザーストーリー>ユーザーストーリー</a></li>
+<li><a href=#短期間のリリースサイクル>短期間のリリースサイクル</a>
+<ul>
+<li><a href=#イテレーションプラン>イテレーションプラン</a></li>
+<li><a href=#リリースプラン>リリースプラン</a></li>
+</ul>
+</li>
+<li><a href=#受け入れテスト>受け入れテスト</a></li>
+<li><a href=#ペアプログラミング>ペアプログラミング</a></li>
+<li><a href=#テストファーストの開発>テストファーストの開発</a></li>
+<li><a href=#共同所有権>共同所有権</a></li>
+<li><a href=#継続的なインテグレーション統合>継続的なインテグレーション(統合)</a></li>
+<li><a href=#持続可能なペース>持続可能なペース</a></li>
+<li><a href=#オープンワークスペース>オープンワークスペース</a></li>
+<li><a href=#シンプルな設計>シンプルな設計</a>
+<ul>
+<li><a href=#最もシンプルな実装を考える>最もシンプルな実装を考える</a></li>
+<li><a href=#後で必要になるは不要>「後で必要になる」は不要</a></li>
+<li><a href=#同じことを2度しない>同じことを2度しない</a></li>
+</ul>
+</li>
+<li><a href=#リファクタリング>リファクタリング</a></li>
+<li><a href=#メタファー>メタファー</a></li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown><h1 id=エクストリームプログラミングのプラクティス>
+エクストリームプログラミングのプラクティス
+<a class=anchor href=#%e3%82%a8%e3%82%af%e3%82%b9%e3%83%88%e3%83%aa%e3%83%bc%e3%83%a0%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%9f%e3%83%b3%e3%82%b0%e3%81%ae%e3%83%97%e3%83%a9%e3%82%af%e3%83%86%e3%82%a3%e3%82%b9>#</a>
+</h1>
+<h2 id=チームメンバーとしての顧客>
+チームメンバーとしての顧客
+<a class=anchor href=#%e3%83%81%e3%83%bc%e3%83%a0%e3%83%a1%e3%83%b3%e3%83%90%e3%83%bc%e3%81%a8%e3%81%97%e3%81%a6%e3%81%ae%e9%a1%a7%e5%ae%a2>#</a>
+</h2>
+<p>顧客と開発者は同じ空間で机を突き合わせて、親密に仕事をするのが望ましいです。
+同じ空間で仕事をすることで、お互いに相手の問題を把握することができ、その問題の解決に向けて一緒に取り組めるからです。
+これは文字通り物理的な距離の話をしていて、顧客と開発者が同じ部屋で作業するのが最も理想的です。
+距離が離れれば離れるほど、顧客をほんとうの意味でのチームに組み込むのが困難になります。</p>
+<h2 id=ユーザーストーリー>
+ユーザーストーリー
+<a class=anchor href=#%e3%83%a6%e3%83%bc%e3%82%b6%e3%83%bc%e3%82%b9%e3%83%88%e3%83%bc%e3%83%aa%e3%83%bc>#</a>
+</h2>
+<p>プロジェクトの計画を練るためには「仕様要求」の概略をある程度知っていないければいけませんが、詳しく把握しておく必要はありません。
+計画をたてる段階では「仕様要求」を実装するための必要な作業量を見積もれる程度の情報で十分です。</p>
+<p>もちろん、詳細があることは知っているべきですし、それがどんなものか大まかに把握している必要はありますが、
+具体的な詳細まで知っている必要はありません。</p>
+<p>個々の仕様要求の詳細はプロジェクトが進むにつれて変化していきます。
+特に、まとまった形になったシステムを顧客が受け取れるようになるとそれが顕著になります。
+初期のシステムが稼働するのを見ることで、本当の意味で仕様要求に焦点を当てられるようになるからです。
+そのため、<strong>システムに組み込むはるか前に仕様要求の具体的な詳細を把握しておくのは早まった行為</strong>と言えます。</p>
+<h2 id=短期間のリリースサイクル>
+短期間のリリースサイクル
+<a class=anchor href=#%e7%9f%ad%e6%9c%9f%e9%96%93%e3%81%ae%e3%83%aa%e3%83%aa%e3%83%bc%e3%82%b9%e3%82%b5%e3%82%a4%e3%82%af%e3%83%ab>#</a>
+</h2>
+<p><strong>XPとスクラムはリリースの考え方が少し異なります。</strong> ここではXPのリリースの考え方を紹介します。
+これもちょうど富士通の公開サイトにプロセスを紹介する図があるのでこちらを引用します。</p>
+<p><img src=../process.jpg alt=XPのプロセス>
+画像出典: <a href=https://www.fujitsu.com/jp/group/fst/about/resources/featurestories/about-agile-02.html>アジャイル開発とは（中編）</a></p>
+<p>XPでは動くソフトウェアを1週間から1ヶ月の短いイテレーションでリリースします。
+このイテレーションの間に作られる動くソフトウェアは、出資者の仕様要求の一部を実装したのもで、
+イテレーションの終わりにステークホルダーからのフィードバックをを得るためにデモを実施します。</p>
+<h3 id=イテレーションプラン>
+イテレーションプラン
+<a class=anchor href=#%e3%82%a4%e3%83%86%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%83%97%e3%83%a9%e3%83%b3>#</a>
+</h3>
+<p>イテレーションは通常2週間程度でイテレーション毎に小さな機能をいくつか実装して納品します。
+しかし、それが最終製品に組み込まれるかどうかは決定していません。
+開発者が作成した見積もりをベースに顧客が複数のユーザストーリーを選び、それらが実際に実装されることになります。</p>
+<p>開発者は前回のイテレーションでこなした仕事量を参考にして、次回のイテレーションでの仕事量を見積もります。
+顧客はその見積もりを超えない範囲で好きな数だけ選択できます。</p>
+<p>イテレーションがスタートしたら開発者たちはストリーをタスクレベルに分割し、
+技術的にもビジネス的にも最も合理的な順序でそれぞれのタスクを実装していきます。</p>
+<h3 id=リリースプラン>
+リリースプラン
+<a class=anchor href=#%e3%83%aa%e3%83%aa%e3%83%bc%e3%82%b9%e3%83%97%e3%83%a9%e3%83%b3>#</a>
+</h3>
+<p>XPチームは次の6回分程度のイテレーションを1つにまとめたプランを作成します。
+これを<strong>リリースプラン</strong>といいます。
+通常一回のリリースは3ヶ月間隔で設定し、
+その間、イテレーションを繰り返し、成果物を一纏めにしてリリースします。</p>
+<p><a href=#%e3%82%a4%e3%83%86%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%83%97%e3%83%a9%e3%83%b3>イテレーションプラン</a> のところで「最終製品に組み込まれるかどうかは決定していません。」と書きましたが、
+リリースのタイミングでリリースに組み込む内容を決定します。
+顧客はストーリーの内容をキャンセルしたり、追加したり、あるいはストーリーの優先順位を変えることができます。</p>
+<h2 id=受け入れテスト>
+受け入れテスト
+<a class=anchor href=#%e5%8f%97%e3%81%91%e5%85%a5%e3%82%8c%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h2>
+<p>受け入れテストはE2Eテストとも言われます。
+正確にいうと受け入れテストはフェーズであり、E2Eテストは受け入れテストの実施方法です。</p>
+<p>ユーザーストーリーの詳細は、顧客が提示する「受け入れテスト」の書式で記述されます。
+ストーリーの「受け入れテスト」はそのストーリの実装直前か、実装と並行して作られます。
+通常、「受け入れテスト」は自動的に繰り返し実行できるようある種のスクリプト言語で書かれ、
+受け入れテストを自動的に繰り返し行うことで、システムが顧客の要求どおりに動かくをチェックできます。</p>
+<p>受け入れテストのツールには様々なものがあります。
+有名なものだとSelenium、Puppeteer、TestCafe、Cypress.ioあたりでしょうか。
+APIテスト周りだとPostmanおよびそのコマンドラインツールであるNewmanや、Karate、Pactなどがあります。
+筆者のプロジェクトではWebブラウザ経由のアクセスの動作チェックにTestCafe、
+API周りの動作チェックにPostmanとNewmanを採用しました。
+これはツールによって得手不得手があったりするので、プロジェクトやアプリの特性に合わせて選択すると良いでしょう。</p>
+<p>また、<strong>「受け入れテスト」のスクリプトはシステムと共に成長し、進化していく</strong>ことになります。
+新しいイテレーションが始まり機能が追加されたとき、それまでの「受け入れテスト」に追加する形でスクリプトを追加していきます。
+つまり、受け入れテストはリグレッションテストも兼ねています。</p>
+<h2 id=ペアプログラミング>
+ペアプログラミング
+<a class=anchor href=#%e3%83%9a%e3%82%a2%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%9f%e3%83%b3%e3%82%b0>#</a>
+</h2>
+<p>ペアプログラミングは2人一組でプログラミングを行うというものです。
+2人で1台のコンピュータを使って共同作業をしてコーディングを行っていきます。
+ペアの片方がコードを入力し、もうひとりはコードにタイプミスがないかをチェックしたり、エラーや改良点がないかどうかを探し出したりする役割を担います。
+ペアがお互いに強く干渉し、検討をす進めながら作業を進め、ソフトウェアを記述するという行為に全身全霊を注ぎます。</p>
+<p>ペアの役割は頻繁に交代します。コード入力担当者が疲れたり行き詰まったりすると、
+相方がもっとこうしたらいいんじゃないかとアドバイスを出したり、キーボードを奪って相方に変わってコード入力をしたりします。</p>
+<p><strong>ペアプログラミングではペアの組み合わせを毎日変えます。</strong>
+そうすると、一人のプログラマがイテレーションで組み込もうとする機能全てに関わることになります。
+特定の一人にシステムの知識が偏るということがなくなります。
+プロジェクトが抱えるリスク指標の１つに「バス係数」というものがあります。
+これは「何人がバスに惹かれるとそのプロジェクトが成り立たなくなるか」を示したものです。
+特定の機能の仕様を把握しているメンバーが1人しかいない場合、そのプロジェクトのバス係数は1となります。
+そのプロジェクトメンバが何らかの原因でプロジェクトから抜けるとそのプロジェクトは破綻してしまいます。
+そうした自体を防ぐために、ペアを必ず入れ替えてプロジェクトの知識やノウハウを分散したほうがいいでしょう。</p>
+<p>また、ペアプログラミングは有識者が他のメンバに<strong>ティーチング</strong>をするという側面もあり、
+ペアプログラミングを繰り返すことで開発チーム全体の開発スキルの底上げが期待できます。</p>
+<h2 id=テストファーストの開発>
+テストファーストの開発
+<a class=anchor href=#%e3%83%86%e3%82%b9%e3%83%88%e3%83%95%e3%82%a1%e3%83%bc%e3%82%b9%e3%83%88%e3%81%ae%e9%96%8b%e7%99%ba>#</a>
+</h2>
+<h2 id=共同所有権>
+共同所有権
+<a class=anchor href=#%e5%85%b1%e5%90%8c%e6%89%80%e6%9c%89%e6%a8%a9>#</a>
+</h2>
+<h2 id=継続的なインテグレーション統合>
+継続的なインテグレーション(統合)
+<a class=anchor href=#%e7%b6%99%e7%b6%9a%e7%9a%84%e3%81%aa%e3%82%a4%e3%83%b3%e3%83%86%e3%82%b0%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e7%b5%b1%e5%90%88>#</a>
+</h2>
+<h2 id=持続可能なペース>
+持続可能なペース
+<a class=anchor href=#%e6%8c%81%e7%b6%9a%e5%8f%af%e8%83%bd%e3%81%aa%e3%83%9a%e3%83%bc%e3%82%b9>#</a>
+</h2>
+<h2 id=オープンワークスペース>
+オープンワークスペース
+<a class=anchor href=#%e3%82%aa%e3%83%bc%e3%83%97%e3%83%b3%e3%83%af%e3%83%bc%e3%82%af%e3%82%b9%e3%83%9a%e3%83%bc%e3%82%b9>#</a>
+</h2>
+<h2 id=シンプルな設計>
+シンプルな設計
+<a class=anchor href=#%e3%82%b7%e3%83%b3%e3%83%97%e3%83%ab%e3%81%aa%e8%a8%ad%e8%a8%88>#</a>
+</h2>
+<h3 id=最もシンプルな実装を考える>
+最もシンプルな実装を考える
+<a class=anchor href=#%e6%9c%80%e3%82%82%e3%82%b7%e3%83%b3%e3%83%97%e3%83%ab%e3%81%aa%e5%ae%9f%e8%a3%85%e3%82%92%e8%80%83%e3%81%88%e3%82%8b>#</a>
+</h3>
+<h3 id=後で必要になるは不要>
+「後で必要になる」は不要
+<a class=anchor href=#%e5%be%8c%e3%81%a7%e5%bf%85%e8%a6%81%e3%81%ab%e3%81%aa%e3%82%8b%e3%81%af%e4%b8%8d%e8%a6%81>#</a>
+</h3>
+<h3 id=同じことを2度しない>
+同じことを2度しない
+<a class=anchor href=#%e5%90%8c%e3%81%98%e3%81%93%e3%81%a8%e3%82%922%e5%ba%a6%e3%81%97%e3%81%aa%e3%81%84>#</a>
+</h3>
+<h2 id=リファクタリング>
+リファクタリング
+<a class=anchor href=#%e3%83%aa%e3%83%95%e3%82%a1%e3%82%af%e3%82%bf%e3%83%aa%e3%83%b3%e3%82%b0>#</a>
+</h2>
+<h2 id=メタファー>
+メタファー
+<a class=anchor href=#%e3%83%a1%e3%82%bf%e3%83%95%e3%82%a1%e3%83%bc>#</a>
+</h2>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#チームメンバーとしての顧客>チームメンバーとしての顧客</a></li>
+<li><a href=#ユーザーストーリー>ユーザーストーリー</a></li>
+<li><a href=#短期間のリリースサイクル>短期間のリリースサイクル</a>
+<ul>
+<li><a href=#イテレーションプラン>イテレーションプラン</a></li>
+<li><a href=#リリースプラン>リリースプラン</a></li>
+</ul>
+</li>
+<li><a href=#受け入れテスト>受け入れテスト</a></li>
+<li><a href=#ペアプログラミング>ペアプログラミング</a></li>
+<li><a href=#テストファーストの開発>テストファーストの開発</a></li>
+<li><a href=#共同所有権>共同所有権</a></li>
+<li><a href=#継続的なインテグレーション統合>継続的なインテグレーション(統合)</a></li>
+<li><a href=#持続可能なペース>持続可能なペース</a></li>
+<li><a href=#オープンワークスペース>オープンワークスペース</a></li>
+<li><a href=#シンプルな設計>シンプルな設計</a>
+<ul>
+<li><a href=#最もシンプルな実装を考える>最もシンプルな実装を考える</a></li>
+<li><a href=#後で必要になるは不要>「後で必要になる」は不要</a></li>
+<li><a href=#同じことを2度しない>同じことを2度しない</a></li>
+</ul>
+</li>
+<li><a href=#リファクタリング>リファクタリング</a></li>
+<li><a href=#メタファー>メタファー</a></li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>
