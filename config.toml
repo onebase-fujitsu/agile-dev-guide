@@ -5,6 +5,5 @@ title = 'Fujitsu Agile Development Guide'
 theme = "book"
 
 [params]
-    BookSearch = true
     BookTheme = 'light'
     BookSearch = false
