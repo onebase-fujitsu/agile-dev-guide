@@ -1,0 +1,673 @@
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="ウォーミングアップ # ここではテスト駆動開発の手法で極々簡単なコンソールアプリケーションを作ってみようと思います。 開発言語はここではJavaを">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="ウォーミングアップ">
+<meta property="og:description" content="ウォーミングアップ # ここではテスト駆動開発の手法で極々簡単なコンソールアプリケーションを作ってみようと思います。 開発言語はここではJavaを">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/"><meta property="article:section" content="docs">
+<title>ウォーミングアップ | Fujitsu Agile Development Guide</title>
+<link rel=manifest href=/agile-dev-guide/manifest.json>
+<link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span>
+</a>
+</h2>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/>はじめに</a>
+</li>
+<li>
+<input type=checkbox id=section-b077c62e2cf275f367b13c9cd484dcf6 class=toggle>
+<label for=section-b077c62e2cf275f367b13c9cd484dcf6 class="flex justify-between">
+<a role=button>アジャイル</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/>アジャイル開発12の原則</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-488859b49087c05cd9f2afa3c2804c61 class=toggle>
+<label for=section-488859b49087c05cd9f2afa3c2804c61 class="flex justify-between">
+<a role=button>スクラム</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/overview/>スクラムとは</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/roles/>ロール</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/products/>成果物</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/events/>イベント</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-f43a50e4d00e3398d279579a5a9a0783 class=toggle>
+<label for=section-f43a50e4d00e3398d279579a5a9a0783 class="flex justify-between">
+<a role=button>エクストリームプログラミング</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/>エクストリームプログラミングとは</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/>エクストリームプログラミングのプラクティス</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-4881c8ea96a48f6fd2540db502c204e0 class=toggle checked>
+<label for=section-4881c8ea96a48f6fd2540db502c204e0 class="flex justify-between">
+<a role=button>ソフトウェアテスト</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/overview/>ソフトウェアテストを始めよう</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/ class=active>ウォーミングアップ</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/>ボウリングゲーム</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/>テストダブル</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2etest/>E2E Test</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-6668e94793f2c3410fae208f25d1f417 class=toggle>
+<label for=section-6668e94793f2c3410fae208f25d1f417 class="flex justify-between">
+<a role=button>ソフトウェア設計</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/>アジャイル開発に求められるソフトウェア設計</a>
+</li>
+<li>
+<input type=checkbox id=section-fd21b9cd7e31d8e1d2ba14b32452065e class=toggle>
+<label for=section-fd21b9cd7e31d8e1d2ba14b32452065e class="flex justify-between">
+<a role=button>SOLID原則</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/>単一責任の原則(SRP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/>オープン・クローズドの原則(OCP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/>リスコフの置換原則(LSP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/>インターフェース分離の原則(ISP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>依存性逆転の原則(DIP)</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-ee4c81ada0b6a9ee859cebeab00ca76e class=toggle>
+<label for=section-ee4c81ada0b6a9ee859cebeab00ca76e class="flex justify-between">
+<a role=button>デザインパターン</a>
+</label>
+<ul>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/>おわりに</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/>推奨書籍</a>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu>
+</label>
+<strong>ウォーミングアップ</strong>
+<label for=toc-control>
+<img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#テスト駆動開発とは>テスト駆動開発とは</a></li>
+<li><a href=#fizzbuzz>FizzBuzz</a>
+<ul>
+<li><a href=#プロジェクトの作成>プロジェクトの作成</a></li>
+<li><a href=#最初のテスト>最初のテスト</a></li>
+<li><a href=#最初の実装>最初の実装</a></li>
+<li><a href=#2番目のテスト>2番目のテスト</a></li>
+<li><a href=#2番目の実装>2番目の実装</a></li>
+<li><a href=#3番目のテスト>3番目のテスト</a></li>
+<li><a href=#3番目の実装>3番目の実装</a></li>
+<li><a href=#4番目のテスト>4番目のテスト</a></li>
+<li><a href=#4番目の実装>4番目の実装</a></li>
+<li><a href=#最後のテスト>最後のテスト</a></li>
+<li><a href=#最後の実装>最後の実装</a></li>
+<li><a href=#リファクタリング>リファクタリング</a></li>
+</ul>
+</li>
+<li><a href=#完成>完成</a></li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown><h1 id=ウォーミングアップ>
+ウォーミングアップ
+<a class=anchor href=#%e3%82%a6%e3%82%a9%e3%83%bc%e3%83%9f%e3%83%b3%e3%82%b0%e3%82%a2%e3%83%83%e3%83%97>#</a>
+</h1>
+<p>ここではテスト駆動開発の手法で極々簡単なコンソールアプリケーションを作ってみようと思います。
+開発言語はここではJavaを使用しますが、
+これから挙げる例題はいずれも有名な問題を題材に取り上げますので、お好きな言語で挑戦されてみてください。</p>
+<h2 id=テスト駆動開発とは>
+テスト駆動開発とは
+<a class=anchor href=#%e3%83%86%e3%82%b9%e3%83%88%e9%a7%86%e5%8b%95%e9%96%8b%e7%99%ba%e3%81%a8%e3%81%af>#</a>
+</h2>
+<p>さて、実践に入る前にテスト駆動開発についておさらいしておきましょう。
+テスト駆動開発とは文字通り<strong>プロダクトの振る舞いをテストするコードを先に実装してから、プロダクトを実装する</strong>開発プロセスです。</p>
+<p><img src=tdd.png alt=TDD></p>
+<p>TDDでは最初に失敗するテストを書きます。
+そして、そのテストをパスする最小限の実装を行います。
+それをひたすら繰り返して、仕様を満たすコードを実現していきます。
+そして最後にリファクタリングというコードを綺麗にするプロセスを経て、プロダクトを作成していきます。</p>
+<h2 id=fizzbuzz>
+FizzBuzz
+<a class=anchor href=#fizzbuzz>#</a>
+</h2>
+<p>まずウォーミングアップとしてFizzBuzzのアプリケーションを一緒に作ってみましょう。
+FizzBuzzは英語圏でよく行われる簡単な言葉遊びです。
+FizzBuzzのルールは以下のとおりです。</p>
+<ul>
+<li>整数値の入力を受け付け、文字列を返す</li>
+<li>入力値が3の倍数だったらFizzを返す</li>
+<li>入力値が5の倍数だったらBuzzを返す</li>
+<li>入力値が3の倍数であり5の倍数ならFizzBuzzを返す</li>
+<li>入力値が3の倍数でも5の倍数でもないときはその数値を文字列で返す</li>
+</ul>
+<p>簡単ですね。１から順番にカウントアップしていくと、「1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz, 16&mldr;..」
+となるようなイメージです。では早速この関数をTDDで作ってみましょう。</p>
+<h3 id=プロジェクトの作成>
+プロジェクトの作成
+<a class=anchor href=#%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e3%81%ae%e4%bd%9c%e6%88%90>#</a>
+</h3>
+<p>兎にも角にもまずは新規のプロジェクトを作ってみましょう。
+この例ではIntelliJ IDEAを使用してますが、皆さんの使い慣れたIDEを使ってもらって大丈夫です。</p>
+<p><img src=newpj1.png alt=プロジェクトの新規作成1></p>
+<p>まず、新規のGradleプロジェクトを作りましょう。</p>
+<p><img src=newpj2.png alt=プロジェクトの新規作成2></p>
+<p>名前はfizzbuzzにしてプロジェクトを作成。</p>
+<p><img src=newpj3.png alt=プロジェクトの新規作成3></p>
+<p>はい、ここまででプロジェクトの雛形はできました。ここまでは特に難しいところはないかと思います。
+さて、ここでbuild.gradleファイルを見てみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>dependencies <span style=color:#f92672>{</span>
+    testImplementation <span style=color:#960050;background-color:#1e0010>&#39;</span>org<span style=color:#f92672>.</span><span style=color:#a6e22e>junit</span><span style=color:#f92672>.</span><span style=color:#a6e22e>jupiter</span><span style=color:#f92672>:</span>junit<span style=color:#f92672>-</span>jupiter<span style=color:#f92672>-</span>api<span style=color:#f92672>:</span>5<span style=color:#f92672>.</span><span style=color:#a6e22e>7</span><span style=color:#f92672>.</span><span style=color:#a6e22e>0</span><span style=color:#960050;background-color:#1e0010>&#39;</span>
+    testRuntimeOnly <span style=color:#960050;background-color:#1e0010>&#39;</span>org<span style=color:#f92672>.</span><span style=color:#a6e22e>junit</span><span style=color:#f92672>.</span><span style=color:#a6e22e>jupiter</span><span style=color:#f92672>:</span>junit<span style=color:#f92672>-</span>jupiter<span style=color:#f92672>-</span>engine<span style=color:#f92672>:</span>5<span style=color:#f92672>.</span><span style=color:#a6e22e>7</span><span style=color:#f92672>.</span><span style=color:#a6e22e>0</span><span style=color:#960050;background-color:#1e0010>&#39;</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>testImplementation &lsquo;org.junit.jupiter:junit-jupiter-api:5.7.0&rsquo;という記述が勝手にできているかと思います。
+このプロジェクトではJUnit5系を使いますということですね。</p>
+<p>では早速テストを書いてみましょう。</p>
+<h3 id=最初のテスト>
+最初のテスト
+<a class=anchor href=#%e6%9c%80%e5%88%9d%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h3>
+<p>では最初のテストを書いてみましょう。test/java配下にFizzBuzzTest.javaというファイルを作ってから、
+以下を記述します。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// FizzBuzzTest.java
+</span><span style=color:#75715e></span><span style=color:#f92672>import</span> org.junit.jupiter.api.Assertions<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.junit.jupiter.api.Test<span style=color:#f92672>;</span>
+
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FizzBuzzTest</span> <span style=color:#f92672>{</span>
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>数字の1を入力すると文字列の1が返ってくる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        FizzBuzz fb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FizzBuzz<span style=color:#f92672>();</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>1<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;1&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>テストを書いたら早速実行してみましょう。失敗するはずです。
+まだFizzBuzzクラスもgetResponseという関数も作っていないのだから当たり前ですよね。</p>
+<p><img src=firstTest.jpg alt=最初のテスト></p>
+<p>もしIDEではなくテキストエディタを使われいるようでしたら、以下のコマンドを叩いてテストを実行してみてください。</p>
+<p>LinuxやMacOSの場合</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>./gradlew test
+</code></pre></div><p>Windowsの場合</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>bradlew.bat test
+</code></pre></div><h3 id=最初の実装>
+最初の実装
+<a class=anchor href=#%e6%9c%80%e5%88%9d%e3%81%ae%e5%ae%9f%e8%a3%85>#</a>
+</h3>
+<p>このテストを満たす最小の実装を考えます。
+テスト駆動開発において大事なのは、<strong>テストで実装した内容を満たす最小の実装を考えること</strong>です。
+このあと3の倍数だとか5の倍数だとかでてきますが、ここではその考慮をしてはいけません。
+ここでは1を入力したら1という文字列を返すことだけを考えましょう。</p>
+<p>src/java配下にFizzBuzz.javaを作ります。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// FizzBuzz.java
+</span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FizzBuzz</span> <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> inputValue<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;1&#34;</span><span style=color:#f92672>;</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p><img src=firstImpl.jpg alt=最初の実装></p>
+<p>こうですね！なにも考えずに"1"を返すだけ。テストも通りました！
+<strong>最初のテストと最初の実装ができましたね！</strong></p>
+<h3 id=2番目のテスト>
+2番目のテスト
+<a class=anchor href=#2%e7%95%aa%e7%9b%ae%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h3>
+<p>この実装では何を入力しても"1"が返ってきてしまいます。
+まずは入力した数値を文字列として返すということを実装してみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// FizzBuzzTest.java
+</span><span style=color:#75715e></span><span style=color:#f92672>import</span> org.junit.jupiter.api.Assertions<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.junit.jupiter.api.Test<span style=color:#f92672>;</span>
+
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FizzBuzzTest</span> <span style=color:#f92672>{</span>
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>数字の1を入力すると文字列の1が返ってくる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        FizzBuzz fb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FizzBuzz<span style=color:#f92672>();</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>1<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;1&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>数字の2を入力すると文字列の2が返ってくる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        FizzBuzz fb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FizzBuzz<span style=color:#f92672>();</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>2<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;2&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>数字の3を入力すると文字列の3が返ってくる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        FizzBuzz fb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FizzBuzz<span style=color:#f92672>();</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>3<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;3&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p><img src=secondTest.jpg alt=2番目のテスト></p>
+<p>先のテストに2つテストを追加しました。追加したテストが失敗しているのがわかると思います。
+ではこれを満たす実装を考えてみてください。</p>
+<h3 id=2番目の実装>
+2番目の実装
+<a class=anchor href=#2%e7%95%aa%e7%9b%ae%e3%81%ae%e5%ae%9f%e8%a3%85>#</a>
+</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// FizzBuzz.java
+</span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FizzBuzz</span> <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> inputValue<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>return</span> String<span style=color:#f92672>.</span><span style=color:#a6e22e>valueOf</span><span style=color:#f92672>(</span>inputValue<span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p><img src=secondImpl.jpg alt=2番目の実装></p>
+<p>1ではなくinputValueを文字列に変換して返すようにしました。
+これでテストが通るようになりましたね。</p>
+<h3 id=3番目のテスト>
+3番目のテスト
+<a class=anchor href=#3%e7%95%aa%e7%9b%ae%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h3>
+<p>ではFizzの実装をしてみましょう。
+Fizzは3の倍数を入力したときに返すので、それを確認するテストを書いてみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// FizzBuzzTest.java
+</span><span style=color:#75715e></span><span style=color:#f92672>import</span> org.junit.jupiter.api.Assertions<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.junit.jupiter.api.Test<span style=color:#f92672>;</span>
+
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FizzBuzzTest</span> <span style=color:#f92672>{</span>
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>数字の1を入力すると文字列の1が返ってくる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        FizzBuzz fb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FizzBuzz<span style=color:#f92672>();</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>1<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;1&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>数字の2を入力すると文字列の2が返ってくる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        FizzBuzz fb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FizzBuzz<span style=color:#f92672>();</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>2<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;2&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>数字の3の倍数を入力すると文字列のFizzが返ってくる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        FizzBuzz fb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FizzBuzz<span style=color:#f92672>();</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>3<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>);</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>6<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>);</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>9<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>);</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>12<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>);</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>15<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>もともとあった3のの入力をしたときのテストを消して、代わりに３の倍数の確認をするテストを書きました。</p>
+<h3 id=3番目の実装>
+3番目の実装
+<a class=anchor href=#3%e7%95%aa%e7%9b%ae%e3%81%ae%e5%ae%9f%e8%a3%85>#</a>
+</h3>
+<p>さっそくこれを満たす実装を考えてみましょう。
+3の倍数のときにFizzを返して、
+それ以外のときは数字の文字列を返すようにしたら良さそうですよね？</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// FizzBuzz.java
+</span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FizzBuzz</span> <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> inputValue<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>inputValue <span style=color:#f92672>%</span> 3 <span style=color:#f92672>==</span> 0<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span>
+        <span style=color:#66d9ef>return</span> String<span style=color:#f92672>.</span><span style=color:#a6e22e>valueOf</span><span style=color:#f92672>(</span>inputValue<span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>これで3番めのテストを満たす実装を書くことができました。</p>
+<h3 id=4番目のテスト>
+4番目のテスト
+<a class=anchor href=#4%e7%95%aa%e7%9b%ae%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h3>
+<p>同じようにBuzzの挙動を確認するテストを書いてみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// FizzBuzzTest.java
+</span><span style=color:#75715e></span><span style=color:#f92672>import</span> org.junit.jupiter.api.Assertions<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.junit.jupiter.api.Test<span style=color:#f92672>;</span>
+
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FizzBuzzTest</span> <span style=color:#f92672>{</span>
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>数字の1を入力すると文字列の1が返ってくる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        FizzBuzz fb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FizzBuzz<span style=color:#f92672>();</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>1<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;1&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>数字の2を入力すると文字列の2が返ってくる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        FizzBuzz fb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FizzBuzz<span style=color:#f92672>();</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>2<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;2&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>数字の3の倍数を入力すると文字列のFizzが返ってくる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        FizzBuzz fb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FizzBuzz<span style=color:#f92672>();</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>3<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>);</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>6<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>);</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>9<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>);</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>12<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>);</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>15<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+    
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>数字の5の倍数を入力すると文字列のBuzzが返ってくる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        FizzBuzz fb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FizzBuzz<span style=color:#f92672>();</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>5<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;Buzz&#34;</span><span style=color:#f92672>);</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>10<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;Buzz&#34;</span><span style=color:#f92672>);</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>15<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;Buzz&#34;</span><span style=color:#f92672>);</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>20<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;Buzz&#34;</span><span style=color:#f92672>);</span>
+        Assertions<span style=color:#f92672>.</span><span style=color:#a6e22e>assertEquals</span><span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>25<span style=color:#f92672>),</span> <span style=color:#e6db74>&#34;Buzz&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>ここで15の入力を確認するテストを見てみると、
+Fizzを期待していたり、Buzzを期待していたりで、矛盾していることが分かります。
+これはテストが微妙ですね。</p>
+<p>ちょっとテストの書き方を変えてみましょう。まず、build.gradleファイルを開いて
+<code>testImplementation 'org.assertj:assertj-core:3.8.0'</code>という一行を書き加えてみてください。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>dependencies <span style=color:#f92672>{</span>
+    testImplementation <span style=color:#960050;background-color:#1e0010>&#39;</span>org<span style=color:#f92672>.</span><span style=color:#a6e22e>junit</span><span style=color:#f92672>.</span><span style=color:#a6e22e>jupiter</span><span style=color:#f92672>:</span>junit<span style=color:#f92672>-</span>jupiter<span style=color:#f92672>-</span>api<span style=color:#f92672>:</span>5<span style=color:#f92672>.</span><span style=color:#a6e22e>7</span><span style=color:#f92672>.</span><span style=color:#a6e22e>0</span><span style=color:#960050;background-color:#1e0010>&#39;</span>
+    testImplementation <span style=color:#960050;background-color:#1e0010>&#39;</span>org<span style=color:#f92672>.</span><span style=color:#a6e22e>assertj</span><span style=color:#f92672>:</span>assertj<span style=color:#f92672>-</span>core<span style=color:#f92672>:</span>3<span style=color:#f92672>.</span><span style=color:#a6e22e>8</span><span style=color:#f92672>.</span><span style=color:#a6e22e>0</span><span style=color:#960050;background-color:#1e0010>&#39;</span>
+    testRuntimeOnly <span style=color:#960050;background-color:#1e0010>&#39;</span>org<span style=color:#f92672>.</span><span style=color:#a6e22e>junit</span><span style=color:#f92672>.</span><span style=color:#a6e22e>jupiter</span><span style=color:#f92672>:</span>junit<span style=color:#f92672>-</span>jupiter<span style=color:#f92672>-</span>engine<span style=color:#f92672>:</span>5<span style=color:#f92672>.</span><span style=color:#a6e22e>7</span><span style=color:#f92672>.</span><span style=color:#a6e22e>0</span><span style=color:#960050;background-color:#1e0010>&#39;</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>JUnit5ではアサーションライブラリをユーザが自由に選択して入れれるようになっています。
+アッサーションライブラリというのは、値が正しいかを検証するライブリです。
+ここではassertJというライブラリを追加しました。</p>
+<p>テストを書き直してみます。こんな感じで書いてみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// FizzBuzzTest.java
+</span><span style=color:#75715e></span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test<span style=color:#f92672>;</span>
+
+<span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat<span style=color:#f92672>;</span>
+
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FizzBuzzTest</span> <span style=color:#f92672>{</span>
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>数字の1を入力すると文字列の1が返ってくる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        FizzBuzz fb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FizzBuzz<span style=color:#f92672>();</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>1<span style=color:#f92672>)).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;1&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>数字の2を入力すると文字列の2が返ってくる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        FizzBuzz fb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FizzBuzz<span style=color:#f92672>();</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>2<span style=color:#f92672>)).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;2&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>数字の3の倍数を入力すると文字列のFizzが返ってくる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        FizzBuzz fb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FizzBuzz<span style=color:#f92672>();</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>3<span style=color:#f92672>)).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>);</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>6<span style=color:#f92672>)).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>);</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>9<span style=color:#f92672>)).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>);</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>12<span style=color:#f92672>)).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>);</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>15<span style=color:#f92672>)).</span><span style=color:#a6e22e>contains</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>数字の5の倍数を入力すると文字列のBuzzが返ってくる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        FizzBuzz fb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FizzBuzz<span style=color:#f92672>();</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>5<span style=color:#f92672>)).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Buzz&#34;</span><span style=color:#f92672>);</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>10<span style=color:#f92672>)).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Buzz&#34;</span><span style=color:#f92672>);</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>15<span style=color:#f92672>)).</span><span style=color:#a6e22e>contains</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Buzz&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>assertJのいいところは期待値をメソッドチェーンで書くことができるところですね。
+15の入力については、Fizzという文字列を含んでいる、Buzzという文字列を含んでいるというテストになりました。
+これを実装してみましょう。</p>
+<h3 id=4番目の実装>
+4番目の実装
+<a class=anchor href=#4%e7%95%aa%e7%9b%ae%e3%81%ae%e5%ae%9f%e8%a3%85>#</a>
+</h3>
+<p>Buzzの挙動を実装してみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// FizzBuzz.java
+</span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FizzBuzz</span> <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> inputValue<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>inputValue <span style=color:#f92672>%</span> 3 <span style=color:#f92672>==</span> 0<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>inputValue <span style=color:#f92672>%</span> 5 <span style=color:#f92672>==</span> 0<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;Buzz&#34;</span><span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span>
+        <span style=color:#66d9ef>return</span> String<span style=color:#f92672>.</span><span style=color:#a6e22e>valueOf</span><span style=color:#f92672>(</span>inputValue<span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>いったんこのように書いてみました。
+一見良さそうですが、これはテストを通るでしょうか？</p>
+<p>動かしてみると分かりますが、これは通りません。
+3の倍数のときFizzを返してしまうので、15のときに”Fizz”が返ってしまいます。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// FizzBuzz.java
+</span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FizzBuzz</span> <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> inputValue<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>inputValue <span style=color:#f92672>==</span> 15<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;FizzBuzz&#34;</span><span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>inputValue <span style=color:#f92672>%</span> 3 <span style=color:#f92672>==</span> 0<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>inputValue <span style=color:#f92672>%</span> 5 <span style=color:#f92672>==</span> 0<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;Buzz&#34;</span><span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span>
+        <span style=color:#66d9ef>return</span> String<span style=color:#f92672>.</span><span style=color:#a6e22e>valueOf</span><span style=color:#f92672>(</span>inputValue<span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>それを踏まえていったん、15のときはFizzBuzzを返すようにしてみました。
+これだと今のテストは通りますね！</p>
+<h3 id=最後のテスト>
+最後のテスト
+<a class=anchor href=#%e6%9c%80%e5%be%8c%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h3>
+<p>いよいよ佳境です。3と5の倍数の挙動のテストを書いてみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// FizzBuzzTest.java
+</span><span style=color:#75715e></span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test<span style=color:#f92672>;</span>
+
+<span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat<span style=color:#f92672>;</span>
+
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FizzBuzzTest</span> <span style=color:#f92672>{</span>
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>数字の1を入力すると文字列の1が返ってくる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        FizzBuzz fb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FizzBuzz<span style=color:#f92672>();</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>1<span style=color:#f92672>)).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;1&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>数字の2を入力すると文字列の2が返ってくる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        FizzBuzz fb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FizzBuzz<span style=color:#f92672>();</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>2<span style=color:#f92672>)).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;2&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>数字の3の倍数を入力すると文字列のFizzが返ってくる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        FizzBuzz fb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FizzBuzz<span style=color:#f92672>();</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>3<span style=color:#f92672>)).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>);</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>6<span style=color:#f92672>)).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>);</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>9<span style=color:#f92672>)).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>);</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>12<span style=color:#f92672>)).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>);</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>15<span style=color:#f92672>)).</span><span style=color:#a6e22e>contains</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>数字の5の倍数を入力すると文字列のBuzzが返ってくる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        FizzBuzz fb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FizzBuzz<span style=color:#f92672>();</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>5<span style=color:#f92672>)).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Buzz&#34;</span><span style=color:#f92672>);</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>10<span style=color:#f92672>)).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Buzz&#34;</span><span style=color:#f92672>);</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>15<span style=color:#f92672>)).</span><span style=color:#a6e22e>contains</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Buzz&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>数字の3と5の倍数を入力すると文字列のFizzBuzzが返ってくる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        FizzBuzz fb <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FizzBuzz<span style=color:#f92672>();</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>15<span style=color:#f92672>)).</span><span style=color:#a6e22e>contains</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;FizzBuzz&#34;</span><span style=color:#f92672>);</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>30<span style=color:#f92672>)).</span><span style=color:#a6e22e>contains</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;FizzBuzz&#34;</span><span style=color:#f92672>);</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>45<span style=color:#f92672>)).</span><span style=color:#a6e22e>contains</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;FizzBuzz&#34;</span><span style=color:#f92672>);</span>
+        assertThat<span style=color:#f92672>(</span>fb<span style=color:#f92672>.</span><span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span>60<span style=color:#f92672>)).</span><span style=color:#a6e22e>contains</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;FizzBuzz&#34;</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>FizzBuzzを確認するテストを書きました。ここまで書くともう慣れてきましたよね？</p>
+<h3 id=最後の実装>
+最後の実装
+<a class=anchor href=#%e6%9c%80%e5%be%8c%e3%81%ae%e5%ae%9f%e8%a3%85>#</a>
+</h3>
+<p>早速これを満たす実装を書いてみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// FizzBuzz.java
+</span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FizzBuzz</span> <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> inputValue<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>inputValue <span style=color:#f92672>%</span> 3 <span style=color:#f92672>==</span> 0 <span style=color:#f92672>&amp;&amp;</span> inputValue <span style=color:#f92672>%</span> 5 <span style=color:#f92672>==</span> 0<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;FizzBuzz&#34;</span><span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>inputValue <span style=color:#f92672>%</span> 3 <span style=color:#f92672>==</span> 0<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>inputValue <span style=color:#f92672>%</span> 5 <span style=color:#f92672>==</span> 0<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;Buzz&#34;</span><span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span>
+        <span style=color:#66d9ef>return</span> String<span style=color:#f92672>.</span><span style=color:#a6e22e>valueOf</span><span style=color:#f92672>(</span>inputValue<span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>これはもう説明不要で大丈夫でしょう！3と5の倍数のときはFizzBuzzを返すプログラムができました。</p>
+<h3 id=リファクタリング>
+リファクタリング
+<a class=anchor href=#%e3%83%aa%e3%83%95%e3%82%a1%e3%82%af%e3%82%bf%e3%83%aa%e3%83%b3%e3%82%b0>#</a>
+</h3>
+<p>いったんFizzBuzzの要件を満たすプログラムはできたように見えます。
+これで終わりでしょうか？</p>
+<p>そう、テスト駆動開発では最後にリファクタリングというプログラムを見直し、
+洗練させるプロセスが入ります。このプログラムは簡単なものなので、サクッと直してしまいましょう。
+ここで大事なのは<strong>テストは直さず実装をきれいする</strong>ということです。
+テストを直してしまうと、プログラムの挙動が変わってしまう可能性が出てきてしまいます。
+プログラムの挙動を変えないように実装を良くするのがリファクタリングです。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// FizzBuzz.java
+</span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FizzBuzz</span> <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getResponse</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> inputValue<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>inputValue <span style=color:#f92672>%</span> 15 <span style=color:#f92672>==</span> 0<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;FizzBuzz&#34;</span><span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>inputValue <span style=color:#f92672>%</span> 3 <span style=color:#f92672>==</span> 0<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;Fizz&#34;</span><span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>inputValue <span style=color:#f92672>%</span> 5 <span style=color:#f92672>==</span> 0<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;Buzz&#34;</span><span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>return</span> String<span style=color:#f92672>.</span><span style=color:#a6e22e>valueOf</span><span style=color:#f92672>(</span>inputValue<span style=color:#f92672>);</span>
+        <span style=color:#f92672>}</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>リファクタリングの一例としてはこんな感じでしょうか。</p>
+<hr>
+<h2 id=完成>
+完成
+<a class=anchor href=#%e5%ae%8c%e6%88%90>#</a>
+</h2>
+<p>以上でFizzBuzzプログラムの実装が終わりました。
+はじめてのテスト駆動開発うまくできましたか？</p>
+<p>FizzBuzzはとても有名な問題なので様々な実装方法があります。興味があれば調べてみてください。</p>
+<p>では次にちょっと難易度を上げた問題に取り組んでみましょう。</p>
+<a href=/agile-dev-guide/docs/softwaretest/bowlinggame/ class=book-btn>
+ボウリングゲーム
+</a>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#テスト駆動開発とは>テスト駆動開発とは</a></li>
+<li><a href=#fizzbuzz>FizzBuzz</a>
+<ul>
+<li><a href=#プロジェクトの作成>プロジェクトの作成</a></li>
+<li><a href=#最初のテスト>最初のテスト</a></li>
+<li><a href=#最初の実装>最初の実装</a></li>
+<li><a href=#2番目のテスト>2番目のテスト</a></li>
+<li><a href=#2番目の実装>2番目の実装</a></li>
+<li><a href=#3番目のテスト>3番目のテスト</a></li>
+<li><a href=#3番目の実装>3番目の実装</a></li>
+<li><a href=#4番目のテスト>4番目のテスト</a></li>
+<li><a href=#4番目の実装>4番目の実装</a></li>
+<li><a href=#最後のテスト>最後のテスト</a></li>
+<li><a href=#最後の実装>最後の実装</a></li>
+<li><a href=#リファクタリング>リファクタリング</a></li>
+</ul>
+</li>
+<li><a href=#完成>完成</a></li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>
