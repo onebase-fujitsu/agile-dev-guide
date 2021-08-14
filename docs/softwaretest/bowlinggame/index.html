@@ -570,7 +570,7 @@ add()メソッドはroll()メソッドに名前を変更しました。
 getScore()でスコアの計算をするように変更すると良さそうですね。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// Game.java
 </span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> <span style=color:#f92672>{</span>
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> rolls<span style=color:#f92672>[]</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>];</span>
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>];</span>
     <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span>
 
     <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getScore</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
@@ -589,7 +589,7 @@ getScore()でスコアの計算をするように変更すると良さそうで�
 では早速、スペアの実装に入ってみましょう。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// Game.java
 </span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> <span style=color:#f92672>{</span>
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> rolls<span style=color:#f92672>[]</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>];</span>
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>];</span>
     <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span>
 
     <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getScore</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
@@ -614,7 +614,7 @@ getScore()でスコアの計算をするように変更すると良さそうで�
 <p>再びリファクタリングしてみましょう。また、スペアを確認するテストをコメントアウトしてください。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// Game.java
 </span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> <span style=color:#f92672>{</span>
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> rolls<span style=color:#f92672>[]</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>];</span>
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>];</span>
     <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span>
 
     <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getScore</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
@@ -637,7 +637,7 @@ iという各フレームの1投目の位置を保持する変数を作ってみ
 <p>これで元々のテストはパスしましたので、再度スペアの実装に挑んでみましょう。スペアを確認するテストのコメントアウトを外してください。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// Game.java
 </span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> <span style=color:#f92672>{</span>
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> rolls<span style=color:#f92672>[]</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>];</span>
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>];</span>
     <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span>
 
     <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getScore</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
@@ -668,7 +668,7 @@ spareを判定するところにコメントがありますが、そもそもコ
 <p>まずiをわかりやすい別の名前にします。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// Game.java
 </span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> <span style=color:#f92672>{</span>
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> rolls<span style=color:#f92672>[]</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>];</span>
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>];</span>
     <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span>
 
     <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getScore</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
@@ -693,7 +693,7 @@ spareを判定するところにコメントがありますが、そもそもコ
 ここではisSpare()のようなboolean値を返すプライベートメソッドを作ると良さそうですね。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// Game.java
 </span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> <span style=color:#f92672>{</span>
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> rolls<span style=color:#f92672>[]</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>];</span>
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>];</span>
     <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span>
 
     <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getScore</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
@@ -847,7 +847,7 @@ game.roll(5);
 <p>スペアができたので、ストライクも同じように実装できそうですよね。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// Game.java
 </span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> <span style=color:#f92672>{</span>
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> rolls<span style=color:#f92672>[]</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>];</span>
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>];</span>
     <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span>
 
     <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getScore</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
@@ -879,7 +879,7 @@ game.roll(5);
 </code></pre></div><p>こんな感じで実装できました。テストもパスできましたね。
 これもストライクの判定処理を切り出すリファクタリングをやってみましょう。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> <span style=color:#f92672>{</span>
-    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> rolls<span style=color:#f92672>[]</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>];</span>
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>];</span>
     <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span>
 
     <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getScore</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
@@ -887,7 +887,7 @@ game.roll(5);
         <span style=color:#66d9ef>int</span> frameIndex <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span>
         <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> frame <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span> frame <span style=color:#f92672>&lt;</span> 10<span style=color:#f92672>;</span> frame<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
             <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>isStrike<span style=color:#f92672>(</span>frameIndex<span style=color:#f92672>))</span> <span style=color:#f92672>{</span>
-                score <span style=color:#f92672>+=</span> 10 <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex<span style=color:#f92672>+</span>1<span style=color:#f92672>]</span> <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex<span style=color:#f92672>+</span>2<span style=color:#f92672>];</span>
+                score <span style=color:#f92672>+=</span> 10 <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex <span style=color:#f92672>+</span> 1<span style=color:#f92672>]</span> <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex <span style=color:#f92672>+</span> 2<span style=color:#f92672>];</span>
                 frameIndex <span style=color:#f92672>+=</span> 1<span style=color:#f92672>;</span>
             <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>isSpare<span style=color:#f92672>(</span>frameIndex<span style=color:#f92672>))</span> <span style=color:#f92672>{</span>
                 score <span style=color:#f92672>+=</span> 10 <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex <span style=color:#f92672>+</span> 2<span style=color:#f92672>];</span>
