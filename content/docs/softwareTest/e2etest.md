@@ -1,6 +1,6 @@
 ---
 title: "E2E Test"
-weight: 2
+weight: 5
 # bookFlatSection: false
 # bookToc: true
 # bookHidden: false
