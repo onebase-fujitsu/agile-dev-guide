@@ -409,7 +409,7 @@ getScore()でスコアの計算をするように変更すると良さそうで�
 ```java
 // Game.java
 public class Game {
-    private int rolls[] = new int[21];
+    private final int[] rolls = new int[21];
     private int currentRoll = 0;
 
     public int getScore() {
@@ -432,7 +432,7 @@ public class Game {
 ```java
 // Game.java
 public class Game {
-    private int rolls[] = new int[21];
+    private final int[] rolls = new int[21];
     private int currentRoll = 0;
 
     public int getScore() {
@@ -462,7 +462,7 @@ public class Game {
 ```java
 // Game.java
 public class Game {
-    private int rolls[] = new int[21];
+    private final int[] rolls = new int[21];
     private int currentRoll = 0;
 
     public int getScore() {
@@ -490,7 +490,7 @@ iという各フレームの1投目の位置を保持する変数を作ってみ
 ```java
 // Game.java
 public class Game {
-    private int rolls[] = new int[21];
+    private final int[] rolls = new int[21];
     private int currentRoll = 0;
 
     public int getScore() {
@@ -528,7 +528,7 @@ spareを判定するところにコメントがありますが、そもそもコ
 ```java
 // Game.java
 public class Game {
-    private int rolls[] = new int[21];
+    private final int[] rolls = new int[21];
     private int currentRoll = 0;
 
     public int getScore() {
@@ -557,7 +557,7 @@ frameIndexという名前に変わりました。スペアの判定はどうし�
 ```java
 // Game.java
 public class Game {
-    private int rolls[] = new int[21];
+    private final int[] rolls = new int[21];
     private int currentRoll = 0;
 
     public int getScore() {
@@ -731,7 +731,7 @@ public class GameTest {
 ```java
 // Game.java
 public class Game {
-    private int rolls[] = new int[21];
+    private final int[] rolls = new int[21];
     private int currentRoll = 0;
 
     public int getScore() {
@@ -767,7 +767,7 @@ public class Game {
 
 ```java
 public class Game {
-    private int rolls[] = new int[21];
+    private final int[] rolls = new int[21];
     private int currentRoll = 0;
 
     public int getScore() {
@@ -775,7 +775,7 @@ public class Game {
         int frameIndex = 0;
         for (int frame = 0; frame < 10; frame++) {
             if (isStrike(frameIndex)) {
-                score += 10 + rolls[frameIndex+1] + rolls[frameIndex+2];
+                score += 10 + rolls[frameIndex + 1] + rolls[frameIndex + 2];
                 frameIndex += 1;
             } else if (isSpare(frameIndex)) {
                 score += 10 + rolls[frameIndex + 2];
