@@ -568,9 +568,117 @@ Spring Bootでは擬似的にHTTP通信をおこなう、TestRestTemplateとい�
 
 ### 実際にDBアクセスを発生させるテスト
 
-### ServiceをモッキングしてDBアクセスを発生させないテスト
+```java
+// TodoAppControllerIntegrationTest.java
+package com.example.todoApp.controller;
 
-### Serviceで例外をスタブして、サーバレスポンスコードを検証するテスト
+import com.example.todoApp.model.Task;
+import net.minidev.json.JSONObject;
+import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.*;
+import org.springframework.test.context.jdbc.Sql;
+
+import java.util.Objects;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Sql(scripts = "/clear_db.sql")
+public class TodoAppControllerIntegrationTest {
+    @Autowired
+    private TestRestTemplate restTemplate;
+
+    @Test
+    public void なにもタスクを作成していない場合は0件が返す() {
+        ResponseEntity<Task[]> response = restTemplate.exchange("/tasks", HttpMethod.GET, HttpEntity.EMPTY, Task[].class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(Objects.requireNonNull(response.getBody()).length).isEqualTo(0);
+    }
+
+    @Test
+    public void タスクを新規に作成するとCREATEDを返す() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        JSONObject taskJson = new JSONObject();
+        taskJson.put("title", "foo");
+        taskJson.put("description", "bar");
+
+        ResponseEntity<Object> response = restTemplate.exchange("/tasks", HttpMethod.POST, new HttpEntity<>(taskJson.toString(), headers), Object.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+    }
+
+
+    @Nested
+    class 既存のタスクに対する操作 {
+        @BeforeEach
+        public void setup() {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            JSONObject taskJson = new JSONObject();
+            taskJson.put("title", "foo");
+            taskJson.put("description", "bar");
+            restTemplate.exchange("/tasks", HttpMethod.POST, new HttpEntity<>(taskJson.toString(), headers), Object.class);
+        }
+
+        @Test
+        public void タスクがあるとその情報を取得できる() {
+            ResponseEntity<Task[]> response = restTemplate.exchange("/tasks", HttpMethod.GET, HttpEntity.EMPTY, Task[].class);
+            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+            assertThat(Objects.requireNonNull(response.getBody()).length).isEqualTo(1);
+
+            assertThat(response.getBody()[0].id).isEqualTo(1);
+            assertThat(response.getBody()[0].title).isEqualTo("foo");
+            assertThat(response.getBody()[0].description).isEqualTo("bar");
+            assertThat(response.getBody()[0].isDone).isEqualTo(false);
+        }
+
+        @Test
+        public void タスクを完了できる() {
+            ResponseEntity<Object> operationResponse = restTemplate.exchange("/tasks/1/finish", HttpMethod.PUT, HttpEntity.EMPTY, Object.class);
+            assertThat(operationResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+            ResponseEntity<Task[]> response = restTemplate.exchange("/tasks", HttpMethod.GET, HttpEntity.EMPTY, Task[].class);
+            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+            assertThat(Objects.requireNonNull(response.getBody()).length).isEqualTo(1);
+
+            assertThat(response.getBody()[0].id).isEqualTo(1);
+            assertThat(response.getBody()[0].title).isEqualTo("foo");
+            assertThat(response.getBody()[0].description).isEqualTo("bar");
+            assertThat(response.getBody()[0].isDone).isEqualTo(true);
+        }
+
+        @Test
+        public void 完了済みのタスクを未完了に戻すことができる() {
+            restTemplate.exchange("/tasks/1/finish", HttpMethod.PUT, HttpEntity.EMPTY, Object.class);
+            ResponseEntity<Object> operationResponse = restTemplate.exchange("/tasks/1/revert", HttpMethod.PUT, HttpEntity.EMPTY, Object.class);
+            assertThat(operationResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+            ResponseEntity<Task[]> response = restTemplate.exchange("/tasks", HttpMethod.GET, HttpEntity.EMPTY, Task[].class);
+            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+            assertThat(Objects.requireNonNull(response.getBody()).length).isEqualTo(1);
+
+            assertThat(response.getBody()[0].id).isEqualTo(1);
+            assertThat(response.getBody()[0].title).isEqualTo("foo");
+            assertThat(response.getBody()[0].description).isEqualTo("bar");
+            assertThat(response.getBody()[0].isDone).isEqualTo(false);
+        }
+
+        @Test
+        public void タスクを他駆除することができる() {
+            ResponseEntity<Object> operationResponse = restTemplate.exchange("/tasks/1", HttpMethod.DELETE, HttpEntity.EMPTY, Object.class);
+            assertThat(operationResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+            ResponseEntity<Task[]> response = restTemplate.exchange("/tasks", HttpMethod.GET, HttpEntity.EMPTY, Task[].class);
+            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+            assertThat(Objects.requireNonNull(response.getBody()).length).isEqualTo(0);
+        }
+    }
+}
+```
 
 ## テスト駆動開発とユニットテスト・インテグレーションテスト
 
@@ -627,5 +735,12 @@ Spring Bootでは擬似的にHTTP通信をおこなう、TestRestTemplateとい�
 「テストケースが十分に網羅されていない」コードを限りなく少なくすることです。
 すなわち、いくらカバレッジが高くても、テストケースの品質が悪ければ、バグが潜在している可能性を低くすることはできません。
 カバレッジ率はテストの網羅率を測るのに有用ですが、**それを目標にしてはいけません。**
+
+「実践テスト駆動開発」という書籍があり、その中の一節を紹介します。
+
+
+> システムの振る舞いは、オブジェクトの組み合わせから現れる性質なのだ。『オブジェクトの組み合わせ』とは、すなわち『どのオブジェクトを、どうつなげるか』ということだ。
+> 
+> **振る舞いのテストを行え、メソッドをテストするのではない**
 
 **テスト駆動開発(TDD)のいうところの"テスト"とはすなわち、振る舞い駆動開発(BDD)であるということを肝に銘じておくと良いでしょう。**
