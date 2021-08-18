@@ -2,9 +2,9 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="テストダブル # テスト駆動開発の開発の流れがわかってきたところで、次にテストダブルについて学んでいきましょう。">
+<meta name=description content="テストダブル # テスト駆動開発の開発の流れがわかってきたところで、次にテストダブルを使用したテストについて学んでいきましょう。 テストダブルとは">
 <meta name=theme-color content="#FFFFFF"><meta property="og:title" content="テストダブル">
-<meta property="og:description" content="テストダブル # テスト駆動開発の開発の流れがわかってきたところで、次にテストダブルについて学んでいきましょう。">
+<meta property="og:description" content="テストダブル # テスト駆動開発の開発の流れがわかってきたところで、次にテストダブルを使用したテストについて学んでいきましょう。 テストダブルとは">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/"><meta property="article:section" content="docs">
 <title>テストダブル | Fujitsu Agile Development Guide</title>
@@ -172,14 +172,601 @@
 </label>
 </div>
 <aside class="hidden clearfix">
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#テストダブルとは>テストダブルとは</a>
+<ul>
+<li><a href=#stub>Stub</a></li>
+</ul>
+</li>
+<li><a href=#テストダブルを実現するライブラリ>テストダブルを実現するライブラリ</a></li>
+<li><a href=#サンプルアプリケーション>サンプルアプリケーション</a></li>
+<li><a href=#mockitoを使ったcontrollerのユニットテスト>Mockitoを使ったControllerのユニットテスト</a>
+<ul>
+<li><a href=#バックエンドの構造>バックエンドの構造</a></li>
+<li><a href=#最初のテスト>最初のテスト</a></li>
+<li><a href=#2番目のテスト>2番目のテスト</a></li>
+<li><a href=#例外のテスト>例外のテスト</a></li>
+<li><a href=#引数のテスト>引数のテスト</a></li>
+</ul>
+</li>
+<li><a href=#mockitoを使ったインテグレーションテスト>Mockitoを使ったインテグレーションテスト</a>
+<ul>
+<li><a href=#実際にdbアクセスを発生させるテスト>実際にDBアクセスを発生させるテスト</a></li>
+<li><a href=#serviceをモッキングしてdbアクセスを発生させないテスト>ServiceをモッキングしてDBアクセスを発生させないテスト</a></li>
+<li><a href=#serviceで例外をスタブしてサーバレスポンスコードを検証するテスト>Serviceで例外をスタブして、サーバレスポンスコードを検証するテスト</a></li>
+</ul>
+</li>
+<li><a href=#テスト駆動開発とユニットテストインテグレーションテスト>テスト駆動開発とユニットテスト・インテグレーションテスト</a></li>
+</ul>
+</nav>
 </aside>
 </header>
 <article class=markdown><h1 id=テストダブル>
 テストダブル
 <a class=anchor href=#%e3%83%86%e3%82%b9%e3%83%88%e3%83%80%e3%83%96%e3%83%ab>#</a>
 </h1>
-<p>テスト駆動開発の開発の流れがわかってきたところで、次にテストダブルについて学んでいきましょう。</p>
+<p>テスト駆動開発の開発の流れがわかってきたところで、次にテストダブルを使用したテストについて学んでいきましょう。</p>
+<h2 id=テストダブルとは>
+テストダブルとは
+<a class=anchor href=#%e3%83%86%e3%82%b9%e3%83%88%e3%83%80%e3%83%96%e3%83%ab%e3%81%a8%e3%81%af>#</a>
+</h2>
+<p>テスト対象となるクラスやメソッドが、ほかのクラスに依存していないケースはほとんどありません。
+依存しているクラスもまた、ほかのクラスに依存しています。</p>
+<p>ソフトウェアは多数のクラスが依存し合って動作するため、クラス単体の動作を保証するよりも、ソフトウェア全体の動作を保証するほうが価値が高くなります。
+一方、テスト対象クラス以外の問題を原因として、ユニットテストが失敗する可能性があることは大きなデメリットです。</p>
+<p>テストが失敗したときには、最初にテスト対象クラスに問題があると考えるため、原因の分析に余計な時間がかかります。
+また、依存する機能が外部サービスや乱数、システム時間など、期待する結果を予測できない場合には検証の精度を落とさざるを得ません。</p>
+<p>そこで、依存する機能がユニットテストで扱いづらい場合や、ユニットテストの独立性を高めたい場合には、依存するオブジェクトを「代役」で置き換える方法が有効です。
+この代役となるオブジェクトはスタブやモックとして知られ、総称してテストダブル（TestDouble）と呼ばれます。</p>
+<p>テストダブルには様々なパターンがあります</p>
+<ul>
+<li>Stub
+<ul>
+<li>テスト対象の依存オブジェクトに予測可能な振る舞いをする</li>
+</ul>
+</li>
+<li>Spy
+<ul>
+<li>テスト対象から依存オブジェクトへの呼び出しを監視する</li>
+</ul>
+</li>
+<li>Mock
+<ul>
+<li>テスト対象から依存オブジェクトへの呼び出しを検証する</li>
+</ul>
+</li>
+<li>Fake
+<ul>
+<li>テストの範囲内で本物と同じように動作する</li>
+</ul>
+</li>
+<li>Dummy
+<ul>
+<li>内部のパラメータや状態がなんでもあってもテストに影響を及ぼさない代替オブジェクト</li>
+</ul>
+</li>
+</ul>
+<p>FakeとDummyは本物と同じように振る舞う偽のオブジェクトであったり、コンパイルを通すために実装される代替オブジェクトなので、
+説明はここでは割愛します。ここではStub、Mock、Spyについて説明していきます。</p>
+<h3 id=stub>
+Stub
+<a class=anchor href=#stub>#</a>
+</h3>
+<p>スタブとは依存するクラスやモジュールの代用として使用する仮のクラスやモジュールです。
+ユニットテストに置いてはは依存オブジェクトに予測可能な振る舞いをさせる目的で使用されます。
+その他にも依存オブジェクトの実行コストが高く、簡単に利用できない場合などに使われます。</p>
+<h2 id=テストダブルを実現するライブラリ>
+テストダブルを実現するライブラリ
+<a class=anchor href=#%e3%83%86%e3%82%b9%e3%83%88%e3%83%80%e3%83%96%e3%83%ab%e3%82%92%e5%ae%9f%e7%8f%be%e3%81%99%e3%82%8b%e3%83%a9%e3%82%a4%e3%83%96%e3%83%a9%e3%83%aa>#</a>
+</h2>
+<p>テストダブルを実現するライブラリも様々なものがあります。
+Javaですと <a href=https://site.mockito.org/>Mockito</a>、 <a href=https://easymock.org/>EasyMock</a> 、
+<a href=http://jmock.org/>jMock</a> あたりでしょうか。
+Javascriptだと <a href=https://sinonjs.org/>Sinon.js</a> や <a href=https://github.com/testdouble/testdouble.js/>testdouble.js</a> が有名です。</p>
+<h2 id=サンプルアプリケーション>
+サンプルアプリケーション
+<a class=anchor href=#%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3>#</a>
+</h2>
+<p>さて、ここからは具体的なアプリケーションをつかってテストの実装をやってみましょう。</p>
+<p>サンプルアプリケーションは <a href=https://github.com/Onebase-Fujitsu/simple-todo-app>ここ</a> で公開してあります。</p>
+<p><a href=https://github.com/Onebase-Fujitsu/simple-todo-app>https://github.com/Onebase-Fujitsu/simple-todo-app</a></p>
+<p>まずはリポジトリをローカルにCloneしてみましょう。
+CloneしたらTerminalを2つ立ち上げて、フロントエンドとバックエンドを起動してみてください。
+実行にはJavaの実行環境と、Node.jsの実行環境が必要です。</p>
+<p>リポジトリのClone</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>git clone https://github.com/Onebase-Fujitsu/simple-todo-app.git
+</code></pre></div><p>フロントエンドの起動(Mac/Linuxの場合)</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>cd client
+npm install
+npm run start
+</code></pre></div><p>フロントエンドの起動(Windowsの場合)</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>chdir client
+npm install
+npm run start
+</code></pre></div><p>バックエンドの起動(Mac/Linuxの場合)</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>cd sever
+SERVER_PORT<span style=color:#f92672>=</span><span style=color:#ae81ff>8080</span> ./gradlew bootRun
+</code></pre></div><p>バックエンドの起動(Windowsの場合)</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>chdir server
+SERVER_PORT<span style=color:#f92672>=</span><span style=color:#ae81ff>8080</span>
+gradlew.bat bootRun
+</code></pre></div><p>まずは、このアプリケーションを動かしてみましょう。このアプリケーションはシンプルなToDo管理アプリケーションです。
+Cliantは <a href=https://ja.reactjs.org/>React</a> で作っていて、開発言語に <a href=https://www.typescriptlang.org/>Typescript</a> を使用しています。
+またUIライブラリに <a href=https://material-ui.com/>Material-UI</a> を採用しています。</p>
+<p>Serverは <a href=https://spring.io/>Spring Boot</a> で作っており、開発言語は <a href=https://www.java.com/ja/>Java</a> です。
+DBは <a href=https://www.h2database.com/html/main.html>H2 Database</a> をインメモリで動かしています。
+またDBのマイグレーションの <a href=https://flywaydb.org/>Flyway</a> を使用しているのが一つポイントです。</p>
+<p>正常に起動してWebブラウザで <a href=http://localhost:3000>http://localhost:3000</a> にアクセスするとこのような画面が表示されるはずです。</p>
+<p><img src=sampleApp1.jpg alt=SampleTodoApp1></p>
+<p>タスク名や説明を入力してSaveをクリックすると、タスクが保存されますし、
+ブラウザをリロードしても状態が保存されていることがわかると思います。</p>
+<p><img src=sampleApp2.jpg alt=SampleTodoApp2></p>
+<p>タスクを完了したり、ゴミ箱ボタンをクリックすると削除したりすることができます。
+さて、このアプリケーションのServerのテストを見てみましょう。</p>
+<p><a href=https://github.com/Onebase-Fujitsu/simple-todo-app/tree/main/server/src/test>https://github.com/Onebase-Fujitsu/simple-todo-app/tree/main/server/src/test</a></p>
+<p>見てもらえると分かりますが、このアプリケーションにはテストが実装されていません。
+ということで一緒にハンズオン形式でテストを実装してみましょう。</p>
+<h2 id=mockitoを使ったcontrollerのユニットテスト>
+Mockitoを使ったControllerのユニットテスト
+<a class=anchor href=#mockito%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%9fcontroller%e3%81%ae%e3%83%a6%e3%83%8b%e3%83%83%e3%83%88%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h2>
+<p>Spring Bootアプリケーションを新規に作るときは <a href=https://start.spring.io/>spring initializr</a> を使うんですが、
+テストのために必要な様々なライブラリはデフォルトでついてきます。</p>
+<p><a href=https://github.com/Onebase-Fujitsu/simple-todo-app/blob/main/server/build.gradle>build.gradle</a>
+を見ると以下のような設定パラメータを見ることができます。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-gradle data-lang=gradle>dependencies <span style=color:#f92672>{</span>
+	implementation <span style=color:#e6db74>&#39;org.springframework.boot:spring-boot-starter-jdbc:2.5.3&#39;</span>
+	implementation <span style=color:#e6db74>&#39;org.springframework.boot:spring-boot-starter-web:2.5.3&#39;</span>
+	implementation <span style=color:#e6db74>&#39;com.h2database:h2:1.4.200&#39;</span>
+	implementation <span style=color:#e6db74>&#39;org.flywaydb:flyway-core:7.12.1&#39;</span>
+	testImplementation <span style=color:#e6db74>&#39;org.springframework.boot:spring-boot-starter-test:2.5.3&#39;</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>この中の<code>testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.3'</code>がSpring Bootアプリケーションに必要な様々な機能を提供しているライブラリです。
+テストダブルを使ったテストを実現するライブラリ<code>Mockito</code>もこの中に含まれています。</p>
+<h3 id=バックエンドの構造>
+バックエンドの構造
+<a class=anchor href=#%e3%83%90%e3%83%83%e3%82%af%e3%82%a8%e3%83%b3%e3%83%89%e3%81%ae%e6%a7%8b%e9%80%a0>#</a>
+</h3>
+<p>さて、次にバックエンドの作りを見てみましょう。
+バックエンドは極々一般的な3層アーキテクチャになっています。
+バックエンドは極々一般的な3層アーキテクチャになっています。</p>
+<script src=/agile-dev-guide/mermaid.min.js></script>
+<script>mermaid.initialize({flowchart:{useMaxWidth:!0},theme:"default"})</script>
+<p class=mermaid>
+classDiagram
+class TodoAppController{
+TodoAppService todoAppService
+getAllTasks() List~Task~
+createTask(NewTask newTask) void
+finishTask(int taskId) void
+revertTask(int taskId) void
+deleteTask(int taskId) void
+}
+class TodoAppService{
+getAllTasks() List~Task~
+createTask(NewTask newTask) void
+finishTask(int taskId) void
+revertTask(int taskId) void
+deleteTask(int taskId) void
+}
+class TodoAppServiceImpl{
+TodoAppRepository todoAppRepository
+getAllTasks() List~Task~
+createTask(NewTask newTask) void
+finishTask(int taskId) void
+revertTask(int taskId) void
+deleteTask(int taskId) void
+}
+class TodoAppRepository{
+getAllTasks() List~Task~
+createTask(NewTask newTask) void
+finishTask(int taskId) void
+revertTask(int taskId) void
+deleteTask(int taskId) void
+}
+class TodoAppRepositoryImpl{
+JdbcTemplate jdbcTemplate;
+getAllTasks() List~Task~
+createTask(NewTask newTask) void
+finishTask(int taskId) void
+revertTask(int taskId) void
+deleteTask(int taskId) void
+}
+TodoAppController ..> TodoAppService
+TodoAppServiceImpl ..|> TodoAppService
+TodoAppServiceImpl ..> TodoAppRepository
+TodoAppRepositoryImpl ..|> TodoAppRepository
+</p>
+<p>TodoAppControllerはTodoAppServiceに依存していて、TodoAppServiceはTodoAppRepositoryに依存しています。
+TodoAppServiceとTodoAppRepositoryはinterfaceです。これは <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>依存性逆転の原則(DIP)</a> に従ったです。
+抽象に依存するようにして結合度を下げています。これについては後述します。</p>
+<h3 id=最初のテスト>
+最初のテスト
+<a class=anchor href=#%e6%9c%80%e5%88%9d%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h3>
+<p>では早速getAllTask()のテストを書いていきましょう。
+getAllTasks()はタスクを全県取得するメソッドです。
+まずはタスクが0件のときに空の配列を返すということを確認するテストを書いていきましょう。</p>
+<p><code>server\src\test\java\com.example.todoApp</code>配下に<code>controller</code>パッケージを新規に作成し<code>TodoAppControllerUnitTest.java</code>を作りましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// TodoAppControllerUnitTest.java
+</span><span style=color:#75715e></span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.junit.jupiter.api.extension.ExtendWith<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.springframework.test.context.junit.jupiter.SpringExtension<span style=color:#f92672>;</span>
+
+<span style=color:#a6e22e>@ExtendWith</span><span style=color:#f92672>(</span>SpringExtension<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>)</span>
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoAppControllerUnitTest</span> <span style=color:#f92672>{</span>
+    
+<span style=color:#f92672>}</span>
+</code></pre></div><p>まずは雛形。
+<code>@ExtendWith(SpringExtension.class)</code>という見慣れない記述がありますが、これはJUnit5上でSpring TestContext Frameworkを使用できるようにしているクラスです。
+最初はおまじないだと思ってください。</p>
+<p>さて、実際のプロダクトの実装ではServiceは実装されているのですが、ここで実装したいのはControllerの単体テストです。
+ちゃんとControllerがServiceを呼んでいるよねという確認や、Serviceからの戻り値に応じた返却をしているよねという検証をしたいです。
+ということで、ここでは本物のTodoAppServiceではなく、Serviceの代わりに成り代わって呼び出しの検証や、戻り値を設定できるオブジェクトを使ったテストがしたいです。</p>
+<p>そこで使われるのが <strong>依存性注入(Dependency Injection)</strong> という仕組みです。よくDIと言われます。
+文字通り依存しているオブジェクトを注入する仕組みです。</p>
+<p>百聞は一見にしかずといいますので、まずは以下のコードを書いてみてください。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// TodoAppControllerUnitTest.java
+</span><span style=color:#75715e></span><span style=color:#f92672>import</span> com.example.todoApp.service.TodoAppService<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.junit.jupiter.api.Test<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.junit.jupiter.api.extension.ExtendWith<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.mockito.InjectMocks<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.mockito.Mock<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.springframework.test.context.junit.jupiter.SpringExtension<span style=color:#f92672>;</span>
+
+<span style=color:#a6e22e>@ExtendWith</span><span style=color:#f92672>(</span>SpringExtension<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>)</span>
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoAppControllerUnitTest</span> <span style=color:#f92672>{</span>
+  <span style=color:#a6e22e>@Mock</span>
+  <span style=color:#66d9ef>private</span> TodoAppService appService<span style=color:#f92672>;</span>
+
+  <span style=color:#a6e22e>@InjectMocks</span>
+  <span style=color:#66d9ef>private</span> TodoAppController appController<span style=color:#f92672>;</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p><code>@Mock</code>と<code>@InjectMocks</code>というアノテーションが出てきました。
+これは共にMockitoの機能になります。</p>
+<p><code>@Mock</code>はモックオブジェクトを作る宣言です。
+ここではTodoAppServiceのモックを作っています。</p>
+<p><code>@InjectMocks</code>は<code>@Mock</code>で作成したモックオブジェクトを注入する対象です。
+ですので、上の記述はTodoAppServiceのモックインスタンス<code>appService</code>を注入したTodoAppControllerクラスのインスタンス、<code>appController</code>を作成しています。</p>
+<p>ではこれでどういう事ができるか実際にテストを書いてみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// TodoAppControllerUnitTest.java
+</span><span style=color:#75715e></span><span style=color:#f92672>import</span> com.example.todoApp.model.Task<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> com.example.todoApp.service.TodoAppService<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.junit.jupiter.api.Test<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.junit.jupiter.api.extension.ExtendWith<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.mockito.InjectMocks<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.mockito.Mock<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.springframework.test.context.junit.jupiter.SpringExtension<span style=color:#f92672>;</span>
+
+<span style=color:#f92672>import</span> java.util.Collections<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> java.util.List<span style=color:#f92672>;</span>
+
+<span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat<span style=color:#f92672>;</span>
+<span style=color:#f92672>import static</span> org.junit.jupiter.api.Assertions.assertThrows<span style=color:#f92672>;</span>
+<span style=color:#f92672>import static</span> org.mockito.Mockito.*<span style=color:#f92672>;</span>
+
+<span style=color:#a6e22e>@ExtendWith</span><span style=color:#f92672>(</span>SpringExtension<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>)</span>
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoAppControllerUnitTest</span> <span style=color:#f92672>{</span>
+  <span style=color:#a6e22e>@Mock</span>
+  <span style=color:#66d9ef>private</span> TodoAppService appService<span style=color:#f92672>;</span>
+
+  <span style=color:#a6e22e>@InjectMocks</span>
+  <span style=color:#66d9ef>private</span> TodoAppController appController<span style=color:#f92672>;</span>
+
+  <span style=color:#a6e22e>@Test</span>
+  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>タスクが取得できなかったら空のタスクリストを返す</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+    when<span style=color:#f92672>(</span>appService<span style=color:#f92672>.</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>thenReturn</span><span style=color:#f92672>(</span>Collections<span style=color:#f92672>.</span><span style=color:#a6e22e>emptyList</span><span style=color:#f92672>());</span>
+    List<span style=color:#f92672>&lt;</span>Task<span style=color:#f92672>&gt;</span> tasks <span style=color:#f92672>=</span> appController<span style=color:#f92672>.</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>();</span>
+    verify<span style=color:#f92672>(</span>appService<span style=color:#f92672>,</span> times<span style=color:#f92672>(</span>1<span style=color:#f92672>)).</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>();</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>0<span style=color:#f92672>);</span>
+  <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>最初のテストができました。このテストはもうパスするのですが（実装終わってるので当たり前ですね&mldr;）、1行づつ解説していきます。</p>
+<p>まず、<code>when(appService.getAllTasks()).thenReturn(Collections.emptyList());</code>という記述がでてきました。
+これはMockしているappServiceインスタンスのgeAllTasks()メソッドをが呼ばれたときに、何の値を返すかを設定しています。
+ここではgetAllTasks()が呼ばれたらからの配列を返すよと宣言しています。</p>
+<p>準備が終わったので、実際にappControllerのgetAllTasks()をその次の行で呼んでますね。</p>
+<p>次に<code>verify(appService, times(1)).getAllTasks();</code>という処理が出てきました。
+これはappServiceのgetAllTasks()が1回呼ばれていることを検証する処理です。
+実装を見るとわかるのですが、TodoAppControllerのgetAllTasks()ではTodoAppServiceのgetAllTasks()を一回だけ呼び出してその返却値を返すという単純な処理になっています。
+もし複数回appServiceのgetAllTasks()が呼ばれているとおかしいですよね。
+verifyを使うことで呼ばれた回数を検証することができます。</p>
+<p>最後にassertThatでappControllerの戻り値を確認してます。Mockオブジェクトが空の配列を返すように設定しましたが、
+その設定通り空の配列が返ってきていることをここで検証できます。</p>
+<p>こうしたMockitoを使った単体テストを書くと、<strong>高速で再現性の高いテストを書くことができます。</strong>
+例えば実際のプロダクトコードを使ってしまうと、DB直接アクセスしてしまって、
+実際のDBの状態に影響されてしまいます。</p>
+<p>でもモックを使って依存するオブジェクトをモッキングしてしまえば、戻り値もなにもかもテストでコントロールできるわけです！</p>
+<h3 id=2番目のテスト>
+2番目のテスト
+<a class=anchor href=#2%e7%95%aa%e7%9b%ae%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h3>
+<p>では本当にモックは戻り値を予測可能な振る舞いにしているかどうかをもう一つテストを書いてみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// TodoAppControllerUnitTest.java
+</span><span style=color:#75715e></span><span style=color:#f92672>import</span> com.example.todoApp.model.Task<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> com.example.todoApp.service.TodoAppService<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.junit.jupiter.api.Test<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.junit.jupiter.api.extension.ExtendWith<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.mockito.InjectMocks<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.mockito.Mock<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.springframework.test.context.junit.jupiter.SpringExtension<span style=color:#f92672>;</span>
+
+<span style=color:#f92672>import</span> java.util.Collections<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> java.util.List<span style=color:#f92672>;</span>
+
+<span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat<span style=color:#f92672>;</span>
+<span style=color:#f92672>import static</span> org.junit.jupiter.api.Assertions.assertThrows<span style=color:#f92672>;</span>
+<span style=color:#f92672>import static</span> org.mockito.Mockito.*<span style=color:#f92672>;</span>
+
+<span style=color:#a6e22e>@ExtendWith</span><span style=color:#f92672>(</span>SpringExtension<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>)</span>
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoAppControllerUnitTest</span> <span style=color:#f92672>{</span>
+  <span style=color:#a6e22e>@Mock</span>
+  <span style=color:#66d9ef>private</span> TodoAppService appService<span style=color:#f92672>;</span>
+
+  <span style=color:#a6e22e>@InjectMocks</span>
+  <span style=color:#66d9ef>private</span> TodoAppController appController<span style=color:#f92672>;</span>
+
+  <span style=color:#a6e22e>@Test</span>
+  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>タスクが取得できなかったら空のタスクリストを返す</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+    when<span style=color:#f92672>(</span>appService<span style=color:#f92672>.</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>thenReturn</span><span style=color:#f92672>(</span>Collections<span style=color:#f92672>.</span><span style=color:#a6e22e>emptyList</span><span style=color:#f92672>());</span>
+    List<span style=color:#f92672>&lt;</span>Task<span style=color:#f92672>&gt;</span> tasks <span style=color:#f92672>=</span> appController<span style=color:#f92672>.</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>();</span>
+    verify<span style=color:#f92672>(</span>appService<span style=color:#f92672>,</span> times<span style=color:#f92672>(</span>1<span style=color:#f92672>)).</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>();</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>0<span style=color:#f92672>);</span>
+  <span style=color:#f92672>}</span>
+
+  <span style=color:#a6e22e>@Test</span>
+  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>複数のタスクをリストで返す</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+    when<span style=color:#f92672>(</span>appService<span style=color:#f92672>.</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>thenReturn</span><span style=color:#f92672>(</span>List<span style=color:#f92672>.</span><span style=color:#a6e22e>of</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> Task<span style=color:#f92672>(</span>1<span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;hoge&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;fuga&#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>),</span> <span style=color:#66d9ef>new</span> Task<span style=color:#f92672>(</span>2<span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;foo&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;bar&#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>true</span><span style=color:#f92672>)));</span>
+    List<span style=color:#f92672>&lt;</span>Task<span style=color:#f92672>&gt;</span> tasks <span style=color:#f92672>=</span> appController<span style=color:#f92672>.</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>();</span>
+    verify<span style=color:#f92672>(</span>appService<span style=color:#f92672>,</span> times<span style=color:#f92672>(</span>1<span style=color:#f92672>)).</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>();</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>2<span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>0<span style=color:#f92672>).</span><span style=color:#a6e22e>id</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>1<span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>0<span style=color:#f92672>).</span><span style=color:#a6e22e>title</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;hoge&#34;</span><span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>0<span style=color:#f92672>).</span><span style=color:#a6e22e>description</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;fuga&#34;</span><span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>0<span style=color:#f92672>).</span><span style=color:#a6e22e>isDone</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#66d9ef>false</span><span style=color:#f92672>);</span>
+
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>1<span style=color:#f92672>).</span><span style=color:#a6e22e>id</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>2<span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>1<span style=color:#f92672>).</span><span style=color:#a6e22e>title</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;foo&#34;</span><span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>1<span style=color:#f92672>).</span><span style=color:#a6e22e>description</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;bar&#34;</span><span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>1<span style=color:#f92672>).</span><span style=color:#a6e22e>isDone</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
+  <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>2つ目のテストを書きました。ちょっと長いですがやってることは1つ目のテストと大して変わりません。
+1行目でappServiceのgetAllTasks()メソッドが2件のTaskインスタンスのリストを返すようにしています。
+このテスト動かしてみるとちゃんとパスすることが確認できるでしょう。テストで戻り値をコントロールできていることが分かりますね。</p>
+<h3 id=例外のテスト>
+例外のテスト
+<a class=anchor href=#%e4%be%8b%e5%a4%96%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h3>
+<p>TodoAppControllerのgetAllTasks()ではDBアクセスに失敗したときに例外をスローするようにしています。
+MockitoやJUnitを使わない場合、このような例外のテストは非常に大変です。
+実際に異常が発生する状況を再現してテストをする必要がありますし、そもそもそういった状況を再現することすら難しい場合も多くあります。</p>
+<p>これもMockitoを使うと簡単に例外を発生させることができますし、また検査対象が例外をスローしたことを検証することも簡単にできます。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// TodoAppControllerUnitTest.java
+</span><span style=color:#75715e></span><span style=color:#f92672>import</span> com.example.todoApp.model.Task<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> com.example.todoApp.service.TodoAppService<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.junit.jupiter.api.Test<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.junit.jupiter.api.extension.ExtendWith<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.mockito.InjectMocks<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.mockito.Mock<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.springframework.test.context.junit.jupiter.SpringExtension<span style=color:#f92672>;</span>
+
+<span style=color:#f92672>import</span> java.util.Collections<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> java.util.List<span style=color:#f92672>;</span>
+
+<span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat<span style=color:#f92672>;</span>
+<span style=color:#f92672>import static</span> org.junit.jupiter.api.Assertions.assertThrows<span style=color:#f92672>;</span>
+<span style=color:#f92672>import static</span> org.mockito.Mockito.*<span style=color:#f92672>;</span>
+
+<span style=color:#a6e22e>@ExtendWith</span><span style=color:#f92672>(</span>SpringExtension<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>)</span>
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoAppControllerUnitTest</span> <span style=color:#f92672>{</span>
+  <span style=color:#a6e22e>@Mock</span>
+  <span style=color:#66d9ef>private</span> TodoAppService appService<span style=color:#f92672>;</span>
+
+  <span style=color:#a6e22e>@InjectMocks</span>
+  <span style=color:#66d9ef>private</span> TodoAppController appController<span style=color:#f92672>;</span>
+
+  <span style=color:#a6e22e>@Test</span>
+  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>タスクが取得できなかったら空のタスクリストを返す</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+    when<span style=color:#f92672>(</span>appService<span style=color:#f92672>.</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>thenReturn</span><span style=color:#f92672>(</span>Collections<span style=color:#f92672>.</span><span style=color:#a6e22e>emptyList</span><span style=color:#f92672>());</span>
+    List<span style=color:#f92672>&lt;</span>Task<span style=color:#f92672>&gt;</span> tasks <span style=color:#f92672>=</span> appController<span style=color:#f92672>.</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>();</span>
+    verify<span style=color:#f92672>(</span>appService<span style=color:#f92672>,</span> times<span style=color:#f92672>(</span>1<span style=color:#f92672>)).</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>();</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>0<span style=color:#f92672>);</span>
+  <span style=color:#f92672>}</span>
+
+  <span style=color:#a6e22e>@Test</span>
+  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>複数のタスクをリストで返す</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+    when<span style=color:#f92672>(</span>appService<span style=color:#f92672>.</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>thenReturn</span><span style=color:#f92672>(</span>List<span style=color:#f92672>.</span><span style=color:#a6e22e>of</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> Task<span style=color:#f92672>(</span>1<span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;hoge&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;fuga&#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>),</span> <span style=color:#66d9ef>new</span> Task<span style=color:#f92672>(</span>2<span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;foo&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;bar&#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>true</span><span style=color:#f92672>)));</span>
+    List<span style=color:#f92672>&lt;</span>Task<span style=color:#f92672>&gt;</span> tasks <span style=color:#f92672>=</span> appController<span style=color:#f92672>.</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>();</span>
+    verify<span style=color:#f92672>(</span>appService<span style=color:#f92672>,</span> times<span style=color:#f92672>(</span>1<span style=color:#f92672>)).</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>();</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>2<span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>0<span style=color:#f92672>).</span><span style=color:#a6e22e>id</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>1<span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>0<span style=color:#f92672>).</span><span style=color:#a6e22e>title</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;hoge&#34;</span><span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>0<span style=color:#f92672>).</span><span style=color:#a6e22e>description</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;fuga&#34;</span><span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>0<span style=color:#f92672>).</span><span style=color:#a6e22e>isDone</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#66d9ef>false</span><span style=color:#f92672>);</span>
+
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>1<span style=color:#f92672>).</span><span style=color:#a6e22e>id</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>2<span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>1<span style=color:#f92672>).</span><span style=color:#a6e22e>title</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;foo&#34;</span><span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>1<span style=color:#f92672>).</span><span style=color:#a6e22e>description</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;bar&#34;</span><span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>1<span style=color:#f92672>).</span><span style=color:#a6e22e>isDone</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
+  <span style=color:#f92672>}</span>
+
+  <span style=color:#a6e22e>@Test</span>
+  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>DBアクセスエラーを検知したときResponseStatusExceptionを投げる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+    when<span style=color:#f92672>(</span>appService<span style=color:#f92672>.</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>thenThrow</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> DataAccessException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;...&#34;</span><span style=color:#f92672>){</span> <span style=color:#f92672>});</span>
+    assertThrows<span style=color:#f92672>(</span>ResponseStatusException<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>,</span> <span style=color:#f92672>()</span> <span style=color:#f92672>-&gt;</span> <span style=color:#f92672>{</span>
+      appController<span style=color:#f92672>.</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>();</span>
+    <span style=color:#f92672>});</span>
+  <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>最後に1件テストを追加しました。
+<code>when(appService.getAllTasks()).thenThrow(new DataAccessException("..."){ });</code>
+appServiceのgetAllTasks()というメソッドが呼ばれたときに、DataAccessException例外をスローしなさいと宣言してます。
+それを検証しているのが<code>assertThrows()</code>です。appControllerのgetAllTasks()を呼んだときにResponseStatusExceptionがスローされているかどうかを検証しています。</p>
+<p>例外も思うどおりコントロールできていることがわかるでしょう。</p>
+<h3 id=引数のテスト>
+引数のテスト
+<a class=anchor href=#%e5%bc%95%e6%95%b0%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h3>
+<p>TodoAppServiceのgetAllTasks()はパラメータがなかったですが、その他のメソッドには引数が必要です。
+Controllerが引数を正しくセットしてServiceのメソッドを呼んでいるかの検証もできます。</p>
+<p>引数の検証にはCaptorを使います。実際にテストを書いてみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// TodoAppControllerUnitTest.java
+</span><span style=color:#75715e></span><span style=color:#f92672>import</span> com.example.todoApp.model.NewTask<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> com.example.todoApp.model.Task<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> com.example.todoApp.service.TodoAppService<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.junit.jupiter.api.Test<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.junit.jupiter.api.extension.ExtendWith<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.mockito.ArgumentCaptor<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.mockito.Captor<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.mockito.InjectMocks<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.mockito.Mock<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.springframework.dao.DataAccessException<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.springframework.test.context.junit.jupiter.SpringExtension<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.springframework.web.server.ResponseStatusException<span style=color:#f92672>;</span>
+
+<span style=color:#f92672>import</span> java.util.Collections<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> java.util.List<span style=color:#f92672>;</span>
+
+<span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat<span style=color:#f92672>;</span>
+<span style=color:#f92672>import static</span> org.junit.jupiter.api.Assertions.assertThrows<span style=color:#f92672>;</span>
+<span style=color:#f92672>import static</span> org.mockito.Mockito.*<span style=color:#f92672>;</span>
+
+<span style=color:#a6e22e>@ExtendWith</span><span style=color:#f92672>(</span>SpringExtension<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>)</span>
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoAppControllerUnitTest</span> <span style=color:#f92672>{</span>
+  <span style=color:#a6e22e>@Mock</span>
+  <span style=color:#66d9ef>private</span> TodoAppService appService<span style=color:#f92672>;</span>
+
+  <span style=color:#a6e22e>@InjectMocks</span>
+  <span style=color:#66d9ef>private</span> TodoAppController appController<span style=color:#f92672>;</span>
+
+  <span style=color:#a6e22e>@Captor</span>
+  <span style=color:#66d9ef>private</span> ArgumentCaptor<span style=color:#f92672>&lt;</span>NewTask<span style=color:#f92672>&gt;</span> argCaptor<span style=color:#f92672>;</span>
+
+  <span style=color:#a6e22e>@Test</span>
+  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>タスクが取得できなかったら空のタスクリストを返す</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+    when<span style=color:#f92672>(</span>appService<span style=color:#f92672>.</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>thenReturn</span><span style=color:#f92672>(</span>Collections<span style=color:#f92672>.</span><span style=color:#a6e22e>emptyList</span><span style=color:#f92672>());</span>
+    List<span style=color:#f92672>&lt;</span>Task<span style=color:#f92672>&gt;</span> tasks <span style=color:#f92672>=</span> appController<span style=color:#f92672>.</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>();</span>
+    verify<span style=color:#f92672>(</span>appService<span style=color:#f92672>,</span> times<span style=color:#f92672>(</span>1<span style=color:#f92672>)).</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>();</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>0<span style=color:#f92672>);</span>
+  <span style=color:#f92672>}</span>
+
+  <span style=color:#a6e22e>@Test</span>
+  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>複数のタスクをリストで返す</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+    when<span style=color:#f92672>(</span>appService<span style=color:#f92672>.</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>thenReturn</span><span style=color:#f92672>(</span>List<span style=color:#f92672>.</span><span style=color:#a6e22e>of</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> Task<span style=color:#f92672>(</span>1<span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;hoge&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;fuga&#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>),</span> <span style=color:#66d9ef>new</span> Task<span style=color:#f92672>(</span>2<span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;foo&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;bar&#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>true</span><span style=color:#f92672>)));</span>
+    List<span style=color:#f92672>&lt;</span>Task<span style=color:#f92672>&gt;</span> tasks <span style=color:#f92672>=</span> appController<span style=color:#f92672>.</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>();</span>
+    verify<span style=color:#f92672>(</span>appService<span style=color:#f92672>,</span> times<span style=color:#f92672>(</span>1<span style=color:#f92672>)).</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>();</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>2<span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>0<span style=color:#f92672>).</span><span style=color:#a6e22e>id</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>1<span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>0<span style=color:#f92672>).</span><span style=color:#a6e22e>title</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;hoge&#34;</span><span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>0<span style=color:#f92672>).</span><span style=color:#a6e22e>description</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;fuga&#34;</span><span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>0<span style=color:#f92672>).</span><span style=color:#a6e22e>isDone</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#66d9ef>false</span><span style=color:#f92672>);</span>
+
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>1<span style=color:#f92672>).</span><span style=color:#a6e22e>id</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>2<span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>1<span style=color:#f92672>).</span><span style=color:#a6e22e>title</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;foo&#34;</span><span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>1<span style=color:#f92672>).</span><span style=color:#a6e22e>description</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;bar&#34;</span><span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>tasks<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>1<span style=color:#f92672>).</span><span style=color:#a6e22e>isDone</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
+  <span style=color:#f92672>}</span>
+
+  <span style=color:#a6e22e>@Test</span>
+  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>DBアクセスエラーを検知したときResponseStatusExceptionを投げる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+    when<span style=color:#f92672>(</span>appService<span style=color:#f92672>.</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>thenThrow</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> DataAccessException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;...&#34;</span><span style=color:#f92672>){</span> <span style=color:#f92672>});</span>
+    assertThrows<span style=color:#f92672>(</span>ResponseStatusException<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>,</span> <span style=color:#f92672>()</span> <span style=color:#f92672>-&gt;</span> <span style=color:#f92672>{</span>
+      appController<span style=color:#f92672>.</span><span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>();</span>
+    <span style=color:#f92672>});</span>
+  <span style=color:#f92672>}</span>
+
+  <span style=color:#a6e22e>@Test</span>
+  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>新規のタスク作成処理を呼ぶ際に引数を正しくセットしている</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+    NewTask task <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> NewTask<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Task Title&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;Task Description&#34;</span><span style=color:#f92672>);</span>
+    appController<span style=color:#f92672>.</span><span style=color:#a6e22e>createTask</span><span style=color:#f92672>(</span>task<span style=color:#f92672>);</span>
+    verify<span style=color:#f92672>(</span>appService<span style=color:#f92672>).</span><span style=color:#a6e22e>createNewTask</span><span style=color:#f92672>(</span>argCaptor<span style=color:#f92672>.</span><span style=color:#a6e22e>capture</span><span style=color:#f92672>());</span>
+    assertThat<span style=color:#f92672>(</span>argCaptor<span style=color:#f92672>.</span><span style=color:#a6e22e>getValue</span><span style=color:#f92672>().</span><span style=color:#a6e22e>title</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Task Title&#34;</span><span style=color:#f92672>);</span>
+    assertThat<span style=color:#f92672>(</span>argCaptor<span style=color:#f92672>.</span><span style=color:#a6e22e>getValue</span><span style=color:#f92672>().</span><span style=color:#a6e22e>description</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Task Description&#34;</span><span style=color:#f92672>);</span>
+  <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>最後に1件テストを追加しました。これも解説していきます。
+最初の2行はシンプルにTodoAppControllerのcreateTasks()を呼んでいるだけです。</p>
+<p>さてその次に、<code>verify(appService).createNewTask(argCaptor.capture());</code>
+という記述が出てきました。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>  <span style=color:#a6e22e>@Captor</span>
+  <span style=color:#66d9ef>private</span> ArgumentCaptor<span style=color:#f92672>&lt;</span>NewTask<span style=color:#f92672>&gt;</span> argCaptor<span style=color:#f92672>;</span>
+</code></pre></div><p>キャプチャをここで仕込んでいます。
+あとはキャプチャから値を取り出して、それがControllerのcreateTask()に与えた引数と一致しているかどうかを検証しているだけです。</p>
+<p>どうでしょう、ここまででMockitoによるモッキングがいかに強力で、様々なテストが柔軟におこなえるようになるということが伝わりましょうか？
+このControllerには他にも様々なメソッドが実装されてます。
+上記のテストを参考にして、他のメソッドのテストを皆さんで実装されてみてください。
+テストダブルを使用したテストはDIの仕組みも絡むため慣れるまでがけっこう大変です。
+より多くのテストを書いて慣れることがとにかく大事です。</p>
+<h2 id=mockitoを使ったインテグレーションテスト>
+Mockitoを使ったインテグレーションテスト
+<a class=anchor href=#mockito%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%9f%e3%82%a4%e3%83%b3%e3%83%86%e3%82%b0%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h2>
+<p>さて、次は複数のモジュールを組み合わせたインテグレーションテストに挑戦してみましょう。
+Spring Bootでは擬似的にHTTP通信をおこなう、TestRestTemplateという機能が用意されています。
+これを使ってControllerの各メソッドに対してHTTPリクエストを発生させて、戻ってきたHttpResponseを評価してみましょう。</p>
+<p>インテグレーションテストも本物の実装を使ったり、特定のクラスをモッキングしたり自由自在なテストを実装することができます。
+実際にテストを書いてみてテストダブルと依存性注入の強力さを体感してみてください。
+コードを眺めるだけではなく実際に手を動かして書いてみることがとても大事です。一緒にやってみましょう。</p>
+<h3 id=実際にdbアクセスを発生させるテスト>
+実際にDBアクセスを発生させるテスト
+<a class=anchor href=#%e5%ae%9f%e9%9a%9b%e3%81%abdb%e3%82%a2%e3%82%af%e3%82%bb%e3%82%b9%e3%82%92%e7%99%ba%e7%94%9f%e3%81%95%e3%81%9b%e3%82%8b%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h3>
+<h3 id=serviceをモッキングしてdbアクセスを発生させないテスト>
+ServiceをモッキングしてDBアクセスを発生させないテスト
+<a class=anchor href=#service%e3%82%92%e3%83%a2%e3%83%83%e3%82%ad%e3%83%b3%e3%82%b0%e3%81%97%e3%81%a6db%e3%82%a2%e3%82%af%e3%82%bb%e3%82%b9%e3%82%92%e7%99%ba%e7%94%9f%e3%81%95%e3%81%9b%e3%81%aa%e3%81%84%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h3>
+<h3 id=serviceで例外をスタブしてサーバレスポンスコードを検証するテスト>
+Serviceで例外をスタブして、サーバレスポンスコードを検証するテスト
+<a class=anchor href=#service%e3%81%a7%e4%be%8b%e5%a4%96%e3%82%92%e3%82%b9%e3%82%bf%e3%83%96%e3%81%97%e3%81%a6%e3%82%b5%e3%83%bc%e3%83%90%e3%83%ac%e3%82%b9%e3%83%9d%e3%83%b3%e3%82%b9%e3%82%b3%e3%83%bc%e3%83%89%e3%82%92%e6%a4%9c%e8%a8%bc%e3%81%99%e3%82%8b%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h3>
+<h2 id=テスト駆動開発とユニットテストインテグレーションテスト>
+テスト駆動開発とユニットテスト・インテグレーションテスト
+<a class=anchor href=#%e3%83%86%e3%82%b9%e3%83%88%e9%a7%86%e5%8b%95%e9%96%8b%e7%99%ba%e3%81%a8%e3%83%a6%e3%83%8b%e3%83%83%e3%83%88%e3%83%86%e3%82%b9%e3%83%88%e3%82%a4%e3%83%b3%e3%83%86%e3%82%b0%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h2>
+<p>さて、ここまででMockitoを使ったMockオブジェクトで他のクラスに依存しない単体テストを書く方法や、
+様々なクラスを組み合わせたインテグレーションテストの書き方を見てきました。</p>
+<p>さて、実際にテスト駆動開発で新規の機能を追加するとなったとき、どういったテストをかけばよいでしょうか？</p>
+<ol>
+<li>まずユニットテストを記述して、それをパスする実装をして、それが通ったらインテグレーションテストを書いて検証する</li>
+<li>まずインテグレーションテストを記述して、それをパスする実装をして、その上でインテグレーションテストで検証が難しい部分をユニットテストで検証する</li>
+</ol>
+<p>選択肢はこの2つでしょうか。 さて、1の「ユニットテストから書き始める」と思った方はいますでしょうか？</p>
+<p>.</p>
+<p>..</p>
+<p>&mldr;</p>
+<p>残念ながら不正解です！「あれ？ウォーターフォールだって最初にPTをやってその次にITをやるじゃないか！」と思われる方も多いかもしれません。
+ですが、ちょっと考えてみてください。<strong>ユニットテストで実装できるテストはホワイトボックステスト</strong>です。
+<strong>ホワイトボックステストは実装内容に非常に依存する</strong>のが特徴です。</p>
+<p>つまり、
+「実装コードがこうなっているから、この分岐を通るようなテストを実装しよう」だとか、
+「実装コードがこうなっているから、この依存部品を正しく呼んでいるかを検証するようなテストを実装しよう」だとか、
+そういう考えで実装するものなのですね。</p>
+<p>さて、テスト駆動開発ではプロダクトの実装を行う前にテストを最初に書きます。
+つまり、テストを書き始める段階で実装コードはまだないわけです。
+その状態でどうやってユニットテストを書けと言われても難しいというのは想像に難くないのではないでしょうか？</p>
+<p>「いやいや、TDDとはいえ実装に入る前に簡単な設計はするでしょ？」と思われる方もいるかもしれません。
+はい、それも間違っていませんが、それでもインテグレーションテストから先に実装するのには理由があります。</p>
+<p>先程前述したとおり、ホワイトボックステストは実装コードの内容に依存します。
+しかし、我々はアジャイルで開発をしています。アジャイルで開発しているということは仕様がどんどん開発する過程で変化をするということです。
+そうした中で自動テストがすべてホワイトボックステストで実装されていたらどうでしょうか？
+答えは<strong>リファクタリングが難しくなります。</strong>
+ちょっとした内部ロジックの修正でありとあらゆるところに影響範囲がでてしまうのは想像に難くないでしょう。
+リファクタリングに多大な時間がかかるようになり、アジリティの高い開発とは程遠い結果を招いてしまいます。</p>
+<p>ですので、<strong>最初にどういうリクエストをしたときに、どういう振る舞いをするのかを検証するインテグレーションテストを書いてから実装を始める</strong>ことがとても大事です。
+実装を進める過程で、「ここ例外処理が必要だね」とか様々な会話が出てくると思います。
+中にはインテグレーションテストでは検証が難しいケースも出てくるでしょう。
+そうしたインテグレーションテストでは検証が難しい部分が出てきたときに、補完する目的でユニットテストを書くべきです。
+しかし、やりすぎるとアジリティの低下を招きますので基本的にはすべてインテグレーションテストで検証すべきです。</p>
+<p>「あれ？ホワイトボックステストを実装しないということはテストカバレッジ率は？」と思われる方もいるでしょう。</p>
+<p>ここで大事なのは <strong>『カバレッジが低ければソースコードないしテストコードの品質は低い』と言えるが、
+『カバレッジが高ければ、ソースコードの品質が高い』とは言えない</strong> ということです。
+カバレッジを計測する目的は、テストが十分に網羅されていないコードを検出することで、
+「テストケースが十分に網羅されていない」コードを限りなく少なくすることです。
+すなわち、いくらカバレッジが高くても、テストケースの品質が悪ければ、バグが潜在している可能性を低くすることはできません。
+カバレッジ率はテストの網羅率を測るのに有用ですが、<strong>それを目標にしてはいけません。</strong></p>
+<p><strong>テスト駆動開発(TDD)のいうところの"テスト"とはすなわち、振る舞い駆動開発(BDD)であるということを肝に銘じておくと良いでしょう。</strong></p>
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
@@ -192,7 +779,34 @@
 </div>
 <aside class=book-toc>
 <div class=book-toc-content>
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#テストダブルとは>テストダブルとは</a>
+<ul>
+<li><a href=#stub>Stub</a></li>
+</ul>
+</li>
+<li><a href=#テストダブルを実現するライブラリ>テストダブルを実現するライブラリ</a></li>
+<li><a href=#サンプルアプリケーション>サンプルアプリケーション</a></li>
+<li><a href=#mockitoを使ったcontrollerのユニットテスト>Mockitoを使ったControllerのユニットテスト</a>
+<ul>
+<li><a href=#バックエンドの構造>バックエンドの構造</a></li>
+<li><a href=#最初のテスト>最初のテスト</a></li>
+<li><a href=#2番目のテスト>2番目のテスト</a></li>
+<li><a href=#例外のテスト>例外のテスト</a></li>
+<li><a href=#引数のテスト>引数のテスト</a></li>
+</ul>
+</li>
+<li><a href=#mockitoを使ったインテグレーションテスト>Mockitoを使ったインテグレーションテスト</a>
+<ul>
+<li><a href=#実際にdbアクセスを発生させるテスト>実際にDBアクセスを発生させるテスト</a></li>
+<li><a href=#serviceをモッキングしてdbアクセスを発生させないテスト>ServiceをモッキングしてDBアクセスを発生させないテスト</a></li>
+<li><a href=#serviceで例外をスタブしてサーバレスポンスコードを検証するテスト>Serviceで例外をスタブして、サーバレスポンスコードを検証するテスト</a></li>
+</ul>
+</li>
+<li><a href=#テスト駆動開発とユニットテストインテグレーションテスト>テスト駆動開発とユニットテスト・インテグレーションテスト</a></li>
+</ul>
+</nav>
 </div>
 </aside>
 </main>
