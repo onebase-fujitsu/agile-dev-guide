@@ -193,8 +193,6 @@
 <li><a href=#mockitoを使ったインテグレーションテスト>Mockitoを使ったインテグレーションテスト</a>
 <ul>
 <li><a href=#実際にdbアクセスを発生させるテスト>実際にDBアクセスを発生させるテスト</a></li>
-<li><a href=#serviceをモッキングしてdbアクセスを発生させないテスト>ServiceをモッキングしてDBアクセスを発生させないテスト</a></li>
-<li><a href=#serviceで例外をスタブしてサーバレスポンスコードを検証するテスト>Serviceで例外をスタブして、サーバレスポンスコードを検証するテスト</a></li>
 </ul>
 </li>
 <li><a href=#テスト駆動開発とユニットテストインテグレーションテスト>テスト駆動開発とユニットテスト・インテグレーションテスト</a></li>
@@ -713,15 +711,116 @@ Spring Bootでは擬似的にHTTP通信をおこなう、TestRestTemplateとい�
 実際にDBアクセスを発生させるテスト
 <a class=anchor href=#%e5%ae%9f%e9%9a%9b%e3%81%abdb%e3%82%a2%e3%82%af%e3%82%bb%e3%82%b9%e3%82%92%e7%99%ba%e7%94%9f%e3%81%95%e3%81%9b%e3%82%8b%e3%83%86%e3%82%b9%e3%83%88>#</a>
 </h3>
-<h3 id=serviceをモッキングしてdbアクセスを発生させないテスト>
-ServiceをモッキングしてDBアクセスを発生させないテスト
-<a class=anchor href=#service%e3%82%92%e3%83%a2%e3%83%83%e3%82%ad%e3%83%b3%e3%82%b0%e3%81%97%e3%81%a6db%e3%82%a2%e3%82%af%e3%82%bb%e3%82%b9%e3%82%92%e7%99%ba%e7%94%9f%e3%81%95%e3%81%9b%e3%81%aa%e3%81%84%e3%83%86%e3%82%b9%e3%83%88>#</a>
-</h3>
-<h3 id=serviceで例外をスタブしてサーバレスポンスコードを検証するテスト>
-Serviceで例外をスタブして、サーバレスポンスコードを検証するテスト
-<a class=anchor href=#service%e3%81%a7%e4%be%8b%e5%a4%96%e3%82%92%e3%82%b9%e3%82%bf%e3%83%96%e3%81%97%e3%81%a6%e3%82%b5%e3%83%bc%e3%83%90%e3%83%ac%e3%82%b9%e3%83%9d%e3%83%b3%e3%82%b9%e3%82%b3%e3%83%bc%e3%83%89%e3%82%92%e6%a4%9c%e8%a8%bc%e3%81%99%e3%82%8b%e3%83%86%e3%82%b9%e3%83%88>#</a>
-</h3>
-<h2 id=テスト駆動開発とユニットテストインテグレーションテスト>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// TodoAppControllerIntegrationTest.java
+</span><span style=color:#75715e></span><span style=color:#f92672>package</span> com.example.todoApp.controller<span style=color:#f92672>;</span>
+
+<span style=color:#f92672>import</span> com.example.todoApp.model.Task<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> net.minidev.json.JSONObject<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.junit.jupiter.api.*<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.springframework.beans.factory.annotation.Autowired<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.springframework.boot.test.context.SpringBootTest<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.springframework.boot.test.web.client.TestRestTemplate<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.springframework.http.*<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> org.springframework.test.context.jdbc.Sql<span style=color:#f92672>;</span>
+
+<span style=color:#f92672>import</span> java.util.Objects<span style=color:#f92672>;</span>
+
+<span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat<span style=color:#f92672>;</span>
+
+
+<span style=color:#a6e22e>@SpringBootTest</span><span style=color:#f92672>(</span>webEnvironment <span style=color:#f92672>=</span> SpringBootTest<span style=color:#f92672>.</span><span style=color:#a6e22e>WebEnvironment</span><span style=color:#f92672>.</span><span style=color:#a6e22e>RANDOM_PORT</span><span style=color:#f92672>)</span>
+<span style=color:#a6e22e>@Sql</span><span style=color:#f92672>(</span>scripts <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;/clear_db.sql&#34;</span><span style=color:#f92672>)</span>
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoAppControllerIntegrationTest</span> <span style=color:#f92672>{</span>
+    <span style=color:#a6e22e>@Autowired</span>
+    <span style=color:#66d9ef>private</span> TestRestTemplate restTemplate<span style=color:#f92672>;</span>
+
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>なにもタスクを作成していない場合は0件が返す</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        ResponseEntity<span style=color:#f92672>&lt;</span>Task<span style=color:#f92672>[]&gt;</span> response <span style=color:#f92672>=</span> restTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>exchange</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;/tasks&#34;</span><span style=color:#f92672>,</span> HttpMethod<span style=color:#f92672>.</span><span style=color:#a6e22e>GET</span><span style=color:#f92672>,</span> HttpEntity<span style=color:#f92672>.</span><span style=color:#a6e22e>EMPTY</span><span style=color:#f92672>,</span> Task<span style=color:#f92672>[].</span><span style=color:#a6e22e>class</span><span style=color:#f92672>);</span>
+        assertThat<span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getStatusCode</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>HttpStatus<span style=color:#f92672>.</span><span style=color:#a6e22e>OK</span><span style=color:#f92672>);</span>
+        assertThat<span style=color:#f92672>(</span>Objects<span style=color:#f92672>.</span><span style=color:#a6e22e>requireNonNull</span><span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>length</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>0<span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>タスクを新規に作成するとCREATEDを返す</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        HttpHeaders headers <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HttpHeaders<span style=color:#f92672>();</span>
+        headers<span style=color:#f92672>.</span><span style=color:#a6e22e>setContentType</span><span style=color:#f92672>(</span>MediaType<span style=color:#f92672>.</span><span style=color:#a6e22e>APPLICATION_JSON</span><span style=color:#f92672>);</span>
+        JSONObject taskJson <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> JSONObject<span style=color:#f92672>();</span>
+        taskJson<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;title&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;foo&#34;</span><span style=color:#f92672>);</span>
+        taskJson<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;description&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;bar&#34;</span><span style=color:#f92672>);</span>
+
+        ResponseEntity<span style=color:#f92672>&lt;</span>Object<span style=color:#f92672>&gt;</span> response <span style=color:#f92672>=</span> restTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>exchange</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;/tasks&#34;</span><span style=color:#f92672>,</span> HttpMethod<span style=color:#f92672>.</span><span style=color:#a6e22e>POST</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>new</span> HttpEntity<span style=color:#f92672>&lt;&gt;(</span>taskJson<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>(),</span> headers<span style=color:#f92672>),</span> Object<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>);</span>
+        assertThat<span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getStatusCode</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>HttpStatus<span style=color:#f92672>.</span><span style=color:#a6e22e>CREATED</span><span style=color:#f92672>);</span>
+    <span style=color:#f92672>}</span>
+
+
+    <span style=color:#a6e22e>@Nested</span>
+    <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>既存のタスクに対する操作</span> <span style=color:#f92672>{</span>
+        <span style=color:#a6e22e>@BeforeEach</span>
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setup</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+            HttpHeaders headers <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HttpHeaders<span style=color:#f92672>();</span>
+            headers<span style=color:#f92672>.</span><span style=color:#a6e22e>setContentType</span><span style=color:#f92672>(</span>MediaType<span style=color:#f92672>.</span><span style=color:#a6e22e>APPLICATION_JSON</span><span style=color:#f92672>);</span>
+            JSONObject taskJson <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> JSONObject<span style=color:#f92672>();</span>
+            taskJson<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;title&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;foo&#34;</span><span style=color:#f92672>);</span>
+            taskJson<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;description&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;bar&#34;</span><span style=color:#f92672>);</span>
+            restTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>exchange</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;/tasks&#34;</span><span style=color:#f92672>,</span> HttpMethod<span style=color:#f92672>.</span><span style=color:#a6e22e>POST</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>new</span> HttpEntity<span style=color:#f92672>&lt;&gt;(</span>taskJson<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>(),</span> headers<span style=color:#f92672>),</span> Object<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>);</span>
+        <span style=color:#f92672>}</span>
+
+        <span style=color:#a6e22e>@Test</span>
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>タスクがあるとその情報を取得できる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+            ResponseEntity<span style=color:#f92672>&lt;</span>Task<span style=color:#f92672>[]&gt;</span> response <span style=color:#f92672>=</span> restTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>exchange</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;/tasks&#34;</span><span style=color:#f92672>,</span> HttpMethod<span style=color:#f92672>.</span><span style=color:#a6e22e>GET</span><span style=color:#f92672>,</span> HttpEntity<span style=color:#f92672>.</span><span style=color:#a6e22e>EMPTY</span><span style=color:#f92672>,</span> Task<span style=color:#f92672>[].</span><span style=color:#a6e22e>class</span><span style=color:#f92672>);</span>
+            assertThat<span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getStatusCode</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>HttpStatus<span style=color:#f92672>.</span><span style=color:#a6e22e>OK</span><span style=color:#f92672>);</span>
+            assertThat<span style=color:#f92672>(</span>Objects<span style=color:#f92672>.</span><span style=color:#a6e22e>requireNonNull</span><span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>length</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>1<span style=color:#f92672>);</span>
+
+            assertThat<span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>()[</span>0<span style=color:#f92672>].</span><span style=color:#a6e22e>id</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>1<span style=color:#f92672>);</span>
+            assertThat<span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>()[</span>0<span style=color:#f92672>].</span><span style=color:#a6e22e>title</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;foo&#34;</span><span style=color:#f92672>);</span>
+            assertThat<span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>()[</span>0<span style=color:#f92672>].</span><span style=color:#a6e22e>description</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;bar&#34;</span><span style=color:#f92672>);</span>
+            assertThat<span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>()[</span>0<span style=color:#f92672>].</span><span style=color:#a6e22e>isDone</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#66d9ef>false</span><span style=color:#f92672>);</span>
+        <span style=color:#f92672>}</span>
+
+        <span style=color:#a6e22e>@Test</span>
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>タスクを完了できる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+            ResponseEntity<span style=color:#f92672>&lt;</span>Object<span style=color:#f92672>&gt;</span> operationResponse <span style=color:#f92672>=</span> restTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>exchange</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;/tasks/1/finish&#34;</span><span style=color:#f92672>,</span> HttpMethod<span style=color:#f92672>.</span><span style=color:#a6e22e>PUT</span><span style=color:#f92672>,</span> HttpEntity<span style=color:#f92672>.</span><span style=color:#a6e22e>EMPTY</span><span style=color:#f92672>,</span> Object<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>);</span>
+            assertThat<span style=color:#f92672>(</span>operationResponse<span style=color:#f92672>.</span><span style=color:#a6e22e>getStatusCode</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>HttpStatus<span style=color:#f92672>.</span><span style=color:#a6e22e>OK</span><span style=color:#f92672>);</span>
+
+            ResponseEntity<span style=color:#f92672>&lt;</span>Task<span style=color:#f92672>[]&gt;</span> response <span style=color:#f92672>=</span> restTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>exchange</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;/tasks&#34;</span><span style=color:#f92672>,</span> HttpMethod<span style=color:#f92672>.</span><span style=color:#a6e22e>GET</span><span style=color:#f92672>,</span> HttpEntity<span style=color:#f92672>.</span><span style=color:#a6e22e>EMPTY</span><span style=color:#f92672>,</span> Task<span style=color:#f92672>[].</span><span style=color:#a6e22e>class</span><span style=color:#f92672>);</span>
+            assertThat<span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getStatusCode</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>HttpStatus<span style=color:#f92672>.</span><span style=color:#a6e22e>OK</span><span style=color:#f92672>);</span>
+            assertThat<span style=color:#f92672>(</span>Objects<span style=color:#f92672>.</span><span style=color:#a6e22e>requireNonNull</span><span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>length</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>1<span style=color:#f92672>);</span>
+
+            assertThat<span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>()[</span>0<span style=color:#f92672>].</span><span style=color:#a6e22e>id</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>1<span style=color:#f92672>);</span>
+            assertThat<span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>()[</span>0<span style=color:#f92672>].</span><span style=color:#a6e22e>title</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;foo&#34;</span><span style=color:#f92672>);</span>
+            assertThat<span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>()[</span>0<span style=color:#f92672>].</span><span style=color:#a6e22e>description</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;bar&#34;</span><span style=color:#f92672>);</span>
+            assertThat<span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>()[</span>0<span style=color:#f92672>].</span><span style=color:#a6e22e>isDone</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
+        <span style=color:#f92672>}</span>
+
+        <span style=color:#a6e22e>@Test</span>
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>完了済みのタスクを未完了に戻すことができる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+            restTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>exchange</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;/tasks/1/finish&#34;</span><span style=color:#f92672>,</span> HttpMethod<span style=color:#f92672>.</span><span style=color:#a6e22e>PUT</span><span style=color:#f92672>,</span> HttpEntity<span style=color:#f92672>.</span><span style=color:#a6e22e>EMPTY</span><span style=color:#f92672>,</span> Object<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>);</span>
+            ResponseEntity<span style=color:#f92672>&lt;</span>Object<span style=color:#f92672>&gt;</span> operationResponse <span style=color:#f92672>=</span> restTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>exchange</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;/tasks/1/revert&#34;</span><span style=color:#f92672>,</span> HttpMethod<span style=color:#f92672>.</span><span style=color:#a6e22e>PUT</span><span style=color:#f92672>,</span> HttpEntity<span style=color:#f92672>.</span><span style=color:#a6e22e>EMPTY</span><span style=color:#f92672>,</span> Object<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>);</span>
+            assertThat<span style=color:#f92672>(</span>operationResponse<span style=color:#f92672>.</span><span style=color:#a6e22e>getStatusCode</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>HttpStatus<span style=color:#f92672>.</span><span style=color:#a6e22e>OK</span><span style=color:#f92672>);</span>
+
+            ResponseEntity<span style=color:#f92672>&lt;</span>Task<span style=color:#f92672>[]&gt;</span> response <span style=color:#f92672>=</span> restTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>exchange</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;/tasks&#34;</span><span style=color:#f92672>,</span> HttpMethod<span style=color:#f92672>.</span><span style=color:#a6e22e>GET</span><span style=color:#f92672>,</span> HttpEntity<span style=color:#f92672>.</span><span style=color:#a6e22e>EMPTY</span><span style=color:#f92672>,</span> Task<span style=color:#f92672>[].</span><span style=color:#a6e22e>class</span><span style=color:#f92672>);</span>
+            assertThat<span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getStatusCode</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>HttpStatus<span style=color:#f92672>.</span><span style=color:#a6e22e>OK</span><span style=color:#f92672>);</span>
+            assertThat<span style=color:#f92672>(</span>Objects<span style=color:#f92672>.</span><span style=color:#a6e22e>requireNonNull</span><span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>length</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>1<span style=color:#f92672>);</span>
+
+            assertThat<span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>()[</span>0<span style=color:#f92672>].</span><span style=color:#a6e22e>id</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>1<span style=color:#f92672>);</span>
+            assertThat<span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>()[</span>0<span style=color:#f92672>].</span><span style=color:#a6e22e>title</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;foo&#34;</span><span style=color:#f92672>);</span>
+            assertThat<span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>()[</span>0<span style=color:#f92672>].</span><span style=color:#a6e22e>description</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;bar&#34;</span><span style=color:#f92672>);</span>
+            assertThat<span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>()[</span>0<span style=color:#f92672>].</span><span style=color:#a6e22e>isDone</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span><span style=color:#66d9ef>false</span><span style=color:#f92672>);</span>
+        <span style=color:#f92672>}</span>
+
+        <span style=color:#a6e22e>@Test</span>
+        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>タスクを他駆除することができる</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+            ResponseEntity<span style=color:#f92672>&lt;</span>Object<span style=color:#f92672>&gt;</span> operationResponse <span style=color:#f92672>=</span> restTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>exchange</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;/tasks/1&#34;</span><span style=color:#f92672>,</span> HttpMethod<span style=color:#f92672>.</span><span style=color:#a6e22e>DELETE</span><span style=color:#f92672>,</span> HttpEntity<span style=color:#f92672>.</span><span style=color:#a6e22e>EMPTY</span><span style=color:#f92672>,</span> Object<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>);</span>
+            assertThat<span style=color:#f92672>(</span>operationResponse<span style=color:#f92672>.</span><span style=color:#a6e22e>getStatusCode</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>HttpStatus<span style=color:#f92672>.</span><span style=color:#a6e22e>OK</span><span style=color:#f92672>);</span>
+
+            ResponseEntity<span style=color:#f92672>&lt;</span>Task<span style=color:#f92672>[]&gt;</span> response <span style=color:#f92672>=</span> restTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>exchange</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;/tasks&#34;</span><span style=color:#f92672>,</span> HttpMethod<span style=color:#f92672>.</span><span style=color:#a6e22e>GET</span><span style=color:#f92672>,</span> HttpEntity<span style=color:#f92672>.</span><span style=color:#a6e22e>EMPTY</span><span style=color:#f92672>,</span> Task<span style=color:#f92672>[].</span><span style=color:#a6e22e>class</span><span style=color:#f92672>);</span>
+            assertThat<span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getStatusCode</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>HttpStatus<span style=color:#f92672>.</span><span style=color:#a6e22e>OK</span><span style=color:#f92672>);</span>
+            assertThat<span style=color:#f92672>(</span>Objects<span style=color:#f92672>.</span><span style=color:#a6e22e>requireNonNull</span><span style=color:#f92672>(</span>response<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>()).</span><span style=color:#a6e22e>length</span><span style=color:#f92672>).</span><span style=color:#a6e22e>isEqualTo</span><span style=color:#f92672>(</span>0<span style=color:#f92672>);</span>
+        <span style=color:#f92672>}</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><h2 id=テスト駆動開発とユニットテストインテグレーションテスト>
 テスト駆動開発とユニットテスト・インテグレーションテスト
 <a class=anchor href=#%e3%83%86%e3%82%b9%e3%83%88%e9%a7%86%e5%8b%95%e9%96%8b%e7%99%ba%e3%81%a8%e3%83%a6%e3%83%8b%e3%83%83%e3%83%88%e3%83%86%e3%82%b9%e3%83%88%e3%82%a4%e3%83%b3%e3%83%86%e3%82%b0%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%83%86%e3%82%b9%e3%83%88>#</a>
 </h2>
@@ -766,6 +865,11 @@ Serviceで例外をスタブして、サーバレスポンスコードを検証�
 「テストケースが十分に網羅されていない」コードを限りなく少なくすることです。
 すなわち、いくらカバレッジが高くても、テストケースの品質が悪ければ、バグが潜在している可能性を低くすることはできません。
 カバレッジ率はテストの網羅率を測るのに有用ですが、<strong>それを目標にしてはいけません。</strong></p>
+<p>「実践テスト駆動開発」という書籍があり、その中の一節を紹介します。</p>
+<blockquote>
+<p>システムの振る舞いは、オブジェクトの組み合わせから現れる性質なのだ。『オブジェクトの組み合わせ』とは、すなわち『どのオブジェクトを、どうつなげるか』ということだ。</p>
+<p><strong>振る舞いのテストを行え、メソッドをテストするのではない</strong></p>
+</blockquote>
 <p><strong>テスト駆動開発(TDD)のいうところの"テスト"とはすなわち、振る舞い駆動開発(BDD)であるということを肝に銘じておくと良いでしょう。</strong></p>
 </article>
 <footer class=book-footer>
@@ -800,8 +904,6 @@ Serviceで例外をスタブして、サーバレスポンスコードを検証�
 <li><a href=#mockitoを使ったインテグレーションテスト>Mockitoを使ったインテグレーションテスト</a>
 <ul>
 <li><a href=#実際にdbアクセスを発生させるテスト>実際にDBアクセスを発生させるテスト</a></li>
-<li><a href=#serviceをモッキングしてdbアクセスを発生させないテスト>ServiceをモッキングしてDBアクセスを発生させないテスト</a></li>
-<li><a href=#serviceで例外をスタブしてサーバレスポンスコードを検証するテスト>Serviceで例外をスタブして、サーバレスポンスコードを検証するテスト</a></li>
 </ul>
 </li>
 <li><a href=#テスト駆動開発とユニットテストインテグレーションテスト>テスト駆動開発とユニットテスト・インテグレーションテスト</a></li>
