@@ -2,12 +2,12 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="E2E Test #  ">
-<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="E2E Test">
-<meta property="og:description" content="E2E Test #  ">
+<meta name=description content="E2Eテスト # サンプルアプリケーション # もし前のテストダブルの節をすでに読んでいて、リポジトリをclone済みの場合は以下のコマンドを実行し">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="E2Eテスト">
+<meta property="og:description" content="E2Eテスト # サンプルアプリケーション # もし前のテストダブルの節をすでに読んでいて、リポジトリをclone済みの場合は以下のコマンドを実行し">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2etest/"><meta property="article:section" content="docs">
-<title>E2E Test | Fujitsu Agile Development Guide</title>
+<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/"><meta property="article:section" content="docs">
+<title>E2Eテスト | Fujitsu Agile Development Guide</title>
 <link rel=manifest href=/agile-dev-guide/manifest.json>
 <link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
@@ -103,7 +103,7 @@
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/>テストダブル</a>
 </li>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2etest/ class=active>E2E Test</a>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/ class=active>E2Eテスト</a>
 </li>
 </ul>
 </li>
@@ -166,19 +166,47 @@
 <label for=menu-control>
 <img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu>
 </label>
-<strong>E2E Test</strong>
+<strong>E2Eテスト</strong>
 <label for=toc-control>
 <img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents">
 </label>
 </div>
 <aside class="hidden clearfix">
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#サンプルアプリケーション>サンプルアプリケーション</a></li>
+</ul>
+</nav>
 </aside>
 </header>
-<article class=markdown><h1 id=e2e-test>
-E2E Test
-<a class=anchor href=#e2e-test>#</a>
+<article class=markdown><h1 id=e2eテスト>
+E2Eテスト
+<a class=anchor href=#e2e%e3%83%86%e3%82%b9%e3%83%88>#</a>
 </h1>
+<h2 id=サンプルアプリケーション>
+サンプルアプリケーション
+<a class=anchor href=#%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3>#</a>
+</h2>
+<p>もし前のテストダブルの節をすでに読んでいて、リポジトリをclone済みの場合は以下のコマンドを実行してください。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>git checkout e2etest
+</code></pre></div><p>もし、この節から読み始めている場合は、以下のコマンドを実行してください。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>git clone -b e2etest https://github.com/Onebase-Fujitsu/simple-todo-app.git
+</code></pre></div><p>このアプリケーションはシンプルなタスク管理アプリケーションになります。
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/#サンプルアプリケーション>アプリケーションの詳細な説明はこちら</a> で解説してありますので、ご一読ください。</p>
+<p>e2eブランチではmainブランチと違い、ルートのディレクトリにe2eというブランチが作成されています。</p>
+<p>まず以下のコマンドを実行してみてください。</p>
+<p>e2eテストの起動(Mac/Linuxの場合)</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>cd e2e
+npm install
+npm run test
+</code></pre></div><p>e2eテストの起動(Windowsの場合)</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>chdir e2e
+npm install
+npm run test
+</code></pre></div><p><code>npm run start</code>コマンドを実行するとChromeのウィンドウが一瞬開いてすぐ閉じると思います。
+もしChromeをインストールされていない方は <a href=https://www.google.com/intl/ja_jp/chrome/>こちらからChromeをインストール</a> して試してみてください。</p>
+<p><img src=testcafe.jpg alt=testcafe></p>
+<p>この画面が出たらこのセクションを始める準備は大丈夫です。</p>
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
@@ -191,7 +219,11 @@ E2E Test
 </div>
 <aside class=book-toc>
 <div class=book-toc-content>
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#サンプルアプリケーション>サンプルアプリケーション</a></li>
+</ul>
+</nav>
 </div>
 </aside>
 </main>
