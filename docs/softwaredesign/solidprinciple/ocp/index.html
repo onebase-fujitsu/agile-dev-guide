@@ -2,9 +2,9 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="オープン・クローズドの原則(The Open Closed Principle) #">
+<meta name=description content="オープン・クローズドの原則(The Open Closed Principle) # オープン・クローズドの原則(OCP)とはなにか？ # オープン・クローズドの原則(OCP)とは ソフトウ">
 <meta name=theme-color content="#FFFFFF"><meta property="og:title" content="オープン・クローズドの原則(OCP)">
-<meta property="og:description" content="オープン・クローズドの原則(The Open Closed Principle) #">
+<meta property="og:description" content="オープン・クローズドの原則(The Open Closed Principle) # オープン・クローズドの原則(OCP)とはなにか？ # オープン・クローズドの原則(OCP)とは ソフトウ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/"><meta property="article:section" content="docs">
 <title>オープン・クローズドの原則(OCP) | Fujitsu Agile Development Guide</title>
@@ -149,13 +149,74 @@
 </label>
 </div>
 <aside class="hidden clearfix">
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#オープンクローズドの原則ocpとはなにか>オープン・クローズドの原則(OCP)とはなにか？</a></li>
+<li><a href=#抽象に依存しろ>『抽象』に依存しろ</a></li>
+</ul>
+</nav>
 </aside>
 </header>
 <article class=markdown><h1 id=オープンクローズドの原則the-open-closed-principle>
 オープン・クローズドの原則(The Open Closed Principle)
 <a class=anchor href=#%e3%82%aa%e3%83%bc%e3%83%97%e3%83%b3%e3%82%af%e3%83%ad%e3%83%bc%e3%82%ba%e3%83%89%e3%81%ae%e5%8e%9f%e5%89%87the-open-closed-principle>#</a>
 </h1>
+<h2 id=オープンクローズドの原則ocpとはなにか>
+オープン・クローズドの原則(OCP)とはなにか？
+<a class=anchor href=#%e3%82%aa%e3%83%bc%e3%83%97%e3%83%b3%e3%82%af%e3%83%ad%e3%83%bc%e3%82%ba%e3%83%89%e3%81%ae%e5%8e%9f%e5%89%87ocp%e3%81%a8%e3%81%af%e3%81%aa%e3%81%ab%e3%81%8b>#</a>
+</h2>
+<p>オープン・クローズドの原則(OCP)とは
+<strong>ソフトウェアの構成要素(クラス、モジュール、関数など)は拡張に対して開いて(オープン)いて、修正に対しては閉じて(クローズド)いなければならない</strong>
+という原則です。</p>
+<p>「硬い」設計にしてしまうと、プログラムのちょっとした変更でさえ、その箇所と依存関係を持つすべてのモジュールに影響を与えてしまいます。
+オープン・クローズドの原則を適用することで、そうした修正の影響範囲を小さくできます。</p>
+<p>オープン・クローズドの原則に従って設計されたモジュールには次のような特徴があります。</p>
+<ol>
+<li>
+<p><strong>拡張に対して開かれている</strong><br>
+これはモジュールの振る舞いを拡張できるという意味です。
+アプリケーションの仕様変更があったとしても、モジュールに新たな振る舞いを追加することでその変更に対処できるようにします。
+つまり、そのモジュールの変更内容を自由に変更できるということです。</p>
+</li>
+<li>
+<p><strong>修正に対して閉じている</strong><br>
+モジュールの振る舞いを変更しても、そのモジュールのソースコードやバイナリコードはまったく影響を受けない。
+すでにモジュールがコンパイルされてバイナリ形式になっているものは、それがリンクライブラリであれ、DLLであれ手を触れる必要はないということです。</p>
+</li>
+</ol>
+<p>一見この2つの特徴は矛盾しているように見えます。
+通常モジュールの振る舞いを拡張するにはそのモジュールのソースコード自体を変更しなければなりません。
+また、ソースコードを変更しなければそのモジュールの振る舞いを変更できないと思うのが普通だと思います。</p>
+<p>ではどうしたら、ソースコードを変更せずにモジュールの振る舞いを変えることができるでしょうか？</p>
+<h2 id=抽象に依存しろ>
+『抽象』に依存しろ
+<a class=anchor href=#%e6%8a%bd%e8%b1%a1%e3%81%ab%e4%be%9d%e5%ad%98%e3%81%97%e3%82%8d>#</a>
+</h2>
+<p>C++やJavaのようなオブジェクト指向言語は宣言が固定されていても、それが特定の実装に結合していないメソッドを「抽象」を使って表現できます。
+これらの言語では「抽象」は抽象基本クラスを使って記述され、特定の実装に結合していないメソッドはその派生クラスで実装されます。</p>
+<p>モジュールの設計ではこういった「抽象」のメカニズムを利用することが有効です。
+モジュールをある固定した「抽象」に依存させておけば、修正に対してコードを閉じることができるからです。
+抽象を使えば、コードを修正しなくても、抽象派生のクラスを新たに追加するだけでモジュールの振る舞いを拡張することができます。</p>
+<script src=/agile-dev-guide/mermaid.min.js></script>
+<script>mermaid.initialize({flowchart:{useMaxWidth:!0},theme:"default"})</script>
+<p class=mermaid>
+classDiagram
+Client --> Server
+</p>
+<p>この例ではClientがServerの両方の実装が「具体的に」実装されてしまっています。
+ClientクラスはServerクラスを利用しているので、Clientオブジェクト別のServerオブジェクトを利用することに慣ればClientクラスを変更する必要があります。</p>
+<p class=mermaid>
+classDiagram
+Client --> ClientInterface
+Server ..|> ClientInterface
+</p>
+<p>そこで上の図のような設計にしてみるとどうでしょうか。
+ClientInterfaceクラスは抽象クラスであり、抽象メンバ関数をいくつか持っています。
+Clientクラスは、この抽象クラスを利用することになります。
+しかし、実際にClientクラスが利用するのは抽象クラスから派生したServerクラスのオブジェクトになります。
+つまり、Clientオブジェクトが新しいServerクラスを利用したくなったら、ClientInterfaceから派生したクラスを別に追加したらいいわけです。
+Clientクラスそのものを変更する必要はありません。</p>
+<p>Clientの処理内容は抽象インタフェースClientInterfaceを使って記述されています。</p>
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
@@ -168,7 +229,12 @@
 </div>
 <aside class=book-toc>
 <div class=book-toc-content>
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#オープンクローズドの原則ocpとはなにか>オープン・クローズドの原則(OCP)とはなにか？</a></li>
+<li><a href=#抽象に依存しろ>『抽象』に依存しろ</a></li>
+</ul>
+</nav>
 </div>
 </aside>
 </main>
