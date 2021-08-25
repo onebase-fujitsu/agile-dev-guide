@@ -62,4 +62,198 @@ Clientクラスは、この抽象クラスを利用することになります�
 つまり、Clientオブジェクトが新しいServerクラスを利用したくなったら、ClientInterfaceから派生したクラスを別に追加したらいいわけです。
 Clientクラスそのものを変更する必要はありません。
 
-Clientの処理内容は抽象インタフェースClientInterfaceを使って記述されています。
+## 具体例
+
+### OCPに従わない図形描画の実装
+
+まず、OCPに従わない実装を見てみましょう。
+
+2つの構造体CircleとSquareは最初のデータ要素`ShapeType itsType;`のみ共通で、他の要素は異なっています。
+`ShapeType itsType;`で図形の型を示し、それによって円なのか四角なのかを判断できる仕組みになってます。
+`DrawAllShapes()`メソッドでは構造体へのポインタの配列を順次呼び出し、
+最初に型を調べてから、その方に応じて必要な関数(`DrawCircle()`や`DrawSquare()`)を呼び出してます。
+
+```C++
+// shape.h
+enum ShapeType {circle, square};
+
+struct Shape {
+    ShapeType itsType;
+};
+```
+
+```C++
+// circle.h
+struct Circle {
+    ShapeType itsType;
+    double itsRadius;
+    Point itsCenter;
+}
+
+void DrawCircle(struct Circle*);
+```
+
+```C++
+// square.h
+struct Square {
+    ShapeType itsType;
+    double itsSide;
+    Point itsTopLeft;
+}
+
+void DrawSquare(struct Square*);
+```
+
+```C++
+// drawAllShapes.cc
+typedef struct Shape *ShapePointer;
+
+void DrawAllShapes(ShapePointer list[], int n) {
+    int i;
+    for (i=0; i<n; i++) {
+        struct Shape* s = list[i];
+        switch (s -> itsType) {
+            case square:
+                DrawSquare((struct Square*)s);
+                break;
+            case circle:
+                DrawCircle((struct Circle*)s);
+                break;
+        }
+    }
+}
+```
+
+この`DrawAllShapes()`は明確にオープン・クローズドの原則に反しています。
+新しい種類の図形を定義して、それを描画したいときに、`DrawAllShapes()`も修正が必要です。
+つまり、この関数は修正に対して閉じていません。
+
+このプログラムは簡単な例に過ぎず、図形の描画処理を呼び出しているだけなので、新しい図形を追加するときに変更する箇所は1箇所で済んでいます。
+しかし、実際にアプリケーションを組むとなると、図形を移動したり、拡大したり、変形したりといった様々な処理を呼び出すことになります。
+そうした処理をおこなうときに描画の処理と似たようなSwitch文による分岐処理が必要になってきます。
+そうすると、新しい図形を1種類追加するときにそうしたSwitch文による分岐処理を行っているところすべてに変更が必要になってくるわけです。
+
+他にも問題があります。新しい図形の種類を追加しようとするとどんな変更が必要になるでしょうか？
+
+まず、列挙型のShapeTypeに新しい図形を登録しなければなりません。
+そうすると、扱っているすべての図形がこの列挙型の宣言に依存しているので、すべての図形を再コンパイルし直さなければいけませんし、
+同様の理由でShapeに依存するモジュールも再コンパイルが必要になってきます。
+
+したがって、ソースコードのswitch/case文やif/else文の部分をすべて変更するだけでなく、構造体Shapeを使うすべてのモジュールのバイナリファイルも再コンパイルが必要になってきます。
+バイナリファイルの変更はDLLや共有ライブラリだけでなく、それ以外のバイナリコンポーネントを再結合し直さなければならないということを意味しています。
+
+結局新しい図形をアプリケーションに追加するという単純な行為のために、様々なモジュールのソースが変更になるだけでなく、
+モジュールのバイナリファイルやライブラリコンポーネントまでもすべて変更されてしまいます。
+
+また、このプログラムは移植性が非常に悪いです。`DrawAllShapes()`を他のプログラムから利用しようとすると、
+別に必要もないSquareやらCircleまでもがオマケでひっついてきてしまいます。
+
+### OCPに従った図形描画の実装
+
+以下に示すコードは、先に示したコードの課題をOCPに従うことで解決しているものです。
+ここではまずShapeという名前の抽象クラスを宣言していて、その中で`Draw()`という抽象メソッドを一つだけ持つようにしています。
+そしてCircleとSquareはこのShapeから派生したクラスになっています。
+
+```java
+public abstract class Shape {
+    public abstract void Draw();
+}
+
+public abstract class Square extends Shape {
+    double itsSide;
+    Point itsTopLeft;
+}
+
+public abstract class Circle extends Shape {
+    double itsRadius;
+    Point itsCenter;
+}
+
+public class DrawingTool {
+    public void DrawAllShapes(List<Shape> shapes) {
+        for (Shape shape : shapes) {
+            shape.Draw();
+        }
+    }
+}
+```
+
+ここで新しい図形を追加したければ、Shapeから派生させた新しいクラスを作成すればいいですよね。
+`DrawAllShapes()`には全く手を加えなくていい、つまり、`DrawAllShapes()`はオープン・クローズドの原則に準じているということを意味しています。
+
+実用的なアプリケーションでは先に前述したように、移動や変形と言った処理も必要になってきます。
+しかし、そういった場合でも新しい図形を追加するのは非常に簡単で、新しい図形の派生クラスを作って必要な処理をすべて実装するだけです。
+アプリケーションをくまなく見直して、変更が必要な箇所を探し回る必要はありません。
+
+また、移植性も担保されてます。どんなアプリケーションが`DrawAllShapes()`を使っても余計なオマケを考慮しなくていいからです。
+
+## 落とし穴
+
+では [先の例](#OCPに従った図形描画の実装) において**四角形を描画する前にすべての円を描画しなければならない**というように仕様を変更したらどうでしょうか？
+
+`DrawAllShapes()`はそうした変更には閉じてません。
+この変更に対応するには`DrawAllShapes()`の中で、まずCircleのリスト検索を行ってその描画処理を行ってから、
+同様にSquareのリスト検索を行ってその描画処理をするといった感じで`DrawAllShapes()`内部の処理の変更が必要になってきます。
+
+## 先を見越した構造と自然な構造
+
+このような仕様変更が起きることを先に見越していれば、その変更から身を守る別の「抽象」を導入できたはずです。
+しかし、[先の例](#OCPに従った図形描画の実装) で使った抽象はこの種の変更に対して助けになるどころか邪魔でしかありません。
+つまり、この抽象は不適切だったということです。
+
+一見、基本クラスShapeを使ったモデルは極々自然なものに見えます。
+しかし、図形の形よりも描画の順番のほうが重要なシステムに於いてはShapeを使ったモデルは自然ではなかったということになります。
+
+つまり、どんなに「閉じた」モジュールであっても、閉じることのできない変更というのはありえます。
+**すべてのケースにおいて適用できる自然なモデルなど存在しません。**
+
+あらゆる変更に対して完璧に閉じることが不可能なら、戦略的に閉じていく必要があります。
+つまり、設計者がどういった種類の変更に対して自分の設計を閉じたいのかを選択する必要があります。
+設計担当者はどういった種類の変更が頻繁にあるのかを推測し、そういった変更から自分を守れるように抽象を構築していかなければなりません。
+
+ではどうすれば、発生しそうな変更を推測できるでしょうか？
+それがユーザリサーチだったり仮説検証のプロセスだったりするわけです。
+アジャイル開発では今後どういったことを開発するべきかを仮説します。
+ユーザにヒアリングしたり、プロトタイプを触ってもらって次に実装する機能を決定します。
+そうした、一連のプロセスからどういった変更がありそうかを事前に見越しておくことしか我々にできることはありません。
+
+## 明示的に閉じる
+
+さて、現に`四角形を描画する前にすべての円を描画しなければならない`という要求が出てきたときにどうすればいいでしょうか？
+閉じるという行為は抽象を使うことで実現できます。つまり、順番に対して`DrawAllShapes()`を閉じるためには、順番の抽象化が必要になってきます。
+順番を抽象化し、あらゆる種類の順序付けを記述できるようにすればよさそうです。
+
+順序付けができるということは2つのオブジェクトが与えられたとき、どちらを先に描画すべきなのかを見つけられるということを意味しています。
+そこで`Precedes(優先する)`という名前の抽象メソッドをShapeに定義して順序付けを実現してみましょう。
+
+```java
+public abstract class Shape {
+    abstract void Draw();
+    abstract boolean Precedes(Shape shape);
+}
+
+public class ShapeComparator implements Comparator<Shape> {
+    public int compare(Shape shape1, Shape shape2) {
+        if (shape1.Precedes(shape2)) {
+            return -1;
+        } else {
+            retrun 1;
+        }
+    }
+}
+
+public class DrawingTool {
+    void DrawAllShapes(List<Shape> shapes) {
+        List<Shape> orderedShapes = DrawingOrderSort(shapes);
+        for (Shape shape : orderedShapes) {
+            shape.Draw();
+        }
+    }
+    
+    List<Shape> DrawingOrderSort(List<Shape> shapes) {
+        List<Shape> orderedShapes = new ArrayList<Shape>(shapes);
+        Collection.sort(orderedShapes, new ShapeComparator());
+        return orderedShapes;
+    }
+}
+```
