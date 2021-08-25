@@ -153,6 +153,15 @@
 <ul>
 <li><a href=#オープンクローズドの原則ocpとはなにか>オープン・クローズドの原則(OCP)とはなにか？</a></li>
 <li><a href=#抽象に依存しろ>『抽象』に依存しろ</a></li>
+<li><a href=#具体例>具体例</a>
+<ul>
+<li><a href=#ocpに従わない図形描画の実装>OCPに従わない図形描画の実装</a></li>
+<li><a href=#ocpに従った図形描画の実装>OCPに従った図形描画の実装</a></li>
+</ul>
+</li>
+<li><a href=#落とし穴>落とし穴</a></li>
+<li><a href=#先を見越した構造と自然な構造>先を見越した構造と自然な構造</a></li>
+<li><a href=#明示的に閉じる>明示的に閉じる</a></li>
 </ul>
 </nav>
 </aside>
@@ -216,8 +225,175 @@ Clientクラスは、この抽象クラスを利用することになります�
 しかし、実際にClientクラスが利用するのは抽象クラスから派生したServerクラスのオブジェクトになります。
 つまり、Clientオブジェクトが新しいServerクラスを利用したくなったら、ClientInterfaceから派生したクラスを別に追加したらいいわけです。
 Clientクラスそのものを変更する必要はありません。</p>
-<p>Clientの処理内容は抽象インタフェースClientInterfaceを使って記述されています。</p>
-</article>
+<h2 id=具体例>
+具体例
+<a class=anchor href=#%e5%85%b7%e4%bd%93%e4%be%8b>#</a>
+</h2>
+<h3 id=ocpに従わない図形描画の実装>
+OCPに従わない図形描画の実装
+<a class=anchor href=#ocp%e3%81%ab%e5%be%93%e3%82%8f%e3%81%aa%e3%81%84%e5%9b%b3%e5%bd%a2%e6%8f%8f%e7%94%bb%e3%81%ae%e5%ae%9f%e8%a3%85>#</a>
+</h3>
+<p>まず、OCPに従わない実装を見てみましょう。</p>
+<p>2つの構造体CircleとSquareは最初のデータ要素<code>ShapeType itsType;</code>のみ共通で、他の要素は異なっています。
+<code>ShapeType itsType;</code>で図形の型を示し、それによって円なのか四角なのかを判断できる仕組みになってます。
+<code>DrawAllShapes()</code>メソッドでは構造体へのポインタの配列を順次呼び出し、
+最初に型を調べてから、その方に応じて必要な関数(<code>DrawCircle()</code>や<code>DrawSquare()</code>)を呼び出してます。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C++ data-lang=C++><span style=color:#75715e>// shape.h
+</span><span style=color:#75715e></span><span style=color:#66d9ef>enum</span> <span style=color:#a6e22e>ShapeType</span> {circle, square};
+
+<span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Shape</span> {
+    ShapeType itsType;
+};
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C++ data-lang=C++><span style=color:#75715e>// circle.h
+</span><span style=color:#75715e></span><span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Circle</span> {
+    ShapeType itsType;
+    <span style=color:#66d9ef>double</span> itsRadius;
+    Point itsCenter;
+}
+
+<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>DrawCircle</span>(<span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Circle</span><span style=color:#f92672>*</span>);
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C++ data-lang=C++><span style=color:#75715e>// square.h
+</span><span style=color:#75715e></span><span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Square</span> {
+    ShapeType itsType;
+    <span style=color:#66d9ef>double</span> itsSide;
+    Point itsTopLeft;
+}
+
+<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>DrawSquare</span>(<span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Square</span><span style=color:#f92672>*</span>);
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-C++ data-lang=C++><span style=color:#75715e>// drawAllShapes.cc
+</span><span style=color:#75715e></span><span style=color:#66d9ef>typedef</span> <span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Shape</span> <span style=color:#f92672>*</span>ShapePointer;
+
+<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>DrawAllShapes</span>(ShapePointer list[], <span style=color:#66d9ef>int</span> n) {
+    <span style=color:#66d9ef>int</span> i;
+    <span style=color:#66d9ef>for</span> (i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>; i<span style=color:#f92672>&lt;</span>n; i<span style=color:#f92672>++</span>) {
+        <span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Shape</span><span style=color:#f92672>*</span> s <span style=color:#f92672>=</span> list[i];
+        <span style=color:#66d9ef>switch</span> (s <span style=color:#f92672>-&gt;</span> itsType) {
+            <span style=color:#66d9ef>case</span> square:
+                DrawSquare((<span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Square</span><span style=color:#f92672>*</span>)s);
+                <span style=color:#66d9ef>break</span>;
+            <span style=color:#66d9ef>case</span> circle:
+                DrawCircle((<span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Circle</span><span style=color:#f92672>*</span>)s);
+                <span style=color:#66d9ef>break</span>;
+        }
+    }
+}
+</code></pre></div><p>この<code>DrawAllShapes()</code>は明確にオープン・クローズドの原則に反しています。
+新しい種類の図形を定義して、それを描画したいときに、<code>DrawAllShapes()</code>も修正が必要です。
+つまり、この関数は修正に対して閉じていません。</p>
+<p>このプログラムは簡単な例に過ぎず、図形の描画処理を呼び出しているだけなので、新しい図形を追加するときに変更する箇所は1箇所で済んでいます。
+しかし、実際にアプリケーションを組むとなると、図形を移動したり、拡大したり、変形したりといった様々な処理を呼び出すことになります。
+そうした処理をおこなうときに描画の処理と似たようなSwitch文による分岐処理が必要になってきます。
+そうすると、新しい図形を1種類追加するときにそうしたSwitch文による分岐処理を行っているところすべてに変更が必要になってくるわけです。</p>
+<p>他にも問題があります。新しい図形の種類を追加しようとするとどんな変更が必要になるでしょうか？</p>
+<p>まず、列挙型のShapeTypeに新しい図形を登録しなければなりません。
+そうすると、扱っているすべての図形がこの列挙型の宣言に依存しているので、すべての図形を再コンパイルし直さなければいけませんし、
+同様の理由でShapeに依存するモジュールも再コンパイルが必要になってきます。</p>
+<p>したがって、ソースコードのswitch/case文やif/else文の部分をすべて変更するだけでなく、構造体Shapeを使うすべてのモジュールのバイナリファイルも再コンパイルが必要になってきます。
+バイナリファイルの変更はDLLや共有ライブラリだけでなく、それ以外のバイナリコンポーネントを再結合し直さなければならないということを意味しています。</p>
+<p>結局新しい図形をアプリケーションに追加するという単純な行為のために、様々なモジュールのソースが変更になるだけでなく、
+モジュールのバイナリファイルやライブラリコンポーネントまでもすべて変更されてしまいます。</p>
+<p>また、このプログラムは移植性が非常に悪いです。<code>DrawAllShapes()</code>を他のプログラムから利用しようとすると、
+別に必要もないSquareやらCircleまでもがオマケでひっついてきてしまいます。</p>
+<h3 id=ocpに従った図形描画の実装>
+OCPに従った図形描画の実装
+<a class=anchor href=#ocp%e3%81%ab%e5%be%93%e3%81%a3%e3%81%9f%e5%9b%b3%e5%bd%a2%e6%8f%8f%e7%94%bb%e3%81%ae%e5%ae%9f%e8%a3%85>#</a>
+</h3>
+<p>以下に示すコードは、先に示したコードの課題をOCPに従うことで解決しているものです。
+ここではまずShapeという名前の抽象クラスを宣言していて、その中で<code>Draw()</code>という抽象メソッドを一つだけ持つようにしています。
+そしてCircleとSquareはこのShapeから派生したクラスになっています。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Shape</span> <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>Draw</span><span style=color:#f92672>();</span>
+<span style=color:#f92672>}</span>
+
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Square</span> <span style=color:#66d9ef>extends</span> Shape <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>double</span> itsSide<span style=color:#f92672>;</span>
+    Point itsTopLeft<span style=color:#f92672>;</span>
+<span style=color:#f92672>}</span>
+
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Circle</span> <span style=color:#66d9ef>extends</span> Shape <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>double</span> itsRadius<span style=color:#f92672>;</span>
+    Point itsCenter<span style=color:#f92672>;</span>
+<span style=color:#f92672>}</span>
+
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DrawingTool</span> <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>DrawAllShapes</span><span style=color:#f92672>(</span>List<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;</span> shapes<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span>Shape shape <span style=color:#f92672>:</span> shapes<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            shape<span style=color:#f92672>.</span><span style=color:#a6e22e>Draw</span><span style=color:#f92672>();</span>
+        <span style=color:#f92672>}</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>ここで新しい図形を追加したければ、Shapeから派生させた新しいクラスを作成すればいいですよね。
+<code>DrawAllShapes()</code>には全く手を加えなくていい、つまり、<code>DrawAllShapes()</code>はオープン・クローズドの原則に準じているということを意味しています。</p>
+<p>実用的なアプリケーションでは先に前述したように、移動や変形と言った処理も必要になってきます。
+しかし、そういった場合でも新しい図形を追加するのは非常に簡単で、新しい図形の派生クラスを作って必要な処理をすべて実装するだけです。
+アプリケーションをくまなく見直して、変更が必要な箇所を探し回る必要はありません。</p>
+<p>また、移植性も担保されてます。どんなアプリケーションが<code>DrawAllShapes()</code>を使っても余計なオマケを考慮しなくていいからです。</p>
+<h2 id=落とし穴>
+落とし穴
+<a class=anchor href=#%e8%90%bd%e3%81%a8%e3%81%97%e7%a9%b4>#</a>
+</h2>
+<p>では <a href=#OCP%e3%81%ab%e5%be%93%e3%81%a3%e3%81%9f%e5%9b%b3%e5%bd%a2%e6%8f%8f%e7%94%bb%e3%81%ae%e5%ae%9f%e8%a3%85>先の例</a> において<strong>四角形を描画する前にすべての円を描画しなければならない</strong>というように仕様を変更したらどうでしょうか？</p>
+<p><code>DrawAllShapes()</code>はそうした変更には閉じてません。
+この変更に対応するには<code>DrawAllShapes()</code>の中で、まずCircleのリスト検索を行ってその描画処理を行ってから、
+同様にSquareのリスト検索を行ってその描画処理をするといった感じで<code>DrawAllShapes()</code>内部の処理の変更が必要になってきます。</p>
+<h2 id=先を見越した構造と自然な構造>
+先を見越した構造と自然な構造
+<a class=anchor href=#%e5%85%88%e3%82%92%e8%a6%8b%e8%b6%8a%e3%81%97%e3%81%9f%e6%a7%8b%e9%80%a0%e3%81%a8%e8%87%aa%e7%84%b6%e3%81%aa%e6%a7%8b%e9%80%a0>#</a>
+</h2>
+<p>このような仕様変更が起きることを先に見越していれば、その変更から身を守る別の「抽象」を導入できたはずです。
+しかし、<a href=#OCP%e3%81%ab%e5%be%93%e3%81%a3%e3%81%9f%e5%9b%b3%e5%bd%a2%e6%8f%8f%e7%94%bb%e3%81%ae%e5%ae%9f%e8%a3%85>先の例</a> で使った抽象はこの種の変更に対して助けになるどころか邪魔でしかありません。
+つまり、この抽象は不適切だったということです。</p>
+<p>一見、基本クラスShapeを使ったモデルは極々自然なものに見えます。
+しかし、図形の形よりも描画の順番のほうが重要なシステムに於いてはShapeを使ったモデルは自然ではなかったということになります。</p>
+<p>つまり、どんなに「閉じた」モジュールであっても、閉じることのできない変更というのはありえます。
+<strong>すべてのケースにおいて適用できる自然なモデルなど存在しません。</strong></p>
+<p>あらゆる変更に対して完璧に閉じることが不可能なら、戦略的に閉じていく必要があります。
+つまり、設計者がどういった種類の変更に対して自分の設計を閉じたいのかを選択する必要があります。
+設計担当者はどういった種類の変更が頻繁にあるのかを推測し、そういった変更から自分を守れるように抽象を構築していかなければなりません。</p>
+<p>ではどうすれば、発生しそうな変更を推測できるでしょうか？
+それがユーザリサーチだったり仮説検証のプロセスだったりするわけです。
+アジャイル開発では今後どういったことを開発するべきかを仮説します。
+ユーザにヒアリングしたり、プロトタイプを触ってもらって次に実装する機能を決定します。
+そうした、一連のプロセスからどういった変更がありそうかを事前に見越しておくことしか我々にできることはありません。</p>
+<h2 id=明示的に閉じる>
+明示的に閉じる
+<a class=anchor href=#%e6%98%8e%e7%a4%ba%e7%9a%84%e3%81%ab%e9%96%89%e3%81%98%e3%82%8b>#</a>
+</h2>
+<p>さて、現に<code>四角形を描画する前にすべての円を描画しなければならない</code>という要求が出てきたときにどうすればいいでしょうか？
+閉じるという行為は抽象を使うことで実現できます。つまり、順番に対して<code>DrawAllShapes()</code>を閉じるためには、順番の抽象化が必要になってきます。
+順番を抽象化し、あらゆる種類の順序付けを記述できるようにすればよさそうです。</p>
+<p>順序付けができるということは2つのオブジェクトが与えられたとき、どちらを先に描画すべきなのかを見つけられるということを意味しています。
+そこで<code>Precedes(優先する)</code>という名前の抽象メソッドをShapeに定義して順序付けを実現してみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Shape</span> <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>Draw</span><span style=color:#f92672>();</span>
+    <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>Precedes</span><span style=color:#f92672>(</span>Shape shape<span style=color:#f92672>);</span>
+<span style=color:#f92672>}</span>
+
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ShapeComparator</span> <span style=color:#66d9ef>implements</span> Comparator<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;</span> <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>compare</span><span style=color:#f92672>(</span>Shape shape1<span style=color:#f92672>,</span> Shape shape2<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>shape1<span style=color:#f92672>.</span><span style=color:#a6e22e>Precedes</span><span style=color:#f92672>(</span>shape2<span style=color:#f92672>))</span> <span style=color:#f92672>{</span>
+            <span style=color:#66d9ef>return</span> <span style=color:#f92672>-</span>1<span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+            retrun 1<span style=color:#f92672>;</span>
+        <span style=color:#f92672>}</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DrawingTool</span> <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>DrawAllShapes</span><span style=color:#f92672>(</span>List<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;</span> shapes<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        List<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;</span> orderedShapes <span style=color:#f92672>=</span> DrawingOrderSort<span style=color:#f92672>(</span>shapes<span style=color:#f92672>);</span>
+        <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span>Shape shape <span style=color:#f92672>:</span> orderedShapes<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+            shape<span style=color:#f92672>.</span><span style=color:#a6e22e>Draw</span><span style=color:#f92672>();</span>
+        <span style=color:#f92672>}</span>
+    <span style=color:#f92672>}</span>
+    
+    List<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>DrawingOrderSort</span><span style=color:#f92672>(</span>List<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;</span> shapes<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        List<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;</span> orderedShapes <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;(</span>shapes<span style=color:#f92672>);</span>
+        Collection<span style=color:#f92672>.</span><span style=color:#a6e22e>sort</span><span style=color:#f92672>(</span>orderedShapes<span style=color:#f92672>,</span> <span style=color:#66d9ef>new</span> ShapeComparator<span style=color:#f92672>());</span>
+        <span style=color:#66d9ef>return</span> orderedShapes<span style=color:#f92672>;</span>
+    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div></article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
 </div>
@@ -233,6 +409,15 @@ Clientクラスそのものを変更する必要はありません。</p>
 <ul>
 <li><a href=#オープンクローズドの原則ocpとはなにか>オープン・クローズドの原則(OCP)とはなにか？</a></li>
 <li><a href=#抽象に依存しろ>『抽象』に依存しろ</a></li>
+<li><a href=#具体例>具体例</a>
+<ul>
+<li><a href=#ocpに従わない図形描画の実装>OCPに従わない図形描画の実装</a></li>
+<li><a href=#ocpに従った図形描画の実装>OCPに従った図形描画の実装</a></li>
+</ul>
+</li>
+<li><a href=#落とし穴>落とし穴</a></li>
+<li><a href=#先を見越した構造と自然な構造>先を見越した構造と自然な構造</a></li>
+<li><a href=#明示的に閉じる>明示的に閉じる</a></li>
 </ul>
 </nav>
 </div>
