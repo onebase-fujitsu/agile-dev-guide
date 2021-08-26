@@ -219,6 +219,8 @@ public class DrawingTool {
 
 ## 明示的に閉じる
 
+### 優先付けを図形から取り外すアプローチ
+
 さて、現に`四角形を描画する前にすべての円を描画しなければならない`という要求が出てきたときにどうすればいいでしょうか？
 閉じるという行為は抽象を使うことで実現できます。つまり、順番に対して`DrawAllShapes()`を閉じるためには、順番の抽象化が必要になってきます。
 順番を抽象化し、あらゆる種類の順序付けを記述できるようにすればよさそうです。
@@ -257,3 +259,85 @@ public class DrawingTool {
     }
 }
 ```
+
+ここではComparatorクラスのcompareをオーバーライドすることによって順序付けを行うメソッドを実現しました。
+しかし、このままでは個々のShapeオブジェクトは`Precedes()`メソッドをオーバーライドしてどういった順序付けをするのかを指定する必要があります。
+
+例えば、Circleの`Precedes()`メソッドを書いてみるとこのようになります。
+
+```java
+public abstract class Circle extends Shape {
+    double itsRadius;
+    Point itsCenter;
+
+    boolean Precedes(Shape shape) {
+        return shape instanceof Square;
+    }
+}
+```
+
+この`Precedes()`はオープン・クローズドの原則に反しているのは個々までの説明からも明らかでしょう。
+もちろん頻繁に新規の図形が定義されないのであればこれでも構いませんが、頻繁に追加されるようだとこのままだと難しいのは火を見るより明らかです。
+
+### テーブル駆動のアプローチを使う
+
+個々の図形が互いの存在を知らなくてもいいようにShapeの派生型を閉じてみましょう。
+ここではテーブル駆動形のアプローチを使ってみます。
+
+```java
+public abstract class Shape {
+    abstract void Draw();
+    abstract String getType();
+    private String[] typeOrderTable = {"square", "circle"};
+    
+    boolean Precedes(Shape shape) {
+        String thisType = this.getType();
+        String argType = shape.getType();
+        
+        int thisOrd = -1;
+        int argOrd = -1;
+        int ord = 0;
+        
+        for (String tableEntry : typeOrderTable) {
+            if (tableEntry.equals(thisType)) {
+                thisOrd = ord;
+            }
+            if (tableEntry.equals(argType)) {
+                argOrd = ord;
+            }
+            if ((0 <= argOrd) && (0 <= thisOrd)) {
+                break;
+            }
+            ord++;
+        }
+        return thisOrd < argOrd;
+    }
+}
+```
+
+ここではShapeに要素の順番を定義する配列を作成しました。
+
+```private String[] typeOrderTable = {"square", "circle"};```
+
+というのがそれです。
+このアプローチを使えば一般的な順序付け問題に対してDrawAllShapesを閉じることができますし、
+それだけでなくShapeの派生型クラスを作成したときも、各Shapeの派生型のソースコードを変更する必要はなくなります。
+
+この方法を採用した場合、様々な図形の順序付けに対して閉じていないのはこの配列のみということになります。
+このテーブルは他のモジュールから切り離し、テーブル自身を独立したモジュールにしてしまうのがよいでしょう。
+
+
+## まとめ
+
+オープン・クローズドの原則はオブジェクト指向設計の核心であり、この原則に従うことで、オブジェクト指向技術から得られる利益（柔軟性。再利用性、保守性）を最大限に享受できるようになります。
+しかし、オブジェクト指向プログラミング言語を使えば自動的にオープン・クローズドの原則に準拠できるかというと、そうではないですし、
+また、アプリケーションのあらゆる部分で抽象をむやみに使えばいいわけでもありません。
+
+開発者が担当する部分で最も頻繁に変更される処理を幹訳、抽象を適切に適用していく必要があります。
+**早まった「抽象」をしないことも、「抽象」を使うのと同じように重要です。**
+
+---
+
+では次にリスコフの置換原則(LSP)について見ていきましょう。
+
+{{< button relref="/docs/softwareDesign/solidPrinciple/lsp" >}}リスコフの置換原則{{< /button >}}

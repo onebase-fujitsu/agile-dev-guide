@@ -130,6 +130,8 @@ class Employee {
 Modemの例のように私達は何かに付けて複数の役割を結合してしまいがちだからです。
 結合している役割を見つけて、それらを分離する作業はソフトウェア設計の本質的なものになります。
 
+---
+
 では次にオープン・クローズドの原則(OCP)について見てみましょう。
 
 {{< button relref="/docs/softwareDesign/solidPrinciple/ocp" >}}オープン・クローズドの原則{{< /button >}}
