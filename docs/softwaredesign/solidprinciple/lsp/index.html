@@ -158,6 +158,14 @@
 <li><a href=#正方形と長方形の例>正方形と長方形の例</a></li>
 </ul>
 </li>
+<li><a href=#is-aの関係に付随する振る舞い>「IS-Aの関係」に付随する「振る舞い」</a></li>
+<li><a href=#経験則と約束事>経験則と約束事</a>
+<ul>
+<li><a href=#派生クラスに置いて退化している機能>派生クラスに置いて退化している機能</a></li>
+<li><a href=#派生クラスから例外を投げる>派生クラスから例外を投げる</a></li>
+</ul>
+</li>
+<li><a href=#まとめ>まとめ</a></li>
 </ul>
 </nav>
 </aside>
@@ -341,6 +349,74 @@ Rectangleへのポインタやリファレンスを引数としてもつ関数�
 しかし、関数gにRectangleとして渡されるものすべてがその過程を満たしているとは限りません。
 そうした過程を前提に設計されているgのような関数にSquareのインスタンスを渡すとその関数はご動作してしまいます。
 つまり、関数gはSquareとRectangleの継承関係に関して「もろさ」を露呈しているのです。</p>
+<p>関数gの問題点は、その作者が長方形の「縦」と「横」が互いに独立していると仮定していることです、
+しかし、一方でRectangleと名付けられたクラスの性質として「縦」と「横」を独立して扱えるというのは普遍的なものであることも事実ですし、
+その普遍的な性質に従わなかったのはSquareの方であるとも言えます。
+しかし、SquareはSquareで正方形の性質にはちゃんと従っています。</p>
+<h2 id=is-aの関係に付随する振る舞い>
+「IS-Aの関係」に付随する「振る舞い」
+<a class=anchor href=#is-a%e3%81%ae%e9%96%a2%e4%bf%82%e3%81%ab%e4%bb%98%e9%9a%8f%e3%81%99%e3%82%8b%e6%8c%af%e3%82%8b%e8%88%9e%e3%81%84>#</a>
+</h2>
+<p>SquareとRectangleについて明らかに正しかったにもかかわらず、なぜ不具合がおきて、どこに問題があったと考えるのが正しいでしょうか？</p>
+<p>SquareはRectangleはIS-Aの関係になかったのでしょうか？
+少なくとも関数gの作者にとってはノーであったはずです。
+確かに正方形は長方形かもしれませんが、関数gの視点から見たとき、Squareオブジェクトは確実にRectangleオブジェクトではありません。
+というものSquareオブジェクトの振る舞いはRectangleオブジェクトの振る舞いと違うからです。</p>
+<p>つまるところ <strong>ソフトウェアとは「振る舞い」そのもの</strong> です。
+この「振る舞い」という視点でみるとSquareはRectangleではないと言えます。</p>
+<p>SquareとRectangleの関係はこの「振る舞い」の違いのせいでリスコフの置換原則に違反したと言えます。
+つまり、 <strong>リスコフの置換原則に準ずるためには「IS-Aの関係」を満たすだけでは不十分で、「振る舞い」の同等性についても注意を払う必要があります。</strong></p>
+<h2 id=経験則と約束事>
+経験則と約束事
+<a class=anchor href=#%e7%b5%8c%e9%a8%93%e5%89%87%e3%81%a8%e7%b4%84%e6%9d%9f%e4%ba%8b>#</a>
+</h2>
+<p>リスコフの置換原則に準じているかどうかを判定できるシンプルな経験則があります。</p>
+<ul>
+<li>基本クラスからなんらかの機能を省いてしまっているような派生クラス</li>
+<li>基本クラスにない例外を投げるような派生クラス</li>
+</ul>
+<p>このような派生クラスはリスコフの置換原則に反している可能性が高いです。</p>
+<h3 id=派生クラスに置いて退化している機能>
+派生クラスに置いて退化している機能
+<a class=anchor href=#%e6%b4%be%e7%94%9f%e3%82%af%e3%83%a9%e3%82%b9%e3%81%ab%e7%bd%ae%e3%81%84%e3%81%a6%e9%80%80%e5%8c%96%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e6%a9%9f%e8%83%bd>#</a>
+</h3>
+<p>例えば以下のようなケースを考えてみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Base</span> <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>f</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        <span style=color:#75715e>// なんらかのコード
+</span><span style=color:#75715e></span>    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Derived</span> <span style=color:#66d9ef>extends</span> Bass <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>f</span><span style=color:#f92672>()</span> <span style=color:#f92672>{}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>メソッドfはBaseで実装してますが、Derivedの中で省かれてしまってます。
+おそらく、Derivedの作者がDerivedの中ではfは何の役割も果たさないと思ったのでしょう。
+しかし、Baseのユーザはメソッドfが退化していることを知ることができません。</p>
+<p>機能の対価が派生クラスの中で起きているからと言って、必ずしもリスコフの置換原則に反しているとは限りませんが、
+そのような状況が起きている場合は注意して見直してみたほうが良いでしょう。</p>
+<h3 id=派生クラスから例外を投げる>
+派生クラスから例外を投げる
+<a class=anchor href=#%e6%b4%be%e7%94%9f%e3%82%af%e3%83%a9%e3%82%b9%e3%81%8b%e3%82%89%e4%be%8b%e5%a4%96%e3%82%92%e6%8a%95%e3%81%92%e3%82%8b>#</a>
+</h3>
+<p>もう一つの違反携帯は基本クラスで投げない例外を派生クラスのメソッドに追加するような場合です。
+基本クラスのユーザーがそういった例外を期待していない場合、派生クラスのメソッドに新たな例外を追加してしまうと、基本クラスの代用ができなくなってしまいます。
+ユーザーに注意喚起するか、派生クラスが例外を投げないようにしないといけません。</p>
+<h2 id=まとめ>
+まとめ
+<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a>
+</h2>
+<p>オブジェクト指向設計についてはこれまでいろいろなことが主張されてきていますが、そのすべての確信になるのはオープン・クローズドの原則です。
+この原則が有効なときアプリケーションはずっと扱いやすく、再利用可能で頑強なものになります。
+リスコフの置換原則はオープン・クローズドの原則を有効にする主要な役割を果たすものの一つです。</p>
+<p>このリスコフの置換原則はあるモジュールに修正を施すことなく拡張する方法を、派生型と基本型の置換性というかたちで表現しています。
+「IS-A」という用語は派生型の定義として用いるには意味が広すぎます。
+派生型の本当の定義は基本型と「置換できる」ということに他なりません。</p>
+<hr>
+<p>では次に依存性逆転の原則(DIP)について見ていきましょう。</p>
+<a href=/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/ class=book-btn>
+依存性逆転の原則
+</a>
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
@@ -362,6 +438,14 @@ Rectangleへのポインタやリファレンスを引数としてもつ関数�
 <li><a href=#正方形と長方形の例>正方形と長方形の例</a></li>
 </ul>
 </li>
+<li><a href=#is-aの関係に付随する振る舞い>「IS-Aの関係」に付随する「振る舞い」</a></li>
+<li><a href=#経験則と約束事>経験則と約束事</a>
+<ul>
+<li><a href=#派生クラスに置いて退化している機能>派生クラスに置いて退化している機能</a></li>
+<li><a href=#派生クラスから例外を投げる>派生クラスから例外を投げる</a></li>
+</ul>
+</li>
+<li><a href=#まとめ>まとめ</a></li>
 </ul>
 </nav>
 </div>
