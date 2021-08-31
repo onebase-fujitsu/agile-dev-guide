@@ -2,9 +2,9 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="依存性逆転の原則(The Dependency Inversion Principle) #">
+<meta name=description content="依存性逆転の原則(The Dependency Inversion Principle) # 依存性逆転の原則とは # 依存性逆転の原則(DIP)とは 上位のモジュールは下位のモジュールに依存してはいけない。">
 <meta name=theme-color content="#FFFFFF"><meta property="og:title" content="依存性逆転の原則(DIP)">
-<meta property="og:description" content="依存性逆転の原則(The Dependency Inversion Principle) #">
+<meta property="og:description" content="依存性逆転の原則(The Dependency Inversion Principle) # 依存性逆転の原則とは # 依存性逆転の原則(DIP)とは 上位のモジュールは下位のモジュールに依存してはいけない。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/"><meta property="article:section" content="docs">
 <title>依存性逆転の原則(DIP) | Fujitsu Agile Development Guide</title>
@@ -109,10 +109,10 @@
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/>リスコフの置換原則(LSP)</a>
 </li>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/>インターフェース分離の原則(ISP)</a>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/ class=active>依存性逆転の原則(DIP)</a>
 </li>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/ class=active>依存性逆転の原則(DIP)</a>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/>インターフェース分離の原則(ISP)</a>
 </li>
 </ul>
 </li>
@@ -149,13 +149,356 @@
 </label>
 </div>
 <aside class="hidden clearfix">
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#依存性逆転の原則とは>依存性逆転の原則とは</a></li>
+<li><a href=#階層化>階層化</a></li>
+<li><a href=#所有権の逆転>所有権の逆転</a></li>
+<li><a href=#抽象に依存しろ>「抽象」に依存しろ</a></li>
+<li><a href=#簡単な例>簡単な例</a>
+<ul>
+<li><a href=#ボタンと照明>ボタンと照明</a></li>
+<li><a href=#内在する抽象をみつける>内在する抽象をみつける</a></li>
+</ul>
+</li>
+<li><a href=#実践的な例>実践的な例</a></li>
+<li><a href=#まとめ>まとめ</a></li>
+</ul>
+</nav>
 </aside>
 </header>
 <article class=markdown><h1 id=依存性逆転の原則the-dependency-inversion-principle>
 依存性逆転の原則(The Dependency Inversion Principle)
 <a class=anchor href=#%e4%be%9d%e5%ad%98%e6%80%a7%e9%80%86%e8%bb%a2%e3%81%ae%e5%8e%9f%e5%89%87the-dependency-inversion-principle>#</a>
 </h1>
+<h2 id=依存性逆転の原則とは>
+依存性逆転の原則とは
+<a class=anchor href=#%e4%be%9d%e5%ad%98%e6%80%a7%e9%80%86%e8%bb%a2%e3%81%ae%e5%8e%9f%e5%89%87%e3%81%a8%e3%81%af>#</a>
+</h2>
+<p>依存性逆転の原則(DIP)とは</p>
+<ul>
+<li><strong>上位のモジュールは下位のモジュールに依存してはいけない。どちらのモジュールも「抽象」に依存すべきである。</strong></li>
+<li><strong>「抽象」は実装の詳細に依存してはいけない。実装の詳細が「抽象」に依存すべきである。</strong></li>
+</ul>
+<p>というものです。</p>
+<p>上位のモジュールが下位のモジュールに依存することは、従来のソフトウェア開発において非常によくあることです。
+例えばよくあるWeb三層アーキテクチャを例に上げると、ControllerクラスはServiceクラスに依存しますし、ServiceクラスはRepositoryクラスに依存します。</p>
+<script src=/agile-dev-guide/mermaid.min.js></script>
+<script>mermaid.initialize({flowchart:{useMaxWidth:!0},theme:"default"})</script>
+<p class=mermaid>
+flowchart LR
+Controller --> Service
+Service --> Repository
+</p>
+<p>それに対して、うまく設計されたオブジェクト指向プログラムの構造は従来の手続き型で見慣れた依存構造を「逆転」したものになります。</p>
+<p>上位のモジュールが下位のモジュールに依存するとはどういうことでしょうか。
+アプリケーションの方針に基づく重要な判断やビジネスモデルを含み、アプリケーションの存在理由を決定づけているのは上位モジュールです。
+それにも関わらず、上位のモジュールが下位のモジュールに依存すると、下位のモジュールの変更が直接上位のモジュールに影響を与え、上位モジュールまで変更を余儀なくされてしまいます。
+それはなんとしても避けるべき事態です。</p>
+<p>アプリケーションの方針を決めているのは上位レベルのモジュールの方ですので、
+実装の詳細を担当している下位モジュールに対して上位モジュールが影響を与えるのが筋でしょう。
+ですのでビジネスルールを担当する上位レベルのモジュールは、実装の詳細を担当している下位のモジュールと独立して、立場も上でなければなりません。
+いかなる場合も、上位レベルのモジュールが下位のモジュールに依存してはならないということです。</p>
+<h2 id=階層化>
+階層化
+<a class=anchor href=#%e9%9a%8e%e5%b1%a4%e5%8c%96>#</a>
+</h2>
+<p class=mermaid>
+flowchart LR
+Controller --> Service
+Service --> Repository
+</p>
+<p>っこで改めて、先に掲載したWeb三層アーキテクチャの図を見てください。
+上位レベルのControllerレイヤが下位レベルのServiceレイヤを使用し、Serviceレイヤは更に下位レベルのRepositoryレイヤを使用しています。
+これは一見適切な構造に見えます。
+しかし、この構造では上位のControllerレイヤがそれよりも下位のすべてのレイヤにおける変更の影響を受ける、<strong>影響が伝達しやすい依存関係</strong>になっています。</p>
+<p>より適切な階層モデルをいかに示します。</p>
+<p class=mermaid>
+flowchart BT
+subgraph RepositoryLayer
+Repository --> RepositoryInterface
+end
+subgraph ServiceLayer
+Service --> ServiceInterface
+end
+subgraph ControllerLayer
+Controller --> ControllerInterface
+end
+Repository --> ServiceInterface
+Service --> ControllerInterface
+</p>
+<p>上位レベルの各レイヤでは抽象インタフェースを宣言し、そのインタフェースを通じて必要なサービスを受けるようにします。
+下位のレベルのレイヤはこれらの抽象インタフェースを実装するようにします。</p>
+<p>こうすれば、上位レベルの各クラスは自ら宣言した抽象インタフェースを通じて、下位レイヤを利用することになるため、
+上位のレイヤが下位のレイヤに依存することがなくなります。</p>
+<p>逆に、サービスを受けるために上位のレイヤが宣言した抽象インタフェースに依存しているのは、下位のレイヤの方になっています。</p>
+<h2 id=所有権の逆転>
+所有権の逆転
+<a class=anchor href=#%e6%89%80%e6%9c%89%e6%a8%a9%e3%81%ae%e9%80%86%e8%bb%a2>#</a>
+</h2>
+<p>ここで <strong>「逆転」するのは単なる依存関係だけではなく、インタフェースの所有権も逆転する</strong> ことに注意してください。</p>
+<p>普通、ユーティリティライブラリのインタフェースはライブラリ自身が所有するものです。
+しかし、依存関係逆転の原則を適用する場合、クライアントがその中小インタフェースを所有し、ライブラリのサービスはそのインタフェースから導かれるものだと言えます。</p>
+<p>所有権が逆転しているのでControllerレイヤはServiceレイヤやRepositoryレイヤの変更の影響をうけません。
+それだけではなく、ControllerレイヤはControllerInterfaceを実装しているモジュールであればどんなものでも再利用できるようになります。
+つまり、依存関係を「逆転」することでより柔軟で耐久性と流動性のある構造を生み出すことができます。</p>
+<h2 id=抽象に依存しろ>
+「抽象」に依存しろ
+<a class=anchor href=#%e6%8a%bd%e8%b1%a1%e3%81%ab%e4%be%9d%e5%ad%98%e3%81%97%e3%82%8d>#</a>
+</h2>
+<p>依存性逆転の原則を一言でいうと「抽象に依存しろ」という経験則だといえます。
+この原則は、プログラムは具体的なクラスに依存してはいけないこと、また、プログラム内の関係はすべて抽象クラスかインタフェースで終結すべきであると提言するものです。</p>
+<ul>
+<li>具体的なクラスへのポインタやリファレンスを保持するような変数があってはならない</li>
+<li>具体的なクラスから派生するクラスがあってはならない</li>
+<li>基本クラスで実装されているメソッドを上書きしてしまうようなメソッドがあってはならない</li>
+</ul>
+<p>依存性逆転の原則とはすなわち、このような経験則に基づく提言になります。
+しかし、この経験則はどのようなプログラムであっても確実に一度は破られることになります。
+具体的なクラスのインスタンスは誰かが必ず作らなければなりませんし、結局それを作成したモジュールはそのインスタンスに依存することになるからです。
+また、たとえ具体的なクラスであっても頻繁に変更されないクラスについては、この経験則に従う必要はありません。
+頻繁に変更されたり、似通った派生クラスが作られることがなければ、プログラムが具体的なクラスに依存していても大した害にはならないからです。</p>
+<p>たとえば、文字列を扱うクラスはほとんどのシステムで具体的なクラスです。例えばJavaでしたらStringクラスが具体的な文字列を扱っています。
+このクラスは頻繁に変更されるようなことはないので、プログラムがこのクラスに直接依存しても大きな問題にはなりません。</p>
+<p>しかし、アプリケーションプログラムの一部として実装される具体的なクラスはたいてい頻繁に変更されるものです。
+そうした頻繁に変更される可能性のあるクラスに直接依存することはあってはなりません。</p>
+<p>しかし、インタフェースを使った分離も完璧ではありません。
+頻繁に変更されやすいクラスのインタフェースを変更しなければならず、その影響がクラスを表現する役割を果たしている抽象インタフェースにまで及ぶ場合もあります。</p>
+<p>抽象インタフェースはクライアントクラスが宣言するものであり、それは即ちクライアント自らが必要なサービスを受けるためのものだという視点に立つと、
+インタフェースが変更されるのは <strong>クライアントが変更を必要とするときのみ</strong> になります。
+この変更はあくまでクライアント主導で行われるもので、抽象インタフェースを実装する立場のクラスがクライアントに影響を与えることはありません。</p>
+<h2 id=簡単な例>
+簡単な例
+<a class=anchor href=#%e7%b0%a1%e5%8d%98%e3%81%aa%e4%be%8b>#</a>
+</h2>
+<h3 id=ボタンと照明>
+ボタンと照明
+<a class=anchor href=#%e3%83%9c%e3%82%bf%e3%83%b3%e3%81%a8%e7%85%a7%e6%98%8e>#</a>
+</h3>
+<p>あるクラスが他のクラスにメッセージを送るようなケースでは「依存関係の逆転」が簡単に適用できます。
+ボタンと照明を例にして考えてみましょう。</p>
+<p>Buttonオブジェクトは外部の状態を感知することができます。ButtonオブジェクトがPollメッセージを受け取ると、ユーザはそれを「押した」かどうかをすぐに判断します。
+Buttonオブジェクトが外部の状態を検知するメカニズには、GUIアイコンのボタンでも、実際に指で押すことができるボタンでもなんでも大丈夫です。
+Buttonオブジェクトはユーザがそれを起動したのか停止したのかを感知するだけです。</p>
+<p>一方Lampオブジェクトは外部に影響を与えます。このオブジェクトはTurnOnメッセージを受け取ると光を放つデバイスにすぐ明かりを灯し、
+TurnOffメッセージを受け取ると、その明かりを消します。これも実際に明かりを灯すデバイス実態はLEDだろうが、白熱灯だろうが何でも構いません。</p>
+<p>このような制御システムを考えたとき、一般的には以下のようになるでしょう。</p>
+<p class=mermaid>
+classDiagram
+class Button {
+poll() void
+}
+class Lamp {
+turnOn() void
+turnOff() void
+}
+Button ..> Lamp
+</p>
+<p>この例ではButtonオブジェクトはPollメッセージを受け取ってボタンが押されたかどうかを判断し、後は単純にTurnOnかTurnOffメッセージをLampに送るだけです。</p>
+<p>しかし、このButtonクラスはLampクラスに直接依存しており、ButtonクラスはLampクラスの変更の影響を受けてしいます。
+また、Lampに代わって新たにMotorオブジェクトが出てきたときにButtonを再利用してそれをコントロールすることもできません。
+この例ではButtonオブジェクトがコントロールできるのはLampオブジェクトだけだということになります。</p>
+<p>つまり、この設計は依存関係逆転の原則に反していると言えます。アプリケーションの上位レベルの方針と下位レベルの実装が分離されていないためです。</p>
+<h3 id=内在する抽象をみつける>
+内在する抽象をみつける
+<a class=anchor href=#%e5%86%85%e5%9c%a8%e3%81%99%e3%82%8b%e6%8a%bd%e8%b1%a1%e3%82%92%e3%81%bf%e3%81%a4%e3%81%91%e3%82%8b>#</a>
+</h3>
+<p>では上位レベルの方針とは何でしょうか？それはアプリケーションに「内在する抽象」であり、実装の詳細が変更されても影響を受けない本質的な部分です。</p>
+<p>例えばButtonとLampの例で言えば、ユーザーから受けたon/offの入力を、明かりを灯す物理的な実態に伝達するというのが「内在する抽象」ということになります。
+どんなon/offの感知メカニズムを使うのかであったり、どのように灯りをともすのかというのはこれはどんな実態を使っていても大丈夫ですよね。
+つまり、内在する抽象とはそういった物によって影響を受けない本質的なものです。</p>
+<p>以下の設計はLampオブジェクトへの依存関係を逆転して改善したものです。</p>
+<p class=mermaid>
+classDiagram
+class Button {
+poll() void
+}
+class ButtonServer {
+turnOn() void
+turnOff() void
+}
+class Lamp {
+turnOn() void
+turnOff() void
+}
+Button ..> ButtonServer
+Lamp ..|> ButtonServer
+</p>
+<p>ここではButtonが依存しているのはButtonServerというインタフェースになります。
+Lampはこのインタフェースを実装する立場であり、従って依存される立場ではなく、インタフェースに依存していることになります。
+この設計であればButtonはButtonServerインタフェースを実装するデバイスであればどんなデバイスであっても制御することができます。</p>
+<h2 id=実践的な例>
+実践的な例
+<a class=anchor href=#%e5%ae%9f%e8%b7%b5%e7%9a%84%e3%81%aa%e4%be%8b>#</a>
+</h2>
+<p>実はここまでのドキュメントを順番に読まれていた方はDIPに準じたアプリケーションの具体的な実装の例を見ています。
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/#バックエンドの構造>テストダブルの章で使用したサンプルアプリケーション</a> を覚えてますでしょうか？</p>
+<p class=mermaid>
+classDiagram
+class TodoAppController{
+TodoAppService todoAppService
+getAllTasks() List~Task~
+createTask(NewTask newTask) void
+finishTask(int taskId) void
+revertTask(int taskId) void
+deleteTask(int taskId) void
+}
+class TodoAppControllerInterface{
+getAllTasks() List~Task~
+createTask(NewTask newTask) void
+finishTask(int taskId) void
+revertTask(int taskId) void
+deleteTask(int taskId) void
+}
+class TodoAppService{
+TodoAppRepository todoAppRepository
+ClockService clockService
+getAllTasks() List~Task~
+createTask(NewTask newTask) void
+finishTask(int taskId) void
+revertTask(int taskId) void
+deleteTask(int taskId) void
+}
+class TodoAppServiceInterface{
+getAllTasks() List~Task~
+createTask(NewTask newTask, Instant now) void
+finishTask(int taskId, Instant now) void
+revertTask(int taskId, Instant now) void
+deleteTask(int taskId, Instant now) void
+}
+class TodoAppRepository{
+JdbcTemplate jdbcTemplate
+getAllTasks() List~Task~
+createTask(NewTask newTask, Instant now) void
+finishTask(int taskId, Instant now) void
+revertTask(int taskId, Instant now) void
+deleteTask(int taskId, Instant now) void
+}
+class ClockServiceInterface{
+now() Instant
+}
+class ClockService{
+now() Instant
+}
+TodoAppController ..> TodoAppControllerInterface
+TodoAppService ..|> TodoAppControllerInterface
+TodoAppService ..> TodoAppServiceInterface
+TodoAppRepository ..|> TodoAppServiceInterface
+TodoAppService ..> ClockServiceInterface
+ClockService ..|> ClockServiceInterface
+</p>
+<p>ちょっと複雑かもしれませんがDIPに準じた実装になっているのが分かりますでしょうか？</p>
+<p>具体的なソースコードを見てみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// TodoAppController.java
+</span><span style=color:#75715e></span><span style=color:#a6e22e>@RestController</span>
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoAppController</span> <span style=color:#f92672>{</span>
+    <span style=color:#a6e22e>@Autowired</span>
+    TodoAppControllerInterface todoAppService<span style=color:#f92672>;</span>
+
+    <span style=color:#75715e>// 具体的な実装
+</span><span style=color:#75715e></span><span style=color:#f92672>}</span>
+</code></pre></div><p>TodoAppControllerクラスはTodoAppControllerInterfaceに依存していて、Interfaceを通じてServiceを利用しています。
+TodoAppControllerが依存しているインタフェースは以下のような実装になっていました。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// TodoAppControllerInterface.java
+</span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>TodoAppControllerInterface</span> <span style=color:#f92672>{</span>
+    List<span style=color:#f92672>&lt;</span>Task<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>();</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>createNewTask</span><span style=color:#f92672>(</span>NewTask newTask<span style=color:#f92672>);</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>finishTask</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> taskId<span style=color:#f92672>);</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>revertTask</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> taskId<span style=color:#f92672>);</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>deleteTask</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> taskId<span style=color:#f92672>);</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>ではServiceはどの様になっていたかというと、TodoAppServiceはTodoAppControllerInterfaceの実装になっています。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// TodoAppService.java
+</span><span style=color:#75715e></span><span style=color:#a6e22e>@Service</span>
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoAppService</span> <span style=color:#66d9ef>implements</span> TodoAppControllerInterface <span style=color:#f92672>{</span>
+    <span style=color:#a6e22e>@Autowired</span>
+    TodoAppRepository todoAppRepository<span style=color:#f92672>;</span>
+    
+    <span style=color:#a6e22e>@Override</span>
+    <span style=color:#66d9ef>public</span> List<span style=color:#f92672>&lt;</span>Task<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        <span style=color:#75715e>// 具体的な実装
+</span><span style=color:#75715e></span>    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Override</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>createNewTask</span><span style=color:#f92672>(</span>NewTask newTask<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#75715e>// 具体的な実装
+</span><span style=color:#75715e></span>    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Override</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>finishTask</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> taskId<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#75715e>// 具体的な実装
+</span><span style=color:#75715e></span>    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Override</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>revertTask</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> taskId<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#75715e>// 具体的な実装
+</span><span style=color:#75715e></span>    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Override</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>deleteTask</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> taskId<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#75715e>// 具体的な実装
+</span><span style=color:#75715e></span>    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>Repositoryも同様ですね。TodoAppServiceはTodoAppServiceInterfaceに依存していて、このInterfaceを通じてRepositoryを利用しています。
+依存しているInterfaceの宣言はこのようになっていました。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// TodoAppServiceInterface.java
+</span><span style=color:#75715e></span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>TodoAppServiceInterface</span> <span style=color:#f92672>{</span>
+    List<span style=color:#f92672>&lt;</span>Task<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>();</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>createNewTask</span><span style=color:#f92672>(</span>NewTask newTask<span style=color:#f92672>,</span> Instant now<span style=color:#f92672>);</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>finishTask</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> taskId<span style=color:#f92672>,</span> Instant now<span style=color:#f92672>);</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>revertTask</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> taskId<span style=color:#f92672>,</span> Instant now<span style=color:#f92672>);</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>deleteTask</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> taskId<span style=color:#f92672>,</span> Instant now<span style=color:#f92672>);</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>そして、その宣言を具体的な実装クラスが実装しています。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// TodoAppRepository.java
+</span><span style=color:#75715e></span><span style=color:#a6e22e>@Repository</span>
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoAppRepository</span> <span style=color:#66d9ef>implements</span> TodoAppServiceInterface <span style=color:#f92672>{</span>
+    <span style=color:#a6e22e>@Autowired</span>
+    JdbcTemplate jdbcTemplate<span style=color:#f92672>;</span>
+
+    <span style=color:#a6e22e>@Override</span>
+    <span style=color:#66d9ef>public</span> List<span style=color:#f92672>&lt;</span>Task<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getAllTasks</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+        <span style=color:#75715e>// 具体的な実装
+</span><span style=color:#75715e></span>    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Override</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>createNewTask</span><span style=color:#f92672>(</span>NewTask newTask<span style=color:#f92672>,</span> Instant now<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#75715e>// 具体的な実装
+</span><span style=color:#75715e></span>    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Override</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>finishTask</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> taskId<span style=color:#f92672>,</span> Instant now<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#75715e>// 具体的な実装
+</span><span style=color:#75715e></span>    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Override</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>revertTask</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> taskId<span style=color:#f92672>,</span> Instant now<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#75715e>// 具体的な実装
+</span><span style=color:#75715e></span>    <span style=color:#f92672>}</span>
+
+    <span style=color:#a6e22e>@Override</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>deleteTask</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> taskId<span style=color:#f92672>,</span> Instant now<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#75715e>// 具体的な実装
+</span><span style=color:#75715e></span>    <span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>どのレイヤも具体的な実装に直接依存しておらず、Interfaceに依存していることがわかると思います。</p>
+<h2 id=まとめ>
+まとめ
+<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a>
+</h2>
+<p>伝統的な手続き型のプログラミングでは、方針が実装の詳細に依存する構造になってしまいます。
+このような構造だと「方針」が詳細の変更に影響されてしまうので好ましくありません。</p>
+<p>オブジェクト指向プログラミングでは方針と実装の詳細を共に抽象に依存させることで、依存関係を逆転させることができます。
+この依存関係の逆転が織り込まれていることこそ、いいオブジェクト指向設計の顕著な特徴だと言えます。
+依存関係が逆転していればオブジェクト指向設計ですし、依存関係が逆手飲していなければ手続き型設計であるということができます。</p>
+<p>依存関係逆転の原則はオブジェクト指向技術のさまざまな利益を享受するために必要不可欠なものです。
+再利用可能なフレームワークを構築するためにはこの原則の適切な適用が欠かすことができません。
+この原則を適用することで抽象と実装の詳細は完全に切り離されますので、コードを保守することがずっと楽になります。</p>
+<hr>
+<p>それでは最後にインタフェース分離の原則(ISP)について見てみましょう。</p>
+<a href=/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/ class=book-btn>
+インタフェース分離の原則
+</a>
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
@@ -168,7 +511,22 @@
 </div>
 <aside class=book-toc>
 <div class=book-toc-content>
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#依存性逆転の原則とは>依存性逆転の原則とは</a></li>
+<li><a href=#階層化>階層化</a></li>
+<li><a href=#所有権の逆転>所有権の逆転</a></li>
+<li><a href=#抽象に依存しろ>「抽象」に依存しろ</a></li>
+<li><a href=#簡単な例>簡単な例</a>
+<ul>
+<li><a href=#ボタンと照明>ボタンと照明</a></li>
+<li><a href=#内在する抽象をみつける>内在する抽象をみつける</a></li>
+</ul>
+</li>
+<li><a href=#実践的な例>実践的な例</a></li>
+<li><a href=#まとめ>まとめ</a></li>
+</ul>
+</nav>
 </div>
 </aside>
 </main>

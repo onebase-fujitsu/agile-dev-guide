@@ -109,10 +109,10 @@
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/>リスコフの置換原則(LSP)</a>
 </li>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/>インターフェース分離の原則(ISP)</a>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>依存性逆転の原則(DIP)</a>
 </li>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>依存性逆転の原則(DIP)</a>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/>インターフェース分離の原則(ISP)</a>
 </li>
 </ul>
 </li>
@@ -320,7 +320,6 @@ Mockitoを使ったControllerのユニットテスト
 <a class=anchor href=#%e3%83%90%e3%83%83%e3%82%af%e3%82%a8%e3%83%b3%e3%83%89%e3%81%ae%e6%a7%8b%e9%80%a0>#</a>
 </h3>
 <p>さて、次にバックエンドの作りを見てみましょう。
-バックエンドは極々一般的な3層アーキテクチャになっています。
 バックエンドは極々一般的な3層アーキテクチャになっています。</p>
 <script src=/agile-dev-guide/mermaid.min.js></script>
 <script>mermaid.initialize({flowchart:{useMaxWidth:!0},theme:"default"})</script>
@@ -334,14 +333,14 @@ finishTask(int taskId) void
 revertTask(int taskId) void
 deleteTask(int taskId) void
 }
-class TodoAppService{
+class TodoAppControllerInterface{
 getAllTasks() List~Task~
 createTask(NewTask newTask) void
 finishTask(int taskId) void
 revertTask(int taskId) void
 deleteTask(int taskId) void
 }
-class TodoAppServiceImpl{
+class TodoAppService{
 TodoAppRepository todoAppRepository
 ClockService clockService
 getAllTasks() List~Task~
@@ -350,14 +349,14 @@ finishTask(int taskId) void
 revertTask(int taskId) void
 deleteTask(int taskId) void
 }
-class TodoAppRepository{
+class TodoAppServiceInterface{
 getAllTasks() List~Task~
 createTask(NewTask newTask, Instant now) void
 finishTask(int taskId, Instant now) void
 revertTask(int taskId, Instant now) void
 deleteTask(int taskId, Instant now) void
 }
-class TodoAppRepositoryImpl{
+class TodoAppRepository{
 JdbcTemplate jdbcTemplate
 getAllTasks() List~Task~
 createTask(NewTask newTask, Instant now) void
@@ -365,23 +364,24 @@ finishTask(int taskId, Instant now) void
 revertTask(int taskId, Instant now) void
 deleteTask(int taskId, Instant now) void
 }
+class ClockServiceInterface{
+now() Instant
+}
 class ClockService{
 now() Instant
 }
-class ClockServiceImpl{
-now() Instant
-}
-TodoAppController ..> TodoAppService
-TodoAppServiceImpl ..|> TodoAppService
-TodoAppServiceImpl ..> TodoAppRepository
-TodoAppRepositoryImpl ..|> TodoAppRepository
-TodoAppServiceImpl ..> ClockService
-ClockServiceImpl ..|> ClockService
+TodoAppController ..> TodoAppControllerInterface
+TodoAppService ..|> TodoAppControllerInterface
+TodoAppService ..> TodoAppServiceInterface
+TodoAppRepository ..|> TodoAppServiceInterface
+TodoAppService ..> ClockServiceInterface
+ClockService ..|> ClockServiceInterface
 </p>
-<p>TodoAppControllerはTodoAppServiceに依存していて、TodoAppServiceはTodoAppRepositoryに依存しています。
-TodoAppServiceとTodoAppRepositoryはinterfaceです。これは <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>依存性逆転の原則(DIP)</a> に従ったものです。
+<p>TodoAppControllerはTodoAppControllerInterfaceに依存していて、TodoAppServiceはTodoAppServiceInterfaceに依存しています。
+そしてTodoAppServiceがTodoAppControllerInterfaceの実装をしており、同様にTodoAppRepositoryがTodoAppServiceInterfaceの実装をしています。
+これは <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>依存性逆転の原則(DIP)</a> に従ったものです。
 抽象に依存するようにして結合度を下げています。これについては後述します。</p>
-<p>また、TodoAppServiceはClockServiceにも依存しています。now()は現在時刻を返す実装になっています。
+<p>また、TodoAppServiceはClockServiceInterfaceにも依存しています。now()は現在時刻を返す実装になっています。
 Controllerの各メソッドは対応するServiceのメソッドを呼び出し、now()で現在時刻を取得して、DBの更新処理をよびだすという作りになっています。</p>
 <h3 id=最初のテスト>
 最初のテスト
@@ -412,7 +412,6 @@ getAllTasks()はタスクを全件取得するメソッドです。
 <p>百聞は一見にしかずといいますので、まずは以下のコードを書いてみてください。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// TodoAppControllerUnitTest.java
 </span><span style=color:#75715e></span><span style=color:#f92672>package</span> com.example.todoApp.controller<span style=color:#f92672>;</span>
-<span style=color:#f92672>import</span> com.example.todoApp.service.TodoAppService<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.junit.jupiter.api.Test<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.junit.jupiter.api.extension.ExtendWith<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.mockito.InjectMocks<span style=color:#f92672>;</span>
@@ -422,7 +421,7 @@ getAllTasks()はタスクを全件取得するメソッドです。
 <span style=color:#a6e22e>@ExtendWith</span><span style=color:#f92672>(</span>SpringExtension<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>)</span>
 <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoAppControllerUnitTest</span> <span style=color:#f92672>{</span>
   <span style=color:#a6e22e>@Mock</span>
-  <span style=color:#66d9ef>private</span> TodoAppService appService<span style=color:#f92672>;</span>
+  <span style=color:#66d9ef>private</span> TodoAppControllerInterface appService<span style=color:#f92672>;</span>
 
   <span style=color:#a6e22e>@InjectMocks</span>
   <span style=color:#66d9ef>private</span> TodoAppController appController<span style=color:#f92672>;</span>
@@ -432,12 +431,11 @@ getAllTasks()はタスクを全件取得するメソッドです。
 <p><code>@Mock</code>はモックオブジェクトを作る宣言です。
 ここではTodoAppServiceのモックを作っています。</p>
 <p><code>@InjectMocks</code>は<code>@Mock</code>で作成したモックオブジェクトを注入する対象です。
-ですので、上の記述はTodoAppServiceのモックインスタンス<code>appService</code>を注入したTodoAppControllerクラスのインスタンス、<code>appController</code>を作成しています。</p>
+ですので、上の記述はTodoAppControllerInterfaceのモックインスタンス<code>appService</code>を注入したTodoAppControllerクラスのインスタンス、<code>appController</code>を作成しています。</p>
 <p>ではこれでどういう事ができるか実際にテストを書いてみましょう。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// TodoAppControllerUnitTest.java
 </span><span style=color:#75715e></span><span style=color:#f92672>package</span> com.example.todoApp.controller<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> com.example.todoApp.model.Task<span style=color:#f92672>;</span>
-<span style=color:#f92672>import</span> com.example.todoApp.service.TodoAppService<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.junit.jupiter.api.Test<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.junit.jupiter.api.extension.ExtendWith<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.mockito.InjectMocks<span style=color:#f92672>;</span>
@@ -453,7 +451,7 @@ getAllTasks()はタスクを全件取得するメソッドです。
 <span style=color:#a6e22e>@ExtendWith</span><span style=color:#f92672>(</span>SpringExtension<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>)</span>
 <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoAppControllerUnitTest</span> <span style=color:#f92672>{</span>
   <span style=color:#a6e22e>@Mock</span>
-  <span style=color:#66d9ef>private</span> TodoAppService appService<span style=color:#f92672>;</span>
+  <span style=color:#66d9ef>private</span> TodoAppControllerInterface appService<span style=color:#f92672>;</span>
 
   <span style=color:#a6e22e>@InjectMocks</span>
   <span style=color:#66d9ef>private</span> TodoAppController appController<span style=color:#f92672>;</span>
@@ -490,7 +488,6 @@ verifyを使うことで呼ばれた回数を検証することができます�
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// TodoAppControllerUnitTest.java
 </span><span style=color:#75715e></span><span style=color:#f92672>package</span> com.example.todoApp.controller<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> com.example.todoApp.model.Task<span style=color:#f92672>;</span>
-<span style=color:#f92672>import</span> com.example.todoApp.service.TodoAppService<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.junit.jupiter.api.Test<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.junit.jupiter.api.extension.ExtendWith<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.mockito.InjectMocks<span style=color:#f92672>;</span>
@@ -507,7 +504,7 @@ verifyを使うことで呼ばれた回数を検証することができます�
 <span style=color:#a6e22e>@ExtendWith</span><span style=color:#f92672>(</span>SpringExtension<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>)</span>
 <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoAppControllerUnitTest</span> <span style=color:#f92672>{</span>
   <span style=color:#a6e22e>@Mock</span>
-  <span style=color:#66d9ef>private</span> TodoAppService appService<span style=color:#f92672>;</span>
+  <span style=color:#66d9ef>private</span> TodoAppControllerInterface appService<span style=color:#f92672>;</span>
 
   <span style=color:#a6e22e>@InjectMocks</span>
   <span style=color:#66d9ef>private</span> TodoAppController appController<span style=color:#f92672>;</span>
@@ -557,7 +554,6 @@ MockitoやJUnitを使わない場合、このような例外のテストは非�
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// TodoAppControllerUnitTest.java
 </span><span style=color:#75715e></span><span style=color:#f92672>package</span> com.example.todoApp.controller<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> com.example.todoApp.model.Task<span style=color:#f92672>;</span>
-<span style=color:#f92672>import</span> com.example.todoApp.service.TodoAppService<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.junit.jupiter.api.Test<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.junit.jupiter.api.extension.ExtendWith<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.mockito.InjectMocks<span style=color:#f92672>;</span>
@@ -577,7 +573,7 @@ MockitoやJUnitを使わない場合、このような例外のテストは非�
 <span style=color:#a6e22e>@ExtendWith</span><span style=color:#f92672>(</span>SpringExtension<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>)</span>
 <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoAppControllerUnitTest</span> <span style=color:#f92672>{</span>
   <span style=color:#a6e22e>@Mock</span>
-  <span style=color:#66d9ef>private</span> TodoAppService appService<span style=color:#f92672>;</span>
+  <span style=color:#66d9ef>private</span> TodoAppControllerInterface appService<span style=color:#f92672>;</span>
 
   <span style=color:#a6e22e>@InjectMocks</span>
   <span style=color:#66d9ef>private</span> TodoAppController appController<span style=color:#f92672>;</span>
@@ -630,14 +626,13 @@ appServiceのgetAllTasks()というメソッドが呼ばれたときに、DataAc
 引数のテスト
 <a class=anchor href=#%e5%bc%95%e6%95%b0%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a>
 </h3>
-<p>TodoAppServiceのgetAllTasks()はパラメータがなかったですが、その他のメソッドには引数が必要です。
+<p>TodoAppControllerInterfaceのgetAllTasks()はパラメータがなかったですが、その他のメソッドには引数が必要です。
 Controllerが引数を正しくセットしてServiceのメソッドを呼んでいるかの検証もできます。</p>
 <p>引数の検証にはCaptorを使います。実際にテストを書いてみましょう。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#75715e>// TodoAppControllerUnitTest.java
 </span><span style=color:#75715e></span><span style=color:#f92672>package</span> com.example.todoApp.controller<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> com.example.todoApp.model.NewTask<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> com.example.todoApp.model.Task<span style=color:#f92672>;</span>
-<span style=color:#f92672>import</span> com.example.todoApp.service.TodoAppService<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.junit.jupiter.api.Test<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.junit.jupiter.api.extension.ExtendWith<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.mockito.ArgumentCaptor<span style=color:#f92672>;</span>
@@ -659,7 +654,7 @@ Controllerが引数を正しくセットしてServiceのメソッドを呼んで
 <span style=color:#a6e22e>@ExtendWith</span><span style=color:#f92672>(</span>SpringExtension<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>)</span>
 <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoAppControllerUnitTest</span> <span style=color:#f92672>{</span>
   <span style=color:#a6e22e>@Mock</span>
-  <span style=color:#66d9ef>private</span> TodoAppService appService<span style=color:#f92672>;</span>
+  <span style=color:#66d9ef>private</span> TodoAppControllerInterface appService<span style=color:#f92672>;</span>
 
   <span style=color:#a6e22e>@InjectMocks</span>
   <span style=color:#66d9ef>private</span> TodoAppController appController<span style=color:#f92672>;</span>
@@ -1020,7 +1015,7 @@ public void タスクがあるとその情報を取得できる() {
 </span><span style=color:#75715e></span><span style=color:#f92672>package</span> com.example.todoApp.controller<span style=color:#f92672>;</span>
 
 <span style=color:#f92672>import</span> com.example.todoApp.model.Task<span style=color:#f92672>;</span>
-<span style=color:#f92672>import</span> com.example.todoApp.service.ClockService<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> com.example.todoApp.service.ClockServiceInterface<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> net.minidev.json.JSONObject<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.junit.jupiter.api.BeforeEach<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.junit.jupiter.api.Nested<span style=color:#f92672>;</span>
@@ -1043,7 +1038,7 @@ public void タスクがあるとその情報を取得できる() {
   <span style=color:#66d9ef>private</span> TestRestTemplate restTemplate<span style=color:#f92672>;</span>
 
   <span style=color:#a6e22e>@MockBean</span>
-  <span style=color:#66d9ef>private</span> ClockService clockService<span style=color:#f92672>;</span>
+  <span style=color:#66d9ef>private</span> ClockServiceInterface clockService<span style=color:#f92672>;</span>
 
   <span style=color:#a6e22e>@BeforeEach</span>
   <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setup</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
@@ -1109,7 +1104,7 @@ public void setup() {
     doReturn(OffsetDateTime.parse(&quot;2021-08-19T15:00:00+09:00&quot;).toInstant()).when(clockService).now();
 }
 </code></pre><p>whenやdoReturnはすでに説明不要で大丈夫ですよね？
-つまり、一連のテストではclockServiceインスタンスのnow()メソッドを呼び出すと、日本時間の2021年08月19日15:00:00を返すと宣言したわけです。
+つまり、一連のテストではclockServiceInterfaceのnow()メソッドを呼び出すと、日本時間の2021年08月19日15:00:00を返すと宣言したわけです。
 こうすると、いつテストを実行してもnow()は決まった時間になります。
 つまり再現性の高いテストが書けるようにようになったということです。</p>
 <pre><code>@Test
@@ -1148,7 +1143,7 @@ public void タスクがあるとその情報を取得できる() {
 </span><span style=color:#75715e></span><span style=color:#f92672>package</span> com.example.todoApp.controller<span style=color:#f92672>;</span>
 
 <span style=color:#f92672>import</span> com.example.todoApp.model.Task<span style=color:#f92672>;</span>
-<span style=color:#f92672>import</span> com.example.todoApp.service.ClockService<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> com.example.todoApp.service.ClockServiceInterface<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> net.minidev.json.JSONObject<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.junit.jupiter.api.BeforeEach<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.junit.jupiter.api.Nested<span style=color:#f92672>;</span>
@@ -1172,7 +1167,7 @@ public void タスクがあるとその情報を取得できる() {
   <span style=color:#66d9ef>private</span> TestRestTemplate restTemplate<span style=color:#f92672>;</span>
 
   <span style=color:#a6e22e>@MockBean</span>
-  <span style=color:#66d9ef>private</span> ClockService clockService<span style=color:#f92672>;</span>
+  <span style=color:#66d9ef>private</span> ClockServiceInterface clockService<span style=color:#f92672>;</span>
 
   <span style=color:#a6e22e>@BeforeEach</span>
   <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setup</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
@@ -1261,8 +1256,8 @@ public void タスクがあるとその情報を取得できる() {
 </span><span style=color:#75715e></span><span style=color:#f92672>package</span> com.example.todoApp.controller<span style=color:#f92672>;</span>
 
 <span style=color:#f92672>import</span> com.example.todoApp.model.Task<span style=color:#f92672>;</span>
-<span style=color:#f92672>import</span> com.example.todoApp.service.ClockService<span style=color:#f92672>;</span>
-<span style=color:#f92672>import</span> com.example.todoApp.repository.TodoAppRepository<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> com.example.todoApp.service.ClockServiceInterface<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> com.example.todoApp.service.TodoAppServiceInterface<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> net.minidev.json.JSONObject<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.junit.jupiter.api.BeforeEach<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.junit.jupiter.api.Nested<span style=color:#f92672>;</span>
@@ -1289,10 +1284,10 @@ public void タスクがあるとその情報を取得できる() {
   <span style=color:#66d9ef>private</span> TestRestTemplate restTemplate<span style=color:#f92672>;</span>
 
   <span style=color:#a6e22e>@MockBean</span>
-  <span style=color:#66d9ef>private</span> ClockService clockService<span style=color:#f92672>;</span>
+  <span style=color:#66d9ef>private</span> ClockServiceInterface clockService<span style=color:#f92672>;</span>
 
   <span style=color:#a6e22e>@SpyBean</span>
-  <span style=color:#66d9ef>private</span> TodoAppRepository todoAppRepository<span style=color:#f92672>;</span>
+  <span style=color:#66d9ef>private</span> TodoAppServiceInterface todoAppRepository<span style=color:#f92672>;</span>
 
   <span style=color:#a6e22e>@BeforeEach</span>
   <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setup</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
@@ -1375,7 +1370,7 @@ public void タスクがあるとその情報を取得できる() {
 <span style=color:#f92672>}</span>
 </code></pre></div><p>こんな感じです。<code>@SpyBean</code>というアノテーションがでてきました。</p>
 <pre><code>@SpyBean
-private TodoAppRepository todoAppRepository;
+private TodoAppServiceInterface todoAppRepository;
 </code></pre><p>これも<code>@MockBean</code>と同じようにSpring Frameworkが提供している機能で、
 MockitoでSpyオブジェクトを作ってDIコンテナに登録、テスト実行時に依存性注入してくれる非常に便利な機能です。</p>
 <pre><code>@Nested
@@ -1387,7 +1382,7 @@ class DBアクセスエラー {
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
   }
 }
-</code></pre><p>最後に追加しているのが、DBアクセスエラーのテストです。doThrowでtodoAppRepositoryのgetAllTasks()メソッドが呼ばれたときに、DataAccessException例外をスローするよう宣言しています。
+</code></pre><p>最後に追加しているのが、DBアクセスエラーのテストです。doThrowでtodoAppServiceInterfaceのgetAllTasks()メソッドが呼ばれたときに、DataAccessException例外をスローするよう宣言しています。
 テストを実行するとちゃんとレスポンスとして500番(HttpStatus.INTERNAL_SERVER_ERROR)が返ってきているのが分かります。</p>
 <p>getAllTasks()は引数が無いメソッドなのでいいですが、createNewTask()メソッドは引数の設定が必要です。
 例外をテストするときに、どんな引数が与えられても例外を返したいという場面は多いです。</p>
@@ -1396,8 +1391,8 @@ class DBアクセスエラー {
 </span><span style=color:#75715e></span><span style=color:#f92672>package</span> com.example.todoApp.controller<span style=color:#f92672>;</span>
 
 <span style=color:#f92672>import</span> com.example.todoApp.model.Task<span style=color:#f92672>;</span>
-<span style=color:#f92672>import</span> com.example.todoApp.service.ClockService<span style=color:#f92672>;</span>
-<span style=color:#f92672>import</span> com.example.todoApp.repository.TodoAppRepository<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> com.example.todoApp.service.ClockServiceInterface<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> com.example.todoApp.service.TodoAppServiceInterface<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> net.minidev.json.JSONObject<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.junit.jupiter.api.BeforeEach<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.junit.jupiter.api.Nested<span style=color:#f92672>;</span>
@@ -1425,10 +1420,10 @@ class DBアクセスエラー {
   <span style=color:#66d9ef>private</span> TestRestTemplate restTemplate<span style=color:#f92672>;</span>
 
   <span style=color:#a6e22e>@MockBean</span>
-  <span style=color:#66d9ef>private</span> ClockService clockService<span style=color:#f92672>;</span>
+  <span style=color:#66d9ef>private</span> ClockServiceInterface clockService<span style=color:#f92672>;</span>
 
   <span style=color:#a6e22e>@SpyBean</span>
-  <span style=color:#66d9ef>private</span> TodoAppRepository todoAppRepository<span style=color:#f92672>;</span>
+  <span style=color:#66d9ef>private</span> TodoAppServiceInterface todoAppRepository<span style=color:#f92672>;</span>
 
   <span style=color:#a6e22e>@BeforeEach</span>
   <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setup</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
