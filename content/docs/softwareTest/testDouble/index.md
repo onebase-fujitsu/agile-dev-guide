@@ -161,7 +161,6 @@ dependencies {
 
 さて、次にバックエンドの作りを見てみましょう。
 バックエンドは極々一般的な3層アーキテクチャになっています。
-バックエンドは極々一般的な3層アーキテクチャになっています。
 
 {{<mermaid>}}
 classDiagram
@@ -173,14 +172,14 @@ class TodoAppController{
   revertTask(int taskId) void
   deleteTask(int taskId) void
 }
-class TodoAppService{
+class TodoAppControllerInterface{
   getAllTasks() List~Task~
   createTask(NewTask newTask) void
   finishTask(int taskId) void
   revertTask(int taskId) void
   deleteTask(int taskId) void
 }
-class TodoAppServiceImpl{
+class TodoAppService{
   TodoAppRepository todoAppRepository
   ClockService clockService
   getAllTasks() List~Task~
@@ -189,14 +188,14 @@ class TodoAppServiceImpl{
   revertTask(int taskId) void
   deleteTask(int taskId) void
 }
-class TodoAppRepository{
+class TodoAppServiceInterface{
 getAllTasks() List~Task~
 createTask(NewTask newTask, Instant now) void
 finishTask(int taskId, Instant now) void
 revertTask(int taskId, Instant now) void
 deleteTask(int taskId, Instant now) void
 }
-class TodoAppRepositoryImpl{
+class TodoAppRepository{
   JdbcTemplate jdbcTemplate
   getAllTasks() List~Task~
   createTask(NewTask newTask, Instant now) void
@@ -204,25 +203,26 @@ class TodoAppRepositoryImpl{
   revertTask(int taskId, Instant now) void
   deleteTask(int taskId, Instant now) void
 }
+class ClockServiceInterface{
+  now() Instant
+}
 class ClockService{
   now() Instant
 }
-class ClockServiceImpl{
-  now() Instant
-}
-TodoAppController ..> TodoAppService
-TodoAppServiceImpl ..|> TodoAppService
-TodoAppServiceImpl ..> TodoAppRepository
-TodoAppRepositoryImpl ..|> TodoAppRepository
-TodoAppServiceImpl ..> ClockService
-ClockServiceImpl ..|> ClockService
+TodoAppController ..> TodoAppControllerInterface
+TodoAppService ..|> TodoAppControllerInterface
+TodoAppService ..> TodoAppServiceInterface
+TodoAppRepository ..|> TodoAppServiceInterface
+TodoAppService ..> ClockServiceInterface
+ClockService ..|> ClockServiceInterface
 {{< /mermaid >}}
 
-TodoAppControllerはTodoAppServiceに依存していて、TodoAppServiceはTodoAppRepositoryに依存しています。
-TodoAppServiceとTodoAppRepositoryはinterfaceです。これは [依存性逆転の原則(DIP)]({{< ref "/docs/softwareDesign/solidPrinciple/dip" >}}) に従ったものです。
+TodoAppControllerはTodoAppControllerInterfaceに依存していて、TodoAppServiceはTodoAppServiceInterfaceに依存しています。
+そしてTodoAppServiceがTodoAppControllerInterfaceの実装をしており、同様にTodoAppRepositoryがTodoAppServiceInterfaceの実装をしています。
+これは [依存性逆転の原則(DIP)]({{< ref "/docs/softwareDesign/solidPrinciple/dip" >}}) に従ったものです。
 抽象に依存するようにして結合度を下げています。これについては後述します。
 
-また、TodoAppServiceはClockServiceにも依存しています。now()は現在時刻を返す実装になっています。
+また、TodoAppServiceはClockServiceInterfaceにも依存しています。now()は現在時刻を返す実装になっています。
 Controllerの各メソッドは対応するServiceのメソッドを呼び出し、now()で現在時刻を取得して、DBの更新処理をよびだすという作りになっています。
 
 ### 最初のテスト
@@ -261,7 +261,6 @@ public class TodoAppControllerUnitTest {
 ```java
 // TodoAppControllerUnitTest.java
 package com.example.todoApp.controller;
-import com.example.todoApp.service.TodoAppService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -271,7 +270,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 public class TodoAppControllerUnitTest {
   @Mock
-  private TodoAppService appService;
+  private TodoAppControllerInterface appService;
 
   @InjectMocks
   private TodoAppController appController;
@@ -285,7 +284,7 @@ public class TodoAppControllerUnitTest {
 ここではTodoAppServiceのモックを作っています。
 
 `@InjectMocks`は`@Mock`で作成したモックオブジェクトを注入する対象です。
-ですので、上の記述はTodoAppServiceのモックインスタンス`appService`を注入したTodoAppControllerクラスのインスタンス、`appController`を作成しています。
+ですので、上の記述はTodoAppControllerInterfaceのモックインスタンス`appService`を注入したTodoAppControllerクラスのインスタンス、`appController`を作成しています。
 
 ではこれでどういう事ができるか実際にテストを書いてみましょう。
 
@@ -293,7 +292,6 @@ public class TodoAppControllerUnitTest {
 // TodoAppControllerUnitTest.java
 package com.example.todoApp.controller;
 import com.example.todoApp.model.Task;
-import com.example.todoApp.service.TodoAppService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -309,7 +307,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(SpringExtension.class)
 public class TodoAppControllerUnitTest {
   @Mock
-  private TodoAppService appService;
+  private TodoAppControllerInterface appService;
 
   @InjectMocks
   private TodoAppController appController;
@@ -355,7 +353,6 @@ verifyを使うことで呼ばれた回数を検証することができます�
 // TodoAppControllerUnitTest.java
 package com.example.todoApp.controller;
 import com.example.todoApp.model.Task;
-import com.example.todoApp.service.TodoAppService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -372,7 +369,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(SpringExtension.class)
 public class TodoAppControllerUnitTest {
   @Mock
-  private TodoAppService appService;
+  private TodoAppControllerInterface appService;
 
   @InjectMocks
   private TodoAppController appController;
@@ -426,7 +423,6 @@ MockitoやJUnitを使わない場合、このような例外のテストは非�
 // TodoAppControllerUnitTest.java
 package com.example.todoApp.controller;
 import com.example.todoApp.model.Task;
-import com.example.todoApp.service.TodoAppService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -446,7 +442,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(SpringExtension.class)
 public class TodoAppControllerUnitTest {
   @Mock
-  private TodoAppService appService;
+  private TodoAppControllerInterface appService;
 
   @InjectMocks
   private TodoAppController appController;
@@ -501,7 +497,7 @@ appServiceのgetAllTasks()というメソッドが呼ばれたときに、DataAc
 
 ### 引数のテスト
 
-TodoAppServiceのgetAllTasks()はパラメータがなかったですが、その他のメソッドには引数が必要です。
+TodoAppControllerInterfaceのgetAllTasks()はパラメータがなかったですが、その他のメソッドには引数が必要です。
 Controllerが引数を正しくセットしてServiceのメソッドを呼んでいるかの検証もできます。
 
 引数の検証にはCaptorを使います。実際にテストを書いてみましょう。
@@ -511,7 +507,6 @@ Controllerが引数を正しくセットしてServiceのメソッドを呼んで
 package com.example.todoApp.controller;
 import com.example.todoApp.model.NewTask;
 import com.example.todoApp.model.Task;
-import com.example.todoApp.service.TodoAppService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -533,7 +528,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(SpringExtension.class)
 public class TodoAppControllerUnitTest {
   @Mock
-  private TodoAppService appService;
+  private TodoAppControllerInterface appService;
 
   @InjectMocks
   private TodoAppController appController;
@@ -943,7 +938,7 @@ public void タスクがあるとその情報を取得できる() {
 package com.example.todoApp.controller;
 
 import com.example.todoApp.model.Task;
-import com.example.todoApp.service.ClockService;
+import com.example.todoApp.service.ClockServiceInterface;
 import net.minidev.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -966,7 +961,7 @@ public class TodoAppControllerIntegrationTest {
   private TestRestTemplate restTemplate;
 
   @MockBean
-  private ClockService clockService;
+  private ClockServiceInterface clockService;
 
   @BeforeEach
   public void setup() {
@@ -1041,7 +1036,7 @@ public void setup() {
 ```
 
 whenやdoReturnはすでに説明不要で大丈夫ですよね？
-つまり、一連のテストではclockServiceインスタンスのnow()メソッドを呼び出すと、日本時間の2021年08月19日15:00:00を返すと宣言したわけです。
+つまり、一連のテストではclockServiceInterfaceのnow()メソッドを呼び出すと、日本時間の2021年08月19日15:00:00を返すと宣言したわけです。
 こうすると、いつテストを実行してもnow()は決まった時間になります。
 つまり再現性の高いテストが書けるようにようになったということです。
 
@@ -1091,7 +1086,7 @@ public void タスクがあるとその情報を取得できる() {
 package com.example.todoApp.controller;
 
 import com.example.todoApp.model.Task;
-import com.example.todoApp.service.ClockService;
+import com.example.todoApp.service.ClockServiceInterface;
 import net.minidev.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -1115,7 +1110,7 @@ public class TodoAppControllerIntegrationTest {
   private TestRestTemplate restTemplate;
 
   @MockBean
-  private ClockService clockService;
+  private ClockServiceInterface clockService;
 
   @BeforeEach
   public void setup() {
@@ -1211,8 +1206,8 @@ doReturn(clockService.now().plus(30, ChronoUnit.MINUTES)).when(clockService).now
 package com.example.todoApp.controller;
 
 import com.example.todoApp.model.Task;
-import com.example.todoApp.service.ClockService;
-import com.example.todoApp.repository.TodoAppRepository;
+import com.example.todoApp.service.ClockServiceInterface;
+import com.example.todoApp.service.TodoAppServiceInterface;
 import net.minidev.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -1239,10 +1234,10 @@ public class TodoAppControllerIntegrationTest {
   private TestRestTemplate restTemplate;
 
   @MockBean
-  private ClockService clockService;
+  private ClockServiceInterface clockService;
 
   @SpyBean
-  private TodoAppRepository todoAppRepository;
+  private TodoAppServiceInterface todoAppRepository;
 
   @BeforeEach
   public void setup() {
@@ -1328,7 +1323,7 @@ public class TodoAppControllerIntegrationTest {
 こんな感じです。`@SpyBean`というアノテーションがでてきました。
 ```
 @SpyBean
-private TodoAppRepository todoAppRepository;
+private TodoAppServiceInterface todoAppRepository;
 ```
 
 これも`@MockBean`と同じようにSpring Frameworkが提供している機能で、
@@ -1346,7 +1341,7 @@ class DBアクセスエラー {
 }
 ```
 
-最後に追加しているのが、DBアクセスエラーのテストです。doThrowでtodoAppRepositoryのgetAllTasks()メソッドが呼ばれたときに、DataAccessException例外をスローするよう宣言しています。
+最後に追加しているのが、DBアクセスエラーのテストです。doThrowでtodoAppServiceInterfaceのgetAllTasks()メソッドが呼ばれたときに、DataAccessException例外をスローするよう宣言しています。
 テストを実行するとちゃんとレスポンスとして500番(HttpStatus.INTERNAL_SERVER_ERROR)が返ってきているのが分かります。
 
 getAllTasks()は引数が無いメソッドなのでいいですが、createNewTask()メソッドは引数の設定が必要です。
@@ -1359,8 +1354,8 @@ getAllTasks()は引数が無いメソッドなのでいいですが、createNewT
 package com.example.todoApp.controller;
 
 import com.example.todoApp.model.Task;
-import com.example.todoApp.service.ClockService;
-import com.example.todoApp.repository.TodoAppRepository;
+import com.example.todoApp.service.ClockServiceInterface;
+import com.example.todoApp.service.TodoAppServiceInterface;
 import net.minidev.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -1388,10 +1383,10 @@ public class TodoAppControllerIntegrationTest {
   private TestRestTemplate restTemplate;
 
   @MockBean
-  private ClockService clockService;
+  private ClockServiceInterface clockService;
 
   @SpyBean
-  private TodoAppRepository todoAppRepository;
+  private TodoAppServiceInterface todoAppRepository;
 
   @BeforeEach
   public void setup() {

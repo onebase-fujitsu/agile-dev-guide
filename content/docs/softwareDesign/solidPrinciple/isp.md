@@ -1,6 +1,6 @@
 ---
 title: "インターフェース分離の原則(ISP)"
-weight: 4
+weight: 5
 bookToc: true
 ---
 
