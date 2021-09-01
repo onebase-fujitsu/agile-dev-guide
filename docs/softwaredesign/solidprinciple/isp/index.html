@@ -2,9 +2,9 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="インターフェース分離の原則(The Interface Segregation Principle) #">
+<meta name=description content="インターフェース分離の原則(The Interface Segregation Principle) # インタフェース分離の原則とは # インターフェス分離の原則(ISP)とは クライアントにクライアントが利">
 <meta name=theme-color content="#FFFFFF"><meta property="og:title" content="インターフェース分離の原則(ISP)">
-<meta property="og:description" content="インターフェース分離の原則(The Interface Segregation Principle) #">
+<meta property="og:description" content="インターフェース分離の原則(The Interface Segregation Principle) # インタフェース分離の原則とは # インターフェス分離の原則(ISP)とは クライアントにクライアントが利">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/"><meta property="article:section" content="docs">
 <title>インターフェース分離の原則(ISP) | Fujitsu Agile Development Guide</title>
@@ -122,6 +122,9 @@
 <a role=button>デザインパターン</a>
 </label>
 <ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/designpattern/designpattern/>デザインパターン</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -149,13 +152,87 @@
 </label>
 </div>
 <aside class="hidden clearfix">
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#インタフェース分離の原則とは>インタフェース分離の原則とは</a></li>
+<li><a href=#インタフェース汚染>インタフェース汚染</a></li>
+<li><a href=#クライアントの分離とインタフェースの分離>クライアントの分離とインタフェースの分離</a></li>
+</ul>
+</nav>
 </aside>
 </header>
 <article class=markdown><h1 id=インターフェース分離の原則the-interface-segregation-principle>
 インターフェース分離の原則(The Interface Segregation Principle)
 <a class=anchor href=#%e3%82%a4%e3%83%b3%e3%82%bf%e3%83%bc%e3%83%95%e3%82%a7%e3%83%bc%e3%82%b9%e5%88%86%e9%9b%a2%e3%81%ae%e5%8e%9f%e5%89%87the-interface-segregation-principle>#</a>
 </h1>
+<h2 id=インタフェース分離の原則とは>
+インタフェース分離の原則とは
+<a class=anchor href=#%e3%82%a4%e3%83%b3%e3%82%bf%e3%83%95%e3%82%a7%e3%83%bc%e3%82%b9%e5%88%86%e9%9b%a2%e3%81%ae%e5%8e%9f%e5%89%87%e3%81%a8%e3%81%af>#</a>
+</h2>
+<p>インターフェス分離の原則(ISP)とは <strong>クライアントにクライアントが利用しないメソッドへの依存を強制してはいけない</strong> という原則です。
+この原則は「太った」インタフェースをうまくシェイプアップしてくれるものです。
+「太った」インタフェースを持つクラスは多数のインタフェースを抱え込んでおり、部分的にしかインタフェース同士が強い関連性を持っていません。
+このことは、視点を変えると強い関連性があるインタフェース同士をまとめてグループ化できるということです。
+グループ化されたメンバ関数は、それぞれ異なるクライアントにサービスを提供することになります。
+なぜなら、クライアントによって必要なメンバ関数は異なるからです。</p>
+<p>一般にクライアントは複数のインタフェースを利用しますが、その全てが互いに強い関連性を持っているわけではありません。
+インタフェース分離の原則はすべてのインタフェースを１つのクラスに押し込めてしまうのではなく、
+関連性を持ったインタフェースはグループ化し、抽象基本クラスとして利用すべきだという主張になります。</p>
+<h2 id=インタフェース汚染>
+インタフェース汚染
+<a class=anchor href=#%e3%82%a4%e3%83%b3%e3%82%bf%e3%83%95%e3%82%a7%e3%83%bc%e3%82%b9%e6%b1%9a%e6%9f%93>#</a>
+</h2>
+<p>次のようなセキュリティシステムを考えてみます。このシステムにはDoorオブジェクトがあり、それをロックしたり解除したりすることができます。
+また、ドアが開いているのか閉じているのかを知ることもできます。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Door</span> <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>Lock</span><span style=color:#f92672>();</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>Unlock</span><span style=color:#f92672>();</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>IsDoorOpen</span><span style=color:#f92672>();</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>これは抽象クラスなので、クライアントはこのDoorインタフェースを実装しているオブジェクトであればどのようなオブジェクトでも使うことができます。</p>
+<p>さて、このインタフェースを実装したクラスの一つであるTimedDoorを見てみましょう。
+TimedDoorは長時間ドアが開放されていると警報がなるドアです。この機能を実現するために、TimedDoorはTimerというオブジェクトと通信します。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Timer</span> <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>Register</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> timeout<span style=color:#f92672>,</span> TimerClient client<span style=color:#f92672>);</span>
+<span style=color:#f92672>}</span>
+
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>TimerClient</span> <span style=color:#f92672>{</span>
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>Timeout</span><span style=color:#f92672>();</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>タイムアウトを警告してほしい場合、オブジェクトはTimerのRegisterメソッドを呼び出します。
+引数はタイムアウトの時間の長さと、TimerClientになっており、タイムアウトしたときにTimeOut()がコールバックされるようになっています。</p>
+<p>ここで、TimerClientクラスがTimedDoorにタイムアウトを通知するにはどうしたらいいでしょうか？</p>
+<script src=/agile-dev-guide/mermaid.min.js></script>
+<script>mermaid.initialize({flowchart:{useMaxWidth:!0},theme:"default"})</script>
+<p class=mermaid>
+classDiagram
+Timer --> "0..*" TimerClientInterface
+Door ..|> TimerClientInterface
+TimedDoor --|> Door
+class TimerClientInterface {
+TimeOut() void
+}
+</p>
+<p>ここで示す方法では、強制的にTimerClientからDoorを派生させています。
+つまり、TimedDoorもTimerClientから派生していることになり、こうすることで、TimedDoorは自分自身を登録し、かつ自分自身がTimeOutのメッセージを受け取ることができるようにしています。</p>
+<p>この方法には問題があり、特にDoorクラスがTimerClientに依存していることが問題です。
+Doorの派生クラスすべてがTimerを必要とするわけではありません。
+実際、最初に記載したDoorの抽象クラスではTimerを必要としておらず、
+Timerを必要としないDoorの派生クラスではTimeOutメソッドを使わない（退化させる）ことになり、これは潜在的にリスコフの置換原則に違反しているということになります。</p>
+<p>また、Doorの派生クラスを使うアプリケーションでは、たとえTimerを使わなくてもTimerClientの定義を必ずインポートする必要があり、
+この方法には「不必要な複雑さ」や「不必要な繰り返し」があることが分かります。</p>
+<p>これがインタフェース汚染です。こういった症状はJavaやC++のように静的に片付けされた言語に共通に発生する可能性があります。
+この例ではDoorインタフェースが本来不要なメソッドTimeOutで汚染されてしまっているというわけです。
+このメソッドをDoorに組み込まなければならない理由はDoorの派生型の一つに恩恵を与えるためでしかありません。
+こういった事が行われると、ある派生型が新しいメソッドを必要とする度に、不要なメソッドを基本クラスに追加することになってしまいまいます。
+そうすると、基本クラスのインタフェース汚染はますます拡大し、インタフェースが「太る」ことになります。</p>
+<p>また、新しいメソッドを基本クラスに追加する度に、派生クラスでも追加されたメソッドを実装しなければならなくなります。
+こうした面倒を解消する方法の一つに、そういったメソッドは基本クラスでは単純な実装をしておき、派生クラスでは必要がなければ何もしないという方法があります。
+しかし、こうした手法はリスコフの置換原則に違反するため、保守や再利用の際に問題をきたすことになります。</p>
+<h2 id=クライアントの分離とインタフェースの分離>
+クライアントの分離とインタフェースの分離
+<a class=anchor href=#%e3%82%af%e3%83%a9%e3%82%a4%e3%82%a2%e3%83%b3%e3%83%88%e3%81%ae%e5%88%86%e9%9b%a2%e3%81%a8%e3%82%a4%e3%83%b3%e3%82%bf%e3%83%95%e3%82%a7%e3%83%bc%e3%82%b9%e3%81%ae%e5%88%86%e9%9b%a2>#</a>
+</h2>
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
@@ -168,7 +245,13 @@
 </div>
 <aside class=book-toc>
 <div class=book-toc-content>
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#インタフェース分離の原則とは>インタフェース分離の原則とは</a></li>
+<li><a href=#インタフェース汚染>インタフェース汚染</a></li>
+<li><a href=#クライアントの分離とインタフェースの分離>クライアントの分離とインタフェースの分離</a></li>
+</ul>
+</nav>
 </div>
 </aside>
 </main>
