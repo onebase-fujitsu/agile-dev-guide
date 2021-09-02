@@ -83,3 +83,159 @@ Timerを必要としないDoorの派生クラスではTimeOutメソッドを使�
 しかし、こうした手法はリスコフの置換原則に違反するため、保守や再利用の際に問題をきたすことになります。
 
 ## クライアントの分離とインタフェースの分離
+
+本当はDoorとTimerClientは全く異なるクライアントにインタフェースを提供すべきで、
+TimerがTimerClientを使うべきですし、ドアを操作するクラスがDoorを使うべきです。
+
+### クライアントがインタフェースに与える強制力
+
+ソフトウェアをどうしても変更しなければならない場合、インタフェースの変更がユーザにどのような影響を及ぼすかを考えるのが自然です。
+例えば、TimerClientのインタフェースを変更した場合、その変更によってTimerClientのユーザが受ける影響を憂慮します。
+
+しかし、それとは逆にユーザがインタフェースの変更を強いる場合があります。
+
+例えばTimerのユーザが１つ以上のタイムアウトを登録するとします。
+この場合、TimedDoorはどうなるでしょうか？Doorが開いたことを検出すると、TimerにRegisterメッセージを贈り、タイムアウトの報告を要求します。
+しかし、タイムアウトの前にドアが締まり、しばらく閉まった後に、再度開いたとします。
+この場合、古いタイムアウトが時間切れになる前に、新たなタイムアウトをリクエストする必要があります。
+こうしてTimerには2つのタイムアウトのリクエストが発行されたことになりますが、最終的に最初にリクエストしたタイムアウトの方が先に時間切れになり、
+TimedDoorのTimeOutメソッドを呼び出してしまいます。すなわち、Doorは誤ったタイミングで警報を鳴らしてしまうことになるのです。
+
+以下に示すような約束事を使えばこの状況を修正することができます。
+
+```java
+public abstract class Timer {
+    public abstract void Register(int timeout, int timeoutId, TimerClient client);
+}
+
+public interface TimerClient {
+    void TimeOut(int timeOutId);
+}
+```
+
+各々のタイムアウトを登録する度にtimeOutIdという固有のコードを導入し、TimerがTimerClientのTimeOutを呼び出すときに、同じコードを引数として渡すようにします。
+こうしておけば、TimerClientの派生型はどのタイムアウトが応答したのかを知ることができます。
+
+この変更がTimerClientのすべてのユーザーに影響を与えるのは明白です。
+しかし、ここではそれを受け入れることにします。というのもtimeOutIdが無いのは明らかに見落としであり、修正が必要だからです。
+
+{{< mermaid >}}
+classDiagram
+Timer --> "0..*" TimerClientInterface
+Door ..|> TimerClientInterface
+TimedDoor --|> Door
+class TimerClientInterface {
+TimeOut() void
+}
+{{< /mermaid >}}
+
+しかし、このような設計になっていると、この修正の影響がDoorにまで及んでしまいます。
+この設計には「硬さ」と「扱いにくさ」があるということです。TimerClientのバグがTimerを使わないDoorの派生型を利用するクライアントにまで影響をおよぼすのはおかしいと言わざるを得ません。
+
+## クラスインタフェースとオブジェクトインタフェース
+
+さて、この例をインタフェースの分離という角度から再考してみましょう。
+2つのクライアント(TimerとDoorのユーザ)は分離した2つのインタフェースを持つオブジェクトを1つ利用するようにします。
+この2つのインタフェースは同一のデータを操作するので、必ず同一オブジェクトに実装しなければならないからです。
+
+ではどうしたらインタフェース分離の原則に準じて、両者が共存しなければならない状況で、インタフェースを分離することができるでしょうか？
+
+それについては、「移譲」を使ったり、そのオブジェクトの「基本クラス」を通してオブジェクトにアクセスしたりすることで、
+オブジェクトのインタフェースをを通してオブジェクトにアクセスしないことで解決を図ります。
+
+### 移譲を使ったインタフェースの分離
+
+解決策の一つはTimerClientから派生するオブジェクトを作り、具体的な処理はTimedDoorに移譲する方法です。
+
+{{< mermaid >}}
+classDiagram
+class TimerClientInterface {
+    +TimeOut
+}
+class DoorTimerAdapter {
+    +TimeOut()
+}
+class TimedDoor {
+    +DoorTimeOut
+}
+Timer --> "0..*" TimerClientInterface
+DoorTimerAdapter --|> TimerClientInterface
+DoorTimerAdapter --> TimedDoor
+TimedDoor ..> DoorTimerAdapter : creates
+TimedDoor ..> Timer
+TimedDoor --|> Door
+{{< /mermaid >}}
+
+```java
+public class TimedDoor extends Door {
+    public TimerClient getDoorTimerAdapter() {
+        return new DoorTimerAdapter(this);
+    }
+    // 処理省略
+}
+
+public class DoorTimerAdapter implements TimerClientInterface {
+    TimedDoor itsTimedDoor;
+    
+    DoorTimerAdapter(TimedDoor timedDoor) {
+        itsTimedDoor = timedDoor;
+    }
+    
+    public void TimeOut() {
+        itsTimedDoor.DoorTimeOut();
+    }
+}
+```
+
+TimedDoorがTimerを使ってタイムアウトのリクエストを登録したいときは、DoorTimerAdapterを作り、それをTimerに登録する。
+TimerがTimeOutメッセージをDoorTimerAdapterに送ると、DoorTimerAdapterはそのメッセージ処理をTimedDoorに移譲する。
+
+この解決方法はDoorクライアントとTimerの結合が防がれているため、インタフェース分離の原則に準じていると言えます。
+そのため、Timerに変更があったとしても、Doorのユーザは誰ひとりとして影響を受けることはありません。
+また、TimedDoorのインタフェースはTimerClientのものと全く同じである必要はありません。
+DoorTimerAdapterがTimerClientのインタフェースをTimedDoorのインタフェースに翻訳してくれるためです。
+したがって、これは非常に柔軟な解決策になっていると言えます。
+
+しかし、この方法はタイムアウトを登録するたびに新たなオブジェクトを生成しなければならずあまりいい方法ではありません。
+
+### 多重継承を使って分離する方法
+
+以下に多重継承をつかってインタフェース分離の原則を実現する方法を示します。
+
+{{< mermaid >}}
+classDiagram
+class TimerClientInterface {
++TimeOut
+}
+class TimedDoor {
++TimeOut
+}
+Timer --> "0..*" TimerClientInterface
+TimedDoor --|> TimerClientInterface
+TimedDoor --|> Door
+TimedDoor ..> Timer
+{{< /mermaid >}}
+
+```java
+public class TimedDoor extends Door implements TimerClientInterface {
+    abstract void TimedOut(int timeOutId);
+}
+```
+
+ここではTimedDoorがDoorとTimerClientInterfaceの両方を継承しています。
+どちらのクライアントもTimedDoorを利用できますし、TimedDoorに依存していません。
+どちらのクライアントも分離したインタフェースを通して、同一のオブジェクトを利用することができます。
+
+
+## まとめ
+
+「太った」クラスはそれを利用するクライアント同士が有害な関連性をもつ原因になりえます。
+クライアントが「太った」クラスに変更を強いると、他のすべてのクライアントに影響が及んでしまうからです。
+
+この有害な関連性を断ち切るには、各クライアントは実際に自分が利用するメソッドだけに依存するようにします。
+「太った」クラスのインタフェースを各クライアントのニーズに合うようにインタフェースを細かくグループ化すればそれが可能になります。
+
+クライアントごとに特化したインタフェースにはそれを利用するクライアントやクライアントグループだけが利用するメソッドだけを宣言しておきます。
+後で「太った」クラスを構築したければ、クライアント毎に特化したインタフェースをすべて継承し、必要なインタフェースを実装したら良いです。
+
+このような方針を取ることで、クライアントは自分が利用しないメソッドとの依存関係を断ち切りクライアント同士の独立性を保つことができます。
