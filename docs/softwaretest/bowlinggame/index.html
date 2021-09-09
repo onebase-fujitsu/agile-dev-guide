@@ -153,6 +153,17 @@
 </ul>
 </li>
 <li>
+<input type=checkbox id=section-a16dbb8fa8b2df15e7da65eb13e2d51a class=toggle>
+<label for=section-a16dbb8fa8b2df15e7da65eb13e2d51a class="flex justify-between">
+<a role=button>アジャイルの実践</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/>1日目</a>
+</li>
+</ul>
+</li>
+<li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/>おわりに</a>
 </li>
 <li>
@@ -780,10 +791,10 @@ Frame.javaとFrameTest.javaは消しちゃいましょう。</p>
     <span style=color:#f92672>}</span>
 <span style=color:#f92672>}</span>
 </code></pre></div><p>こんな感じにしてみました。こうしてみると、</p>
-<pre><code>game.roll(5);
+<pre tabindex=0><code>game.roll(5);
 game.roll(5);
 </code></pre><p>がスペアを意味していたり、</p>
-<pre><code>game.roll(10);
+<pre tabindex=0><code>game.roll(10);
 </code></pre><p>がストライクを意味しているというのは少しソースコードからは読み取りづらいですね。ここもリファクタリングしてみましょう。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#f92672>import</span> org.junit.jupiter.api.BeforeEach<span style=color:#f92672>;</span>
 <span style=color:#f92672>import</span> org.junit.jupiter.api.Test<span style=color:#f92672>;</span>

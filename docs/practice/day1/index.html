@@ -1,0 +1,843 @@
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="１日目 # アプリケーションの要件 # では、早速アジャイル開発で実際に動くアプリケーションを作ってみましょう。 今回は、簡単な例としてタスク管理のア">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="1日目">
+<meta property="og:description" content="１日目 # アプリケーションの要件 # では、早速アジャイル開発で実際に動くアプリケーションを作ってみましょう。 今回は、簡単な例としてタスク管理のア">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/"><meta property="article:section" content="docs">
+<title>1日目 | Fujitsu Agile Development Guide</title>
+<link rel=manifest href=/agile-dev-guide/manifest.json>
+<link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span>
+</a>
+</h2>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/>はじめに</a>
+</li>
+<li>
+<input type=checkbox id=section-b077c62e2cf275f367b13c9cd484dcf6 class=toggle>
+<label for=section-b077c62e2cf275f367b13c9cd484dcf6 class="flex justify-between">
+<a role=button>アジャイル</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/>アジャイル開発12の原則</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-488859b49087c05cd9f2afa3c2804c61 class=toggle>
+<label for=section-488859b49087c05cd9f2afa3c2804c61 class="flex justify-between">
+<a role=button>スクラム</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/overview/>スクラムとは</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/roles/>ロール</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/products/>成果物</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/events/>イベント</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-f43a50e4d00e3398d279579a5a9a0783 class=toggle>
+<label for=section-f43a50e4d00e3398d279579a5a9a0783 class="flex justify-between">
+<a role=button>エクストリームプログラミング</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/>エクストリームプログラミングとは</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/>エクストリームプログラミングのプラクティス</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-4881c8ea96a48f6fd2540db502c204e0 class=toggle>
+<label for=section-4881c8ea96a48f6fd2540db502c204e0 class="flex justify-between">
+<a role=button>ソフトウェアテスト</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/overview/>ソフトウェアテストを始めよう</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/>ウォーミングアップ</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/>ボウリングゲーム</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/>テストダブル</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/>E2Eテスト</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-6668e94793f2c3410fae208f25d1f417 class=toggle>
+<label for=section-6668e94793f2c3410fae208f25d1f417 class="flex justify-between">
+<a role=button>ソフトウェア設計</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/>アジャイル開発に求められるソフトウェア設計</a>
+</li>
+<li>
+<input type=checkbox id=section-fd21b9cd7e31d8e1d2ba14b32452065e class=toggle>
+<label for=section-fd21b9cd7e31d8e1d2ba14b32452065e class="flex justify-between">
+<a role=button>SOLID原則</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/>単一責任の原則(SRP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/>オープン・クローズドの原則(OCP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/>リスコフの置換原則(LSP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>依存性逆転の原則(DIP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/>インターフェース分離の原則(ISP)</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-ee4c81ada0b6a9ee859cebeab00ca76e class=toggle>
+<label for=section-ee4c81ada0b6a9ee859cebeab00ca76e class="flex justify-between">
+<a role=button>デザインパターン</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/designpattern/designpattern/>デザインパターン</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-a16dbb8fa8b2df15e7da65eb13e2d51a class=toggle checked>
+<label for=section-a16dbb8fa8b2df15e7da65eb13e2d51a class="flex justify-between">
+<a role=button>アジャイルの実践</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/ class=active>1日目</a>
+</li>
+</ul>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/>おわりに</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/>推奨書籍</a>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu>
+</label>
+<strong>1日目</strong>
+<label for=toc-control>
+<img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#アプリケーションの要件>アプリケーションの要件</a></li>
+<li><a href=#アーキテクチャと開発言語フレームワークの決定>アーキテクチャと開発言語、フレームワークの決定</a></li>
+<li><a href=#プロジェクトの構成>プロジェクトの構成</a></li>
+<li><a href=#クライアントの環境構築>クライアントの環境構築</a>
+<ul>
+<li><a href=#reactアプリの作成>reactアプリの作成</a></li>
+<li><a href=#eslintの設定>eslintの設定</a></li>
+<li><a href=#prettierの設定>prettierの設定</a></li>
+<li><a href=#css-in-jsの設定>css in JSの設定</a></li>
+<li><a href=#テスト環境の整備>テスト環境の整備</a></li>
+</ul>
+</li>
+<li><a href=#ヘッダーの作成>ヘッダーの作成</a>
+<ul>
+<li><a href=#テストの作成>テストの作成</a></li>
+<li><a href=#headerの実装>Headerの実装</a></li>
+</ul>
+</li>
+<li><a href=#画面の表示>画面の表示</a></li>
+<li><a href=#デザインの適用>デザインの適用</a></li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown><h1 id=１日目>
+１日目
+<a class=anchor href=#%ef%bc%91%e6%97%a5%e7%9b%ae>#</a>
+</h1>
+<h2 id=アプリケーションの要件>
+アプリケーションの要件
+<a class=anchor href=#%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%81%ae%e8%a6%81%e4%bb%b6>#</a>
+</h2>
+<p>では、早速アジャイル開発で実際に動くアプリケーションを作ってみましょう。
+今回は、簡単な例としてタスク管理のアプリを作ってみます。</p>
+<h2 id=アーキテクチャと開発言語フレームワークの決定>
+アーキテクチャと開発言語、フレームワークの決定
+<a class=anchor href=#%e3%82%a2%e3%83%bc%e3%82%ad%e3%83%86%e3%82%af%e3%83%81%e3%83%a3%e3%81%a8%e9%96%8b%e7%99%ba%e8%a8%80%e8%aa%9e%e3%83%95%e3%83%ac%e3%83%bc%e3%83%a0%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e6%b1%ba%e5%ae%9a>#</a>
+</h2>
+<p>実は、一番難しいのがプロジェクト立ち上げのときだったりします。
+アジャイル開発ではあらゆる変更を受け入れるようにSOLID原則などのプログラミング技法に則って開発をすすめます。
+しかし、それでも開発を進めてからでは変更が難しいものがいくつかあります。</p>
+<p>一つは開発言語、そしてもう一つはフレームワークです。</p>
+<p>この２つは後から変更することが非常に困難であり、プロジェクトの特性を見極めて慎重に決定する必要があります。
+最初を丁寧にやればやるほど後から楽になります。最初の検討を怠ってはいけません。</p>
+<blockquote class="book-hint info">
+<p><strong>開発言語変更の例</strong></p>
+<p>Javascriptとそのスーパーセットである、Typescriptはプロジェクト内で共存が可能で、
+順次置き換えていくと言った戦略が取れるでしょう。
+また、JavaとKotlinも順次置き換える戦略がとることができ、
+現に筆者のプロジェクトでは当初JavascriptとJavaを採用していましたが、
+開発に着手して１ヶ月半ほどでTypescriptとKotlinに変更しました。
+しかし、これはまだ着手してまもなく規模もそこまで大きくなかったため踏み切れたものです。</p>
+<p>ソフトウェアの開発規模が大きくなるにつれ次第に変更は難しくなります。
+最初の開発言語は慎重にやるべきです。</p>
+</blockquote>
+<h2 id=プロジェクトの構成>
+プロジェクトの構成
+<a class=anchor href=#%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e3%81%ae%e6%a7%8b%e6%88%90>#</a>
+</h2>
+<p>今回は簡単なタスク管理アプリを作ってみます。
+これから作るのはフロントエンドはReactで開発言語はTypescript、バックエンドはSpring Bootで開発言語はKotlinで、
+フロントエンドとバックエンドがHTTPでJSONをやり取りして、画面を描画する極々シンプルなSPAアプリケーションです。</p>
+<p><img src=arch.jpg alt=アーキテクチャ></p>
+<h2 id=クライアントの環境構築>
+クライアントの環境構築
+<a class=anchor href=#%e3%82%af%e3%83%a9%e3%82%a4%e3%82%a2%e3%83%b3%e3%83%88%e3%81%ae%e7%92%b0%e5%a2%83%e6%a7%8b%e7%af%89>#</a>
+</h2>
+<h3 id=reactアプリの作成>
+reactアプリの作成
+<a class=anchor href=#react%e3%82%a2%e3%83%97%e3%83%aa%e3%81%ae%e4%bd%9c%e6%88%90>#</a>
+</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>npx create-react-app todo-app-client --template redux-typescript --use-npm
+</code></pre></div><p>今回はredux-typescriptのtemplateから作成を始めます。
+<code>create-react-app</code>を使ってクライアントの雛形を作りました。</p>
+<p>このTemplateには不要な初期実装が含まれてますので、ひとまずApp.cssや<code>features/counter</code>配下など諸々を削除しました。
+そして、storesディレクトリと、componentsディレクトリ、pagesディレクトリを作成し、ファイルを以下のように整理しました。</p>
+<pre tabindex=0><code>src
+├── App.tsx
+├── components
+├── features
+├── index.tsx
+├── pages
+├── react-app-env.d.ts
+├── serviceWorker.ts
+├── setupTests.ts
+└── stores
+    ├── hooks.ts
+    └── store.ts
+</code></pre><h3 id=eslintの設定>
+eslintの設定
+<a class=anchor href=#eslint%e3%81%ae%e8%a8%ad%e5%ae%9a>#</a>
+</h3>
+<p>一番最初にやるべきはlintの設定です。lintとはコードが規約に準じているかを確認してくれるライブラリです。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser
+npx eslint --init
+</code></pre></div><p>npx eslint &ndash;initコマンドを叩くと設定ウィザードがでてきますので、以下に従って実行します。</p>
+<pre tabindex=0><code>onebase@Onebase-Maguro todo-app-client % npx eslint --init            
+✔ How would you like to use ESLint? · style
+✔ What type of modules does your project use? · esm
+✔ Which framework does your project use? · react
+✔ Does your project use TypeScript? · No / Yes
+✔ Where does your code run? · browser
+✔ How would you like to define a style for your project? · guide
+✔ Which style guide do you want to follow? · airbnb
+✔ What format do you want your config file to be in? · JavaScript
+</code></pre><p>eslintに必要なパッケージが導入されます。　eslintの設定ファイルはjavascriptでもYAMLでもどっちでもいいのですが、
+今回はjavascriptにします。</p>
+<p>eslint &ndash;initを実行するとeslintrc.jsが出力されますが、少し手を加えます。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Javascript data-lang=Javascript><span style=color:#75715e>//.eslintrc.js
+</span><span style=color:#75715e></span><span style=color:#a6e22e>module</span>.<span style=color:#a6e22e>exports</span> <span style=color:#f92672>=</span> {
+    <span style=color:#a6e22e>env</span><span style=color:#f92672>:</span> {
+        <span style=color:#a6e22e>browser</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>,
+        <span style=color:#a6e22e>es2021</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>,
+    },
+    <span style=color:#66d9ef>extends</span><span style=color:#f92672>:</span> [
+        <span style=color:#e6db74>&#39;plugin:react/recommended&#39;</span>,
+        <span style=color:#e6db74>&#39;airbnb&#39;</span>,
+    ],
+    <span style=color:#a6e22e>parser</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;@typescript-eslint/parser&#39;</span>,
+    <span style=color:#a6e22e>parserOptions</span><span style=color:#f92672>:</span> {
+        <span style=color:#a6e22e>ecmaFeatures</span><span style=color:#f92672>:</span> {
+            <span style=color:#a6e22e>jsx</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>,
+        },
+        <span style=color:#a6e22e>ecmaVersion</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>12</span>,
+        <span style=color:#a6e22e>sourceType</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;module&#39;</span>,
+        <span style=color:#a6e22e>tsconfigRootDir</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>__</span><span style=color:#a6e22e>dirname</span>,
+        <span style=color:#a6e22e>project</span><span style=color:#f92672>:</span> [<span style=color:#e6db74>&#39;./tsconfig.json&#39;</span>],
+    },
+    <span style=color:#a6e22e>plugins</span><span style=color:#f92672>:</span> [
+        <span style=color:#e6db74>&#39;react&#39;</span>,
+        <span style=color:#e6db74>&#39;@typescript-eslint&#39;</span>,
+    ],
+    <span style=color:#a6e22e>rules</span><span style=color:#f92672>:</span> {
+        <span style=color:#e6db74>&#39;import/extensions&#39;</span><span style=color:#f92672>:</span> [
+            <span style=color:#e6db74>&#39;error&#39;</span>,
+            {
+                <span style=color:#a6e22e>js</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;never&#39;</span>,
+                <span style=color:#a6e22e>jsx</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;never&#39;</span>,
+                <span style=color:#a6e22e>ts</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;never&#39;</span>,
+                <span style=color:#a6e22e>tsx</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;never&#39;</span>,
+            }
+        ],
+        <span style=color:#e6db74>&#39;react/jsx-filename-extension&#39;</span><span style=color:#f92672>:</span> [
+            <span style=color:#e6db74>&#39;error&#39;</span>,
+            {
+                <span style=color:#a6e22e>extensions</span><span style=color:#f92672>:</span> [<span style=color:#e6db74>&#39;.jsx&#39;</span>, <span style=color:#e6db74>&#39;.tsx&#39;</span>]
+            }
+        ],
+        <span style=color:#e6db74>&#39;react/react-in-jsx-scope&#39;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;off&#39;</span>,
+        <span style=color:#e6db74>&#39;import/prefer-default-export&#39;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;off&#39;</span>,
+    },
+    <span style=color:#a6e22e>settings</span><span style=color:#f92672>:</span> {
+        <span style=color:#e6db74>&#39;import/resolver&#39;</span><span style=color:#f92672>:</span> {
+            <span style=color:#a6e22e>node</span><span style=color:#f92672>:</span> {
+                <span style=color:#a6e22e>paths</span><span style=color:#f92672>:</span> [<span style=color:#e6db74>&#39;src&#39;</span>],
+                <span style=color:#a6e22e>extensions</span><span style=color:#f92672>:</span> [<span style=color:#e6db74>&#39;.js&#39;</span>, <span style=color:#e6db74>&#39;.jsx&#39;</span>, <span style=color:#e6db74>&#39;.ts&#39;</span>, <span style=color:#e6db74>&#39;.tsx&#39;</span>]
+            }
+        }
+    }
+};
+</code></pre></div><p>さらにpackage.jsonにlintのscriptを追記します。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
+  <span style=color:#f92672>&#34;scripts&#34;</span>: {
+    <span style=color:#f92672>&#34;start&#34;</span>: <span style=color:#e6db74>&#34;react-scripts start&#34;</span>,
+    <span style=color:#f92672>&#34;build&#34;</span>: <span style=color:#e6db74>&#34;react-scripts build&#34;</span>,
+    <span style=color:#f92672>&#34;test&#34;</span>: <span style=color:#e6db74>&#34;react-scripts test&#34;</span>,
+    <span style=color:#f92672>&#34;eject&#34;</span>: <span style=color:#e6db74>&#34;react-scripts eject&#34;</span>,
+    <span style=color:#f92672>&#34;lint&#34;</span>: <span style=color:#e6db74>&#34;eslint --ext .ts,.tsx ./src&#34;</span>
+  }
+}
+</code></pre></div><p>この時点でnpm run lintを実行すると様々なエラーが出力されるはずです。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>onebase@Onebase-Maguro todo-app-client % npm run lint
+
+&gt; todo-app-client@0.1.0 lint
+&gt; eslint --ext .ts,.tsx ./src
+
+
+/Users/onebase/IdeaProjects/todo-app-client/src/App.tsx
+  1:8   error  <span style=color:#e6db74>&#39;React&#39;</span> was used before it was defined          no-use-before-define
+  5:5   error  JSX not allowed in files with extension <span style=color:#e6db74>&#39;.tsx&#39;</span>  react/jsx-filename-extension
+  5:25  error  A space is required before closing bracket      react/jsx-tag-spacing
+
+/Users/onebase/IdeaProjects/todo-app-client/src/index.tsx
+   1:8   error  <span style=color:#e6db74>&#39;React&#39;</span> was used before it was defined                      no-use-before-define
+   3:17  error  Unable to resolve path to module <span style=color:#e6db74>&#39;./App&#39;</span>                    import/no-unresolved
+   3:17  error  Missing file extension <span style=color:#66d9ef>for</span> <span style=color:#e6db74>&#34;./App&#34;</span>                          import/extensions
+   4:23  error  Unable to resolve path to module <span style=color:#e6db74>&#39;./stores/store&#39;</span>           import/no-unresolved
+   4:23  error  Missing file extension <span style=color:#66d9ef>for</span> <span style=color:#e6db74>&#34;./stores/store&#34;</span>                 import/extensions
+   5:1   error  <span style=color:#e6db74>`</span>react-redux<span style=color:#e6db74>`</span> import should occur before import of <span style=color:#e6db74>`</span>./App<span style=color:#e6db74>`</span>  import/order
+   8:3   error  JSX not allowed in files with extension <span style=color:#e6db74>&#39;.tsx&#39;</span>              react/jsx-filename-extension
+  13:34  error  Missing trailing comma                                      comma-dangle
+  15:1   error  Too many blank lines at the end of file. Max of <span style=color:#ae81ff>0</span> allowed   no-multiple-empty-lines
+
+/Users/onebase/IdeaProjects/todo-app-client/src/stores/hooks.ts
+  2:45  error  Unable to resolve path to module <span style=color:#e6db74>&#39;./store&#39;</span>  import/no-unresolved
+  2:45  error  Missing file extension <span style=color:#66d9ef>for</span> <span style=color:#e6db74>&#34;./store&#34;</span>        import/extensions
+
+✖ <span style=color:#ae81ff>14</span> problems <span style=color:#f92672>(</span><span style=color:#ae81ff>14</span> errors, <span style=color:#ae81ff>0</span> warnings<span style=color:#f92672>)</span>
+  <span style=color:#ae81ff>4</span> errors and <span style=color:#ae81ff>0</span> warnings potentially fixable with the <span style=color:#e6db74>`</span>--fix<span style=color:#e6db74>`</span> option.
+
+</code></pre></div><h3 id=prettierの設定>
+prettierの設定
+<a class=anchor href=#prettier%e3%81%ae%e8%a8%ad%e5%ae%9a>#</a>
+</h3>
+<p>指摘するだけですと不便ですので、自動で修正してくれるようにprettierを導入します。
+まず、eslintからprettierの競合設定を外す拡張を導入します。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>npm i --save-dev eslint-config-prettier
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#66d9ef>extends</span><span style=color:#f92672>:</span> [
+    <span style=color:#e6db74>&#39;plugin:react/recommended&#39;</span>,
+    <span style=color:#e6db74>&#39;airbnb&#39;</span>,
+    <span style=color:#e6db74>&#39;prettier&#39;</span>  <span style=color:#75715e>// 追記
+</span><span style=color:#75715e></span>],
+</code></pre></div><p>.eslintrc.jsのextendsにprettierの設定をいれました。
+次にprettierを導入します。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>npm install --save-dev prettier
+</code></pre></div><p>client配下に<code>.prettierrc</code>ファイルを作成します。</p>
+<pre tabindex=0><code>{
+    &quot;singleQuote&quot;: true,
+    &quot;tabWidth&quot;: 2,
+    &quot;semi&quot;: false,
+    &quot;bracketSpacing&quot;: false,
+    &quot;jsxBracketSameLine&quot;: true
+}
+</code></pre><p>package.jsonのscriptに修正用のコマンドも入れてしまいましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
+  <span style=color:#f92672>&#34;scripts&#34;</span>: {
+    <span style=color:#f92672>&#34;start&#34;</span>: <span style=color:#e6db74>&#34;react-scripts start&#34;</span>,
+    <span style=color:#f92672>&#34;build&#34;</span>: <span style=color:#e6db74>&#34;react-scripts build&#34;</span>,
+    <span style=color:#f92672>&#34;test&#34;</span>: <span style=color:#e6db74>&#34;react-scripts test&#34;</span>,
+    <span style=color:#f92672>&#34;eject&#34;</span>: <span style=color:#e6db74>&#34;react-scripts eject&#34;</span>,
+    <span style=color:#f92672>&#34;lint&#34;</span>: <span style=color:#e6db74>&#34;eslint --ext .ts,.tsx ./src&#34;</span>,
+    <span style=color:#f92672>&#34;fix&#34;</span>: <span style=color:#e6db74>&#34;npm run format &amp;&amp; npm run lint:fix&#34;</span>,
+    <span style=color:#f92672>&#34;format&#34;</span>: <span style=color:#e6db74>&#34;prettier --write &#39;src/**/*.{js,jsx,ts,tsx}&#39;&#34;</span>,
+    <span style=color:#f92672>&#34;lint:fix&#34;</span>: <span style=color:#e6db74>&#34;eslint --fix &#39;src/**/*.{js,jsx,ts,tsx}&#39;&#34;</span>
+  }
+}
+</code></pre></div><p>これで設定は完了です。<code>npm run fix</code>を実行してみましょう。</p>
+<pre tabindex=0><code>/Users/onebase/IdeaProjects/todo-app/client/src/App.tsx
+  1:8  error  'React' was used before it was defined  no-use-before-define
+
+/Users/onebase/IdeaProjects/todo-app/client/src/index.tsx
+  1:8  error  'React' was used before it was defined  no-use-before-define
+
+</code></pre><p>ほとんどのエラーがprettierにより修正され、エラーが2つだけ出力されました。
+これはApp.tsxとindex.tsxの1行目のReactのimportを削除すると解消されます。</p>
+<p>ここまでのソースコードは <a href=https://github.com/Onebase-Fujitsu/todo-app-client/tree/step1>https://github.com/Onebase-Fujitsu/todo-app-client/tree/step1</a> においてあります。</p>
+<h3 id=css-in-jsの設定>
+css in JSの設定
+<a class=anchor href=#css-in-js%e3%81%ae%e8%a8%ad%e5%ae%9a>#</a>
+</h3>
+<p>次にスタイルシートの記述方法を設定します。これも後から変更するのは大変ですので慎重に決定する必要があります。
+有名どころはこの辺になるかと思います。</p>
+<ul>
+<li>Material UI</li>
+<li>Tailwind CSS</li>
+<li>styled-components</li>
+<li>Chakra UI</li>
+</ul>
+<p>Material UIはスタイル適用済みのUI Componentを提供するもので、Tailwind CSSやstyled-components、Chakra UIはJSXファイルの中でスタイルを規定していくものです。
+Material UIはコンポーネントが提供されているため、さっと見た目のいいアプリを作るのにはいいですが、
+いかにもな"Material UI"感がでてしまうのが難点です。</p>
+<p>Tailwind CSSやstyled-componentsなどはその点自由にデザインを組めますが、
+両者でコーディングスタイルは大きく異なっています。</p>
+<p>個人的にはTailwind CSSを押しているため今回はTailwind CSSを導入してみます。</p>
+<p>導入方法はこちらに書いてあるので、これに習って導入してみましょう。
+<a href=https://tailwindcss.com/docs/guides/create-react-app>https://tailwindcss.com/docs/guides/create-react-app</a></p>
+<p>tailwind cssのインストールコマンドをまず叩いて、</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>npm install -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
+npm install @craco/craco
+</code></pre></div><p>package.jsonのスクリプトを編集</p>
+<pre tabindex=0><code>// package.json
+&quot;scripts&quot;: {
+    &quot;start&quot;: &quot;craco start&quot;,   // 変更
+    &quot;build&quot;: &quot;craco build&quot;,   // 変更
+    &quot;test&quot;: &quot;craco test&quot;,     // 変更
+    &quot;eject&quot;: &quot;react-scripts eject&quot;,
+    &quot;lint&quot;: &quot;eslint --ext .ts,.tsx ./src&quot;,
+    &quot;fix&quot;: &quot;npm run format &amp;&amp; npm run lint:fix&quot;,
+    &quot;format&quot;: &quot;prettier --write 'src/**/*.{js,jsx,ts,tsx}'&quot;,
+    &quot;lint:fix&quot;: &quot;eslint --fix 'src/**/*.{js,jsx,ts,tsx}'&quot;
+  },
+</code></pre><p>craco.config.jsを新規に作成</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#75715e>// craco.config.js
+</span><span style=color:#75715e></span><span style=color:#a6e22e>module</span>.<span style=color:#a6e22e>exports</span> <span style=color:#f92672>=</span> {
+    <span style=color:#a6e22e>style</span><span style=color:#f92672>:</span> {
+        <span style=color:#a6e22e>postcss</span><span style=color:#f92672>:</span> {
+            <span style=color:#a6e22e>plugins</span><span style=color:#f92672>:</span> [
+                <span style=color:#a6e22e>require</span>(<span style=color:#e6db74>&#39;tailwindcss&#39;</span>),
+                <span style=color:#a6e22e>require</span>(<span style=color:#e6db74>&#39;autoprefixer&#39;</span>),
+            ],
+        },
+    },
+}
+</code></pre></div><p>Tailwind CSSの初期設定コマンドを実行</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>npx tailwindcss-cli@latest init
+</code></pre></div><p>tailwind.config.jsが生成されるので、中身を更新</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#75715e>// tailwind.config.js
+</span><span style=color:#75715e></span><span style=color:#a6e22e>module</span>.<span style=color:#a6e22e>exports</span> <span style=color:#f92672>=</span> {
+    <span style=color:#a6e22e>purge</span><span style=color:#f92672>:</span> [<span style=color:#e6db74>&#39;./src/**/*.{js,jsx,ts,tsx}&#39;</span>, <span style=color:#e6db74>&#39;./public/index.html&#39;</span>],   <span style=color:#75715e>// 更新
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>darkMode</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>false</span>, <span style=color:#75715e>// or &#39;media&#39; or &#39;class&#39;
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>theme</span><span style=color:#f92672>:</span> {
+        <span style=color:#a6e22e>extend</span><span style=color:#f92672>:</span> {},
+    },
+    <span style=color:#a6e22e>variants</span><span style=color:#f92672>:</span> {
+        <span style=color:#a6e22e>extend</span><span style=color:#f92672>:</span> {},
+    },
+    <span style=color:#a6e22e>plugins</span><span style=color:#f92672>:</span> [],
+}
+</code></pre></div><p>src直下にindex.cssを作成して</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-css data-lang=css>@<span style=color:#66d9ef>tailwind</span> <span style=color:#f92672>base</span>;
+@<span style=color:#66d9ef>tailwind</span> <span style=color:#f92672>components</span>;
+@<span style=color:#66d9ef>tailwind</span> <span style=color:#f92672>utilities</span>;
+</code></pre></div><p>index.tsxで読み込み</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>StrictMode</span>} <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>ReactDOM</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;react-dom&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>Provider</span>} <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;react-redux&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#e6db74>&#39;./index.css&#39;</span>  <span style=color:#75715e>// 追加
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>App</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;./App&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>store</span>} <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;./stores/store&#39;</span>
+
+<span style=color:#a6e22e>ReactDOM</span>.<span style=color:#a6e22e>render</span>(
+  <span style=color:#f92672>&lt;</span><span style=color:#a6e22e>StrictMode</span><span style=color:#f92672>&gt;</span>
+    <span style=color:#f92672>&lt;</span><span style=color:#a6e22e>Provider</span> <span style=color:#a6e22e>store</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>store</span>}<span style=color:#f92672>&gt;</span>
+      <span style=color:#f92672>&lt;</span><span style=color:#a6e22e>App</span> <span style=color:#f92672>/&gt;</span>
+    <span style=color:#f92672>&lt;</span><span style=color:#960050;background-color:#1e0010>/Provider&gt;</span>
+  <span style=color:#f92672>&lt;</span><span style=color:#960050;background-color:#1e0010>/StrictMode&gt;,</span>
+  document.<span style=color:#a6e22e>getElementById</span>(<span style=color:#e6db74>&#39;root&#39;</span>)
+)
+</code></pre></div><p>これでTailwind CSSの導入ができました。
+正しく導入できているか確認してみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#75715e>// App.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>App</span>() {
+    <span style=color:#66d9ef>return</span> (
+        <span style=color:#f92672>&lt;</span><span style=color:#a6e22e>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text-red-500&#34;</span><span style=color:#f92672>&gt;</span><span style=color:#a6e22e>test</span><span style=color:#f92672>&lt;</span><span style=color:#960050;background-color:#1e0010>/div&gt;</span>
+    )
+}
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>App</span>
+</code></pre></div><p>App.tsxを以下のように変更してコンパイルしてみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>npm run start
+</code></pre></div><p><img src=tailwind.jpg alt=tailwind></p>
+<p>ブラウザで赤い文字でtestと表示されているのが確認できたら正しく導入できていますので、確認できたらApp.tsxをもとに戻しておいてください。</p>
+<p>ここまでのソースは <a href=https://github.com/Onebase-Fujitsu/todo-app-client/tree/step2>https://github.com/Onebase-Fujitsu/todo-app-client/tree/step2</a> に置いてあります。</p>
+<h3 id=テスト環境の整備>
+テスト環境の整備
+<a class=anchor href=#%e3%83%86%e3%82%b9%e3%83%88%e7%92%b0%e5%a2%83%e3%81%ae%e6%95%b4%e5%82%99>#</a>
+</h3>
+<p>次にクライアントのテスト環境を整備していきます。
+2021年9月のreactの最新版は17.0.2ですが、最新版はテストに必要なenzymeがまだ対応していないため、
+今回は16.14.0で実装していこうと思います。</p>
+<p>まずpackage.jsonのreactのバージョンを変更</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
+  <span style=color:#f92672>&#34;dependencies&#34;</span>: 
+    <span style=color:#960050;background-color:#1e0010>...</span>
+    <span style=color:#e6db74>&#34;react&#34;</span>: <span style=color:#e6db74>&#34;^16.14.0&#34;</span>,
+    <span style=color:#f92672>&#34;react-dom&#34;</span>: <span style=color:#e6db74>&#34;^16.14.0&#34;</span>,
+    <span style=color:#960050;background-color:#1e0010>...</span>
+}
+</code></pre></div><p>次にテストに必要なライブラリを導入します。
+ここでは以下のライブラリを導入します。</p>
+<ul>
+<li>enzyme</li>
+<li>Sinon.js</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>npm install --save-dev enzyme @types/enzyme sinon @types/sinon enzyme-adapter-react-16 @types/enzyme-adapter-react-16
+</code></pre></div><p>enzymeはAirbnb社が開発している、Reactのテストユーティリティで、Reactコンポーネントを仮想的にレンダリングすることができます。
+Sinon.jsはJavascriptで最も標準的なテストダブルのライブラリです。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// setupTests.ts
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>configure</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;enzyme&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Adapter</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;enzyme-adapter-react-16&#39;</span>
+
+<span style=color:#a6e22e>configure</span>({<span style=color:#a6e22e>adapter</span>: <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Adapter</span>()})
+</code></pre></div><p>導入できたらsetupTest.tsを上記のように書き換えます。
+しかし、importでDevDependenciesのライブラリを読み込んでいるためeslintがエラーを出しています。これは無効化してしまいましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#75715e>// .eslintrc.js
+</span><span style=color:#75715e></span><span style=color:#a6e22e>module</span>.<span style=color:#a6e22e>exports</span> <span style=color:#f92672>=</span> {
+    <span style=color:#75715e>// 省略
+</span><span style=color:#75715e></span>  <span style=color:#a6e22e>rules</span><span style=color:#f92672>:</span> {
+    <span style=color:#e6db74>&#39;import/extensions&#39;</span><span style=color:#f92672>:</span> [
+      <span style=color:#e6db74>&#39;error&#39;</span>,
+      {
+        <span style=color:#a6e22e>js</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;never&#39;</span>,
+        <span style=color:#a6e22e>jsx</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;never&#39;</span>,
+        <span style=color:#a6e22e>ts</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;never&#39;</span>,
+        <span style=color:#a6e22e>tsx</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;never&#39;</span>,
+      }
+    ],
+    <span style=color:#e6db74>&#39;react/jsx-filename-extension&#39;</span><span style=color:#f92672>:</span> [
+      <span style=color:#e6db74>&#39;error&#39;</span>,
+      {
+        <span style=color:#a6e22e>extensions</span><span style=color:#f92672>:</span> [<span style=color:#e6db74>&#39;.jsx&#39;</span>, <span style=color:#e6db74>&#39;.tsx&#39;</span>]
+      }
+    ],
+    <span style=color:#e6db74>&#39;react/react-in-jsx-scope&#39;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;off&#39;</span>,
+    <span style=color:#e6db74>&#39;import/prefer-default-export&#39;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;off&#39;</span>,
+    <span style=color:#e6db74>&#39;import/no-extraneous-dependencies&#39;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;off&#39;</span>, <span style=color:#75715e>// 追加
+</span><span style=color:#75715e></span>  },
+    <span style=color:#75715e>// 省略
+</span><span style=color:#75715e></span>};
+</code></pre></div><p>create-react-appは標準でテストランナーにJestを採用しているのですが、このままではeslintがJestの処理に対してエラーを出すため、これを修正していきます。
+まず、eslint-plugin-jestを導入。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>npm install --save-dev eslint-plugin-jest
+</code></pre></div><p>そして、.eslintrc.jsに以下の二行を追加します。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#a6e22e>module</span>.<span style=color:#a6e22e>exports</span> <span style=color:#f92672>=</span> {
+  <span style=color:#a6e22e>env</span><span style=color:#f92672>:</span> {
+    <span style=color:#a6e22e>browser</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>,
+    <span style=color:#a6e22e>es2021</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>,
+    <span style=color:#e6db74>&#34;jest/globals&#34;</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>,       <span style=color:#75715e>// 追記
+</span><span style=color:#75715e></span>  },
+  <span style=color:#a6e22e>plugins</span><span style=color:#f92672>:</span> [
+    <span style=color:#e6db74>&#39;react&#39;</span>,
+    <span style=color:#e6db74>&#39;@typescript-eslint&#39;</span>,
+    <span style=color:#e6db74>&#34;jest&#34;</span>                      <span style=color:#75715e>// 追記
+</span><span style=color:#75715e></span>  ]
+}
+</code></pre></div><p>この状態で<code>npm run test</code>を実行してみましょう。テストランナーが立ち上がり、src配下のファイルの変更を監視しはじめます。
+ファイルの変更があるたびにテストを実行してくれるようになります。</p>
+<p>Jestはsrcディレクトリに直下に<code>__tests__</code>ディレクトリを作るか、
+どこでもいいので<code>*.test.ts</code>という形式でテストファイルを作ると自動でテストが動きます。</p>
+<p>どちらでもいいのですが、今回は前者の<code>__tests__</code>ディレクトリを作成する形式でいきます。</p>
+<p>これで準備は完了です。ここまでのソースコードは
+<a href=https://github.com/Onebase-Fujitsu/todo-app-client/tree/step3>https://github.com/Onebase-Fujitsu/todo-app-client/tree/step3</a>
+から確認できます。</p>
+<h2 id=ヘッダーの作成>
+ヘッダーの作成
+<a class=anchor href=#%e3%83%98%e3%83%83%e3%83%80%e3%83%bc%e3%81%ae%e4%bd%9c%e6%88%90>#</a>
+</h2>
+<h3 id=テストの作成>
+テストの作成
+<a class=anchor href=#%e3%83%86%e3%82%b9%e3%83%88%e3%81%ae%e4%bd%9c%e6%88%90>#</a>
+</h3>
+<p>src直下に__tests__ディレクトリを作成し、その配下にcomponentsディレクトリを作成して、その配下にHeader.test.tsxを作りましょう。</p>
+<pre tabindex=0><code>src
+├── App.tsx
+├── __tests__
+│   └── components
+│       └── Header.test.tsx  // 新規作成
+├── components
+├── features
+├── index.css
+├── index.tsx
+├── pages
+├── react-app-env.d.ts
+├── setupTests.ts
+└── stores
+    ├── hooks.ts
+    └── store.ts
+</code></pre><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// Header.test.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>shallow</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;enzyme&#39;</span>
+
+<span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#34;Header&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#34;ヘッダーの初期表示&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>wrapper</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>shallow</span>(&lt;<span style=color:#f92672>Header</span> /&gt;)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>wrapper</span>.<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h1&#39;</span>).<span style=color:#a6e22e>text</span>()).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#34;Todo App&#34;</span>)
+  })
+})
+</code></pre></div><p>最初のテストはこのようにしてみました。h1要素があることを確認しています。
+当然この時点ではshallowはenzymeが提供しているレンダリングメソッドの1つで、コンポーネントをshallowRenderingしてくれます。
+仮想的に直接Headerコンポーネントだけをレンダリングしていると考えてみてください。</p>
+<p>この時点ではHeaderコンポーネントは作成されていないので、当然失敗します。
+npm run testを実行するとこのような表示になっているはずです。</p>
+<pre tabindex=0><code>FAIL  src/__tests__/components/Header.test.tsx
+Header
+✕ ヘッダーの初期表示 (1 ms)
+
+● Header › ヘッダーの初期表示
+
+    ReferenceError: Header is not defined
+
+      3 | describe(&quot;Header&quot;, () =&gt; {
+      4 |   it(&quot;ヘッダーの初期表示&quot;, () =&gt; {
+    &gt; 5 |     const wrapper = shallow(&lt;Header /&gt;)
+        |                              ^
+      6 |     expect(wrapper.find('h1').text()).toEqual(&quot;Todo App&quot;)
+      7 |   })
+      8 | })
+
+      at Object.&lt;anonymous&gt; (src/__tests__/components/Header.test.tsx:5:30)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 total
+Snapshots:   0 total
+Time:        0.358 s, estimated 1 s
+</code></pre><h3 id=headerの実装>
+Headerの実装
+<a class=anchor href=#header%e3%81%ae%e5%ae%9f%e8%a3%85>#</a>
+</h3>
+<p>src/components配下にHeader.tsxを作成します。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// Header.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Header</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> (
+  &lt;<span style=color:#f92672>h1</span>&gt;<span style=color:#a6e22e>Todo</span> <span style=color:#a6e22e>App</span>&lt;/<span style=color:#f92672>h1</span>&gt;
+)
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>Header</span>
+</code></pre></div><p>Header.tsxを作ったら、Header.test.tsxを開き、先程作ったHeaderコンポーネントをインポートしてみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>shallow</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;enzyme&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Header</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../../components/Header&#34;</span>; <span style=color:#75715e>// 追記
+</span><span style=color:#75715e></span>
+<span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#34;Header&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#34;ヘッダーの初期表示&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>wrapper</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>shallow</span>(&lt;<span style=color:#f92672>Header</span> /&gt;)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>wrapper</span>.<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h1&#39;</span>).<span style=color:#a6e22e>text</span>()).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#34;Todo App&#34;</span>)
+  })
+})
+</code></pre></div><p>このファイルを保存してテストを実行すると、テストが無事通っていることがわかると思います。</p>
+<pre tabindex=0><code>Watch Usage: Press w to show more.
+ PASS  src/__tests__/components/Header.test.tsx
+  Header
+    ✓ ヘッダーの初期表示 (6 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        0.579 s, estimated 1 s
+
+</code></pre><p>最初のテストが通りました！おめでとうございます。</p>
+<h2 id=画面の表示>
+画面の表示
+<a class=anchor href=#%e7%94%bb%e9%9d%a2%e3%81%ae%e8%a1%a8%e7%a4%ba>#</a>
+</h2>
+<p>Headerは作りましたがまだReactアプリに組み込んでいないため、まだブラウザ上ではなにも表示されていません。
+次に画面に表示するようにしてみましょう。</p>
+<p>コンポーネントのときと同じように__tests__配下にpagesディレクトリを作成し、<code>Home.test.tsx</code>を作成します。
+同様にsrc/pages配下に<code>Home.tsx</code>を作成しましょう。</p>
+<pre tabindex=0><code>src
+├── App.tsx
+├── __tests__
+│     ├── components
+│     │     └── Header.test.tsx
+│     └── pages
+│         └── Home.test.tsx
+├── components
+│     └── Header.tsx
+├── features
+├── index.css
+├── index.tsx
+├── pages
+│     └── Home.tsx
+├── react-app-env.d.ts
+├── setupTests.ts
+└── stores
+    ├── hooks.ts
+    └── store.ts
+</code></pre><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// Home.test.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>shallow</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;enzyme&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Home</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../../pages/Home&#34;</span>;
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Header</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../../components/Header&#34;</span>;
+
+<span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#34;Home画面&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#34;ホーム画面の初期表示&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>wrapper</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>shallow</span>(&lt;<span style=color:#f92672>Home</span> /&gt;)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>wrapper</span>.<span style=color:#a6e22e>find</span>(<span style=color:#a6e22e>Header</span>).<span style=color:#a6e22e>exists</span>()).<span style=color:#a6e22e>toEqual</span>(<span style=color:#66d9ef>true</span>)
+  })
+})
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// Home.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Header</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../components/Header&#34;</span>;
+
+<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Home</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> (
+  &lt;<span style=color:#f92672>div</span>&gt;
+    &lt;<span style=color:#f92672>Header</span>/&gt;
+  &lt;/<span style=color:#f92672>div</span>&gt;
+)
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>Home</span>
+</code></pre></div><p>Home.test.tsxと、Home.tsxはそれぞれこのようにしてみました。
+先程のテストとは違ってHeaderコンポーネントを表示していることを確認するテストになっています。
+これも問題なく通ると思います。</p>
+<p>この状態でApp.tsxを以下のように変更してみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Home</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;./pages/Home&#34;</span>;
+
+<span style=color:#66d9ef>function</span> <span style=color:#a6e22e>App() {</span>
+  <span style=color:#66d9ef>return</span> (
+    &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;App&#34;</span>&gt;
+      &lt;<span style=color:#f92672>Home</span> /&gt;
+    &lt;/<span style=color:#f92672>div</span>&gt;
+  )
+}
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>App</span>
+</code></pre></div><p><code>npm run start</code>を実行して <a href=https://localhost:3000>https://localhost:3000</a> にアクセスしてみましょう。</p>
+<p><img src=home_initial.jpg alt=ホーム画面></p>
+<p>TodoAppという文字列が表示されていたら成功です！</p>
+<h2 id=デザインの適用>
+デザインの適用
+<a class=anchor href=#%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3%e3%81%ae%e9%81%a9%e7%94%a8>#</a>
+</h2>
+<p>このままだと寂しいのでHeaderにデザインを適用してみましょう。
+Tailwind CSSでは予め定義されたclass名を使ってデザインを適用していきます。
+例えばmarginを設定したい場合は該当のDOMに<code>m-1</code>といったクラス名を適用したらいいですし、
+文字の色を変えたい場合は<code>text-red-500</code>のようなクラス名を適用します。
+どのようなCSS定義があるかは <code>https://tailwindcss.com/docs</code> を参照してください。</p>
+<p>実際にデザインをヘッダーに適用していきましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// Header.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Header</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> (
+  &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;flex items-center bg-green-500 p-6&#34;</span>&gt;
+    &lt;<span style=color:#f92672>h1</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;font-semibold text-xl text-white tracking-tight&#34;</span>&gt;<span style=color:#a6e22e>Journal</span> <span style=color:#a6e22e>App</span>&lt;/<span style=color:#f92672>h1</span>&gt;
+  &lt;/<span style=color:#f92672>div</span>&gt;
+)
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>Header</span>
+</code></pre></div><p>Header.tsxをこのように変更してみました。</p>
+<p><img src=home_apply_design.jpg alt=ヘッダーにデザイン適用></p>
+<p>ヘッダーに背景色をつけて、Headerの文字を白に、そして大きくしてみました。
+一気に華やかになってきましたね。</p>
+<p>ここまでのソースコードは <a href=https://github.com/Onebase-Fujitsu/todo-app-client/tree/step4>https://github.com/Onebase-Fujitsu/todo-app-client/tree/step4</a> に置いてあります。</p>
+<hr>
+<p>一日目はクライアントアプリの環境構築と最初の画面表示までいきました。
+環境構築はアプリ構築になれている方がやらないとかなり難しい部分だったりします。
+というのもアプリの初期構築はそんなに回数こなすものでもないためです。</p>
+<p>特にReactは最初の環境構築がcreate-react-appで簡略化されたとはいえ難しいです。
+まだReactのフレームワークも触りの部分しか扱っていません。
+ここまで、躓くことが無いように頑張ってください。</p>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#アプリケーションの要件>アプリケーションの要件</a></li>
+<li><a href=#アーキテクチャと開発言語フレームワークの決定>アーキテクチャと開発言語、フレームワークの決定</a></li>
+<li><a href=#プロジェクトの構成>プロジェクトの構成</a></li>
+<li><a href=#クライアントの環境構築>クライアントの環境構築</a>
+<ul>
+<li><a href=#reactアプリの作成>reactアプリの作成</a></li>
+<li><a href=#eslintの設定>eslintの設定</a></li>
+<li><a href=#prettierの設定>prettierの設定</a></li>
+<li><a href=#css-in-jsの設定>css in JSの設定</a></li>
+<li><a href=#テスト環境の整備>テスト環境の整備</a></li>
+</ul>
+</li>
+<li><a href=#ヘッダーの作成>ヘッダーの作成</a>
+<ul>
+<li><a href=#テストの作成>テストの作成</a></li>
+<li><a href=#headerの実装>Headerの実装</a></li>
+</ul>
+</li>
+<li><a href=#画面の表示>画面の表示</a></li>
+<li><a href=#デザインの適用>デザインの適用</a></li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>

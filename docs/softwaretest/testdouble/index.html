@@ -153,6 +153,17 @@
 </ul>
 </li>
 <li>
+<input type=checkbox id=section-a16dbb8fa8b2df15e7da65eb13e2d51a class=toggle>
+<label for=section-a16dbb8fa8b2df15e7da65eb13e2d51a class="flex justify-between">
+<a role=button>アジャイルの実践</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/>1日目</a>
+</li>
+</ul>
+</li>
+<li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/>おわりに</a>
 </li>
 <li>
@@ -740,7 +751,7 @@ Controllerが引数を正しくセットしてServiceのメソッドを呼んで
 最初の2行はシンプルにTodoAppControllerのcreateTasks()を呼んでいるだけです。</p>
 <p>さてその次に、<code>verify(appService).createNewTask(argCaptor.capture());</code>
 という記述が出てきました。</p>
-<pre><code>@Captor
+<pre tabindex=0><code>@Captor
 private ArgumentCaptor&lt;NewTask&gt; argCaptor;
 </code></pre><p>キャプチャをここで仕込んでいます。
 あとはキャプチャから値を取り出して、それがControllerのcreateTask()に与えた引数と一致しているかどうかを検証しているだけです。</p>
@@ -1016,7 +1027,7 @@ IDEを使っていない方はTerminalで</p>
 </code></pre></div><p><code>@Nested</code>を使って複数のテストをグルーピングできるようにしました。<code>@BeforeEach</code>を使ってテストの前にタスクを1件作る操作を入れています。</p>
 <p>さて、このテストは通るのですが、このテストは <strong>タスクが作られた時間とタスクが更新された時間を評価していません。</strong>
 試しに、最後のテストを以下のように変更してみてテストを実行してみてください。</p>
-<pre><code>@Test
+<pre tabindex=0><code>@Test
 public void タスクがあるとその情報を取得できる() {
   ResponseEntity&lt;Task[]&gt; response = restTemplate.exchange(&quot;/tasks&quot;, HttpMethod.GET, HttpEntity.EMPTY, Task[].class);
   assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -1125,7 +1136,7 @@ public void タスクがあるとその情報を取得できる() {
 Mockを作ってDIコンテナに登録して、テストを実行するときに自動で@Autowiredしてくれます。
 めちゃくちゃ便利なんですがSpring Framework独自の機能だということに注意してください。</p>
 <p>さてここで以下のような記述が登場しました。</p>
-<pre><code>@BeforeEach
+<pre tabindex=0><code>@BeforeEach
 public void setup() {
     doReturn(OffsetDateTime.parse(&quot;2021-08-19T15:00:00+09:00&quot;).toInstant()).when(clockService).now();
 }
@@ -1133,7 +1144,7 @@ public void setup() {
 つまり、一連のテストではclockServiceInterfaceのnow()メソッドを呼び出すと、日本時間の2021年08月19日15:00:00を返すと宣言したわけです。
 こうすると、いつテストを実行してもnow()は決まった時間になります。
 つまり再現性の高いテストが書けるようにようになったということです。</p>
-<pre><code>@Test
+<pre tabindex=0><code>@Test
 public void タスクがあるとその情報を取得できる() {
   ResponseEntity&lt;Task[]&gt; response = restTemplate.exchange(&quot;/tasks&quot;, HttpMethod.GET, HttpEntity.EMPTY, Task[].class);
   assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -1265,7 +1276,7 @@ public void タスクがあるとその情報を取得できる() {
   <span style=color:#f92672>}</span>
 <span style=color:#f92672>}</span>
 </code></pre></div><p>30分後にタスクを完了するテストを書いてみました。</p>
-<pre><code>doReturn(clockService.now().plus(30, ChronoUnit.MINUTES)).when(clockService).now();
+<pre tabindex=0><code>doReturn(clockService.now().plus(30, ChronoUnit.MINUTES)).when(clockService).now();
 </code></pre><p>これがポイントです。すでにStubされているclockService.now()を上書きしてるんですね。
 その状態でfinishAPIを呼んでいるわけです。</p>
 <p>テストと実行すると、ちゃんとupdatedAtが30分後の2021年8月19日の15時30分になっているのがわかると思います。
@@ -1395,11 +1406,11 @@ public void タスクがあるとその情報を取得できる() {
   <span style=color:#f92672>}</span>
 <span style=color:#f92672>}</span>
 </code></pre></div><p>こんな感じです。<code>@SpyBean</code>というアノテーションがでてきました。</p>
-<pre><code>@SpyBean
+<pre tabindex=0><code>@SpyBean
 private TodoAppServiceInterface todoAppRepository;
 </code></pre><p>これも<code>@MockBean</code>と同じようにSpring Frameworkが提供している機能で、
 MockitoでSpyオブジェクトを作ってDIコンテナに登録、テスト実行時に依存性注入してくれる非常に便利な機能です。</p>
-<pre><code>@Nested
+<pre tabindex=0><code>@Nested
 class DBアクセスエラー {
   @Test
   public void 取得メソッドでDBアクセスエラーが発生するとInternalServerErrorを返す() {
@@ -1543,7 +1554,7 @@ class DBアクセスエラー {
   <span style=color:#f92672>}</span>
 <span style=color:#f92672>}</span>
 </code></pre></div><p>最後に追加したのは作成処理を呼んだときにDBアクセス例外が発生したときのテストです。</p>
-<pre><code>doThrow(new DataAccessException(&quot;...&quot;){}).when(todoAppRepository).createNewTask(any(), any());
+<pre tabindex=0><code>doThrow(new DataAccessException(&quot;...&quot;){}).when(todoAppRepository).createNewTask(any(), any());
 </code></pre><p>any()というのはMockitoが提供している引数のMatcherです。
 なんでもいいよということですね。</p>
 <p>例えば、any()ではなく、特定の値が引数で与えられたら例外をスローするといった挙動もStubすることができます！</p>
