@@ -230,9 +230,10 @@ extends: [
 npm install --save-dev prettier
 ```
 
-client配下に`.prettierrc`ファイルを作成します。
+プロジェクトルートディレクトリ配下に`.prettierrc`ファイルを作成します。
 
 ```
+// .prettierrc
 {
     "singleQuote": true,
     "tabWidth": 2,
@@ -415,44 +416,12 @@ npm run start
 ### テスト環境の整備
 
 次にクライアントのテスト環境を整備していきます。
-2021年9月のreactの最新版は17.0.2ですが、最新版はテストに必要なenzymeがまだ対応していないため、
-今回は16.14.0で実装していこうと思います。
+ReactのTestライブラリとして著名なものにenzymeとReact Testing Libraryがあります。
+どちらを使ってもいいのですが、enzymeはreact16までしか現在対応していないため、
+今回はReact Testing Libraryを採用することにします。
+React Testing Libraryはcreate-react-app時に一緒に導入されているため、個別のインストールや設定作業は不要で使用できます。
 
-まずpackage.jsonのreactのバージョンを変更
-
-```json
-{
-  "dependencies": 
-    ...
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    ...
-}
-```
-
-次にテストに必要なライブラリを導入します。
-ここでは以下のライブラリを導入します。
-
-- enzyme
-- Sinon.js
-
-```shell
-npm install --save-dev enzyme @types/enzyme sinon @types/sinon enzyme-adapter-react-16 @types/enzyme-adapter-react-16
-```
-
-enzymeはAirbnb社が開発している、Reactのテストユーティリティで、Reactコンポーネントを仮想的にレンダリングすることができます。
-Sinon.jsはJavascriptで最も標準的なテストダブルのライブラリです。
-
-```typescript
-// setupTests.ts
-import {configure} from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
-
-configure({adapter: new Adapter()})
-```
-
-導入できたらsetupTest.tsを上記のように書き換えます。
-しかし、importでDevDependenciesのライブラリを読み込んでいるためeslintがエラーを出しています。これは無効化してしまいましょう。
+次にimportでDevDependenciesのライブラリを読み込んでいるためeslintがエラーを出してしまいますので、これはoffにしてしまいます。
 
 ```javascript
 // .eslintrc.js
@@ -482,7 +451,7 @@ module.exports = {
 };
 ```
 
-create-react-appは標準でテストランナーにJestを採用しているのですが、このままではeslintがJestの処理に対してエラーを出すため、これを修正していきます。
+create-react-appは標準でテストランナーにJestを採用しているのですが、このままではeslintがJestの処理に対してエラーを出すため、これも修正していきます。
 まず、eslint-plugin-jestを導入。
 
 ```shell
@@ -514,10 +483,6 @@ Jestはsrcディレクトリに直下に`__tests__`ディレクトリを作る�
 
 どちらでもいいのですが、今回は前者の`__tests__`ディレクトリを作成する形式でいきます。
 
-これで準備は完了です。ここまでのソースコードは
-[https://github.com/Onebase-Fujitsu/todo-app-client/tree/step3](https://github.com/Onebase-Fujitsu/todo-app-client/tree/step3)
-から確認できます。
-
 ## ヘッダーの作成
 
 ### テストの作成
@@ -542,14 +507,18 @@ src
     └── store.ts
 ```
 
-```typescript
+```typescript jsx
 // Header.test.tsx
-import {shallow} from 'enzyme'
+import {cleanup, render, screen} from "@testing-library/react";
 
 describe("Header", () => {
+  afterEach(() => {
+    cleanup()
+  })
+
   it("ヘッダーの初期表示", () => {
-    const wrapper = shallow(<Header />)
-    expect(wrapper.find('h1').text()).toEqual("Todo App")
+    render(<Header />)
+    expect(screen.getByText('Todo App')).toBeInTheDocument()
   })
 })
 ```
@@ -570,13 +539,13 @@ Header
 
     ReferenceError: Header is not defined
 
-      3 | describe("Header", () => {
-      4 |   it("ヘッダーの初期表示", () => {
-    > 5 |     const wrapper = shallow(<Header />)
-        |                              ^
-      6 |     expect(wrapper.find('h1').text()).toEqual("Todo App")
-      7 |   })
-      8 | })
+       7 |
+       8 |   it("ヘッダーの初期表示", () => {
+    >  9 |     render(<Header />)
+         |             ^
+      10 |     expect(screen.getByText('Todo App')).toBeInTheDocument()
+      11 |   })
+      12 | })
 
       at Object.<anonymous> (src/__tests__/components/Header.test.tsx:5:30)
 
@@ -603,13 +572,17 @@ export default Header
 Header.tsxを作ったら、Header.test.tsxを開き、先程作ったHeaderコンポーネントをインポートしてみましょう。
 
 ```typescript jsx
-import {shallow} from 'enzyme'
-import Header from "../../components/Header"; // 追記
+import {cleanup, render, screen} from "@testing-library/react";
+import Header from "../../components/Header";
 
 describe("Header", () => {
+  afterEach(() => {
+    cleanup()
+  })
+
   it("ヘッダーの初期表示", () => {
-    const wrapper = shallow(<Header />)
-    expect(wrapper.find('h1').text()).toEqual("Todo App")
+    render(<Header />)
+    expect(screen.getByText('Todo App')).toBeInTheDocument()
   })
 })
 ```
@@ -661,14 +634,18 @@ src
 
 ```typescript jsx
 // Home.test.tsx
-import {shallow} from 'enzyme'
+import {cleanup, render, screen} from "@testing-library/react";
 import Home from "../../pages/Home";
-import Header from "../../components/Header";
 
 describe("Home画面", () => {
+
+  afterEach(() => {
+    cleanup()
+  })
+
   it("ホーム画面の初期表示", () => {
-    const wrapper = shallow(<Home />)
-    expect(wrapper.find(Header).exists()).toEqual(true)
+    render(<Home />)
+    expect(screen.getByText("Todo App")).toBeInTheDocument()
   })
 })
 ```
@@ -726,7 +703,7 @@ Tailwind CSSでは予め定義されたclass名を使ってデザインを適用
 // Header.tsx
 const Header = () => (
   <div className="flex items-center bg-green-500 p-6">
-    <h1 className="font-semibold text-xl text-white tracking-tight">Journal App</h1>
+    <h1 className="font-semibold text-xl text-white tracking-tight">Todo App</h1>
   </div>
 )
 
