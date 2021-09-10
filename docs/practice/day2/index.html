@@ -2,12 +2,12 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="アジャイル開発に求められるソフトウェア設計 # アジャイル開発では開発の途中で求められるソフトウェア仕様がどんどん変化します。 そのため、変化に強">
-<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="アジャイル開発に求められるソフトウェア設計">
-<meta property="og:description" content="アジャイル開発に求められるソフトウェア設計 # アジャイル開発では開発の途中で求められるソフトウェア仕様がどんどん変化します。 そのため、変化に強">
+<meta name=description content="２日目 # ２日目はClientがServerに対してHTTPリクエストを実行するところ、そして、Serverの初期設定をして簡単なAPIを作っ">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="2日目">
+<meta property="og:description" content="２日目 # ２日目はClientがServerに対してHTTPリクエストを実行するところ、そして、Serverの初期設定をして簡単なAPIを作っ">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/"><meta property="article:section" content="docs">
-<title>アジャイル開発に求められるソフトウェア設計 | Fujitsu Agile Development Guide</title>
+<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/"><meta property="article:section" content="docs">
+<title>2日目 | Fujitsu Agile Development Guide</title>
 <link rel=manifest href=/agile-dev-guide/manifest.json>
 <link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
@@ -108,13 +108,13 @@
 </ul>
 </li>
 <li>
-<input type=checkbox id=section-6668e94793f2c3410fae208f25d1f417 class=toggle checked>
+<input type=checkbox id=section-6668e94793f2c3410fae208f25d1f417 class=toggle>
 <label for=section-6668e94793f2c3410fae208f25d1f417 class="flex justify-between">
 <a role=button>ソフトウェア設計</a>
 </label>
 <ul>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/ class=active>アジャイル開発に求められるソフトウェア設計</a>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/>アジャイル開発に求められるソフトウェア設計</a>
 </li>
 <li>
 <input type=checkbox id=section-fd21b9cd7e31d8e1d2ba14b32452065e class=toggle>
@@ -153,7 +153,7 @@
 </ul>
 </li>
 <li>
-<input type=checkbox id=section-a16dbb8fa8b2df15e7da65eb13e2d51a class=toggle>
+<input type=checkbox id=section-a16dbb8fa8b2df15e7da65eb13e2d51a class=toggle checked>
 <label for=section-a16dbb8fa8b2df15e7da65eb13e2d51a class="flex justify-between">
 <a role=button>アジャイルの実践</a>
 </label>
@@ -162,7 +162,7 @@
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/>1日目</a>
 </li>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/>2日目</a>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/ class=active>2日目</a>
 </li>
 </ul>
 </li>
@@ -183,33 +183,33 @@
 <label for=menu-control>
 <img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu>
 </label>
-<strong>アジャイル開発に求められるソフトウェア設計</strong>
+<strong>2日目</strong>
 <label for=toc-control>
 <img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents">
 </label>
 </div>
 <aside class="hidden clearfix">
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#reduxと非同期処理>Reduxと非同期処理</a></li>
+</ul>
+</li>
+</ul>
+</nav>
 </aside>
 </header>
-<article class=markdown><h1 id=アジャイル開発に求められるソフトウェア設計>
-アジャイル開発に求められるソフトウェア設計
-<a class=anchor href=#%e3%82%a2%e3%82%b8%e3%83%a3%e3%82%a4%e3%83%ab%e9%96%8b%e7%99%ba%e3%81%ab%e6%b1%82%e3%82%81%e3%82%89%e3%82%8c%e3%82%8b%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2%e8%a8%ad%e8%a8%88>#</a>
+<article class=markdown><h1 id=２日目>
+２日目
+<a class=anchor href=#%ef%bc%92%e6%97%a5%e7%9b%ae>#</a>
 </h1>
-<p>アジャイル開発では開発の途中で求められるソフトウェア仕様がどんどん変化します。
-そのため、変化に強い「柔軟な」設計が求められます。</p>
-<p>変化に強い柔軟な設計、実装ができるためにはSOLID原則や、デザインパターンといった、
-オブジェクト指向プログラミングの原則を知り、それを活用できることが非常に大事です。</p>
-<p>先のソフトウェアテストの章と比べると、難しく退屈な説明が続くことになりますが、
-この章こそアジャイルデベロッパーが抑えておくべきもっとも大事な内容になります。</p>
-<p>この章はSOLID原則などの「さわり」を解説しますが、
-この内容だけで本が何冊も出版されているような領域であり、とてもここだけですべてを解説するのは難しい章でもあります。</p>
-<p>この章を読んで、アジャイル開発に挑戦したいと思われた方はぜひ <a href=https://asciidwango.jp/post/176293765750/clean-architecture>「Clean Architecture」</a> を読まれてみてください。
-きっと様々な学びがあるはずです。</p>
-<p>では早速SOLID原則の最初の”S”である単一責任の原則(SRP)から見てみましょう。</p>
-<a href=/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/ class=book-btn>
-単一責任の原則
-</a>
+<p>２日目はClientがServerに対してHTTPリクエストを実行するところ、そして、Serverの初期設定をして簡単なAPIを作って見るところをやってみましょう。</p>
+<h3 id=reduxと非同期処理>
+Reduxと非同期処理
+<a class=anchor href=#redux%e3%81%a8%e9%9d%9e%e5%90%8c%e6%9c%9f%e5%87%a6%e7%90%86>#</a>
+</h3>
+<p>ここからだいぶ難しくなると思いますが、頑張っていきましょう。</p>
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
@@ -222,7 +222,15 @@
 </div>
 <aside class=book-toc>
 <div class=book-toc-content>
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li>
+<ul>
+<li><a href=#reduxと非同期処理>Reduxと非同期処理</a></li>
+</ul>
+</li>
+</ul>
+</nav>
 </div>
 </aside>
 </main>
