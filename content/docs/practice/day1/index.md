@@ -48,6 +48,26 @@ Javascriptとそのスーパーセットである、Typescriptはプロジェク
 
 ## クライアントの環境構築
 
+{{< hint warning >}}
+
+**ハンズオンを始めるにあたって**
+
+ハンズオン形式で細かくソースコードを提示しながらアプリケーションを作っていきますが、
+それをただ写すだけでは意味がありませんし、それがあなたの身につくことはありません。
+ましてや、眺めているだけでは決してあなたの身につくことないでしょう。
+
+このサンプルアプリケーションではSpring Framework(Spring Boot)や、
+React.jsやReduxその他多くのOSSを使用していますが、わからないことを都度 **各ライブラリやフレームワークの公式のリファレンスや [MDN](https://developer.mozilla.org/ja/docs/Web)** を読み、
+理解するよう努めることがとても大事です。
+
+**公式のリファレンス以上に参考になるドキュメントはWeb上のどこにもない** ということを肝に銘じ、
+公式のリファレンスを読めるようになりましょう。
+
+コピペでしかソースコードを書けないエンジニアの特徴に **エラーメッセージを読もうとしない**、**公式のドキュメントを読もうとしない**というのがあります。
+そうならないようにしましょう。
+
+{{< /hint >}}
+
 ### reactアプリの作成
 
 ```shell
@@ -293,10 +313,31 @@ Material UIはコンポーネントが提供されているため、さっと見
 Tailwind CSSやstyled-componentsなどはその点自由にデザインを組めますが、
 両者でコーディングスタイルは大きく異なっています。
 
-個人的にはTailwind CSSを押しているため今回はTailwind CSSを導入してみます。
+個人的にはTailwind CSSを推しているため今回はTailwind CSSを導入してみます。
 
-導入方法はこちらに書いてあるので、これに習って導入してみましょう。
-https://tailwindcss.com/docs/guides/create-react-app
+{{< hint info >}}
+
+**なぜTailwind CSS?**
+
+制約こそデザインシステムだというライブラリの考え方に共感するところが多いからです。
+Tailwind CSSは予め用意されたクラス名定義を組み合わせでデザインをしていくわけですが、
+その定義から外れたようなデザインがとてもしにくくなっているのが特徴です。
+
+アジャイル開発では最初にデザインシステムがない状態から始めることが一般的です。
+その状態において自由度の高すぎるCSS記述はアプリデザインの一貫性の欠如をもたらします。
+
+自由な記述ができないことで、デザインに一貫性を保ち、それがデザインシステムになっていくという思想は、非常にアジャイル的だと筆者は思っています。
+
+styled-componentはTailwind CSSと比較してとにかく自由です。
+どんなデザインでも普通のHTML + CSS(SASS)と同じように実装できるでしょう。
+そういった部分に価値観を置くのであれば、styled-componentsの採用も考えていいでしょう。
+将来自由度の高いデザイン記述が必要になる可能性は無いとは言えません。プロジェクトの特性に合わせて選択しましょう。
+
+{{< /hint >}}
+
+Tailwind CSSの導入方法はこちらに書いてあるので、これに習って導入してみましょう。
+
+[https://tailwindcss.com/docs/guides/create-react-app](https://tailwindcss.com/docs/guides/create-react-app)
 
 tailwind cssのインストールコマンドをまず叩いて、
 
@@ -717,7 +758,7 @@ Header.tsxをこのように変更してみました。
 ヘッダーに背景色をつけて、Headerの文字を白に、そして大きくしてみました。
 一気に華やかになってきましたね。
 
-ここまでのソースコードは [https://github.com/Onebase-Fujitsu/todo-app-client/tree/step4](https://github.com/Onebase-Fujitsu/todo-app-client/tree/step4) に置いてあります。
+ここまでのソースコードは [https://github.com/Onebase-Fujitsu/todo-app-client/tree/step3](https://github.com/Onebase-Fujitsu/todo-app-client/tree/step3) に置いてあります。
 
 ---
 
