@@ -35,6 +35,7 @@ npm install react-router-dom @types/react-router-dom
 そして、App.tsxを以下のように編集してみましょう
 
 ```typescript jsx
+// App.tsx
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Home from './pages/Home'
 

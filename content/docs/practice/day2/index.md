@@ -23,13 +23,14 @@ redux-toolkitはそれをReactで使用できるようにした [React-Redux](ht
 reduxを便利に使用するための仕組みを同梱したものです。
 
 Reduxについては公式のドキュメントを読んでください。Reduxは非常に難解なライブラリの1つですが、使いこなすと非常に強力です。
-ドキュメントも非常に量が多いですが、この作業を始める前に最低限、以下を読んでおくことをおすすめします
+ドキュメントも非常に量が多いですが、このセクションを始める前に最低限、以下を読んでおくことをおすすめします
 
 - [https://redux.js.org/tutorials/essentials/part-1-overview-concepts](https://redux.js.org/tutorials/essentials/part-1-overview-concepts)
   - この記事を起因とする一連のRedux Essential
 - [https://redux-toolkit.js.org/usage/usage-with-typescript](https://redux-toolkit.js.org/usage/usage-with-typescript)
 - [https://redux.js.org/usage/writing-tests](https://redux.js.org/usage/writing-tests)
 - [https://redux.js.org/style-guide/style-guide](https://redux.js.org/style-guide/style-guide)
+  - ベストプラクティス。メチャクチャ大事。
 
 {{< hint info >}}
 **Reduxを最初から入れるべきか?**
