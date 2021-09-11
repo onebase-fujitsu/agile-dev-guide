@@ -191,11 +191,34 @@
 <aside class="hidden clearfix">
 <nav id=TableOfContents>
 <ul>
-<li>
+<li><a href=#reduxの導入>Reduxの導入</a></li>
+<li><a href=#非同期通信のテストと実装>非同期通信のテストと実装</a>
 <ul>
-<li><a href=#reduxと非同期処理>Reduxと非同期処理</a></li>
+<li><a href=#非同期通信のテスト>非同期通信のテスト</a></li>
+<li><a href=#非同期通信の実装>非同期通信の実装</a></li>
 </ul>
 </li>
+<li><a href=#reducerのテストと実装>Reducerのテストと実装</a>
+<ul>
+<li><a href=#reducerの登録>Reducerの登録</a></li>
+<li><a href=#reducerのテスト>Reducerのテスト</a></li>
+<li><a href=#reducerの実装>Reducerの実装</a></li>
+</ul>
+</li>
+<li><a href=#タスク一覧表示コンポーネントのテストと実装>タスク一覧表示コンポーネントのテストと実装</a>
+<ul>
+<li><a href=#タスク一覧表示コンポーネントのテスト>タスク一覧表示コンポーネントのテスト</a></li>
+<li><a href=#タスク一覧表示コンポーネントの実装>タスク一覧表示コンポーネントの実装</a></li>
+<li><a href=#redux-connected-componentsのテスト>Redux Connected Componentsのテスト</a></li>
+</ul>
+</li>
+<li><a href=#ホーム画面への組み込み>ホーム画面への組み込み</a>
+<ul>
+<li><a href=#ホーム画面のテスト>ホーム画面のテスト</a></li>
+<li><a href=#ホーム画面の実装>ホーム画面の実装</a></li>
+</ul>
+</li>
+<li><a href=#クライアントの動作確認>クライアントの動作確認</a></li>
 </ul>
 </nav>
 </aside>
@@ -204,12 +227,648 @@
 ２日目
 <a class=anchor href=#%ef%bc%92%e6%97%a5%e7%9b%ae>#</a>
 </h1>
-<p>２日目はClientがServerに対してHTTPリクエストを実行するところ、そして、Serverの初期設定をして簡単なAPIを作って見るところをやってみましょう。</p>
-<h3 id=reduxと非同期処理>
-Reduxと非同期処理
-<a class=anchor href=#redux%e3%81%a8%e9%9d%9e%e5%90%8c%e6%9c%9f%e5%87%a6%e7%90%86>#</a>
+<p>２日目はClientがServerに対してHTTPリクエストを実行するところ、そして、Serverの初期設定をして簡単なAPIを作って見るところをやってみましょう。
+ここからだいぶ難しくなると思いますが、頑張っていきましょう。</p>
+<h2 id=reduxの導入>
+Reduxの導入
+<a class=anchor href=#redux%e3%81%ae%e5%b0%8e%e5%85%a5>#</a>
+</h2>
+<p>今回一番最初に<code>create-react-app</code>コマンドを実行したときtemplateにredux-typescriptをしていたのを覚えてますでしょうか。</p>
+<pre tabindex=0><code>npx create-react-app todo-app-client --template redux-typescript --use-npm
+</code></pre><p>このtemplateにはすでに <a href=https://redux-toolkit.js.org/>redux-toolkit</a> を使用するのに必要なモジュールが含まれています。
+<a href=https://redux.js.org/>redux</a> は状態管理のライブラリですが、
+redux-toolkitはそれをReactで使用できるようにした <a href=https://react-redux.js.org/>React-Redux</a> や、
+reduxを便利に使用するための仕組みを同梱したものです。</p>
+<p>Reduxについては公式のドキュメントを読んでください。Reduxは非常に難解なライブラリの1つですが、使いこなすと非常に強力です。
+ドキュメントも非常に量が多いですが、この作業を始める前に最低限、以下を読んでおくことをおすすめします</p>
+<ul>
+<li><a href=https://redux.js.org/tutorials/essentials/part-1-overview-concepts>https://redux.js.org/tutorials/essentials/part-1-overview-concepts</a>
+<ul>
+<li>この記事を起因とする一連のRedux Essential</li>
+</ul>
+</li>
+<li><a href=https://redux-toolkit.js.org/usage/usage-with-typescript>https://redux-toolkit.js.org/usage/usage-with-typescript</a></li>
+<li><a href=https://redux.js.org/usage/writing-tests>https://redux.js.org/usage/writing-tests</a></li>
+<li><a href=https://redux.js.org/style-guide/style-guide>https://redux.js.org/style-guide/style-guide</a></li>
+</ul>
+<blockquote class="book-hint info">
+<p><strong>Reduxを最初から入れるべきか?</strong></p>
+<p>Reduxを最初からいれるべきかどうかというのは非常に議論が分かれる部分ですが、筆者は <strong>Reduxは最初から入れるべき</strong> という考えです。
+というのも、<strong>どのようなアプリであっても遅かれ早かれスケールします。</strong></p>
+<p>Reduxの導入を嫌煙する理由に導入コストが大きいというものがあります。
+しかしRedux-Toolkitの登場によってRedux導入のコストはかなり低く、楽に導入できるようになりました。</p>
+<p>ある程度アプリが大きくなった状態で後からReduxを入れるのはかなり作業量が大きくなり難しいです。
+それなら最初からReduxを前提としてアプリを書いたほうがいいだろうという考えです。</p>
+<p>Redux導入のコストは楽になりましたが、学習コストは依然として高いままです（これはReactも）。
+導入の際はプロジェクトメンバに使い方を事前に学習してもらうなどして臨むようにすると良いでしょう。</p>
+</blockquote>
+<h2 id=非同期通信のテストと実装>
+非同期通信のテストと実装
+<a class=anchor href=#%e9%9d%9e%e5%90%8c%e6%9c%9f%e9%80%9a%e4%bf%a1%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88%e3%81%a8%e5%ae%9f%e8%a3%85>#</a>
+</h2>
+<h3 id=非同期通信のテスト>
+非同期通信のテスト
+<a class=anchor href=#%e9%9d%9e%e5%90%8c%e6%9c%9f%e9%80%9a%e4%bf%a1%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a>
 </h3>
-<p>ここからだいぶ難しくなると思いますが、頑張っていきましょう。</p>
+<p>まず、トップ画面を開いたらタスクの一覧を取得して、取得できたタスク一覧を表示するという機能を作ってみましょう。
+Webブラウザには <a href=https://developer.mozilla.org/ja/docs/Web/API/Fetch_API>fetchAPI</a> という機能があります。
+ReactからfetchAPIを実行すると、指定したURLからリソースを取得することができます。</p>
+<p>しかし、今回はこのfetchAPIはしようせず、 <a href=https://axios-http.com/>axios</a> を導入します。
+axiosはnode.jsのHTTP Clientです。axiosの類似のライブラリとしては <a href=https://www.npmjs.com/package/isomorphic-fetch>isomorphic-fetch</a> などもあります。</p>
+<p>なぜブラウザ標準のAPIを使用しないかというと以下の理由からです。</p>
+<ul>
+<li>ブラウザによってfetchの実装に差異がある</li>
+<li>ブラウザの実装をMockしてテストする難しさ</li>
+</ul>
+<p>HTTP Clientをモックしてしまえば、どんなレスポンスもスタブとしてセットできるようになるので、開発がしやすくなります。</p>
+<p>まずはaxiosとモックライブラリであるaxios-mock-adapterを導入しましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>npm install axios @types/axios
+npm install --save-dev axios-mock-adapter
+</code></pre></div><p>さて、テストの実装をしていく前に今回の機能を実現するAPIを軽く設計しないといけません。
+ひとまず今回は<code>/todos</code>に対してGETすると以下のフォーマットのJSON文書が取得できるとします。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>[
+  {
+    <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#960050;background-color:#1e0010>number</span>,
+    <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#960050;background-color:#1e0010>string</span>,
+    <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#960050;background-color:#1e0010>boolean</span>
+  }
+]
+</code></pre></div><p>ルートが配列になっているJSONですね。エンベロープにくるむ(つまり最初にtodosのようなキーを作る)べきか、くるまない方がいいのかは議論が分かれるところですが、
+筆者は後者の方ががいいと考えています。<code>GET /todos</code>というエンドポイントからTodoを一覧で取得できることが明確だからです。</p>
+<p>さて、ではテストを書いていきましょう。
+<code>__test__</code>配下にfeaturesというディレクトリを作成し、<code>TodoApi.test.ts</code>というファイルを作成し、最初のテストを実装していきます。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// TodoApi.test.ts
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>MockAdapter</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios-mock-adapter&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>axios</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>getTodos</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../features/TodoApi&#39;</span>
+
+<span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;TodoApi&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>mock</span>: <span style=color:#66d9ef>MockAdapter</span>
+
+  <span style=color:#a6e22e>beforeEach</span>(() <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>mock</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>MockAdapter</span>(<span style=color:#a6e22e>axios</span>)
+  })
+
+  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>reset</span>()
+  })
+
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;get /todos&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>onGet</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>).<span style=color:#a6e22e>reply</span>(<span style=color:#ae81ff>200</span>, [
+      {
+        <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>1</span>,
+        <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title&#39;</span>,
+        <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>false</span>,
+      },
+    ])
+
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>response</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>getTodos</span>()
+
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#66d9ef>get</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>url</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>response</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>id</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#ae81ff>1</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>response</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>title</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;title&#39;</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>response</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>completed</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#66d9ef>false</span>)
+  })
+})
+</code></pre></div><p>最初のテストはこのようにしました。axios-mock-adapterでHTTP通信をモックしており、
+getTodo()を実行したときに、ちゃんと<code>/todo</code>に対してGetのリクエストをしていること。
+戻り値のJSONのパースがうまくいっていることを確認しています。</p>
+<h3 id=非同期通信の実装>
+非同期通信の実装
+<a class=anchor href=#%e9%9d%9e%e5%90%8c%e6%9c%9f%e9%80%9a%e4%bf%a1%e3%81%ae%e5%ae%9f%e8%a3%85>#</a>
+</h3>
+<p>テストが実装できたら、これを実装してみましょう。
+src配下にfeaturesというディレクトリを作成し、TodoApi.tsを作成します。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// TodoApi.ts
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>axios</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>Todo</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../stores/todoSlice&#39;</span>
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>getTodos</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>response</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>axios</span>.<span style=color:#66d9ef>get</span>&lt;<span style=color:#f92672>Todo</span><span style=color:#960050;background-color:#1e0010>[]</span>&gt;(<span style=color:#e6db74>&#39;/todos&#39;</span>)
+  <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>data</span>
+}
+</code></pre></div><p>また、src配下のstoresに<code>todoSlice.ts</code>というファイルを作りましょう。いったん、Todoのインタフェースだけ定義してあげます。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// todoSlice.ts
+</span><span style=color:#75715e></span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>Todo</span> {
+  <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>number</span>
+  <span style=color:#a6e22e>title</span>: <span style=color:#66d9ef>string</span>
+  <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>boolean</span>
+}
+</code></pre></div><p>実装はこのようになりました。ひとまずこれでAPIのテストは通るはずです。
+テストが通ったのを確認したら次のステップに行きましょう。</p>
+<h2 id=reducerのテストと実装>
+Reducerのテストと実装
+<a class=anchor href=#reducer%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88%e3%81%a8%e5%ae%9f%e8%a3%85>#</a>
+</h2>
+<p>さて、APIの利用準備が整ったらReducerを作っていきましょう。ReducerとはReduxのStateを変更する関数のことです。
+ReduxではStateを直接変更することは許されておらず、必ずReducerを通じて変更しなければなりません。</p>
+<p>先程、Todo一覧をGetする非同期処理を実装しましたが、その非同期処理を呼び、戻り地をStateに反映する処理を実装してみましょう。</p>
+<h3 id=reducerの登録>
+Reducerの登録
+<a class=anchor href=#reducer%e3%81%ae%e7%99%bb%e9%8c%b2>#</a>
+</h3>
+<p>Redux-ToolkitではSliceという概念があります。これはStateとReducerを一纏めにしたものだと考えてください。
+まず、Reducerを作ります。</p>
+<p>先程作成したtodoSlice.tsに以下のように変更してください。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// todoSlice.ts
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>createAsyncThunk</span>, <span style=color:#a6e22e>createSlice</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@reduxjs/toolkit&#39;</span>
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>Todo</span> {
+  <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>number</span>
+  <span style=color:#a6e22e>title</span>: <span style=color:#66d9ef>string</span>
+  <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>boolean</span>
+}
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>todoSlice</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createSlice</span>({
+  <span style=color:#a6e22e>name</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;todos&#39;</span>,
+  <span style=color:#a6e22e>initialState</span><span style=color:#f92672>:</span> [] <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>Todo</span>[],
+  <span style=color:#a6e22e>reducers</span><span style=color:#f92672>:</span> {},
+})
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>todoSlice</span>
+</code></pre></div><p>ひとまず機能は実装せず、StateとしてTodo[]の配列を保持するという設定だけ入れました。
+その上で、store.tsにこれを登録してあげます。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// store.ts
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>configureStore</span>, <span style=color:#a6e22e>ThunkAction</span>, <span style=color:#a6e22e>Action</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@reduxjs/toolkit&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>todoSlice</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./todoSlice&#39;</span>   <span style=color:#75715e>// 追記
+</span><span style=color:#75715e></span>
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>store</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>configureStore</span>({
+  <span style=color:#a6e22e>reducer</span><span style=color:#f92672>:</span> {
+    <span style=color:#a6e22e>todos</span>: <span style=color:#66d9ef>todoSlice.reducer</span>,     <span style=color:#75715e>// 追記
+</span><span style=color:#75715e></span>  },
+})
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>type</span> <span style=color:#a6e22e>AppDispatch</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>typeof</span> <span style=color:#a6e22e>store</span>.<span style=color:#a6e22e>dispatch</span>
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>type</span> <span style=color:#a6e22e>RootState</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>ReturnType</span>&lt;<span style=color:#f92672>typeof</span> <span style=color:#a6e22e>store.getState</span>&gt;
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>type</span> <span style=color:#a6e22e>AppThunk</span>&lt;<span style=color:#f92672>ReturnType</span> <span style=color:#960050;background-color:#1e0010>=</span> <span style=color:#a6e22e>void</span>&gt; <span style=color:#f92672>=</span> <span style=color:#a6e22e>ThunkAction</span><span style=color:#f92672>&lt;</span>
+        <span style=color:#a6e22e>ReturnType</span>,
+        <span style=color:#a6e22e>RootState</span>,
+        <span style=color:#66d9ef>unknown</span>,
+        <span style=color:#a6e22e>Action</span>&lt;<span style=color:#f92672>string</span>&gt;
+        <span style=color:#f92672>&gt;</span>
+</code></pre></div><p>これでReducerを使う準備が整いました。ではテストを書いていきましょう。</p>
+<h3 id=reducerのテスト>
+Reducerのテスト
+<a class=anchor href=#reducer%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h3>
+<p><code>__tests__</code>配下に<code>store</code>ディレクトリを作成し、<code>todoSlice.test.ts</code>を作成してください。
+Reducerは <strong>変更前のStateに対して、Actionを実行し、変更後のStateを返す</strong> 純粋な関数ですのでテストは非常に簡単に書くことができます。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// todoSlice.test.ts
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>todoSlice</span>, {<span style=color:#a6e22e>getTodoAction</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../../stores/todoSlice&#34;</span>;
+
+<span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#34;todo reducer&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#34;initial state&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>todoSlice</span>.<span style=color:#a6e22e>reducer</span>(<span style=color:#66d9ef>undefined</span>, {<span style=color:#66d9ef>type</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>undefined</span>})).<span style=color:#a6e22e>toEqual</span>([])
+  })
+
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;get todo is pending&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>action</span> <span style=color:#f92672>=</span> {<span style=color:#66d9ef>type</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>getTodoAction</span>.<span style=color:#a6e22e>pending</span>.<span style=color:#66d9ef>type</span>}
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>state</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>todoSlice</span>.<span style=color:#a6e22e>reducer</span>([], <span style=color:#a6e22e>action</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>.<span style=color:#a6e22e>length</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#ae81ff>0</span>)
+  })
+
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;get todo is fulfilled&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>action</span> <span style=color:#f92672>=</span> {
+      <span style=color:#66d9ef>type</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>getTodoAction</span>.<span style=color:#a6e22e>fulfilled</span>.<span style=color:#66d9ef>type</span>, <span style=color:#a6e22e>payload</span><span style=color:#f92672>:</span> [{
+        <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>1</span>,
+        <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;hoge&#39;</span>,
+        <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>false</span>
+      }]
+    }
+
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>state</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>todoSlice</span>.<span style=color:#a6e22e>reducer</span>([], <span style=color:#a6e22e>action</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>.<span style=color:#a6e22e>length</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#ae81ff>1</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>id</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#ae81ff>1</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>title</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;hoge&#39;</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>completed</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#66d9ef>false</span>)
+  })
+
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;get todo is rejected&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>action</span> <span style=color:#f92672>=</span> {<span style=color:#66d9ef>type</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>getTodoAction</span>.<span style=color:#a6e22e>rejected</span>.<span style=color:#66d9ef>type</span>}
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>state</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>todoSlice</span>.<span style=color:#a6e22e>reducer</span>([], <span style=color:#a6e22e>action</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>.<span style=color:#a6e22e>length</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#ae81ff>0</span>)
+  })
+})
+</code></pre></div><p>4つのテストを実装しました。
+最初のテストはSliceを作ったとき最初の初期状態が空の配列になることを確認しています。</p>
+<p>残る3つはGet /Todoの非同期処理に関わるテストで上から順番に</p>
+<ul>
+<li>非同期処理が実行中はStateの状態は変化しない</li>
+<li>非同期処理が完了したら取得した内容がそのままStateに反映される</li>
+<li>非同期処理がエラーだったらStateの状態は変化しない</li>
+</ul>
+<p>ことを確認しているテストです。ここまで大丈夫でしょうか。</p>
+<p>pending、fulfilled、rejectedとは？となるかもしれませんが、
+これはRedux-Toolkitで非同期処理を実装するのに使う、
+<a href=https://redux-toolkit.js.org/api/createAsyncThunk>createAsyncThunk</a> が自動で作成してくれるActionです。
+今回はgetTodoActionという名前のアクションを作成することにしました。</p>
+<p>このgetTodoActionはまだ実装されてませんが、先程featureに実装したAPIを呼び出すものになるのは明白ですので、
+<code>createAsyncThunk</code>を使用する前提でテストを記述しています。</p>
+<p>わからない所があれば都度公式のリファレンスやドキュメントを読んで理解してください。</p>
+<h3 id=reducerの実装>
+Reducerの実装
+<a class=anchor href=#reducer%e3%81%ae%e5%ae%9f%e8%a3%85>#</a>
+</h3>
+<p>それではReducerを実装してみましょう。ReduxのReducerでは通常副作用のある（つまりasync/awaitを含むような）処理を記述することはできません。
+そこで、使われるのが <a href=https://github.com/reduxjs/redux-thunk>redux-thunk</a> というmiddlewareです。
+createAsyncThunkを使うとThunkを使った処理が簡単に記述できます。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// todoSlice.ts
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>createAsyncThunk</span>, <span style=color:#a6e22e>createSlice</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@reduxjs/toolkit&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>getTodos</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../features/TodoApi&#39;</span>
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>Todo</span> {
+  <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>number</span>
+  <span style=color:#a6e22e>title</span>: <span style=color:#66d9ef>string</span>
+  <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>boolean</span>
+}
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>getTodoAction</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createAsyncThunk</span>&lt;<span style=color:#f92672>Todo</span><span style=color:#960050;background-color:#1e0010>[]</span>&gt;(
+        <span style=color:#e6db74>&#39;get /todos&#39;</span>,
+        <span style=color:#66d9ef>async</span> ()<span style=color:#f92672>:</span> <span style=color:#a6e22e>Promise</span>&lt;<span style=color:#f92672>Todo</span><span style=color:#960050;background-color:#1e0010>[]</span>&gt; <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>getTodos</span>()
+)
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>todoSlice</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createSlice</span>({
+  <span style=color:#a6e22e>name</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;todos&#39;</span>,
+  <span style=color:#a6e22e>initialState</span><span style=color:#f92672>:</span> [] <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>Todo</span>[],
+  <span style=color:#a6e22e>reducers</span><span style=color:#f92672>:</span> {},
+  <span style=color:#a6e22e>extraReducers</span><span style=color:#f92672>:</span> (<span style=color:#a6e22e>builder</span>) <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>builder</span>.<span style=color:#a6e22e>addCase</span>(<span style=color:#a6e22e>getTodoAction</span>.<span style=color:#a6e22e>fulfilled</span>, (<span style=color:#a6e22e>state</span>, <span style=color:#a6e22e>action</span>) <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>action</span>.<span style=color:#a6e22e>payload</span>)
+  },
+})
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>todoSlice</span>
+</code></pre></div><p>getTodoActionはこのように実装しました。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>getTodoAction</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createAsyncThunk</span>&lt;<span style=color:#f92672>Todo</span><span style=color:#960050;background-color:#1e0010>[]</span>&gt;(
+        <span style=color:#e6db74>&#39;get /todos&#39;</span>,
+        <span style=color:#66d9ef>async</span> ()<span style=color:#f92672>:</span> <span style=color:#a6e22e>Promise</span>&lt;<span style=color:#f92672>Todo</span><span style=color:#960050;background-color:#1e0010>[]</span>&gt; <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>getTodos</span>()
+)
+</code></pre></div><p>createAsyncThunkで非同期のActionを作成し、その中で先程作ったgetTodo()を呼んでPromise&lt;Todo[]>を返却するようにしています。
+作成したアクションをextraReducers（reducersではないので注意）に登録しているのが以下の部分です。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>todoSlice</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createSlice</span>({
+  <span style=color:#a6e22e>name</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;todos&#39;</span>,
+  <span style=color:#a6e22e>initialState</span><span style=color:#f92672>:</span> [] <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>Todo</span>[],
+  <span style=color:#a6e22e>reducers</span><span style=color:#f92672>:</span> {},
+  <span style=color:#a6e22e>extraReducers</span><span style=color:#f92672>:</span> (<span style=color:#a6e22e>builder</span>) <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>builder</span>.<span style=color:#a6e22e>addCase</span>(<span style=color:#a6e22e>getTodoAction</span>.<span style=color:#a6e22e>fulfilled</span>, (<span style=color:#a6e22e>state</span>, <span style=color:#a6e22e>action</span>) <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>action</span>.<span style=color:#a6e22e>payload</span>)
+  },
+})
+</code></pre></div><p>getTodoActionが正常に完了したときに新しいアクションをどうするかを記載しています。
+ここではstateがどのような状態であれ、getTodo()の戻り値(つまりaction.payload)を新しいstateとして返却するとしました。
+ひとまず、現状テストは通っているはずです。</p>
+<p>これでReducerの実装は終わりました。次に作成したSliceを使ってコンポーネントの描画をしてみましょう。</p>
+<h2 id=タスク一覧表示コンポーネントのテストと実装>
+タスク一覧表示コンポーネントのテストと実装
+<a class=anchor href=#%e3%82%bf%e3%82%b9%e3%82%af%e4%b8%80%e8%a6%a7%e8%a1%a8%e7%a4%ba%e3%82%b3%e3%83%b3%e3%83%9d%e3%83%bc%e3%83%8d%e3%83%b3%e3%83%88%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88%e3%81%a8%e5%ae%9f%e8%a3%85>#</a>
+</h2>
+<p>Reduxを使うことによる最大の利点はコンポーネント間の依存を小さくし、
+<strong>各コンポーネントを非常にシンプルな状態に保つことができること</strong> です。</p>
+<p>これからタスク一覧のコンポーネントを作成しますが、このコンポーネントはStateの状態にしたがって画面を描画するだけになります。
+すなわちテストの実装も非常に簡単です。</p>
+<h3 id=タスク一覧表示コンポーネントのテスト>
+タスク一覧表示コンポーネントのテスト
+<a class=anchor href=#%e3%82%bf%e3%82%b9%e3%82%af%e4%b8%80%e8%a6%a7%e8%a1%a8%e7%a4%ba%e3%82%b3%e3%83%b3%e3%83%9d%e3%83%bc%e3%83%8d%e3%83%b3%e3%83%88%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h3>
+<p><strong>tests</strong>/components配下にTodoList.test.tsxを作成しましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>//TodoList.test.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>screen</span>, <span style=color:#a6e22e>render</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+
+<span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;TodoList Component&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>cleanup</span>()
+  })
+
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;ステートが空ならリストも空&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>TodoList</span> /&gt;)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByRole</span>(<span style=color:#e6db74>&#39;list&#39;</span>).<span style=color:#a6e22e>hasChildNodes</span>()).<span style=color:#a6e22e>toEqual</span>(<span style=color:#66d9ef>false</span>)
+  })
+})
+</code></pre></div><p>最初のテストはこのようにしてみました。これを実行してみましょう。
+TodoListはまだ実装されていませんので、当然失敗するはずです。</p>
+<pre tabindex=0><code> FAIL  src/__tests__/components/TodoList.test.tsx
+  ● TodoList Component › ステートが空ならリストも空
+
+    ReferenceError: TodoList is not defined
+
+      19 |   // })
+      20 |   it('ステートが空ならリストも空', () =&gt; {
+    &gt; 21 |     render(&lt;TodoList /&gt;)
+         |             ^
+      22 |     expect(screen.getByRole('list').hasChildNodes()).toEqual(false)
+      23 |   })
+      24 | })
+
+      at Object.&lt;anonymous&gt; (src/__tests__/components/TodoList.test.tsx:21:13)
+</code></pre><h3 id=タスク一覧表示コンポーネントの実装>
+タスク一覧表示コンポーネントの実装
+<a class=anchor href=#%e3%82%bf%e3%82%b9%e3%82%af%e4%b8%80%e8%a6%a7%e8%a1%a8%e7%a4%ba%e3%82%b3%e3%83%b3%e3%83%9d%e3%83%bc%e3%83%8d%e3%83%b3%e3%83%88%e3%81%ae%e5%ae%9f%e8%a3%85>#</a>
+</h3>
+<p>ではコンポーネントを実装していきましょう。src/components配下にTodoList.tsxを作成します。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// TodoList.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>useSelector</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-redux&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>RootState</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../stores/store&#39;</span>
+
+<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>TodoList</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>todos</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>useSelector</span>((<span style=color:#a6e22e>state</span>: <span style=color:#66d9ef>RootState</span>) <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>state</span>.<span style=color:#a6e22e>todos</span>)
+
+  <span style=color:#66d9ef>return</span> (
+          &lt;<span style=color:#f92672>ul</span>&gt;
+            {<span style=color:#a6e22e>todos</span>.<span style=color:#a6e22e>map</span>((<span style=color:#a6e22e>todo</span>) <span style=color:#f92672>=&gt;</span> (
+                    &lt;<span style=color:#f92672>li</span> <span style=color:#a6e22e>key</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>todo</span>.<span style=color:#a6e22e>id</span>}&gt;{<span style=color:#a6e22e>todo</span>.<span style=color:#a6e22e>title</span>}&lt;/<span style=color:#f92672>li</span>&gt;
+            ))}
+          &lt;/<span style=color:#f92672>ul</span>&gt;
+  )
+}
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>TodoList</span>
+</code></pre></div><p>useSelectorはReduxのStateから情報を引き出す処理です。ここではstate.todosを読み込んでます。
+読み込んだtodosは配列ですので、1件ずつ表示しているだけです。
+コンポーネントが非常にシンプルになっているかとおもいます。</p>
+<h3 id=redux-connected-componentsのテスト>
+Redux Connected Componentsのテスト
+<a class=anchor href=#redux-connected-components%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h3>
+<p>さて、コンポーネントの実装は終わったので、これをテストしてみましょう。
+先程作成した、<code>TodoList.test.tsx</code>に<code>import TodoList from "../../components/TodoList";</code>を加えてテストを実行してみましょう。</p>
+<p>どうでしょう、成功したと思いきやまだ失敗しています。
+これはなぜかというと、このTodoListComponentは他のコンポーネントには依存してませんが、ReduxのStateに依存してますよね。</p>
+<p>一度index.tsxを見てみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>StrictMode</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>ReactDOM</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-dom&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>Provider</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-redux&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#e6db74>&#39;./index.css&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>App</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./App&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>store</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./stores/store&#39;</span>
+
+<span style=color:#a6e22e>ReactDOM</span>.<span style=color:#a6e22e>render</span>(
+  &lt;<span style=color:#f92672>StrictMode</span>&gt;
+    &lt;<span style=color:#f92672>Provider</span> <span style=color:#a6e22e>store</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>store</span>}&gt;
+      &lt;<span style=color:#f92672>App</span> /&gt;
+    &lt;/<span style=color:#f92672>Provider</span>&gt;
+  &lt;/<span style=color:#f92672>StrictMode</span>&gt;,
+  document.<span style=color:#a6e22e>getElementById</span>(<span style=color:#e6db74>&#39;root&#39;</span>)
+)
+</code></pre></div><p><code>&lt;Provider store={store}></code>という記述があると思いますが、これが非常に重要で、
+この記述があるおかげで、App以下のコンポーネントはReduxのStoreを使うことができます。</p>
+<p>しかし、現在の<code>TodoList.test.tsx</code>に実装したテストではその依存関係を無視して、<code>render(&lt;TodoList />)</code>と、TodoListのみを直でレンダリングしてます。
+なので、storeが使えずエラーになっているわけです。</p>
+<p>これを解消するための方法は、公式のドキュメントにしっかり記載があり、
+<a href=https://redux.js.org/usage/writing-tests#components>ReactTestingLibraryのRender関数をカスタマイズした独自のRender関数を作ることで対処</a> します。</p>
+<p>src直下にtest-utils.jsxを作成します。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#75715e>// test-utils.jsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>render</span> <span style=color:#a6e22e>as</span> <span style=color:#a6e22e>rtlRender</span>} <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>configureStore</span>} <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;@reduxjs/toolkit&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>Provider</span>} <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;react-redux&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>todoSlice</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;./stores/todoSlice&#39;</span>
+
+<span style=color:#66d9ef>function</span> <span style=color:#a6e22e>render</span>(
+        <span style=color:#a6e22e>ui</span>,
+        {
+          <span style=color:#a6e22e>preloadedState</span>,
+          <span style=color:#a6e22e>store</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>configureStore</span>({
+            <span style=color:#a6e22e>reducer</span><span style=color:#f92672>:</span> {<span style=color:#a6e22e>todos</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>todoSlice</span>.<span style=color:#a6e22e>reducer</span>},
+            <span style=color:#a6e22e>preloadedState</span>,
+          }),
+          ...<span style=color:#a6e22e>renderOptions</span>
+        } <span style=color:#f92672>=</span> {}
+) {
+  <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>Wrapper</span>({<span style=color:#a6e22e>children</span>}) {
+    <span style=color:#66d9ef>return</span> <span style=color:#f92672>&lt;</span><span style=color:#a6e22e>Provider</span> <span style=color:#a6e22e>store</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>store</span>}<span style=color:#f92672>&gt;</span>{<span style=color:#a6e22e>children</span>}<span style=color:#f92672>&lt;</span><span style=color:#960050;background-color:#1e0010>/Provider&gt;</span>
+  }
+  <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>rtlRender</span>(<span style=color:#a6e22e>ui</span>, {<span style=color:#a6e22e>wrapper</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>Wrapper</span>, ...<span style=color:#a6e22e>renderOptions</span>})
+}
+
+<span style=color:#66d9ef>export</span> <span style=color:#f92672>*</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+<span style=color:#66d9ef>export</span> {<span style=color:#a6e22e>render</span>}
+</code></pre></div><p>ソースコード見ていただけるとわかると思いますが、公式のドキュメントに記載されてる関数ほぼそのままです。</p>
+<p>このrender関数のいい所はpreloadStateにStateの初期状態を設定できるところです。
+ではこのrender関数をつかって<code>TodoList.test.tsx</code>を書き直してみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// TodoList.test.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>render</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../test-utils&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>TodoList</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../../components/TodoList&#34;</span>;
+
+<span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;TodoList Component&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>cleanup</span>()
+  })
+
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;ステートが空ならリストも空&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>initialState</span> <span style=color:#f92672>=</span> {<span style=color:#a6e22e>todos</span><span style=color:#f92672>:</span> []}
+    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>TodoList</span> /&gt;, {<span style=color:#a6e22e>preloadedState</span>: <span style=color:#66d9ef>initialState</span>})
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByRole</span>(<span style=color:#e6db74>&#39;list&#39;</span>).<span style=color:#a6e22e>hasChildNodes</span>()).<span style=color:#a6e22e>toEqual</span>(<span style=color:#66d9ef>false</span>)
+  })
+
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;リストアイテムを表示する&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>initialState</span> <span style=color:#f92672>=</span> {<span style=color:#a6e22e>todos</span><span style=color:#f92672>:</span> [{<span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>1</span>, <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;hoge&#39;</span>, <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>false</span>}]}
+    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>TodoList</span> /&gt;, {<span style=color:#a6e22e>preloadedState</span>: <span style=color:#66d9ef>initialState</span>})
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByRole</span>(<span style=color:#e6db74>&#39;listitem&#39;</span>).<span style=color:#a6e22e>textContent</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;hoge&#39;</span>)
+  })
+})
+</code></pre></div><p>このコンポーネントはStateの件数に応じてリストを表示しているだけですので、現状このぐらいのテストで十分でしょう。
+これでテストが通っていたらひとまず大丈夫です。</p>
+<h2 id=ホーム画面への組み込み>
+ホーム画面への組み込み
+<a class=anchor href=#%e3%83%9b%e3%83%bc%e3%83%a0%e7%94%bb%e9%9d%a2%e3%81%b8%e3%81%ae%e7%b5%84%e3%81%bf%e8%be%bc%e3%81%bf>#</a>
+</h2>
+<p>Stateの状態に応じてタスクを表示するコンポーネントはできましたが、肝心の画面への組み込みができていませんし、
+作成したActionを呼び出すこともしてませんので、これをやっていきましょう。</p>
+<h3 id=ホーム画面のテスト>
+ホーム画面のテスト
+<a class=anchor href=#%e3%83%9b%e3%83%bc%e3%83%a0%e7%94%bb%e9%9d%a2%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h3>
+<p>ホーム画面を表示したらgetTodoActionを実行するという処理を実装してみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// Home.test.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>MockAdapter</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios-mock-adapter&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>axios</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>render</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../test-utils&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Home</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../pages/Home&#39;</span>
+
+<span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;Home画面&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>mock</span>: <span style=color:#66d9ef>MockAdapter</span>
+
+  <span style=color:#a6e22e>beforeEach</span>(() <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>mock</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>MockAdapter</span>(<span style=color:#a6e22e>axios</span>)
+  })
+
+  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>reset</span>()
+    <span style=color:#a6e22e>cleanup</span>()
+  })
+
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;ホーム画面の初期表示&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>onGet</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>).<span style=color:#a6e22e>reply</span>(<span style=color:#ae81ff>200</span>, [
+      {
+        <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>1</span>,
+        <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title&#39;</span>,
+        <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>false</span>,
+      },
+    ])
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>initialState</span> <span style=color:#f92672>=</span> {<span style=color:#a6e22e>todos</span><span style=color:#f92672>:</span> []}
+    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>Home</span> /&gt;, {<span style=color:#a6e22e>preloadedState</span>: <span style=color:#66d9ef>initialState</span>})
+
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#66d9ef>get</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>url</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#39;title&#39;</span>)).<span style=color:#a6e22e>toBeInTheDocument</span>()
+  })
+})
+</code></pre></div><p>作成したテストはこのようなものです。元々あったホーム画面の初期表示のテストを拡充しました。
+このHomeもReduxのStoreに依存することになるため、<strong>renderの関数をtest-utils.jsで実装したrenderに変更するのを忘れないでください。</strong></p>
+<p>また、APIのテストを実装するときに使用したaxios-mock-adapterが再び登場しました。
+Sliceはモックしておらず、本物のtodoSliceを使用しているのが非常に大事で、要はインテグレーションテストになっています。</p>
+<p>なぜSliceをモックせずHTTP Clientだけをモックしているかというと、
+<a href=https://redux.js.org/usage/writing-tests#action-creators--thunks>公式のドキュメントがそれを推奨している</a> からです。
+Reducerをモックして実施するComponentのテストに果たして意味があるのかということですね。</p>
+<h3 id=ホーム画面の実装>
+ホーム画面の実装
+<a class=anchor href=#%e3%83%9b%e3%83%bc%e3%83%a0%e7%94%bb%e9%9d%a2%e3%81%ae%e5%ae%9f%e8%a3%85>#</a>
+</h3>
+<p>ホーム画面を表示したあと、副次的な処理としてgetTodoActionを実行するということでReactの<code>useEffect()</code>を使えば良さそうです。
+useEffect()については <a href=https://ja.reactjs.org/docs/hooks-effect.html>https://ja.reactjs.org/docs/hooks-effect.html</a> を読みましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// Home.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>useEffect</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>useDispatch</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-redux&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Header</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../components/Header&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>TodoList</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../components/TodoList&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>AppDispatch</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../stores/store&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>getTodoAction</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../stores/todoSlice&#39;</span>
+
+<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Home</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>dispatch</span>: <span style=color:#66d9ef>AppDispatch</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>useDispatch</span>()
+
+  <span style=color:#a6e22e>useEffect</span>(() <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>dispatch</span>(<span style=color:#a6e22e>getTodoAction</span>())
+  })
+
+  <span style=color:#66d9ef>return</span> (
+          &lt;<span style=color:#f92672>div</span>&gt;
+            &lt;<span style=color:#f92672>Header</span> /&gt;
+            &lt;<span style=color:#f92672>TodoList</span> /&gt;
+          &lt;/<span style=color:#f92672>div</span>&gt;
+  )
+}
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>Home</span>
+</code></pre></div><p>useEffect()内で、getTodoAction()をDispatchしています。
+DispatchはActionを実際に発行する処理です。
+さらにHeaderの下に先程作成したTodoListコンポーネントを組み込みました。</p>
+<p>これでどうでしょうか？テストは通りますでしょうか？</p>
+<pre tabindex=0><code>      30 |     expect(screen.getByText(&quot;Todo App&quot;)).toBeInTheDocument()
+      31 |     expect(mock.history.get[0].url).toEqual('/todos')
+    &gt; 32 |     expect(screen.getByText('title')).toBeInTheDocument()
+         |                   ^
+      33 |   })
+      34 | })
+      35 |
+
+      at Object.getElementError (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/config.js:34:12)
+      at node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:71:38
+      at getByText (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:54:17)
+      at Object.&lt;anonymous&gt; (src/__tests__/pages/Home.test.tsx:32:19)
+
+Test Suites: 1 failed, 4 passed, 5 total
+Tests:       1 failed, 8 passed, 9 total
+Snapshots:   0 total
+Time:        1.989 s, estimated 2 s
+
+</code></pre><p>どうにもおかしいですね。/todosにちゃんとGetのリクエストは行っていて、Getのレスポンスの内容もMockされています。
+なのに、画面にはまだそれが反映されていないようです。</p>
+<p>これは非同期処理特有の罠で、APIへの応答はMockしているのですが、
+APIリクエストの戻り値はPromiseで、それがまだペンディングの状態になっており処理を堰き止めています。
+つまりGETのリクエストを投げて、その応答がまだ帰ってきていない状態になっているということです。</p>
+<p>ですので、ペンディングになっているPromiseを完了させる必要があります。
+大した処理ではないので自前で実装してもいいでのすが、ここでは <a href=https://www.npmjs.com/package/flush-promises>flush-promises</a> というライブラリを使ってしまいます。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>npm install --save-dev flush-promises
+</code></pre></div><p>flush-promisesが導入できたら、Home.test.tsxを少し編集しましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// Home.test.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>MockAdapter</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios-mock-adapter&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>axios</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>flushPromises</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;flush-promises&#39;</span>    <span style=color:#75715e>// 追記
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>render</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../test-utils&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Home</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../pages/Home&#39;</span>
+
+<span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;Home画面&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>mock</span>: <span style=color:#66d9ef>MockAdapter</span>
+
+  <span style=color:#a6e22e>beforeEach</span>(() <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>mock</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>MockAdapter</span>(<span style=color:#a6e22e>axios</span>)
+  })
+
+  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>reset</span>()
+    <span style=color:#a6e22e>cleanup</span>()
+  })
+
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;ホーム画面の初期表示&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>onGet</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>).<span style=color:#a6e22e>reply</span>(<span style=color:#ae81ff>200</span>, [
+      {
+        <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>1</span>,
+        <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title&#39;</span>,
+        <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>false</span>,
+      },
+    ])
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>initialState</span> <span style=color:#f92672>=</span> {<span style=color:#a6e22e>todos</span><span style=color:#f92672>:</span> []}
+    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>Home</span> /&gt;, {<span style=color:#a6e22e>preloadedState</span>: <span style=color:#66d9ef>initialState</span>})
+
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#34;Todo App&#34;</span>)).<span style=color:#a6e22e>toBeInTheDocument</span>()
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#66d9ef>get</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>url</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>)
+    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>flushPromises</span>()     <span style=color:#75715e>// 追記
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#39;title&#39;</span>)).<span style=color:#a6e22e>toBeInTheDocument</span>()
+  })
+})
+</code></pre></div><p><code>await flushPromise()</code>を実行すると、堰き止められていたPromiseが動き出します！</p>
+<pre tabindex=0><code> PASS  src/__tests__/features/TodoApi.test.ts
+ PASS  src/__tests__/components/TodoList.test.tsx
+ PASS  src/__tests__/pages/Home.test.tsx
+ PASS  src/__tests__/components/Header.test.tsx
+ PASS  src/__tests__/stores/todoSlice.test.ts
+
+Test Suites: 5 passed, 5 total
+Tests:       9 passed, 9 total
+Snapshots:   0 total
+Time:        1.847 s, estimated 2 s
+Ran all test suites related to changed files.
+</code></pre><p>テストが全件通りました！ひとまずこれでクライアントの実装は完了です。
+ここまでのソースコードは
+<a href=https://github.com/Onebase-Fujitsu/todo-app-client/tree/step4>https://github.com/Onebase-Fujitsu/todo-app-client/tree/step4</a>
+に置いてあります。</p>
+<p>ここは慣れていないと非常に難しい部分だと思いますので、
+公式のリファレンスを参考にしながら少しずつトライしてみましょう。</p>
+<h2 id=クライアントの動作確認>
+クライアントの動作確認
+<a class=anchor href=#%e3%82%af%e3%83%a9%e3%82%a4%e3%82%a2%e3%83%b3%e3%83%88%e3%81%ae%e5%8b%95%e4%bd%9c%e7%a2%ba%e8%aa%8d>#</a>
+</h2>
+<p>さてクライアントの実装は終わりましたが、<code>npm run start</code>を実行して<code>http://localhost:3000</code>にアクセスしても、
+1日目の実装結果となにも変わりありませんよね。</p>
+<p><img src=chrome-404.jpg alt="chrome dev tool"></p>
+<p>しかし、Chromeの開発者ツールをつかって画面表示に際して発生したトラフィックを見てみると、
+ちゃんと/todoに対してリクエストを行っている様子が確認できます。
+まだサーバが実装されていませんので、まだ404になるのは当然ですね。</p>
+<p>しかし、このままだとちゃんとクライアントの実装ができてるか少し不安だと思うので、ちょっとしたツールをご紹介します。
+<a href=https://jsonplaceholder.typicode.com/>JSON Placeholder</a> というサービスがあります。</p>
+<p>これは予め定義されたJSONを返してくれるサービスで、
+例えば <a href=https://jsonplaceholder.typicode.com/todos>https://jsonplaceholder.typicode.com/todos</a> にアクセスすると、
+200件のTodoをJSONで返してくれます。</p>
+<p>TodoApi.tsを開いてリクエスト先のURLを一時的に変更してみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// TodoApi.ts
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>axios</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>Todo</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../stores/todoSlice&#39;</span>
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>getTodos</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#75715e>// const response = await axios.get&lt;Todo[]&gt;(&#39;/todos&#39;)
+</span><span style=color:#75715e></span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>response</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>axios</span>.<span style=color:#66d9ef>get</span>&lt;<span style=color:#f92672>Todo</span><span style=color:#960050;background-color:#1e0010>[]</span>&gt;(<span style=color:#e6db74>&#39;https://jsonplaceholder.typicode.com/todos&#39;</span>)
+  <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>data</span>
+}
+</code></pre></div><p>この状態で再びhttp://localhost:3000を開くと文字列がズラズラ表示されます！</p>
+<p><img src=json-placeholder.jpg alt="with jsonPlaceholder"></p>
+<p>よくみると、これは
+<a href=https://jsonplaceholder.typicode.com/todos>https://jsonplaceholder.typicode.com/todos</a>
+が応答してるjsonのtitle部分になっていることがわかると思います。</p>
+<p>正しく処理されていそうですね！</p>
+<p>Json Placeholderは予め定義されているJSONの他にも自分で提起したJSONを応答させるようにすることもできます。
+サーバの実装は当分先だけどClientだけどうなるか見たいというときはこういったサービスを活用するといいですね。</p>
+<p>正しく動作していることが確認できたら再びリクエスト先を/todosに戻しておいてください。
+次はサーバの実装をやってみましょう。</p>
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
@@ -224,11 +883,34 @@ Reduxと非同期処理
 <div class=book-toc-content>
 <nav id=TableOfContents>
 <ul>
-<li>
+<li><a href=#reduxの導入>Reduxの導入</a></li>
+<li><a href=#非同期通信のテストと実装>非同期通信のテストと実装</a>
 <ul>
-<li><a href=#reduxと非同期処理>Reduxと非同期処理</a></li>
+<li><a href=#非同期通信のテスト>非同期通信のテスト</a></li>
+<li><a href=#非同期通信の実装>非同期通信の実装</a></li>
 </ul>
 </li>
+<li><a href=#reducerのテストと実装>Reducerのテストと実装</a>
+<ul>
+<li><a href=#reducerの登録>Reducerの登録</a></li>
+<li><a href=#reducerのテスト>Reducerのテスト</a></li>
+<li><a href=#reducerの実装>Reducerの実装</a></li>
+</ul>
+</li>
+<li><a href=#タスク一覧表示コンポーネントのテストと実装>タスク一覧表示コンポーネントのテストと実装</a>
+<ul>
+<li><a href=#タスク一覧表示コンポーネントのテスト>タスク一覧表示コンポーネントのテスト</a></li>
+<li><a href=#タスク一覧表示コンポーネントの実装>タスク一覧表示コンポーネントの実装</a></li>
+<li><a href=#redux-connected-componentsのテスト>Redux Connected Componentsのテスト</a></li>
+</ul>
+</li>
+<li><a href=#ホーム画面への組み込み>ホーム画面への組み込み</a>
+<ul>
+<li><a href=#ホーム画面のテスト>ホーム画面のテスト</a></li>
+<li><a href=#ホーム画面の実装>ホーム画面の実装</a></li>
+</ul>
+</li>
+<li><a href=#クライアントの動作確認>クライアントの動作確認</a></li>
 </ul>
 </nav>
 </div>

@@ -258,6 +258,19 @@
 クライアントの環境構築
 <a class=anchor href=#%e3%82%af%e3%83%a9%e3%82%a4%e3%82%a2%e3%83%b3%e3%83%88%e3%81%ae%e7%92%b0%e5%a2%83%e6%a7%8b%e7%af%89>#</a>
 </h2>
+<blockquote class="book-hint warning">
+<p><strong>ハンズオンを始めるにあたって</strong></p>
+<p>ハンズオン形式で細かくソースコードを提示しながらアプリケーションを作っていきますが、
+それをただ写すだけでは意味がありませんし、それがあなたの身につくことはありません。
+ましてや、眺めているだけでは決してあなたの身につくことないでしょう。</p>
+<p>このサンプルアプリケーションではSpring Framework(Spring Boot)や、
+React.jsやReduxその他多くのOSSを使用していますが、わからないことを都度 <strong>各ライブラリやフレームワークの公式のリファレンスや <a href=https://developer.mozilla.org/ja/docs/Web>MDN</a></strong> を読み、
+理解するよう努めることがとても大事です。</p>
+<p><strong>公式のリファレンス以上に参考になるドキュメントはWeb上のどこにもない</strong> ということを肝に銘じ、
+公式のリファレンスを読めるようになりましょう。</p>
+<p>コピペでしかソースコードを書けないエンジニアの特徴に <strong>エラーメッセージを読もうとしない</strong>、<strong>公式のドキュメントを読もうとしない</strong>というのがあります。
+そうならないようにしましょう。</p>
+</blockquote>
 <h3 id=reactアプリの作成>
 reactアプリの作成
 <a class=anchor href=#react%e3%82%a2%e3%83%97%e3%83%aa%e3%81%ae%e4%bd%9c%e6%88%90>#</a>
@@ -455,9 +468,22 @@ Material UIはコンポーネントが提供されているため、さっと見
 いかにもな"Material UI"感がでてしまうのが難点です。</p>
 <p>Tailwind CSSやstyled-componentsなどはその点自由にデザインを組めますが、
 両者でコーディングスタイルは大きく異なっています。</p>
-<p>個人的にはTailwind CSSを押しているため今回はTailwind CSSを導入してみます。</p>
-<p>導入方法はこちらに書いてあるので、これに習って導入してみましょう。
-<a href=https://tailwindcss.com/docs/guides/create-react-app>https://tailwindcss.com/docs/guides/create-react-app</a></p>
+<p>個人的にはTailwind CSSを推しているため今回はTailwind CSSを導入してみます。</p>
+<blockquote class="book-hint info">
+<p><strong>なぜTailwind CSS?</strong></p>
+<p>制約こそデザインシステムだというライブラリの考え方に共感するところが多いからです。
+Tailwind CSSは予め用意されたクラス名定義を組み合わせでデザインをしていくわけですが、
+その定義から外れたようなデザインがとてもしにくくなっているのが特徴です。</p>
+<p>アジャイル開発では最初にデザインシステムがない状態から始めることが一般的です。
+その状態において自由度の高すぎるCSS記述はアプリデザインの一貫性の欠如をもたらします。</p>
+<p>自由な記述ができないことで、デザインに一貫性を保ち、それがデザインシステムになっていくという思想は、非常にアジャイル的だと筆者は思っています。</p>
+<p>styled-componentはTailwind CSSと比較してとにかく自由です。
+どんなデザインでも普通のHTML + CSS(SASS)と同じように実装できるでしょう。
+そういった部分に価値観を置くのであれば、styled-componentsの採用も考えていいでしょう。
+将来自由度の高いデザイン記述が必要になる可能性は無いとは言えません。プロジェクトの特性に合わせて選択しましょう。</p>
+</blockquote>
+<p>Tailwind CSSの導入方法はこちらに書いてあるので、これに習って導入してみましょう。</p>
+<p><a href=https://tailwindcss.com/docs/guides/create-react-app>https://tailwindcss.com/docs/guides/create-react-app</a></p>
 <p>tailwind cssのインストールコマンドをまず叩いて、</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>npm install -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
 npm install @craco/craco
@@ -784,7 +810,7 @@ Tailwind CSSでは予め定義されたclass名を使ってデザインを適用
 <p><img src=home_apply_design.jpg alt=ヘッダーにデザイン適用></p>
 <p>ヘッダーに背景色をつけて、Headerの文字を白に、そして大きくしてみました。
 一気に華やかになってきましたね。</p>
-<p>ここまでのソースコードは <a href=https://github.com/Onebase-Fujitsu/todo-app-client/tree/step4>https://github.com/Onebase-Fujitsu/todo-app-client/tree/step4</a> に置いてあります。</p>
+<p>ここまでのソースコードは <a href=https://github.com/Onebase-Fujitsu/todo-app-client/tree/step3>https://github.com/Onebase-Fujitsu/todo-app-client/tree/step3</a> に置いてあります。</p>
 <hr>
 <p>一日目はクライアントアプリの環境構築と最初の画面表示までいきました。
 環境構築はアプリ構築になれている方がやらないとかなり難しい部分だったりします。
