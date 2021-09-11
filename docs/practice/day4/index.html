@@ -233,7 +233,8 @@
 <p>まずreact-router-domを導入します。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>npm install react-router-dom @types/react-router-dom
 </code></pre></div><p>そして、App.tsxを以下のように編集してみましょう</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>BrowserRouter</span>, <span style=color:#a6e22e>Route</span>, <span style=color:#a6e22e>Switch</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;react-router-dom&#34;</span>;
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// App.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>BrowserRouter</span>, <span style=color:#a6e22e>Route</span>, <span style=color:#a6e22e>Switch</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;react-router-dom&#34;</span>;
 <span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Home</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./pages/Home&#39;</span>
 
 <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>App() {</span>
