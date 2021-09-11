@@ -205,3 +205,292 @@ Flywayはアプリケーション起動時にdb/migrationディレクトリ配�
 [https://github.com/Onebase-Fujitsu/todo-app-server/tree/step1](https://github.com/Onebase-Fujitsu/todo-app-server/tree/step1)
 に置いてあります。
 
+## GET /todosの実装
+
+### GET /todosのテスト
+
+ではまず/todosに対してGETをしたときに、データベースにアクセスして、Todo一覧をJSON形式で返却するテストを書いてみましょう。
+src/test/kotlin/com.fujitsu.todoappserver配下にcontrollerパッケージを作り、その中に`TodoApiControllerTest.kt`を作りましょう
+
+```
+src
+├── main
+│     ├── kotlin
+│     │     └── com
+│     │         └── fujitsu
+│     │             └── todoappserver
+│     │                 └── TodoAppServerApplication.kt
+│     └── resources
+│         ├── application.yml
+│         ├── db
+│         │     └── migration
+│         │         └── V20210912045400__CreateTodoTable.sql
+│         ├── static
+│         └── templates
+└── test
+    └── kotlin
+        └── com
+            └── fujitsu
+                └── todoappserver
+                    ├── TodoAppServerApplicationTests.kt
+                    └── controller
+                        └── TodoApiControllerTest.kt    // 作成
+
+```
+
+```kotlin
+// TodoApiControllerTest.kt
+package com.fujitsu.todoappserver.controller
+
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
+import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.web.client.TestRestTemplate
+import org.springframework.http.*
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class TodoApiControllerTest {
+    @Autowired
+    lateinit var restTemplate: TestRestTemplate
+
+    @Test
+    fun タスク一覧を取得できる() {
+        val header = HttpHeaders()
+        header.contentType = MediaType.APPLICATION_JSON
+        val response = restTemplate.exchange("/todos", HttpMethod.GET, HttpEntity(null, header), String::class.java)
+        val mapper = jacksonObjectMapper()
+        val articles: List<Todo> = mapper.readValue(response.body!!)
+        Assertions.assertThat(response.statusCode).isEqualTo(HttpStatus.OK)
+        Assertions.assertThat(articles.size).isEqualTo(0)
+    }
+}
+```
+
+最初のテストはこのように書きました。ソフトウェアテストの章でこのあたりは詳しく説明していますので、テストの説明は割愛します。
+このテストは当然Todoがまだ定義されてませんのでコンパイルができずに失敗します。
+
+### GET /todosの実装
+
+#### Modelの実装
+
+まず先のテストはTodoモデルが無いことで落ちていたので、これを定義しましょう。
+
+src/main/kotlin/com.fujitsu.todoappserver配下に`model`パッケージ、`controller`パッケージ、`service`パッケージ、`repository`パッケージを作りましょう。
+そして`model`パッケージ配下にTodo.ktを作成。
+
+```
+src
+├── main
+│     ├── kotlin
+│     │     └── com
+│     │         └── fujitsu
+│     │             └── todoappserver
+│     │                 ├── TodoAppServerApplication.kt
+│     │                 ├── controller
+│     │                 ├── model
+│     │                 │     └── Todo.kt       // 作成
+│     │                 ├── repository
+│     │                 └── service
+│     └── resources
+│         ├── application.yml
+│         ├── db
+│         │     └── migration
+│         │         └── V20210912045400__CreateTodoTable.sql
+│         ├── static
+│         └── templates
+└── test
+    └── kotlin
+        └── com
+            └── fujitsu
+                └── todoappserver
+                    ├── TodoAppServerApplicationTests.kt
+                    └── controller
+                        └── TodoControllerTest.kt
+
+```
+
+```kotlin
+// Todo.kt
+package com.fujitsu.todoappserver.model
+
+data class Todo(
+    val id: Int,
+    val title: String,
+    val completed: Boolean
+)
+```
+
+Kotlinはdata classの宣言で簡単にPOJOを作ることができます。Javaだと必要なsetterやgetterは不要です。
+このTodoモデルを先ほど作成したテストにインポートして実行してみましょう。
+
+コンパイルには成功して、Getリクエストが発生していますが、404 Not Foundが返却されるようになりテストが失敗するようになったと思います。
+
+#### Controller層の実装
+
+Controller層を実装していきましょう。controllerパッケージ配下にTodoControllerInterface.ktとTodoController.ktを作成します。
+
+TodoControllerInterfaceにはTodoControllerが使いたい（つまりServiceに実装してもらいたい）メソッドを定義しておきます。
+
+```kotlin
+// TodoControllerInterface.kt
+package com.fujitsu.todoappserver.controller
+
+import com.fujitsu.todoappserver.model.Todo
+
+interface TodoControllerInterface {
+    fun getTodos(): List<Todo>
+}
+```
+
+TodoControllerは先程定義したInterfaceを通じてserviceを利用します。
+
+```kotlin
+// TodoController.kt
+package com.fujitsu.todoappserver.controller
+
+import com.fujitsu.todoappserver.model.Todo
+import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.ResponseStatus
+import org.springframework.web.bind.annotation.RestController
+
+@RestController
+class TodoController(private val todoService: TodoControllerInterface) {
+    @GetMapping("/todos")
+    @ResponseStatus(HttpStatus.OK)
+    fun getTodos() : List<Todo> {
+        return todoService.getTodos()
+    }
+}
+```
+
+InterfaceがService層ではなくController層にあるのに違和感を覚える人も多いと思います。
+これは依存性逆転の原則(DIP)です。覚えてますでしょうか？
+依存性逆転の原則では**抽象の所有権も逆転**させるんでしたよね。
+
+#### Service層の実装
+
+同様にService層も実装していきましょう。Serviceパッケージ配下にTodoServiceInterface.ktとTodoService.ktを作ります。
+Service層はRepository層から返ってきたレスポンスをそのままControllerに受け流すだけになるので、説明は割愛します。
+
+```kotlin
+// TodoServiceInterface.kt
+package com.fujitsu.todoappserver.service
+
+import com.fujitsu.todoappserver.model.Todo
+
+interface TodoServiceInterface {
+    fun getTodos(): List<Todo>
+}
+```
+
+```kotlin
+// TodoService.kt
+package com.fujitsu.todoappserver.service
+
+import com.fujitsu.todoappserver.controller.TodoControllerInterface
+import com.fujitsu.todoappserver.model.Todo
+import org.springframework.stereotype.Service
+
+@Service
+class TodoService(private val todoRepository: TodoServiceInterface): TodoControllerInterface {
+    override fun getTodos(): List<Todo> {
+        return todoRepository.getTodos()
+    }
+}
+```
+
+#### Repository層の実装
+
+Repository層を実装します。repositoryパッケージ配下にTodoRepository.ktを作成し、TodoServiceInterfaceを実装しましょう。
+
+```kotlin
+// TodoRepository.kt
+package com.fujitsu.todoappserver.repository
+
+import com.fujitsu.todoappserver.model.Todo
+import com.fujitsu.todoappserver.service.TodoServiceInterface
+import org.springframework.jdbc.core.JdbcTemplate
+import org.springframework.stereotype.Repository
+import java.sql.ResultSet
+
+@Repository
+class TodoRepository(val jdbcTemplate: JdbcTemplate) : TodoServiceInterface {
+    override fun getTodos(): List<Todo> {
+        return jdbcTemplate.query(
+            """select id, title, completed from todo"""
+        ) {rs: ResultSet, _:Int ->
+            Todo(rs.getInt("id"),
+                rs.getString("title"),
+                rs.getBoolean("completed")
+            )
+        }
+    }
+}
+```
+
+Repositoryは実際にDBに対してクエリを投げ、ResultSetからTodoオブジェクトを作り、それをListとして返しています。
+これで実装は終わりました。テストを実行してみましょう！
+
+```shell
+./gradlew test
+```
+
+```
+onebase@Onebase-Maguro todo-app-server % ./gradlew test
+
+> Task :test
+2021-09-12 06:37:05.404  INFO 76511 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-09-12 06:37:05.408  INFO 76511 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+
+BUILD SUCCESSFUL in 4s
+4 actionable tasks: 1 executed, 3 up-to-date
+
+```
+
+テストが通る様子が確認できると思います。
+
+ここまでのソースは
+[https://github.com/Onebase-Fujitsu/todo-app-server/tree/step2](https://github.com/Onebase-Fujitsu/todo-app-server/tree/step2)
+に置いてあります。
+
+## クライアントとサーバの連携
+
+さて、サーバを起動した状態にしておいてください。
+
+```shell
+./gradlew bootRun
+```
+
+サーバを起動した状態でクライアントを起動しましょう。
+
+```shell
+npm run start
+```
+
+その状態で [http://localhost:3000](http://localhost:3000) にアクセスすると、まだ、/todosに対するリクエストに404が返っていると思います。
+
+![404](getTodos404.jpg)
+
+それもそのはず、Clientはlocalhost:3000/todosにリクエストしている一方で、サーバは8080ポートで起動しているからです。
+そこでClientにProxyの設定を入れてあげます。
+
+Clientのpackage.jsonを開いたら一行`"proxy": "http://localhost:8080",`という設定を追記して、再度Clientを起動してみましょう。
+
+```json
+package.json
+{
+  ...
+  "proxy": "http://localhost:8080",
+  ...
+}
+```
+
+![200](getTodos200.jpg)
+
+proxyの設定によりServerが応答できるようになり、200が返却されているのが確認できると思います。
+
+おめでとうございまいます！最初のサーバAPIとクライアントを連携させたアプリケーションを実装することができました！
