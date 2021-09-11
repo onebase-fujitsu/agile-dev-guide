@@ -758,7 +758,7 @@ export const getTodos = async () => {
 
 正しく処理されていそうですね！
 
-JSON Placeholderは予め定義されているJSONの他にも自分で作成したJSONを応答させるようにすることもできます。
+JSON Placeholderは予め定義されているJSONの他にも [自分で作成したJSONを応答させるようにすること](https://my-json-server.typicode.com/) もできます。
 サーバの実装は当分先だけどClientだけどうなるか見たいというときはこういったサービスを活用するといいですね。
 
 正しく動作していることが確認できたら再びリクエスト先を/todosに戻しておいてください。
