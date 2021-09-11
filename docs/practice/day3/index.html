@@ -1,0 +1,391 @@
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="3日目 # 2日目まででタスク一覧をサーバに対して要求して、レスポンスに応じてタスク一覧を画面に描画するフロントエンドができました。 ただ、現時点">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="3日目">
+<meta property="og:description" content="3日目 # 2日目まででタスク一覧をサーバに対して要求して、レスポンスに応じてタスク一覧を画面に描画するフロントエンドができました。 ただ、現時点">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/"><meta property="article:section" content="docs">
+<title>3日目 | Fujitsu Agile Development Guide</title>
+<link rel=manifest href=/agile-dev-guide/manifest.json>
+<link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span>
+</a>
+</h2>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/>はじめに</a>
+</li>
+<li>
+<input type=checkbox id=section-b077c62e2cf275f367b13c9cd484dcf6 class=toggle>
+<label for=section-b077c62e2cf275f367b13c9cd484dcf6 class="flex justify-between">
+<a role=button>アジャイル</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/>アジャイル開発12の原則</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-488859b49087c05cd9f2afa3c2804c61 class=toggle>
+<label for=section-488859b49087c05cd9f2afa3c2804c61 class="flex justify-between">
+<a role=button>スクラム</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/overview/>スクラムとは</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/roles/>ロール</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/products/>成果物</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/events/>イベント</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-f43a50e4d00e3398d279579a5a9a0783 class=toggle>
+<label for=section-f43a50e4d00e3398d279579a5a9a0783 class="flex justify-between">
+<a role=button>エクストリームプログラミング</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/>エクストリームプログラミングとは</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/>エクストリームプログラミングのプラクティス</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-4881c8ea96a48f6fd2540db502c204e0 class=toggle>
+<label for=section-4881c8ea96a48f6fd2540db502c204e0 class="flex justify-between">
+<a role=button>ソフトウェアテスト</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/overview/>ソフトウェアテストを始めよう</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/>ウォーミングアップ</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/>ボウリングゲーム</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/>テストダブル</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/>E2Eテスト</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-6668e94793f2c3410fae208f25d1f417 class=toggle>
+<label for=section-6668e94793f2c3410fae208f25d1f417 class="flex justify-between">
+<a role=button>ソフトウェア設計</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/>アジャイル開発に求められるソフトウェア設計</a>
+</li>
+<li>
+<input type=checkbox id=section-fd21b9cd7e31d8e1d2ba14b32452065e class=toggle>
+<label for=section-fd21b9cd7e31d8e1d2ba14b32452065e class="flex justify-between">
+<a role=button>SOLID原則</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/>単一責任の原則(SRP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/>オープン・クローズドの原則(OCP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/>リスコフの置換原則(LSP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>依存性逆転の原則(DIP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/>インターフェース分離の原則(ISP)</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-ee4c81ada0b6a9ee859cebeab00ca76e class=toggle>
+<label for=section-ee4c81ada0b6a9ee859cebeab00ca76e class="flex justify-between">
+<a role=button>デザインパターン</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/designpattern/designpattern/>デザインパターン</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-a16dbb8fa8b2df15e7da65eb13e2d51a class=toggle checked>
+<label for=section-a16dbb8fa8b2df15e7da65eb13e2d51a class="flex justify-between">
+<a role=button>アジャイルの実践</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/>1日目</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/>2日目</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/ class=active>3日目</a>
+</li>
+</ul>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/>おわりに</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/>推奨書籍</a>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu>
+</label>
+<strong>3日目</strong>
+<label for=toc-control>
+<img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#バックエンドの初期設定>バックエンドの初期設定</a>
+<ul>
+<li><a href=#spring-initializr>Spring Initializr</a></li>
+<li><a href=#dbの設定>DBの設定</a></li>
+<li><a href=#dbのマイグレーションツールの導入>DBのマイグレーションツールの導入</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown><h1 id=3日目>
+3日目
+<a class=anchor href=#3%e6%97%a5%e7%9b%ae>#</a>
+</h1>
+<p>2日目まででタスク一覧をサーバに対して要求して、レスポンスに応じてタスク一覧を画面に描画するフロントエンドができました。
+ただ、現時点でリクエストに対して応答するバックエンドがまだありませんので、これを作っていきましょう。</p>
+<h2 id=バックエンドの初期設定>
+バックエンドの初期設定
+<a class=anchor href=#%e3%83%90%e3%83%83%e3%82%af%e3%82%a8%e3%83%b3%e3%83%89%e3%81%ae%e5%88%9d%e6%9c%9f%e8%a8%ad%e5%ae%9a>#</a>
+</h2>
+<h3 id=spring-initializr>
+Spring Initializr
+<a class=anchor href=#spring-initializr>#</a>
+</h3>
+<p>Spring Bootのプロジェクトを作成するときは <a href=https://start.spring.io/>Spring Initializr</a> を使います。</p>
+<p><img src=SpringInitializr.jpg alt="Spring Initializr"></p>
+<p>今回はGradle Projectで開発言語はKotlinにします。</p>
+<p>Spring Bootのバージョンはその時の安定版を指定すると良いです。</p>
+<p>Artifact名は今回はtodo-app-serverとしました。
+依存ライブラリですが、後からでも追加できますので、ここではいったん、Spring Webのみ追加しました。</p>
+<p>これでGenerateしましょう。雛形となるプロジェクトがダウンロードされるはずです。</p>
+<h3 id=dbの設定>
+DBの設定
+<a class=anchor href=#db%e3%81%ae%e8%a8%ad%e5%ae%9a>#</a>
+</h3>
+<p>例によってアプリ作成は初期設定が一番大変です。頑張っていきましょう。
+まず、DBの設定をしていきましょう。</p>
+<p>今回DBは <a href=https://www.postgresql.org/>PostgreSQL</a> を使用しようと思います。
+ソフトウェアテストの章でつかったサンプルアプリケーションではH2をインメモリで動かしていたのですが、
+流石に実際の開発のときにそんなことはしないので、実際の開発に寄せる意味でもPostgreSQLにしてみます。</p>
+<p>まだPostgreSQLをインストールしていない方はPostgreSQLを導入してください。</p>
+<p>PostgreSQLをサービスとしてローカルで動いているのを確認したら、
+<a href=https://www.postgresql.jp/document/9.4/html/app-createdb.html>createdb</a> コマンドを実行してtodo_dbを作っておきましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>createdb todo_db
+</code></pre></div><p>まず、DB接続に必要なライブラリを追加しましょう。build.gradle.ktsを開いたらdependenciesを以下のように変更してください。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#75715e>// build.gradle.kts
+</span><span style=color:#75715e></span>dependencies {
+    implementation(<span style=color:#e6db74>&#34;org.springframework.boot:spring-boot-starter-web&#34;</span>)
+    implementation(<span style=color:#e6db74>&#34;com.fasterxml.jackson.module:jackson-module-kotlin&#34;</span>)
+    implementation(<span style=color:#e6db74>&#34;org.jetbrains.kotlin:kotlin-reflect&#34;</span>)
+    implementation(<span style=color:#e6db74>&#34;org.jetbrains.kotlin:kotlin-stdlib-jdk8&#34;</span>)
+    implementation(<span style=color:#e6db74>&#34;org.springframework.boot:spring-boot-starter-jdbc&#34;</span>)   <span style=color:#75715e>// 追記
+</span><span style=color:#75715e></span>    runtimeOnly(<span style=color:#e6db74>&#34;org.postgresql:postgresql&#34;</span>)                              <span style=color:#75715e>// 追記
+</span><span style=color:#75715e></span>    testImplementation(<span style=color:#e6db74>&#34;org.springframework.boot:spring-boot-starter-test&#34;</span>)
+}
+</code></pre></div><p>次にsrc/resources/application.propertiesがありますが、yamlで記述したほうが見通しが良くなるので、
+このapplication.propertiesをapplication.ymlに変更します。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#ae81ff>// application.yml</span>
+<span style=color:#f92672>spring</span>:
+  <span style=color:#f92672>datasource</span>:
+    <span style=color:#f92672>url</span>: <span style=color:#ae81ff>jdbc:postgresql://localhost:5432/${DB_NAME:todo_db}</span>
+    <span style=color:#f92672>username</span>: <span style=color:#ae81ff>onebase</span>
+    <span style=color:#f92672>password</span>:
+</code></pre></div><p>設定ファイルはこのように変更します。<strong>usernameは<code>createdb</code>コマンドを実行した環境に依存しますので、皆様の環境に合わせて書き換えてください。</strong>
+この状態でアプリケーションを起動してみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>./gradlew bootRun
+</code></pre></div><pre tabindex=0><code>onebase@Onebase-Maguro todo-app-server % ./gradlew bootRun
+
+&gt; Task :bootRun
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.5.4)
+
+2021-09-12 04:38:21.169  INFO 74012 --- [           main] c.f.t.TodoAppServerApplicationKt         : Starting TodoAppServerApplicationKt using Java 13.0.2 on Onebase-Maguro.local with PID 74012 (/Users/onebase/IdeaProjects/todo-app-server/build/classes/kotlin/main started by onebase in /Users/onebase/IdeaProjects/todo-app-server)
+2021-09-12 04:38:21.171  INFO 74012 --- [           main] c.f.t.TodoAppServerApplicationKt         : No active profile set, falling back to default profiles: default
+2021-09-12 04:38:22.054  INFO 74012 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-09-12 04:38:22.063  INFO 74012 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-09-12 04:38:22.064  INFO 74012 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.52]
+2021-09-12 04:38:22.122  INFO 74012 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-09-12 04:38:22.122  INFO 74012 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 910 ms
+2021-09-12 04:38:22.451  INFO 74012 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-09-12 04:38:22.459  INFO 74012 --- [           main] c.f.t.TodoAppServerApplicationKt         : Started TodoAppServerApplicationKt in 1.844 seconds
+&lt;==========---&gt; 83% EXECUTING [16s]
+&gt; :bootRun
+
+</code></pre><p>ひとまずこのような表示が出たらServerとPostgreSQL DBの接続はうまくいっていますので、<code>Control+C</code>を押してサーバを止めておきましょう。</p>
+<h3 id=dbのマイグレーションツールの導入>
+DBのマイグレーションツールの導入
+<a class=anchor href=#db%e3%81%ae%e3%83%9e%e3%82%a4%e3%82%b0%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%83%84%e3%83%bc%e3%83%ab%e3%81%ae%e5%b0%8e%e5%85%a5>#</a>
+</h3>
+<p>DBのマイグレーションツールを導入してみましょう。
+先程<code>createdb</code>コマンドを実行してDBを作りましたが、まだテーブルを全く作ってません。
+DBのスキーマを手動で管理するのはメチャクチャ大変ですので、マイグレーションツールを導入するとスキーマの作成や、スキーマ変更に伴うデータのマイグレーションを自動化することができます。</p>
+<p>ここでは <a href=https://flywaydb.org/>Flyway</a> を使います。</p>
+<p>再び、build.gradle.ktsを開いたら以下の依存を追加してください。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#75715e>// build.gradle.kts
+</span><span style=color:#75715e></span>dependencies {
+	implementation(<span style=color:#e6db74>&#34;org.springframework.boot:spring-boot-starter-jdbc&#34;</span>)
+	implementation(<span style=color:#e6db74>&#34;org.springframework.boot:spring-boot-starter-web&#34;</span>)
+	implementation(<span style=color:#e6db74>&#34;com.fasterxml.jackson.module:jackson-module-kotlin&#34;</span>)
+	implementation(<span style=color:#e6db74>&#34;org.jetbrains.kotlin:kotlin-reflect&#34;</span>)
+	implementation(<span style=color:#e6db74>&#34;org.jetbrains.kotlin:kotlin-stdlib-jdk8&#34;</span>)
+	implementation(<span style=color:#e6db74>&#34;org.flywaydb:flyway-core&#34;</span>)                       <span style=color:#75715e>// 追記
+</span><span style=color:#75715e></span>	runtimeOnly(<span style=color:#e6db74>&#34;org.postgresql:postgresql&#34;</span>)
+	testImplementation(<span style=color:#e6db74>&#34;org.springframework.boot:spring-boot-starter-test&#34;</span>)
+}
+</code></pre></div><p>次に、src/main/resources/application.ymlを再び開いてFlywayの設定を記入しましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#ae81ff>// application.yml</span>
+<span style=color:#f92672>spring</span>:
+  <span style=color:#f92672>datasource</span>:
+    <span style=color:#f92672>url</span>: <span style=color:#ae81ff>jdbc:postgresql://localhost:5432/${DB_NAME:todo_db}</span>
+    <span style=color:#f92672>username</span>: <span style=color:#ae81ff>onebase</span>
+    <span style=color:#f92672>password</span>:
+  <span style=color:#f92672>flyway</span>:
+    <span style=color:#f92672>baseline-on-migrate</span>: <span style=color:#66d9ef>true</span>
+    <span style=color:#f92672>url</span>: <span style=color:#ae81ff>jdbc:postgresql://localhost:5432/${DB_NAME:todo_db}</span>
+    <span style=color:#f92672>user</span>: <span style=color:#ae81ff>onebase</span>
+    <span style=color:#f92672>password</span>:
+</code></pre></div><p>これでFlywayを使う準備が整いました。では実際にマイグレーションをかけてテーブルを作ってみましょう。
+src/main/resources配下にdbというディレクトリを作成し、さらにその配下にmigrationというディレクトリを作成します。
+そして、そのmigration配下に<code>VyyyyMMddHHmmss__CreateTodoTable.sql</code>というファイルを新規に作ってください。
+&lsquo;yyyyMMddHHmmss&rsquo;の部分は実際に作成作業をした時間に置き換えてください。
+ファイル名がこの命名規約に従っていることがとても大事です。</p>
+<pre tabindex=0><code>src
+├── main
+│     ├── kotlin
+│     │     └── com
+│     │         └── fujitsu
+│     │             └── todoappserver
+│     │                 └── TodoAppServerApplication.kt
+│     └── resources
+│         ├── application.yml
+│         ├── db
+│         │     └── migration
+│         │         └── V20210912045400__CreateTodoTable.sql
+│         ├── static
+│         └── templates
+└── test
+    └── kotlin
+        └── com
+            └── fujitsu
+                └── todoappserver
+                    └── TodoAppServerApplicationTests.kt
+
+</code></pre><p>筆者の例では「V20210912045400__CreateTodoTable.sql」というファイル名にしています。（このドキュメントは朝4時に書いています。）</p>
+<p>このファイルにはマイグレーション用のSQLを記述します。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=color:#66d9ef>create</span> <span style=color:#66d9ef>table</span> todo (
+    id serial <span style=color:#66d9ef>primary</span> <span style=color:#66d9ef>key</span>,
+    title varchar <span style=color:#66d9ef>not</span> <span style=color:#66d9ef>null</span>,
+    completed boolean <span style=color:#66d9ef>not</span> <span style=color:#66d9ef>null</span> <span style=color:#66d9ef>default</span> <span style=color:#66d9ef>false</span>
+);
+</code></pre></div><p>最初のSQLはこのようにしました。
+この状態で再度アプリケーションを起動してみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>./gradlew bootRun
+</code></pre></div><p>正常に起動したら、どのようなツールでも構いませんのでtodo_dbの状態をみてみましょう。</p>
+<p><img src=flyway_migration.jpg alt="flyway migration"></p>
+<p>flyway_schema_historyというテーブル共にtodoテーブルがFlywayによって作られていたら成功です。
+Flywayはアプリケーション起動時にdb/migrationディレクトリ配下のSQLを確認して、DBのマイグレーションを実行してくれます。</p>
+<p>これでバックエンド開発の下準備が整いました。ここまでのソースコードは
+<a href=https://github.com/Onebase-Fujitsu/todo-app-server/tree/step1>https://github.com/Onebase-Fujitsu/todo-app-server/tree/step1</a>
+に置いてあります。</p>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#バックエンドの初期設定>バックエンドの初期設定</a>
+<ul>
+<li><a href=#spring-initializr>Spring Initializr</a></li>
+<li><a href=#dbの設定>DBの設定</a></li>
+<li><a href=#dbのマイグレーションツールの導入>DBのマイグレーションツールの導入</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>
