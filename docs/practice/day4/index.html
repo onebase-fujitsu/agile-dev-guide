@@ -2,15 +2,15 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content>
-<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="ソフトウェア設計">
-<meta property="og:description" content>
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/">
-<title>ソフトウェア設計 | Fujitsu Agile Development Guide</title>
+<meta name=description content="4日目 # 3日まででReact+Reduxで作ったフロントエンドとSpring Bootで作ったバックエンドを連携させることができました。 しかし">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="4日目">
+<meta property="og:description" content="4日目 # 3日まででReact+Reduxで作ったフロントエンドとSpring Bootで作ったバックエンドを連携させることができました。 しかし">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/"><meta property="article:section" content="docs">
+<title>4日目 | Fujitsu Agile Development Guide</title>
 <link rel=manifest href=/agile-dev-guide/manifest.json>
 <link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon>
-<link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous><link rel=alternate type=application/rss+xml href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/index.xml title="Fujitsu Agile Development Guide">
+<link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
 </head>
 <body dir=ltr>
 <input type=checkbox class="hidden toggle" id=menu-control>
@@ -108,9 +108,9 @@
 </ul>
 </li>
 <li>
-<input type=checkbox id=section-6668e94793f2c3410fae208f25d1f417 class=toggle checked>
+<input type=checkbox id=section-6668e94793f2c3410fae208f25d1f417 class=toggle>
 <label for=section-6668e94793f2c3410fae208f25d1f417 class="flex justify-between">
-<a role=button class=active>ソフトウェア設計</a>
+<a role=button>ソフトウェア設計</a>
 </label>
 <ul>
 <li>
@@ -153,7 +153,7 @@
 </ul>
 </li>
 <li>
-<input type=checkbox id=section-a16dbb8fa8b2df15e7da65eb13e2d51a class=toggle>
+<input type=checkbox id=section-a16dbb8fa8b2df15e7da65eb13e2d51a class=toggle checked>
 <label for=section-a16dbb8fa8b2df15e7da65eb13e2d51a class="flex justify-between">
 <a role=button>アジャイルの実践</a>
 </label>
@@ -168,7 +168,7 @@
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/>3日目</a>
 </li>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/>4日目</a>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/ class=active>4日目</a>
 </li>
 </ul>
 </li>
@@ -189,26 +189,90 @@
 <label for=menu-control>
 <img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu>
 </label>
-<strong>ソフトウェア設計</strong>
+<strong>4日目</strong>
 <label for=toc-control>
 <img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents">
 </label>
 </div>
 <aside class="hidden clearfix">
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#タスクの追加画面を作る>タスクの追加画面を作る</a>
+<ul>
+<li><a href=#ルーターの導入>ルーターの導入</a></li>
+</ul>
+</li>
+</ul>
+</nav>
 </aside>
 </header>
-<article class=markdown></article>
+<article class=markdown><h1 id=4日目>
+4日目
+<a class=anchor href=#4%e6%97%a5%e7%9b%ae>#</a>
+</h1>
+<p>3日まででReact+Reduxで作ったフロントエンドとSpring Bootで作ったバックエンドを連携させることができました。
+しかし、タスクを表示することができましたが、タスクを追加する機能がまだありません。
+4日目からはどんどん機能を追加してみましょう。</p>
+<h2 id=タスクの追加画面を作る>
+タスクの追加画面を作る
+<a class=anchor href=#%e3%82%bf%e3%82%b9%e3%82%af%e3%81%ae%e8%bf%bd%e5%8a%a0%e7%94%bb%e9%9d%a2%e3%82%92%e4%bd%9c%e3%82%8b>#</a>
+</h2>
+<p>いまClientのアプリケーションにはまだルーターの機能がありません。
+例えば、 <a href=http://localhost:3000/>http://localhost:3000/</a> にアクセスしてもHome画面が表示されていますし、
+<a href=http://localhost:3000/hogehoge>http://localhost:3000/hogehoge</a> にアクセスしてもHome画面が表示されます。</p>
+<p>これはちょっとイケてないので、ルーターの機能を実装してみます。
+ここでは <a href=http://localhost:3000/>http://localhost:3000/</a> にアクセスするとHome画面が、
+そして <a href=http://localhost:3000/newTodo>http://localhost:3000/newTodo</a> にアクセスするとタスク管理画面が開くようにしてみましょう。</p>
+<h3 id=ルーターの導入>
+ルーターの導入
+<a class=anchor href=#%e3%83%ab%e3%83%bc%e3%82%bf%e3%83%bc%e3%81%ae%e5%b0%8e%e5%85%a5>#</a>
+</h3>
+<p>ルーターの実装には <a href=https://reactrouter.com/>react-router-dom</a> が必要なので、これを導入します。
+これはルーティング機能もDOMとして宣言してしまうライブラリです。
+これだけどあまりピンとこないと思いますので、どういう実装になるのかを実際に見てもらった方が早いと思います。</p>
+<p>まずreact-router-domを導入します。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>npm install react-router-dom @types/react-router-dom
+</code></pre></div><p>そして、App.tsxを以下のように編集してみましょう</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>BrowserRouter</span>, <span style=color:#a6e22e>Route</span>, <span style=color:#a6e22e>Switch</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;react-router-dom&#34;</span>;
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Home</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./pages/Home&#39;</span>
+
+<span style=color:#66d9ef>function</span> <span style=color:#a6e22e>App() {</span>
+  <span style=color:#66d9ef>return</span> (
+    &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;App&#34;</span>&gt;
+      &lt;<span style=color:#f92672>BrowserRouter</span>&gt;
+        &lt;<span style=color:#f92672>Switch</span>&gt;
+          &lt;<span style=color:#f92672>Route</span> <span style=color:#a6e22e>path</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/&#34;</span> <span style=color:#a6e22e>exact</span> <span style=color:#a6e22e>render</span><span style=color:#f92672>=</span>{() <span style=color:#f92672>=&gt;</span> &lt;<span style=color:#f92672>Home</span>/&gt;} /&gt;
+        &lt;/<span style=color:#f92672>Switch</span>&gt;
+      &lt;/<span style=color:#f92672>BrowserRouter</span>&gt;
+    &lt;/<span style=color:#f92672>div</span>&gt;
+  )
+}
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>App</span>
+</code></pre></div><p>この状態で <a href=http://localhost:3000/>http://localhost:3000/</a> にアクセスするとHome画面が表示されます。ここはこれまでの動作と変わりません。
+そこで <a href=http://localhost:3000/hoge>http://localhost:3000/hoge</a> にアクセスすると、先程と代わって真っ白な画面になると思います。</p>
+<p>つまりこれは'/&lsquo;というパスだったらホームコンポーネントを表示するよという設定なわけです。</p>
+</article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
 </div>
 <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
 </footer>
+<div class=book-comments>
+</div>
 <label for=menu-control class="hidden book-menu-overlay"></label>
 </div>
 <aside class=book-toc>
 <div class=book-toc-content>
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#タスクの追加画面を作る>タスクの追加画面を作る</a>
+<ul>
+<li><a href=#ルーターの導入>ルーターの導入</a></li>
+</ul>
+</li>
+</ul>
+</nav>
 </div>
 </aside>
 </main>
