@@ -408,7 +408,7 @@ const TodoList = () => {
   const todos = useSelector((state: RootState) => state.todos)
 
   return (
-          <ul>
+          <ul data-testid='TodoList'>
             {todos.map((todo) => (
                     <li key={todo.id}>{todo.title}</li>
             ))}
@@ -551,6 +551,12 @@ describe('Home画面', () => {
     cleanup()
   })
 
+  it("画面構成", () => {
+    render(<Home />)
+    expect(screen.queryByTestId('Header')).toBeTruthy()
+    expect(screen.queryByTestId('TodoList')).toBeTruthy()
+  })
+
   it('ホーム画面の初期表示', async () => {
     mock.onGet('/todos').reply(200, [
       {
@@ -600,7 +606,7 @@ const Home = () => {
   })
 
   return (
-          <div>
+          <div data-testid="Home">
             <Header />
             <TodoList />
           </div>
@@ -672,6 +678,12 @@ describe('Home画面', () => {
   afterEach(() => {
     mock.reset()
     cleanup()
+  })
+
+  it("画面構成", () => {
+    render(<Home />)
+    expect(screen.queryByTestId('Header')).toBeTruthy()
+    expect(screen.queryByTestId('TodoList')).toBeTruthy()
   })
 
   it('ホーム画面の初期表示', async () => {

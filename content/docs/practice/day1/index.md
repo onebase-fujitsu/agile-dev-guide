@@ -743,7 +743,7 @@ Tailwind CSSでは予め定義されたclass名を使ってデザインを適用
 ```typescript jsx
 // Header.tsx
 const Header = () => (
-  <div className="flex items-center bg-green-500 p-6">
+  <div data-testid="Header" className="flex items-center bg-green-500 p-6">
     <h1 className="font-semibold text-xl text-white tracking-tight">Todo App</h1>
   </div>
 )
