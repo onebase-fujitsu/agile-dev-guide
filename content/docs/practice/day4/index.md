@@ -402,7 +402,6 @@ import {getTodos, postTodos} from '../../features/TodoApi'
 describe('TodoApi', () => {
   
   // 中略
-  
   it('post /todos', async () => {
     mock.onPost('/todos', {title: 'title'}).reply(201,
       {
@@ -415,6 +414,8 @@ describe('TodoApi', () => {
 
     expect(mock.history.post[0].url).toEqual('/todos')
     expect(mock.history.post[0].data).toEqual(JSON.stringify({title: 'title'}))
+    expect(mock.history.post[0].headers['Content-Type']).toEqual("application/json")
+    expect(mock.history.post[0].headers['X-Requested-With']).toEqual("XMLHttpRequest")
     expect(response.id).toEqual(1)
     expect(response.title).toEqual('title')
     expect(response.completed).toEqual(false)
@@ -423,6 +424,7 @@ describe('TodoApi', () => {
 ```
 
 `postTodos()`はtitleをパラメータとしてもらって、それをJSONに整形して送信していることを確認するテストを書きました。
+また、Headerに`Content-Type: application/json`が設定されていることを確認するテストも書いています。
 
 ```typescript
 // TodoApi.ts
