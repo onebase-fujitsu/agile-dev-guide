@@ -1,0 +1,553 @@
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="5日目 # ではTodoを作成するバックエンドAPIを作成していきましょう。 タスク作成バックエンドAPI # テスト # まず、サーバのテストを書いてみ">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="5日目">
+<meta property="og:description" content="5日目 # ではTodoを作成するバックエンドAPIを作成していきましょう。 タスク作成バックエンドAPI # テスト # まず、サーバのテストを書いてみ">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/"><meta property="article:section" content="docs">
+<title>5日目 | Fujitsu Agile Development Guide</title>
+<link rel=manifest href=/agile-dev-guide/manifest.json>
+<link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span>
+</a>
+</h2>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/>はじめに</a>
+</li>
+<li>
+<input type=checkbox id=section-b077c62e2cf275f367b13c9cd484dcf6 class=toggle>
+<label for=section-b077c62e2cf275f367b13c9cd484dcf6 class="flex justify-between">
+<a role=button>アジャイル</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/>アジャイル開発12の原則</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-488859b49087c05cd9f2afa3c2804c61 class=toggle>
+<label for=section-488859b49087c05cd9f2afa3c2804c61 class="flex justify-between">
+<a role=button>スクラム</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/overview/>スクラムとは</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/roles/>ロール</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/products/>成果物</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/events/>イベント</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-f43a50e4d00e3398d279579a5a9a0783 class=toggle>
+<label for=section-f43a50e4d00e3398d279579a5a9a0783 class="flex justify-between">
+<a role=button>エクストリームプログラミング</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/>エクストリームプログラミングとは</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/>エクストリームプログラミングのプラクティス</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-4881c8ea96a48f6fd2540db502c204e0 class=toggle>
+<label for=section-4881c8ea96a48f6fd2540db502c204e0 class="flex justify-between">
+<a role=button>ソフトウェアテスト</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/overview/>ソフトウェアテストを始めよう</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/>ウォーミングアップ</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/>ボウリングゲーム</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/>テストダブル</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/>E2Eテスト</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-6668e94793f2c3410fae208f25d1f417 class=toggle>
+<label for=section-6668e94793f2c3410fae208f25d1f417 class="flex justify-between">
+<a role=button>ソフトウェア設計</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/>アジャイル開発に求められるソフトウェア設計</a>
+</li>
+<li>
+<input type=checkbox id=section-fd21b9cd7e31d8e1d2ba14b32452065e class=toggle>
+<label for=section-fd21b9cd7e31d8e1d2ba14b32452065e class="flex justify-between">
+<a role=button>SOLID原則</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/>単一責任の原則(SRP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/>オープン・クローズドの原則(OCP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/>リスコフの置換原則(LSP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>依存性逆転の原則(DIP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/>インターフェース分離の原則(ISP)</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-ee4c81ada0b6a9ee859cebeab00ca76e class=toggle>
+<label for=section-ee4c81ada0b6a9ee859cebeab00ca76e class="flex justify-between">
+<a role=button>デザインパターン</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/designpattern/designpattern/>デザインパターン</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-a16dbb8fa8b2df15e7da65eb13e2d51a class=toggle checked>
+<label for=section-a16dbb8fa8b2df15e7da65eb13e2d51a class="flex justify-between">
+<a role=button>アジャイルの実践</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/>1日目</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/>2日目</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/>3日目</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/>4日目</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/ class=active>5日目</a>
+</li>
+</ul>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/>おわりに</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/>推奨書籍</a>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu>
+</label>
+<strong>5日目</strong>
+<label for=toc-control>
+<img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#タスク作成バックエンドapi>タスク作成バックエンドAPI</a>
+<ul>
+<li><a href=#テスト>テスト</a></li>
+<li><a href=#実装>実装</a></li>
+<li><a href=#再実行可能なテスト>再実行可能なテスト</a></li>
+</ul>
+</li>
+<li><a href=#api設計>API設計</a>
+<ul>
+<li><a href=#いいapiの設計とは>いいAPIの設計とは</a></li>
+<li><a href=#rest>REST</a></li>
+<li><a href=#リソース志向>リソース志向</a></li>
+<li><a href=#パラメータ>パラメータ</a></li>
+<li><a href=#レスポンスデータの設計>レスポンスデータの設計</a></li>
+<li><a href=#swagger>Swagger</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown><h1 id=5日目>
+5日目
+<a class=anchor href=#5%e6%97%a5%e7%9b%ae>#</a>
+</h1>
+<p>ではTodoを作成するバックエンドAPIを作成していきましょう。</p>
+<h2 id=タスク作成バックエンドapi>
+タスク作成バックエンドAPI
+<a class=anchor href=#%e3%82%bf%e3%82%b9%e3%82%af%e4%bd%9c%e6%88%90%e3%83%90%e3%83%83%e3%82%af%e3%82%a8%e3%83%b3%e3%83%89api>#</a>
+</h2>
+<h3 id=テスト>
+テスト
+<a class=anchor href=#%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h3>
+<p>まず、サーバのテストを書いてみましょう。
+<code>POST /todos</code>に対してJSONをボディにセットして、リクエストしたときの、
+レスポンスコードとレスポンスデータを確認するテストを書いてみます。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#75715e>// TodoControllerTest.kt
+</span><span style=color:#75715e></span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
+
+<span style=color:#66d9ef>import</span> com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+<span style=color:#66d9ef>import</span> com.fasterxml.jackson.module.kotlin.readValue
+<span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+<span style=color:#66d9ef>import</span> org.assertj.core.api.Assertions.assertThat
+<span style=color:#66d9ef>import</span> org.json.JSONObject
+<span style=color:#66d9ef>import</span> org.junit.jupiter.api.Test
+<span style=color:#66d9ef>import</span> org.springframework.beans.factory.annotation.Autowired
+<span style=color:#66d9ef>import</span> org.springframework.boot.test.context.SpringBootTest
+<span style=color:#66d9ef>import</span> org.springframework.boot.test.web.client.TestRestTemplate
+<span style=color:#66d9ef>import</span> org.springframework.http.*
+
+<span style=color:#a6e22e>@SpringBootTest</span>(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoControllerTest</span> {
+    <span style=color:#a6e22e>@Autowired</span>
+    <span style=color:#66d9ef>lateinit</span> <span style=color:#66d9ef>var</span> restTemplate: TestRestTemplate
+
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>fun</span> <span style=color:#960050;background-color:#1e0010>タスク一覧を取得できる()</span> <span style=color:#960050;background-color:#1e0010>{</span>
+        <span style=color:#a6e22e>val</span> header = HttpHeaders()
+        header.contentType = MediaType.APPLICATION_JSON
+        <span style=color:#66d9ef>val</span> response = restTemplate.exchange(<span style=color:#e6db74>&#34;/todos&#34;</span>, HttpMethod.GET, HttpEntity(<span style=color:#66d9ef>null</span>, header), String<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java)
+        <span style=color:#66d9ef>val</span> mapper = jacksonObjectMapper()
+        <span style=color:#66d9ef>val</span> articles: List&lt;Todo&gt; = mapper.readValue(response.body<span style=color:#f92672>!!</span>)
+        assertThat(response.statusCode).isEqualTo(HttpStatus.OK)
+        assertThat(articles.size).isEqualTo(<span style=color:#ae81ff>0</span>)
+    }
+
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>fun</span> <span style=color:#960050;background-color:#1e0010>タスクを新規作成できる()</span> <span style=color:#960050;background-color:#1e0010>{</span>
+        <span style=color:#a6e22e>val</span> newTodoJson = JSONObject()
+        newTodoJson.put(<span style=color:#e6db74>&#34;title&#34;</span>, <span style=color:#e6db74>&#34;test title&#34;</span>)
+        <span style=color:#66d9ef>val</span> header = HttpHeaders()
+        header.contentType = MediaType.APPLICATION_JSON
+        <span style=color:#66d9ef>val</span> postResponse = restTemplate.exchange(<span style=color:#e6db74>&#34;/todos&#34;</span>, HttpMethod.POST, HttpEntity(newTodoJson.toString(), header), String<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java)
+        <span style=color:#66d9ef>val</span> mapper = jacksonObjectMapper()
+        <span style=color:#66d9ef>val</span> todo: Todo = mapper.readValue(postResponse.body<span style=color:#f92672>!!</span>)
+        assertThat(postResponse.statusCode).isEqualTo(HttpStatus.CREATED)
+        assertThat(todo.id).isEqualTo(<span style=color:#ae81ff>1</span>)
+        assertThat(todo.title).isEqualTo(<span style=color:#e6db74>&#34;test title&#34;</span>)
+        assertThat(todo.completed).isEqualTo(<span style=color:#66d9ef>false</span>)
+    }
+}
+</code></pre></div><p>これは先日書いた<code>Get /Todos</code>のテストと同等なので大丈夫でしょう。</p>
+<h3 id=実装>
+実装
+<a class=anchor href=#%e5%ae%9f%e8%a3%85>#</a>
+</h3>
+<p>これも先日実装した<code>Get /Todos</code>とほぼ同等ですので、コードだけ示します。</p>
+<h4 id=model>
+Model
+<a class=anchor href=#model>#</a>
+</h4>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#75715e>// NewTodo.kt
+</span><span style=color:#75715e></span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.model
+
+<span style=color:#66d9ef>data</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>NewTodo</span>(
+    <span style=color:#66d9ef>val</span> title: String,
+)
+</code></pre></div><h4 id=controller層>
+Controller層
+<a class=anchor href=#controller%e5%b1%a4>#</a>
+</h4>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#75715e>// TodoControllerInterface.kt
+</span><span style=color:#75715e></span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
+
+<span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.NewTodo  <span style=color:#75715e>// 追加
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+
+<span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>TodoControllerInterface</span> {
+    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTodos</span>(): List&lt;Todo&gt;
+    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>createTodo</span>(newTodo: NewTodo): Todo  <span style=color:#75715e>// 追加
+</span><span style=color:#75715e></span>}
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#75715e>// TodoController.kt
+</span><span style=color:#75715e></span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
+
+<span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.NewTodo
+<span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+<span style=color:#66d9ef>import</span> org.springframework.http.HttpStatus
+<span style=color:#66d9ef>import</span> org.springframework.web.bind.annotation.*
+
+<span style=color:#a6e22e>@RestController</span>
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoController</span>(<span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> todoService: TodoControllerInterface) {
+    <span style=color:#a6e22e>@GetMapping</span>(<span style=color:#e6db74>&#34;/todos&#34;</span>)
+    <span style=color:#a6e22e>@ResponseStatus</span>(HttpStatus.OK)
+    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTodos</span>() : List&lt;Todo&gt; {
+        <span style=color:#66d9ef>return</span> todoService.getTodos()
+    }
+
+    <span style=color:#75715e>// 追加
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>@PostMapping</span>(<span style=color:#e6db74>&#34;/todos&#34;</span>)
+    <span style=color:#a6e22e>@ResponseStatus</span>(HttpStatus.CREATED)
+    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>createTodo</span>(<span style=color:#a6e22e>@RequestBody</span> newTodo: NewTodo): Todo {
+        <span style=color:#66d9ef>return</span> todoService.createTodo(newTodo)
+    }
+}
+</code></pre></div><h4 id=service層>
+Service層
+<a class=anchor href=#service%e5%b1%a4>#</a>
+</h4>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#75715e>// TodoServiceInterface.kt
+</span><span style=color:#75715e></span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.service
+
+<span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.NewTodo  <span style=color:#75715e>// 追加
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+
+<span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>TodoServiceInterface</span> {
+    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTodos</span>(): List&lt;Todo&gt;
+    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>createTodo</span>(newTodo: NewTodo): Todo      <span style=color:#75715e>// 追加
+</span><span style=color:#75715e></span>}
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#75715e>// TodoService.kt
+</span><span style=color:#75715e></span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.service
+
+<span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.controller.TodoControllerInterface
+<span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.NewTodo  <span style=color:#75715e>// 追加
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+<span style=color:#66d9ef>import</span> org.springframework.stereotype.Service
+
+<span style=color:#a6e22e>@Service</span>
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoService</span>(<span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> todoRepository: TodoServiceInterface) : TodoControllerInterface {
+    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTodos</span>(): List&lt;Todo&gt; {
+        <span style=color:#66d9ef>return</span> todoRepository.getTodos()
+    }
+
+    <span style=color:#75715e>// 追加
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>createTodo</span>(newTodo: NewTodo): Todo {
+        <span style=color:#66d9ef>return</span> todoRepository.createTodo(newTodo)
+    }
+}
+</code></pre></div><h5 id=repository層>
+Repository層
+<a class=anchor href=#repository%e5%b1%a4>#</a>
+</h5>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#75715e>// TodoRepository.kt
+</span><span style=color:#75715e></span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.repository
+
+<span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.NewTodo  <span style=color:#75715e>// 追加
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+<span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.service.TodoServiceInterface
+<span style=color:#66d9ef>import</span> org.springframework.jdbc.core.JdbcTemplate
+<span style=color:#66d9ef>import</span> org.springframework.jdbc.support.GeneratedKeyHolder
+<span style=color:#66d9ef>import</span> org.springframework.stereotype.Repository
+<span style=color:#66d9ef>import</span> java.sql.ResultSet
+<span style=color:#66d9ef>import</span> java.sql.Statement
+
+<span style=color:#a6e22e>@Repository</span>
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoRepository</span>(<span style=color:#66d9ef>val</span> jdbcTemplate: JdbcTemplate) : TodoServiceInterface {
+    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTodos</span>(): List&lt;Todo&gt; {
+        <span style=color:#66d9ef>return</span> jdbcTemplate.query(
+            <span style=color:#e6db74>&#34;&#34;&#34;select id, title, completed from todo&#34;&#34;&#34;</span>
+        ) { rs: ResultSet, _: Int <span style=color:#f92672>-&gt;</span>
+            Todo(
+                rs.getInt(<span style=color:#e6db74>&#34;id&#34;</span>),
+                rs.getString(<span style=color:#e6db74>&#34;title&#34;</span>),
+                rs.getBoolean(<span style=color:#e6db74>&#34;completed&#34;</span>)
+            )
+        }
+    }
+
+    <span style=color:#75715e>// 追加
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>createTodo</span>(newTodo: NewTodo): Todo {
+        <span style=color:#66d9ef>val</span> keyHolder = GeneratedKeyHolder()
+        jdbcTemplate.update({ connection <span style=color:#f92672>-&gt;</span>
+            <span style=color:#66d9ef>val</span> statement = connection.prepareStatement(
+                <span style=color:#e6db74>&#34;&#34;&#34;insert into todo(title, completed) values (?, false)&#34;&#34;&#34;</span>, Statement.RETURN_GENERATED_KEYS
+            )
+            statement.setString(<span style=color:#ae81ff>1</span>, newTodo.title)
+            statement
+        }, keyHolder)
+        <span style=color:#66d9ef>return</span> Todo(
+            keyHolder.keys<span style=color:#f92672>!!</span>[<span style=color:#e6db74>&#34;id&#34;</span>] <span style=color:#66d9ef>as</span> Int,
+            newTodo.title,
+            <span style=color:#66d9ef>false</span>
+        )
+    }
+}
+</code></pre></div><p>リポジトリは少しテクニカルなことをしていて、insert文を実行したときにインクリメントされた<code>id</code>を返すようにしていて、
+それを使って、戻り値を返すようにしています。</p>
+<p>こうすると、データを作成した後にサイドselect文を発行する必要がなくなりレスポンスが早くなります。</p>
+<h3 id=再実行可能なテスト>
+再実行可能なテスト
+<a class=anchor href=#%e5%86%8d%e5%ae%9f%e8%a1%8c%e5%8f%af%e8%83%bd%e3%81%aa%e3%83%86%e3%82%b9%e3%83%88>#</a>
+</h3>
+<p>さて、実装は完了したのでテストを動かして検証していきたいわけですが、このテストは問題なく動いているでしょうか？
+このテストはデータベースの状態に強く依存していて、動く人もいれば動かない人もいます。
+もし、運良くテストが動いた人も、もう一度全件テストを動かすと失敗するはずです。</p>
+<p>これはテストを実行する度に、todo_dbに対してデータの追加を行っているからで、
+一度todoテーブルに対してデータを追加すると、2回目以降はidが1にはならないからです。
+つまり、これは再現可能なテストになっていません。</p>
+<p>この問題に対処するにはテストを実行する度にDBをリセットしてしまえばいいので、その設定をしてみましょう。</p>
+<p>まず、src/test配下に<code>resources</code>ディレクトリを作成し、その中に<code>clear_db.sql</code>を作成します。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=color:#f92672>//</span> clear_db.<span style=color:#66d9ef>sql</span>
+<span style=color:#66d9ef>truncate</span> <span style=color:#66d9ef>table</span> todo <span style=color:#66d9ef>restart</span> <span style=color:#66d9ef>identity</span> <span style=color:#66d9ef>cascade</span>;
+</code></pre></div><p>やっている内容は単純でtodoテーブルの内容をtruncateすると共に、idのシーケンスをリセットしています。
+そして、テストを実行する度にこのSQLを実行したらいいわけですが、これもアノテーションを付与するだけで簡単に実現できます。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#75715e>// TodoControllerTest.kt
+</span><span style=color:#75715e></span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
+
+<span style=color:#66d9ef>import</span> com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+<span style=color:#66d9ef>import</span> com.fasterxml.jackson.module.kotlin.readValue
+<span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+<span style=color:#66d9ef>import</span> org.assertj.core.api.Assertions.assertThat
+<span style=color:#66d9ef>import</span> org.json.JSONObject
+<span style=color:#66d9ef>import</span> org.junit.jupiter.api.Test
+<span style=color:#66d9ef>import</span> org.springframework.beans.factory.annotation.Autowired
+<span style=color:#66d9ef>import</span> org.springframework.boot.test.context.SpringBootTest
+<span style=color:#66d9ef>import</span> org.springframework.boot.test.web.client.TestRestTemplate
+<span style=color:#66d9ef>import</span> org.springframework.http.*
+<span style=color:#66d9ef>import</span> org.springframework.test.context.jdbc.Sql    <span style=color:#75715e>// 追加
+</span><span style=color:#75715e></span>
+<span style=color:#a6e22e>@SpringBootTest</span>(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+<span style=color:#a6e22e>@Sql</span>(scripts = [<span style=color:#e6db74>&#34;/clear_db.sql&#34;</span>])       <span style=color:#75715e>// 追加
+</span><span style=color:#75715e></span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoControllerTest</span> {
+    <span style=color:#a6e22e>@Autowired</span>
+    <span style=color:#66d9ef>lateinit</span> <span style=color:#66d9ef>var</span> restTemplate: TestRestTemplate
+
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>fun</span> <span style=color:#960050;background-color:#1e0010>タスク一覧を取得できる()</span> <span style=color:#960050;background-color:#1e0010>{</span>
+        <span style=color:#a6e22e>val</span> header = HttpHeaders()
+        header.contentType = MediaType.APPLICATION_JSON
+        <span style=color:#66d9ef>val</span> response = restTemplate.exchange(<span style=color:#e6db74>&#34;/todos&#34;</span>, HttpMethod.GET, HttpEntity(<span style=color:#66d9ef>null</span>, header), String<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java)
+        <span style=color:#66d9ef>val</span> mapper = jacksonObjectMapper()
+        <span style=color:#66d9ef>val</span> articles: List&lt;Todo&gt; = mapper.readValue(response.body<span style=color:#f92672>!!</span>)
+        assertThat(response.statusCode).isEqualTo(HttpStatus.OK)
+        assertThat(articles.size).isEqualTo(<span style=color:#ae81ff>0</span>)
+    }
+
+    <span style=color:#a6e22e>@Test</span>
+    <span style=color:#66d9ef>fun</span> <span style=color:#960050;background-color:#1e0010>タスクを新規作成できる()</span> <span style=color:#960050;background-color:#1e0010>{</span>
+        <span style=color:#a6e22e>val</span> newTodoJson = JSONObject()
+        newTodoJson.put(<span style=color:#e6db74>&#34;title&#34;</span>, <span style=color:#e6db74>&#34;test title&#34;</span>)
+        <span style=color:#66d9ef>val</span> header = HttpHeaders()
+        header.contentType = MediaType.APPLICATION_JSON
+        <span style=color:#66d9ef>val</span> postResponse = restTemplate.exchange(<span style=color:#e6db74>&#34;/todos&#34;</span>, HttpMethod.POST, HttpEntity(newTodoJson.toString(), header), String<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java)
+        <span style=color:#66d9ef>val</span> mapper = jacksonObjectMapper()
+        <span style=color:#66d9ef>val</span> todo: Todo = mapper.readValue(postResponse.body<span style=color:#f92672>!!</span>)
+        assertThat(postResponse.statusCode).isEqualTo(HttpStatus.CREATED)
+        assertThat(todo.id).isEqualTo(<span style=color:#ae81ff>1</span>)
+        assertThat(todo.title).isEqualTo(<span style=color:#e6db74>&#34;test title&#34;</span>)
+        assertThat(todo.completed).isEqualTo(<span style=color:#66d9ef>false</span>)
+    }
+}
+</code></pre></div><p>これでテストは動くはずです。データを追加できるようになったため、データを追加した後Getでレスポンスデータを確認するテストを追記しても良いでしょう。</p>
+<p>ここまでのサーバのソースコードは
+<a href=https://github.com/Onebase-Fujitsu/todo-app-server/tree/step3>https://github.com/Onebase-Fujitsu/todo-app-server/tree/step3</a>
+においてあります。</p>
+<h2 id=api設計>
+API設計
+<a class=anchor href=#api%e8%a8%ad%e8%a8%88>#</a>
+</h2>
+<h3 id=いいapiの設計とは>
+いいAPIの設計とは
+<a class=anchor href=#%e3%81%84%e3%81%84api%e3%81%ae%e8%a8%ad%e8%a8%88%e3%81%a8%e3%81%af>#</a>
+</h3>
+<h3 id=rest>
+REST
+<a class=anchor href=#rest>#</a>
+</h3>
+<h3 id=リソース志向>
+リソース志向
+<a class=anchor href=#%e3%83%aa%e3%82%bd%e3%83%bc%e3%82%b9%e5%bf%97%e5%90%91>#</a>
+</h3>
+<h3 id=パラメータ>
+パラメータ
+<a class=anchor href=#%e3%83%91%e3%83%a9%e3%83%a1%e3%83%bc%e3%82%bf>#</a>
+</h3>
+<h3 id=レスポンスデータの設計>
+レスポンスデータの設計
+<a class=anchor href=#%e3%83%ac%e3%82%b9%e3%83%9d%e3%83%b3%e3%82%b9%e3%83%87%e3%83%bc%e3%82%bf%e3%81%ae%e8%a8%ad%e8%a8%88>#</a>
+</h3>
+<h3 id=swagger>
+Swagger
+<a class=anchor href=#swagger>#</a>
+</h3>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#タスク作成バックエンドapi>タスク作成バックエンドAPI</a>
+<ul>
+<li><a href=#テスト>テスト</a></li>
+<li><a href=#実装>実装</a></li>
+<li><a href=#再実行可能なテスト>再実行可能なテスト</a></li>
+</ul>
+</li>
+<li><a href=#api設計>API設計</a>
+<ul>
+<li><a href=#いいapiの設計とは>いいAPIの設計とは</a></li>
+<li><a href=#rest>REST</a></li>
+<li><a href=#リソース志向>リソース志向</a></li>
+<li><a href=#パラメータ>パラメータ</a></li>
+<li><a href=#レスポンスデータの設計>レスポンスデータの設計</a></li>
+<li><a href=#swagger>Swagger</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>
