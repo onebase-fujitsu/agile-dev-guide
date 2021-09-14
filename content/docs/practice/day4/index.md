@@ -719,3 +719,63 @@ export default Home
 
 Home.tsxがだいぶスッキリしました。テストも合わせて修正してしまいましょう。
 
+```typescript jsx
+// Home.test.tsx
+import {cleanup, screen} from '@testing-library/react'
+import {render} from '../../test-utils'
+import Home from '../../pages/Home'
+
+describe('Home画面', () => {
+  afterEach(() => {
+    cleanup()
+  })
+
+  it('画面構成', () => {
+    render(<Home />)
+    expect(screen.queryByTestId('Header')).toBeTruthy()
+    expect(screen.queryByTestId('TodoList')).toBeTruthy()
+  })
+})
+```
+
+```typescript jsx
+// App.test.tsx
+import axios from "axios";
+import MockAdapter from "axios-mock-adapter";
+import {render} from "../test-utils";
+import App from "../App";
+
+describe('App', () => {
+  let mock: MockAdapter
+
+  beforeEach(() => {
+    mock = new MockAdapter(axios)
+  })
+
+  afterEach(() => {
+    mock.reset()
+  })
+
+  it('ホーム画面の初期表示', async () => {
+    mock.onGet('/todos').reply(200, [
+      {
+        id: 1,
+        title: 'title',
+        completed: false,
+      },
+    ])
+    const initialState = {todos: []}
+    render(<App />, {preloadedState: initialState})
+
+    expect(mock.history.get[0].url).toEqual('/todos')
+  })
+})
+```
+
+これでテストは通るようになったと思います。
+ブラウザで動作を確認してみると、アプリケーションを開いた最初の一回だけ/todosにGETをしているのが確認でき、
+メニューからページ遷移をしても/todosにGETはされないことが確認できるはずです。
+
+ここまでのソースは
+[https://github.com/Onebase-Fujitsu/todo-app-client/tree/step7](https://github.com/Onebase-Fujitsu/todo-app-client/tree/step7)
+に置いてあります。
