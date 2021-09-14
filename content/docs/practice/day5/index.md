@@ -226,7 +226,7 @@ class TodoRepository(val jdbcTemplate: JdbcTemplate) : TodoServiceInterface {
 まず、src/test配下に`resources`ディレクトリを作成し、その中に`clear_db.sql`を作成します。
 
 ```sql
-// clear_db.sql
+/* clear_db.sql */
 truncate table todo restart identity cascade;
 ```
 
@@ -289,14 +289,80 @@ class TodoControllerTest {
 [https://github.com/Onebase-Fujitsu/todo-app-server/tree/step3](https://github.com/Onebase-Fujitsu/todo-app-server/tree/step3)
 においてあります。
 
+## タスク画面のデザインの適用
+
+![NewTask](NewTask.jpg)
+
+現在クライアントを連携させると、NewTask画面で追加したタスクがHome画面に追加できていることがわかります。
+しかし、デザインがまだ適用されていないので、デザインを適用してみましょう。
+
+```typescript jsx
+// TodoList.tsx
+import {useSelector} from 'react-redux'
+import {ArchiveIcon} from "@heroicons/react/solid";
+import {RootState} from '../stores/store'
+
+const TodoList = () => {
+  const todos = useSelector((state: RootState) => state.todos)
+
+  return (
+    <ul data-testid="TodoList" className="w-full p-8 flex flex-col">
+      {todos.map((todo) => (
+        <li key={todo.id} className="w-full flex justify-center items-center pb-4">
+          <div className="border-2 flex justify-between border-gray-200 w-full rounded-lg shadow-lg p-4">
+            <div>
+              <p className="text-xl font-bold">{todo.title}</p>
+            </div>
+            <button type="button">
+              <ArchiveIcon className="w-6"/>
+            </button>
+          </div>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+export default TodoList
+```
+
+タスクリストにデザインを適用してみました。
+
+![DesignedTaskList](DesignedTaskList.jpg)
+
+ここまでのクライアントのソースコードは
+[https://github.com/Onebase-Fujitsu/todo-app-client/tree/step8](https://github.com/Onebase-Fujitsu/todo-app-client/tree/step8)
+に置いてあります。
+
 
 ## API設計
 
-
+さて、ここまで`/todos`に対するGETの処理やPOSTの処理を実装しましたが、
+ここで少し箸休めにAPIの設計について簡単に説明しようと思います。
 
 ### いいAPIの設計とは
 
+4日目に以下のような文書を記載しました。
+
+{{< hint >}}
+HTTP通信のオーバーヘッドはメモリアクセスや、ディスクアクセスと比較して比べ物にならないほど大きいです。
+良くないAPIを揶揄する言葉に「おしゃべりなAPI」というものがあります。
+つまり、画面を描画するのになんどもなんどもAPIをコールする必要があるAPI設計は良くないということです。
+{{< /hint >}}
+
+これはよくある悪いAPIの設計の話なのですが、逆にいいAPIとはなんでしょうか？
+
+いいAPIの定義は人によって様々だと思いますが、筆者は **「開発者がドキュメントを見なくても自然に使えるAPI」** がいいAPIだと思っています。
+自然に使えるというのは **つまりWeb標準に従っているAPI** ということです。つまりRESTのルールに準拠して設計をしなさいということになります。
+
 ### REST
+
+HTTPのメソッドは4つしかありません。
+
+- GET
+- POST
+- PUT
+- DELETE
 
 ### リソース志向
 
