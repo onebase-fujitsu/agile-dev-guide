@@ -207,6 +207,7 @@
 <li><a href=#再実行可能なテスト>再実行可能なテスト</a></li>
 </ul>
 </li>
+<li><a href=#タスク画面のデザインの適用>タスク画面のデザインの適用</a></li>
 <li><a href=#api設計>API設計</a>
 <ul>
 <li><a href=#いいapiの設計とは>いいAPIの設計とは</a></li>
@@ -430,7 +431,7 @@ Repository層
 つまり、これは再現可能なテストになっていません。</p>
 <p>この問題に対処するにはテストを実行する度にDBをリセットしてしまえばいいので、その設定をしてみましょう。</p>
 <p>まず、src/test配下に<code>resources</code>ディレクトリを作成し、その中に<code>clear_db.sql</code>を作成します。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=color:#f92672>//</span> clear_db.<span style=color:#66d9ef>sql</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=color:#75715e>/* clear_db.sql */</span>
 <span style=color:#66d9ef>truncate</span> <span style=color:#66d9ef>table</span> todo <span style=color:#66d9ef>restart</span> <span style=color:#66d9ef>identity</span> <span style=color:#66d9ef>cascade</span>;
 </code></pre></div><p>やっている内容は単純でtodoテーブルの内容をtruncateすると共に、idのシーケンスをリセットしています。
 そして、テストを実行する度にこのSQLを実行したらいいわけですが、これもアノテーションを付与するだけで簡単に実現できます。</p>
@@ -485,18 +486,75 @@ Repository層
 <p>ここまでのサーバのソースコードは
 <a href=https://github.com/Onebase-Fujitsu/todo-app-server/tree/step3>https://github.com/Onebase-Fujitsu/todo-app-server/tree/step3</a>
 においてあります。</p>
+<h2 id=タスク画面のデザインの適用>
+タスク画面のデザインの適用
+<a class=anchor href=#%e3%82%bf%e3%82%b9%e3%82%af%e7%94%bb%e9%9d%a2%e3%81%ae%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3%e3%81%ae%e9%81%a9%e7%94%a8>#</a>
+</h2>
+<p><img src=NewTask.jpg alt=NewTask></p>
+<p>現在クライアントを連携させると、NewTask画面で追加したタスクがHome画面に追加できていることがわかります。
+しかし、デザインがまだ適用されていないので、デザインを適用してみましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// TodoList.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>useSelector</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-redux&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>ArchiveIcon</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;@heroicons/react/solid&#34;</span>;
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>RootState</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../stores/store&#39;</span>
+
+<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>TodoList</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>todos</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>useSelector</span>((<span style=color:#a6e22e>state</span>: <span style=color:#66d9ef>RootState</span>) <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>state</span>.<span style=color:#a6e22e>todos</span>)
+
+  <span style=color:#66d9ef>return</span> (
+    &lt;<span style=color:#f92672>ul</span> <span style=color:#a6e22e>data</span><span style=color:#960050;background-color:#1e0010>-</span><span style=color:#a6e22e>testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;TodoList&#34;</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;w-full p-8 flex flex-col&#34;</span>&gt;
+      {<span style=color:#a6e22e>todos</span>.<span style=color:#a6e22e>map</span>((<span style=color:#a6e22e>todo</span>) <span style=color:#f92672>=&gt;</span> (
+        &lt;<span style=color:#f92672>li</span> <span style=color:#a6e22e>key</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>todo</span>.<span style=color:#a6e22e>id</span>} <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;w-full flex justify-center items-center pb-4&#34;</span>&gt;
+          &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;border-2 flex justify-between border-gray-200 w-full rounded-lg shadow-lg p-4&#34;</span>&gt;
+            &lt;<span style=color:#f92672>div</span>&gt;
+              &lt;<span style=color:#f92672>p</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text-xl font-bold&#34;</span>&gt;{<span style=color:#a6e22e>todo</span>.<span style=color:#a6e22e>title</span>}&lt;/<span style=color:#f92672>p</span>&gt;
+            &lt;/<span style=color:#f92672>div</span>&gt;
+            &lt;<span style=color:#f92672>button</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;button&#34;</span>&gt;
+              &lt;<span style=color:#f92672>ArchiveIcon</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;w-6&#34;</span>/&gt;
+            &lt;/<span style=color:#f92672>button</span>&gt;
+          &lt;/<span style=color:#f92672>div</span>&gt;
+        &lt;/<span style=color:#f92672>li</span>&gt;
+      ))}
+    &lt;/<span style=color:#f92672>ul</span>&gt;
+  )
+}
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>TodoList</span>
+</code></pre></div><p>タスクリストにデザインを適用してみました。</p>
+<p><img src=DesignedTaskList.jpg alt=DesignedTaskList></p>
+<p>ここまでのクライアントのソースコードは
+<a href=https://github.com/Onebase-Fujitsu/todo-app-client/tree/step8>https://github.com/Onebase-Fujitsu/todo-app-client/tree/step8</a>
+に置いてあります。</p>
 <h2 id=api設計>
 API設計
 <a class=anchor href=#api%e8%a8%ad%e8%a8%88>#</a>
 </h2>
+<p>さて、ここまで<code>/todos</code>に対するGETの処理やPOSTの処理を実装しましたが、
+ここで少し箸休めにAPIの設計について簡単に説明しようと思います。</p>
 <h3 id=いいapiの設計とは>
 いいAPIの設計とは
 <a class=anchor href=#%e3%81%84%e3%81%84api%e3%81%ae%e8%a8%ad%e8%a8%88%e3%81%a8%e3%81%af>#</a>
 </h3>
+<p>4日目に以下のような文書を記載しました。</p>
+<blockquote class=book-hint>
+HTTP通信のオーバーヘッドはメモリアクセスや、ディスクアクセスと比較して比べ物にならないほど大きいです。
+良くないAPIを揶揄する言葉に「おしゃべりなAPI」というものがあります。
+つまり、画面を描画するのになんどもなんどもAPIをコールする必要があるAPI設計は良くないということです。
+</blockquote>
+<p>これはよくある悪いAPIの設計の話なのですが、逆にいいAPIとはなんでしょうか？</p>
+<p>いいAPIの定義は人によって様々だと思いますが、筆者は <strong>「開発者がドキュメントを見なくても自然に使えるAPI」</strong> がいいAPIだと思っています。
+自然に使えるというのは <strong>つまりWeb標準に従っているAPI</strong> ということです。つまりRESTのルールに準拠して設計をしなさいということになります。</p>
 <h3 id=rest>
 REST
 <a class=anchor href=#rest>#</a>
 </h3>
+<p>HTTPのメソッドは4つしかありません。</p>
+<ul>
+<li>GET</li>
+<li>POST</li>
+<li>PUT</li>
+<li>DELETE</li>
+</ul>
 <h3 id=リソース志向>
 リソース志向
 <a class=anchor href=#%e3%83%aa%e3%82%bd%e3%83%bc%e3%82%b9%e5%bf%97%e5%90%91>#</a>
@@ -534,6 +592,7 @@ Swagger
 <li><a href=#再実行可能なテスト>再実行可能なテスト</a></li>
 </ul>
 </li>
+<li><a href=#タスク画面のデザインの適用>タスク画面のデザインの適用</a></li>
 <li><a href=#api設計>API設計</a>
 <ul>
 <li><a href=#いいapiの設計とは>いいAPIの設計とは</a></li>
