@@ -551,8 +551,7 @@ APIの作成
 <span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;TodoApi&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
   
   <span style=color:#75715e>// 中略
-</span><span style=color:#75715e></span>  
-  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;post /todos&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+</span><span style=color:#75715e></span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;post /todos&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
     <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>onPost</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>, {<span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title&#39;</span>}).<span style=color:#a6e22e>reply</span>(<span style=color:#ae81ff>201</span>,
       {
         <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>1</span>,
@@ -564,12 +563,15 @@ APIの作成
 
     <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#a6e22e>post</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>url</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>)
     <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#a6e22e>post</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>data</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#a6e22e>JSON</span>.<span style=color:#a6e22e>stringify</span>({<span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title&#39;</span>}))
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#a6e22e>post</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>headers</span>[<span style=color:#e6db74>&#39;Content-Type&#39;</span>]).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#34;application/json&#34;</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#a6e22e>post</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>headers</span>[<span style=color:#e6db74>&#39;X-Requested-With&#39;</span>]).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#34;XMLHttpRequest&#34;</span>)
     <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>id</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#ae81ff>1</span>)
     <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>title</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;title&#39;</span>)
     <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>completed</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#66d9ef>false</span>)
   })
 })
-</code></pre></div><p><code>postTodos()</code>はtitleをパラメータとしてもらって、それをJSONに整形して送信していることを確認するテストを書きました。</p>
+</code></pre></div><p><code>postTodos()</code>はtitleをパラメータとしてもらって、それをJSONに整形して送信していることを確認するテストを書きました。
+また、Headerに<code>Content-Type: application/json</code>が設定されていることを確認するテストも書いています。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// TodoApi.ts
 </span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>axios</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios&#39;</span>
 <span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>Todo</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../stores/todoSlice&#39;</span>
