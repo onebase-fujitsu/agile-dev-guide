@@ -436,7 +436,11 @@ export const getTodos = async () => {
 
 export const postTodos = async (title: string) => {
   const requestJson = {title}
-  const response = await axios.post<Todo>('/todos', JSON.stringify(requestJson))
+  const headers = {
+    'X-Requested-With': 'XMLHttpRequest',
+    'Content-Type': 'application/json',
+  }
+  const response = await axios.post<Todo>('/todos', JSON.stringify(requestJson), {headers})
   return response.data
 }
 ```
