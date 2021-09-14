@@ -581,7 +581,7 @@ TodoListはまだ実装されていませんので、当然失敗するはずで
   <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>todos</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>useSelector</span>((<span style=color:#a6e22e>state</span>: <span style=color:#66d9ef>RootState</span>) <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>state</span>.<span style=color:#a6e22e>todos</span>)
 
   <span style=color:#66d9ef>return</span> (
-          &lt;<span style=color:#f92672>ul</span>&gt;
+          &lt;<span style=color:#f92672>ul</span> <span style=color:#a6e22e>data</span><span style=color:#960050;background-color:#1e0010>-</span><span style=color:#a6e22e>testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#39;TodoList&#39;</span>&gt;
             {<span style=color:#a6e22e>todos</span>.<span style=color:#a6e22e>map</span>((<span style=color:#a6e22e>todo</span>) <span style=color:#f92672>=&gt;</span> (
                     &lt;<span style=color:#f92672>li</span> <span style=color:#a6e22e>key</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>todo</span>.<span style=color:#a6e22e>id</span>}&gt;{<span style=color:#a6e22e>todo</span>.<span style=color:#a6e22e>title</span>}&lt;/<span style=color:#f92672>li</span>&gt;
             ))}
@@ -706,6 +706,12 @@ Redux Connected Componentsのテスト
     <span style=color:#a6e22e>cleanup</span>()
   })
 
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#34;画面構成&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>Home</span> /&gt;)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByTestId</span>(<span style=color:#e6db74>&#39;Header&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByTestId</span>(<span style=color:#e6db74>&#39;TodoList&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
+  })
+
   <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;ホーム画面の初期表示&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
     <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>onGet</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>).<span style=color:#a6e22e>reply</span>(<span style=color:#ae81ff>200</span>, [
       {
@@ -750,7 +756,7 @@ useEffect()については <a href=https://ja.reactjs.org/docs/hooks-effect.html
   })
 
   <span style=color:#66d9ef>return</span> (
-          &lt;<span style=color:#f92672>div</span>&gt;
+          &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>data</span><span style=color:#960050;background-color:#1e0010>-</span><span style=color:#a6e22e>testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Home&#34;</span>&gt;
             &lt;<span style=color:#f92672>Header</span> /&gt;
             &lt;<span style=color:#f92672>TodoList</span> /&gt;
           &lt;/<span style=color:#f92672>div</span>&gt;
@@ -807,6 +813,12 @@ APIリクエストの戻り値はPromiseで、それがまだペンディング�
   <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
     <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>reset</span>()
     <span style=color:#a6e22e>cleanup</span>()
+  })
+
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#34;画面構成&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>Home</span> /&gt;)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByTestId</span>(<span style=color:#e6db74>&#39;Header&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByTestId</span>(<span style=color:#e6db74>&#39;TodoList&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
   })
 
   <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;ホーム画面の初期表示&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {

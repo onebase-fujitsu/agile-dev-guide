@@ -200,8 +200,18 @@
 <li><a href=#タスクの追加画面を作る>タスクの追加画面を作る</a>
 <ul>
 <li><a href=#ルーターの導入>ルーターの導入</a></li>
+<li><a href=#ヘッダーの作り込み>ヘッダーの作り込み</a></li>
+<li><a href=#タスク作成画面の作成>タスク作成画面の作成</a></li>
 </ul>
 </li>
+<li><a href=#タスク作成機能の作成>タスク作成機能の作成</a>
+<ul>
+<li><a href=#apiの作成>APIの作成</a></li>
+<li><a href=#reducerへの登録>Reducerへの登録</a></li>
+<li><a href=#タスク作成フォームへの組み込み>タスク作成フォームへの組み込み</a></li>
+</ul>
+</li>
+<li><a href=#タスク一覧の取得タイミングの変更>タスク一覧の取得タイミングの変更</a></li>
 </ul>
 </nav>
 </aside>
@@ -222,7 +232,7 @@
 <a href=http://localhost:3000/hogehoge>http://localhost:3000/hogehoge</a> にアクセスしてもHome画面が表示されます。</p>
 <p>これはちょっとイケてないので、ルーターの機能を実装してみます。
 ここでは <a href=http://localhost:3000/>http://localhost:3000/</a> にアクセスするとHome画面が、
-そして <a href=http://localhost:3000/newTodo>http://localhost:3000/newTodo</a> にアクセスするとタスク管理画面が開くようにしてみましょう。</p>
+そして <a href=http://localhost:3000/newTask>http://localhost:3000/newTask</a> にアクセスするとタスク管理画面が開くようにしてみましょう。</p>
 <h3 id=ルーターの導入>
 ルーターの導入
 <a class=anchor href=#%e3%83%ab%e3%83%bc%e3%82%bf%e3%83%bc%e3%81%ae%e5%b0%8e%e5%85%a5>#</a>
@@ -252,7 +262,628 @@
 <span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>App</span>
 </code></pre></div><p>この状態で <a href=http://localhost:3000/>http://localhost:3000/</a> にアクセスするとHome画面が表示されます。ここはこれまでの動作と変わりません。
 そこで <a href=http://localhost:3000/hoge>http://localhost:3000/hoge</a> にアクセスすると、先程と代わって真っ白な画面になると思います。</p>
-<p>つまりこれは'/&lsquo;というパスだったらホームコンポーネントを表示するよという設定なわけです。</p>
+<p>つまりこれは<code>/</code>というパスだったらホームコンポーネントを表示するよという設定なわけです。</p>
+<h3 id=ヘッダーの作り込み>
+ヘッダーの作り込み
+<a class=anchor href=#%e3%83%98%e3%83%83%e3%83%80%e3%83%bc%e3%81%ae%e4%bd%9c%e3%82%8a%e8%be%bc%e3%81%bf>#</a>
+</h3>
+<p>ではヘッダーにメニューを作り込んでいきましょう。
+せっかくなので、ここでデザインも作り込んでいきます。</p>
+<p>まずテストから。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// Header.test.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>  <span style=color:#75715e>// 変更
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Header</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../components/Header&#39;</span>
+<span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>render</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../test-utils&#39;</span>   <span style=color:#75715e>// 追加
+</span><span style=color:#75715e></span>
+<span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;Header&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>cleanup</span>()
+  })
+
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;ヘッダーの初期表示&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>Header</span> /&gt;)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#39;Todo App&#39;</span>)).<span style=color:#a6e22e>toBeInTheDocument</span>()
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#39;Home&#39;</span>).<span style=color:#a6e22e>closest</span>(<span style=color:#e6db74>&#39;a&#39;</span>)).<span style=color:#a6e22e>toHaveAttribute</span>(<span style=color:#e6db74>&#39;href&#39;</span>, <span style=color:#e6db74>&#39;/&#39;</span>)            <span style=color:#75715e>// 追加
+</span><span style=color:#75715e></span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#39;New Task&#39;</span>).<span style=color:#a6e22e>closest</span>(<span style=color:#e6db74>&#39;a&#39;</span>)).<span style=color:#a6e22e>toHaveAttribute</span>(<span style=color:#e6db74>&#39;href&#39;</span>, <span style=color:#e6db74>&#39;/newTask&#39;</span>) <span style=color:#75715e>// 追加
+</span><span style=color:#75715e></span>  })
+})
+</code></pre></div><p>ヘッダーに<code>/</code>へのリンクと、<code>/newTask</code>へのリンクがあることを確認するテストを追加しました。</p>
+<p>テストが書けたら実装も追加します。
+今回はicon画像を使いたいので、<a href=https://heroicons.com/>HeroIcons</a> を導入してから、Header.tsxを編集します。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>npm install @heroicons/react
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// Header.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>Link</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;react-router-dom&#34;</span>;
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>HomeIcon</span>, <span style=color:#a6e22e>PencilAltIcon</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;@heroicons/react/solid&#34;</span>;
+
+<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Header</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> (
+  &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>data</span><span style=color:#960050;background-color:#1e0010>-</span><span style=color:#a6e22e>testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Header&#34;</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;h-screen w-48 border-r bg-white&#34;</span>&gt;
+    &lt;<span style=color:#f92672>h1</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;font-semibold p-4 text-xl tracking-tight&#34;</span>&gt;<span style=color:#a6e22e>Todo</span> <span style=color:#a6e22e>App</span>&lt;/<span style=color:#f92672>h1</span>&gt;
+    &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;h-3/4 flex flex-col justify-start text-gray-500&#34;</span>&gt;
+      &lt;<span style=color:#f92672>Link</span> <span style=color:#a6e22e>to</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/&#34;</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;p-4 hover:bg-gray-100 hover:text-gray-700 transition duration-200 ease-in&#34;</span>&gt;
+        &lt;<span style=color:#f92672>h2</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text-sm flex items-center&#34;</span>&gt;
+          &lt;<span style=color:#f92672>HomeIcon</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;w-5 mr-3&#34;</span>/&gt;
+          &lt;<span style=color:#f92672>span</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;hover:text-black transition duration-200 ease-linear&#34;</span>&gt;<span style=color:#a6e22e>Home</span>&lt;/<span style=color:#f92672>span</span>&gt;
+        &lt;/<span style=color:#f92672>h2</span>&gt;
+      &lt;/<span style=color:#f92672>Link</span>&gt;
+      &lt;<span style=color:#f92672>Link</span> <span style=color:#a6e22e>to</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/newTask&#34;</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;p-4 hover:bg-gray-100 hover:text-gray-700 transition duration-200 ease-in&#34;</span>&gt;
+        &lt;<span style=color:#f92672>h2</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text-sm flex items-center&#34;</span>&gt;
+          &lt;<span style=color:#f92672>PencilAltIcon</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;w-5 mr-3&#34;</span>/&gt;
+          &lt;<span style=color:#f92672>span</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;hover:text-black transition duration-200 ease-linear&#34;</span>&gt;<span style=color:#a6e22e>New</span> <span style=color:#a6e22e>Task</span>&lt;/<span style=color:#f92672>span</span>&gt;
+        &lt;/<span style=color:#f92672>h2</span>&gt;
+      &lt;/<span style=color:#f92672>Link</span>&gt;
+    &lt;/<span style=color:#f92672>div</span>&gt;
+  &lt;/<span style=color:#f92672>div</span>&gt;
+)
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>Header</span>
+</code></pre></div><p>しかし、このテストはそもそもレンダーで失敗します。</p>
+<pre tabindex=0><code>  ● Header › ヘッダーの初期表示
+
+    Invariant failed: You should not use &lt;Link&gt; outside a &lt;Router&gt;
+
+      18 |     return &lt;Provider store={store}&gt;{children}&lt;/Provider&gt;
+      19 |   }
+    &gt; 20 |   return rtlRender(ui, {wrapper: Wrapper, ...renderOptions})
+         |          ^
+      21 | }
+      22 |
+      23 | export * from '@testing-library/react'
+</code></pre><p>Routerに依存しているのでLinkがRouterに依存しているのにそれを無視してレンダリングしようとしたからですね。
+というわけで、test-utils.jsxも編集してしまいましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#75715e>// test-utils.jsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>render</span> <span style=color:#a6e22e>as</span> <span style=color:#a6e22e>rtlRender</span>} <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>configureStore</span>} <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;@reduxjs/toolkit&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>Provider</span>} <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;react-redux&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>todoSlice</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;./stores/todoSlice&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>BrowserRouter</span>} <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;react-router-dom&#39;</span>
+
+<span style=color:#66d9ef>function</span> <span style=color:#a6e22e>render</span>(
+    <span style=color:#a6e22e>ui</span>,
+    {
+        <span style=color:#a6e22e>preloadedState</span>,
+        <span style=color:#a6e22e>store</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>configureStore</span>({
+            <span style=color:#a6e22e>reducer</span><span style=color:#f92672>:</span> {<span style=color:#a6e22e>todos</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>todoSlice</span>.<span style=color:#a6e22e>reducer</span>},
+            <span style=color:#a6e22e>preloadedState</span>,
+        }),
+        ...<span style=color:#a6e22e>renderOptions</span>
+    } <span style=color:#f92672>=</span> {}
+) {
+    <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>Wrapper</span>({<span style=color:#a6e22e>children</span>}) {
+        <span style=color:#66d9ef>return</span> (
+            <span style=color:#f92672>&lt;</span><span style=color:#a6e22e>Provider</span> <span style=color:#a6e22e>store</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>store</span>}<span style=color:#f92672>&gt;</span>
+                <span style=color:#f92672>&lt;</span><span style=color:#a6e22e>BrowserRouter</span><span style=color:#f92672>&gt;</span>{<span style=color:#a6e22e>children</span>}<span style=color:#f92672>&lt;</span><span style=color:#960050;background-color:#1e0010>/BrowserRouter&gt;</span>
+            <span style=color:#f92672>&lt;</span><span style=color:#960050;background-color:#1e0010>/Provider&gt;</span>
+        )
+    }
+    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>rtlRender</span>(<span style=color:#a6e22e>ui</span>, {<span style=color:#a6e22e>wrapper</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>Wrapper</span>, ...<span style=color:#a6e22e>renderOptions</span>})
+}
+
+<span style=color:#66d9ef>export</span> <span style=color:#f92672>*</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+<span style=color:#66d9ef>export</span> {<span style=color:#a6e22e>render</span>}
+</code></pre></div><p>これでひとまずテストは通ったと思います。</p>
+<p><img src=newMenu.jpg alt=新しいメニュー></p>
+<p>メニューができて芋っぽさがなくなりました。しかし、New Taskをクリックすると真っ白な画面になってしまいます。</p>
+<p>ここまでのソースは
+<a href=https://github.com/Onebase-Fujitsu/todo-app-client/tree/step5>https://github.com/Onebase-Fujitsu/todo-app-client/tree/step5</a>
+に置いてあります。</p>
+<h3 id=タスク作成画面の作成>
+タスク作成画面の作成
+<a class=anchor href=#%e3%82%bf%e3%82%b9%e3%82%af%e4%bd%9c%e6%88%90%e7%94%bb%e9%9d%a2%e3%81%ae%e4%bd%9c%e6%88%90>#</a>
+</h3>
+<p>では次にタスク作成画面を作成しましょう。まず、タスク作成画面のテストを作成します。
+page配下にNewTask.test.tsxを作成しましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// NewTask.test.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>render</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../test-utils&#39;</span>
+
+<span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;タスク作成画面&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+
+    <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+        <span style=color:#a6e22e>cleanup</span>()
+    })
+
+    <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;画面構成&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+        <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>NewTask</span> /&gt;)
+
+        <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByTestId</span>(<span style=color:#e6db74>&#39;Header&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
+        <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByTestId</span>(<span style=color:#e6db74>&#39;NewTaskForm&#39;</span>)).<span style=color:#a6e22e>toBeInTheDocument</span>()
+    })
+})
+</code></pre></div><p>画面のテスト内容はHeaderとタスクを入力するFormコンポーネントで構成されていることというテストにしました。
+もちろん、NewTaskコンポーネントも、NewTaskFormコンポーネントもまだ無いためこのテストは失敗します。</p>
+<p>まず、NewTaskFromコンポーネントを作成していきましょう。
+components配下にNewTaskForm.tsxを作成します。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// NewTaskFrom.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>NewTaskForm</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
+
+  <span style=color:#66d9ef>return</span> (
+    &lt;<span style=color:#f92672>form</span> <span style=color:#a6e22e>data</span><span style=color:#960050;background-color:#1e0010>-</span><span style=color:#a6e22e>testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;NewTaskForm&#34;</span> /&gt;
+  )
+}
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>NewTaskForm</span>
+</code></pre></div><p>いったん中身は空で大丈夫です。</p>
+<p>その上で、page配下にNewTask.tsxを作成します。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// NewTask.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Header</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../components/Header&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>NewTaskForm</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../components/NewTaskForm&#39;</span>
+
+<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>NewTask</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> (
+  &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>data</span><span style=color:#960050;background-color:#1e0010>-</span><span style=color:#a6e22e>testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;NewTask&#34;</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;flex&#34;</span>&gt;
+    &lt;<span style=color:#f92672>Header</span>/&gt;
+    &lt;<span style=color:#f92672>NewTaskForm</span>/&gt;
+  &lt;/<span style=color:#f92672>div</span>&gt;
+)
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>NewTask</span>
+</code></pre></div><p>これでNewTask.test.tsxにimportを追加すると、いったんテストは通るようになったのではないでしょうか？</p>
+<p>次にFormコンポーネントを作り込んでいきましょう。
+NewTaskFormコンポーネントにはタスクの入力とテキストボックスと、サーバに送信するボタンがあると良さそうなので、それをテストしていきます。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// NewTaskForm.test.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>fireEvent</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;@testing-library/react&#34;</span>;
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>render</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../../test-utils&#34;</span>;
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>NewTaskForm</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../../components/NewTaskForm&#34;</span>;
+
+
+<span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;NewEntryFormコンポーネント&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>cleanup</span>()
+  })
+
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#34;初期表示&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>NewTaskForm</span>/&gt;)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByLabelText</span>(<span style=color:#e6db74>&#39;Title&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByTestId</span>(<span style=color:#e6db74>&#34;TitleInput&#34;</span>)).<span style=color:#a6e22e>toHaveValue</span>(<span style=color:#e6db74>&#39;&#39;</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByText</span>(<span style=color:#e6db74>&#39;Send&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
+  })
+
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#34;タスク名を編集できる&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>NewTaskForm</span>/&gt;)
+    <span style=color:#a6e22e>fireEvent</span>.<span style=color:#a6e22e>change</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByTestId</span>(<span style=color:#e6db74>&#39;TitleInput&#39;</span>), {<span style=color:#a6e22e>target</span><span style=color:#f92672>:</span> {<span style=color:#a6e22e>value</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title text&#39;</span>}})
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByTestId</span>(<span style=color:#e6db74>&#34;TitleInput&#34;</span>)).<span style=color:#a6e22e>toHaveValue</span>(<span style=color:#e6db74>&#39;title text&#39;</span>)
+  })
+})
+</code></pre></div><p>ではこれを実現するNewTaskFormを実装しましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// NewTaskForm.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>useState</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
+
+<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>NewTaskForm</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#66d9ef>const</span> [<span style=color:#a6e22e>taskInput</span>, <span style=color:#a6e22e>setTaskInput</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>useState</span>(<span style=color:#e6db74>&#39;&#39;</span>)
+
+  <span style=color:#66d9ef>return</span> (
+    &lt;<span style=color:#f92672>form</span> <span style=color:#a6e22e>data</span><span style=color:#960050;background-color:#1e0010>-</span><span style=color:#a6e22e>testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;NewTaskForm&#34;</span>&gt;
+      &lt;<span style=color:#f92672>label</span> <span style=color:#a6e22e>htmlFor</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;titleInput&#34;</span>&gt;<span style=color:#a6e22e>Title</span>&lt;/<span style=color:#f92672>label</span>&gt;
+      &lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;titleInput&#34;</span> <span style=color:#a6e22e>data</span><span style=color:#960050;background-color:#1e0010>-</span><span style=color:#a6e22e>testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;TitleInput&#34;</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text&#34;</span> <span style=color:#a6e22e>value</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>taskInput</span>}
+             <span style=color:#a6e22e>onChange</span><span style=color:#f92672>=</span>{(<span style=color:#a6e22e>event</span>) <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>setTaskInput</span>(<span style=color:#a6e22e>event</span>.<span style=color:#a6e22e>target</span>.<span style=color:#a6e22e>value</span>)}/&gt;
+      &lt;<span style=color:#f92672>button</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;button&#34;</span>&gt;
+        <span style=color:#a6e22e>Send</span>
+      &lt;/<span style=color:#f92672>button</span>&gt;
+    &lt;/<span style=color:#f92672>form</span>&gt;
+  )
+}
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>NewTaskForm</span>
+</code></pre></div><p>こんな感じでしょうか。これでテストは通ると思います。</p>
+<p>しかしこの時点ではまだ、NewTask画面がRouterに組み込まれていませんので、メニューをクリックしても白い画面のままです。
+メニューに組み込んでいきましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// App.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>BrowserRouter</span>, <span style=color:#a6e22e>Route</span>, <span style=color:#a6e22e>Switch</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-router-dom&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Home</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./pages/Home&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>NewTask</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;./pages/NewTask&#34;</span>;    <span style=color:#75715e>// 追記
+</span><span style=color:#75715e></span>
+<span style=color:#66d9ef>function</span> <span style=color:#a6e22e>App() {</span>
+  <span style=color:#66d9ef>return</span> (
+    &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;App&#34;</span>&gt;
+      &lt;<span style=color:#f92672>BrowserRouter</span>&gt;
+        &lt;<span style=color:#f92672>Switch</span>&gt;
+          &lt;<span style=color:#f92672>Route</span> <span style=color:#a6e22e>path</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/&#34;</span> <span style=color:#a6e22e>exact</span> <span style=color:#a6e22e>render</span><span style=color:#f92672>=</span>{() <span style=color:#f92672>=&gt;</span> &lt;<span style=color:#f92672>Home</span> /&gt;} /&gt;
+          &lt;<span style=color:#f92672>Route</span> <span style=color:#a6e22e>path</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/newTask&#34;</span> <span style=color:#a6e22e>exact</span> <span style=color:#a6e22e>render</span><span style=color:#f92672>=</span>{() <span style=color:#f92672>=&gt;</span> &lt;<span style=color:#f92672>NewTask</span> /&gt;} /&gt;    <span style=color:#75715e>// 追記
+</span><span style=color:#75715e></span>        &lt;/<span style=color:#f92672>Switch</span>&gt;
+      &lt;/<span style=color:#f92672>BrowserRouter</span>&gt;
+    &lt;/<span style=color:#f92672>div</span>&gt;
+  )
+}
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>App</span>
+</code></pre></div><p>App.tsxにルーティング設定を追加しました。この状態でメニューをクリックすると画面が切り替わるようになったはずです。</p>
+<p><img src=newTaskInitial.jpg alt=newTask画面></p>
+<p>せっかくなのでフォームにデザインを適用してみます。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// NewTaskForm.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>useState</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
+
+<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>NewTaskForm</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#66d9ef>const</span> [<span style=color:#a6e22e>taskInput</span>, <span style=color:#a6e22e>setTaskInput</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>useState</span>(<span style=color:#e6db74>&#39;&#39;</span>)
+
+  <span style=color:#66d9ef>return</span> (
+    &lt;<span style=color:#f92672>form</span> <span style=color:#a6e22e>data</span><span style=color:#960050;background-color:#1e0010>-</span><span style=color:#a6e22e>testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;NewTaskForm&#34;</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;w-full p-8&#34;</span>&gt;
+      &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;flex flex-wrap -mx-3 mb-6&#34;</span>&gt;
+        &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;w-full px-3&#34;</span>&gt;
+          &lt;<span style=color:#f92672>label</span>
+            <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2&#34;</span>
+            <span style=color:#a6e22e>htmlFor</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;titleInput&#34;</span>
+          &gt;
+            <span style=color:#a6e22e>Title</span>
+          &lt;/<span style=color:#f92672>label</span>&gt;
+          &lt;<span style=color:#f92672>input</span>
+            <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500&#34;</span>
+            <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;titleInput&#34;</span>
+            <span style=color:#a6e22e>data</span><span style=color:#960050;background-color:#1e0010>-</span><span style=color:#a6e22e>testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;TitleInput&#34;</span>
+            <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text&#34;</span>
+            <span style=color:#a6e22e>value</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>taskInput</span>}
+            <span style=color:#a6e22e>onChange</span><span style=color:#f92672>=</span>{(<span style=color:#a6e22e>event</span>) <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>setTaskInput</span>(<span style=color:#a6e22e>event</span>.<span style=color:#a6e22e>target</span>.<span style=color:#a6e22e>value</span>)}
+          /&gt;
+        &lt;/<span style=color:#f92672>div</span>&gt;
+      &lt;/<span style=color:#f92672>div</span>&gt;
+      &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;md:flex md:items-center&#34;</span>&gt;
+        &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;md:w-1/3&#34;</span>&gt;
+          &lt;<span style=color:#f92672>button</span>
+            <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;shadow bg-green-400 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded&#34;</span>
+            <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;button&#34;</span>
+          &gt;
+            <span style=color:#a6e22e>Send</span>
+          &lt;/<span style=color:#f92672>button</span>&gt;
+        &lt;/<span style=color:#f92672>div</span>&gt;
+      &lt;/<span style=color:#f92672>div</span>&gt;
+    &lt;/<span style=color:#f92672>form</span>&gt;
+  )
+}
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>NewTaskForm</span>
+</code></pre></div><p><img src=newTaskDesigned.jpg alt=デザイン適用></p>
+<p>デザインが適用されてだいぶアプリっぽくなりましたね。</p>
+<p>ここまでのソースは
+<a href=https://github.com/Onebase-Fujitsu/todo-app-client/tree/step6>https://github.com/Onebase-Fujitsu/todo-app-client/tree/step6</a>
+に置いてあります。</p>
+<h2 id=タスク作成機能の作成>
+タスク作成機能の作成
+<a class=anchor href=#%e3%82%bf%e3%82%b9%e3%82%af%e4%bd%9c%e6%88%90%e6%a9%9f%e8%83%bd%e3%81%ae%e4%bd%9c%e6%88%90>#</a>
+</h2>
+<h3 id=apiの作成>
+APIの作成
+<a class=anchor href=#api%e3%81%ae%e4%bd%9c%e6%88%90>#</a>
+</h3>
+<p>まずAPIへのリクエスト処理のテストと実装をやっていきましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// TodoApi.test.ts
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>MockAdapter</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios-mock-adapter&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>axios</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>getTodos</span>, <span style=color:#a6e22e>postTodos</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../features/TodoApi&#39;</span>
+
+<span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;TodoApi&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+  
+  <span style=color:#75715e>// 中略
+</span><span style=color:#75715e></span>  
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;post /todos&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>onPost</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>, {<span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title&#39;</span>}).<span style=color:#a6e22e>reply</span>(<span style=color:#ae81ff>201</span>,
+      {
+        <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>1</span>,
+        <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title&#39;</span>,
+        <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>false</span>
+      })
+
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>response</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>postTodos</span>(<span style=color:#e6db74>&#39;title&#39;</span>)
+
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#a6e22e>post</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>url</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#a6e22e>post</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>data</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#a6e22e>JSON</span>.<span style=color:#a6e22e>stringify</span>({<span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title&#39;</span>}))
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>id</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#ae81ff>1</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>title</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;title&#39;</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>completed</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#66d9ef>false</span>)
+  })
+})
+</code></pre></div><p><code>postTodos()</code>はtitleをパラメータとしてもらって、それをJSONに整形して送信していることを確認するテストを書きました。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// TodoApi.ts
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>axios</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>Todo</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../stores/todoSlice&#39;</span>
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>getTodos</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>response</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>axios</span>.<span style=color:#66d9ef>get</span>&lt;<span style=color:#f92672>Todo</span><span style=color:#960050;background-color:#1e0010>[]</span>&gt;(<span style=color:#e6db74>&#39;/todos&#39;</span>)
+  <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>data</span>
+}
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>postTodos</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>async</span> (<span style=color:#a6e22e>title</span>: <span style=color:#66d9ef>string</span>) <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>requestJson</span> <span style=color:#f92672>=</span> {<span style=color:#a6e22e>title</span>}
+  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>response</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>axios</span>.<span style=color:#a6e22e>post</span>&lt;<span style=color:#f92672>Todo</span>&gt;(<span style=color:#e6db74>&#39;/todos&#39;</span>, <span style=color:#a6e22e>JSON</span>.<span style=color:#a6e22e>stringify</span>(<span style=color:#a6e22e>requestJson</span>))
+  <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>data</span>
+}
+</code></pre></div><p>このテストを満たす実装はこのようになります。これでAPIを呼ぶ処理はできました。</p>
+<h3 id=reducerへの登録>
+Reducerへの登録
+<a class=anchor href=#reducer%e3%81%b8%e3%81%ae%e7%99%bb%e9%8c%b2>#</a>
+</h3>
+<p>では次にReducerにこれを登録していきましょう。まずはテストから。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// todoSlice.test.ts
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>todoSlice</span>, {<span style=color:#a6e22e>getTodoAction</span>, <span style=color:#a6e22e>postTodoAction</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../stores/todoSlice&#39;</span>
+
+<span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;todo reducer&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+  
+  <span style=color:#75715e>// 中略
+</span><span style=color:#75715e></span>  
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;post todo is pending&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>action</span> <span style=color:#f92672>=</span> {<span style=color:#66d9ef>type</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>postTodoAction</span>.<span style=color:#a6e22e>pending</span>.<span style=color:#66d9ef>type</span>}
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>state</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>todoSlice</span>.<span style=color:#a6e22e>reducer</span>([], <span style=color:#a6e22e>action</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>.<span style=color:#a6e22e>length</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#ae81ff>0</span>)
+  })
+
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;post todo is fulfilled&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>action</span> <span style=color:#f92672>=</span> {
+      <span style=color:#66d9ef>type</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>postTodoAction</span>.<span style=color:#a6e22e>fulfilled</span>.<span style=color:#66d9ef>type</span>,
+      <span style=color:#a6e22e>payload</span><span style=color:#f92672>:</span>
+        {
+          <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>2</span>,
+          <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;hoge&#39;</span>,
+          <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>false</span>,
+        },
+    }
+
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>initialState</span> <span style=color:#f92672>=</span> [{
+      <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>1</span>,
+      <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title&#39;</span>,
+      <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>false</span>
+    }]
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>state</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>todoSlice</span>.<span style=color:#a6e22e>reducer</span>(<span style=color:#a6e22e>initialState</span>, <span style=color:#a6e22e>action</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>.<span style=color:#a6e22e>length</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#ae81ff>2</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>id</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#ae81ff>1</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>title</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;title&#39;</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>completed</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#66d9ef>false</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>[<span style=color:#ae81ff>1</span>].<span style=color:#a6e22e>id</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#ae81ff>2</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>[<span style=color:#ae81ff>1</span>].<span style=color:#a6e22e>title</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;hoge&#39;</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>[<span style=color:#ae81ff>1</span>].<span style=color:#a6e22e>completed</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#66d9ef>false</span>)
+  })
+
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;post todo is rejected&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>action</span> <span style=color:#f92672>=</span> {<span style=color:#66d9ef>type</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>postTodoAction</span>.<span style=color:#a6e22e>rejected</span>.<span style=color:#66d9ef>type</span>}
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>state</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>todoSlice</span>.<span style=color:#a6e22e>reducer</span>([], <span style=color:#a6e22e>action</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>.<span style=color:#a6e22e>length</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#ae81ff>0</span>)
+  })
+})
+</code></pre></div><p>3件のテストを追加しました。
+getのテストと違って、成功したときに<strong>既存のStateにサーバからの戻り値を追加する差分更新のテストにしています。</strong>
+差分更新にしているというのが結構大事です。APIの設計については後述します。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// todoSlice.ts
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>createAsyncThunk</span>, <span style=color:#a6e22e>createSlice</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@reduxjs/toolkit&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>getTodos</span>, <span style=color:#a6e22e>postTodos</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../features/TodoApi&#39;</span>
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>Todo</span> {
+  <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>number</span>
+  <span style=color:#a6e22e>title</span>: <span style=color:#66d9ef>string</span>
+  <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>boolean</span>
+}
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>getTodoAction</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createAsyncThunk</span>&lt;<span style=color:#f92672>Todo</span><span style=color:#960050;background-color:#1e0010>[]</span>&gt;(
+  <span style=color:#e6db74>&#39;get /todos&#39;</span>,
+  <span style=color:#66d9ef>async</span> ()<span style=color:#f92672>:</span> <span style=color:#a6e22e>Promise</span>&lt;<span style=color:#f92672>Todo</span><span style=color:#960050;background-color:#1e0010>[]</span>&gt; <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>getTodos</span>()
+)
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>postTodoAction</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createAsyncThunk</span>&lt;<span style=color:#f92672>Todo</span><span style=color:#960050;background-color:#1e0010>,</span> {<span style=color:#a6e22e>title</span><span style=color:#960050;background-color:#1e0010>:</span> <span style=color:#a6e22e>string</span>}&gt;(
+  <span style=color:#e6db74>&#39;post /todos&#39;</span>,
+  <span style=color:#66d9ef>async</span> (<span style=color:#a6e22e>arg</span>)<span style=color:#f92672>:</span> <span style=color:#a6e22e>Promise</span>&lt;<span style=color:#f92672>Todo</span>&gt; <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>postTodos</span>(<span style=color:#a6e22e>arg</span>.<span style=color:#a6e22e>title</span>)
+)
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>todoSlice</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createSlice</span>({
+  <span style=color:#a6e22e>name</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;todos&#39;</span>,
+  <span style=color:#a6e22e>initialState</span><span style=color:#f92672>:</span> [] <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>Todo</span>[],
+  <span style=color:#a6e22e>reducers</span><span style=color:#f92672>:</span> {},
+  <span style=color:#a6e22e>extraReducers</span><span style=color:#f92672>:</span> (<span style=color:#a6e22e>builder</span>) <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>builder</span>.<span style=color:#a6e22e>addCase</span>(<span style=color:#a6e22e>getTodoAction</span>.<span style=color:#a6e22e>fulfilled</span>, (<span style=color:#a6e22e>state</span>, <span style=color:#a6e22e>action</span>) <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>action</span>.<span style=color:#a6e22e>payload</span>)
+    <span style=color:#a6e22e>builder</span>.<span style=color:#a6e22e>addCase</span>(<span style=color:#a6e22e>postTodoAction</span>.<span style=color:#a6e22e>fulfilled</span>, (<span style=color:#a6e22e>state</span>, <span style=color:#a6e22e>action</span>) <span style=color:#f92672>=&gt;</span> [...<span style=color:#a6e22e>state</span>, <span style=color:#a6e22e>action</span>.<span style=color:#a6e22e>payload</span>])
+  },
+})
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>todoSlice</span>
+</code></pre></div><p>これを満たす実装はこのようになります。</p>
+<blockquote class="book-hint warning">
+<p><strong>Reducerの書き方について</strong></p>
+<p>StateはImmutableであり変更不可です。ReducerであってもStateを直接更新してはいけません。必ず新しいStateを作成して返す必要があります。</p>
+<p>つまり、<strong><code>(state, action) => state.push(action.payload)</code>のような記述は厳禁</strong>ですので気をつけてください。</p>
+</blockquote>
+<h3 id=タスク作成フォームへの組み込み>
+タスク作成フォームへの組み込み
+<a class=anchor href=#%e3%82%bf%e3%82%b9%e3%82%af%e4%bd%9c%e6%88%90%e3%83%95%e3%82%a9%e3%83%bc%e3%83%a0%e3%81%b8%e3%81%ae%e7%b5%84%e3%81%bf%e8%be%bc%e3%81%bf>#</a>
+</h3>
+<p>最後に、作成ボタンを押したらこれを呼び出す処理を書いていきましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// NewTaskForm.test.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>fireEvent</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>MockAdapter</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;axios-mock-adapter&#34;</span>;
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>axios</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;axios&#34;</span>;
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>NewTaskForm</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../components/NewTaskForm&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>render</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../test-utils&#39;</span>
+
+<span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;NewEntryFormコンポーネント&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>mock</span>: <span style=color:#66d9ef>MockAdapter</span>
+
+  <span style=color:#a6e22e>beforeEach</span>(() <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>mock</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>MockAdapter</span>(<span style=color:#a6e22e>axios</span>)
+  })
+
+  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>reset</span>()
+    <span style=color:#a6e22e>cleanup</span>()
+  })
+
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;初期表示&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>NewTaskForm</span> /&gt;)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByLabelText</span>(<span style=color:#e6db74>&#39;Title&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByTestId</span>(<span style=color:#e6db74>&#39;TitleInput&#39;</span>)).<span style=color:#a6e22e>toHaveValue</span>(<span style=color:#e6db74>&#39;&#39;</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByText</span>(<span style=color:#e6db74>&#39;Send&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
+  })
+
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;タスク名を編集できる&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>NewTaskForm</span> /&gt;)
+    <span style=color:#a6e22e>fireEvent</span>.<span style=color:#a6e22e>change</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByTestId</span>(<span style=color:#e6db74>&#39;TitleInput&#39;</span>), {
+      <span style=color:#a6e22e>target</span><span style=color:#f92672>:</span> {<span style=color:#a6e22e>value</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title text&#39;</span>},
+    })
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByTestId</span>(<span style=color:#e6db74>&#39;TitleInput&#39;</span>)).<span style=color:#a6e22e>toHaveValue</span>(<span style=color:#e6db74>&#39;title text&#39;</span>)
+  })
+
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#34;作成ボタンを押したら、作成がリクエストされる&#34;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>NewTaskForm</span> /&gt;)
+    <span style=color:#a6e22e>fireEvent</span>.<span style=color:#a6e22e>change</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByTestId</span>(<span style=color:#e6db74>&#39;TitleInput&#39;</span>), {
+      <span style=color:#a6e22e>target</span><span style=color:#f92672>:</span> {<span style=color:#a6e22e>value</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title text&#39;</span>},
+    })
+    <span style=color:#a6e22e>fireEvent</span>.<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#39;Send&#39;</span>))
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#a6e22e>post</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>url</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#a6e22e>post</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>data</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#a6e22e>JSON</span>.<span style=color:#a6e22e>stringify</span>({<span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title text&#39;</span>}))
+  })
+})
+</code></pre></div><p>タスク名入力欄に文字を入力して、Sendボタンをクリックしたら<code>/todos</code>にJSONをPOSTしていることを確認するテストを追加しました。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// NewTaskForm.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>useState</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>useDispatch</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;react-redux&#34;</span>;
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>AppDispatch</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../stores/store&#34;</span>;
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>postTodoAction</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../stores/todoSlice&#34;</span>;
+
+<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>NewTaskForm</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#66d9ef>const</span> [<span style=color:#a6e22e>taskInput</span>, <span style=color:#a6e22e>setTaskInput</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>useState</span>(<span style=color:#e6db74>&#39;&#39;</span>)
+  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>dispatch</span>: <span style=color:#66d9ef>AppDispatch</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>useDispatch</span>()
+
+  <span style=color:#66d9ef>return</span> (
+    &lt;<span style=color:#f92672>form</span> <span style=color:#a6e22e>data</span><span style=color:#960050;background-color:#1e0010>-</span><span style=color:#a6e22e>testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;NewTaskForm&#34;</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;w-full p-8&#34;</span>&gt;
+      &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;flex flex-wrap -mx-3 mb-6&#34;</span>&gt;
+        &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;w-full px-3&#34;</span>&gt;
+          &lt;<span style=color:#f92672>label</span>
+            <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2&#34;</span>
+            <span style=color:#a6e22e>htmlFor</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;titleInput&#34;</span>
+          &gt;
+            <span style=color:#a6e22e>Title</span>
+          &lt;/<span style=color:#f92672>label</span>&gt;
+          &lt;<span style=color:#f92672>input</span>
+            <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500&#34;</span>
+            <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;titleInput&#34;</span>
+            <span style=color:#a6e22e>data</span><span style=color:#960050;background-color:#1e0010>-</span><span style=color:#a6e22e>testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;TitleInput&#34;</span>
+            <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text&#34;</span>
+            <span style=color:#a6e22e>value</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>taskInput</span>}
+            <span style=color:#a6e22e>onChange</span><span style=color:#f92672>=</span>{(<span style=color:#a6e22e>event</span>) <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>setTaskInput</span>(<span style=color:#a6e22e>event</span>.<span style=color:#a6e22e>target</span>.<span style=color:#a6e22e>value</span>)}
+          /&gt;
+        &lt;/<span style=color:#f92672>div</span>&gt;
+      &lt;/<span style=color:#f92672>div</span>&gt;
+      &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;md:flex md:items-center&#34;</span>&gt;
+        &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;md:w-1/3&#34;</span>&gt;
+          &lt;<span style=color:#f92672>button</span>
+            <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;shadow bg-green-400 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded&#34;</span>
+            <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;button&#34;</span>
+            <span style=color:#a6e22e>onClick</span><span style=color:#f92672>=</span>{() <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>dispatch</span>(<span style=color:#a6e22e>postTodoAction</span>({<span style=color:#a6e22e>title</span>: <span style=color:#66d9ef>taskInput</span>}))}
+          &gt;
+            <span style=color:#a6e22e>Send</span>
+          &lt;/<span style=color:#f92672>button</span>&gt;
+        &lt;/<span style=color:#f92672>div</span>&gt;
+      &lt;/<span style=color:#f92672>div</span>&gt;
+    &lt;/<span style=color:#f92672>form</span>&gt;
+  )
+}
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>NewTaskForm</span>
+</code></pre></div><p>実装はこのようになります。buttonをonClickしたときにpostTodoActionをdispatchするだけですね。</p>
+<p><img src=postTodos.jpg alt=postTodo></p>
+<p>画面を描画して作成画面を開きSendボタンをクリックすると、タスクが送信されていることが分かります。</p>
+<h2 id=タスク一覧の取得タイミングの変更>
+タスク一覧の取得タイミングの変更
+<a class=anchor href=#%e3%82%bf%e3%82%b9%e3%82%af%e4%b8%80%e8%a6%a7%e3%81%ae%e5%8f%96%e5%be%97%e3%82%bf%e3%82%a4%e3%83%9f%e3%83%b3%e3%82%b0%e3%81%ae%e5%a4%89%e6%9b%b4>#</a>
+</h2>
+<p>今の実装では、タスク一覧画面を開いたときにタスクを全件取得しています。
+画面を開く度に毎回全件取得のAPIを呼び出すのは非効率です。
+全件取得するのは最初の一回で十分で、あとは差分更新にしたほうが効率的な処理ができます。</p>
+<p>HTTP通信のオーバーヘッドはメモリアクセスや、ディスクアクセスと比較して比べ物にならないほど大きいです。
+良くないAPIを揶揄する言葉に「おしゃべりなAPI」というものがあります。
+つまり、画面を描画するのになんどもなんどもAPIをコールする必要があるAPI設計は良くないということです。</p>
+<p>さきほど、作成したタスクをstateに対して差分更新できるようにしたのも余計な通信を発生させないためです。
+もし、<code>POST /todos</code>が戻り値がなかったら、クライアントはIDを知るためだけに全件取得のAPIを呼び出さないといけなくなってしまいます。</p>
+<p>すでに、POSTに成功したときに差分更新をするように実装してあるので、
+タスク一覧を開いたときに毎回全件取得をするという処理から、画面を開いたときに一回だけ全件取得するという処理に変更しましょう。</p>
+<p>といっても、これは非常に簡単で、Home.tsxにあったuseEffectの処理をApp.tsxに写すだけです。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// App.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>useDispatch</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;react-redux&#34;</span>;
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>useEffect</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;react&#34;</span>;
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>BrowserRouter</span>, <span style=color:#a6e22e>Route</span>, <span style=color:#a6e22e>Switch</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-router-dom&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Home</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./pages/Home&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>NewTask</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./pages/NewTask&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>AppDispatch</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;./stores/store&#34;</span>;
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>getTodoAction</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;./stores/todoSlice&#34;</span>;
+
+<span style=color:#66d9ef>function</span> <span style=color:#a6e22e>App() {</span>
+  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>dispatch</span>: <span style=color:#66d9ef>AppDispatch</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>useDispatch</span>()
+
+  <span style=color:#a6e22e>useEffect</span>(() <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>dispatch</span>(<span style=color:#a6e22e>getTodoAction</span>())
+  })
+
+  <span style=color:#66d9ef>return</span> (
+    &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;App&#34;</span>&gt;
+      &lt;<span style=color:#f92672>BrowserRouter</span>&gt;
+        &lt;<span style=color:#f92672>Switch</span>&gt;
+          &lt;<span style=color:#f92672>Route</span> <span style=color:#a6e22e>path</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/&#34;</span> <span style=color:#a6e22e>exact</span> <span style=color:#a6e22e>render</span><span style=color:#f92672>=</span>{() <span style=color:#f92672>=&gt;</span> &lt;<span style=color:#f92672>Home</span> /&gt;} /&gt;
+          &lt;<span style=color:#f92672>Route</span> <span style=color:#a6e22e>path</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/newTask&#34;</span> <span style=color:#a6e22e>exact</span> <span style=color:#a6e22e>render</span><span style=color:#f92672>=</span>{() <span style=color:#f92672>=&gt;</span> &lt;<span style=color:#f92672>NewTask</span> /&gt;} /&gt;
+        &lt;/<span style=color:#f92672>Switch</span>&gt;
+      &lt;/<span style=color:#f92672>BrowserRouter</span>&gt;
+    &lt;/<span style=color:#f92672>div</span>&gt;
+  )
+}
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>App</span>
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// Home.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Header</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../components/Header&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>TodoList</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../components/TodoList&#39;</span>
+
+<span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Home</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> (
+  &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>data</span><span style=color:#960050;background-color:#1e0010>-</span><span style=color:#a6e22e>testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Home&#34;</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;flex&#34;</span>&gt;
+    &lt;<span style=color:#f92672>Header</span>/&gt;
+    &lt;<span style=color:#f92672>TodoList</span>/&gt;
+  &lt;/<span style=color:#f92672>div</span>&gt;
+)
+
+<span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>Home</span>
+</code></pre></div><p>Home.tsxがだいぶスッキリしました。テストも合わせて修正してしまいましょう。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// Home.test.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>render</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../test-utils&#39;</span>
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Home</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../pages/Home&#39;</span>
+
+<span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;Home画面&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>cleanup</span>()
+  })
+
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;画面構成&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>Home</span> /&gt;)
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByTestId</span>(<span style=color:#e6db74>&#39;Header&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByTestId</span>(<span style=color:#e6db74>&#39;TodoList&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
+  })
+})
+</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// App.test.tsx
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>axios</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;axios&#34;</span>;
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>MockAdapter</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;axios-mock-adapter&#34;</span>;
+<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>render</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../test-utils&#34;</span>;
+<span style=color:#66d9ef>import</span> <span style=color:#a6e22e>App</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../App&#34;</span>;
+
+<span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;App&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>mock</span>: <span style=color:#66d9ef>MockAdapter</span>
+
+  <span style=color:#a6e22e>beforeEach</span>(() <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>mock</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>MockAdapter</span>(<span style=color:#a6e22e>axios</span>)
+  })
+
+  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>reset</span>()
+  })
+
+  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;ホーム画面の初期表示&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>onGet</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>).<span style=color:#a6e22e>reply</span>(<span style=color:#ae81ff>200</span>, [
+      {
+        <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>1</span>,
+        <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title&#39;</span>,
+        <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>false</span>,
+      },
+    ])
+    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>initialState</span> <span style=color:#f92672>=</span> {<span style=color:#a6e22e>todos</span><span style=color:#f92672>:</span> []}
+    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>App</span> /&gt;, {<span style=color:#a6e22e>preloadedState</span>: <span style=color:#66d9ef>initialState</span>})
+
+    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#66d9ef>get</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>url</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>)
+  })
+})
+</code></pre></div><p>これでテストは通るようになったと思います。
+ブラウザで動作を確認してみると、アプリケーションを開いた最初の一回だけ/todosにGETをしているのが確認でき、
+メニューからページ遷移をしても/todosにGETはされないことが確認できるはずです。</p>
+<p>ここまでのソースは
+<a href=https://github.com/Onebase-Fujitsu/todo-app-client/tree/step7>https://github.com/Onebase-Fujitsu/todo-app-client/tree/step7</a>
+に置いてあります。</p>
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
@@ -270,8 +901,18 @@
 <li><a href=#タスクの追加画面を作る>タスクの追加画面を作る</a>
 <ul>
 <li><a href=#ルーターの導入>ルーターの導入</a></li>
+<li><a href=#ヘッダーの作り込み>ヘッダーの作り込み</a></li>
+<li><a href=#タスク作成画面の作成>タスク作成画面の作成</a></li>
 </ul>
 </li>
+<li><a href=#タスク作成機能の作成>タスク作成機能の作成</a>
+<ul>
+<li><a href=#apiの作成>APIの作成</a></li>
+<li><a href=#reducerへの登録>Reducerへの登録</a></li>
+<li><a href=#タスク作成フォームへの組み込み>タスク作成フォームへの組み込み</a></li>
+</ul>
+</li>
+<li><a href=#タスク一覧の取得タイミングの変更>タスク一覧の取得タイミングの変更</a></li>
 </ul>
 </nav>
 </div>
