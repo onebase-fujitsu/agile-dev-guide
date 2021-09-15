@@ -11,4 +11,7 @@ bookToc: true
 
 では早速アジャイルとは何かについて学んでいきましょう。
 
+
+テストのぶんしょう
+
 {{< button relref="/docs/agile/manifest" >}}アジャイルとは{{< /button >}}
