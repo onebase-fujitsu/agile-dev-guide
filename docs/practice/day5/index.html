@@ -211,11 +211,11 @@
 <li><a href=#api設計>API設計</a>
 <ul>
 <li><a href=#いいapiの設計とは>いいAPIの設計とは</a></li>
-<li><a href=#rest>REST</a></li>
-<li><a href=#リソース志向>リソース志向</a></li>
+<li><a href=#リソース志向設計>リソース志向設計</a></li>
 <li><a href=#パラメータ>パラメータ</a></li>
-<li><a href=#レスポンスデータの設計>レスポンスデータの設計</a></li>
-<li><a href=#swagger>Swagger</a></li>
+<li><a href=#レスポンス設計>レスポンス設計</a></li>
+<li><a href=#クライアントに忖度しない>クライアントに忖度しない</a></li>
+<li><a href=#swaggeroas30>Swagger(OAS3.0)</a></li>
 </ul>
 </li>
 </ul>
@@ -236,8 +236,7 @@
 <a class=anchor href=#%e3%83%86%e3%82%b9%e3%83%88>#</a>
 </h3>
 <p>まず、サーバのテストを書いてみましょう。
-<code>POST /todos</code>に対してJSONをボディにセットして、リクエストしたときの、
-レスポンスコードとレスポンスデータを確認するテストを書いてみます。</p>
+<code>POST /todos</code>に対してJSONをボディにセットして、リクエストしたときの、 レスポンスコードとレスポンスデータを確認するテストを書いてみます。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#75715e>// TodoControllerTest.kt
 </span><span style=color:#75715e></span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
 
@@ -274,7 +273,12 @@
         newTodoJson.put(<span style=color:#e6db74>&#34;title&#34;</span>, <span style=color:#e6db74>&#34;test title&#34;</span>)
         <span style=color:#66d9ef>val</span> header = HttpHeaders()
         header.contentType = MediaType.APPLICATION_JSON
-        <span style=color:#66d9ef>val</span> postResponse = restTemplate.exchange(<span style=color:#e6db74>&#34;/todos&#34;</span>, HttpMethod.POST, HttpEntity(newTodoJson.toString(), header), String<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java)
+        <span style=color:#66d9ef>val</span> postResponse = restTemplate.exchange(
+            <span style=color:#e6db74>&#34;/todos&#34;</span>,
+            HttpMethod.POST,
+            HttpEntity(newTodoJson.toString(), header),
+            String<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java
+        )
         <span style=color:#66d9ef>val</span> mapper = jacksonObjectMapper()
         <span style=color:#66d9ef>val</span> todo: Todo = mapper.readValue(postResponse.body<span style=color:#f92672>!!</span>)
         assertThat(postResponse.statusCode).isEqualTo(HttpStatus.CREATED)
@@ -325,7 +329,7 @@ Controller層
 <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoController</span>(<span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> todoService: TodoControllerInterface) {
     <span style=color:#a6e22e>@GetMapping</span>(<span style=color:#e6db74>&#34;/todos&#34;</span>)
     <span style=color:#a6e22e>@ResponseStatus</span>(HttpStatus.OK)
-    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTodos</span>() : List&lt;Todo&gt; {
+    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTodos</span>(): List&lt;Todo&gt; {
         <span style=color:#66d9ef>return</span> todoService.getTodos()
     }
 
@@ -416,25 +420,20 @@ Repository層
         )
     }
 }
-</code></pre></div><p>リポジトリは少しテクニカルなことをしていて、insert文を実行したときにインクリメントされた<code>id</code>を返すようにしていて、
-それを使って、戻り値を返すようにしています。</p>
+</code></pre></div><p>リポジトリは少しテクニカルなことをしていて、insert文を実行したときにインクリメントされた<code>id</code>を返すようにしていて、 それを使って、戻り値を返すようにしています。</p>
 <p>こうすると、データを作成した後にサイドselect文を発行する必要がなくなりレスポンスが早くなります。</p>
 <h3 id=再実行可能なテスト>
 再実行可能なテスト
 <a class=anchor href=#%e5%86%8d%e5%ae%9f%e8%a1%8c%e5%8f%af%e8%83%bd%e3%81%aa%e3%83%86%e3%82%b9%e3%83%88>#</a>
 </h3>
-<p>さて、実装は完了したのでテストを動かして検証していきたいわけですが、このテストは問題なく動いているでしょうか？
-このテストはデータベースの状態に強く依存していて、動く人もいれば動かない人もいます。
+<p>さて、実装は完了したのでテストを動かして検証していきたいわけですが、このテストは問題なく動いているでしょうか？ このテストはデータベースの状態に強く依存していて、動く人もいれば動かない人もいます。
 もし、運良くテストが動いた人も、もう一度全件テストを動かすと失敗するはずです。</p>
-<p>これはテストを実行する度に、todo_dbに対してデータの追加を行っているからで、
-一度todoテーブルに対してデータを追加すると、2回目以降はidが1にはならないからです。
-つまり、これは再現可能なテストになっていません。</p>
+<p>これはテストを実行する度に、todo_dbに対してデータの追加を行っているからで、 一度todoテーブルに対してデータを追加すると、2回目以降はidが1にはならないからです。 つまり、これは再現可能なテストになっていません。</p>
 <p>この問題に対処するにはテストを実行する度にDBをリセットしてしまえばいいので、その設定をしてみましょう。</p>
 <p>まず、src/test配下に<code>resources</code>ディレクトリを作成し、その中に<code>clear_db.sql</code>を作成します。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=color:#75715e>/* clear_db.sql */</span>
 <span style=color:#66d9ef>truncate</span> <span style=color:#66d9ef>table</span> todo <span style=color:#66d9ef>restart</span> <span style=color:#66d9ef>identity</span> <span style=color:#66d9ef>cascade</span>;
-</code></pre></div><p>やっている内容は単純でtodoテーブルの内容をtruncateすると共に、idのシーケンスをリセットしています。
-そして、テストを実行する度にこのSQLを実行したらいいわけですが、これもアノテーションを付与するだけで簡単に実現できます。</p>
+</code></pre></div><p>やっている内容は単純でtodoテーブルの内容をtruncateすると共に、idのシーケンスをリセットしています。 そして、テストを実行する度にこのSQLを実行したらいいわけですが、これもアノテーションを付与するだけで簡単に実現できます。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=color:#75715e>// TodoControllerTest.kt
 </span><span style=color:#75715e></span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
 
@@ -473,7 +472,12 @@ Repository層
         newTodoJson.put(<span style=color:#e6db74>&#34;title&#34;</span>, <span style=color:#e6db74>&#34;test title&#34;</span>)
         <span style=color:#66d9ef>val</span> header = HttpHeaders()
         header.contentType = MediaType.APPLICATION_JSON
-        <span style=color:#66d9ef>val</span> postResponse = restTemplate.exchange(<span style=color:#e6db74>&#34;/todos&#34;</span>, HttpMethod.POST, HttpEntity(newTodoJson.toString(), header), String<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java)
+        <span style=color:#66d9ef>val</span> postResponse = restTemplate.exchange(
+            <span style=color:#e6db74>&#34;/todos&#34;</span>,
+            HttpMethod.POST,
+            HttpEntity(newTodoJson.toString(), header),
+            String<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java
+        )
         <span style=color:#66d9ef>val</span> mapper = jacksonObjectMapper()
         <span style=color:#66d9ef>val</span> todo: Todo = mapper.readValue(postResponse.body<span style=color:#f92672>!!</span>)
         assertThat(postResponse.statusCode).isEqualTo(HttpStatus.CREATED)
@@ -491,31 +495,27 @@ Repository層
 <a class=anchor href=#%e3%82%bf%e3%82%b9%e3%82%af%e7%94%bb%e9%9d%a2%e3%81%ae%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3%e3%81%ae%e9%81%a9%e7%94%a8>#</a>
 </h2>
 <p><img src=NewTask.jpg alt=NewTask></p>
-<p>現在クライアントを連携させると、NewTask画面で追加したタスクがHome画面に追加できていることがわかります。
-しかし、デザインがまだ適用されていないので、デザインを適用してみましょう。</p>
+<p>現在クライアントを連携させると、NewTask画面で追加したタスクがHome画面に追加できていることがわかります。 しかし、デザインがまだ適用されていないので、デザインを適用してみましょう。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=color:#75715e>// TodoList.tsx
 </span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>useSelector</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-redux&#39;</span>
-<span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>ArchiveIcon</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;@heroicons/react/solid&#34;</span>;
 <span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>RootState</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../stores/store&#39;</span>
 
 <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>TodoList</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
   <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>todos</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>useSelector</span>((<span style=color:#a6e22e>state</span>: <span style=color:#66d9ef>RootState</span>) <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>state</span>.<span style=color:#a6e22e>todos</span>)
 
   <span style=color:#66d9ef>return</span> (
-    &lt;<span style=color:#f92672>ul</span> <span style=color:#a6e22e>data</span><span style=color:#960050;background-color:#1e0010>-</span><span style=color:#a6e22e>testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;TodoList&#34;</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;w-full p-8 flex flex-col&#34;</span>&gt;
-      {<span style=color:#a6e22e>todos</span>.<span style=color:#a6e22e>map</span>((<span style=color:#a6e22e>todo</span>) <span style=color:#f92672>=&gt;</span> (
-        &lt;<span style=color:#f92672>li</span> <span style=color:#a6e22e>key</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>todo</span>.<span style=color:#a6e22e>id</span>} <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;w-full flex justify-center items-center pb-4&#34;</span>&gt;
-          &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;border-2 flex justify-between border-gray-200 w-full rounded-lg shadow-lg p-4&#34;</span>&gt;
-            &lt;<span style=color:#f92672>div</span>&gt;
-              &lt;<span style=color:#f92672>p</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text-xl font-bold&#34;</span>&gt;{<span style=color:#a6e22e>todo</span>.<span style=color:#a6e22e>title</span>}&lt;/<span style=color:#f92672>p</span>&gt;
-            &lt;/<span style=color:#f92672>div</span>&gt;
-            &lt;<span style=color:#f92672>button</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;button&#34;</span>&gt;
-              &lt;<span style=color:#f92672>ArchiveIcon</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;w-6&#34;</span>/&gt;
-            &lt;/<span style=color:#f92672>button</span>&gt;
-          &lt;/<span style=color:#f92672>div</span>&gt;
-        &lt;/<span style=color:#f92672>li</span>&gt;
-      ))}
-    &lt;/<span style=color:#f92672>ul</span>&gt;
+          &lt;<span style=color:#f92672>ul</span> <span style=color:#a6e22e>data</span><span style=color:#960050;background-color:#1e0010>-</span><span style=color:#a6e22e>testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;TodoList&#34;</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;w-full p-8 flex flex-col&#34;</span>&gt;
+            {<span style=color:#a6e22e>todos</span>.<span style=color:#a6e22e>map</span>((<span style=color:#a6e22e>todo</span>) <span style=color:#f92672>=&gt;</span> (
+                    &lt;<span style=color:#f92672>li</span> <span style=color:#a6e22e>key</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>todo</span>.<span style=color:#a6e22e>id</span>} <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;w-full flex justify-center items-center pb-4&#34;</span>&gt;
+                      &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;border-2 flex border-gray-200 w-full rounded-lg shadow-lg p-4&#34;</span>&gt;
+                        &lt;<span style=color:#f92672>label</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;inline-flex items-center mr-4&#34;</span>&gt;
+                          &lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;checkbox&#34;</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;form-checkbox h-5 w-5 text-gray-600&#34;</span> <span style=color:#a6e22e>defaultChecked</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>todo</span>.<span style=color:#a6e22e>completed</span>} /&gt;
+                        &lt;/<span style=color:#f92672>label</span>&gt;
+                        &lt;<span style=color:#f92672>p</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text-xl font-bold&#34;</span>&gt;{<span style=color:#a6e22e>todo</span>.<span style=color:#a6e22e>title</span>}&lt;/<span style=color:#f92672>p</span>&gt;
+                      &lt;/<span style=color:#f92672>div</span>&gt;
+                    &lt;/<span style=color:#f92672>li</span>&gt;
+            ))}
+          &lt;/<span style=color:#f92672>ul</span>&gt;
   )
 }
 
@@ -529,48 +529,501 @@ Repository層
 API設計
 <a class=anchor href=#api%e8%a8%ad%e8%a8%88>#</a>
 </h2>
-<p>さて、ここまで<code>/todos</code>に対するGETの処理やPOSTの処理を実装しましたが、
-ここで少し箸休めにAPIの設計について簡単に説明しようと思います。</p>
+<p>さて、ここまで<code>/todos</code>に対するGETの処理やPOSTの処理を実装しましたが、 ここで少し箸休めにAPIの設計について簡単に説明しようと思います。</p>
+<p>とはいえAPI設計だけで本一冊書けるぐらいに奥が深い内容で、ここでは本当にさわりを紹介する程度にとどめます。 現代のWebアプリケーション開発に置いてAPI設計スキルはほぼ必須で避けて通ることはできませんので、
+<a href=https://www.oreilly.co.jp/books/9784873116860/>Web API: The Good Parts</a> 等の書籍を各自読みましょう。</p>
 <h3 id=いいapiの設計とは>
 いいAPIの設計とは
 <a class=anchor href=#%e3%81%84%e3%81%84api%e3%81%ae%e8%a8%ad%e8%a8%88%e3%81%a8%e3%81%af>#</a>
 </h3>
 <p>4日目に以下のような文書を記載しました。</p>
 <blockquote class=book-hint>
-HTTP通信のオーバーヘッドはメモリアクセスや、ディスクアクセスと比較して比べ物にならないほど大きいです。
-良くないAPIを揶揄する言葉に「おしゃべりなAPI」というものがあります。
+HTTP通信のオーバーヘッドはメモリアクセスや、ディスクアクセスと比較して比べ物にならないほど大きいです。 良くないAPIを揶揄する言葉に「おしゃべりなAPI」というものがあります。
 つまり、画面を描画するのになんどもなんどもAPIをコールする必要があるAPI設計は良くないということです。
 </blockquote>
 <p>これはよくある悪いAPIの設計の話なのですが、逆にいいAPIとはなんでしょうか？</p>
-<p>いいAPIの定義は人によって様々だと思いますが、筆者は <strong>「開発者がドキュメントを見なくても自然に使えるAPI」</strong> がいいAPIだと思っています。
-自然に使えるというのは <strong>つまりWeb標準に従っているAPI</strong> ということです。つまりRESTのルールに準拠して設計をしなさいということになります。</p>
-<h3 id=rest>
-REST
-<a class=anchor href=#rest>#</a>
+<p>いいAPIの定義は人によって様々だと思いますが、筆者は <strong>「開発者がドキュメントを見なくても自然に使えるAPI」</strong> がいいAPIだと思っています。 自然に使えるというのは <strong>つまりWeb標準に従っているAPI</strong>
+ということです。つまりRESTのアーキテクチャに従って設計しなさいということになります。</p>
+<h3 id=リソース志向設計>
+リソース志向設計
+<a class=anchor href=#%e3%83%aa%e3%82%bd%e3%83%bc%e3%82%b9%e5%bf%97%e5%90%91%e8%a8%ad%e8%a8%88>#</a>
 </h3>
-<p>HTTPのメソッドは4つしかありません。</p>
+<p>RESTのキーとなる概念は<strong>論理的に分割されたリソースをHTTPメソッド(GET/POST/PUT/DELETE)で操作する</strong>ということです。
+RESTではURL部分を「リソース」とみなし、HTTPメソッドとURLの組み合わせを「なにを(リソース)」「どうする(メソッド)」という形式で捉えます。</p>
+<h4 id=リソース>
+リソース
+<a class=anchor href=#%e3%83%aa%e3%82%bd%e3%83%bc%e3%82%b9>#</a>
+</h4>
+<p>リソースとはURLで表現されるAPIによって操作される対象のことです。 たとえば、今回のアプリケーションであればTodoがリソースに当たります。</p>
+<h4 id=メソッド>
+メソッド
+<a class=anchor href=#%e3%83%a1%e3%82%bd%e3%83%83%e3%83%89>#</a>
+</h4>
+<p>HTTPのメソッドは主に5つです。</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>メソッドの種類</th>
+<th style=text-align:left>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>GET</td>
+<td style=text-align:left>リソースの取得</td>
+</tr>
+<tr>
+<td style=text-align:left>POST</td>
+<td style=text-align:left>リソースの新規作成</td>
+</tr>
+<tr>
+<td style=text-align:left>PATCH</td>
+<td style=text-align:left>リソースの一分更新</td>
+</tr>
+<tr>
+<td style=text-align:left>PUT</td>
+<td style=text-align:left>リソースの置き換え</td>
+</tr>
+<tr>
+<td style=text-align:left>DELETE</td>
+<td style=text-align:left>リソースの削除</td>
+</tr>
+</tbody>
+</table>
+<p>これらのメソッドを使って、リソースに対する操作を表現していきます。 例えば今回のタスク管理アプリケーションですと、以下のようになります。</p>
 <ul>
-<li>GET</li>
-<li>POST</li>
-<li>PUT</li>
-<li>DELETE</li>
+<li>GET /todos
+<ul>
+<li>Todoのリストを取得する</li>
 </ul>
-<h3 id=リソース志向>
-リソース志向
-<a class=anchor href=#%e3%83%aa%e3%82%bd%e3%83%bc%e3%82%b9%e5%bf%97%e5%90%91>#</a>
-</h3>
+</li>
+<li>GET /todos/1
+<ul>
+<li>Todo#1を取得する</li>
+</ul>
+</li>
+<li>POST /todos
+<ul>
+<li>新規のTodoを作成する</li>
+</ul>
+</li>
+<li>PUT /todos/2
+<ul>
+<li>Todo#2を更新する</li>
+</ul>
+</li>
+<li>DELETE /todos/3
+<ul>
+<li>Todo#3を削除する</li>
+</ul>
+</li>
+</ul>
+<p>RESTはHTTPメソッドを活用することで、<code>/todos</code>というエンドポイントに対して主要な機能をもたせることができます。 リソースに対する命令をHTTPのメソッドで表現するという形です。
+こうすることで、エンドポイントの命名規則など意識する必要ありませんし、URL 構造は明白かつ整然としたものとなります。</p>
+<p>Todoに関連データがあった場合はどうでしょうか。例えば1つのTodoには複数のタスクから構成されるといったリソースを考えてみましょう。 その場合は以下のように表現されるのが自然です。</p>
+<ul>
+<li>GET /todos/1/tasks
+<ul>
+<li>Todo#1に紐づくタスクのリストを取得する</li>
+</ul>
+</li>
+<li>GET /todos/1/tasks/5
+<ul>
+<li>Todo#1に紐づくタスク#5を取得する</li>
+</ul>
+</li>
+<li>POST /todos/1/tasks
+<ul>
+<li>Todo#1に紐づくタスクを新規作成する</li>
+</ul>
+</li>
+<li>PUT /todos/1/tasks/4
+<ul>
+<li>Todo#1に紐づくタスク#4を更新する</li>
+</ul>
+</li>
+<li>PATCH /todos/1
+<ul>
+<li>Todo#1のリソースを部分的に更新する</li>
+</ul>
+</li>
+<li>DELETE /todos/1/tasks/2
+<ul>
+<li>Todo#1に紐づくタスク#2を削除する</li>
+</ul>
+</li>
+</ul>
 <h3 id=パラメータ>
 パラメータ
 <a class=anchor href=#%e3%83%91%e3%83%a9%e3%83%a1%e3%83%bc%e3%82%bf>#</a>
 </h3>
-<h3 id=レスポンスデータの設計>
+<p>クライアントからサーバに対してAPIリクエストをする際に、クライアントからサーバに渡すことができるパラメータは3つあります。</p>
+<ul>
+<li>パスパラメータ</li>
+<li>クエリパラメータ</li>
+<li>リクエストボディ</li>
+</ul>
+<p>それぞれどのように使うのが適当かについて説明していきましょう。</p>
+<h4 id=クエリパラメータ>
+クエリパラメータ
+<a class=anchor href=#%e3%82%af%e3%82%a8%e3%83%aa%e3%83%91%e3%83%a9%e3%83%a1%e3%83%bc%e3%82%bf>#</a>
+</h4>
+<p>クエリパラメータはクエリという名前の示すとおり、<strong>リソースの絞り込みに使う</strong> ものです。</p>
+<pre tabindex=0><code>GET /todos?completed=false
+</code></pre><p>このようにURLに<code>?</code>続くかたちでパラメータを与えることができます。 ここで大事なのは絞り込みの用途で使われるべきであるということです。</p>
+<p><code>GET /todos</code>というAPIはTodo一覧を返すわけですが、その一覧の要素をクエリパラメータを使って絞り込む用途で使います。
+<code>GET /todos?completed=false</code>という命令は/todosの中から未完了のものだけをリストで返してほしいという命令になるわけです。</p>
+<p>取得リソースの絞り込みにつかうため、必然的に<strong>GETメソッド以外ではクエリパラメータを使うことはありません。</strong></p>
+<h4 id=パスパラメータ>
+パスパラメータ
+<a class=anchor href=#%e3%83%91%e3%82%b9%e3%83%91%e3%83%a9%e3%83%a1%e3%83%bc%e3%82%bf>#</a>
+</h4>
+<p><strong>パスパラーメタはリソースの指定をおこなう</strong> ためのものです。 先程、<code>GET /todos/1</code>という例をだしましたが、これはTodo#1を取得するという命令でした。 このurlに含まれる<code>1</code>
+というのはクライアントが指定できるパラメータで、 汎用的に書くとつまり<code>GET /todos/${id}</code>という形で記述することができます。 パスに入れることで、特定のリソースに対する命令であることを明確にしていることがわかると思います。</p>
+<p>クエリパラメータは原則GETメソッドでしか使えませんでしたが、パスパラメータはどのようなメソッドでも使うことができます。 パスパラメータが設定されているエンドポイントにおいて、パスパラメータは原則必須になるという特徴も覚えておいてください。
+つまり<code>GET /todos/</code>のような宣言は許可されません。</p>
+<h4 id=リクエストボディ>
+リクエストボディ
+<a class=anchor href=#%e3%83%aa%e3%82%af%e3%82%a8%e3%82%b9%e3%83%88%e3%83%9c%e3%83%87%e3%82%a3>#</a>
+</h4>
+<p><strong>リクエストボディはリソースの作成や、置換を行う際に、その内容を記載するものです。</strong></p>
+<p>例えば、<code>POST /todos</code>のAPIを実行たときのリクエストボディは以下のようになっていました。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
+  <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;Sample Title&#34;</span>
+}
+</code></pre></div><p>基本的にはJSON形式を使うことが一般的です。JSON文書であればClientもServerも取り扱いです。 また、ファイルのアップロードなどを取り扱う場合はmultipart/form-dataといった形式が取られます。</p>
+<h3 id=レスポンス設計>
+レスポンス設計
+<a class=anchor href=#%e3%83%ac%e3%82%b9%e3%83%9d%e3%83%b3%e3%82%b9%e8%a8%ad%e8%a8%88>#</a>
+</h3>
+<h4 id=レスポンスステータス>
+レスポンスステータス
+<a class=anchor href=#%e3%83%ac%e3%82%b9%e3%83%9d%e3%83%b3%e3%82%b9%e3%82%b9%e3%83%86%e3%83%bc%e3%82%bf%e3%82%b9>#</a>
+</h4>
+<p>APIにおいてとても大事なことはHTTPSレスポンスステータスコードをフル活用することです。 HTTPレスポンスステータスコードが何かわからない方もWebブラウザで404 Not
+Foundが表示されたことがあるのを見たことがない人はいないと思います。</p>
+<p>APIがクライアントにレスポンスを返すときに適切なステータスコードを返すようにする必要があります。</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>ステータスコード</th>
+<th style=text-align:left>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>200 OK</td>
+<td style=text-align:left>リクエスト成功</td>
+</tr>
+<tr>
+<td style=text-align:left>201 CREATED</td>
+<td style=text-align:left>リクエストに成功し、リソースを作成</td>
+</tr>
+<tr>
+<td style=text-align:left>204 NO CONTENT</td>
+<td style=text-align:left>リクエストは成功、返すコンテンツはない</td>
+</tr>
+<tr>
+<td style=text-align:left>400 BAD REQUEST</td>
+<td style=text-align:left>リクエストの形式エラー(クライアントのリクエストの誤り)</td>
+</tr>
+<tr>
+<td style=text-align:left>401 UNAUTHORIZED</td>
+<td style=text-align:left>未承認エラー</td>
+</tr>
+<tr>
+<td style=text-align:left>403 FORBIDDEN</td>
+<td style=text-align:left>権限エラー</td>
+</tr>
+<tr>
+<td style=text-align:left>404 NOT FOUND</td>
+<td style=text-align:left>リソースがない</td>
+</tr>
+<tr>
+<td style=text-align:left>500 Internal Server Error</td>
+<td style=text-align:left>サーバーエラー</td>
+</tr>
+</tbody>
+</table>
+<p>よく使われるのはこの辺になります。ステータスコードを適切に返すことで、 クライアントはレスポンスボディをみなくても、リクエストが成功したのか、失敗したときなぜ失敗したのかがわかるようになります。</p>
+<p>どういったステータスコードがあるのかは
+<a href=https://developer.mozilla.org/ja/docs/Web/HTTP/Status>https://developer.mozilla.org/ja/docs/Web/HTTP/Status</a>
+をみて、適切なものを選ぶようにしてください</p>
+<h4 id=レスポンスデータの設計>
 レスポンスデータの設計
 <a class=anchor href=#%e3%83%ac%e3%82%b9%e3%83%9d%e3%83%b3%e3%82%b9%e3%83%87%e3%83%bc%e3%82%bf%e3%81%ae%e8%a8%ad%e8%a8%88>#</a>
+</h4>
+<h5 id=リストを返すエンドポイント>
+リストを返すエンドポイント
+<a class=anchor href=#%e3%83%aa%e3%82%b9%e3%83%88%e3%82%92%e8%bf%94%e3%81%99%e3%82%a8%e3%83%b3%e3%83%89%e3%83%9d%e3%82%a4%e3%83%b3%e3%83%88>#</a>
+</h5>
+<p>レスポンスデータは基本的にJSONで返すようにします。少し前まではXMLも使われることが多かったですが、今はJSON一択でよいです。 たとえば、<code>GET /todos</code>
+にアクセスした場合、このエンドポイントはリストを返すエンドポイントですので、以下のようなレスポンスを返すように設計すると良いです。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>[
+  {
+    <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>1</span>,
+    <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#1&#34;</span>,
+    <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#66d9ef>false</span>
+  },
+  {
+    <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>2</span>,
+    <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#2&#34;</span>,
+    <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#66d9ef>false</span>
+  },
+  {
+    <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>3</span>,
+    <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#3&#34;</span>,
+    <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#66d9ef>false</span>
+  }
+]
+</code></pre></div><p>リストのエンドポイントを設計する際にエンベロープにくるむべきかそうしないべきかは議論が分かれるところです。 エンベロープとは以下のようなものです。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
+  <span style=color:#f92672>&#34;todos&#34;</span>: [
+    {
+      <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>1</span>,
+      <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#1&#34;</span>,
+      <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#66d9ef>false</span>
+    },
+    {
+      <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>2</span>,
+      <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#2&#34;</span>,
+      <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#66d9ef>false</span>
+    },
+    {
+      <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>3</span>,
+      <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#3&#34;</span>,
+      <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#66d9ef>false</span>
+    }
+  ]
+}
+</code></pre></div><p>しかし、筆者はエンベロープは不要と考えています。クライアントはTodoのリストを取得したくて、<code>GET /todos</code>にアクセスしているのですから、
+リストがTodoのリストであることは自明であるためです。</p>
+<h5 id=オブジェクトを返すエンドポイント>
+オブジェクトを返すエンドポイント
+<a class=anchor href=#%e3%82%aa%e3%83%96%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e3%82%92%e8%bf%94%e3%81%99%e3%82%a8%e3%83%b3%e3%83%89%e3%83%9d%e3%82%a4%e3%83%b3%e3%83%88>#</a>
+</h5>
+<p><code>GET /todos/1</code>というように特定のリソースを取得するようなエンドポイントの場合は、
+配列ではなくオブジェクトを返すのが適当です。
+即ち、いかのようなレスポンスボディを返すと良いです。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
+  <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>1</span>,
+  <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#1&#34;</span>,
+  <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#66d9ef>false</span>
+}
+</code></pre></div><h4 id=レスポンス設計の難しさ>
+レスポンス設計の難しさ
+<a class=anchor href=#%e3%83%ac%e3%82%b9%e3%83%9d%e3%83%b3%e3%82%b9%e8%a8%ad%e8%a8%88%e3%81%ae%e9%9b%a3%e3%81%97%e3%81%95>#</a>
+</h4>
+<p>では、Todoのリストが空だった場合はどういったレスポンスを返すべきでしょうか？
+404を返すべきでしょうか？200で空のリストを返すべきでしょうか？</p>
+<p>これも議論が分かれるところですが、筆者はレスポンスステータス200で空の配列を返すべきだと考えています。</p>
+<p>では<code>GET /todos/13</code>というリクエストに対して、該当するTodoがない場合はどうでしょう？</p>
+<p>これは筆者は404を返すのが適当かなと思います。リソースを指定して取得してきてるリクエストに対して、そのリソースがないと返すのが自然なためです。</p>
+<p>では<code>GET /todos?id=13</code>というリクエストに対して、該当するTodoがない場合はどうでしょうか？
+404 Not Foundを返すのが適当でしょうか？400 Bad Requestを返すのが適当でしょうか？200で空の配列を返すのが正しいでしょうか？</p>
+<p>これも難しいところではありますが、200で空の配列を返すのが正しいと考えます。
+リクエスト自体は正しいのですが、クエリの結果配列が空になってしまったという考え方になります。</p>
+<p>このようにGETリクエスト一つとって</p>
+<h3 id=クライアントに忖度しない>
+クライアントに忖度しない
+<a class=anchor href=#%e3%82%af%e3%83%a9%e3%82%a4%e3%82%a2%e3%83%b3%e3%83%88%e3%81%ab%e5%bf%96%e5%ba%a6%e3%81%97%e3%81%aa%e3%81%84>#</a>
 </h3>
-<h3 id=swagger>
-Swagger
-<a class=anchor href=#swagger>#</a>
+<p>APIのレスポンスデータを設計するにあたって一つ大事なポイントにクライアントに忖度しないというのがあります。
+これはどういうことかというと、<strong>一般的なデータ表現で、多くの情報を一度に返す</strong>ということです。</p>
+<h4 id=一般的なデータ形式を使う>
+一般的なデータ形式を使う
+<a class=anchor href=#%e4%b8%80%e8%88%ac%e7%9a%84%e3%81%aa%e3%83%87%e3%83%bc%e3%82%bf%e5%bd%a2%e5%bc%8f%e3%82%92%e4%bd%bf%e3%81%86>#</a>
+</h4>
+<p>例えば、クライアントの画面でTodoの作成日付を「2021年11月10日　13時20分」のように出力するという要件があったとします。
+このとき、サーバはどういったデータ表現で日時情報を表すべきでしょうか？</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>[
+  {
+    <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>1</span>,
+    <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#1&#34;</span>,
+    <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#66d9ef>false</span>,
+    <span style=color:#f92672>&#34;createdAt&#34;</span>: <span style=color:#e6db74>&#34;2021年11月10日　13時20分&#34;</span>
+  }
+]
+</code></pre></div><p>このようなJSONのレスポンスデータ設計は不適切です。というのも、Viewはアプリケーションの中でも特に変更の頻度が大きい部分です。
+もし、このようなJSONレスポンスをしてしまうと、日付の表示形態を変更したいとなったときに、クライアントだけでなくサーバも影響を受けて変更しないといけなくなります。
+データをうけてどのように表示するかを担うのはViewの部分。即ちClientになります。サーバはそれに忖度してはいけません。
+例えば日時情報であればRFC 3339で定義されている<code>2021-11-10T04:20:00Z</code>ないし<code>2021-11-10T13:20:00+09:00</code>のようなフォーマットで返すべきです。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>[
+  {
+    <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>1</span>,
+    <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#1&#34;</span>,
+    <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#66d9ef>false</span>,
+    <span style=color:#f92672>&#34;createdAt&#34;</span>: <span style=color:#e6db74>&#34;2021-11-10T04:20:00Z&#34;</span>
+  }
+]
+</code></pre></div><h4 id=多くの情報を一度に返す>
+多くの情報を一度に返す
+<a class=anchor href=#%e5%a4%9a%e3%81%8f%e3%81%ae%e6%83%85%e5%a0%b1%e3%82%92%e4%b8%80%e5%ba%a6%e3%81%ab%e8%bf%94%e3%81%99>#</a>
+</h4>
+<p>また、多くの情報を一度に返すとはどういうことかというと、画面に表示するかどうかに関わらずリソースに関わる情報を返すということです。
+前述したように画面を描画するにあたって多くのAPIリクエストを必要とする<strong>おしゃべりなAPI</strong>は良くないAPIです。</p>
+<p>HTTPのオーバーヘッドはとにかく大きいため、パフォーマンス向上のためにはいかにHTTP通信の回数を減らす方が大事になってきます。
+画面を見るのは人間ですが、<strong>JSONを処理するのは人間ではなくプログラム</strong>です。
+画面を描画するにあたって必要がなければ、プログラムで使わなければいいだけです。
+プログラム相手に遠慮する必要はありません。多くの情報を一度に返しましょう。</p>
+<h3 id=swaggeroas30>
+Swagger(OAS3.0)
+<a class=anchor href=#swaggeroas30>#</a>
 </h3>
+<p>APIの仕様記述の標準仕様に <a href=https://swagger.io/>Swagger</a> があります。
+SwaggerはAPI仕様定義のデファクトスタンダードで、JSONないしYAMLでAPIの仕様を記述することができます。
+Swaggerの仕様については以下のリンクを参照してください。</p>
+<p><a href=https://swagger.io/specification/>https://swagger.io/specification/</a></p>
+<p>APIの設計をするにあたって、<a href=https://github.com/swagger-api/swagger-editor>Swagger Editor</a> を活用すると良いでしょう。
+Dockerをインストールした上で、以下のコマンドを起動するとSwagger Editorを起動することができます。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>docker pull swaggerapi/swagger-editor
+docker run -d -p 80:8080 swaggerapi/swagger-editor
+</code></pre></div><p>バックエンドの開発にあたっては、<strong>Swagger Editorをつかって仕様を最初に設計を行い。チーム内でレビューないし合意をとってから開発するプロセスを強く推奨します。</strong>
+例として、今回のTodoアプリケーションのバックエンドAPI構成例を以下に記載します。</p>
+<p><a href=openapi.yaml>openapi.yaml</a></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-YAML data-lang=YAML><span style=color:#f92672>openapi</span>: <span style=color:#ae81ff>3.0.1</span>
+<span style=color:#f92672>info</span>:
+  <span style=color:#f92672>title</span>: <span style=color:#ae81ff>Todo App</span>
+  <span style=color:#f92672>description</span>: <span style=color:#ae81ff>This is the backend API definition for the task management application.</span>
+  <span style=color:#f92672>termsOfService</span>: <span style=color:#ae81ff>https://onebase-fujitsu.github.io/agile-dev-guide/</span>
+  <span style=color:#f92672>license</span>:
+    <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Creative Commons BY-NC-SA 4.0</span>
+    <span style=color:#f92672>url</span>: <span style=color:#ae81ff>https://creativecommons.org/licenses/by-nc-sa/4.0/</span>
+  <span style=color:#f92672>version</span>: <span style=color:#ae81ff>1.0.0</span>
+<span style=color:#f92672>servers</span>:
+  - <span style=color:#f92672>url</span>: <span style=color:#ae81ff>https://localhost:8080</span>
+<span style=color:#f92672>tags</span>:
+  - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>todos</span>
+    <span style=color:#f92672>description</span>: <span style=color:#ae81ff>API for managing todo</span>
+<span style=color:#f92672>paths</span>:
+  <span style=color:#f92672>/todos</span>:
+    <span style=color:#f92672>get</span>:
+      <span style=color:#f92672>tags</span>:
+        - <span style=color:#ae81ff>todos</span>
+      <span style=color:#f92672>summary</span>: <span style=color:#ae81ff>Get all todo list</span>
+      <span style=color:#f92672>operationId</span>: <span style=color:#ae81ff>getTodos</span>
+      <span style=color:#f92672>responses</span>:
+        <span style=color:#f92672>200</span>:
+          <span style=color:#f92672>description</span>: <span style=color:#ae81ff>OK</span>
+          <span style=color:#f92672>content</span>:
+            <span style=color:#f92672>application/json</span>:
+              <span style=color:#f92672>schema</span>:
+                <span style=color:#f92672>type</span>: <span style=color:#ae81ff>array</span>
+                <span style=color:#f92672>items</span>:
+                  <span style=color:#f92672>$ref</span>: <span style=color:#e6db74>&#39;#/components/schemas/Todo&#39;</span>
+              <span style=color:#f92672>example</span>:
+                [
+                  {
+                    <span style=color:#f92672>id</span>: <span style=color:#ae81ff>1</span>,
+                    <span style=color:#f92672>title</span>: <span style=color:#e6db74>&#34;Tado Title#1&#34;</span>,
+                    <span style=color:#f92672>completed</span>: <span style=color:#66d9ef>false</span>
+                  }
+                ]
+    <span style=color:#f92672>post</span>:
+      <span style=color:#f92672>tags</span>:
+        - <span style=color:#ae81ff>todos</span>
+      <span style=color:#f92672>summary</span>: <span style=color:#ae81ff>Add a new todo</span>
+      <span style=color:#f92672>operationId</span>: <span style=color:#ae81ff>addTodos</span>
+      <span style=color:#f92672>requestBody</span>:
+        <span style=color:#f92672>description</span>: <span style=color:#ae81ff>Pet object that needs to be added to the store</span>
+        <span style=color:#f92672>content</span>:
+          <span style=color:#f92672>application/json</span>:
+            <span style=color:#f92672>schema</span>:
+              <span style=color:#f92672>type</span>: <span style=color:#ae81ff>object</span>
+              <span style=color:#f92672>properties</span>:
+                <span style=color:#f92672>title</span>:
+                  <span style=color:#f92672>type</span>: <span style=color:#ae81ff>string</span>
+            <span style=color:#f92672>example</span>:
+              {
+                <span style=color:#f92672>title</span>: <span style=color:#e6db74>&#34;Todo Title&#34;</span>
+              }
+        <span style=color:#f92672>required</span>: <span style=color:#66d9ef>true</span>
+      <span style=color:#f92672>responses</span>:
+        <span style=color:#f92672>201</span>:
+          <span style=color:#f92672>description</span>: <span style=color:#ae81ff>Created</span>
+          <span style=color:#f92672>content</span>:
+            <span style=color:#f92672>application/json</span>:
+              <span style=color:#f92672>schema</span>:
+                <span style=color:#f92672>$ref</span>: <span style=color:#e6db74>&#39;#/components/schemas/Todo&#39;</span>
+              <span style=color:#f92672>example</span>:
+                {
+                  <span style=color:#f92672>id</span>: <span style=color:#ae81ff>1</span>,
+                  <span style=color:#f92672>title</span>: <span style=color:#e6db74>&#34;Tado Title#1&#34;</span>,
+                  <span style=color:#f92672>completed</span>: <span style=color:#66d9ef>false</span>
+                }
+        <span style=color:#f92672>400</span>:
+          <span style=color:#f92672>description</span>: <span style=color:#ae81ff>Bad Request</span>
+  <span style=color:#ae81ff>/todos/{id}:</span>
+    <span style=color:#f92672>patch</span>:
+      <span style=color:#f92672>tags</span>:
+        - <span style=color:#ae81ff>todos</span>
+      <span style=color:#f92672>summary</span>: <span style=color:#ae81ff>patch todo</span>
+      <span style=color:#f92672>parameters</span>:
+        - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>id</span>
+          <span style=color:#f92672>in</span>: <span style=color:#ae81ff>path</span>
+          <span style=color:#f92672>schema</span>:
+            <span style=color:#f92672>type</span>: <span style=color:#ae81ff>integer</span>
+            <span style=color:#f92672>format</span>: <span style=color:#ae81ff>int32</span>
+          <span style=color:#f92672>required</span>: <span style=color:#66d9ef>true</span>
+      <span style=color:#f92672>requestBody</span>:
+        <span style=color:#f92672>content</span>:
+          <span style=color:#f92672>application/json</span>:
+            <span style=color:#f92672>schema</span>:
+              <span style=color:#f92672>type</span>: <span style=color:#ae81ff>object</span>
+              <span style=color:#f92672>properties</span>:
+                <span style=color:#f92672>title</span>:
+                  <span style=color:#f92672>type</span>: <span style=color:#ae81ff>string</span>
+                <span style=color:#f92672>completed</span>:
+                  <span style=color:#f92672>type</span>: <span style=color:#ae81ff>boolean</span>
+            <span style=color:#f92672>example</span>:
+              {
+                <span style=color:#f92672>completed</span>: <span style=color:#66d9ef>true</span>
+              }
+      <span style=color:#f92672>responses</span>:
+        <span style=color:#f92672>204</span>:
+          <span style=color:#f92672>description</span>: <span style=color:#ae81ff>Resource Updated</span>
+        <span style=color:#f92672>400</span>:
+          <span style=color:#f92672>description</span>: <span style=color:#ae81ff>Bad Request</span>
+        <span style=color:#f92672>404</span>:
+          <span style=color:#f92672>description</span>: <span style=color:#ae81ff>Resource Not Found</span>
+    <span style=color:#f92672>delete</span>:
+      <span style=color:#f92672>tags</span>:
+        - <span style=color:#ae81ff>todos</span>
+      <span style=color:#f92672>summary</span>: <span style=color:#ae81ff>delete todo</span>
+      <span style=color:#f92672>parameters</span>:
+        - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>id</span>
+          <span style=color:#f92672>in</span>: <span style=color:#ae81ff>path</span>
+          <span style=color:#f92672>schema</span>:
+            <span style=color:#f92672>type</span>: <span style=color:#ae81ff>integer</span>
+            <span style=color:#f92672>format</span>: <span style=color:#ae81ff>int32</span>
+          <span style=color:#f92672>required</span>: <span style=color:#66d9ef>true</span>
+      <span style=color:#f92672>responses</span>:
+        <span style=color:#f92672>204</span>:
+          <span style=color:#f92672>description</span>: <span style=color:#ae81ff>Resource Deleted</span>
+        <span style=color:#f92672>400</span>:
+          <span style=color:#f92672>description</span>: <span style=color:#ae81ff>Bad Request</span>
+        <span style=color:#f92672>404</span>:
+          <span style=color:#f92672>description</span>: <span style=color:#ae81ff>Resource Not Found</span>
+<span style=color:#f92672>components</span>:
+  <span style=color:#f92672>schemas</span>:
+    <span style=color:#f92672>Todo</span>:
+      <span style=color:#f92672>type</span>: <span style=color:#ae81ff>object</span>
+      <span style=color:#f92672>properties</span>:
+        <span style=color:#f92672>id</span>:
+          <span style=color:#f92672>type</span>: <span style=color:#ae81ff>integer</span>
+          <span style=color:#f92672>format</span>: <span style=color:#ae81ff>int64</span>
+        <span style=color:#f92672>title</span>:
+          <span style=color:#f92672>type</span>: <span style=color:#ae81ff>string</span>
+        <span style=color:#f92672>completed</span>:
+          <span style=color:#f92672>type</span>: <span style=color:#ae81ff>boolean</span>
+
+</code></pre></div><p>APIの設計とSwaggerの仕様をきちんと理解することは非常に大事で、APIを外部に公開する際はこのSwaggerのyamlを公開することになります。
+変な仕様書を公開するとかえって外部の開発者の混乱を招くことになります。Swagger(OAS3.0)以外の形式でAPI仕様を公開すべきではありません。
+<a href=https://swagger.io/tools/swagger-ui/>Swagger UI</a> のようにSwaggerの仕様を見やすく、そして使いやすく公開するためのツールもあります。</p>
+<p><strong>APIの設計は標準仕様をよく目を通し、仕様に則ったものを作りましょう。</strong>
+設計したAPI仕様を読み、そしてAPIを使うのは一般のエンドユーザではなく開発者です。
+開発者自身が使いやすくないAPIを作ってしまうと、とても外部の開発者に使ってもらうことは叶いません。
+まずは、<strong>開発者自身が使いやすいAPIを目指しましょう。</strong></p>
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
@@ -596,11 +1049,11 @@ Swagger
 <li><a href=#api設計>API設計</a>
 <ul>
 <li><a href=#いいapiの設計とは>いいAPIの設計とは</a></li>
-<li><a href=#rest>REST</a></li>
-<li><a href=#リソース志向>リソース志向</a></li>
+<li><a href=#リソース志向設計>リソース志向設計</a></li>
 <li><a href=#パラメータ>パラメータ</a></li>
-<li><a href=#レスポンスデータの設計>レスポンスデータの設計</a></li>
-<li><a href=#swagger>Swagger</a></li>
+<li><a href=#レスポンス設計>レスポンス設計</a></li>
+<li><a href=#クライアントに忖度しない>クライアントに忖度しない</a></li>
+<li><a href=#swaggeroas30>Swagger(OAS3.0)</a></li>
 </ul>
 </li>
 </ul>
