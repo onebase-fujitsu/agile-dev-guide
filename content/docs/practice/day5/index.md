@@ -626,6 +626,8 @@ docker pull swaggerapi/swagger-editor
 docker run -d -p 80:8080 swaggerapi/swagger-editor
 ```
 
+![SwaggerEditor](swaggerEditor.jpg)
+
 バックエンドの開発にあたっては、**Swagger Editorをつかって仕様を最初に設計を行い。チーム内でレビューないし合意をとってから開発するプロセスを強く推奨します。**
 例として、今回のTodoアプリケーションのバックエンドAPI構成例を以下に記載します。
 
