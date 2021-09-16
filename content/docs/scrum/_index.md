@@ -1,5 +1,5 @@
 ---
-title: "スクラムtest"
+title: "スクラム"
 weight: 3
 bookFlatSection: false
 bookToc: true
