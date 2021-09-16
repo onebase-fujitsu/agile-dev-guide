@@ -878,7 +878,8 @@ Swaggerの仕様については以下のリンクを参照してください。<
 Dockerをインストールした上で、以下のコマンドを起動するとSwagger Editorを起動することができます。</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>docker pull swaggerapi/swagger-editor
 docker run -d -p 80:8080 swaggerapi/swagger-editor
-</code></pre></div><p>バックエンドの開発にあたっては、<strong>Swagger Editorをつかって仕様を最初に設計を行い。チーム内でレビューないし合意をとってから開発するプロセスを強く推奨します。</strong>
+</code></pre></div><p><img src=swaggerEditor.jpg alt=SwaggerEditor></p>
+<p>バックエンドの開発にあたっては、<strong>Swagger Editorをつかって仕様を最初に設計を行い。チーム内でレビューないし合意をとってから開発するプロセスを強く推奨します。</strong>
 例として、今回のTodoアプリケーションのバックエンドAPI構成例を以下に記載します。</p>
 <p><a href=openapi.yaml>openapi.yaml</a></p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-YAML data-lang=YAML><span style=color:#f92672>openapi</span>: <span style=color:#ae81ff>3.0.1</span>
