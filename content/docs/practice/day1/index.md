@@ -1,5 +1,5 @@
 ---
-title: "1日目test"
+title: "1日目"
 weight: 1
 bookToc: true
 ---
