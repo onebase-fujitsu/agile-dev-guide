@@ -1,7 +1,7 @@
 ---
 title: "おわりに"
 weight: 8
-bookToc: true
+bookToc: false
 ---
 
 # おわりに
