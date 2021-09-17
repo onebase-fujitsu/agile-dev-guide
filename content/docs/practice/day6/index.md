@@ -153,3 +153,50 @@ test('タスクを作成することができる', async t => {
 
 これも実行すると問題なく通るはずです。
 
+ここまでのリポジトリは
+[https://github.com/Onebase-Fujitsu/todo-app/tree/step2](https://github.com/Onebase-Fujitsu/todo-app/tree/step2)
+にあります。
+
+## さらなるアプリのスケールに向けて
+
+ここまで、簡単なSPAのアプリケーションを1からテスト駆動開発で作成し、バックエンドのAPIと連携させ、
+一連のプロセスをE2Eテストするというところまで来ました。
+
+まだReduxのState管理をするにあたって、fetchした内容をそのままStateに入れていますが、
+本当であれば [Normalizr.js](https://github.com/paularmstrong/normalizr) で正規化して入れるべきです。
+詳しくは [Redux Style Guide](https://redux.js.org/style-guide/style-guide) を読んでみてください。
+
+ReduxのState管理方法も規約がありません。このままでは開発者によって無造作にStateが作られ、管理できなくなってしまうでしょう。
+[Ducks Pattern](https://medium.com/@scbarrus/the-ducks-file-structure-for-redux-d63c41b7035c) や
+[Re-Ducks Pattern](https://github.com/erikras/ducks-modular-redux) といったReduxの管理方法のパターンがありますので、
+そういったパターンに従うようにチーム内で合意をとるようにすると良いでしょう。
+
+一般的には以下のようなState管理をするとよいと言われています。
+
+- Domain Data
+  - バックエンドからfetchしたアプリケーションが表示したり変更したりするデータ
+- App State
+  - アプリケーション独自の振る舞いのためのデータ
+  - データの選択状態やデータフェッチのローディング状態
+- UI State
+  - 現在の表示方法のためのデータ
+  - モーダルが開かれているかどうかや、通知バーの状態など
+
+また、Componentの分割粒度も曖昧なままです。
+複数人で開発をすすめるとどうしても開発者によってComponentの分割粒度にばらつきがでます。
+意図せず巨大なComponentができてしまうかもしれません。
+そこで取り入れたいのが [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) の考え方です。
+
+アプリ開発はとにかく自由度が大きいです。アジャイル開発となれば開発に関する裁量は開発者に委ねられるため、
+無数にある開発手法の中から最適なものを選択し、アーキテクチャを決定して、実装していかなければなりません。
+
+そして、自由度が高くなればなるほどに、個人間での開発スタイルやスキルの"ブレ"が問題になってきます。
+**チーム開発において最も大事なのは規約です。**
+このハンズオンでも一番最初にやったのはeslintの設定でした。規約はとにかく大事です。
+
+コンポーネントの分割粒度はこうする、ReduxのState管理はこうする、バックエンドのAPIはこうするとチーム内でかならず合意形成をとり、
+lintのように自動でチェックできるものはlintに規約を落とし込んでコードの品質を保つようにしてください。
+
+まだバックエンドの変更API`PATCH /todos/{id}`も実装できていませんし、まだまだやることは山のようにあります。
+**アジャイルのアプリ開発に終わりはありません。**
+さらなるユーザ価値の提供に向けて各自取り組んでいってください。
