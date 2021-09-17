@@ -203,11 +203,7 @@
 <aside class="hidden clearfix">
 <nav id=TableOfContents>
 <ul>
-<li><a href=#テストダブルとは>テストダブルとは</a>
-<ul>
-<li><a href=#stub>Stub</a></li>
-</ul>
-</li>
+<li><a href=#テストダブルとは>テストダブルとは</a></li>
 <li><a href=#テストダブルを実現するライブラリ>テストダブルを実現するライブラリ</a></li>
 <li><a href=#サンプルアプリケーション>サンプルアプリケーション</a></li>
 <li><a href=#mockitoを使ったcontrollerのユニットテスト>Mockitoを使ったControllerのユニットテスト</a>
@@ -253,42 +249,42 @@
 <p>そこで、依存する機能がユニットテストで扱いづらい場合や、ユニットテストの独立性を高めたい場合には、依存するオブジェクトを「代役」で置き換える方法が有効です。
 この代役となるオブジェクトはスタブやモックとして知られ、総称してテストダブル（TestDouble）と呼ばれます。</p>
 <p>テストダブルには様々なパターンがあります</p>
-<ul>
-<li>Stub
-<ul>
-<li>テスト対象の依存オブジェクトに予測可能な振る舞いをする</li>
-</ul>
-</li>
-<li>Spy
-<ul>
-<li>テスト対象から依存オブジェクトへの呼び出しを監視する</li>
-</ul>
-</li>
-<li>Mock
-<ul>
-<li>テスト対象から依存オブジェクトへの呼び出しを検証する</li>
-</ul>
-</li>
-<li>Fake
-<ul>
-<li>テストの範囲内で本物と同じように動作する</li>
-</ul>
-</li>
-<li>Dummy
-<ul>
-<li>内部のパラメータや状態がなんでもあってもテストに影響を及ぼさない代替オブジェクト</li>
-</ul>
-</li>
-</ul>
-<p>FakeとDummyは本物と同じように振る舞う偽のオブジェクトであったり、コンパイルを通すために実装される代替オブジェクトなので、
-説明はここでは割愛します。ここではStub、Mock、Spyについて説明していきます。</p>
-<h3 id=stub>
-Stub
-<a class=anchor href=#stub>#</a>
-</h3>
-<p>スタブとは依存するクラスやモジュールの代用として使用する仮のクラスやモジュールです。
-ユニットテストに置いてはは依存オブジェクトに予測可能な振る舞いをさせる目的で使用されます。
-その他にも依存オブジェクトの実行コストが高く、簡単に利用できない場合などに使われます。</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>テストダブル</th>
+<th style=text-align:left>役割</th>
+<th style=text-align:left>具体例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>Stub</td>
+<td style=text-align:left>テスト対象の依存オブジェクトに予測可能な振る舞いをする</td>
+<td style=text-align:left>依存コンポーネントから取得できる値が変化したとき、テスト対象の挙動がどう変化するか確認するテスト</td>
+</tr>
+<tr>
+<td style=text-align:left>Spy</td>
+<td style=text-align:left>テスト対象から依存オブジェクトへの呼び出しを監視する</td>
+<td style=text-align:left>テスト対象が既に実装された依存コンポーネントを呼び出した値や回数を検証するテスト</td>
+</tr>
+<tr>
+<td style=text-align:left>Mock</td>
+<td style=text-align:left>テスト対象から依存オブジェクトへの呼び出しを検証する</td>
+<td style=text-align:left>テスト対象が依存コンポーネントに入力した内容を検証するテスト</td>
+</tr>
+<tr>
+<td style=text-align:left>Fake</td>
+<td style=text-align:left>テストの範囲内で本物と同じように動作する</td>
+<td style=text-align:left>データベースを使用するテストの場合、膨大な時間がかかる場合がある。フェイクとして同機能をインメモリデータベースで実装しテストを高速化する。</td>
+</tr>
+<tr>
+<td style=text-align:left>Dummy</td>
+<td style=text-align:left>内部のパラメータや状態がなんであってもテストに影響を及ぼさない代替オブジェクト</td>
+<td style=text-align:left>テストに関係はないがコンストラクタに与える値が足りない、その値を埋めるために作成する。</td>
+</tr>
+</tbody>
+</table>
 <h2 id=テストダブルを実現するライブラリ>
 テストダブルを実現するライブラリ
 <a class=anchor href=#%e3%83%86%e3%82%b9%e3%83%88%e3%83%80%e3%83%96%e3%83%ab%e3%82%92%e5%ae%9f%e7%8f%be%e3%81%99%e3%82%8b%e3%83%a9%e3%82%a4%e3%83%96%e3%83%a9%e3%83%aa>#</a>
@@ -1647,11 +1643,7 @@ class DBアクセスエラー {
 <div class=book-toc-content>
 <nav id=TableOfContents>
 <ul>
-<li><a href=#テストダブルとは>テストダブルとは</a>
-<ul>
-<li><a href=#stub>Stub</a></li>
-</ul>
-</li>
+<li><a href=#テストダブルとは>テストダブルとは</a></li>
 <li><a href=#テストダブルを実現するライブラリ>テストダブルを実現するライブラリ</a></li>
 <li><a href=#サンプルアプリケーション>サンプルアプリケーション</a></li>
 <li><a href=#mockitoを使ったcontrollerのユニットテスト>Mockitoを使ったControllerのユニットテスト</a>
