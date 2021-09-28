@@ -1,5 +1,5 @@
 ---
-title: "2日目test"
+title: "2日目"
 weight: 2
 bookToc: true
 ---
@@ -777,3 +777,8 @@ JSON Placeholderは予め定義されているJSONの他にも [自分で作成�
 正しく動作していることが確認できたら再びリクエスト先を/todosに戻しておいてください。
 次はサーバの実装をやってみましょう。
 
+---
+
+3日目に続きます
+
+{{< button relref="/docs/practice/day3" >}}3日目{{< /button >}}
