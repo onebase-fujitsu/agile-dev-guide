@@ -785,3 +785,9 @@ describe('App', () => {
 ここまでのソースは
 [https://github.com/Onebase-Fujitsu/todo-app-client/tree/step7](https://github.com/Onebase-Fujitsu/todo-app-client/tree/step7)
 に置いてあります。
+
+---
+
+5日目に続きます
+
+{{< button relref="/docs/practice/day5" >}}5日目{{< /button >}}

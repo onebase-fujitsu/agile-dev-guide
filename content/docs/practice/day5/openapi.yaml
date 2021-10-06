@@ -1,0 +1,135 @@
+openapi: 3.0.1
+info:
+  title: Todo App
+  description: This is the backend API definition for the task management application.
+  termsOfService: https://onebase-fujitsu.github.io/agile-dev-guide/
+  license:
+    name: Creative Commons BY-NC-SA 4.0
+    url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+  version: 1.0.0
+servers:
+- url: https://localhost:8080
+tags:
+- name: todos
+  description: API for managing todo
+paths:
+  /todos:
+    get:
+      tags:
+        - todos
+      summary: Get all todo list
+      operationId: getTodos
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Todo'
+              example:
+                [
+                  {
+                    id: 1,
+                    title: "Tado Title#1",
+                    completed: false
+                  }
+                ]
+    post:
+      tags:
+        - todos
+      summary: Add a new todo
+      operationId: addTodos
+      requestBody:
+        description: Pet object that needs to be added to the store
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+            example:
+              {
+                title: "Todo Title"
+              }
+        required: true
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+              example:
+                {
+                  id: 1,
+                  title: "Tado Title#1",
+                  completed: false
+                }
+        400:
+          description: Bad Request
+  /todos/{id}:
+    patch:
+      tags:
+        - todos
+      summary: patch todo
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            format: int32
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                completed:
+                  type: boolean
+            example:
+              {
+                completed: true
+              }
+      responses:
+        204:
+          description: Resource Updated
+        400:
+          description: Bad Request
+        404:
+          description: Resource Not Found
+    delete:
+      tags:
+        - todos
+      summary: delete todo
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+            format: int32
+          required: true
+      responses:
+        204:
+          description: Resource Deleted
+        400:
+          description: Bad Request
+        404:
+          description: Resource Not Found
+components:
+  schemas:
+    Todo:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+        completed:
+          type: boolean

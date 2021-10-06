@@ -509,6 +509,7 @@ public class FizzBuzz {
 完成したソースコードは [こちらで公開してあります](https://github.com/Onebase-Fujitsu/fizzbuzz)。迷ったときに見てみてください。
 
 FizzBuzzはとても有名な問題なので様々な実装方法があります。興味があれば調べてみてください。
+なかには [FizzBuzz Enterprise Edition](https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition) なんてものもあります。（風刺を目的としたジョークコードですので真に受けないように）
 
 では次にちょっと難易度を上げた問題に取り組んでみましょう。
 
