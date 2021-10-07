@@ -2,15 +2,15 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content>
-<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="SOLID原則">
-<meta property="og:description" content>
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/">
-<title>SOLID原則 | Fujitsu Agile Development Guide</title>
+<meta name=description content="ユーザーストーリーマッピング # Describtion ペルソナがソフトウェアを使う流れ（ストーリー）と、必要となる情報や機能を整理し、開発すべきものをチーム内で意">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="ユーザストーリーマッピング">
+<meta property="og:description" content="ユーザーストーリーマッピング # Describtion ペルソナがソフトウェアを使う流れ（ストーリー）と、必要となる情報や機能を整理し、開発すべきものをチーム内で意">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/userstory/"><meta property="article:section" content="docs">
+<title>ユーザストーリーマッピング | Fujitsu Agile Development Guide</title>
 <link rel=manifest href=/agile-dev-guide/manifest.json>
 <link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon>
-<link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous><link rel=alternate type=application/rss+xml href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/index.xml title="Fujitsu Agile Development Guide">
+<link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
 </head>
 <body dir=ltr>
 <input type=checkbox class="hidden toggle" id=menu-control>
@@ -28,7 +28,7 @@
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/>はじめに</a>
 </li>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/userstory/>ユーザストーリーマッピング</a>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/userstory/ class=active>ユーザストーリーマッピング</a>
 </li>
 <li>
 <input type=checkbox id=section-b077c62e2cf275f367b13c9cd484dcf6 class=toggle>
@@ -114,7 +114,7 @@
 </ul>
 </li>
 <li>
-<input type=checkbox id=section-6668e94793f2c3410fae208f25d1f417 class=toggle checked>
+<input type=checkbox id=section-6668e94793f2c3410fae208f25d1f417 class=toggle>
 <label for=section-6668e94793f2c3410fae208f25d1f417 class="flex justify-between">
 <a role=button>ソフトウェア設計</a>
 </label>
@@ -123,9 +123,9 @@
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/>アジャイル開発に求められるソフトウェア設計</a>
 </li>
 <li>
-<input type=checkbox id=section-fd21b9cd7e31d8e1d2ba14b32452065e class=toggle checked>
+<input type=checkbox id=section-fd21b9cd7e31d8e1d2ba14b32452065e class=toggle>
 <label for=section-fd21b9cd7e31d8e1d2ba14b32452065e class="flex justify-between">
-<a role=button class=active>SOLID原則</a>
+<a role=button>SOLID原則</a>
 </label>
 <ul>
 <li>
@@ -201,7 +201,7 @@
 <label for=menu-control>
 <img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu>
 </label>
-<strong>SOLID原則</strong>
+<strong>ユーザストーリーマッピング</strong>
 <label for=toc-control>
 <img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents">
 </label>
@@ -210,12 +210,51 @@
 <nav id=TableOfContents></nav>
 </aside>
 </header>
-<article class=markdown></article>
+<article class=markdown><h1 id=ユーザーストーリーマッピング>
+ユーザーストーリーマッピング
+<a class=anchor href=#%e3%83%a6%e3%83%bc%e3%82%b6%e3%83%bc%e3%82%b9%e3%83%88%e3%83%bc%e3%83%aa%e3%83%bc%e3%83%9e%e3%83%83%e3%83%94%e3%83%b3%e3%82%b0>#</a>
+</h1>
+<p></p>
+<blockquote class="book-hint info">
+<p><strong>Describtion</strong></p>
+<p>ペルソナがソフトウェアを使う流れ（ストーリー）と、必要となる情報や機能を整理し、開発すべきものをチーム内で意識合わせをします。
+情報や機能は優先度をつけ、リリース計画を検討します。</p>
+<blockquote>
+<ul>
+<li>ペルソナのストーリを書き出します。</li>
+<li>各ストーリで必要となる細かい要求（情報や機能）を書き出します。</li>
+<li>要求に優先度をつけ、リリース別に横線を書きます。</li>
+<li>もっともミニマムなものをリリース１として開発し、その後のリリースで付加機能を追加していきます。</li>
+</ul>
+</blockquote>
+<p><strong>Tips</strong></p>
+<blockquote>
+<ul>
+<li>PMs, Designers, Devs全員で行う方が良いです。</li>
+<li>ユーザーストーリーマッピングはユーザーの体験とソフトウェアの機能の対応を整理し、優先度付けするもの（カスタマージャーニーマップやシナリオではない）</li>
+</ul>
+</blockquote>
+<p><strong>例：ユーザーは決済します。</strong></p>
+<blockquote>
+<ul>
+<li>リリース１：クレジットカード決済のみ</li>
+<li>リリース２：PayPayなどキャッシュレス決済も追加</li>
+</ul>
+</blockquote>
+<h1 id=リスクアクティビティ>リスクアクティビティ</h1>
+<p>&lt;img src=&ldquo;riskactivity.jpg&rdquo; width=&ldquo;80%></p>
+<p>プロダクトを失敗に導くリスクを洗い出し、優先度をつけます。
+<strong>失敗＝プロダクトのビジョンが達成できない</strong>
+「もし○○○だったら、このプロダクトは失敗する」という形で記述します。まずは一人ひとりの思い込み(Assumption)を可視化し、インパクトやチームの学習状況などから優先度付けを行います。</p>
+</blockquote>
+</article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
 </div>
 <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
 </footer>
+<div class=book-comments>
+</div>
 <label for=menu-control class="hidden book-menu-overlay"></label>
 </div>
 <aside class=book-toc>
