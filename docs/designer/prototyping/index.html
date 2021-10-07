@@ -1,0 +1,286 @@
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="プロトタイピング # Description ソフトウェアのUIデザインを行う。 シナリオに沿って、画面遷移と各画面の レイアウトを検討 満たすべき要求を整理し、各自ラフス">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="プロトタイピング">
+<meta property="og:description" content="プロトタイピング # Description ソフトウェアのUIデザインを行う。 シナリオに沿って、画面遷移と各画面の レイアウトを検討 満たすべき要求を整理し、各自ラフス">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/prototyping/"><meta property="article:section" content="docs">
+<title>プロトタイピング | Fujitsu Agile Development Guide</title>
+<link rel=manifest href=/agile-dev-guide/manifest.json>
+<link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span>
+</a>
+</h2>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/>はじめに</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/userstory/>ユーザストーリーマッピング</a>
+</li>
+<li>
+<input type=checkbox id=section-b077c62e2cf275f367b13c9cd484dcf6 class=toggle>
+<label for=section-b077c62e2cf275f367b13c9cd484dcf6 class="flex justify-between">
+<a role=button>アジャイル</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/>アジャイル開発12の原則</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-488859b49087c05cd9f2afa3c2804c61 class=toggle>
+<label for=section-488859b49087c05cd9f2afa3c2804c61 class="flex justify-between">
+<a role=button>スクラム</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/overview/>スクラムとは</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/roles/>ロール</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/products/>成果物</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/events/>イベント</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/overview/iteration/agileworkingstyle/>リーンスタートアップ働き方</a>
+</li>
+<li>
+<input type=checkbox id=section-f43a50e4d00e3398d279579a5a9a0783 class=toggle>
+<label for=section-f43a50e4d00e3398d279579a5a9a0783 class="flex justify-between">
+<a role=button>エクストリームプログラミング</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/>エクストリームプログラミングとは</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/>エクストリームプログラミングのプラクティス</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-a13c3fe744f0e51384f4e9ab9bef8ae4 class=toggle checked>
+<label for=section-a13c3fe744f0e51384f4e9ab9bef8ae4 class="flex justify-between">
+<a role=button>デザイナー</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/persona/>ペルソナ</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/scenario/>シナリオ</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/researchplanning/>リサーチ計画立案</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/prototyping/ class=active>プロトタイピング</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/script/>スクリプト</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/researchacction/>リサーチ実施</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/synthesize/>シンセサイズ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-4881c8ea96a48f6fd2540db502c204e0 class=toggle>
+<label for=section-4881c8ea96a48f6fd2540db502c204e0 class="flex justify-between">
+<a role=button>ソフトウェアテスト</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/overview/>ソフトウェアテストを始めよう</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/>ウォーミングアップ</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/>ボウリングゲーム</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/>テストダブル</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/>E2Eテスト</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-6668e94793f2c3410fae208f25d1f417 class=toggle>
+<label for=section-6668e94793f2c3410fae208f25d1f417 class="flex justify-between">
+<a role=button>ソフトウェア設計</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/>アジャイル開発に求められるソフトウェア設計</a>
+</li>
+<li>
+<input type=checkbox id=section-fd21b9cd7e31d8e1d2ba14b32452065e class=toggle>
+<label for=section-fd21b9cd7e31d8e1d2ba14b32452065e class="flex justify-between">
+<a role=button>SOLID原則</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/>単一責任の原則(SRP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/>オープン・クローズドの原則(OCP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/>リスコフの置換原則(LSP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>依存性逆転の原則(DIP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/>インターフェース分離の原則(ISP)</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-ee4c81ada0b6a9ee859cebeab00ca76e class=toggle>
+<label for=section-ee4c81ada0b6a9ee859cebeab00ca76e class="flex justify-between">
+<a role=button>デザインパターン</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/designpattern/designpattern/>デザインパターン</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-a16dbb8fa8b2df15e7da65eb13e2d51a class=toggle>
+<label for=section-a16dbb8fa8b2df15e7da65eb13e2d51a class="flex justify-between">
+<a role=button>アジャイルの実践</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/>1日目</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/>2日目</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/>3日目</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/>4日目</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/>5日目</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/>6日目</a>
+</li>
+</ul>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/>おわりに</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/>推奨書籍</a>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu>
+</label>
+<strong>プロトタイピング</strong>
+<label for=toc-control>
+<img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents></nav>
+</aside>
+</header>
+<article class=markdown><h1 id=プロトタイピング>
+プロトタイピング
+<a class=anchor href=#%e3%83%97%e3%83%ad%e3%83%88%e3%82%bf%e3%82%a4%e3%83%94%e3%83%b3%e3%82%b0>#</a>
+</h1>
+<p>Description</p>
+<p>ソフトウェアのUIデザインを行う。</p>
+<ul>
+<li>シナリオに沿って、画面遷移と各画面のレイアウトを検討
+<ul>
+<li>満たすべき要求を整理し、各自ラフスケッチを作りシェアしても良い。</li>
+</ul>
+</li>
+<li>大まかな全体像ができたら、ツールでUIを制作する</li>
+<li>適宜PMs、Devsとシェア</li>
+</ul>
+<p>Tips</p>
+<ul>
+<li>レイアウトの微調整ができていない段階でも、プロトタイプとしてリサーチすることはできる。問題ないことを確認後、開発向けに精度を高めていく形で良い。</li>
+<li>検証したい仮説やイテレーションのスケジュールに合わせて段階的に作る。一気に全画面を作らない。</li>
+<li>Devsとの連携や、軌道修正がしやすいツールで行う(figmaを利用）</li>
+<li>スタイルガイド（カラー、文字）など作っておく</li>
+<li>可能な限り初めから共通部品化(Component化)し、変更に強い作りを目指す。</li>
+<li>UIデザインのスキルは一朝一夕につかい。</li>
+</ul>
+<a href=/agile-dev-guide/docs/designer/script/ class=book-btn>
+スクリプト作成
+</a>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents></nav>
+</div>
+</aside>
+</main>
+</body>
+</html>
