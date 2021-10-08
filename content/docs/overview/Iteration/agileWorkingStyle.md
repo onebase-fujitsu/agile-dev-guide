@@ -59,7 +59,7 @@ bookToc: true
 
 ## デイリースタンドアップ
 
-![dailystand](./dailystand.jpg)
+![dailystand](content/docs/overview/Iteration/dailystand.jpg)
 
 {{< hint info >}}
 
