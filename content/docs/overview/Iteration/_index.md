@@ -59,7 +59,7 @@ bookToc: true
 
 ## デイリースタンドアップ
 
-![dailystand](content/docs/overview/Iteration/dailystand.jpg)
+![dailystand](dailystand.jpg)
 
 {{< hint info >}}
 
@@ -89,7 +89,7 @@ bookToc: true
 
 ## タスク確認（PdMとDesigners）
 
-![task](./task_confirm.png)
+![task](task_confirm.png)
 
 
 PdMとデザイナーで毎日共有します。
@@ -97,7 +97,7 @@ PdMとデザイナーで毎日共有します。
 
 ## IPM(Iteration Planning Meeting)
 
-![IPM](./IPM.jpg)
+![IPM](IPM.jpg)
 
 {{< hint info >}}
 
@@ -119,18 +119,18 @@ PdMとデザイナーで毎日共有します。
 
 ストーリー、リリース計画、ベロシティ（チームの馬力）
 
-![productbacklog](./productBackLog1.png)
-![productbacklog2](./productBackLog2.jpg)
+![productbacklog](productBackLog1.png)
+![productbacklog2](productBackLog2.jpg)
 
 ## CL　クライアントとの定例会(PMO ミーティング）
 
-![PMO](./PMO.jpg)
+![PMO](PMO.jpg)
 
 
 ## レトロスペクティブ
 
-![retrospective1](./retrospective1.jpg)
-![retrospective](./retrospective2.jpg)
+![retrospective1](retrospective1.jpg)
+![retrospective](retrospective2.jpg)
 
 {{< hint info >}}
 
