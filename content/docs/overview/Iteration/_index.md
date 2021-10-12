@@ -1,5 +1,5 @@
 ---
-title: "リーンスタートアップ働き方"
+title: "リーンスタートアップ働き方test"
 weight: 3
 bookToc: true
 ---
