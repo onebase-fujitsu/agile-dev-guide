@@ -2,15 +2,15 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content>
-<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="デザイナー">
-<meta property="og:description" content>
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/">
-<title>デザイナー | Fujitsu Agile Development Guide</title>
+<meta name=description content="リリース計画 # リリース計画におけるポイント # 早く頻繁に出す # ユーザーが機能を使ってみて初めて、適切な状態を開発し上手くデザインして実装したか">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="リリース管理">
+<meta property="og:description" content="リリース計画 # リリース計画におけるポイント # 早く頻繁に出す # ユーザーが機能を使ってみて初めて、適切な状態を開発し上手くデザインして実装したか">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/releaseplanning/"><meta property="article:section" content="docs">
+<title>リリース管理 | Fujitsu Agile Development Guide</title>
 <link rel=manifest href=/agile-dev-guide/manifest.json>
 <link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon>
-<link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous><link rel=alternate type=application/rss+xml href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/index.xml title="Fujitsu Agile Development Guide">
+<link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
 </head>
 <body dir=ltr>
 <input type=checkbox class="hidden toggle" id=menu-control>
@@ -85,9 +85,9 @@
 </ul>
 </li>
 <li>
-<input type=checkbox id=section-a13c3fe744f0e51384f4e9ab9bef8ae4 class=toggle checked>
+<input type=checkbox id=section-a13c3fe744f0e51384f4e9ab9bef8ae4 class=toggle>
 <label for=section-a13c3fe744f0e51384f4e9ab9bef8ae4 class="flex justify-between">
-<a role=button class=active>デザイナー</a>
+<a role=button>デザイナー</a>
 </label>
 <ul>
 <li>
@@ -211,7 +211,7 @@
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/>おわりに</a>
 </li>
 <li>
-<input type=checkbox id=section-a3ce7ee7d3769060eec4e1e5ae7fef5e class=toggle>
+<input type=checkbox id=section-a3ce7ee7d3769060eec4e1e5ae7fef5e class=toggle checked>
 <label for=section-a3ce7ee7d3769060eec4e1e5ae7fef5e class="flex justify-between">
 <a role=button>ProductManager</a>
 </label>
@@ -223,7 +223,7 @@
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/backlogmanagement/>バックログ管理</a>
 </li>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/releaseplanning/>リリース管理</a>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/releaseplanning/ class=active>リリース管理</a>
 </li>
 <li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/informationsharing/>情報共有</a>
@@ -244,26 +244,92 @@
 <label for=menu-control>
 <img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu>
 </label>
-<strong>デザイナー</strong>
+<strong>リリース管理</strong>
 <label for=toc-control>
 <img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents">
 </label>
 </div>
 <aside class="hidden clearfix">
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#リリース計画におけるポイント>リリース計画におけるポイント</a>
+<ul>
+<li><a href=#早く頻繁に出す>早く頻繁に出す　　</a></li>
+<li><a href=#リリースはできるだけ簡単かつ安価に>リリースはできるだけ簡単かつ安価に　　</a></li>
+<li><a href=#ビジネス観点でのリリース時期決定>ビジネス観点でのリリース時期決定　　</a></li>
+<li><a href=#リリースのブロッカーの把握>リリースのブロッカーの把握</a></li>
+</ul>
+</li>
+</ul>
+</nav>
 </aside>
 </header>
-<article class=markdown></article>
+<article class=markdown><h1 id=リリース計画>
+リリース計画
+<a class=anchor href=#%e3%83%aa%e3%83%aa%e3%83%bc%e3%82%b9%e8%a8%88%e7%94%bb>#</a>
+</h1>
+<h2 id=リリース計画におけるポイント>
+リリース計画におけるポイント
+<a class=anchor href=#%e3%83%aa%e3%83%aa%e3%83%bc%e3%82%b9%e8%a8%88%e7%94%bb%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e3%83%9d%e3%82%a4%e3%83%b3%e3%83%88>#</a>
+</h2>
+<h3 id=早く頻繁に出す>
+早く頻繁に出す　　
+<a class=anchor href=#%e6%97%a9%e3%81%8f%e9%a0%bb%e7%b9%81%e3%81%ab%e5%87%ba%e3%81%99>#</a>
+</h3>
+<p>ユーザーが機能を使ってみて初めて、適切な状態を開発し上手くデザインして実装したかどうかが真にわかる。プロダクトの方向性を継続的に検証できるように、ユーザーからのフィードバックのサイクルはできるだけ短くすることが望ましい。　　</p>
+<h3 id=リリースはできるだけ簡単かつ安価に>
+リリースはできるだけ簡単かつ安価に　　
+<a class=anchor href=#%e3%83%aa%e3%83%aa%e3%83%bc%e3%82%b9%e3%81%af%e3%81%a7%e3%81%8d%e3%82%8b%e3%81%a0%e3%81%91%e7%b0%a1%e5%8d%98%e3%81%8b%e3%81%a4%e5%ae%89%e4%be%a1%e3%81%ab>#</a>
+</h3>
+<p>反復可能で、定期的で、成功し、信頼性が高く、費用対効果の高いリリースプロセスは、小さな価値を継続的に提供するために必要不可欠。</p>
+<h3 id=ビジネス観点でのリリース時期決定>
+ビジネス観点でのリリース時期決定　　
+<a class=anchor href=#%e3%83%93%e3%82%b8%e3%83%8d%e3%82%b9%e8%a6%b3%e7%82%b9%e3%81%a7%e3%81%ae%e3%83%aa%e3%83%aa%e3%83%bc%e3%82%b9%e6%99%82%e6%9c%9f%e6%b1%ba%e5%ae%9a>#</a>
+</h3>
+<p>リリースの決定はビジネスの観点で決めるべき、出すためのコストとリスクを照らして、現在提供できるユーザー価値を比較対象する必要がある。以下のインプットを収集する。　　</p>
+<ul>
+<li>ユーザーのニーズ<br>
+ユーザーが新しい機能・洗練された機能デザインをどの程度必要としているか？　　</li>
+<li>ステークホルダー<br>
+マーケティング、販売、顧客サービス、他のチームなどで提供機能をサポートする準備ができているか？　　</li>
+<li>他のプロダクトチーム<br>
+他のチームのサービスに依存している場合、それらの準備が整っているか？</li>
+<li>リリースするソフトウェアのサイズ<br>
+大きくなるほどリスクが高い</li>
+<li>リリースプロセス<br>
+リリースプロセスが自動化されているか？(手動であるほど高価)</li>
+<li>デリバリーインフラ<br>
+コードをプッシュするのが容易か？</li>
+</ul>
+<h3 id=リリースのブロッカーの把握>
+リリースのブロッカーの把握
+<a class=anchor href=#%e3%83%aa%e3%83%aa%e3%83%bc%e3%82%b9%e3%81%ae%e3%83%96%e3%83%ad%e3%83%83%e3%82%ab%e3%83%bc%e3%81%ae%e6%8a%8a%e6%8f%a1>#</a>
+</h3>
+<p>組織においてプロダクション環境にリリースするための要件を積極的に理解する。これは予想以上に時間がかかり、チームのブロッカーになる可能性がある。</p>
+</article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
 </div>
 <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
 </footer>
+<div class=book-comments>
+</div>
 <label for=menu-control class="hidden book-menu-overlay"></label>
 </div>
 <aside class=book-toc>
 <div class=book-toc-content>
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#リリース計画におけるポイント>リリース計画におけるポイント</a>
+<ul>
+<li><a href=#早く頻繁に出す>早く頻繁に出す　　</a></li>
+<li><a href=#リリースはできるだけ簡単かつ安価に>リリースはできるだけ簡単かつ安価に　　</a></li>
+<li><a href=#ビジネス観点でのリリース時期決定>ビジネス観点でのリリース時期決定　　</a></li>
+<li><a href=#リリースのブロッカーの把握>リリースのブロッカーの把握</a></li>
+</ul>
+</li>
+</ul>
+</nav>
 </div>
 </aside>
 </main>
