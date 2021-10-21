@@ -1,6 +1,6 @@
 ---
-title: "ProductManager編"
-weight: 40
+title: "全体編"
+weight: 10
 bookFlatSection: true
 bookToc: true
 bookCollapseSection: false
