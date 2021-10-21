@@ -2,9 +2,9 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content>
+<meta name=description content="プロダクトロードマップ # ■ プロダクトロードマップの取り扱い # 認識の統一とチーム間の調整を行いやすくする ロードマップは最も重要なコミュニケーシ">
 <meta name=theme-color content="#FFFFFF"><meta property="og:title" content="プロダクトロードマップ">
-<meta property="og:description" content>
+<meta property="og:description" content="プロダクトロードマップ # ■ プロダクトロードマップの取り扱い # 認識の統一とチーム間の調整を行いやすくする ロードマップは最も重要なコミュニケーシ">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/productroadmap/"><meta property="article:section" content="docs">
 <title>プロダクトロードマップ | Fujitsu Agile Development Guide</title>
@@ -217,7 +217,13 @@
 </label>
 <ul>
 <li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/productroadmap/ class=active>プロダクトロードマップ</a>
+</li>
+<li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/userstory/>ユーザストーリーマッピング</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/equipmentprioritization/>機器の優先順位付け</a>
 </li>
 <li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/backlogmanagement/>バックログ管理</a>
@@ -250,20 +256,129 @@
 </label>
 </div>
 <aside class="hidden clearfix">
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#-プロダクトロードマップの取り扱い>■ プロダクトロードマップの取り扱い</a></li>
+<li><a href=#-プロダクトロードマップ作成のポイント>■ プロダクトロードマップ作成のポイント</a></li>
+<li><a href=#-測定可能な目標の設定>■ 測定可能な目標の設定</a></li>
+<li><a href=#-mvp>■ MVP</a></li>
+</ul>
+</nav>
 </aside>
 </header>
-<article class=markdown></article>
+<article class=markdown><h1 id=プロダクトロードマップ>
+プロダクトロードマップ
+<a class=anchor href=#%e3%83%97%e3%83%ad%e3%83%80%e3%82%af%e3%83%88%e3%83%ad%e3%83%bc%e3%83%89%e3%83%9e%e3%83%83%e3%83%97>#</a>
+</h1>
+<h2 id=-プロダクトロードマップの取り扱い>
+■ プロダクトロードマップの取り扱い
+<a class=anchor href=#-%e3%83%97%e3%83%ad%e3%83%80%e3%82%af%e3%83%88%e3%83%ad%e3%83%bc%e3%83%89%e3%83%9e%e3%83%83%e3%83%97%e3%81%ae%e5%8f%96%e3%82%8a%e6%89%b1%e3%81%84>#</a>
+</h2>
+<ul>
+<li>
+<p>認識の統一とチーム間の調整を行いやすくする<br>
+ロードマップは最も重要なコミュニケーションツール。</p>
+<p>今後起きることを理解してもらい、他のチームとの共同作業や依存関係の調整に活用する。また、ゴールと優先順位を明確に伝えることで重要な会話を早い段階で発生させ、ビジネスニーズと優先順位に沿ったプロダクトづくりをし続けるのに役立つ。</p>
+</li>
+<li>
+<p>ビジョンは頑固に、詳細は柔軟にする<br>
+重要なことは最終的に正しい場所に到達すること。</p>
+<p>プロダクトビジョンを元にそのビジョンに到達するためのハイレベルな方向性（プロダクト戦略）を明確にし、直近のステップの計画（ロードマップ）を策定する。
+ロードマップはチームが学びを得るとともに、臨機応変に見直していく。</p>
+</li>
+<li>
+<p>アウトカムを重視する<br>
+ロードマップで強調されるべきは、プロダクトやビジネスの指標の改善といった生み出したい結果。</p>
+<p>アウトカム思考であることがソリューションに対してチームが柔軟であることを可能にする。</p>
+<p>アウトカムベースでのアプローチは次のことに役立つ。</p>
+<ul>
+<li>なぜプロダクトを作っているかについて共通理解を生み出す。</li>
+<li>ステークホルダー、スポンサー、プロダクトチーム間の認識の統一をする。</li>
+<li>機能のアイディアや要求の優先順位をつけ、チームの任務をより明確にする。</li>
+<li>問題を解決するための支援をもらうことで仕事に対しtえより強く自分事間を感じてもらう。</li>
+<li>機能している戦略、機能していない戦略を把握する。</li>
+</ul>
+</li>
+</ul>
+<h2 id=-プロダクトロードマップ作成のポイント>
+■ プロダクトロードマップ作成のポイント
+<a class=anchor href=#-%e3%83%97%e3%83%ad%e3%83%80%e3%82%af%e3%83%88%e3%83%ad%e3%83%bc%e3%83%89%e3%83%9e%e3%83%83%e3%83%97%e4%bd%9c%e6%88%90%e3%81%ae%e3%83%9d%e3%82%a4%e3%83%b3%e3%83%88>#</a>
+</h2>
+<ul>
+<li>
+<p>ビジョンと戦略から<br>
+ロードマップはビジョンに向かって開発を進めるのに手助けとなるいくつかの連続したゴール (戦略) から構成される。ゴールを定めるには、最初に達成する必要のある重要な課題を特定する。また、ビジネス上すでに定義されている戦略的なアウトカムを見てみる。</p>
+<p>ロードマップにおいて以下を明確にするようにする。</p>
+<ul>
+<li>解決するべき課題</li>
+<li>どう解決するつもりか</li>
+<li>解決したかどうかをどのようにして知るか</li>
+</ul>
+</li>
+<li>
+<p>最初に行う必要がある作業を特定<br>
+ビジネスゴールが定まったら、そのゴールにどのように到達するか仮説を作る。</p>
+<p>解決する必要がある顧客の問題、その問題を解決するための機能、その機能をどのようにデザインして実装するか、そのソリューションが提供するビジネス上の価値、プロダクトをリリースして運用する方法などの思い込みを特定して、検証する。仮説の検証にあたって、依存関係を考慮して優先順位をつける。</p>
+</li>
+<li>
+<p>3つの時間軸<br>
+優先順位の大まかな順序を伝達するために、現在、近未来、将来の３つの時間軸で整理する。最初のいくつかのゴールを明確にすることが最も重要。</p>
+</li>
+<li>
+<p>ロードマップデザインの原則</p>
+<ol>
+<li>ビジョンを実現するために計画している方向性を伝える。</li>
+<li>不確実性と変化を想定し、学習と応答の度に最適化する。</li>
+<li>アウトプットではなく、期待される、あるいは望ましいアウトカムに立脚した作業を組み立てる。</li>
+<li>ロードマップの更新と共有がしやすいようにする。</li>
+</ol>
+</li>
+</ul>
+<h2 id=-測定可能な目標の設定>
+■ 測定可能な目標の設定
+<a class=anchor href=#-%e6%b8%ac%e5%ae%9a%e5%8f%af%e8%83%bd%e3%81%aa%e7%9b%ae%e6%a8%99%e3%81%ae%e8%a8%ad%e5%ae%9a>#</a>
+</h2>
+<p>プロダクトゴールを達成するための正しい軌道に乗っているかどうかを知るために、明確な目標と指標を持つ必要がある。</p>
+<p>1つのゴールはいくつかの目標に分解することができる。目標がSMART (Specific(具体的)、Measurable(測定可能)、Attainable(達成可能)、Realistic(現実的)、Time-bound(時間が区切られている)) であるようにする。</p>
+<p>重要なビジネス目標に対してどの程度うまくやっているかを評価するのに役立つ指標（KPI）を設定する。</p>
+<p>良い指標はアクションにつながる。次に何をすべきかについては何ら洞察を示さない類の数字にならないように注意する。</p>
+<h2 id=-mvp>
+■ MVP
+<a class=anchor href=#-mvp>#</a>
+</h2>
+<p>実用最小限のプロダクト (MVP) とはプロダクトの提供価値を最小のコストで作ったもの。<br>
+失敗して失うものは少なく、成功した場合は大きくしてもう一度テストする。<br>
+MVPの目的はプロダクトを作り続けるべきかどうかを知るのに役立てること。<br>
+ソフトウェアのデリバリーにおけるマイルストーンではなく、学習におけるマイルストーン。<br>
+次のようなものではないことに注意する。</p>
+<ul>
+<li>エグゼクティブスポンサーに見せたり市場へリリースできると感じられるプロダクトの最初のバージョン</li>
+<li>最優先と定義したリリース</li>
+<li>コンセプトの証明</li>
+<li>ビジネスゴールやKPIを伴わない、機能の最小セット</li>
+<li>内部デモンストレーション目的の完成品</li>
+<li>常にソフトウェア</li>
+</ul>
+</article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
 </div>
 <script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
 </footer>
+<div class=book-comments>
+</div>
 <label for=menu-control class="hidden book-menu-overlay"></label>
 </div>
 <aside class=book-toc>
 <div class=book-toc-content>
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#-プロダクトロードマップの取り扱い>■ プロダクトロードマップの取り扱い</a></li>
+<li><a href=#-プロダクトロードマップ作成のポイント>■ プロダクトロードマップ作成のポイント</a></li>
+<li><a href=#-測定可能な目標の設定>■ 測定可能な目標の設定</a></li>
+<li><a href=#-mvp>■ MVP</a></li>
+</ul>
+</nav>
 </div>
 </aside>
 </main>
