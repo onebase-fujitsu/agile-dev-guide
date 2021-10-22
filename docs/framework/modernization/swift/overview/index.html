@@ -1,0 +1,705 @@
+<!doctype html><html lang=en dir=ltr>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=description content="Swift Method とは # 背景 # レガシーシステムをモダナイズする際に以下のような問題点に直面します。 レガシーシステムについて知識のある人がいなくなっている 言">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="Swift Method とは">
+<meta property="og:description" content="Swift Method とは # 背景 # レガシーシステムをモダナイズする際に以下のような問題点に直面します。 レガシーシステムについて知識のある人がいなくなっている 言">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/overview/"><meta property="article:section" content="docs">
+<title>Swift Method とは | Fujitsu Agile Development Guide</title>
+<link rel=manifest href=/agile-dev-guide/manifest.json>
+<link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon>
+<link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
+</head>
+<body dir=ltr>
+<input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control>
+<main class="container flex">
+<aside class=book-menu>
+<div class=book-menu-content>
+<nav>
+<h2 class=book-brand>
+<a href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span>
+</a>
+</h2>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/>はじめに</a>
+</li>
+<li>
+<input type=checkbox id=section-b077c62e2cf275f367b13c9cd484dcf6 class=toggle>
+<label for=section-b077c62e2cf275f367b13c9cd484dcf6 class="flex justify-between">
+<a role=button>アジャイル</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/>アジャイル開発12の原則</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-488859b49087c05cd9f2afa3c2804c61 class=toggle>
+<label for=section-488859b49087c05cd9f2afa3c2804c61 class="flex justify-between">
+<a role=button>スクラム</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/overview/>スクラムとは</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/roles/>ロール</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/products/>成果物</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/events/>イベント</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-f43a50e4d00e3398d279579a5a9a0783 class=toggle>
+<label for=section-f43a50e4d00e3398d279579a5a9a0783 class="flex justify-between">
+<a role=button>エクストリームプログラミング</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/>エクストリームプログラミングとは</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/>エクストリームプログラミングのプラクティス</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/>まとめ</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-4881c8ea96a48f6fd2540db502c204e0 class=toggle>
+<label for=section-4881c8ea96a48f6fd2540db502c204e0 class="flex justify-between">
+<a role=button>ソフトウェアテスト</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/overview/>ソフトウェアテストを始めよう</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/>ウォーミングアップ</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/>ボウリングゲーム</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/>テストダブル</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/>E2Eテスト</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-6668e94793f2c3410fae208f25d1f417 class=toggle>
+<label for=section-6668e94793f2c3410fae208f25d1f417 class="flex justify-between">
+<a role=button>ソフトウェア設計</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/>アジャイル開発に求められるソフトウェア設計</a>
+</li>
+<li>
+<input type=checkbox id=section-fd21b9cd7e31d8e1d2ba14b32452065e class=toggle>
+<label for=section-fd21b9cd7e31d8e1d2ba14b32452065e class="flex justify-between">
+<a role=button>SOLID原則</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/>単一責任の原則(SRP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/>オープン・クローズドの原則(OCP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/>リスコフの置換原則(LSP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>依存性逆転の原則(DIP)</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/>インターフェース分離の原則(ISP)</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-ee4c81ada0b6a9ee859cebeab00ca76e class=toggle>
+<label for=section-ee4c81ada0b6a9ee859cebeab00ca76e class="flex justify-between">
+<a role=button>デザインパターン</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/designpattern/designpattern/>デザインパターン</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-a16dbb8fa8b2df15e7da65eb13e2d51a class=toggle>
+<label for=section-a16dbb8fa8b2df15e7da65eb13e2d51a class="flex justify-between">
+<a role=button>アジャイルの実践</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/>1日目</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/>2日目</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/>3日目</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/>4日目</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/>5日目</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/>6日目</a>
+</li>
+</ul>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/>おわりに</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/>推奨書籍</a>
+</li>
+<li class=book-section-flat>
+<span>全体編</span>
+<ul>
+<li>
+<input type=checkbox id=section-e99c955bf75208a72cc409dac3a52e06 class=toggle>
+<label for=section-e99c955bf75208a72cc409dac3a52e06 class="flex justify-between">
+<a role=button>リーンスタートアップ</a>
+</label>
+<ul>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-9be0117e86ea19505cc5ceb0d72e959e class=toggle checked>
+<label for=section-9be0117e86ea19505cc5ceb0d72e959e class="flex justify-between">
+<a role=button>モダナイゼーション</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/overview/>モダナイゼーションの流れ</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/organization/>体制・役割</a>
+</li>
+<li>
+<input type=checkbox id=section-bde04692c1fd3ecde39ac4bab024fff3 class=toggle checked>
+<label for=section-bde04692c1fd3ecde39ac4bab024fff3 class="flex justify-between">
+<a role=button>Swift Method</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/overview/ class=active>Swift Method とは</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/eventstorming/>Event Storming</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/boris/>Boris</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/snape/>SnapE</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/slices/>Slices</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/techchoice/>Tech Choice</a>
+</li>
+</ul>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/inception/>Inception</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/outception/>Outception</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class=book-section-flat>
+<span>Team編</span>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/workstyle/>チームの働き方</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/balancedteam/>バランスチーム</a>
+</li>
+<li>
+<input type=checkbox id=section-567421c4f32cd12e88a451ff3fc3c989 class=toggle>
+<label for=section-567421c4f32cd12e88a451ff3fc3c989 class="flex justify-between">
+<a role=button>マインドセット</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/onebase/>ONEbaseの価値観</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/psychologicalsafety/>心理的安全性</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/xp/>XPの価値観</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/practice/>プラクティスの取り入れ方</a>
+</li>
+</ul>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/teambuilding/>チームビルディング</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/remotework/>リモートワーク</a>
+</li>
+<li>
+<input type=checkbox id=section-b52b30221e4a89615e78dbb78082bc47 class=toggle>
+<label for=section-b52b30221e4a89615e78dbb78082bc47 class="flex justify-between">
+<a role=button>チームのアクティビティ</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/officestandup/>全体スタンドアップ</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamstandup/>チームスタンドアップ</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/preipm/>Pre-IPM</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/ipm/>IPM</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/cl/>CLミーティング</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/retro/>レトロスペクティブ</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/salesmeeting/>営業確認会議</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/internalsync/>Internal Sync</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/riskmitigations/>Risks & Mitigations</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/feedback/>フィードバック</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/icebreak/>Ice Break</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamhealthcheck/>Team Health Check</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/1on1/>1on1</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/exercise/>ラジオ体操</a>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=section-0ca98ed05d635a669132a6c12086bd7c class=toggle>
+<label for=section-0ca98ed05d635a669132a6c12086bd7c class="flex justify-between">
+<a role=button>チームのプラクティス</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/facilitation/>ファシリテーション</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/okrs/>OKRs</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class=book-section-flat>
+<span>Designer編</span>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/overview/>Designerとは</a>
+</li>
+<li>
+<input type=checkbox id=section-0356f56143a8f1215a9a8d2120898187 class=toggle>
+<label for=section-0356f56143a8f1215a9a8d2120898187 class="flex justify-between">
+<a role=button>Designerのプラクティス</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/persona/>ペルソナ</a>
+</li>
+</ul>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/scenario/>シナリオ</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/researchplanning/>リサーチ計画立案</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/prototyping/>プロトタイピング</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/script/>スクリプト</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/researchacction/>リサーチ実施</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/synthesize/>シンセサイズ</a>
+</li>
+</ul>
+</li>
+<li class=book-section-flat>
+<span>ProductManager編</span>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/overview/>ProductManagerとは</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/productroadmap/>プロダクトロードマップ</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/userstory/>ユーザストーリーマッピング</a>
+</li>
+<li>
+<input type=checkbox id=section-6976e7caed46c8d93d6db8fc8ac10964 class=toggle>
+<label for=section-6976e7caed46c8d93d6db8fc8ac10964 class="flex justify-between">
+<a role=button>ProductManagerのプラクティス</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/>MVP</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstorymapping/>ユーザーストーリーマッピング</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/>ユーザーストーリー</a>
+</li>
+</ul>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/equipmentprioritization/>機器の優先順位付け</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/backlogmanagement/>バックログ管理</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/releaseplanning/>リリース管理</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/informationsharing/>情報共有</a>
+</li>
+</ul>
+</li>
+<li class=book-section-flat>
+<span>Developer編</span>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/overview/>Developerとは</a>
+</li>
+<li>
+<input type=checkbox id=section-8663d063f439d3f63d1a0dffad20b22d class=toggle>
+<label for=section-8663d063f439d3f63d1a0dffad20b22d class="flex justify-between">
+<a role=button>Developerのプラクティス</a>
+</label>
+<ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/tdd/>TDD</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/cicd/>CI/CD</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/pairprogramming/>ペアプログラミング</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+</div>
+</aside>
+<div class=book-page>
+<header class=book-header>
+<div class="flex align-center justify-between">
+<label for=menu-control>
+<img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu>
+</label>
+<strong>Swift Method とは</strong>
+<label for=toc-control>
+<img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents">
+</label>
+</div>
+<aside class="hidden clearfix">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#背景>背景</a></li>
+<li><a href=#概要>概要</a></li>
+<li><a href=#swift-methodの利点>Swift Methodの利点</a></li>
+<li><a href=#swift-method適用時に考慮すべき点>Swift Method適用時に考慮すべき点</a></li>
+<li><a href=#流れ>流れ</a>
+<ul>
+<li><a href=#分析>分析</a></li>
+<li><a href=#開発>開発</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</aside>
+</header>
+<article class=markdown><h1 id=swift-method-とは>
+Swift Method とは
+<a class=anchor href=#swift-method-%e3%81%a8%e3%81%af>#</a>
+</h1>
+<h2 id=背景>
+背景
+<a class=anchor href=#%e8%83%8c%e6%99%af>#</a>
+</h2>
+<p>レガシーシステムをモダナイズする際に以下のような問題点に直面します。</p>
+<ul>
+<li>レガシーシステムについて知識のある人がいなくなっている</li>
+<li>言語、テクノロジーが古く理解できない</li>
+<li>ソースコードのコメントや設計書等がメンテナンスされていない</li>
+<li>その場しのぎの技術負債が溜まっている</li>
+<li>どの機能が重要なのか、優先順位が分からない</li>
+<li>要件が変わっている</li>
+</ul>
+<p>このようなレガシーシステムのブラックボックス化が招く問題により、
+メンテナンスや、新規要件への対応、影響調査が難しくなり、
+必要のない資料、機能、プログラムの解析に時間を使うことになってしまいます。</p>
+<p>これらに対応し、効率的にモダナイズする手法としてSwift Methodが有効となります。</p>
+<p>Swift Methodは、ビジネスの視点をトップとしたトップダウンのアプローチです。<br>
+エンジニアのみでなく、システムのユーザー、ビジネスモデルを理解している人と共に、
+現在の問題、課題や今後の展望を含めたビジネスの状況からモダナイズについてディスカッションすることで、
+重要な機能・優先順位が明確になります。さらに、ディスカッション中に知見が広がり、新しい要望が生まれることもあります。</p>
+<h2 id=概要>
+概要
+<a class=anchor href=#%e6%a6%82%e8%a6%81>#</a>
+</h2>
+<p>Swift Methodは、巨大で複雑な(モノリスな)システムを近代的なアーキテクチャで作り直す(モダナイズする)際に利用できるメソッドです。
+漏れなく全ての機能をリプレースするのではなく、優先度の高い価値から順次リリースすることを目指します。</p>
+<ul>
+<li>技術視点ではなく、ビジネスのあるべき姿から分析・理解を開始し、アジャイルプロセスを通してシステムを段階的に移行・開発する際に活用できます。</li>
+<li>DDD(Domain Driven Design)の原則に則ってビジネスの境界線を適切にシステムに反映させます。</li>
+<li>チームがソフトウェアシステムの最新化を開始するのに十分な計画を立てるのに役立ちます(リーンスタートアップ)。</li>
+<li>必要なメンバー (エンジニア、システムのユーザー、ビジネスモデルを理解している人) が一緒になって作業します。</li>
+</ul>
+<h2 id=swift-methodの利点>
+Swift Methodの利点
+<a class=anchor href=#swift-method%e3%81%ae%e5%88%a9%e7%82%b9>#</a>
+</h2>
+<ul>
+<li>
+<p><strong>業務ケースを共有できる、ユビキタス言語を形成できる</strong></p>
+<ul>
+<li>EventStromingでビジネスイベントの洗い出しを行い、ユーザの業務ケースを共有するため、業務に対する理解を深めることができる</li>
+<li>ユビキタス言語をまとめることで、顧客-開発チーム間での共通言語を形成することができるため、明確なコミュニケーションをとることができる</li>
+<li>追加の要件に対してもスムーズなやり取りができる</li>
+</ul>
+</li>
+<li>
+<p><strong>設計上で良いプロダクトになる</strong></p>
+<p>ドメインごとにサービス候補を挙げて仮説検証を繰り返すため、システム全体の見直しやシステムのあるべき姿をチーム内で認識を合わせることができます。</p>
+</li>
+<li>
+<p><strong>顧客、開発者間で信頼関係ができる</strong></p>
+<p>顧客と常に一緒に行動するため、顧客を含んだチームビルディング、顧客とのコミュニケーションの増加、プロダクトのビジョンを共有することができます。</p>
+</li>
+<li>
+<p><strong>システムの柔軟性が高くなる</strong></p>
+<p>開発を進めた後でも素早くサービスの見直しをすることができます。（途中変更への対応が比較的容易）</p>
+</li>
+<li>
+<p><strong>メンバーのイネーブルメントがしやすい</strong></p>
+<p>有識者とのペアリングやチーム活動を通して、学びを得て成長することができます。</p>
+</li>
+<li>
+<p><strong>優先度の高い機能を速く提供できる</strong></p>
+<p>エンジニア、システムのユーザー、ビジネスモデルを理解している人全員の認識を合わせ、不要な作業をすることなく、優先度が高い機能を速く提供することができます。</p>
+</li>
+<li>
+<p><strong>不要なやり取りがなくなる</strong></p>
+<p>顧客の実現したい機能について、技術的視点で実現可能性や難易度についてもディスカッションができるため、顧客とエンジニア間での認識齟齬を防ぐことができます。</p>
+</li>
+</ul>
+<h2 id=swift-method適用時に考慮すべき点>
+Swift Method適用時に考慮すべき点
+<a class=anchor href=#swift-method%e9%81%a9%e7%94%a8%e6%99%82%e3%81%ab%e8%80%83%e6%85%ae%e3%81%99%e3%81%b9%e3%81%8d%e7%82%b9>#</a>
+</h2>
+<ul>
+<li>
+<p><strong>顧客の時間調整</strong></p>
+<p>顧客に業務ケースのヒアリングなどを行うため、顧客の時間を調整しておかないといけません。<br>
+そのため、事前に顧客の参加が必要不可欠であることを合意しておくことやヒアリングの入念な事前準備が必要になります。</p>
+</li>
+<li>
+<p><strong>有識者・経験者のアサイン</strong></p>
+<ul>
+<li>アジャイル開発経験者<br>
+ペアワークを前提として、チームメンバーの半分以上はアジャイル開発経験者をアサインするのが望ましいです。</li>
+<li>DDD有識者<br>
+Swift Methodを通してサービス候補を挙げる際にDDDの知識が必要になるため、有識者のアサインが必要です。</li>
+<li>現行システム有識者<br>
+以下にあたって現行システム有識者が参画することが必要です。
+<ul>
+<li>モダナイゼーションを行う際の現行システムの機能と比較して抜け漏れ防止</li>
+<li>サービス分割の検討にあたって、サブシステム間でどのようなデータが連携されているかの情報提供</li>
+<li>ストーリーを記載する際の現行仕様の詳細な確認</li>
+</ul>
+</li>
+<li>ファシリテーター<br>
+チームでの話し合いの頻度が多いため、ファシリテートできる人が少ない、もしくは、ファシリテートできる人がいないとチームの意思決定がスムーズにできません。<br>
+そのため、ファシリテーションのポイントをメンバが押さえておくことや、チームメンバのファシリテーターに対する協力的な姿勢が必要になります。</li>
+</ul>
+</li>
+<li>
+<p><strong>スケール</strong></p>
+<ul>
+<li>
+<p>チームのスケール<br>
+Swift Methodの経験者・有識者が少ない状態で進めることがないよう、1チームから徐々に増やす方法が望ましいです。必要な体制までスケールさせるには労力と時間がかかります。</p>
+<p><img src=ScaleTeam.jpg alt=ScaleTeam></p>
+</li>
+<li>
+<p>スコープのスケール<br>
+EventStormingで大きい粒度で業務フローを作ることで全体像を把握しておく必要があります。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>マインドセット</strong></p>
+<p>良いプロダクトに作り、継続的にプロダクトを成長させ続けるために、チーム内のフラットな関係を保ち、チームで意思決定して、その中で学びを得て改善していきます。
+チームビルディングなどを通して時間をかけてこのようなマインドセットを形成し、チームの環境・活動の進め方に順応することが重要です。</p>
+</li>
+<li>
+<p><strong>情報共有のルール</strong></p>
+<p>コミュニケーションミスを防ぐために、チーム間/ステークホルダー間でどのように暗黙知の共有を行うかなど、ベースとなるコミュニケーションのルールを関係者で合意しておく必要があります。</p>
+</li>
+<li>
+<p><strong>現行資産の流用</strong></p>
+<p>現行資産を流用する場合、流用部分のテストや現行システムとの結合部分のテストの方針を検討する必要があります。</p>
+</li>
+<li>
+<p><strong>監査対応</strong></p>
+<p>アジャイル開発における監査方法について整備されていない可能性があるため、監査の対応方法について事前に顧客と認識を合わせる必要があります。</p>
+</li>
+</ul>
+<h2 id=流れ>
+流れ
+<a class=anchor href=#%e6%b5%81%e3%82%8c>#</a>
+</h2>
+<p><img src=SwiftOverview.jpg alt=Swiftの流れ></p>
+<h3 id=分析>
+分析
+<a class=anchor href=#%e5%88%86%e6%9e%90>#</a>
+</h3>
+<ol>
+<li><a href=../eventstorming>Event Storming</a><br>
+ビジネスニーズを達成するためにどんなシステムを作るべきか認識を揃えます</li>
+<li><a href=../boris>Boris</a><br>
+サービス(候補)間の関係性を可視化します</li>
+<li><a href=../snape>SnapE</a><br>
+各サービス(候補)の要素について認識を合わせます</li>
+<li><a href=../slices>Slices</a><br>
+開発着手するシナリオを選定します</li>
+<li><a href=../techchoice>Tech Choice</a><br>
+シナリオに着手するために必要な技術選定をします</li>
+</ol>
+<h3 id=開発>
+開発
+<a class=anchor href=#%e9%96%8b%e7%99%ba>#</a>
+</h3>
+<ol>
+<li><a href=../../../../team/activities/preipm>Pre-IPM</a><br>
+Storyのブラッシュアップをします</li>
+<li><a href=../../../../team/activities/preipm>IPM</a><br>
+Storyの複雑性をチームで判断します</li>
+<li>Build<br>
+モノを作り上げます</li>
+<li>Accept<br>
+できたモノを確認しSwiftでのOutputに対してupdateの有無を判断します</li>
+</ol>
+<p>開発の流れは<a href=../../../../team/workstyle/#%e3%82%a4%e3%83%86%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e9%96%8b%e7%99%ba%e3%81%ae%e5%9f%ba%e6%9c%ac%e7%9a%84%e3%81%aa%e8%80%83%e3%81%88%e6%96%b9>チームの働き方</a>に則ります。</p>
+<blockquote class="book-hint info">
+<p><strong>Tips</strong></p>
+<ul>
+<li>気付き・学びがあれば随時前のStepに戻って見直します。</li>
+<li>開発に入ってからも分析(Swift)で作成したものを継続して更新し続けます。</li>
+<li>Swift Methodは、VMware Tanzuにおいて過去の実績に基づいて、Event Stormingなどの複数のツールを集めて、モダナイズをする際の手法として定着させたものです。Boris、SnapEなどは独自にやり方を作り上げているため、インターネットで検索しても単語として出てきません。</li>
+</ul>
+</blockquote>
+<blockquote class="book-hint info">
+<p><strong>参考資料</strong></p>
+<ul>
+<li><a href=https://tanzu.vmware.com/developer/practices/swift-method/>Tanzu Practices Swift Method</a></li>
+</ul>
+</blockquote>
+<a href=/agile-dev-guide/docs/framework/modernization/swift/eventstorming/ class=book-btn>
+Event Storming
+</a>
+</article>
+<footer class=book-footer>
+<div class="flex flex-wrap justify-between">
+</div>
+<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
+</footer>
+<div class=book-comments>
+</div>
+<label for=menu-control class="hidden book-menu-overlay"></label>
+</div>
+<aside class=book-toc>
+<div class=book-toc-content>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#背景>背景</a></li>
+<li><a href=#概要>概要</a></li>
+<li><a href=#swift-methodの利点>Swift Methodの利点</a></li>
+<li><a href=#swift-method適用時に考慮すべき点>Swift Method適用時に考慮すべき点</a></li>
+<li><a href=#流れ>流れ</a>
+<ul>
+<li><a href=#分析>分析</a></li>
+<li><a href=#開発>開発</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</aside>
+</main>
+</body>
+</html>
