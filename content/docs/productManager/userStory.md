@@ -1,12 +1,14 @@
 ---
 title: "ユーザストーリーマッピング"
-weight: 1
+weight: 2
 bookToc: true
 ---
 
 # ユーザーストーリーマッピング
 
-<img src="userstory1.jpg" width="50%"><img src="userstory2.jpg" width="50%">
+![userstory](userstory1.jpg)
+![userstory](userstory2.jpg)
+
 
 {{< hint info >}}
 
@@ -31,7 +33,7 @@ bookToc: true
 
 # リスクアクティビティ
 
-<img src="riskactivity.jpg" width="80%>
+![riskactivity](riskactivity.jpg)
 
 プロダクトを失敗に導くリスクを洗い出し、優先度をつけます。
 **失敗＝プロダクトのビジョンが達成できない**
