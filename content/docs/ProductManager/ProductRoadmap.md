@@ -5,9 +5,10 @@ bookToc: true
 ---
 
 # プロダクトロードマップ
-<p><img src="images/roadmap1.png" alt="roadmap1" /></p> 
-<p><img src="images/roadmap2.png" alt="roadmap2" /></p> 
-<p><img src="images/roadmap3.png" alt="roadmap3" /></p> 
+
+![ProductrRoadmap](../ProductRoadmap.png)
+![productrroadmap](../productroadmap2.png) 
+![productrroadmap](../productroadmap3.png) 
 
 ## ■ プロダクトロードマップの取り扱い
 - 認識の統一とチーム間の調整を行いやすくする  
@@ -46,7 +47,7 @@ bookToc: true
 
 - 最初に行う必要がある作業を特定  
     ビジネスゴールが定まったら、そのゴールにどのように到達するか仮説を作る。  
-    
+
     解決する必要がある顧客の問題、その問題を解決するための機能、その機能をどのようにデザインして実装するか、そのソリューションが提供するビジネス上の価値、プロダクトをリリースして運用する方法などの思い込みを特定して、検証する。仮説の検証にあたって、依存関係を考慮して優先順位をつける。
 
 - 3つの時間軸  
@@ -59,7 +60,7 @@ bookToc: true
     1. ロードマップの更新と共有がしやすいようにする。
 
 ## ■ 測定可能な目標の設定
-<p><img src="images/roadmap4.png" alt="roadmap4" /></p> 
+![productrroadmap](../productroadmap4.png) 
 
 プロダクトゴールを達成するための正しい軌道に乗っているかどうかを知るために、明確な目標と指標を持つ必要がある。  
 
