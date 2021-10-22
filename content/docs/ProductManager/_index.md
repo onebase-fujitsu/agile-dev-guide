@@ -1,7 +1,7 @@
 ---
-title: "ProductManager"
-weight: 9
-bookFlatSection: false
+title: "ProductManager編"
+weight: 40
+bookFlatSection: true
 bookToc: true
-bookCollapseSection: true
+bookCollapseSection: false
 ---

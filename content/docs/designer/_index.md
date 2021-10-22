@@ -1,7 +1,7 @@
 ---
-title: "デザイナー"
-weight: 4
-bookFlatSection: false
+title: "Designer編"
+weight: 30
+bookFlatSection: true
 bookToc: true
-bookCollapseSection: true
+bookCollapseSection: false
 ---
