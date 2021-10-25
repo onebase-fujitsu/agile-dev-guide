@@ -31,6 +31,3 @@ tips
 リサーチ計画立案の例をご紹介します。
 
 ![research planning example](../research_planning_example1.jpg)
-
-{{< button relref="/docs/designer/prototyping" >}}プロトタイピング{{< /button >}}
-

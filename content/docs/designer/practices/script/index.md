@@ -28,4 +28,4 @@ Tips
 - 形式はこだわらず、インタビュアーが話しやすいように調整してよい。
 
 
-{{< button relref="/docs/designer/researchAcction" >}}リサーチ実施{{< /button >}}
+<!--- {{< button relref="researchacction" >}}リサーチ実施{{< /button >}} -->

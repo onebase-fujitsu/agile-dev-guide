@@ -28,5 +28,3 @@ Tips
 - ペルソナ同様、あらたな事実や誤りに気づいたら随時修正していく。
 
 ![persona Mike](../scenario_example.jpg)
-
-{{< button relref="/docs/designer/researchPlanning" >}}リサーチ計画立案{{< /button >}}
