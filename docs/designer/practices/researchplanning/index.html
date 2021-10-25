@@ -2,12 +2,12 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="スクリプト # Description リサーチ当日の流れや確認事項を整理したトークスクリプトを作成する。 記載内容 ターゲットユーザー 今回のリサーチの目的、検証したい仮">
-<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="スクリプト">
-<meta property="og:description" content="スクリプト # Description リサーチ当日の流れや確認事項を整理したトークスクリプトを作成する。 記載内容 ターゲットユーザー 今回のリサーチの目的、検証したい仮">
+<meta name=description content="リサーチ計画立案 # Description 次回のユーザーリサーチで検証すべき仮説と、その検証方法について計画する。 リサーチのテーマ（問い）の設定 優先度の高いリスク">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="リサーチ計画立案">
+<meta property="og:description" content="リサーチ計画立案 # Description 次回のユーザーリサーチで検証すべき仮説と、その検証方法について計画する。 リサーチのテーマ（問い）の設定 優先度の高いリスク">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/script/"><meta property="article:section" content="docs">
-<title>スクリプト | Fujitsu Agile Development Guide</title>
+<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchplanning/"><meta property="article:section" content="docs">
+<title>リサーチ計画立案 | Fujitsu Agile Development Guide</title>
 <link rel=manifest href=/agile-dev-guide/manifest.json>
 <link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
@@ -351,7 +351,7 @@
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/overview/>Designerとは</a>
 </li>
 <li>
-<input type=checkbox id=section-0356f56143a8f1215a9a8d2120898187 class=toggle>
+<input type=checkbox id=section-0356f56143a8f1215a9a8d2120898187 class=toggle checked>
 <label for=section-0356f56143a8f1215a9a8d2120898187 class="flex justify-between">
 <a role=button>Designerのプラクティス</a>
 </label>
@@ -359,25 +359,25 @@
 <li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/persona/>ペルソナ</a>
 </li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/scenario/>シナリオ</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchplanning/ class=active>リサーチ計画立案</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/prototyping/>プロトタイピング</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/script/>スクリプト</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchacction/>リサーチ実施</a>
+</li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/synthesize/>シンセサイズ</a>
+</li>
 </ul>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/scenario/>シナリオ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/researchplanning/>リサーチ計画立案</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/prototyping/>プロトタイピング</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/script/ class=active>スクリプト</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/researchacction/>リサーチ実施</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/synthesize/>シンセサイズ</a>
 </li>
 </ul>
 </li>
@@ -460,7 +460,7 @@
 <label for=menu-control>
 <img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu>
 </label>
-<strong>スクリプト</strong>
+<strong>リサーチ計画立案</strong>
 <label for=toc-control>
 <img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents">
 </label>
@@ -469,46 +469,33 @@
 <nav id=TableOfContents></nav>
 </aside>
 </header>
-<article class=markdown><h1 id=スクリプト>
-スクリプト
-<a class=anchor href=#%e3%82%b9%e3%82%af%e3%83%aa%e3%83%97%e3%83%88>#</a>
+<article class=markdown><h1 id=リサーチ計画立案>
+リサーチ計画立案
+<a class=anchor href=#%e3%83%aa%e3%82%b5%e3%83%bc%e3%83%81%e8%a8%88%e7%94%bb%e7%ab%8b%e6%a1%88>#</a>
 </h1>
 <p>Description</p>
-<p>リサーチ当日の流れや確認事項を整理したトークスクリプトを作成する。</p>
+<p>次回のユーザーリサーチで検証すべき仮説と、その検証方法について計画する。</p>
+<ol>
+<li>リサーチのテーマ（問い）の設定</li>
+<li>優先度の高いリスクやアサンプションを出す</li>
+<li>検証可能な仮説に変換する</li>
+<li>検証方法を具体化する</li>
+<li>実施に向けたタスクや準備を整理する</li>
+</ol>
+<p>tips</p>
 <ul>
-<li>記載内容
-<ul>
-<li>ターゲットユーザー</li>
-<li>今回のリサーチの目的、検証したい仮説
-<ul>
-<li>Generative</li>
-<li>Evaluative</li>
-<li>Usability</li>
+<li>ここでもリスクがスタートとなる。</li>
+<li>リスクは、メンバーのアサンプションに依存する。</li>
+<li>常日頃からリスクやアサンプションについて考えておく。</li>
+<li>リサーチ計画の立案は難しいが、回数を重ねるごとに勘所が見えてくる。</li>
 </ul>
-</li>
-<li>準備物</li>
-<li>スクリプトそのもの
-<ul>
-<li>インタビュアーの発言</li>
-<li>依頼するタスク/確認する仮説</li>
-<li>確認事項</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>Tips</p>
-<ul>
-<li>必ず事前のリハーサルをする
-<ul>
-<li>誰かにインタビュイーをしてもらう</li>
-</ul>
-</li>
-<li>形式はこだわらず、インタビュアーが話しやすいように調整してよい。</li>
-</ul>
-<a href=/agile-dev-guide/docs/designer/researchacction/ class=book-btn>
-リサーチ実施
-</a>
+<p><img src=../research_planning1.jpg alt="research planning example"></p>
+<h1 id=リサーチ計画立案-例>
+リサーチ計画立案 例
+<a class=anchor href=#%e3%83%aa%e3%82%b5%e3%83%bc%e3%83%81%e8%a8%88%e7%94%bb%e7%ab%8b%e6%a1%88-%e4%be%8b>#</a>
+</h1>
+<p>リサーチ計画立案の例をご紹介します。</p>
+<p><img src=../research_planning_example1.jpg alt="research planning example"></p>
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
