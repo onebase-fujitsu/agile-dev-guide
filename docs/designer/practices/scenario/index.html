@@ -2,9 +2,9 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="シナリオ # Description ターゲットユーザーがどのような流れでソフトウェアを利用するかを時系列で具体的に記入したもの もっとも基本的なシナリオ(happy p">
+<meta name=description content="シナリオ # 概要 # シナリオは、ターゲットユーザーがどのような流れでソフトウェアを利用するかを時系列で具体的に記入したものです。 シナリオでは、以">
 <meta name=theme-color content="#FFFFFF"><meta property="og:title" content="シナリオ">
-<meta property="og:description" content="シナリオ # Description ターゲットユーザーがどのような流れでソフトウェアを利用するかを時系列で具体的に記入したもの もっとも基本的なシナリオ(happy p">
+<meta property="og:description" content="シナリオ # 概要 # シナリオは、ターゲットユーザーがどのような流れでソフトウェアを利用するかを時系列で具体的に記入したものです。 シナリオでは、以">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/scenario/"><meta property="article:section" content="docs">
 <title>シナリオ | Fujitsu Agile Development Guide</title>
@@ -466,44 +466,65 @@
 </label>
 </div>
 <aside class="hidden clearfix">
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#概要>概要</a></li>
+<li><a href=#シナリオのポイント>シナリオのポイント</a></li>
+</ul>
+</nav>
 </aside>
 </header>
 <article class=markdown><h1 id=シナリオ>
 シナリオ
 <a class=anchor href=#%e3%82%b7%e3%83%8a%e3%83%aa%e3%82%aa>#</a>
 </h1>
-<p>Description</p>
-<p>ターゲットユーザーがどのような流れでソフトウェアを利用するかを時系列で具体的に記入したもの</p>
+<h2 id=概要>
+概要
+<a class=anchor href=#%e6%a6%82%e8%a6%81>#</a>
+</h2>
+<p>シナリオは、ターゲットユーザーがどのような流れでソフトウェアを利用するかを時系列で具体的に記入したものです。</p>
+<p>シナリオでは、以下を実施します。</p>
 <ul>
-<li>もっとも基本的なシナリオ(happy path)を書く
-<ul>
-<li>レアケース、エラーケースはまずは不要。</li>
-</ul>
+<li>
+<p>もっとも基本的なシナリオ(happy path)を書く
+レアケース、エラーケースはまずは不要。</p>
 </li>
-<li>作業の起点と終点を意識して書く
-<ul>
-<li>なにがきっかけでシナリオがスタートするのか(before use)</li>
-<li>どうなればゴールなのか、その後どうなるか(after use)</li>
-</ul>
+<li>
+<p>作業の起点と終点を意識して書く</p>
+<p>なにがきっかけでシナリオがスタートするのか(before use)</p>
+<p>どうなればゴールなのか、その後どうなるか(after use)</p>
 </li>
-<li>シナリオ中、関わる関係者やタッチポイント（モノや情報）を意識して書く。</li>
-<li>流れが分かるように簡潔に書く。</li>
-<li>ペルソナの気持ちがわかるように。</li>
-<li>現状「Current」と未来「Future」のシナリオを書くこともある</li>
-</ul>
-<p>Tips</p>
-<ul>
-<li>UIの細かい挙動は書かなくてよい
-<ul>
-<li>Not good：たけしが検索フィールドにユーザー名を入力すると、インクリメンタルサーチが走り、候補が絞り込まれる。対象ユーザーを選択し、「編集」ボタンを選択する。するとポップアップ画面が表示され情報を編集する。</li>
-<li>Good ：たけしは、対象ユーザーを絞り込み、情報を編集する</li>
-</ul>
+<li>
+<p>シナリオ中、関わる関係者やタッチポイント（モノや情報）を意識して書く</p>
 </li>
-<li>シナリオをかくことで、新たなアサンプション、自分たちが知らない箇所、ペルソナの要求に気づくことがあります。</li>
-<li>ペルソナ同様、あらたな事実や誤りに気づいたら随時修正していく。</li>
+<li>
+<p>流れが分かるように簡潔に書く</p>
+</li>
+<li>
+<p>ペルソナの気持ちがわかるように書く</p>
+</li>
+<li>
+<p>現状「Current」と未来「Future」のシナリオを書くこともある</p>
+</li>
 </ul>
-<p><img src=../scenario_example.jpg alt="persona Mike"></p>
+<h2 id=シナリオのポイント>
+シナリオのポイント
+<a class=anchor href=#%e3%82%b7%e3%83%8a%e3%83%aa%e3%82%aa%e3%81%ae%e3%83%9d%e3%82%a4%e3%83%b3%e3%83%88>#</a>
+</h2>
+<p><img src=scenario_example.jpg alt="persona Mike"></p>
+<ul>
+<li>
+<p>UIの細かい挙動は書かなくてよい</p>
+<p>Not good：たけしが検索フィールドにユーザー名を入力すると、インクリメンタルサーチが走り、候補が絞り込まれる。対象ユーザーを選択し、「編集」ボタンを選択する。するとポップアップ画面が表示され情報を編集する。</p>
+<p>Good ：たけしは、対象ユーザーを絞り込み、情報を編集する。</p>
+</li>
+<li>
+<p>シナリオを書くことで、新たなアサンプション、自分たちが知らない箇所、ペルソナの要求に気づくことがある</p>
+</li>
+<li>
+<p>ペルソナ同様、あらたな事実や誤りに気づいたら随時修正する</p>
+</li>
+</ul>
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
@@ -516,7 +537,12 @@
 </div>
 <aside class=book-toc>
 <div class=book-toc-content>
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#概要>概要</a></li>
+<li><a href=#シナリオのポイント>シナリオのポイント</a></li>
+</ul>
+</nav>
 </div>
 </aside>
 </main>
