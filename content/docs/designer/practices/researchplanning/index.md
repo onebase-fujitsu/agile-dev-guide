@@ -33,3 +33,5 @@ bookToc: true
 リサーチ計画立案の例です。
 
 ![research planning example](research_planning_example1.jpg)
+
+{{< button relref="prototyping" >}}プロトタイピング{{< /button >}}
