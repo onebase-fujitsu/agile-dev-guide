@@ -2,9 +2,9 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="MVP # 概要 # MVP(Minimum Viable Product)とは、ユーザーに価値を提供できる最小限のプロダクトのことです。 最小限(Minimum) 最小限の時間・投資で作る">
+<meta name=description content="MVP # 概要 # MVP(Minimum Viable Product)とは、ユーザーに価値を提供できる最小限のプロダクトのことです。 仮説検証のプロセスで利用します。 最小限（Mini">
 <meta name=theme-color content="#FFFFFF"><meta property="og:title" content="MVP">
-<meta property="og:description" content="MVP # 概要 # MVP(Minimum Viable Product)とは、ユーザーに価値を提供できる最小限のプロダクトのことです。 最小限(Minimum) 最小限の時間・投資で作る">
+<meta property="og:description" content="MVP # 概要 # MVP(Minimum Viable Product)とは、ユーザーに価値を提供できる最小限のプロダクトのことです。 仮説検証のプロセスで利用します。 最小限（Mini">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/"><meta property="article:section" content="docs">
 <title>MVP | Fujitsu Agile Development Guide</title>
@@ -403,14 +403,14 @@
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/overview/>ProductManagerとは</a>
 </li>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/productroadmap/>プロダクトロードマップ</a>
-</li>
-<li>
 <input type=checkbox id=section-6976e7caed46c8d93d6db8fc8ac10964 class=toggle checked>
 <label for=section-6976e7caed46c8d93d6db8fc8ac10964 class="flex justify-between">
 <a role=button>ProductManagerのプラクティス</a>
 </label>
 <ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/roadmap/>プロダクトロードマップ</a>
+</li>
 <li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/ class=active>MVP</a>
 </li>
@@ -420,22 +420,10 @@
 <li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/>ユーザーストーリー</a>
 </li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/>2×2</a>
+</li>
 </ul>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/userstory/>ユーザストーリーマッピング</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/equipmentprioritization/>機器の優先順位付け</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/backlogmanagement/>バックログ管理</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/releaseplanning/>リリース管理</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/informationsharing/>情報共有</a>
 </li>
 </ul>
 </li>
@@ -485,7 +473,13 @@
 <ul>
 <li><a href=#概要>概要</a></li>
 <li><a href=#なぜmvp>なぜMVP?</a></li>
-<li><a href=#mvpのポイント>MVPのポイント</a></li>
+<li><a href=#mvpのポイント>MVPのポイント</a>
+<ul>
+<li><a href=#mvpは学びにおけるマイルストーン>MVPは学びにおけるマイルストーン</a></li>
+<li><a href=#検証したいことに集中する>検証したいことに集中する</a></li>
+<li><a href=#仮説検証のためのmvp>仮説検証のためのMVP</a></li>
+</ul>
+</li>
 </ul>
 </nav>
 </aside>
@@ -498,37 +492,53 @@ MVP
 概要
 <a class=anchor href=#%e6%a6%82%e8%a6%81>#</a>
 </h2>
-<p>MVP(Minimum Viable Product)とは、ユーザーに価値を提供できる最小限のプロダクトのことです。</p>
+<p>MVP(Minimum Viable Product)とは、ユーザーに価値を提供できる最小限のプロダクトのことです。
+仮説検証のプロセスで利用します。</p>
 <ul>
-<li>
-<p>最小限(Minimum)</p>
-<p>最小限の時間・投資で作るプロダクトです。</p>
-</li>
-<li>
-<p>実行可能(Viable)</p>
-<p>ユーザーに価値を示し仮説を検証するのに十分な体験を提供するプロダクトです。</p>
-</li>
+<li>最小限（Minimum） : 最小限の時間・投資で作る</li>
+<li>実行可能（Viable） : ユーザーに価値を示し仮説を検証するのに十分な体験を提供する</li>
 </ul>
 <h2 id=なぜmvp>
 なぜMVP?
 <a class=anchor href=#%e3%81%aa%e3%81%9cmvp>#</a>
 </h2>
-<p>MVPは最小限のコストで最大の仮説を検証し、最大のリスクを最小化するのに利用されます。
-早期にプロダクトをユーザーに利用してもらいフィードバックを得ることで、プロダクトを作り続けるべきか、ビジネスとして継続するべきか、を判断するのに役立ちます。</p>
+<p>MVPは最小限のコストで最大の仮説を検証し、最大のリスクを最小化するのに利用されます。<br>
+早期にプロダクトをユーザーに利用してもらいフィードバックを得ることで、プロダクトを作り続けるべきか、ビジネスとして継続するべきか、を判断するのに役立ちます。
+最小のコストで仮説を検証することで、仮説に誤りがありビジネスを継続しないという判断になった場合でも失うことは少なくて済みます。<br>
+また、仮説検証のプロセスの一部であったとしても、早期にプロダクトをユーザーに提供することは、認知度をあげて競合に対して優位になります。</p>
 <h2 id=mvpのポイント>
 MVPのポイント
 <a class=anchor href=#mvp%e3%81%ae%e3%83%9d%e3%82%a4%e3%83%b3%e3%83%88>#</a>
 </h2>
-<ul>
-<li>
-<p>MVPはデリバリーのマイルストーンではなく、学びを得るにあたってのマイルストーンになります。</p>
-<p>ユーザーに提供する価値を適切に設定し(速く移動する)、MVPに対するフィードバックを集め早期に学びを得ます。早期に学びを得ることによって、途中(バイク)でユーザーが満足する可能性もあるし、最終的に目指していたプロダクト(車)を提供する際にもより満足度の高いもの(風を感じられるオープンカー)にできます。</p>
+<h3 id=mvpは学びにおけるマイルストーン>
+MVPは学びにおけるマイルストーン
+<a class=anchor href=#mvp%e3%81%af%e5%ad%a6%e3%81%b3%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e3%83%9e%e3%82%a4%e3%83%ab%e3%82%b9%e3%83%88%e3%83%bc%e3%83%b3>#</a>
+</h3>
+<p>MVPはデリバリーのマイルストーンではなく、学びを得るにあたってのマイルストーンになります。
+仮説検証のプロセスを通して正しいことを確認できたら、MVPを大きくしてプロセスを繰り返していきます。</p>
+<p>ユーザーに提供する価値を適切に設定し（速く移動する）、MVPに対するフィードバックを集め早期に学びを得ます。早期に学びを得ることによって、途中（バイク）でユーザーが満足する可能性もあるし、最終的に目指していたプロダクト（車）を提供する際にもより満足度の高いもの（風を感じられるオープンカー）にできます。</p>
 <p><img src=mvp1.jpg alt=mvp1></p>
-</li>
-<li>
-<p>MVPを構築する際、検証したいことに直接結びつかない機能やプロセス、労力は取り除くのが原則です。</p>
-<p><img src=mvp2.jpg alt=mvp1></p>
-</li>
+<h3 id=検証したいことに集中する>
+検証したいことに集中する
+<a class=anchor href=#%e6%a4%9c%e8%a8%bc%e3%81%97%e3%81%9f%e3%81%84%e3%81%93%e3%81%a8%e3%81%ab%e9%9b%86%e4%b8%ad%e3%81%99%e3%82%8b>#</a>
+</h3>
+<p>MVPを構築する際、検証したいことに直接結びつかない機能やプロセス、労力は取り除くのが原則です。
+検証のために最低限の機能を提供します。
+ただし、ユーザーから仮説検証したい内容にフォーカスしたフィードバックを得るためにも、機能性のみを意識するのではなく、見た目や使い勝手をある程度作り込んで提供すべきです。<br>
+また、ユーザーからのフィードバックを得てプロダクトを改善していくことは重要ですが、最初に定めた課題を解決できているか検証することを第一とし、ユーザーの意見に振り回され過ぎて時間を無駄にしないように注意が必要です。</p>
+<p><img src=mvp2.jpg alt=mvp2></p>
+<h3 id=仮説検証のためのmvp>
+仮説検証のためのMVP
+<a class=anchor href=#%e4%bb%ae%e8%aa%ac%e6%a4%9c%e8%a8%bc%e3%81%ae%e3%81%9f%e3%82%81%e3%81%aemvp>#</a>
+</h3>
+<p>MVPは仮説検証のために利用する概念であり、次のようなものではありません。
+また、必ずしもソフトウェアである必要はありません。</p>
+<ul>
+<li>決裁者に見せたりリリースできると感じられる、プロダクトの最初のバージョン</li>
+<li>最優先と定義したリリース</li>
+<li>コンセプトの証明</li>
+<li>ビジネスゴールやKPIを伴わない、機能の最小セット</li>
+<li>社内でのデモンストレーションを目的の完成品</li>
 </ul>
 </article>
 <footer class=book-footer>
@@ -546,7 +556,13 @@ MVPのポイント
 <ul>
 <li><a href=#概要>概要</a></li>
 <li><a href=#なぜmvp>なぜMVP?</a></li>
-<li><a href=#mvpのポイント>MVPのポイント</a></li>
+<li><a href=#mvpのポイント>MVPのポイント</a>
+<ul>
+<li><a href=#mvpは学びにおけるマイルストーン>MVPは学びにおけるマイルストーン</a></li>
+<li><a href=#検証したいことに集中する>検証したいことに集中する</a></li>
+<li><a href=#仮説検証のためのmvp>仮説検証のためのMVP</a></li>
+</ul>
+</li>
 </ul>
 </nav>
 </div>

@@ -2,9 +2,9 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="ユーザーストーリーマッピング # 概要 # ユーザーストーリーマッピングでは、ユーザーストーリーを抽出しながら、ストーリーの分類(横軸)、優先度(縦">
+<meta name=description content="ユーザーストーリーマッピング # 概要 # ユーザーストーリーマッピングでは、ユーザーストーリーを抽出しながら、ユーザーのアクション（横軸）、優先度">
 <meta name=theme-color content="#FFFFFF"><meta property="og:title" content="ユーザーストーリーマッピング">
-<meta property="og:description" content="ユーザーストーリーマッピング # 概要 # ユーザーストーリーマッピングでは、ユーザーストーリーを抽出しながら、ストーリーの分類(横軸)、優先度(縦">
+<meta property="og:description" content="ユーザーストーリーマッピング # 概要 # ユーザーストーリーマッピングでは、ユーザーストーリーを抽出しながら、ユーザーのアクション（横軸）、優先度">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstorymapping/"><meta property="article:section" content="docs">
 <title>ユーザーストーリーマッピング | Fujitsu Agile Development Guide</title>
@@ -403,14 +403,14 @@
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/overview/>ProductManagerとは</a>
 </li>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/productroadmap/>プロダクトロードマップ</a>
-</li>
-<li>
 <input type=checkbox id=section-6976e7caed46c8d93d6db8fc8ac10964 class=toggle checked>
 <label for=section-6976e7caed46c8d93d6db8fc8ac10964 class="flex justify-between">
 <a role=button>ProductManagerのプラクティス</a>
 </label>
 <ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/roadmap/>プロダクトロードマップ</a>
+</li>
 <li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/>MVP</a>
 </li>
@@ -420,22 +420,10 @@
 <li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/>ユーザーストーリー</a>
 </li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/>2×2</a>
+</li>
 </ul>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/userstory/>ユーザストーリーマッピング</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/equipmentprioritization/>機器の優先順位付け</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/backlogmanagement/>バックログ管理</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/releaseplanning/>リリース管理</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/informationsharing/>情報共有</a>
 </li>
 </ul>
 </li>
@@ -498,26 +486,49 @@
 概要
 <a class=anchor href=#%e6%a6%82%e8%a6%81>#</a>
 </h2>
-<p>ユーザーストーリーマッピングでは、ユーザーストーリーを抽出しながら、ストーリーの分類(横軸)、優先度(縦軸)によってマッピングを行い、ユーザーストーリーを整理します。</p>
-<p>Swift MethodのSlicesで抽出した優先着手するシナリオの実現に必要となる、以下のような情報や機能をユーザーストーリーとして抽出します。</p>
+<p>ユーザーストーリーマッピングでは、ユーザーストーリーを抽出しながら、ユーザーのアクション（横軸）、優先度（縦軸）によってマッピングを行い、ユーザーストーリーを整理します。</p>
+<ol>
+<li>
+<p>各ユーザー（ペルソナ）が利用する際のアクションを書き出す</p>
+</li>
+<li>
+<p>各アクションで必要となる詳細な要求（ユーザーストーリー）を書き出す</p>
+<blockquote>
+<p><strong>ユーザーストーリー抽出観点の例</strong></p>
 <ul>
-<li>画面の表示項目</li>
-<li>画面表示の契機となるアクション</li>
-<li>画面表示の検索条件</li>
-<li>画面表示のソート条件</li>
+<li>画面で見ることができる項目</li>
+<li>画面の操作内容</li>
+<li>画面で指定する入力項目</li>
+<li>画面に表示する順序</li>
 </ul>
-<p>抽出したユーザーストーリーは、機能またはユーザーの行動(横軸)、及び、以下のような優先度(縦軸)で分類します。</p>
+</blockquote>
+</li>
+<li>
+<p>各ユーザーストーリーについて優先度でマッピングする</p>
+<blockquote>
+<p><strong>優先度の観点の例</strong></p>
 <ul>
-<li>must have (ないと困る)</li>
-<li>good to have (あった方が良い)</li>
-<li>nice to have (あるとさらにUXに効果的)</li>
+<li>must have（ないと困る）</li>
+<li>good to have（あった方が良い）</li>
+<li>nice to have（あるとさらにUXに効果的）</li>
 <li>edge case</li>
 </ul>
+</blockquote>
+<blockquote>
+<p><strong>優先度付けの結果としてのリリース例 (ユーザーの決済)</strong></p>
+<ul>
+<li>リリース１：クレジットカード決済のみ</li>
+<li>リリース２：PayPayなどのキャッシュレス決済の追加</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<p><img src=UserStoryMapping.jpg alt=UserStoryMapping></p>
 <h2 id=なぜユーザーストーリーマッピング>
 なぜユーザーストーリーマッピング？
 <a class=anchor href=#%e3%81%aa%e3%81%9c%e3%83%a6%e3%83%bc%e3%82%b6%e3%83%bc%e3%82%b9%e3%83%88%e3%83%bc%e3%83%aa%e3%83%bc%e3%83%9e%e3%83%83%e3%83%94%e3%83%b3%e3%82%b0>#</a>
 </h2>
-<p>ユーザーストーリーマッピングは、ユーザーストーリー毎に開発対象、優先度の全体像を可視化して、チーム内で認識を揃えることを目的としています。
+<p>ユーザーストーリーマッピングは、ユーザーがプロダクトを利用する流れと、ユーザーストーリー単位での開発対象、優先度の全体像を可視化して、チーム内で認識を揃えることを目的としています。
 また、ユーザーストーリーマッピングは、今後のリリース計画についてどの機能までをリリースするかの整理、ユーザーストーリーにおける抜け漏れへの気付き、新しいアイデアの抽出、に有効です。</p>
 <h2 id=ユーザーストーリーマッピングのポイント>
 ユーザーストーリーマッピングのポイント
@@ -530,7 +541,7 @@
 </li>
 <li>
 <p>ユーザーストーリーを適度に分類する</p>
-<p>基本的にユーザーストーリーマッピングでは、ユーザー、及び、そのユーザーの行動によって、横軸に分類を行います。ただし、ユーザーストーリーが増えるにつれて全体像の把握が難しくなってしまうため、横軸の分類を詳細化する(大分類/中分類/小分類)、各ユーザーストーリーの付箋にタグ付けしてグルーピングする、ユーザーストーリーマップ自体を複数に分割する、など適度に分類して見やすくすることが有効です。</p>
+<p>基本的にユーザーストーリーマッピングでは、ユーザー（ペルソナ）、及び、そのユーザーのアクションによって、横軸に分類を行います。ただし、ユーザーストーリーが増えるにつれて全体像の把握が難しくなってしまうため、横軸の分類を詳細化する（大分類/中分類/小分類）、各ユーザーストーリーの付箋にタグ付けしてグルーピングする、ユーザーストーリーマップ自体を複数に分割する、など適度に分類して見やすくすることが有効です。</p>
 </li>
 <li>
 <p>自信度が高いものをユーザーストーリーとして抽出する</p>
@@ -542,7 +553,8 @@
 </li>
 <li>
 <p>優先度を判断できる人やユーザーのことをよく理解している人と一緒に作成する</p>
-<p>整理を進めるなかで気付きを得ながら、ユーザーストーリーを抽出したり優先付けしたりするため、必要な情報を持っているメンバー、優先度の判断ができるメンバーが一緒になって作業をすることで効率的に進められます。</p>
+<p>整理を進めるなかで気付きを得ながら、ユーザーストーリーを抽出したり優先付けしたりするため、必要な情報を持っているメンバー、優先度の判断ができるメンバーが一緒になって作業をすることで効率的に進められます。
+ProductManagerとDesigner、また、必要であればDeveloperと一緒に実施することで、各観点で抜け漏れが少なくなったりその場で認識を合わせられたりします。</p>
 </li>
 </ul>
 </article>

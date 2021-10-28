@@ -2,9 +2,9 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="Risks & Mitigations # 概要 # チームの目標を達成するためにどのようなリスクがあるかを挙げて、そのリスクを軽減するための対策を検討します。 目的 # リスクの洗い出">
+<meta name=description content="Risks & Mitigations # 概要 # チームの目標を達成するためにどのようなリスクがあるかを挙げて、そのリスクを軽減するための対策を検討します。 一人ひとりの思い込み">
 <meta name=theme-color content="#FFFFFF"><meta property="og:title" content="Risks & Mitigations">
-<meta property="og:description" content="Risks & Mitigations # 概要 # チームの目標を達成するためにどのようなリスクがあるかを挙げて、そのリスクを軽減するための対策を検討します。 目的 # リスクの洗い出">
+<meta property="og:description" content="Risks & Mitigations # 概要 # チームの目標を達成するためにどのようなリスクがあるかを挙げて、そのリスクを軽減するための対策を検討します。 一人ひとりの思い込み">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/riskmitigations/"><meta property="article:section" content="docs">
 <title>Risks & Mitigations | Fujitsu Agile Development Guide</title>
@@ -403,14 +403,14 @@
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/overview/>ProductManagerとは</a>
 </li>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/productroadmap/>プロダクトロードマップ</a>
-</li>
-<li>
 <input type=checkbox id=section-6976e7caed46c8d93d6db8fc8ac10964 class=toggle>
 <label for=section-6976e7caed46c8d93d6db8fc8ac10964 class="flex justify-between">
 <a role=button>ProductManagerのプラクティス</a>
 </label>
 <ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/roadmap/>プロダクトロードマップ</a>
+</li>
 <li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/>MVP</a>
 </li>
@@ -420,22 +420,10 @@
 <li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/>ユーザーストーリー</a>
 </li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/>2×2</a>
+</li>
 </ul>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/userstory/>ユーザストーリーマッピング</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/equipmentprioritization/>機器の優先順位付け</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/backlogmanagement/>バックログ管理</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/releaseplanning/>リリース管理</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/informationsharing/>情報共有</a>
 </li>
 </ul>
 </li>
@@ -499,7 +487,8 @@ Risks & Mitigations
 概要
 <a class=anchor href=#%e6%a6%82%e8%a6%81>#</a>
 </h2>
-<p>チームの目標を達成するためにどのようなリスクがあるかを挙げて、そのリスクを軽減するための対策を検討します。</p>
+<p>チームの目標を達成するためにどのようなリスクがあるかを挙げて、そのリスクを軽減するための対策を検討します。
+一人ひとりの思い込み（Assumption）を可視化し、インパクトやチームの学習状況などから優先度付けを行って対策をとります。</p>
 <h2 id=目的>
 目的
 <a class=anchor href=#%e7%9b%ae%e7%9a%84>#</a>
@@ -517,23 +506,34 @@ Risks & Mitigations
 進め方
 <a class=anchor href=#%e9%80%b2%e3%82%81%e6%96%b9>#</a>
 </h2>
-<ul>
-<li>リスクの洗い出しを行う際の観点を決めます</li>
-<li>どのようなリスクがあるかを各自でDump & Sortします</li>
-<li>挙げられたリスクをグルーピングします</li>
-<li>2×2で分類します
+<ol>
+<li>リスクの抽出の観点決め
+<blockquote>
+<p><strong>例</strong>
+プロダクトのビジョンを達成する（Inception時）</p>
+</blockquote>
+</li>
+<li>どのようなリスクがあるか各自でDump & Sort
+<blockquote>
+<p><strong>例</strong>
+「もし○○○だったら、ビジョンを達成できずこのプロダクトは失敗する」</p>
+</blockquote>
+</li>
+<li>挙げられたリスクをグルーピング</li>
+<li>2×2で分類して優先度付け
 <ul>
 <li>2×2の軸はリスクの重要度（High Risk⇔Low Risk）とリスクの緩和の難易度（Hard to Mitigate⇔Easy to Mitigate）</li>
-<li>2×2で分類せずに、リスクの重要度だけで分類することもあります</li>
+<li>別の軸にしても、リスクの重要度だけで分類しても良い</li>
 </ul>
 </li>
-<li>リスクを軽減するため対策（Mitigations）を検討します
+<li>リスクを軽減するための対策（Mitigations）の検討
 <ul>
-<li>2×2で右上の部分(優先度の高いリスク)にプロットされたリスクを重点的に検討します</li>
+<li>2×2で右上の部分（優先度の高いリスク）にプロットされたリスクを重点的に検討する</li>
 </ul>
 </li>
-</ul>
-<p><img src=riskmitigation.jpg alt=riskmitigation></p>
+</ol>
+<p><img src=riskactivity.jpg alt=riskactivity>
+<img src=riskmitigation.jpg alt=riskmitigation></p>
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">

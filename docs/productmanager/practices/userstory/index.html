@@ -2,9 +2,9 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="ユーザーストーリー # 概要 # ユーザーストーリーとはユーザーの要求(誰が、どのような目的で、何をしたいのか)を表わすものです。 ユーザーストーリー">
+<meta name=description content="ユーザーストーリー # 概要 # ユーザーストーリーとはユーザーの要求（誰が、どのような目的で、何をしたいのか）を表わすものです。 ユーザーストーリー">
 <meta name=theme-color content="#FFFFFF"><meta property="og:title" content="ユーザーストーリー">
-<meta property="og:description" content="ユーザーストーリー # 概要 # ユーザーストーリーとはユーザーの要求(誰が、どのような目的で、何をしたいのか)を表わすものです。 ユーザーストーリー">
+<meta property="og:description" content="ユーザーストーリー # 概要 # ユーザーストーリーとはユーザーの要求（誰が、どのような目的で、何をしたいのか）を表わすものです。 ユーザーストーリー">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/"><meta property="article:section" content="docs">
 <title>ユーザーストーリー | Fujitsu Agile Development Guide</title>
@@ -403,14 +403,14 @@
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/overview/>ProductManagerとは</a>
 </li>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/productroadmap/>プロダクトロードマップ</a>
-</li>
-<li>
 <input type=checkbox id=section-6976e7caed46c8d93d6db8fc8ac10964 class=toggle checked>
 <label for=section-6976e7caed46c8d93d6db8fc8ac10964 class="flex justify-between">
 <a role=button>ProductManagerのプラクティス</a>
 </label>
 <ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/roadmap/>プロダクトロードマップ</a>
+</li>
 <li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/>MVP</a>
 </li>
@@ -420,22 +420,10 @@
 <li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/ class=active>ユーザーストーリー</a>
 </li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/>2×2</a>
+</li>
 </ul>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/userstory/>ユーザストーリーマッピング</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/equipmentprioritization/>機器の優先順位付け</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/backlogmanagement/>バックログ管理</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/releaseplanning/>リリース管理</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/informationsharing/>情報共有</a>
 </li>
 </ul>
 </li>
@@ -498,17 +486,19 @@
 概要
 <a class=anchor href=#%e6%a6%82%e8%a6%81>#</a>
 </h2>
-<p>ユーザーストーリーとはユーザーの要求(誰が、どのような目的で、何をしたいのか)を表わすものです。<br>
+<p>ユーザーストーリーとはユーザーの要求（誰が、どのような目的で、何をしたいのか）を表わすものです。<br>
 ユーザーストーリーでは、ユーザーの要求を以下の形式で記載します。</p>
-<pre tabindex=0><code>As [ユーザー(ペルソナ)]
+<pre tabindex=0><code>As [ユーザー（ペルソナ）]
 I want [ユーザーがしたいこと]
 So that [結果として得られること]
-</code></pre><p>また、ユーザーストーリーが達成していることを確認する基準(Acceptance Criteria)を以下の形で記載します。</p>
+</code></pre><p>また、ユーザーストーリーが達成していることを確認する基準（Acceptance Criteria）を以下の形で記載します。</p>
 <pre tabindex=0><code>Scenario:
 Given [状況やコンテキスト]
 When [アクション]
 Then [結果]
-</code></pre><h2 id=なぜユーザーストーリー>
+</code></pre><p>バックログ管理するユーザーストーリーの例
+<img src=userStory.png alt=userStory></p>
+<h2 id=なぜユーザーストーリー>
 なぜユーザーストーリー?
 <a class=anchor href=#%e3%81%aa%e3%81%9c%e3%83%a6%e3%83%bc%e3%82%b6%e3%83%bc%e3%82%b9%e3%83%88%e3%83%bc%e3%83%aa%e3%83%bc>#</a>
 </h2>
@@ -542,7 +532,7 @@ Then [結果]
 <li>
 <p><strong>V</strong>aluable</p>
 <p>ユーザーに何らかの価値を提供するものにします。
-価値を提供しないものの開発者が作業する必要があるものは、ユーザーストーリーではなく、開発のための作業(chore)の一つとしてタスク管理します。
+価値を提供しないものの開発者が作業する必要があるものは、ユーザーストーリーではなく、開発のための作業（chore）の一つとしてタスク管理します。
 また、ログ出力などシステム監視の機能については、運用担当者/システム管理者をペルソナとしてユーザーストーリーを作成します。</p>
 </li>
 <li>

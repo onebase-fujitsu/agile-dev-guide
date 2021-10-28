@@ -2,12 +2,12 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="リリース計画 # ■リリース計画におけるポイント # 早く頻繁に出す # ユーザーが機能を使ってみて初めて、適切な状態を開発し上手くデザインして実装した">
-<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="リリース管理">
-<meta property="og:description" content="リリース計画 # ■リリース計画におけるポイント # 早く頻繁に出す # ユーザーが機能を使ってみて初めて、適切な状態を開発し上手くデザインして実装した">
+<meta name=description content="2×2 # 概要 # 2×2(two by two)とは、優先順位を徹底して意思決定を行うための手法です。 意思決定をするための2つの観点を縦軸と横軸に設定">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="2×2">
+<meta property="og:description" content="2×2 # 概要 # 2×2(two by two)とは、優先順位を徹底して意思決定を行うための手法です。 意思決定をするための2つの観点を縦軸と横軸に設定">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/releaseplanning/"><meta property="article:section" content="docs">
-<title>リリース管理 | Fujitsu Agile Development Guide</title>
+<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/"><meta property="article:section" content="docs">
+<title>2×2 | Fujitsu Agile Development Guide</title>
 <link rel=manifest href=/agile-dev-guide/manifest.json>
 <link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
@@ -403,14 +403,14 @@
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/overview/>ProductManagerとは</a>
 </li>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/productroadmap/>プロダクトロードマップ</a>
-</li>
-<li>
-<input type=checkbox id=section-6976e7caed46c8d93d6db8fc8ac10964 class=toggle>
+<input type=checkbox id=section-6976e7caed46c8d93d6db8fc8ac10964 class=toggle checked>
 <label for=section-6976e7caed46c8d93d6db8fc8ac10964 class="flex justify-between">
 <a role=button>ProductManagerのプラクティス</a>
 </label>
 <ul>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/roadmap/>プロダクトロードマップ</a>
+</li>
 <li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/>MVP</a>
 </li>
@@ -420,22 +420,10 @@
 <li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/>ユーザーストーリー</a>
 </li>
+<li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/ class=active>2×2</a>
+</li>
 </ul>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/userstory/>ユーザストーリーマッピング</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/equipmentprioritization/>機器の優先順位付け</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/backlogmanagement/>バックログ管理</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/releaseplanning/ class=active>リリース管理</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/informationsharing/>情報共有</a>
 </li>
 </ul>
 </li>
@@ -475,7 +463,7 @@
 <label for=menu-control>
 <img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu>
 </label>
-<strong>リリース管理</strong>
+<strong>2×2</strong>
 <label for=toc-control>
 <img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents">
 </label>
@@ -483,60 +471,53 @@
 <aside class="hidden clearfix">
 <nav id=TableOfContents>
 <ul>
-<li><a href=#リリース計画におけるポイント>■リリース計画におけるポイント</a>
-<ul>
-<li><a href=#早く頻繁に出す>早く頻繁に出す　　</a></li>
-<li><a href=#リリースはできるだけ簡単かつ安価に>リリースはできるだけ簡単かつ安価に　　</a></li>
-<li><a href=#ビジネス観点でのリリース時期決定>ビジネス観点でのリリース時期決定　　</a></li>
-<li><a href=#リリースのブロッカーの把握>リリースのブロッカーの把握</a></li>
-</ul>
-</li>
+<li><a href=#概要>概要</a></li>
+<li><a href=#なぜ22>なぜ2×2?</a></li>
+<li><a href=#22のポイント>2×2のポイント</a></li>
 </ul>
 </nav>
 </aside>
 </header>
-<article class=markdown><h1 id=リリース計画>
-リリース計画
-<a class=anchor href=#%e3%83%aa%e3%83%aa%e3%83%bc%e3%82%b9%e8%a8%88%e7%94%bb>#</a>
+<article class=markdown><h1 id=22>
+2×2
+<a class=anchor href=#22>#</a>
 </h1>
-<h2 id=リリース計画におけるポイント>
-■リリース計画におけるポイント
-<a class=anchor href=#%e3%83%aa%e3%83%aa%e3%83%bc%e3%82%b9%e8%a8%88%e7%94%bb%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e3%83%9d%e3%82%a4%e3%83%b3%e3%83%88>#</a>
+<h2 id=概要>
+概要
+<a class=anchor href=#%e6%a6%82%e8%a6%81>#</a>
 </h2>
-<h3 id=早く頻繁に出す>
-早く頻繁に出す　　
-<a class=anchor href=#%e6%97%a9%e3%81%8f%e9%a0%bb%e7%b9%81%e3%81%ab%e5%87%ba%e3%81%99>#</a>
-</h3>
-<p>ユーザーが機能を使ってみて初めて、適切な状態を開発し上手くデザインして実装したかどうかが真にわかる。プロダクトの方向性を継続的に検証できるように、ユーザーからのフィードバックのサイクルはできるだけ短くすることが望ましい。　　</p>
-<h3 id=リリースはできるだけ簡単かつ安価に>
-リリースはできるだけ簡単かつ安価に　　
-<a class=anchor href=#%e3%83%aa%e3%83%aa%e3%83%bc%e3%82%b9%e3%81%af%e3%81%a7%e3%81%8d%e3%82%8b%e3%81%a0%e3%81%91%e7%b0%a1%e5%8d%98%e3%81%8b%e3%81%a4%e5%ae%89%e4%be%a1%e3%81%ab>#</a>
-</h3>
-<p>反復可能で、定期的で、成功し、信頼性が高く、費用対効果の高いリリースプロセスは、小さな価値を継続的に提供するために必要不可欠。</p>
-<h3 id=ビジネス観点でのリリース時期決定>
-ビジネス観点でのリリース時期決定　　
-<a class=anchor href=#%e3%83%93%e3%82%b8%e3%83%8d%e3%82%b9%e8%a6%b3%e7%82%b9%e3%81%a7%e3%81%ae%e3%83%aa%e3%83%aa%e3%83%bc%e3%82%b9%e6%99%82%e6%9c%9f%e6%b1%ba%e5%ae%9a>#</a>
-</h3>
-<p>リリースの決定はビジネスの観点で決めるべき、出すためのコストとリスクを照らして、現在提供できるユーザー価値を比較対象する必要がある。以下のインプットを収集する。　　</p>
+<p>2×2(two by two)とは、優先順位を徹底して意思決定を行うための手法です。
+意思決定をするための2つの観点を縦軸と横軸に設定してそれぞれの観点毎に順序付けをすることで、四象限の右上のものが「今やるべきもの」、左下のものが「やらなくて良いもの」、と優先度を決めることができます。</p>
+<h2 id=なぜ22>
+なぜ2×2?
+<a class=anchor href=#%e3%81%aa%e3%81%9c22>#</a>
+</h2>
+<p>対立する複数の観点を軸にしてバランスをとりながら優先度を設定でき、なぜそのような決定をしたのかをロジカルに説明しやすくなり、全ての関係者の理解を得やすくなります。</p>
+<h2 id=22のポイント>
+2×2のポイント
+<a class=anchor href=#22%e3%81%ae%e3%83%9d%e3%82%a4%e3%83%b3%e3%83%88>#</a>
+</h2>
 <ul>
-<li>ユーザーのニーズ<br>
-ユーザーが新しい機能・洗練された機能デザインをどの程度必要としているか？　　</li>
-<li>ステークホルダー<br>
-マーケティング、販売、顧客サービス、他のチームなどで提供機能をサポートする準備ができているか？　　</li>
-<li>他のプロダクトチーム<br>
-他のチームのサービスに依存している場合、それらの準備が整っているか？</li>
-<li>リリースするソフトウェアのサイズ<br>
-大きくなるほどリスクが高い</li>
-<li>リリースプロセス<br>
-リリースプロセスが自動化されているか？(手動であるほど高価)</li>
-<li>デリバリーインフラ<br>
-コードをプッシュするのが容易か？</li>
+<li>
+<p>偏りが出ないようにする</p>
+<p>「やりたいもの」が多いと右上に要素が偏りがちですが、相対的な順位付けであることを意識し、上下・左右にバランスよく要素が行き渡るようにプロットします。</p>
+</li>
+<li>
+<p>順序付けを徹底する</p>
+<p>優先度が同じと判断して同じ位置に設定するのではなく、いずれかの順序を判断して上下・左右に位置づけることを徹底します。
+また、四象限で分けることができるよう、中央の線の真上ではなく上下・左右にずらしてプロットするようにします。</p>
+</li>
+<li>
+<p>縦軸と横軸でそれぞれ整理する</p>
+<p>縦軸の観点と横軸の観点を同時に順序付けをしようとすると難しくなるため、まずは縦軸の観点で全要素を並び替えた後に、横軸の観点で並び替えを行うようにすると良いです。</p>
+</li>
+<li>
+<p>縦軸と横軸に別々の観点を設定する</p>
+<p>2つの観点の設定に悩んだ際に、似たような観点を設定してしまいがちですが、あまり意味がありません。
+2つの観点としては対立する（関連しない）観点を意識してあげるようにします。<br>
+また、決めづらい場合にはまずは作業を進めてみることで、重要なポイントに気付くことができ、途中で観点の見直しをするきっかけになります。</p>
+</li>
 </ul>
-<h3 id=リリースのブロッカーの把握>
-リリースのブロッカーの把握
-<a class=anchor href=#%e3%83%aa%e3%83%aa%e3%83%bc%e3%82%b9%e3%81%ae%e3%83%96%e3%83%ad%e3%83%83%e3%82%ab%e3%83%bc%e3%81%ae%e6%8a%8a%e6%8f%a1>#</a>
-</h3>
-<p>組織においてプロダクション環境にリリースするための要件を積極的に理解する。これは予想以上に時間がかかり、チームのブロッカーになる可能性がある。</p>
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
@@ -551,14 +532,9 @@
 <div class=book-toc-content>
 <nav id=TableOfContents>
 <ul>
-<li><a href=#リリース計画におけるポイント>■リリース計画におけるポイント</a>
-<ul>
-<li><a href=#早く頻繁に出す>早く頻繁に出す　　</a></li>
-<li><a href=#リリースはできるだけ簡単かつ安価に>リリースはできるだけ簡単かつ安価に　　</a></li>
-<li><a href=#ビジネス観点でのリリース時期決定>ビジネス観点でのリリース時期決定　　</a></li>
-<li><a href=#リリースのブロッカーの把握>リリースのブロッカーの把握</a></li>
-</ul>
-</li>
+<li><a href=#概要>概要</a></li>
+<li><a href=#なぜ22>なぜ2×2?</a></li>
+<li><a href=#22のポイント>2×2のポイント</a></li>
 </ul>
 </nav>
 </div>
