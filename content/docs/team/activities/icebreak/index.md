@@ -34,7 +34,7 @@ bookToc: true
 - 各種ボードゲーム
 - 共通点探しゲーム
   [[遊び方]](http://yorozumemo.com/looking-for-something-in-common-3050/)
-- [GeoGuessr(ストリートビューの場所の推理ゲーム)](https://www.geoguessr.com/)
+- [GeoGuessr（ストリートビューの場所の推理ゲーム）](https://www.geoguessr.com/)
   [[遊び方]](https://gigazine.net/news/20180508-geoguessr/)  
   ![GeoGuessr](geoguessr.jpg)
 - 雑談

@@ -68,7 +68,7 @@ Event Stormingの大まかな流れは以下の通りです。
 ・システムやビジネスプロセスに対する理解の共有
 ・グループ間の明確なコミュニケーションのためのユビキタス言語
 ・システムの再構築を始めるためのサービス候補のリスト
-・ユーザー・ジャーニーやシステム機能のリスト(「シン・スライス」とも呼ばれ、システム・モデルを演習する際に使用される)(Borisを参照)
+・ユーザー・ジャーニーやシステム機能のリスト（「シン・スライス」とも呼ばれ、システム・モデルを演習する際に使用される）（Borisを参照）
 ・システムの痛みや制約のトップシステム
 ・ビジョン指向の思考プロセス
 ```
@@ -126,7 +126,7 @@ Event Stormingの大まかな流れは以下の通りです。
       - ↑でも特に「Business Capabilities」と「Data ownership」が特に重要
     - サービス候補が妥当かどうかの検討基準
       - Rate of Change
-      - Scalability(Independent)
+      - Scalability（Independent）
       - Lifecycle management
       - Isolated failure
       - Simplifying external dependency

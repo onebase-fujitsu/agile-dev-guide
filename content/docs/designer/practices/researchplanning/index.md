@@ -10,12 +10,14 @@ bookToc: true
 
 リサーチ計画立案では、次回のユーザーリサーチで検証すべき仮説と、その検証方法について計画します。
 
-以下の手順を実施します。
+以下の手順で準備を進めます。
 1. リサーチのテーマ（問い）の設定
 1. 優先度の高いリスクやアサンプションを出す
 1. 検証可能な仮説に変換する
 1. 検証方法を具体化する
 1. 実施に向けたタスクや準備を整理する
+
+![research planning](research_planning1.jpg)
 
 ## リサーチ計画立案のポイント
 
@@ -24,14 +26,10 @@ bookToc: true
 - 常日頃からリスクやアサンプションについて考えておく
 - リサーチ計画の立案は難しいが、回数を重ねるごとに勘所が見えてくる
 
-![research planning example](research_planning1.jpg)
-
-
-
-## リサーチ計画立案 例
-
-リサーチ計画立案の例です。
+{{< hint info >}}
+**リサーチ計画立案 例**
 
 ![research planning example](research_planning_example1.jpg)
+{{< /hint >}}
 
 {{< button relref="prototyping" >}}プロトタイピング{{< /button >}}

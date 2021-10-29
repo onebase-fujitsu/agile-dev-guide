@@ -23,5 +23,5 @@ bookToc: true
 
 {{< hint info >}}
 **参考資料**
-- [ラジオ体操第一(YouTube)](https://www.youtube.com/watch?v=feSVtC1BSeQ)
+- [ラジオ体操第一（YouTube）](https://www.youtube.com/watch?v=feSVtC1BSeQ)
 {{< /hint >}}

@@ -13,3 +13,11 @@ bookToc: true
 - 順次、開発・リリース
 - 学びを得て見直しをかける
 
+## Inception
+
+- 体制
+- Goal
+- プロダクト概要
+- Risk & Mitigations
+
+## Outception
