@@ -194,19 +194,10 @@
 </label>
 <ul>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/scoping/>スコーピング</a>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/scoping/>Scoping</a>
 </li>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/product/>プロダクトビジョン / バリュープロポジション</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/persona/>ペルソナエコシステム</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/userstory/>ユーザーストーリーマッピング</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/risk/>リスクアクティビティ</a>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/productvision/>プロダクトビジョン / バリュープロポジション</a>
 </li>
 </ul>
 </li>
@@ -247,12 +238,6 @@
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/techchoice/>Tech Choice</a>
 </li>
 </ul>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/inception/>Inception</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/outception/>Outception</a>
 </li>
 </ul>
 </li>
@@ -387,7 +372,7 @@
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/script/>スクリプト作成</a>
 </li>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchacction/>リサーチ実施</a>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchaction/>リサーチ実施</a>
 </li>
 <li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/synthesize/>シンセサイズ</a>
@@ -403,8 +388,8 @@
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/overview/>ProductManagerとは</a>
 </li>
 <li>
-<input type=checkbox id=section-6976e7caed46c8d93d6db8fc8ac10964 class=toggle>
-<label for=section-6976e7caed46c8d93d6db8fc8ac10964 class="flex justify-between">
+<input type=checkbox id=section-8fbae8de73ef8326d3c4d80af4144c79 class=toggle>
+<label for=section-8fbae8de73ef8326d3c4d80af4144c79 class="flex justify-between">
 <a role=button>ProductManagerのプラクティス</a>
 </label>
 <ul>
@@ -475,8 +460,6 @@
 <li><a href=#イテレーション開発の基本的な考え方>イテレーション開発の基本的な考え方</a>
 <ul>
 <li><a href=#ユーザーストーリー作成から受け入れまでの流れ>ユーザーストーリー作成から受け入れまでの流れ</a></li>
-<li><a href=#バックログの例>バックログの例</a></li>
-<li><a href=#イテレーションで完了したポイント数とベロシティの遷移の例>イテレーションで完了したポイント数とベロシティの遷移の例</a></li>
 </ul>
 </li>
 </ul>
@@ -549,7 +532,7 @@ IPMで開発の見通しを立てて、デイリースタンドアップで日�
 <li><strong><a href=../activities/preipm>Pre-IPM(Iteration Planning Meeting)</a></strong>
 <ul>
 <li>IPMの準備として実施します。</li>
-<li>ドラフト版のユーザーストーリーに対してDev観点で確認します。</li>
+<li>ドラフト版のユーザーストーリーに対してDeveloper観点で確認します。</li>
 </ul>
 </li>
 <li><strong><a href=../activities/ipm>IPM(Iteration Planning Meeting)</a></strong>
@@ -589,14 +572,13 @@ Internal Sync
 </a>
 </p>
 <blockquote class="book-hint info">
-<p><strong>Tips</strong></p>
-<p>一日のスケジュールの例</p>
+<p><strong>一日のスケジュールの例</strong></p>
 <blockquote>
 <p>例1</p>
 <ul>
 <li>09:06~09:15 全体スタンドアップ＋チームスタンドアップ</li>
-<li>09:15~09:30 Dev+Infraのタスク確認</li>
-<li>09:30~09:40 PdM+Designerのタスク確認</li>
+<li>09:15~09:30 Developer+Infraのタスク確認</li>
+<li>09:30~09:40 ProductManager+Designerのタスク確認</li>
 <li>09:30~12:30 開発</li>
 <li>12:30~13:30 Lunch</li>
 <li>13:30~18:00 開発</li>
@@ -638,16 +620,14 @@ Internal Sync
 <li>ProductManager/Designerが意図通り動作するか確認</li>
 <li>問題なければ受け入れ／問題があればDeveloperに問題点を伝えてDeveloperが修正</li>
 </ol>
-<h3 id=バックログの例>
-バックログの例
-<a class=anchor href=#%e3%83%90%e3%83%83%e3%82%af%e3%83%ad%e3%82%b0%e3%81%ae%e4%be%8b>#</a>
-</h3>
+<blockquote>
+<p><strong>バックログの例</strong></p>
 <p><img src=productBackLog1.png alt=productbacklog1></p>
-<h3 id=イテレーションで完了したポイント数とベロシティの遷移の例>
-イテレーションで完了したポイント数とベロシティの遷移の例
-<a class=anchor href=#%e3%82%a4%e3%83%86%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%81%a7%e5%ae%8c%e4%ba%86%e3%81%97%e3%81%9f%e3%83%9d%e3%82%a4%e3%83%b3%e3%83%88%e6%95%b0%e3%81%a8%e3%83%99%e3%83%ad%e3%82%b7%e3%83%86%e3%82%a3%e3%81%ae%e9%81%b7%e7%a7%bb%e3%81%ae%e4%be%8b>#</a>
-</h3>
+</blockquote>
+<blockquote>
+<p><strong>イテレーションで完了したポイント数とベロシティの遷移の例</strong></p>
 <p><img src=productBackLog2.jpg alt=productbacklog2></p>
+</blockquote>
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
@@ -666,8 +646,6 @@ Internal Sync
 <li><a href=#イテレーション開発の基本的な考え方>イテレーション開発の基本的な考え方</a>
 <ul>
 <li><a href=#ユーザーストーリー作成から受け入れまでの流れ>ユーザーストーリー作成から受け入れまでの流れ</a></li>
-<li><a href=#バックログの例>バックログの例</a></li>
-<li><a href=#イテレーションで完了したポイント数とベロシティの遷移の例>イテレーションで完了したポイント数とベロシティの遷移の例</a></li>
 </ul>
 </li>
 </ul>
