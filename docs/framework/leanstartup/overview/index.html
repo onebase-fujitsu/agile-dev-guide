@@ -2,12 +2,12 @@
 <head>
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="Scoping # プロジェクトの開始にあたって以下を確認し、関係者で共有理解を得ます。 ビジネスゴール プロダクトの概要 プロダクトの特性 プロダクトの競合 また、">
-<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="Scoping">
-<meta property="og:description" content="Scoping # プロジェクトの開始にあたって以下を確認し、関係者で共有理解を得ます。 ビジネスゴール プロダクトの概要 プロダクトの特性 プロダクトの競合 また、">
+<meta name=description content="リーンスタートアップアジャイルの流れ # リーンスタートアップアジャイルでは、ユーザーに対する仮説検証を繰り返しながら、アジリティを持ってプロダ">
+<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="リーンスタートアップアジャイルの流れ">
+<meta property="og:description" content="リーンスタートアップアジャイルの流れ # リーンスタートアップアジャイルでは、ユーザーに対する仮説検証を繰り返しながら、アジリティを持ってプロダ">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/scoping/"><meta property="article:section" content="docs">
-<title>Scoping | Fujitsu Agile Development Guide</title>
+<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/overview/"><meta property="article:section" content="docs">
+<title>リーンスタートアップアジャイルの流れ | Fujitsu Agile Development Guide</title>
 <link rel=manifest href=/agile-dev-guide/manifest.json>
 <link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon>
 <link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
@@ -190,11 +190,11 @@
 <li>
 <input type=checkbox id=section-e99c955bf75208a72cc409dac3a52e06 class=toggle checked>
 <label for=section-e99c955bf75208a72cc409dac3a52e06 class="flex justify-between">
-<a role=button>リーンスタートアップ</a>
+<a role=button>リーンスタートアップアジャイル</a>
 </label>
 <ul>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/scoping/ class=active>Scoping</a>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/overview/ class=active>リーンスタートアップアジャイルの流れ</a>
 </li>
 <li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/productvision/>プロダクトビジョン / バリュープロポジション</a>
@@ -204,11 +204,11 @@
 <li>
 <input type=checkbox id=section-9be0117e86ea19505cc5ceb0d72e959e class=toggle>
 <label for=section-9be0117e86ea19505cc5ceb0d72e959e class="flex justify-between">
-<a role=button>モダナイゼーション</a>
+<a role=button>モダナイゼーションアジャイル</a>
 </label>
 <ul>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/overview/>モダナイゼーションの流れ</a>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/overview/>モダナイゼーションアジャイルの流れ</a>
 </li>
 <li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/organization/>体制・役割</a>
@@ -448,34 +448,242 @@
 <label for=menu-control>
 <img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu>
 </label>
-<strong>Scoping</strong>
+<strong>リーンスタートアップアジャイルの流れ</strong>
 <label for=toc-control>
 <img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents">
 </label>
 </div>
 <aside class="hidden clearfix">
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#pre-scoping>Pre-Scoping</a></li>
+<li><a href=#scoping>Scoping</a></li>
+<li><a href=#discovery--framing>Discovery & Framing</a>
+<ul>
+<li><a href=#discovery>Discovery</a></li>
+<li><a href=#framing>Framing</a></li>
+</ul>
+</li>
+<li><a href=#inception>Inception</a></li>
+<li><a href=#development>Development</a></li>
+<li><a href=#outception>Outception</a></li>
+</ul>
+</nav>
 </aside>
 </header>
-<article class=markdown><h1 id=scoping>
+<article class=markdown><h1 id=リーンスタートアップアジャイルの流れ>
+リーンスタートアップアジャイルの流れ
+<a class=anchor href=#%e3%83%aa%e3%83%bc%e3%83%b3%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%e3%82%a2%e3%82%b8%e3%83%a3%e3%82%a4%e3%83%ab%e3%81%ae%e6%b5%81%e3%82%8c>#</a>
+</h1>
+<p>リーンスタートアップアジャイルでは、ユーザーに対する仮説検証を繰り返しながら、アジリティを持ってプロダクトを開発し続ける「リーンXP」の開発手法を、「バランスチーム」の中で実践します。</p>
+<ul>
+<li>リーンXP
+<ul>
+<li>リーンスタートアップとユーザー中心設計のプラクティスにより、ユーザーに対する仮説検証を繰り返して、無駄なもの（＝ユーザーに使われないもの）を作らない</li>
+<li>エクストリーム・プログラミング（XP）のプラクティスにより、高品質で変化に強いソフトウェアを作る</li>
+</ul>
+</li>
+<li>バランスチーム
+<ul>
+<li>ビジネス部門の開発への参画、メンバー間のフラットかつ頻繁なコラボレーションによる真のアジリティを獲得する</li>
+</ul>
+</li>
+</ul>
+<p><img src=leanstartupagile.jpg alt=leanstartupagile></p>
+<p>プロジェクトの開始前にScoping（必要に応じてPre-Scoping）を行い概要を理解した上で、プロジェクトの開始後に最初の4週間のDiscovery & Framingで開発するプロダクトを計画し、5週目から実際に開発を行います。</p>
+<p><img src=df.jpg alt=df></p>
+<p>開発開始以降は、プロダクトビジョン実現を目指し、プロダクトを成長させる戦略を決めて、検証→学ぶ→作るのサイクルを繰り返します。</p>
+<p><img src=cycle.jpg alt=cycle></p>
+<h2 id=pre-scoping>
+Pre-Scoping
+<a class=anchor href=#pre-scoping>#</a>
+</h2>
+<p>Pre-Scopingでは、Scopingの前にプロジェクトの開始前に事前に検討／調査している内容についてプロジェクトの参加者で共有します。
+Scopingで円滑にミーティングを進められるように事前に情報をインプットします。</p>
+<h2 id=scoping>
 Scoping
 <a class=anchor href=#scoping>#</a>
-</h1>
-<p>プロジェクトの開始にあたって以下を確認し、関係者で共有理解を得ます。</p>
+</h2>
+<p>Scopingでは、プロジェクトの開始にあたって関係者が集まり以下を整理し、理解を深めます。</p>
 <ul>
-<li>ビジネスゴール</li>
-<li>プロダクトの概要</li>
-<li>プロダクトの特性</li>
-<li>プロダクトの競合</li>
+<li>ビジネスゴール
+<ul>
+<li>ビジネスの目標とKPI</li>
+</ul>
+</li>
+<li>プロダクト概要
+<ul>
+<li>ユーザーの業務プロセス</li>
+<li>ユーザーに提供する価値</li>
+<li>システムの構成</li>
+</ul>
+</li>
+<li>競合
+<ul>
+<li>競合他社の情報</li>
+<li>プロダクトの優位性</li>
+</ul>
+</li>
 </ul>
 <p><img src=scoping1.png alt=共有事項></p>
-<p>また、プロジェクトにおけるリスクの抽出も行います。</p>
-<p><em>ユーザーのアウトカム</em></p>
-<p><img src=scoping2.jpg alt=ユーザーのアウトカム></p>
-<p><em>業務プロセス</em></p>
-<p><img src=scoping3.jpg alt=業務プロセス></p>
-<p><em>システム構成</em></p>
-<p><img src=scoping4.jpg alt=システム構成></p>
+<p><img src=scoping2.jpg alt=ユーザーのアウトカム>
+<img src=scoping3.jpg alt=業務プロセス>
+<img src=scoping4.jpg alt=システム構成></p>
+<p>また、プロジェクトにおけるリスクの抽出を行い、アクションを検討します。</p>
+<a href=/agile-dev-guide/docs/team/activities/riskmitigations/ class=book-btn>
+Risks & Mitigations
+</a>
+<h2 id=discovery--framing>
+Discovery & Framing
+<a class=anchor href=#discovery--framing>#</a>
+</h2>
+<p>Discovery & Framing(D&F)では、プロダクトのアイデアを調査および検証して、プロダクトの開発に必要な情報を取得します。
+検証結果に基づいて、プロダクトリスクを軽減するために優先すべき機能を定義します。
+開発着手して以降もこれらのプロセスは継続して繰り返していきます。</p>
+<p>また、開発に入る前に、プロダクトのビジョンとバリュープロポジション（ユーザーへの提供価値）を改めて策定し、直近のゴールを定めます。</p>
+<p>
+<a href=/agile-dev-guide/docs/framework/leanstartup/productvision/ class=book-btn>
+プロダクトビジョン / バリュープロポジション
+</a>
+<a href=/agile-dev-guide/docs/team/practices/okrs/ class=book-btn>
+OKRs
+</a>
+</p>
+<h3 id=discovery>
+Discovery
+<a class=anchor href=#discovery>#</a>
+</h3>
+<p>Discoveryでは、プロダクトのビジネスケースとターゲットユーザーを深く理解し、優先度の高い課題を定義します。</p>
+<ul>
+<li>ユーザーへのGenerativeなリサーチを通して、ユーザーの業務を理解し、アイデアを抽出する</li>
+<li>プロダクトに関わる登場人物の関係を理解する（ペルソナ・エコシステム）</li>
+<li>プロダクトによる利害関係者、及び、競合他社や製品の分析を行い、ビジネスモデルを理解する</li>
+<li>プロダクトの技術的な実現性を評価する</li>
+</ul>
+<a href=/agile-dev-guide/docs/designer/practices/persona/ class=book-btn>
+ペルソナ
+</a>
+<h3 id=framing>
+Framing
+<a class=anchor href=#framing>#</a>
+</h3>
+<p>Framingでは、ユーザー、ビジネス、技術スタックに対してさらに理解を深め、課題を解決する優先度の高い機能を絞り込みます。</p>
+<ul>
+<li>ターゲットユーザーの行動や振る舞い、ニーズ、および目標の概要を理解する</li>
+<li>プロダクトのユースケース（シナリオ）を理解する</li>
+<li>プロダクトのデザインを決めるにあたっての基本的な理念（デザイン原則）を定義する</li>
+<li>ワイヤーフレームなどで画面の大まかなレイアウトや主な動きを理解する</li>
+<li>ユーザーへのEvaluativeおよびUsabilityのリサーチを通して、ワイヤーフレームやシナリオを利用してユーザー価値を実現できるかテストを行う</li>
+<li>機能の優先度を整理し、MVPを定義する</li>
+<li>プロダクトの基本的なアプリケーション構造の方針を検討する</li>
+</ul>
+<p>
+<a href=/agile-dev-guide/docs/designer/practices/persona/ class=book-btn>
+ペルソナ
+</a>
+<a href=/agile-dev-guide/docs/designer/practices/scenario/ class=book-btn>
+シナリオ
+</a>
+<a href=/agile-dev-guide/docs/designer/practices/researchplanning/ class=book-btn>
+リサーチ計画
+</a>
+<a href=/agile-dev-guide/docs/designer/practices/prototyping/ class=book-btn>
+プロトタイピング
+</a>
+<a href=/agile-dev-guide/docs/designer/practices/researchaction/ class=book-btn>
+リサーチ
+</a>
+<a href=/agile-dev-guide/docs/productmanager/practices/userstorymapping/ class=book-btn>
+ユーザーストーリーマッピング
+</a>
+<a href=/agile-dev-guide/docs/productmanager/practices/mvp/ class=book-btn>
+MVP
+</a>
+</p>
+<h2 id=inception>
+Inception
+<a class=anchor href=#inception>#</a>
+</h2>
+<p>Discovery & Framing後にプロダクトを本格的に開発していくにあたって、チーム全員のプロダクトに関する理解を深めるために、Inceptionを実施します。
+ゴールを再確認し、D&Fでのアップデート内容や今後の予定について共有します。
+また、プロジェクトにおけるリスクの抽出を行い、アクションを検討します。</p>
+<blockquote>
+<p><strong>アジェンダ例</strong></p>
+<ul>
+<li>PointBの確認</li>
+<li>アップデート内容の共有
+<ul>
+<li>ペルソナ</li>
+<li>デザイン原則</li>
+<li>デザイン案</li>
+</ul>
+</li>
+<li>リサーチ・ロードマップの共有
+<ul>
+<li>ペルソナ毎に検証したい仮説</li>
+<li>インタビュー・スケジュール</li>
+</ul>
+</li>
+<li>ゴールの再確認
+<ul>
+<li>プロダクトの方向性</li>
+<li>ビジネスゴール・プロダクトゴール・直近のゴールの振り返り</li>
+</ul>
+</li>
+<li>プロダクト・ウォークスルーとストーリーのポインティング
+<ul>
+<li>現状のビルドの共有</li>
+<li>ストーリーのポインティング（IPM）</li>
+</ul>
+</li>
+<li>Risk & Mitigations</li>
+<li>レトロ</li>
+</ul>
+</blockquote>
+<a href=/agile-dev-guide/docs/team/activities/riskmitigations/ class=book-btn>
+Risks & Mitigations
+</a>
+<h2 id=development>
+Development
+<a class=anchor href=#development>#</a>
+</h2>
+<p>ユーザーへのインタビューなどで検証できた自信度の高いものを、優先度が高いものから順に各イテレーションで開発していきます。<br>
+MVPを作ったら、プロダクトを実際にユーザーに使ってもらってテストを行い、学びを得て、次の開発を続けていきます。</p>
+<a href=/agile-dev-guide/docs/team/workstyle/#%e3%82%a4%e3%83%86%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e9%96%8b%e7%99%ba%e3%81%ae%e5%9f%ba%e6%9c%ac%e7%9a%84%e3%81%aa%e8%80%83%e3%81%88%e6%96%b9 class=book-btn>
+イテレーション開発
+</a>
+<h2 id=outception>
+Outception
+<a class=anchor href=#outception>#</a>
+</h2>
+<p>開発期間を振り返って以降に継続的に開発を行っていくために、Outceptionを実施します。<br>
+開発の区切りでOutception / Inceptionを行い、定期的に振り返りとプロジェクト関係者への情報共有を行っていきます。</p>
+<blockquote>
+<p><strong>アジェンダ例</strong></p>
+<ul>
+<li>PointBの確認</li>
+<li>開発期間の振り返り
+<ul>
+<li>ゴール（OKR）の振り返り</li>
+<li>プロダクトのデモ</li>
+<li>プロダクトによるユーザーテストの結果共有</li>
+<li>Q&A</li>
+</ul>
+</li>
+<li>プロダクトの今後の予定
+<ul>
+<li>プロダクトロードマップの共有</li>
+<li>今後開発予定のエピック／機能と優先順位</li>
+<li>Q&A</li>
+</ul>
+</li>
+<li>Risk & Mitigations</li>
+<li>レトロ</li>
+</ul>
+</blockquote>
+<a href=/agile-dev-guide/docs/team/activities/retro/ class=book-btn>
+レトロ
+</a>
 </article>
 <footer class=book-footer>
 <div class="flex flex-wrap justify-between">
@@ -488,7 +696,21 @@ Scoping
 </div>
 <aside class=book-toc>
 <div class=book-toc-content>
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#pre-scoping>Pre-Scoping</a></li>
+<li><a href=#scoping>Scoping</a></li>
+<li><a href=#discovery--framing>Discovery & Framing</a>
+<ul>
+<li><a href=#discovery>Discovery</a></li>
+<li><a href=#framing>Framing</a></li>
+</ul>
+</li>
+<li><a href=#inception>Inception</a></li>
+<li><a href=#development>Development</a></li>
+<li><a href=#outception>Outception</a></li>
+</ul>
+</nav>
 </div>
 </aside>
 </main>
