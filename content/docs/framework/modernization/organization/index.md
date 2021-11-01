@@ -1,7 +1,7 @@
 ---
 title: "体制・役割"
 weight: 2
-bookToc: true
+bookToc: false
 ---
 
 # 体制・役割

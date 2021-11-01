@@ -1,5 +1,5 @@
 ---
-title: "リーンスタートアップ"
+title: "リーンスタートアップアジャイル"
 weight: 2
 bookFlatSection: false
 bookToc: true
