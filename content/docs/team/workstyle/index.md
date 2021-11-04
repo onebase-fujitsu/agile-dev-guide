@@ -37,25 +37,32 @@ bookToc: true
 チームは、一週間単位のイテレーションで、開発を実施します。
 IPMで開発の見通しを立てて、デイリースタンドアップで日々の状況の確認、金曜日にレトロスペクティブ（振り返り）を行って翌週にさらに良いチームになるよう改善を続けて行きます。
 
-- **[イテレーション](#イテレーション開発の基本的な考え方)**
+- **イテレーション**
     - ユーザーリサーチを通じてプロダクトに何か必要かを学びます。
     - 必要と分かったものはユーザストーリーを執筆し、優先度を付けます。
     - ペアプロ/TDDで高品質なプロダクトを開発します。
     - チームが同じ場所に集い、頻繫にコミュニケーションを行います。
-- **[Pre-IPM(Iteration Planning Meeting)](../activities/preipm)**
+- **Pre-IPM(Iteration Planning Meeting)**
     - IPMの準備として実施します。
     - ドラフト版のユーザーストーリーに対してDeveloper観点で確認します。
-- **[IPM(Iteration Planning Meeting)](../activities/ipm)**
+- **IPM(Iteration Planning Meeting)**
     - 開発するユーザーストーリーの内容をチームに共有します。
     - コミュニケーションにより、ストーリーについて理解を深めます。
     - ユーザーストーリーの複雑さの見積ります。
-- **デイリースタンドアップ ([全体スタンドアップ](../activities/officestandup)/[チームスタンドアップ](../activities/teamstandup))**
+- **デイリースタンドアップ（全体スタンドアップ/チームスタンドアップ）**
     - その名の通り、毎朝立ちながら実施する数分のミーティングです。
     - 昨日やったこと、今日やること、困っていることを共有します。
-- **[レトロスペクティブ](../activities/retro)**
+- **レトロスペクティブ**
     - 金曜夕方に行う、チームのための時間です。
     - お酒を飲みながら、今週よかったこと、よくなかった点を遠慮なく出し合います。
     - 改善に向けたアクションを決めます。
+
+{{< button relref="#イテレーション開発の基本的な考え方" >}}イテレーション{{< /button >}}
+{{< button relref="../activities/preipm" >}}Pre-IPM{{< /button >}}
+{{< button relref="../activities/ipm" >}}IPM{{< /button >}}
+{{< button relref="../activities/officestandup" >}}全体スタンドアップ{{< /button >}}
+{{< button relref="../activities/teamstandup" >}}チームスタンドアップ{{< /button >}}
+{{< button relref="../activities/retro" >}}レトロスペクティブ{{< /button >}}
 
 これらを基本としつつ、プロジェクトの体制やチームの状況によって以下を普段のサイクルに取り入れます。
 
@@ -69,7 +76,7 @@ IPMで開発の見通しを立てて、デイリースタンドアップで日�
 > 例1
 > - 09:06~09:15 全体スタンドアップ＋チームスタンドアップ
 > - 09:15~09:30 Developer+Infraのタスク確認
-> - 09:30~09:40 ProductManager+Designerのタスク確認
+> - 09:30~09:40 Product Manager+Designerのタスク確認
 > - 09:30~12:30 開発
 > - 12:30~13:30 Lunch
 > - 13:30~18:00 開発
@@ -93,15 +100,15 @@ IPMで開発の見通しを立てて、デイリースタンドアップで日�
 
 ![developmentFlow](developmentFlow.jpg)
 
-1. ProductManager/Designerがユーザーストーリーを作成（ドラフト版）
+1. Product Manager/Designerがユーザーストーリーを作成（ドラフト版）
 1. Pre-IPMでユーザーストーリーをDeveloperの観点で確認（必ず会話）
-1. Pre-IPMでのフィードバックをProductManager/Designerがユーザーストーリーに反映
+1. Pre-IPMでのフィードバックをProduct Manager/Designerがユーザーストーリーに反映
 1. IPMでユーザーストーリーに対して、Developer全員が実装イメージを合わせて複雑さの観点で見積もり
-1. IPMでProductManager/Designerが開発の複雑さを理解し、必要であればユーザーストーリーを細分化
+1. IPMでProduct Manager/Designerが開発の複雑さを理解し、必要であればユーザーストーリーを細分化
 1. 開発開始
-1. 開発中に不明点や確認事項が出たらProductManager/Designerと随時会話
+1. 開発中に不明点や確認事項が出たらProduct Manager/Designerと随時会話
 1. 開発完了
-1. ProductManager/Designerが意図通り動作するか確認
+1. Product Manager/Designerが意図通り動作するか確認
 1. 問題なければ受け入れ／問題があればDeveloperに問題点を伝えてDeveloperが修正
 
 > **バックログの例**

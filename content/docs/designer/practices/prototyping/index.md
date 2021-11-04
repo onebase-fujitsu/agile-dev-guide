@@ -14,7 +14,7 @@ bookToc: true
 - シナリオに沿って、画面遷移と各画面のレイアウトを検討  
   - 満たすべき要求を整理し、各自ラフスケッチを作りシェアしても良い。
 - 大まかな全体像ができたら、ツールでUIを制作する
-- 適宜ProductManager、Developerとシェア
+- 適宜Product Manager、Developerとシェア
 
 ## プロトタイピングのポイント
 

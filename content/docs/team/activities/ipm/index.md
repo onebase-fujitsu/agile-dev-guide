@@ -8,7 +8,7 @@ bookToc: true
 
 ## 概要
 IPM(Iteration Planning Meeting)は、各ユーザーストーリーの見積もりを行って次のイテレーションの計画を立てるミーティングです。
-ProductManagerが進行し、ProductManagerとDesignerから提供価値の説明を行い、Developerが全員で見積もりを行います。
+Product Managerが進行し、Product ManagerとDesignerから提供価値の説明を行い、Developerが全員で見積もりを行います。
 
 ![IPM](IPM.jpg)
 
@@ -17,7 +17,7 @@ ProductManagerが進行し、ProductManagerとDesignerから提供価値の説�
 また、見積もりを行って一週間〜二週間先のイテレーションでどの程度ユーザーストーリーを完了できるか見込みを立てます。
 
 この計画は次のイテレーションで「実施しなければならない」ノルマではありません。  
-実装の計画を立てることによって、ProductManagerやDesignerがプロダクトで新たな価値を提供するためにいつまでに何の準備をすれば良いか、
+実装の計画を立てることによって、Product ManagerやDesignerがプロダクトで新たな価値を提供するためにいつまでに何の準備をすれば良いか、
 また、早く価値を提供するために優先順位の見直しが必要か、を判断できるようになります。  
 また、小さく一貫したサイズのユーザーストーリーを実装し続けられれば、通常は各イテレーションで同じ量の作業を進められますが、
 １イテレーションで進んだストーリーのポイント数が予定（その時点でのベロシティ）と乖離している場合には改善の余地があると考えられ、
@@ -40,7 +40,7 @@ ProductManagerが進行し、ProductManagerとDesignerから提供価値の説�
 
 1. ストーリーの説明
 
-   各ストーリーについてProductManagerとDesignerから説明を行います。
+   各ストーリーについてProduct ManagerとDesignerから説明を行います。
    - ストーリーのタイトルの読み上げ
    - ユーザーに提供する価値の説明
    - 受け入れの基準の説明

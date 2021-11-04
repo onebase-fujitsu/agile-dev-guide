@@ -38,6 +38,6 @@ bookToc: true
 - 個別に共有・議論したいことがある場合には別途時間を取って行う
 - 自分が話そうとしたことをすでに前の人から共有されている場合「カバーされています」と言う
 - チームの共有タスクの確認に全メンバーが必要がない場合には、チームスタンドアップを終了後にメンバーを分けて実施する
-  - InfraチームとDeveloperの共有タスク: Infraチーム + Developer + ProductManager
-  - ProductManagerとDesignerの共有タスク: ProductManager + Designer
+  - InfraチームとDeveloperの共有タスク: Infraチーム + Developer + Product Manager
+  - Product ManagerとDesignerの共有タスク: Product Manager + Designer
 {{< /hint >}}

@@ -27,7 +27,7 @@ bookToc: true
 ## ペルソナのポイント
 - 必要なメンバーで一緒に作る
 
-  Designerだけで作業せず、ProductManagerやユーザーをよく知る人と一緒にワークして作成します。
+  Designerだけで作業せず、Product Managerやユーザーをよく知る人と一緒にワークして作成します。
 
 - 1時間程度で仕上げる
 

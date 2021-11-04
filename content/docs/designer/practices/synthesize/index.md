@@ -30,7 +30,7 @@ bookToc: true
 
 ## シンセサイズのポイント
 
-- ProductManagerとDesignerで行う
+- Product ManagerとDesignerで行う
 - インサイトは、チームが知らなかった新しい発見や気づき（ユーザーの本音）のこと
 - 「対応する」ことになったニーズは次のアクションアイテムまで落とし込む
   - 誰が何をするのか

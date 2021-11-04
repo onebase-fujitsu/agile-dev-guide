@@ -118,21 +118,27 @@ Swift Methodは、巨大で複雑な（モノリスな）システムを近代�
 ![Swiftの流れ](SwiftOverview.jpg)
 
 ### 分析
-1. [Event Storming](../eventstorming)  
+1. Event Storming  
    ビジネスニーズを達成するためにどんなシステムを作るべきか認識を揃えます
-1. [Boris](../boris)  
+1. Boris  
    サービス（候補）間の関係性を可視化します
-1. [SnapE](../snape)  
+1. SnapE  
    各サービス（候補）の要素について認識を合わせます
-1. [Slices](../slices)  
+1. Slices  
    開発着手するシナリオを選定します
-1. [Tech Choice](../techchoice)  
+1. Tech Choice  
    シナリオに着手するために必要な技術選定をします
 
+{{< button relref="../eventstorming" >}}Event Storming{{< /button >}}
+{{< button relref="../boris" >}}Boris{{< /button >}}
+{{< button relref="../snape" >}}SnapE{{< /button >}}
+{{< button relref="../slices" >}}Slices{{< /button >}}
+{{< button relref="../techchoice" >}}Tech Choice{{< /button >}}
+
 ### 開発
-1. [Pre-IPM]({{< ref "/docs/team/activities/preipm" >}})  
+1. Pre-IPM  
   Storyのブラッシュアップをします
-1. [IPM]({{< ref "/docs/team/activities/ipm" >}})  
+1. IPM  
   Storyの複雑性をチームで判断します
 1. Build  
   モノを作り上げます
@@ -140,6 +146,9 @@ Swift Methodは、巨大で複雑な（モノリスな）システムを近代�
   できたモノを確認しSwiftでのOutputに対してupdateの有無を判断します
 
 開発の流れは[チームの働き方]({{< ref "/docs/team/workstyle#イテレーション開発の基本的な考え方" >}})に則ります。
+
+{{< button relref="/docs/team/activities/preipm" >}}Pre-IPM{{< /button >}}
+{{< button relref="/docs/team/activities/ipm" >}}IPM{{< /button >}}
 
 {{< hint info >}}
 **Tips**
@@ -152,5 +161,3 @@ Swift Methodは、巨大で複雑な（モノリスな）システムを近代�
 **参考資料**
 - [Tanzu Practices Swift Method](https://tanzu.vmware.com/developer/practices/swift-method/)
 {{< /hint >}}
-
-{{< button relref="../eventstorming" >}}Event Storming{{< /button >}}
