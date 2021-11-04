@@ -197,6 +197,9 @@
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/overview/>リーンスタートアップアジャイルの流れ</a>
 </li>
 <li>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/organization/>体制・役割</a>
+</li>
+<li>
 <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/productvision/>プロダクトビジョン / バリュープロポジション</a>
 </li>
 </ul>
@@ -382,15 +385,15 @@
 </ul>
 </li>
 <li class=book-section-flat>
-<span>ProductManager編</span>
+<span>Product Manager編</span>
 <ul>
 <li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/overview/>ProductManagerとは</a>
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/overview/>Product Managerとは</a>
 </li>
 <li>
 <input type=checkbox id=section-8fbae8de73ef8326d3c4d80af4144c79 class=toggle>
 <label for=section-8fbae8de73ef8326d3c4d80af4144c79 class="flex justify-between">
-<a role=button>ProductManagerのプラクティス</a>
+<a role=button>Product Managerのプラクティス</a>
 </label>
 <ul>
 <li>
@@ -513,8 +516,8 @@
     <span style=color:#66d9ef>lateinit</span> <span style=color:#66d9ef>var</span> restTemplate: TestRestTemplate
 
     <span style=color:#a6e22e>@Test</span>
-    <span style=color:#66d9ef>fun</span> <span style=color:#960050;background-color:#1e0010>タスク一覧を取得できる()</span> <span style=color:#960050;background-color:#1e0010>{</span>
-        <span style=color:#a6e22e>val</span> header = HttpHeaders()
+    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>タスク一覧を取得できる</span>() {
+        <span style=color:#66d9ef>val</span> header = HttpHeaders()
         header.contentType = MediaType.APPLICATION_JSON
         <span style=color:#66d9ef>val</span> response = restTemplate.exchange(<span style=color:#e6db74>&#34;/todos&#34;</span>, HttpMethod.GET, HttpEntity(<span style=color:#66d9ef>null</span>, header), String<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java)
         <span style=color:#66d9ef>val</span> mapper = jacksonObjectMapper()
@@ -524,8 +527,8 @@
     }
 
     <span style=color:#a6e22e>@Test</span>
-    <span style=color:#66d9ef>fun</span> <span style=color:#960050;background-color:#1e0010>タスクを新規作成できる()</span> <span style=color:#960050;background-color:#1e0010>{</span>
-        <span style=color:#a6e22e>val</span> newTodoJson = JSONObject()
+    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>タスクを新規作成できる</span>() {
+        <span style=color:#66d9ef>val</span> newTodoJson = JSONObject()
         newTodoJson.put(<span style=color:#e6db74>&#34;title&#34;</span>, <span style=color:#e6db74>&#34;test title&#34;</span>)
         <span style=color:#66d9ef>val</span> header = HttpHeaders()
         header.contentType = MediaType.APPLICATION_JSON
@@ -712,8 +715,8 @@ Repository層
     <span style=color:#66d9ef>lateinit</span> <span style=color:#66d9ef>var</span> restTemplate: TestRestTemplate
 
     <span style=color:#a6e22e>@Test</span>
-    <span style=color:#66d9ef>fun</span> <span style=color:#960050;background-color:#1e0010>タスク一覧を取得できる()</span> <span style=color:#960050;background-color:#1e0010>{</span>
-        <span style=color:#a6e22e>val</span> header = HttpHeaders()
+    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>タスク一覧を取得できる</span>() {
+        <span style=color:#66d9ef>val</span> header = HttpHeaders()
         header.contentType = MediaType.APPLICATION_JSON
         <span style=color:#66d9ef>val</span> response = restTemplate.exchange(<span style=color:#e6db74>&#34;/todos&#34;</span>, HttpMethod.GET, HttpEntity(<span style=color:#66d9ef>null</span>, header), String<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java)
         <span style=color:#66d9ef>val</span> mapper = jacksonObjectMapper()
@@ -723,8 +726,8 @@ Repository層
     }
 
     <span style=color:#a6e22e>@Test</span>
-    <span style=color:#66d9ef>fun</span> <span style=color:#960050;background-color:#1e0010>タスクを新規作成できる()</span> <span style=color:#960050;background-color:#1e0010>{</span>
-        <span style=color:#a6e22e>val</span> newTodoJson = JSONObject()
+    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>タスクを新規作成できる</span>() {
+        <span style=color:#66d9ef>val</span> newTodoJson = JSONObject()
         newTodoJson.put(<span style=color:#e6db74>&#34;title&#34;</span>, <span style=color:#e6db74>&#34;test title&#34;</span>)
         <span style=color:#66d9ef>val</span> header = HttpHeaders()
         header.contentType = MediaType.APPLICATION_JSON
