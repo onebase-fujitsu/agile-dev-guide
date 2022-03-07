@@ -1,6 +1,6 @@
 ---
 title: "ケーススタディ"
-weight: 10
+weight: 8
 bookFlatSection: false
 bookToc: true
 bookCollapseSection: true

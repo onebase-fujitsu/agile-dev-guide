@@ -1,6 +1,6 @@
 ---
 title: "推奨書籍"
-weight: 9
+weight: 9.5
 bookToc: true
 ---
 
