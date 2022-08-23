@@ -162,27 +162,7 @@ test('タスクを作成することができる', async t => {
 ここまで、簡単なSPAのアプリケーションを1からテスト駆動開発で作成し、バックエンドのAPIと連携させ、
 一連のプロセスをE2Eテストするというところまで来ました。
 
-まだReduxのState管理をするにあたって、fetchした内容をそのままStateに入れていますが、
-本当であれば [Normalizr.js](https://github.com/paularmstrong/normalizr) で正規化して入れるべきです。
-詳しくは [Redux Style Guide](https://redux.js.org/style-guide/style-guide) を読んでみてください。
-
-ReduxのState管理方法も規約がありません。このままでは開発者によって無造作にStateが作られ、管理できなくなってしまうでしょう。
-[Ducks Pattern](https://medium.com/@scbarrus/the-ducks-file-structure-for-redux-d63c41b7035c) や
-[Re-Ducks Pattern](https://github.com/erikras/ducks-modular-redux) といったReduxの管理方法のパターンがありますので、
-そういったパターンに従うようにチーム内で合意をとるようにすると良いでしょう。
-
-一般的には以下のようなState管理をするとよいと言われています。
-
-- Domain Data
-  - バックエンドからfetchしたアプリケーションが表示したり変更したりするデータ
-- App State
-  - アプリケーション独自の振る舞いのためのデータ
-  - データの選択状態やデータフェッチのローディング状態
-- UI State
-  - 現在の表示方法のためのデータ
-  - モーダルが開かれているかどうかや、通知バーの状態など
-
-また、Componentの分割粒度も曖昧なままです。
+しかし、Componentの分割粒度も曖昧なままです。
 複数人で開発をすすめるとどうしても開発者によってComponentの分割粒度にばらつきがでます。
 意図せず巨大なComponentができてしまうかもしれません。
 そこで取り入れたいのが [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) の考え方です。
@@ -194,7 +174,7 @@ ReduxのState管理方法も規約がありません。このままでは開発�
 **チーム開発において最も大事なのは規約です。**
 このハンズオンでも一番最初にやったのはeslintの設定でした。規約はとにかく大事です。
 
-コンポーネントの分割粒度はこうする、ReduxのState管理はこうする、バックエンドのAPIはこうするとチーム内でかならず合意形成をとり、
+コンポーネントの分割粒度はこうする、バックエンドのAPIはこうするとチーム内でかならず合意形成をとり、
 lintのように自動でチェックできるものはlintに規約を落とし込んでコードの品質を保つようにしてください。
 
 もし、コードの品質を保つことできないメンバーがいるようなら、チーム内で勉強会などを開くと良いです。

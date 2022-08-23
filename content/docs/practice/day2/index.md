@@ -9,45 +9,6 @@ bookToc: true
 2日目はClientがServerに対してHTTPリクエストを実行するところ、そして、Serverの初期設定をして簡単なAPIを作って見るところをやってみましょう。
 ここからだいぶ難しくなると思いますが、頑張っていきましょう。
 
-## Reduxの導入
-
-今回一番最初に`create-react-app`コマンドを実行したときtemplateにredux-typescriptをしていたのを覚えてますでしょうか。
-
-```
-npx create-react-app todo-app-client --template redux-typescript --use-npm
-```
-
-このtemplateにはすでに [redux-toolkit](https://redux-toolkit.js.org/) を使用するのに必要なモジュールが含まれています。
-[redux](https://redux.js.org/) は状態管理のライブラリですが、
-redux-toolkitはそれをReactで使用できるようにした [React-Redux](https://react-redux.js.org/) や、
-reduxを便利に使用するための仕組みを同梱したものです。
-
-Reduxについては公式のドキュメントを読んでください。Reduxは非常に難解なライブラリの1つですが、使いこなすと非常に強力です。
-ドキュメントも非常に量が多いですが、このセクションを始める前に最低限、以下を読んでおくことをおすすめします
-
-- [https://redux.js.org/tutorials/essentials/part-1-overview-concepts](https://redux.js.org/tutorials/essentials/part-1-overview-concepts)
-  - この記事を起因とする一連のRedux Essential
-- [https://redux-toolkit.js.org/usage/usage-with-typescript](https://redux-toolkit.js.org/usage/usage-with-typescript)
-- [https://redux.js.org/usage/writing-tests](https://redux.js.org/usage/writing-tests)
-- [https://redux.js.org/style-guide/style-guide](https://redux.js.org/style-guide/style-guide)
-  - ベストプラクティス。メチャクチャ大事。
-
-{{< hint info >}}
-**Reduxを最初から入れるべきか?**
-
-Reduxを最初からいれるべきかどうかというのは非常に議論が分かれる部分ですが、筆者は **Reduxは最初から入れるべき** という考えです。
-というのも、**どのようなアプリであっても遅かれ早かれスケールします。**
-
-Reduxの導入を嫌煙する理由に導入コストが大きいというものがあります。
-しかしRedux-Toolkitの登場によってRedux導入のコストはかなり低く、楽に導入できるようになりました。
-
-ある程度アプリが大きくなった状態で後からReduxを入れるのはかなり作業量が大きくなり難しいです。
-それなら最初からReduxを前提としてアプリを書いたほうがいいだろうという考えです。
-
-Redux導入のコストは楽になりましたが、学習コストは依然として高いままです（これはReactも）。
-導入の際はプロジェクトメンバに使い方を事前に学習してもらうなどして臨むようにすると良いでしょう。
-{{< /hint >}}
-
 ## 非同期通信のテストと実装
 
 ### 非同期通信のテスト
@@ -140,7 +101,12 @@ src配下にfeaturesというディレクトリを作成し、TodoApi.tsを作�
 ```typescript
 // TodoApi.ts
 import axios from 'axios'
-import {Todo} from '../stores/todoSlice'
+
+export interface Todo {
+  id: number
+  title: string
+  completed: boolean
+}
 
 export const getTodos = async () => {
   const response = await axios.get<Todo[]>('/todos')
@@ -148,212 +114,12 @@ export const getTodos = async () => {
 }
 ```
 
-また、src配下のstoresに`todoSlice.ts`というファイルを作りましょう。いったん、Todoのインタフェースだけ定義してあげます。
-
-```typescript
-// todoSlice.ts
-export interface Todo {
-  id: number
-  title: string
-  completed: boolean
-}
-```
-
 実装はこのようになりました。ひとまずこれでAPIのテストは通るはずです。
 テストが通ったのを確認したら次のステップに行きましょう。
 
-## Reducerのテストと実装
-
-さて、APIの利用準備が整ったらReducerを作っていきましょう。ReducerとはReduxのStateを変更する関数のことです。
-ReduxではStateを直接変更することは許されておらず、必ずReducerを通じて変更しなければなりません。
-
-先程、Todo一覧をGetする非同期処理を実装しましたが、その非同期処理を呼び、戻り地をStateに反映する処理を実装してみましょう。
-
-### Reducerの登録
-
-Redux-ToolkitではSliceという概念があります。これはStateとReducerを一纏めにしたものだと考えてください。
-まず、Reducerを作ります。
-
-先程作成したtodoSlice.tsに以下のように変更してください。
-
-```typescript
-// todoSlice.ts
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-
-export interface Todo {
-  id: number
-  title: string
-  completed: boolean
-}
-
-export const todoSlice = createSlice({
-  name: 'todos',
-  initialState: [] as Todo[],
-  reducers: {},
-})
-
-export default todoSlice
-```
-
-ひとまず機能は実装せず、StateとしてTodo[]の配列を保持するという設定だけ入れました。
-その上で、store.tsにこれを登録してあげます。
-
-```typescript
-// store.ts
-import {configureStore, ThunkAction, Action} from '@reduxjs/toolkit'
-import todoSlice from './todoSlice'   // 追記
-
-export const store = configureStore({
-  reducer: {
-    todos: todoSlice.reducer,     // 追記
-  },
-})
-
-export type AppDispatch = typeof store.dispatch
-export type RootState = ReturnType<typeof store.getState>
-export type AppThunk<ReturnType = void> = ThunkAction<
-        ReturnType,
-        RootState,
-        unknown,
-        Action<string>
-        >
-```
-
-これでReducerを使う準備が整いました。ではテストを書いていきましょう。
-
-### Reducerのテスト
-
-`__tests__`配下に`store`ディレクトリを作成し、`todoSlice.test.ts`を作成してください。
-Reducerは **変更前のStateに対して、Actionを実行し、変更後のStateを返す** 純粋な関数ですのでテストは非常に簡単に書くことができます。
-
-```typescript
-// todoSlice.test.ts
-import todoSlice, {getTodoAction} from "../../stores/todoSlice";
-
-describe("todo reducer", () => {
-  it("initial state", () => {
-    expect(todoSlice.reducer(undefined, {type: undefined})).toEqual([])
-  })
-
-  it('get todo is pending', async () => {
-    const action = {type: getTodoAction.pending.type}
-    const state = todoSlice.reducer([], action)
-    expect(state.length).toEqual(0)
-  })
-
-  it('get todo is fulfilled', async () => {
-    const action = {
-      type: getTodoAction.fulfilled.type, payload: [{
-        id: 1,
-        title: 'hoge',
-        completed: false
-      }]
-    }
-
-    const state = todoSlice.reducer([], action)
-    expect(state.length).toEqual(1)
-    expect(state[0].id).toEqual(1)
-    expect(state[0].title).toEqual('hoge')
-    expect(state[0].completed).toEqual(false)
-  })
-
-  it('get todo is rejected', async () => {
-    const action = {type: getTodoAction.rejected.type}
-    const state = todoSlice.reducer([], action)
-    expect(state.length).toEqual(0)
-  })
-})
-```
-
-4つのテストを実装しました。
-最初のテストはSliceを作ったとき最初の初期状態が空の配列になることを確認しています。
-
-残る3つはGet /Todoの非同期処理に関わるテストで上から順番に
-
-- 非同期処理が実行中はStateの状態は変化しない
-- 非同期処理が完了したら取得した内容がそのままStateに反映される
-- 非同期処理がエラーだったらStateの状態は変化しない
-
-ことを確認しているテストです。ここまで大丈夫でしょうか。
-
-pending、fulfilled、rejectedとは？となるかもしれませんが、
-これはRedux-Toolkitで非同期処理を実装するのに使う、
-[createAsyncThunk](https://redux-toolkit.js.org/api/createAsyncThunk) が自動で作成してくれるActionです。
-今回はgetTodoActionという名前のアクションを作成することにしました。
-
-このgetTodoActionはまだ実装されてませんが、先程featureに実装したAPIを呼び出すものになるのは明白ですので、
-`createAsyncThunk`を使用する前提でテストを記述しています。
-
-わからない所があれば都度公式のリファレンスやドキュメントを読んで理解してください。
-
-### Reducerの実装
-
-それではReducerを実装してみましょう。ReduxのReducerでは通常副作用のある（つまりasync/awaitを含むような）処理を記述することはできません。
-そこで、使われるのが [redux-thunk](https://github.com/reduxjs/redux-thunk) というmiddlewareです。
-createAsyncThunkを使うとThunkを使った処理が簡単に記述できます。
-
-```typescript
-// todoSlice.ts
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import {getTodos} from '../features/TodoApi'
-
-export interface Todo {
-  id: number
-  title: string
-  completed: boolean
-}
-
-export const getTodoAction = createAsyncThunk<Todo[]>(
-        'get /todos',
-        async (): Promise<Todo[]> => getTodos()
-)
-
-export const todoSlice = createSlice({
-  name: 'todos',
-  initialState: [] as Todo[],
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(getTodoAction.fulfilled, (state, action) => action.payload)
-  },
-})
-
-export default todoSlice
-```
-
-getTodoActionはこのように実装しました。
-```typescript
-export const getTodoAction = createAsyncThunk<Todo[]>(
-        'get /todos',
-        async (): Promise<Todo[]> => getTodos()
-)
-```
-
-createAsyncThunkで非同期のActionを作成し、その中で先程作ったgetTodo()を呼んでPromise<Todo[]>を返却するようにしています。
-作成したアクションをextraReducers（reducersではないので注意）に登録しているのが以下の部分です。
-```typescript
-export const todoSlice = createSlice({
-  name: 'todos',
-  initialState: [] as Todo[],
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(getTodoAction.fulfilled, (state, action) => action.payload)
-  },
-})
-```
-
-getTodoActionが正常に完了したときに新しいアクションをどうするかを記載しています。
-ここではstateがどのような状態であれ、getTodo()の戻り値(つまりaction.payload)を新しいstateとして返却するとしました。
-ひとまず、現状テストは通っているはずです。
-
-これでReducerの実装は終わりました。次に作成したSliceを使ってコンポーネントの描画をしてみましょう。
-
 ## タスク一覧表示コンポーネントのテストと実装
 
-Reduxを使うことによる最大の利点はコンポーネント間の依存を小さくし、
-**各コンポーネントを非常にシンプルな状態に保つことができること** です。
-
-これからタスク一覧のコンポーネントを作成しますが、このコンポーネントはStateの状態にしたがって画面を描画するだけになります。
-すなわちテストの実装も非常に簡単です。
+これからタスク一覧のコンポーネントを作成します。
 
 ### タスク一覧表示コンポーネントのテスト
 
@@ -361,18 +127,31 @@ __tests__/components配下にTodoList.test.tsxを作成しましょう。
 
 ```typescript jsx
 //TodoList.test.tsx
-import {cleanup, screen, render} from '@testing-library/react'
+import {render, screen} from '@testing-library/react'
+import TodoList from '../../components/TodoList'
+import MockAdapter from "axios-mock-adapter";
+import axios from "axios";
 
-describe('TodoList Component', () => {
-  afterEach(() => {
-    cleanup()
+describe('TodoList.tsx Component', () => {
+  let mock: MockAdapter
+
+  beforeEach(() => {
+    mock = new MockAdapter(axios)
   })
 
-  it('ステートが空ならリストも空', () => {
+  afterEach(() => {
+    mock.reset()
+  })
+
+  it('getTodosの戻り値が空ならリストも空', () => {
+    mock.onGet('/todos').reply(200, [])
+
     render(<TodoList />)
+
     expect(screen.getByRole('list').hasChildNodes()).toEqual(false)
   })
 })
+
 ```
 
 最初のテストはこのようにしてみました。これを実行してみましょう。
@@ -401,143 +180,117 @@ TodoListはまだ実装されていませんので、当然失敗するはずで
 
 ```typescript jsx
 // TodoList.tsx
-import {useSelector} from 'react-redux'
-import {RootState} from '../stores/store'
+import React, {useEffect, useState} from 'react'
+import {getTodos, Todo} from '../features/TodoApi'
 
 const TodoList = () => {
-  const todos = useSelector((state: RootState) => state.todos)
+  const [todos, setTodos] = useState<Todo[]>([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getTodos()
+      setTodos(response)
+    }
+    fetchData()
+  }, [])
 
   return (
-          <ul data-testid='TodoList'>
-            {todos.map((todo) => (
-                    <li key={todo.id}>{todo.title}</li>
-            ))}
-          </ul>
+    <ul data-testid='TodoList'>
+      {todos.map((todo) => (
+        <li key={todo.id}>{todo.title}</li>
+      ))}
+    </ul>
   )
 }
 
 export default TodoList
+
 ```
 
-useSelectorはReduxのStateから情報を引き出す処理です。ここではstate.todosを読み込んでます。
-読み込んだtodosは配列ですので、1件ずつ表示しているだけです。
-コンポーネントが非常にシンプルになっているかとおもいます。
+`useState()`は関数コンポーネントでstateを管理するためのReactが提供している関数です。
+さらに、`useEffect()`を利用し、画面描画時にtodosの中身にgetTodosの戻り値を詰めています。
 
-### Redux Connected Componentsのテスト
+また`useEffect()`で非同期処理を呼び出す場合は、直接関数を実行するとメモリーリークの原因となるため注意が必要です。
+今回は`useEffect()`内で非同期関数を定義し、それを実行することで回避しています。
+`useState()`や`useEffect()`について詳しく知りたい方は[こちら](https://ja.reactjs.org/docs/hooks-intro.html)を参照してください。
 
-さて、コンポーネントの実装は終わったので、これをテストしてみましょう。
-先程作成した、`TodoList.test.tsx`に`import TodoList from "../../components/TodoList";`を加えてテストを実行してみましょう。
+### リスト表示のテスト
 
-どうでしょう、成功したと思いきやまだ失敗しています。
-これはなぜかというと、このTodoListComponentは他のコンポーネントには依存してませんが、ReduxのStateに依存してますよね。
-
-一度index.tsxを見てみましょう。
-
-```typescript jsx
-import {StrictMode} from 'react'
-import ReactDOM from 'react-dom'
-import {Provider} from 'react-redux'
-import './index.css'
-import App from './App'
-import {store} from './stores/store'
-
-ReactDOM.render(
-  <StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </StrictMode>,
-  document.getElementById('root')
-)
-```
-
-`<Provider store={store}>`という記述があると思いますが、これが非常に重要で、
-この記述があるおかげで、App以下のコンポーネントはReduxのStoreを使うことができます。
-
-しかし、現在の`TodoList.test.tsx`に実装したテストではその依存関係を無視して、`render(<TodoList />)`と、TodoListのみを直でレンダリングしてます。
-なので、storeが使えずエラーになっているわけです。
-
-これを解消するための方法は、公式のドキュメントにしっかり記載があり、
-[ReactTestingLibraryのRender関数をカスタマイズした独自のRender関数を作ることで対処](https://redux.js.org/usage/writing-tests#components) します。
-
-src直下にtest-utils.jsxを作成します。
-```javascript
-// test-utils.jsx
-import {render as rtlRender} from '@testing-library/react'
-import {configureStore} from '@reduxjs/toolkit'
-import {Provider} from 'react-redux'
-import todoSlice from './stores/todoSlice'
-
-function render(
-        ui,
-        {
-          preloadedState,
-          store = configureStore({
-            reducer: {todos: todoSlice.reducer},
-            preloadedState,
-          }),
-          ...renderOptions
-        } = {}
-) {
-  function Wrapper({children}) {
-    return <Provider store={store}>{children}</Provider>
-  }
-  return rtlRender(ui, {wrapper: Wrapper, ...renderOptions})
-}
-
-export * from '@testing-library/react'
-export {render}
-```
-
-ソースコード見ていただけるとわかると思いますが、公式のドキュメントに記載されてる関数ほぼそのままです。
-
-このrender関数のいい所はpreloadStateにStateの初期状態を設定できるところです。
-ではこのrender関数をつかって`TodoList.test.tsx`を書き直してみましょう。
+リストが返却された場合のテストも追加してみましょう。
 
 ```typescript jsx
 // TodoList.test.tsx
-import {cleanup, screen} from '@testing-library/react'
-import {render} from '../../test-utils'
-import TodoList from "../../components/TodoList";
+import {render, screen} from '@testing-library/react'
+import TodoList from '../../components/TodoList'
+import MockAdapter from 'axios-mock-adapter'
+import axios from 'axios'
+import {act} from 'react-dom/test-utils'
 
-describe('TodoList Component', () => {
-  afterEach(() => {
-    cleanup()
+describe('TodoList.tsx Component', () => {
+  let mock: MockAdapter
+
+  beforeEach(() => {
+    mock = new MockAdapter(axios)
   })
 
-  it('ステートが空ならリストも空', () => {
-    const initialState = {todos: []}
-    render(<TodoList />, {preloadedState: initialState})
+  afterEach(() => {
+    mock.reset()
+  })
+
+  it('getTodosの戻り値が空ならリストも空', async () => {
+    mock.onGet('/todos').reply(200, [])
+
+    await act(() => {
+      render(<TodoList />)
+    })
+
     expect(screen.getByRole('list').hasChildNodes()).toEqual(false)
   })
 
-  it('リストアイテムを表示する', () => {
-    const initialState = {todos: [{id: 1, title: 'hoge', completed: false}]}
-    render(<TodoList />, {preloadedState: initialState})
-    expect(screen.getByRole('listitem').textContent).toEqual('hoge')
+  it('getTodosの戻り値があればリストアイテムを表示', async () => {
+    mock.onGet('/todos').reply(200, [
+      {
+        id: 1,
+        title: 'title',
+        completed: false
+      }
+    ])
+
+    await act(() => {
+      render(<TodoList />)
+    })
+
+    expect(screen.getByRole('list').hasChildNodes()).toEqual(true)
+
+    expect(screen.getByRole('listitem').textContent).toEqual('title')
   })
 })
 ```
 
-このコンポーネントはStateの件数に応じてリストを表示しているだけですので、現状このぐらいのテストで十分でしょう。
+ここではコンポーネントのレンダリングの前に`act()`を使用しています。
+もし気になる方は試しに`act()`を外してテストを実行してみてください。テストが通らないと思います。
+これは非同期処理特有の罠で、APIへの応答はMockしているのですが、 APIリクエストの戻り値はPromiseで、それがまだペンディングの状態になっており処理を堰き止めています。 つまりGETのリクエストを投げて、その応答がまだ帰ってきていない状態になっているということです。
+
+このコンポーネントはgetTodosの戻り値に応じてリストを表示しているだけですので、現状このぐらいのテストで十分でしょう。
 これでテストが通っていたらひとまず大丈夫です。
 
 ## ホーム画面への組み込み
 
-Stateの状態に応じてタスクを表示するコンポーネントはできましたが、肝心の画面への組み込みができていませんし、
-作成したActionを呼び出すこともしてませんので、これをやっていきましょう。
+getTodosの戻り値に応じてタスクを表示するコンポーネントはできましたが、肝心の画面への組み込みができていません。
+ここではホーム画面への組み込みをやっていきましょう。
 
 ### ホーム画面のテスト
 
-ホーム画面を表示したらgetTodoActionを実行するという処理を実装してみましょう。
+ホーム画面を表示したらgetTodosを実行するという処理を実装してみましょう。
 
 ```typescript jsx
 // Home.test.tsx
-import {cleanup, screen} from '@testing-library/react'
+import {cleanup, render, screen, waitFor} from '@testing-library/react'
 import MockAdapter from 'axios-mock-adapter'
 import axios from 'axios'
-import {render} from '../../test-utils'
 import Home from '../../pages/Home'
+import {act} from 'react-dom/test-utils'
+import TodoProvider from '../../context/TodoContext'
 
 describe('Home画面', () => {
   let mock: MockAdapter
@@ -551,8 +304,13 @@ describe('Home画面', () => {
     cleanup()
   })
 
-  it("画面構成", () => {
-    render(<Home />)
+  it('画面構成', async () => {
+    mock.onGet('/todos').reply(200, [])
+
+    await act(() => {
+      render(<Home />)
+    })
+
     expect(screen.queryByTestId('Header')).toBeTruthy()
     expect(screen.queryByTestId('TodoList')).toBeTruthy()
   })
@@ -562,11 +320,13 @@ describe('Home画面', () => {
       {
         id: 1,
         title: 'title',
-        completed: false,
-      },
+        completed: false
+      }
     ])
-    const initialState = {todos: []}
-    render(<Home />, {preloadedState: initialState})
+
+    await act(() => {
+      render(<TodoProvider><Home /></TodoProvider>)
+    })
 
     expect(mock.history.get[0].url).toEqual('/todos')
     expect(screen.getByText('title')).toBeInTheDocument()
@@ -575,153 +335,242 @@ describe('Home画面', () => {
 ```
 
 作成したテストはこのようなものです。元々あったホーム画面の初期表示のテストを拡充しました。
-このHomeもReduxのStoreに依存することになるため、**renderの関数をtest-utils.jsで実装したrenderに変更するのを忘れないでください。**
 
 また、APIのテストを実装するときに使用したaxios-mock-adapterが再び登場しました。
-Sliceはモックしておらず、本物のtodoSliceを使用しているのが非常に大事で、要はインテグレーションテストになっています。
-
-なぜSliceをモックせずHTTP Clientだけをモックしているかというと、
-[公式のドキュメントがそれを推奨している](https://redux.js.org/usage/writing-tests#action-creators--thunks) からです。
-Reducerをモックして実施するComponentのテストに果たして意味があるのかということですね。
+本物の値を使用しているのが非常に大事で、要はインテグレーションテストになっています。
 
 ### ホーム画面の実装
 
-ホーム画面を表示したあと、副次的な処理としてgetTodoActionを実行するということでReactの`useEffect()`を使えば良さそうです。
-useEffect()については [https://ja.reactjs.org/docs/hooks-effect.html](https://ja.reactjs.org/docs/hooks-effect.html) を読みましょう。
+テストを書いてる際に気づいた方もいるかもしれませんが、ホーム画面とTodoListコンポーネントの役割に重複があります。
+今回は以下のようにそれぞれの役割を定義します。
+- ホーム画面：
+  - Apiを呼び出しタスク一覧を取得する
+- TodoListコンポーネント：
+  - 取得したタスク一覧を描画する
+
+今回はコンポーネント感でのプロパティの受け渡しに`useContext()`を利用します。
+`useContext()`を利用することで、プロパティをグローバルに管理することができます。
+また、`useContext()`も`useState()`や`useEffect（）`と同様にReact hooksの一つです。詳しく知りたい方は[こちら](https://ja.reactjs.org/docs/hooks-reference.html#usecontext)を参照してください。
+
+実際のコードは以下です。
+
+まず、src配下に`context`ディレクトリを作成し、その中に`TodoContext.tsx`を作成します。
+
+```
+src
+├── App.tsx
+├── __tests__
+├── components
+├── context
+│     └── TodoContext.tsx
+├── features
+├── pages
+├── index.css
+├── index.tsx
+└── setupTests.ts
+```
 
 ```typescript jsx
-// Home.tsx
-import {useEffect} from 'react'
-import {useDispatch} from 'react-redux'
-import Header from '../components/Header'
-import TodoList from '../components/TodoList'
-import {AppDispatch} from '../stores/store'
-import {getTodoAction} from '../stores/todoSlice'
+// TodoContext.tsx
+import React, {createContext, useMemo, useState} from 'react'
+import {Todo} from '../features/TodoApi'
 
-const Home = () => {
-  const dispatch: AppDispatch = useDispatch()
+type Props = {
+  children: React.ReactNode
+}
 
-  useEffect(() => {
-    dispatch(getTodoAction())
-  })
+type InitialState = {
+  todos: Todo[]
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>
+}
 
+export const TodoContext = createContext<InitialState | null>(null)
+
+const TodoProvider: React.FC<Props> = ({children}) => {
+  const [todos, setTodos] = useState<Todo[]>([])
+  const todosValue= useMemo(() => ({todos, setTodos}), [todos, setTodos]);
   return (
-          <div data-testid="Home">
-            <Header />
-            <TodoList />
-          </div>
+    <TodoContext.Provider value={todosValue}>
+      {children}
+    </TodoContext.Provider>
   )
 }
 
-export default Home
+export default TodoProvider
 ```
 
-useEffect()内で、getTodoAction()をDispatchしています。
-DispatchはActionを実際に発行する処理です。
-さらにHeaderの下に先程作成したTodoListコンポーネントを組み込みました。
+`TodoContext.tsx`では、`TodoContext`と`TodoProvider`の2つを定義しています。
 
-これでどうでしょうか？テストは通りますでしょうか？
+`TodoContext`はTodoの配列をとその中身を設定するための関数を持っています。また、`TodoProvider`は`TodoContext`を子コンポーネントで使用できるようにするため、`TodoContex.Provider`で子コンポーネントをラップする形になっています。
 
+次に、`TodoList.tsx`をTodoContexを使用するように修正します。
+
+```typescript jsx
+// TodoList.test.tsx
+import {render, screen, waitFor} from '@testing-library/react'
+import React from 'react'
+import TodoList from '../../components/TodoList'
+
+describe('TodoList.tsx Component', () => {
+  let todoContextMock: jest.Mock
+
+  beforeEach(() => {
+    todoContextMock = React.useContext = jest.fn()
+  })
+
+  it('todoContextが空ならリストも空', () => {
+    todoContextMock.mockReturnValue({
+      todos: []
+    })
+
+    render(<TodoList />)
+
+    expect(screen.getByRole('list').hasChildNodes()).toEqual(false)
+  })
+
+  it('todoContextがあればリストアイテムを表示', async () => {
+    todoContextMock.mockReturnValue({
+      todos: [
+        {
+          id: 1,
+          title: 'title',
+          completed: false
+        }
+      ]
+    })
+
+    render(<TodoList />)
+
+    expect(screen.getByRole('list').hasChildNodes()).toEqual(true)
+
+    await waitFor(() =>
+      expect(screen.getByRole('listitem').textContent).toEqual('title')
+    )
+  })
+})
 ```
-      30 |     expect(screen.getByText("Todo App")).toBeInTheDocument()
-      31 |     expect(mock.history.get[0].url).toEqual('/todos')
-    > 32 |     expect(screen.getByText('title')).toBeInTheDocument()
-         |                   ^
-      33 |   })
-      34 | })
-      35 |
 
-      at Object.getElementError (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/config.js:34:12)
-      at node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:71:38
-      at getByText (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:54:17)
-      at Object.<anonymous> (src/__tests__/pages/Home.test.tsx:32:19)
+axiosのmockに関する記述は削除し、新たにTodoContextのmockに関する記述を追加しています。
 
-Test Suites: 1 failed, 4 passed, 5 total
-Tests:       1 failed, 8 passed, 9 total
-Snapshots:   0 total
-Time:        1.989 s, estimated 2 s
+```typescript jsx
+// TodoList.tsx
+import React from 'react'
+import {TodoContext} from '../context/TodoContext'
 
+const TodoList = () => {
+  const todoContext = React.useContext(TodoContext)
+
+  return (
+    <ul data-testid='TodoList'>
+      {todoContext?.todos.map((todo) => (
+        <li key={todo.id}>{todo.title}</li>
+      ))}
+    </ul>
+  )
+}
+
+export default TodoList
 ```
 
-どうにもおかしいですね。/todosにちゃんとGetのリクエストは行っていて、Getのレスポンスの内容もMockされています。
-なのに、画面にはまだそれが反映されていないようです。
+実装も同様にApi呼び出しを削除し、TodoContextの使用に関する記述を追加しています。 結果として、TodoContextの値のみに依存する非常にシンプルな作りに修正することができました。
 
-これは非同期処理特有の罠で、APIへの応答はMockしているのですが、
-APIリクエストの戻り値はPromiseで、それがまだペンディングの状態になっており処理を堰き止めています。
-つまりGETのリクエストを投げて、その応答がまだ帰ってきていない状態になっているということです。
-
-ですので、ペンディングになっているPromiseを完了させる必要があります。
-大した処理ではないので自前で実装してもいいでのすが、ここでは [flush-promises](https://www.npmjs.com/package/flush-promises) というライブラリを使ってしまいます。
-
-```shell
-npm install --save-dev flush-promises
-```
-
-flush-promisesが導入できたら、Home.test.tsxを少し編集しましょう。
+次に、`Home.tsx`の修正です。
 
 ```typescript jsx
 // Home.test.tsx
-import {cleanup, screen} from '@testing-library/react'
-import MockAdapter from 'axios-mock-adapter'
-import axios from 'axios'
-import flushPromises from 'flush-promises'    // 追記
-import {render} from '../../test-utils'
-import Home from '../../pages/Home'
 
-describe('Home画面', () => {
-  let mock: MockAdapter
-
-  beforeEach(() => {
-    mock = new MockAdapter(axios)
-  })
-
-  afterEach(() => {
-    mock.reset()
-    cleanup()
-  })
-
-  it("画面構成", () => {
-    render(<Home />)
-    expect(screen.queryByTestId('Header')).toBeTruthy()
-    expect(screen.queryByTestId('TodoList')).toBeTruthy()
-  })
+// 中略
 
   it('ホーム画面の初期表示', async () => {
     mock.onGet('/todos').reply(200, [
       {
         id: 1,
         title: 'title',
-        completed: false,
-      },
+        completed: false
+      }
     ])
-    const initialState = {todos: []}
-    render(<Home />, {preloadedState: initialState})
 
-    expect(screen.getByText("Todo App")).toBeInTheDocument()
+    await act(() => {
+      render(<TodoProvider><Home /></TodoProvider>)     // 修正
+    })
+
     expect(mock.history.get[0].url).toEqual('/todos')
-    await flushPromises()     // 追記
     expect(screen.getByText('title')).toBeInTheDocument()
   })
-})
 ```
 
-`await flushPromise()`を実行すると、堰き止められていたPromiseが動き出します！
+テストでもTodoContextを使用したいので、HomeコンポーネントをTodoProviderでラップします。
+
+
+```typescript jsx
+// Home.tsx
+import React, {useContext, useEffect} from 'react'
+import TodoList from '../components/TodoList'
+import Header from '../components/Header'
+import {getTodos} from '../features/TodoApi'
+import {TodoContext} from '../context/TodoContext'
+
+const Home = () => {
+  const todoContext = useContext(TodoContext)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getTodos()
+      todoContext?.setTodos(response)
+    }
+    fetchData()
+  }, [])
+
+  return (
+    <div>
+      <Header />
+      <TodoList />
+    </div>
+  )
+}
+
+export default Home
+```
+
+ホーム画面では、これまでTodoListコンポーネントで実施していたApiの呼び出しと戻り値の格納を担当しています。この際、戻り値の格納先がTodoContextになっていることがポイントです。
+
+これで全てのテストが通る状態になったと思います。
 
 ```
- PASS  src/__tests__/features/TodoApi.test.ts
- PASS  src/__tests__/components/TodoList.test.tsx
- PASS  src/__tests__/pages/Home.test.tsx
- PASS  src/__tests__/components/Header.test.tsx
- PASS  src/__tests__/stores/todoSlice.test.ts
+Watch Usage: Press w to show more.
+ PASS  src/__test__/features/TodoApi.test.ts
+ PASS  src/__test__/components/TodoList.test.tsx
+ PASS  src/__test__/pages/Home.test.tsx
 
-Test Suites: 5 passed, 5 total
-Tests:       9 passed, 9 total
+Test Suites: 3 passed, 3 total
+Tests:       5 passed, 5 total
 Snapshots:   0 total
-Time:        1.847 s, estimated 2 s
+Time:        0.663 s, estimated 1 s
 Ran all test suites related to changed files.
 ```
 
-テストが全件通りました！ひとまずこれでクライアントの実装は完了です。
+最後に、`Home.tsx`でTodoContextを使用できるようにするため、`index.tsx`を修正します。
+
+```typescript jsx
+// index.tsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import './index.css'
+import App from './App'
+import TodoProvider from './context/TodoContext'
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+root.render(
+  <React.StrictMode>
+    <TodoProvider>    // 修正
+      <App />
+    </TodoProvider>   // 修正
+  </React.StrictMode>
+)
+```
+
+これでホーム画面への組み込みは完了です。
+
 ここまでのソースコードは
 [https://github.com/Onebase-Fujitsu/todo-app-client/tree/step4](https://github.com/Onebase-Fujitsu/todo-app-client/tree/step4)
 に置いてあります。
@@ -751,8 +600,8 @@ TodoApi.tsを開いてリクエスト先のURLを一時的に変更してみま�
 
 ```typescript
 // TodoApi.ts
-import axios from 'axios'
-import {Todo} from '../stores/todoSlice'
+
+// 中略
 
 export const getTodos = async () => {
   // const response = await axios.get<Todo[]>('/todos')
