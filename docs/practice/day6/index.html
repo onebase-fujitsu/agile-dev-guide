@@ -1,551 +1,79 @@
-<!doctype html><html lang=en dir=ltr>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="6日目 # クライアントとサーバを連携させてタスクを作成することができるようになったので、シナリオテストを作成していきましょう。 モノレポの作成 #">
-<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="6日目">
-<meta property="og:description" content="6日目 # クライアントとサーバを連携させてタスクを作成することができるようになったので、シナリオテストを作成していきましょう。 モノレポの作成 #">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/"><meta property="article:section" content="docs">
-<title>6日目 | Fujitsu Agile Development Guide</title>
-<link rel=manifest href=/agile-dev-guide/manifest.json>
-<link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon>
-<link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
-</head>
-<body dir=ltr>
-<input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control>
-<main class="container flex">
-<aside class=book-menu>
-<div class=book-menu-content>
-<nav>
-<h2 class=book-brand>
-<a href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span>
-</a>
-</h2>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/>はじめに</a>
-</li>
-<li>
-<input type=checkbox id=section-b077c62e2cf275f367b13c9cd484dcf6 class=toggle>
-<label for=section-b077c62e2cf275f367b13c9cd484dcf6 class="flex justify-between">
-<a role=button>アジャイル</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/>アジャイル開発12の原則</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/>まとめ</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-488859b49087c05cd9f2afa3c2804c61 class=toggle>
-<label for=section-488859b49087c05cd9f2afa3c2804c61 class="flex justify-between">
-<a role=button>スクラム</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/overview/>スクラムとは</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/roles/>ロール</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/products/>成果物</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/events/>イベント</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/conclude/>まとめ</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-f43a50e4d00e3398d279579a5a9a0783 class=toggle>
-<label for=section-f43a50e4d00e3398d279579a5a9a0783 class="flex justify-between">
-<a role=button>エクストリームプログラミング</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/>エクストリームプログラミングとは</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/>エクストリームプログラミングのプラクティス</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/>まとめ</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-4881c8ea96a48f6fd2540db502c204e0 class=toggle>
-<label for=section-4881c8ea96a48f6fd2540db502c204e0 class="flex justify-between">
-<a role=button>ソフトウェアテスト</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/overview/>ソフトウェアテストを始めよう</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/>ウォーミングアップ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/>ボウリングゲーム</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/>テストダブル</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/>E2Eテスト</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-6668e94793f2c3410fae208f25d1f417 class=toggle>
-<label for=section-6668e94793f2c3410fae208f25d1f417 class="flex justify-between">
-<a role=button>ソフトウェア設計</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/>アジャイル開発に求められるソフトウェア設計</a>
-</li>
-<li>
-<input type=checkbox id=section-fd21b9cd7e31d8e1d2ba14b32452065e class=toggle>
-<label for=section-fd21b9cd7e31d8e1d2ba14b32452065e class="flex justify-between">
-<a role=button>SOLID原則</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/>単一責任の原則(SRP)</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/>オープン・クローズドの原則(OCP)</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/>リスコフの置換原則(LSP)</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>依存性逆転の原則(DIP)</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/>インターフェース分離の原則(ISP)</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-ee4c81ada0b6a9ee859cebeab00ca76e class=toggle>
-<label for=section-ee4c81ada0b6a9ee859cebeab00ca76e class="flex justify-between">
-<a role=button>デザインパターン</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/designpattern/designpattern/>デザインパターン</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-a16dbb8fa8b2df15e7da65eb13e2d51a class=toggle checked>
-<label for=section-a16dbb8fa8b2df15e7da65eb13e2d51a class="flex justify-between">
-<a role=button>アジャイルの実践</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/>1日目</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/>2日目</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/>3日目</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/>4日目</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/>5日目</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/ class=active>6日目</a>
-</li>
-</ul>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/>おわりに</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/>推奨書籍</a>
-</li>
-<li class=book-section-flat>
-<span>全体編</span>
-<ul>
-<li>
-<input type=checkbox id=section-e99c955bf75208a72cc409dac3a52e06 class=toggle>
-<label for=section-e99c955bf75208a72cc409dac3a52e06 class="flex justify-between">
-<a role=button>リーンスタートアップアジャイル</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/overview/>リーンスタートアップアジャイルの流れ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/organization/>体制・役割</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/productvision/>プロダクトビジョン / バリュープロポジション</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-9be0117e86ea19505cc5ceb0d72e959e class=toggle>
-<label for=section-9be0117e86ea19505cc5ceb0d72e959e class="flex justify-between">
-<a role=button>モダナイゼーションアジャイル</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/overview/>モダナイゼーションアジャイルの流れ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/organization/>体制・役割</a>
-</li>
-<li>
-<input type=checkbox id=section-bde04692c1fd3ecde39ac4bab024fff3 class=toggle>
-<label for=section-bde04692c1fd3ecde39ac4bab024fff3 class="flex justify-between">
-<a role=button>Swift Method</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/overview/>Swift Method とは</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/eventstorming/>Event Storming</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/boris/>Boris</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/snape/>SnapE</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/slices/>Slices</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/techchoice/>Tech Choice</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class=book-section-flat>
-<span>Team編</span>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/workstyle/>チームの働き方</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/balancedteam/>バランスチーム</a>
-</li>
-<li>
-<input type=checkbox id=section-567421c4f32cd12e88a451ff3fc3c989 class=toggle>
-<label for=section-567421c4f32cd12e88a451ff3fc3c989 class="flex justify-between">
-<a role=button>マインドセット</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/onebase/>ONEbaseの価値観</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/psychologicalsafety/>心理的安全性</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/xp/>XPの価値観</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/practice/>プラクティスの取り入れ方</a>
-</li>
-</ul>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/teambuilding/>チームビルディング</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/remotework/>リモートワーク</a>
-</li>
-<li>
-<input type=checkbox id=section-b52b30221e4a89615e78dbb78082bc47 class=toggle>
-<label for=section-b52b30221e4a89615e78dbb78082bc47 class="flex justify-between">
-<a role=button>チームのアクティビティ</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/officestandup/>全体スタンドアップ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamstandup/>チームスタンドアップ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/preipm/>Pre-IPM</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/ipm/>IPM</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/cl/>CLミーティング</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/retro/>レトロスペクティブ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/salesmeeting/>営業確認会議</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/internalsync/>Internal Sync</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/riskmitigations/>Risks & Mitigations</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/feedback/>フィードバック</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/icebreak/>Ice Break</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamhealthcheck/>Team Health Check</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/1on1/>1on1</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/exercise/>ラジオ体操</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-0ca98ed05d635a669132a6c12086bd7c class=toggle>
-<label for=section-0ca98ed05d635a669132a6c12086bd7c class="flex justify-between">
-<a role=button>チームのプラクティス</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/facilitation/>ファシリテーション</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/okrs/>OKRs</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class=book-section-flat>
-<span>Designer編</span>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/overview/>Designerとは</a>
-</li>
-<li>
-<input type=checkbox id=section-0356f56143a8f1215a9a8d2120898187 class=toggle>
-<label for=section-0356f56143a8f1215a9a8d2120898187 class="flex justify-between">
-<a role=button>Designerのプラクティス</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/persona/>ペルソナ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/scenario/>シナリオ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchplanning/>リサーチ計画立案</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/prototyping/>プロトタイピング</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/script/>スクリプト作成</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchaction/>リサーチ実施</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/synthesize/>シンセサイズ</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class=book-section-flat>
-<span>Product Manager編</span>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/overview/>Product Managerとは</a>
-</li>
-<li>
-<input type=checkbox id=section-8fbae8de73ef8326d3c4d80af4144c79 class=toggle>
-<label for=section-8fbae8de73ef8326d3c4d80af4144c79 class="flex justify-between">
-<a role=button>Product Managerのプラクティス</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/roadmap/>プロダクトロードマップ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/>MVP</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstorymapping/>ユーザーストーリーマッピング</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/>ユーザーストーリー</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/>2×2</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class=book-section-flat>
-<span>Developer編</span>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/overview/>Developerとは</a>
-</li>
-<li>
-<input type=checkbox id=section-8663d063f439d3f63d1a0dffad20b22d class=toggle>
-<label for=section-8663d063f439d3f63d1a0dffad20b22d class="flex justify-between">
-<a role=button>Developerのプラクティス</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/tdd/>TDD</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/cicd/>CI/CD</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/pairprogramming/>ペアプログラミング</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</nav>
-<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
-</div>
-</aside>
-<div class=book-page>
-<header class=book-header>
-<div class="flex align-center justify-between">
-<label for=menu-control>
-<img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu>
-</label>
+<!doctype html><html lang=en dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="6日目 # クライアントとサーバを連携させてタスクを作成することができるようになったので、シナリオテストを作成していきましょう。 モノレポの作成 #"><meta name=theme-color content="#FFFFFF"><meta property="og:title" content="6日目"><meta property="og:description" content="6日目 # クライアントとサーバを連携させてタスクを作成することができるようになったので、シナリオテストを作成していきましょう。 モノレポの作成 #"><meta property="og:type" content="article"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/"><meta property="article:section" content="docs"><title>6日目 | Fujitsu Agile Development Guide</title><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon><link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span></a></h2><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/>はじめに</a></li><li><input type=checkbox id=section-b077c62e2cf275f367b13c9cd484dcf6 class=toggle>
+<label for=section-b077c62e2cf275f367b13c9cd484dcf6 class="flex justify-between"><a role=button>アジャイル</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/>アジャイル開発12の原則</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-488859b49087c05cd9f2afa3c2804c61 class=toggle>
+<label for=section-488859b49087c05cd9f2afa3c2804c61 class="flex justify-between"><a role=button>スクラム</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/overview/>スクラムとは</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/roles/>ロール</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/products/>成果物</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/events/>イベント</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-f43a50e4d00e3398d279579a5a9a0783 class=toggle>
+<label for=section-f43a50e4d00e3398d279579a5a9a0783 class="flex justify-between"><a role=button>エクストリームプログラミング</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/>エクストリームプログラミングとは</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/>エクストリームプログラミングのプラクティス</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-4881c8ea96a48f6fd2540db502c204e0 class=toggle>
+<label for=section-4881c8ea96a48f6fd2540db502c204e0 class="flex justify-between"><a role=button>ソフトウェアテスト</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/overview/>ソフトウェアテストを始めよう</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/>ウォーミングアップ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/>ボウリングゲーム</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/>テストダブル</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/>E2Eテスト</a></li></ul></li><li><input type=checkbox id=section-6668e94793f2c3410fae208f25d1f417 class=toggle>
+<label for=section-6668e94793f2c3410fae208f25d1f417 class="flex justify-between"><a role=button>ソフトウェア設計</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/>アジャイル開発に求められるソフトウェア設計</a></li><li><input type=checkbox id=section-fd21b9cd7e31d8e1d2ba14b32452065e class=toggle>
+<label for=section-fd21b9cd7e31d8e1d2ba14b32452065e class="flex justify-between"><a role=button>SOLID原則</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/>単一責任の原則(SRP)</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/>オープン・クローズドの原則(OCP)</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/>リスコフの置換原則(LSP)</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>依存性逆転の原則(DIP)</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/>インターフェース分離の原則(ISP)</a></li></ul></li><li><input type=checkbox id=section-ee4c81ada0b6a9ee859cebeab00ca76e class=toggle>
+<label for=section-ee4c81ada0b6a9ee859cebeab00ca76e class="flex justify-between"><a role=button>デザインパターン</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/designpattern/designpattern/>デザインパターン</a></li></ul></li></ul></li><li><input type=checkbox id=section-a16dbb8fa8b2df15e7da65eb13e2d51a class=toggle checked>
+<label for=section-a16dbb8fa8b2df15e7da65eb13e2d51a class="flex justify-between"><a role=button>アジャイルの実践</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/>1日目</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/>2日目</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/>3日目</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/>4日目</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/>5日目</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/ class=active>6日目</a></li></ul></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/>おわりに</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/>推奨書籍</a></li><li class=book-section-flat><span>全体編</span><ul><li><input type=checkbox id=section-e99c955bf75208a72cc409dac3a52e06 class=toggle>
+<label for=section-e99c955bf75208a72cc409dac3a52e06 class="flex justify-between"><a role=button>リーンスタートアップアジャイル</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/overview/>リーンスタートアップアジャイルの流れ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/organization/>体制・役割</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/productvision/>プロダクトビジョン / バリュープロポジション</a></li></ul></li><li><input type=checkbox id=section-9be0117e86ea19505cc5ceb0d72e959e class=toggle>
+<label for=section-9be0117e86ea19505cc5ceb0d72e959e class="flex justify-between"><a role=button>モダナイゼーションアジャイル</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/overview/>モダナイゼーションアジャイルの流れ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/organization/>体制・役割</a></li><li><input type=checkbox id=section-bde04692c1fd3ecde39ac4bab024fff3 class=toggle>
+<label for=section-bde04692c1fd3ecde39ac4bab024fff3 class="flex justify-between"><a role=button>Swift Method</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/overview/>Swift Method とは</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/eventstorming/>Event Storming</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/boris/>Boris</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/snape/>SnapE</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/slices/>Slices</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/techchoice/>Tech Choice</a></li></ul></li></ul></li></ul></li><li class=book-section-flat><span>Team編</span><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/workstyle/>チームの働き方</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/balancedteam/>バランスチーム</a></li><li><input type=checkbox id=section-567421c4f32cd12e88a451ff3fc3c989 class=toggle>
+<label for=section-567421c4f32cd12e88a451ff3fc3c989 class="flex justify-between"><a role=button>マインドセット</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/onebase/>ONEbaseの価値観</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/psychologicalsafety/>心理的安全性</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/xp/>XPの価値観</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/practice/>プラクティスの取り入れ方</a></li></ul></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/teambuilding/>チームビルディング</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/remotework/>リモートワーク</a></li><li><input type=checkbox id=section-b52b30221e4a89615e78dbb78082bc47 class=toggle>
+<label for=section-b52b30221e4a89615e78dbb78082bc47 class="flex justify-between"><a role=button>チームのアクティビティ</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/officestandup/>全体スタンドアップ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamstandup/>チームスタンドアップ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/preipm/>Pre-IPM</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/ipm/>IPM</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/cl/>CLミーティング</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/retro/>レトロスペクティブ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/salesmeeting/>営業確認会議</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/internalsync/>Internal Sync</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/riskmitigations/>Risks & Mitigations</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/feedback/>フィードバック</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/icebreak/>Ice Break</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamhealthcheck/>Team Health Check</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/1on1/>1on1</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/exercise/>ラジオ体操</a></li></ul></li><li><input type=checkbox id=section-0ca98ed05d635a669132a6c12086bd7c class=toggle>
+<label for=section-0ca98ed05d635a669132a6c12086bd7c class="flex justify-between"><a role=button>チームのプラクティス</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/facilitation/>ファシリテーション</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/okrs/>OKRs</a></li></ul></li></ul></li><li class=book-section-flat><span>Designer編</span><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/overview/>Designerとは</a></li><li><input type=checkbox id=section-0356f56143a8f1215a9a8d2120898187 class=toggle>
+<label for=section-0356f56143a8f1215a9a8d2120898187 class="flex justify-between"><a role=button>Designerのプラクティス</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/persona/>ペルソナ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/scenario/>シナリオ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchplanning/>リサーチ計画立案</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/prototyping/>プロトタイピング</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/script/>スクリプト作成</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchaction/>リサーチ実施</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/synthesize/>シンセサイズ</a></li></ul></li></ul></li><li class=book-section-flat><span>Product Manager編</span><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/overview/>Product Managerとは</a></li><li><input type=checkbox id=section-8fbae8de73ef8326d3c4d80af4144c79 class=toggle>
+<label for=section-8fbae8de73ef8326d3c4d80af4144c79 class="flex justify-between"><a role=button>Product Managerのプラクティス</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/roadmap/>プロダクトロードマップ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/>MVP</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstorymapping/>ユーザーストーリーマッピング</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/>ユーザーストーリー</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/>2×2</a></li></ul></li></ul></li><li class=book-section-flat><span>Developer編</span><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/overview/>Developerとは</a></li><li><input type=checkbox id=section-8663d063f439d3f63d1a0dffad20b22d class=toggle>
+<label for=section-8663d063f439d3f63d1a0dffad20b22d class="flex justify-between"><a role=button>Developerのプラクティス</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/tdd/>TDD</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/cicd/>CI/CD</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/pairprogramming/>ペアプログラミング</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/soroprogramming/>ソロプログラミング</a></li></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu></label>
 <strong>6日目</strong>
-<label for=toc-control>
-<img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents">
-</label>
-</div>
-<aside class="hidden clearfix">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#モノレポの作成>モノレポの作成</a></li>
-<li><a href=#e2eテストの環境構築>e2eテストの環境構築</a></li>
-<li><a href=#e2eテストの作成>e2eテストの作成</a></li>
-<li><a href=#さらなるアプリのスケールに向けて>さらなるアプリのスケールに向けて</a></li>
-</ul>
-</nav>
-</aside>
-</header>
-<article class=markdown><h1 id=6日目>
-6日目
-<a class=anchor href=#6%e6%97%a5%e7%9b%ae>#</a>
-</h1>
-<p>クライアントとサーバを連携させてタスクを作成することができるようになったので、シナリオテストを作成していきましょう。</p>
-<h2 id=モノレポの作成>
-モノレポの作成
-<a class=anchor href=#%e3%83%a2%e3%83%8e%e3%83%ac%e3%83%9d%e3%81%ae%e4%bd%9c%e6%88%90>#</a>
-</h2>
-<p>まず、これまで別に管理していたクライアントとサーバを一纏めにしたリポジトリを作りましょう。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>mkdir todo-app
-cd todo-app
-git init
-git submodule add https://github.com/Onebase-Fujitsu/todo-app-server.git server
-git submodule add https://github.com/Onebase-Fujitsu/todo-app-client.git client
-</code></pre></div><p>submoduleを追加できたたらserverとclientの依存ライブラリの解決をしておいてください。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>cd client
-npm install
-</code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>cd server
-./gradlew build
-</code></pre></div><h2 id=e2eテストの環境構築>
-e2eテストの環境構築
-<a class=anchor href=#e2e%e3%83%86%e3%82%b9%e3%83%88%e3%81%ae%e7%92%b0%e5%a2%83%e6%a7%8b%e7%af%89>#</a>
-</h2>
-<p>まずe2eテスト用の環境を作成していきましょう。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>mkdir e2e
-cd e2e
-mkdir test
-touch test/test.js 
-npm init
-</code></pre></div><p><code>npm init</code>コマンドを実行すると、設定ダイアログが表示されるので、いったんすべて何も設定せずEnterを押下してpackage.jsonを作成。
-その後、e2eテストライブラリのtestcafeを導入します。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>npm install --save-dev testcafe
-</code></pre></div><p>インストールが完了したら、package.jsonを以下のように編集します。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
-  <span style=color:#f92672>&#34;name&#34;</span>: <span style=color:#e6db74>&#34;todo-app&#34;</span>,
-  <span style=color:#f92672>&#34;version&#34;</span>: <span style=color:#e6db74>&#34;1.0.0&#34;</span>,
-  <span style=color:#f92672>&#34;description&#34;</span>: <span style=color:#e6db74>&#34;&#34;</span>,
-  <span style=color:#f92672>&#34;main&#34;</span>: <span style=color:#e6db74>&#34;test/test.js&#34;</span>,
-  <span style=color:#f92672>&#34;scripts&#34;</span>: {
-    <span style=color:#f92672>&#34;test&#34;</span>: <span style=color:#e6db74>&#34;./node_modules/.bin/testcafe &#39;chrome&#39; ./test&#34;</span>
-  },
-  <span style=color:#f92672>&#34;author&#34;</span>: <span style=color:#e6db74>&#34;&#34;</span>,
-  <span style=color:#f92672>&#34;license&#34;</span>: <span style=color:#e6db74>&#34;ISC&#34;</span>,
-  <span style=color:#f92672>&#34;devDependencies&#34;</span>: {
-    <span style=color:#f92672>&#34;testcafe&#34;</span>: <span style=color:#e6db74>&#34;^1.16.0&#34;</span>
-  }
-}
-</code></pre></div><p>編集が完了したらe2eディレクトリで以下のコマンドを実行してみましょう。
-Chromeが起動し画像のような画面が一瞬起動して閉じると環境の準備は完了です。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>npm run test
-</code></pre></div><p><img src=testcafe.jpg alt=testcafe></p>
-<p>ここまでのリポジトリは
+<label for=toc-control><img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#モノレポの作成>モノレポの作成</a></li><li><a href=#e2eテストの環境構築>e2eテストの環境構築</a></li><li><a href=#e2eテストの作成>e2eテストの作成</a></li><li><a href=#さらなるアプリのスケールに向けて>さらなるアプリのスケールに向けて</a></li></ul></nav></aside></header><article class=markdown><h1 id=6日目>6日目
+<a class=anchor href=#6%e6%97%a5%e7%9b%ae>#</a></h1><p>クライアントとサーバを連携させてタスクを作成することができるようになったので、シナリオテストを作成していきましょう。</p><h2 id=モノレポの作成>モノレポの作成
+<a class=anchor href=#%e3%83%a2%e3%83%8e%e3%83%ac%e3%83%9d%e3%81%ae%e4%bd%9c%e6%88%90>#</a></h2><p>まず、これまで別に管理していたクライアントとサーバを一纏めにしたリポジトリを作りましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>mkdir todo-app
+</span></span><span style=display:flex><span>cd todo-app
+</span></span><span style=display:flex><span>git init
+</span></span><span style=display:flex><span>git submodule add https://github.com/Onebase-Fujitsu/todo-app-server.git server
+</span></span><span style=display:flex><span>git submodule add https://github.com/Onebase-Fujitsu/todo-app-client.git client
+</span></span></code></pre></div><p>submoduleを追加できたたらserverとclientの依存ライブラリの解決をしておいてください。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>cd client
+</span></span><span style=display:flex><span>npm install
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>cd server
+</span></span><span style=display:flex><span>./gradlew build
+</span></span></code></pre></div><h2 id=e2eテストの環境構築>e2eテストの環境構築
+<a class=anchor href=#e2e%e3%83%86%e3%82%b9%e3%83%88%e3%81%ae%e7%92%b0%e5%a2%83%e6%a7%8b%e7%af%89>#</a></h2><p>まずe2eテスト用の環境を作成していきましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>mkdir e2e
+</span></span><span style=display:flex><span>cd e2e
+</span></span><span style=display:flex><span>mkdir test
+</span></span><span style=display:flex><span>touch test/test.js 
+</span></span><span style=display:flex><span>npm init
+</span></span></code></pre></div><p><code>npm init</code>コマンドを実行すると、設定ダイアログが表示されるので、いったんすべて何も設定せずEnterを押下してpackage.jsonを作成。
+その後、e2eテストライブラリのtestcafeを導入します。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>npm install --save-dev testcafe
+</span></span></code></pre></div><p>インストールが完了したら、package.jsonを以下のように編集します。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;name&#34;</span>: <span style=color:#e6db74>&#34;todo-app&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;version&#34;</span>: <span style=color:#e6db74>&#34;1.0.0&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;description&#34;</span>: <span style=color:#e6db74>&#34;&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;main&#34;</span>: <span style=color:#e6db74>&#34;test/test.js&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;scripts&#34;</span>: {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;test&#34;</span>: <span style=color:#e6db74>&#34;./node_modules/.bin/testcafe &#39;chrome&#39; ./test&#34;</span>
+</span></span><span style=display:flex><span>  },
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;author&#34;</span>: <span style=color:#e6db74>&#34;&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;license&#34;</span>: <span style=color:#e6db74>&#34;ISC&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;devDependencies&#34;</span>: {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;testcafe&#34;</span>: <span style=color:#e6db74>&#34;^1.16.0&#34;</span>
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>編集が完了したらe2eディレクトリで以下のコマンドを実行してみましょう。
+Chromeが起動し画像のような画面が一瞬起動して閉じると環境の準備は完了です。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>npm run test
+</span></span></code></pre></div><p><img src=testcafe.jpg alt=testcafe></p><p>ここまでのリポジトリは
 <a href=https://github.com/Onebase-Fujitsu/todo-app/tree/step1>https://github.com/Onebase-Fujitsu/todo-app/tree/step1</a>
-においてあります。</p>
-<h2 id=e2eテストの作成>
-e2eテストの作成
-<a class=anchor href=#e2e%e3%83%86%e3%82%b9%e3%83%88%e3%81%ae%e4%bd%9c%e6%88%90>#</a>
-</h2>
-<p>では早速e2eテストを作成していきましょう。まず、トップページが表示されることを確認しましょう。
-test.jsを以下のように変更します。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#75715e>// test.js
-</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Selector</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;testcafe&#39;</span>;
-
-<span style=color:#a6e22e>fixture</span> <span style=color:#e6db74>`test target`</span>
-    .<span style=color:#a6e22e>page</span> <span style=color:#e6db74>`http://localhost:3000`</span>;
-
-<span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスク一覧画面を見ることができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
-    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;body&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;Todo App&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;a&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;Home&#34;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;a&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;New Task&#34;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-})
-</code></pre></div><p>そして<strong>clientアプリとserverアプリを起動した状態で</strong><code>npm run test</code>コマンドを実行してみてください。
-問題なければ、テストが成功するはずです。</p>
-<pre tabindex=0><code>onebase@Onebase-Maguro e2e % npm run test
+においてあります。</p><h2 id=e2eテストの作成>e2eテストの作成
+<a class=anchor href=#e2e%e3%83%86%e3%82%b9%e3%83%88%e3%81%ae%e4%bd%9c%e6%88%90>#</a></h2><p>では早速e2eテストを作成していきましょう。まず、トップページが表示されることを確認しましょう。
+test.jsを以下のように変更します。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#75715e>// test.js
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Selector</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;testcafe&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>fixture</span> <span style=color:#e6db74>`test target`</span>
+</span></span><span style=display:flex><span>    .<span style=color:#a6e22e>page</span> <span style=color:#e6db74>`http://localhost:3000`</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスク一覧画面を見ることができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;body&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;Todo App&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;a&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;Home&#34;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;a&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;New Task&#34;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><p>そして<strong>clientアプリとserverアプリを起動した状態で</strong><code>npm run test</code>コマンドを実行してみてください。
+問題なければ、テストが成功するはずです。</p><pre tabindex=0><code>onebase@Onebase-Maguro e2e % npm run test
 
 &gt; todo-app@1.0.0 test
-&gt; ./node_modules/.bin/testcafe 'chrome' ./test
+&gt; ./node_modules/.bin/testcafe &#39;chrome&#39; ./test
 
  Running tests in:
  - Chrome 93.0.4577.82 / macOS 10.15.7
@@ -555,111 +83,47 @@ test.jsを以下のように変更します。</p>
 
 
  1 passed (1s)
-</code></pre><p>テストが通ったらさらにテストを追加して、タスクが追加できることを確認しましょう。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#75715e>// test.ts
-</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Selector</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;testcafe&#39;</span>;
-
-<span style=color:#a6e22e>fixture</span> <span style=color:#e6db74>`test target`</span>
-    .<span style=color:#a6e22e>page</span> <span style=color:#e6db74>`http://localhost:3000`</span>;
-
-<span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスク一覧画面を見ることができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
-    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;body&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;Todo App&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;a&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;Home&#34;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;a&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;New Task&#34;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-})
-
-<span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスクを作成することができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
-    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
-        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;a&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;New Task&#34;</span>))
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SEND&#34;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>typeText</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input&#39;</span>), <span style=color:#e6db74>&#39;e2e test title&#39;</span>, {<span style=color:#a6e22e>replace</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>})
-        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SEND&#34;</span>))
-        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;a&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;Home&#34;</span>))
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>textContent</span>).<span style=color:#a6e22e>contains</span>(<span style=color:#e6db74>&#39;e2e test title&#39;</span>)
-})
-</code></pre></div><p>これも実行すると問題なく通るはずです。</p>
-<p>ここまでのリポジトリは
+</code></pre><p>テストが通ったらさらにテストを追加して、タスクが追加できることを確認しましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#75715e>// test.ts
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Selector</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;testcafe&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>fixture</span> <span style=color:#e6db74>`test target`</span>
+</span></span><span style=display:flex><span>    .<span style=color:#a6e22e>page</span> <span style=color:#e6db74>`http://localhost:3000`</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスク一覧画面を見ることができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;body&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;Todo App&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;a&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;Home&#34;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;a&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;New Task&#34;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスクを作成することができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;a&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;New Task&#34;</span>))
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SEND&#34;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>typeText</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input&#39;</span>), <span style=color:#e6db74>&#39;e2e test title&#39;</span>, {<span style=color:#a6e22e>replace</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>})
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SEND&#34;</span>))
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;a&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;Home&#34;</span>))
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>textContent</span>).<span style=color:#a6e22e>contains</span>(<span style=color:#e6db74>&#39;e2e test title&#39;</span>)
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><p>これも実行すると問題なく通るはずです。</p><p>ここまでのリポジトリは
 <a href=https://github.com/Onebase-Fujitsu/todo-app/tree/step2>https://github.com/Onebase-Fujitsu/todo-app/tree/step2</a>
-にあります。</p>
-<h2 id=さらなるアプリのスケールに向けて>
-さらなるアプリのスケールに向けて
-<a class=anchor href=#%e3%81%95%e3%82%89%e3%81%aa%e3%82%8b%e3%82%a2%e3%83%97%e3%83%aa%e3%81%ae%e3%82%b9%e3%82%b1%e3%83%bc%e3%83%ab%e3%81%ab%e5%90%91%e3%81%91%e3%81%a6>#</a>
-</h2>
-<p>ここまで、簡単なSPAのアプリケーションを1からテスト駆動開発で作成し、バックエンドのAPIと連携させ、
-一連のプロセスをE2Eテストするというところまで来ました。</p>
-<p>まだReduxのState管理をするにあたって、fetchした内容をそのままStateに入れていますが、
+にあります。</p><h2 id=さらなるアプリのスケールに向けて>さらなるアプリのスケールに向けて
+<a class=anchor href=#%e3%81%95%e3%82%89%e3%81%aa%e3%82%8b%e3%82%a2%e3%83%97%e3%83%aa%e3%81%ae%e3%82%b9%e3%82%b1%e3%83%bc%e3%83%ab%e3%81%ab%e5%90%91%e3%81%91%e3%81%a6>#</a></h2><p>ここまで、簡単なSPAのアプリケーションを1からテスト駆動開発で作成し、バックエンドのAPIと連携させ、
+一連のプロセスをE2Eテストするというところまで来ました。</p><p>まだReduxのState管理をするにあたって、fetchした内容をそのままStateに入れていますが、
 本当であれば <a href=https://github.com/paularmstrong/normalizr>Normalizr.js</a> で正規化して入れるべきです。
-詳しくは <a href=https://redux.js.org/style-guide/style-guide>Redux Style Guide</a> を読んでみてください。</p>
-<p>ReduxのState管理方法も規約がありません。このままでは開発者によって無造作にStateが作られ、管理できなくなってしまうでしょう。
+詳しくは <a href=https://redux.js.org/style-guide/style-guide>Redux Style Guide</a> を読んでみてください。</p><p>ReduxのState管理方法も規約がありません。このままでは開発者によって無造作にStateが作られ、管理できなくなってしまうでしょう。
 <a href=https://medium.com/@scbarrus/the-ducks-file-structure-for-redux-d63c41b7035c>Ducks Pattern</a> や
 <a href=https://github.com/erikras/ducks-modular-redux>Re-Ducks Pattern</a> といったReduxの管理方法のパターンがありますので、
-そういったパターンに従うようにチーム内で合意をとるようにすると良いでしょう。</p>
-<p>一般的には以下のようなState管理をするとよいと言われています。</p>
-<ul>
-<li>Domain Data
-<ul>
-<li>バックエンドからfetchしたアプリケーションが表示したり変更したりするデータ</li>
-</ul>
-</li>
-<li>App State
-<ul>
-<li>アプリケーション独自の振る舞いのためのデータ</li>
-<li>データの選択状態やデータフェッチのローディング状態</li>
-</ul>
-</li>
-<li>UI State
-<ul>
-<li>現在の表示方法のためのデータ</li>
-<li>モーダルが開かれているかどうかや、通知バーの状態など</li>
-</ul>
-</li>
-</ul>
-<p>また、Componentの分割粒度も曖昧なままです。
+そういったパターンに従うようにチーム内で合意をとるようにすると良いでしょう。</p><p>一般的には以下のようなState管理をするとよいと言われています。</p><ul><li>Domain Data<ul><li>バックエンドからfetchしたアプリケーションが表示したり変更したりするデータ</li></ul></li><li>App State<ul><li>アプリケーション独自の振る舞いのためのデータ</li><li>データの選択状態やデータフェッチのローディング状態</li></ul></li><li>UI State<ul><li>現在の表示方法のためのデータ</li><li>モーダルが開かれているかどうかや、通知バーの状態など</li></ul></li></ul><p>また、Componentの分割粒度も曖昧なままです。
 複数人で開発をすすめるとどうしても開発者によってComponentの分割粒度にばらつきがでます。
 意図せず巨大なComponentができてしまうかもしれません。
-そこで取り入れたいのが <a href=https://bradfrost.com/blog/post/atomic-web-design/>Atomic Design</a> の考え方です。</p>
-<p>アプリ開発はとにかく自由度が大きいです。アジャイル開発となれば開発に関する裁量は開発者に委ねられるため、
-無数にある開発手法の中から最適なものを選択し、アーキテクチャを決定して、実装していかなければなりません。</p>
-<p>そして、自由度が高くなればなるほどに、個人間での開発スタイルやスキルの"ブレ"が問題になってきます。
+そこで取り入れたいのが <a href=https://bradfrost.com/blog/post/atomic-web-design/>Atomic Design</a> の考え方です。</p><p>アプリ開発はとにかく自由度が大きいです。アジャイル開発となれば開発に関する裁量は開発者に委ねられるため、
+無数にある開発手法の中から最適なものを選択し、アーキテクチャを決定して、実装していかなければなりません。</p><p>そして、自由度が高くなればなるほどに、個人間での開発スタイルやスキルの"ブレ"が問題になってきます。
 <strong>チーム開発において最も大事なのは規約です。</strong>
-このハンズオンでも一番最初にやったのはeslintの設定でした。規約はとにかく大事です。</p>
-<p>コンポーネントの分割粒度はこうする、ReduxのState管理はこうする、バックエンドのAPIはこうするとチーム内でかならず合意形成をとり、
-lintのように自動でチェックできるものはlintに規約を落とし込んでコードの品質を保つようにしてください。</p>
-<p>もし、コードの品質を保つことできないメンバーがいるようなら、チーム内で勉強会などを開くと良いです。
+このハンズオンでも一番最初にやったのはeslintの設定でした。規約はとにかく大事です。</p><p>コンポーネントの分割粒度はこうする、ReduxのState管理はこうする、バックエンドのAPIはこうするとチーム内でかならず合意形成をとり、
+lintのように自動でチェックできるものはlintに規約を落とし込んでコードの品質を保つようにしてください。</p><p>もし、コードの品質を保つことできないメンバーがいるようなら、チーム内で勉強会などを開くと良いです。
 そして、そもそもとしてコードの品質を保つことができないようなメンバーをその時点で参画させるべきではありません。
-事前に教育を受けてもらうなどし、一定のスキル水準に達したところでプロジェクトに参画してもらうべきでしょう。</p>
-<p>まだバックエンドの変更API<code>PATCH /todos/{id}</code>も実装できていませんし、まだまだやることは山のようにあります。
+事前に教育を受けてもらうなどし、一定のスキル水準に達したところでプロジェクトに参画してもらうべきでしょう。</p><p>まだバックエンドの変更API<code>PATCH /todos/{id}</code>も実装できていませんし、まだまだやることは山のようにあります。
 <strong>アジャイルのアプリ開発に終わりはありません。</strong>
-さらなるユーザ価値の提供に向けて各自取り組んでいってください。</p>
-<hr>
-<p>まとめに続きます</p>
-<a href=/agile-dev-guide/docs/inclosing/ class=book-btn>
-おわりに
-</a>
-</article>
-<footer class=book-footer>
-<div class="flex flex-wrap justify-between">
-</div>
-<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
-</footer>
-<div class=book-comments>
-</div>
-<label for=menu-control class="hidden book-menu-overlay"></label>
-</div>
-<aside class=book-toc>
-<div class=book-toc-content>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#モノレポの作成>モノレポの作成</a></li>
-<li><a href=#e2eテストの環境構築>e2eテストの環境構築</a></li>
-<li><a href=#e2eテストの作成>e2eテストの作成</a></li>
-<li><a href=#さらなるアプリのスケールに向けて>さらなるアプリのスケールに向けて</a></li>
-</ul>
-</nav>
-</div>
-</aside>
-</main>
-</body>
-</html>
+さらなるユーザ価値の提供に向けて各自取り組んでいってください。</p><hr><p>まとめに続きます</p><a href=/agile-dev-guide/docs/inclosing/ class=book-btn>おわりに</a></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#モノレポの作成>モノレポの作成</a></li><li><a href=#e2eテストの環境構築>e2eテストの環境構築</a></li><li><a href=#e2eテストの作成>e2eテストの作成</a></li><li><a href=#さらなるアプリのスケールに向けて>さらなるアプリのスケールに向けて</a></li></ul></nav></div></aside></main></body></html>

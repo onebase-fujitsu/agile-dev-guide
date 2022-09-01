@@ -1,488 +1,27 @@
-<!doctype html><html lang=en dir=ltr>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="アジャイル開発12の原則 # アジャイルソフトウェア開発宣言 で宣言されていた内容は、 アジャイル開発をする上で大事なマインドセットを述べたものでし">
-<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="アジャイル開発12の原則">
-<meta property="og:description" content="アジャイル開発12の原則 # アジャイルソフトウェア開発宣言 で宣言されていた内容は、 アジャイル開発をする上で大事なマインドセットを述べたものでし">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/"><meta property="article:section" content="docs">
-<title>アジャイル開発12の原則 | Fujitsu Agile Development Guide</title>
-<link rel=manifest href=/agile-dev-guide/manifest.json>
-<link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon>
-<link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
-</head>
-<body dir=ltr>
-<input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control>
-<main class="container flex">
-<aside class=book-menu>
-<div class=book-menu-content>
-<nav>
-<h2 class=book-brand>
-<a href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span>
-</a>
-</h2>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/>はじめに</a>
-</li>
-<li>
-<input type=checkbox id=section-b077c62e2cf275f367b13c9cd484dcf6 class=toggle checked>
-<label for=section-b077c62e2cf275f367b13c9cd484dcf6 class="flex justify-between">
-<a role=button>アジャイル</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/ class=active>アジャイル開発12の原則</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/>まとめ</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-488859b49087c05cd9f2afa3c2804c61 class=toggle>
-<label for=section-488859b49087c05cd9f2afa3c2804c61 class="flex justify-between">
-<a role=button>スクラム</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/overview/>スクラムとは</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/roles/>ロール</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/products/>成果物</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/events/>イベント</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/conclude/>まとめ</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-f43a50e4d00e3398d279579a5a9a0783 class=toggle>
-<label for=section-f43a50e4d00e3398d279579a5a9a0783 class="flex justify-between">
-<a role=button>エクストリームプログラミング</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/>エクストリームプログラミングとは</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/>エクストリームプログラミングのプラクティス</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/>まとめ</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-4881c8ea96a48f6fd2540db502c204e0 class=toggle>
-<label for=section-4881c8ea96a48f6fd2540db502c204e0 class="flex justify-between">
-<a role=button>ソフトウェアテスト</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/overview/>ソフトウェアテストを始めよう</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/>ウォーミングアップ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/>ボウリングゲーム</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/>テストダブル</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/>E2Eテスト</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-6668e94793f2c3410fae208f25d1f417 class=toggle>
-<label for=section-6668e94793f2c3410fae208f25d1f417 class="flex justify-between">
-<a role=button>ソフトウェア設計</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/>アジャイル開発に求められるソフトウェア設計</a>
-</li>
-<li>
-<input type=checkbox id=section-fd21b9cd7e31d8e1d2ba14b32452065e class=toggle>
-<label for=section-fd21b9cd7e31d8e1d2ba14b32452065e class="flex justify-between">
-<a role=button>SOLID原則</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/>単一責任の原則(SRP)</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/>オープン・クローズドの原則(OCP)</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/>リスコフの置換原則(LSP)</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>依存性逆転の原則(DIP)</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/>インターフェース分離の原則(ISP)</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-ee4c81ada0b6a9ee859cebeab00ca76e class=toggle>
-<label for=section-ee4c81ada0b6a9ee859cebeab00ca76e class="flex justify-between">
-<a role=button>デザインパターン</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/designpattern/designpattern/>デザインパターン</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-a16dbb8fa8b2df15e7da65eb13e2d51a class=toggle>
-<label for=section-a16dbb8fa8b2df15e7da65eb13e2d51a class="flex justify-between">
-<a role=button>アジャイルの実践</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/>1日目</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/>2日目</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/>3日目</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/>4日目</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/>5日目</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/>6日目</a>
-</li>
-</ul>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/>おわりに</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/>推奨書籍</a>
-</li>
-<li class=book-section-flat>
-<span>全体編</span>
-<ul>
-<li>
-<input type=checkbox id=section-e99c955bf75208a72cc409dac3a52e06 class=toggle>
-<label for=section-e99c955bf75208a72cc409dac3a52e06 class="flex justify-between">
-<a role=button>リーンスタートアップアジャイル</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/overview/>リーンスタートアップアジャイルの流れ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/organization/>体制・役割</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/productvision/>プロダクトビジョン / バリュープロポジション</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-9be0117e86ea19505cc5ceb0d72e959e class=toggle>
-<label for=section-9be0117e86ea19505cc5ceb0d72e959e class="flex justify-between">
-<a role=button>モダナイゼーションアジャイル</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/overview/>モダナイゼーションアジャイルの流れ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/organization/>体制・役割</a>
-</li>
-<li>
-<input type=checkbox id=section-bde04692c1fd3ecde39ac4bab024fff3 class=toggle>
-<label for=section-bde04692c1fd3ecde39ac4bab024fff3 class="flex justify-between">
-<a role=button>Swift Method</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/overview/>Swift Method とは</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/eventstorming/>Event Storming</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/boris/>Boris</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/snape/>SnapE</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/slices/>Slices</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/techchoice/>Tech Choice</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class=book-section-flat>
-<span>Team編</span>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/workstyle/>チームの働き方</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/balancedteam/>バランスチーム</a>
-</li>
-<li>
-<input type=checkbox id=section-567421c4f32cd12e88a451ff3fc3c989 class=toggle>
-<label for=section-567421c4f32cd12e88a451ff3fc3c989 class="flex justify-between">
-<a role=button>マインドセット</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/onebase/>ONEbaseの価値観</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/psychologicalsafety/>心理的安全性</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/xp/>XPの価値観</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/practice/>プラクティスの取り入れ方</a>
-</li>
-</ul>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/teambuilding/>チームビルディング</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/remotework/>リモートワーク</a>
-</li>
-<li>
-<input type=checkbox id=section-b52b30221e4a89615e78dbb78082bc47 class=toggle>
-<label for=section-b52b30221e4a89615e78dbb78082bc47 class="flex justify-between">
-<a role=button>チームのアクティビティ</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/officestandup/>全体スタンドアップ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamstandup/>チームスタンドアップ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/preipm/>Pre-IPM</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/ipm/>IPM</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/cl/>CLミーティング</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/retro/>レトロスペクティブ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/salesmeeting/>営業確認会議</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/internalsync/>Internal Sync</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/riskmitigations/>Risks & Mitigations</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/feedback/>フィードバック</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/icebreak/>Ice Break</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamhealthcheck/>Team Health Check</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/1on1/>1on1</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/exercise/>ラジオ体操</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-0ca98ed05d635a669132a6c12086bd7c class=toggle>
-<label for=section-0ca98ed05d635a669132a6c12086bd7c class="flex justify-between">
-<a role=button>チームのプラクティス</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/facilitation/>ファシリテーション</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/okrs/>OKRs</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class=book-section-flat>
-<span>Designer編</span>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/overview/>Designerとは</a>
-</li>
-<li>
-<input type=checkbox id=section-0356f56143a8f1215a9a8d2120898187 class=toggle>
-<label for=section-0356f56143a8f1215a9a8d2120898187 class="flex justify-between">
-<a role=button>Designerのプラクティス</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/persona/>ペルソナ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/scenario/>シナリオ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchplanning/>リサーチ計画立案</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/prototyping/>プロトタイピング</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/script/>スクリプト作成</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchaction/>リサーチ実施</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/synthesize/>シンセサイズ</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class=book-section-flat>
-<span>Product Manager編</span>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/overview/>Product Managerとは</a>
-</li>
-<li>
-<input type=checkbox id=section-8fbae8de73ef8326d3c4d80af4144c79 class=toggle>
-<label for=section-8fbae8de73ef8326d3c4d80af4144c79 class="flex justify-between">
-<a role=button>Product Managerのプラクティス</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/roadmap/>プロダクトロードマップ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/>MVP</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstorymapping/>ユーザーストーリーマッピング</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/>ユーザーストーリー</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/>2×2</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class=book-section-flat>
-<span>Developer編</span>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/overview/>Developerとは</a>
-</li>
-<li>
-<input type=checkbox id=section-8663d063f439d3f63d1a0dffad20b22d class=toggle>
-<label for=section-8663d063f439d3f63d1a0dffad20b22d class="flex justify-between">
-<a role=button>Developerのプラクティス</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/tdd/>TDD</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/cicd/>CI/CD</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/pairprogramming/>ペアプログラミング</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</nav>
-<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
-</div>
-</aside>
-<div class=book-page>
-<header class=book-header>
-<div class="flex align-center justify-between">
-<label for=menu-control>
-<img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu>
-</label>
+<!doctype html><html lang=en dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="アジャイル開発12の原則 # アジャイルソフトウェア開発宣言 で宣言されていた内容は、 アジャイル開発をする上で大事なマインドセットを述べたものでし"><meta name=theme-color content="#FFFFFF"><meta property="og:title" content="アジャイル開発12の原則"><meta property="og:description" content="アジャイル開発12の原則 # アジャイルソフトウェア開発宣言 で宣言されていた内容は、 アジャイル開発をする上で大事なマインドセットを述べたものでし"><meta property="og:type" content="article"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/"><meta property="article:section" content="docs"><title>アジャイル開発12の原則 | Fujitsu Agile Development Guide</title><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon><link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span></a></h2><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/>はじめに</a></li><li><input type=checkbox id=section-b077c62e2cf275f367b13c9cd484dcf6 class=toggle checked>
+<label for=section-b077c62e2cf275f367b13c9cd484dcf6 class="flex justify-between"><a role=button>アジャイル</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/ class=active>アジャイル開発12の原則</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-488859b49087c05cd9f2afa3c2804c61 class=toggle>
+<label for=section-488859b49087c05cd9f2afa3c2804c61 class="flex justify-between"><a role=button>スクラム</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/overview/>スクラムとは</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/roles/>ロール</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/products/>成果物</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/events/>イベント</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-f43a50e4d00e3398d279579a5a9a0783 class=toggle>
+<label for=section-f43a50e4d00e3398d279579a5a9a0783 class="flex justify-between"><a role=button>エクストリームプログラミング</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/>エクストリームプログラミングとは</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/>エクストリームプログラミングのプラクティス</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-4881c8ea96a48f6fd2540db502c204e0 class=toggle>
+<label for=section-4881c8ea96a48f6fd2540db502c204e0 class="flex justify-between"><a role=button>ソフトウェアテスト</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/overview/>ソフトウェアテストを始めよう</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/>ウォーミングアップ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/>ボウリングゲーム</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/>テストダブル</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/>E2Eテスト</a></li></ul></li><li><input type=checkbox id=section-6668e94793f2c3410fae208f25d1f417 class=toggle>
+<label for=section-6668e94793f2c3410fae208f25d1f417 class="flex justify-between"><a role=button>ソフトウェア設計</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/>アジャイル開発に求められるソフトウェア設計</a></li><li><input type=checkbox id=section-fd21b9cd7e31d8e1d2ba14b32452065e class=toggle>
+<label for=section-fd21b9cd7e31d8e1d2ba14b32452065e class="flex justify-between"><a role=button>SOLID原則</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/>単一責任の原則(SRP)</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/>オープン・クローズドの原則(OCP)</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/>リスコフの置換原則(LSP)</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>依存性逆転の原則(DIP)</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/>インターフェース分離の原則(ISP)</a></li></ul></li><li><input type=checkbox id=section-ee4c81ada0b6a9ee859cebeab00ca76e class=toggle>
+<label for=section-ee4c81ada0b6a9ee859cebeab00ca76e class="flex justify-between"><a role=button>デザインパターン</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/designpattern/designpattern/>デザインパターン</a></li></ul></li></ul></li><li><input type=checkbox id=section-a16dbb8fa8b2df15e7da65eb13e2d51a class=toggle>
+<label for=section-a16dbb8fa8b2df15e7da65eb13e2d51a class="flex justify-between"><a role=button>アジャイルの実践</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/>1日目</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/>2日目</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/>3日目</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/>4日目</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/>5日目</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/>6日目</a></li></ul></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/>おわりに</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/>推奨書籍</a></li><li class=book-section-flat><span>全体編</span><ul><li><input type=checkbox id=section-e99c955bf75208a72cc409dac3a52e06 class=toggle>
+<label for=section-e99c955bf75208a72cc409dac3a52e06 class="flex justify-between"><a role=button>リーンスタートアップアジャイル</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/overview/>リーンスタートアップアジャイルの流れ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/organization/>体制・役割</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/productvision/>プロダクトビジョン / バリュープロポジション</a></li></ul></li><li><input type=checkbox id=section-9be0117e86ea19505cc5ceb0d72e959e class=toggle>
+<label for=section-9be0117e86ea19505cc5ceb0d72e959e class="flex justify-between"><a role=button>モダナイゼーションアジャイル</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/overview/>モダナイゼーションアジャイルの流れ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/organization/>体制・役割</a></li><li><input type=checkbox id=section-bde04692c1fd3ecde39ac4bab024fff3 class=toggle>
+<label for=section-bde04692c1fd3ecde39ac4bab024fff3 class="flex justify-between"><a role=button>Swift Method</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/overview/>Swift Method とは</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/eventstorming/>Event Storming</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/boris/>Boris</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/snape/>SnapE</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/slices/>Slices</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/techchoice/>Tech Choice</a></li></ul></li></ul></li></ul></li><li class=book-section-flat><span>Team編</span><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/workstyle/>チームの働き方</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/balancedteam/>バランスチーム</a></li><li><input type=checkbox id=section-567421c4f32cd12e88a451ff3fc3c989 class=toggle>
+<label for=section-567421c4f32cd12e88a451ff3fc3c989 class="flex justify-between"><a role=button>マインドセット</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/onebase/>ONEbaseの価値観</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/psychologicalsafety/>心理的安全性</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/xp/>XPの価値観</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/practice/>プラクティスの取り入れ方</a></li></ul></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/teambuilding/>チームビルディング</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/remotework/>リモートワーク</a></li><li><input type=checkbox id=section-b52b30221e4a89615e78dbb78082bc47 class=toggle>
+<label for=section-b52b30221e4a89615e78dbb78082bc47 class="flex justify-between"><a role=button>チームのアクティビティ</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/officestandup/>全体スタンドアップ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamstandup/>チームスタンドアップ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/preipm/>Pre-IPM</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/ipm/>IPM</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/cl/>CLミーティング</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/retro/>レトロスペクティブ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/salesmeeting/>営業確認会議</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/internalsync/>Internal Sync</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/riskmitigations/>Risks & Mitigations</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/feedback/>フィードバック</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/icebreak/>Ice Break</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamhealthcheck/>Team Health Check</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/1on1/>1on1</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/exercise/>ラジオ体操</a></li></ul></li><li><input type=checkbox id=section-0ca98ed05d635a669132a6c12086bd7c class=toggle>
+<label for=section-0ca98ed05d635a669132a6c12086bd7c class="flex justify-between"><a role=button>チームのプラクティス</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/facilitation/>ファシリテーション</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/okrs/>OKRs</a></li></ul></li></ul></li><li class=book-section-flat><span>Designer編</span><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/overview/>Designerとは</a></li><li><input type=checkbox id=section-0356f56143a8f1215a9a8d2120898187 class=toggle>
+<label for=section-0356f56143a8f1215a9a8d2120898187 class="flex justify-between"><a role=button>Designerのプラクティス</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/persona/>ペルソナ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/scenario/>シナリオ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchplanning/>リサーチ計画立案</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/prototyping/>プロトタイピング</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/script/>スクリプト作成</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchaction/>リサーチ実施</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/synthesize/>シンセサイズ</a></li></ul></li></ul></li><li class=book-section-flat><span>Product Manager編</span><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/overview/>Product Managerとは</a></li><li><input type=checkbox id=section-8fbae8de73ef8326d3c4d80af4144c79 class=toggle>
+<label for=section-8fbae8de73ef8326d3c4d80af4144c79 class="flex justify-between"><a role=button>Product Managerのプラクティス</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/roadmap/>プロダクトロードマップ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/>MVP</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstorymapping/>ユーザーストーリーマッピング</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/>ユーザーストーリー</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/>2×2</a></li></ul></li></ul></li><li class=book-section-flat><span>Developer編</span><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/overview/>Developerとは</a></li><li><input type=checkbox id=section-8663d063f439d3f63d1a0dffad20b22d class=toggle>
+<label for=section-8663d063f439d3f63d1a0dffad20b22d class="flex justify-between"><a role=button>Developerのプラクティス</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/tdd/>TDD</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/cicd/>CI/CD</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/pairprogramming/>ペアプログラミング</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/soroprogramming/>ソロプログラミング</a></li></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu></label>
 <strong>アジャイル開発12の原則</strong>
-<label for=toc-control>
-<img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents">
-</label>
-</div>
-<aside class="hidden clearfix">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#顧客満足を最優先し価値のあるソフトウェアを早く継続的に提供する>顧客満足を最優先し、価値のあるソフトウェアを早く継続的に提供する</a></li>
-<li><a href=#要求の変更はたとえ開発の後期であっても歓迎する>要求の変更はたとえ開発の後期であっても歓迎する</a></li>
-<li><a href=#動くソフトウェアを2-3週間から2-3ヶ月というできるだけ短い時間間隔でリリースする>動くソフトウェアを2-3週間から2-3ヶ月というできるだけ短い時間間隔でリリースする</a></li>
-<li><a href=#ビジネス側の人と開発者はプロジェクトを通して日々一緒に働く>ビジネス側の人と開発者は、プロジェクトを通して日々一緒に働く</a></li>
-<li><a href=#意欲に満ちた人々を集めてプロジェクトを構成する環境と支援を与え仕事が無事終わるまで彼らを信頼する>意欲に満ちた人々を集めてプロジェクトを構成する。環境と支援を与え仕事が無事終わるまで彼らを信頼する</a></li>
-<li><a href=#情報を伝えるもっとも効率的で効果的な方法はフェイストゥフェイスで話をすること>情報を伝えるもっとも効率的で効果的な方法はフェイス・トゥ・フェイスで話をすること</a></li>
-<li><a href=#動くソフトウェアこそが進捗の最も重要な尺度>動くソフトウェアこそが進捗の最も重要な尺度</a></li>
-<li><a href=#アジャイルプロセスは持続可能な開発を促進する一定のペースを継続的に維持する>アジャイル･プロセスは持続可能な開発を促進する。一定のペースを継続的に維持する</a></li>
-<li><a href=#技術や設計をレベルアップさせる意識が俊敏アジャイルさを高める>技術や設計をレベルアップさせる意識が、俊敏（アジャイル）さを高める</a></li>
-<li><a href=#シンプルさムダなく作れる量を最大限にすることが本質>シンプルさ（ムダなく作れる量を最大限にすること）が本質</a></li>
-<li><a href=#自己組織化したチームのメンバーが協調して動く方がパフォーマンスが高い>自己組織化したチームのメンバーが協調して動く方が、パフォーマンスが高い</a></li>
-<li><a href=#定期的なふりかえりにより開発チームのパフォーマンスをより高めるようにする>定期的な「ふりかえり」により、開発チームのパフォーマンスをより高めるようにする</a></li>
-</ul>
-</nav>
-</aside>
-</header>
-<article class=markdown><h1 id=アジャイル開発12の原則>
-アジャイル開発12の原則
-<a class=anchor href=#%e3%82%a2%e3%82%b8%e3%83%a3%e3%82%a4%e3%83%ab%e9%96%8b%e7%99%ba12%e3%81%ae%e5%8e%9f%e5%89%87>#</a>
-</h1>
-<p><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a> で宣言されていた内容は、
+<label for=toc-control><img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#顧客満足を最優先し価値のあるソフトウェアを早く継続的に提供する>顧客満足を最優先し、価値のあるソフトウェアを早く継続的に提供する</a></li><li><a href=#要求の変更はたとえ開発の後期であっても歓迎する>要求の変更はたとえ開発の後期であっても歓迎する</a></li><li><a href=#動くソフトウェアを2-3週間から2-3ヶ月というできるだけ短い時間間隔でリリースする>動くソフトウェアを2-3週間から2-3ヶ月というできるだけ短い時間間隔でリリースする</a></li><li><a href=#ビジネス側の人と開発者はプロジェクトを通して日々一緒に働く>ビジネス側の人と開発者は、プロジェクトを通して日々一緒に働く</a></li><li><a href=#意欲に満ちた人々を集めてプロジェクトを構成する環境と支援を与え仕事が無事終わるまで彼らを信頼する>意欲に満ちた人々を集めてプロジェクトを構成する。環境と支援を与え仕事が無事終わるまで彼らを信頼する</a></li><li><a href=#情報を伝えるもっとも効率的で効果的な方法はフェイストゥフェイスで話をすること>情報を伝えるもっとも効率的で効果的な方法はフェイス・トゥ・フェイスで話をすること</a></li><li><a href=#動くソフトウェアこそが進捗の最も重要な尺度>動くソフトウェアこそが進捗の最も重要な尺度</a></li><li><a href=#アジャイルプロセスは持続可能な開発を促進する一定のペースを継続的に維持する>アジャイル･プロセスは持続可能な開発を促進する。一定のペースを継続的に維持する</a></li><li><a href=#技術や設計をレベルアップさせる意識が俊敏アジャイルさを高める>技術や設計をレベルアップさせる意識が、俊敏（アジャイル）さを高める</a></li><li><a href=#シンプルさムダなく作れる量を最大限にすることが本質>シンプルさ（ムダなく作れる量を最大限にすること）が本質</a></li><li><a href=#自己組織化したチームのメンバーが協調して動く方がパフォーマンスが高い>自己組織化したチームのメンバーが協調して動く方が、パフォーマンスが高い</a></li><li><a href=#定期的なふりかえりにより開発チームのパフォーマンスをより高めるようにする>定期的な「ふりかえり」により、開発チームのパフォーマンスをより高めるようにする</a></li></ul></nav></aside></header><article class=markdown><h1 id=アジャイル開発12の原則>アジャイル開発12の原則
+<a class=anchor href=#%e3%82%a2%e3%82%b8%e3%83%a3%e3%82%a4%e3%83%ab%e9%96%8b%e7%99%ba12%e3%81%ae%e5%8e%9f%e5%89%87>#</a></h1><p><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a> で宣言されていた内容は、
 アジャイル開発をする上で大事なマインドセットを述べたものでした。
-ではその背景にもなる <a href=https://agilemanifesto.org/iso/ja/principles.html>アジャイル開発12の原則</a> を見ていきましょう。先のアジャイルソフトウェア開発宣言のページにリンクがあります。</p>
-<pre tabindex=0><code>アジャイル宣言の背後にある原則
+ではその背景にもなる <a href=https://agilemanifesto.org/iso/ja/principles.html>アジャイル開発12の原則</a> を見ていきましょう。先のアジャイルソフトウェア開発宣言のページにリンクがあります。</p><pre tabindex=0><code>アジャイル宣言の背後にある原則
 
 
 私たちは以下の原則に従う:
@@ -519,14 +58,9 @@
 
 チームがもっと効率を高めることができるかを定期的に振り返り、
 それに基づいて自分たちのやり方を最適に調整します。
-</code></pre><p>次はこれについて読み解いてみましょう。</p>
-<h2 id=顧客満足を最優先し価値のあるソフトウェアを早く継続的に提供する>
-顧客満足を最優先し、価値のあるソフトウェアを早く継続的に提供する
-<a class=anchor href=#%e9%a1%a7%e5%ae%a2%e6%ba%80%e8%b6%b3%e3%82%92%e6%9c%80%e5%84%aa%e5%85%88%e3%81%97%e4%be%a1%e5%80%a4%e3%81%ae%e3%81%82%e3%82%8b%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2%e3%82%92%e6%97%a9%e3%81%8f%e7%b6%99%e7%b6%9a%e7%9a%84%e3%81%ab%e6%8f%90%e4%be%9b%e3%81%99%e3%82%8b>#</a>
-</h2>
-<p>開発者にとって最も重要な活動は<strong>顧客のビジネスを成功させ満足させる</strong>ことです。
-そのため、<strong>価値のあるソフトウェアを素早く継続的に提供する</strong>必要があります。</p>
-<p>ウォーターフォールモデルにおいて、開発の目的はQCDの達成でした。
+</code></pre><p>次はこれについて読み解いてみましょう。</p><h2 id=顧客満足を最優先し価値のあるソフトウェアを早く継続的に提供する>顧客満足を最優先し、価値のあるソフトウェアを早く継続的に提供する
+<a class=anchor href=#%e9%a1%a7%e5%ae%a2%e6%ba%80%e8%b6%b3%e3%82%92%e6%9c%80%e5%84%aa%e5%85%88%e3%81%97%e4%be%a1%e5%80%a4%e3%81%ae%e3%81%82%e3%82%8b%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2%e3%82%92%e6%97%a9%e3%81%8f%e7%b6%99%e7%b6%9a%e7%9a%84%e3%81%ab%e6%8f%90%e4%be%9b%e3%81%99%e3%82%8b>#</a></h2><p>開発者にとって最も重要な活動は<strong>顧客のビジネスを成功させ満足させる</strong>ことです。
+そのため、<strong>価値のあるソフトウェアを素早く継続的に提供する</strong>必要があります。</p><p>ウォーターフォールモデルにおいて、開発の目的はQCDの達成でした。
 これは、顧客とベンダの間で請負契約があり、
 ベンダは決められた納期までに、予算内に、品質を担保してプロダクトを提供する必要があるためです。
 しかし、アジャイル開発では前述の通り、準委任契約が前提になります。
@@ -534,47 +68,26 @@
 そのため、<strong>アジャイル開発において、開発の目的はQCDの達成ではありません。</strong>
 もちろんバグがないこと、コストを下げること、納期を守ることは大事です。
 しかし、エンドユーザに価値のあるソフトウェアを素早く継続的に提供することが最も目指すべきものです。
-その目的を見失ってはいけません。</p>
-<h2 id=要求の変更はたとえ開発の後期であっても歓迎する>
-要求の変更はたとえ開発の後期であっても歓迎する
-<a class=anchor href=#%e8%a6%81%e6%b1%82%e3%81%ae%e5%a4%89%e6%9b%b4%e3%81%af%e3%81%9f%e3%81%a8%e3%81%88%e9%96%8b%e7%99%ba%e3%81%ae%e5%be%8c%e6%9c%9f%e3%81%a7%e3%81%82%e3%81%a3%e3%81%a6%e3%82%82%e6%ad%93%e8%bf%8e%e3%81%99%e3%82%8b>#</a>
-</h2>
-<p>開発者は<strong>価値があるのであれば</strong>変更を積極的に受け入れます。
+その目的を見失ってはいけません。</p><h2 id=要求の変更はたとえ開発の後期であっても歓迎する>要求の変更はたとえ開発の後期であっても歓迎する
+<a class=anchor href=#%e8%a6%81%e6%b1%82%e3%81%ae%e5%a4%89%e6%9b%b4%e3%81%af%e3%81%9f%e3%81%a8%e3%81%88%e9%96%8b%e7%99%ba%e3%81%ae%e5%be%8c%e6%9c%9f%e3%81%a7%e3%81%82%e3%81%a3%e3%81%a6%e3%82%82%e6%ad%93%e8%bf%8e%e3%81%99%e3%82%8b>#</a></h2><p>開発者は<strong>価値があるのであれば</strong>変更を積極的に受け入れます。
 価値があるのであればというのが大事なポイントです。
-顧客に言われるがままに変更を受け入れるようなことはしません。</p>
-<p>では価値があるかどうかはどうやって見極めるのでしょうか？</p>
-<p><strong>価値があるかどうかはエンドユーザが見極めます。</strong>
+顧客に言われるがままに変更を受け入れるようなことはしません。</p><p>では価値があるかどうかはどうやって見極めるのでしょうか？</p><p><strong>価値があるかどうかはエンドユーザが見極めます。</strong>
 「開発もしてないのにどうやって？」と思われるかもしれませんが、
 それを検証する仮説検証というプロセスがアジャイル開発にはあります。
 プロトタイプを作って実際にユーザにヒアリングを行うのです。
-そうして、この機能は作ったほうがエンドユーザにとって利益があると分かって初めて開発に着手します。</p>
-<p>すなわち要求の変更があるということは、
+そうして、この機能は作ったほうがエンドユーザにとって利益があると分かって初めて開発に着手します。</p><p>すなわち要求の変更があるということは、
 改善につながる要求は新しい価値を見つけた証拠にほかなりません。
-要求の変更は「新しい価値」の発見の機会と捉え変更を前向きに受け入れることが大事です。</p>
-<h2 id=動くソフトウェアを2-3週間から2-3ヶ月というできるだけ短い時間間隔でリリースする>
-動くソフトウェアを2-3週間から2-3ヶ月というできるだけ短い時間間隔でリリースする
-<a class=anchor href=#%e5%8b%95%e3%81%8f%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2%e3%82%922-3%e9%80%b1%e9%96%93%e3%81%8b%e3%82%892-3%e3%83%b6%e6%9c%88%e3%81%a8%e3%81%84%e3%81%86%e3%81%a7%e3%81%8d%e3%82%8b%e3%81%a0%e3%81%91%e7%9f%ad%e3%81%84%e6%99%82%e9%96%93%e9%96%93%e9%9a%94%e3%81%a7%e3%83%aa%e3%83%aa%e3%83%bc%e3%82%b9%e3%81%99%e3%82%8b>#</a>
-</h2>
-<p>ウォーターフォールでは要件定義で抽出したすべての機能を一斉に作って、
+要求の変更は「新しい価値」の発見の機会と捉え変更を前向きに受け入れることが大事です。</p><h2 id=動くソフトウェアを2-3週間から2-3ヶ月というできるだけ短い時間間隔でリリースする>動くソフトウェアを2-3週間から2-3ヶ月というできるだけ短い時間間隔でリリースする
+<a class=anchor href=#%e5%8b%95%e3%81%8f%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2%e3%82%922-3%e9%80%b1%e9%96%93%e3%81%8b%e3%82%892-3%e3%83%b6%e6%9c%88%e3%81%a8%e3%81%84%e3%81%86%e3%81%a7%e3%81%8d%e3%82%8b%e3%81%a0%e3%81%91%e7%9f%ad%e3%81%84%e6%99%82%e9%96%93%e9%96%93%e9%9a%94%e3%81%a7%e3%83%aa%e3%83%aa%e3%83%bc%e3%82%b9%e3%81%99%e3%82%8b>#</a></h2><p>ウォーターフォールでは要件定義で抽出したすべての機能を一斉に作って、
 出揃ったら一斉にテストして、完了したらリリースという流れでプロダクトをリリースしてました。
-しかし、それではエンドユーザが確認できるのはプロダクトがすべてできてからとなります。</p>
-<p>そこで、アジャイル開発では動くソフトウェアを短い間隔でリリースし、少しずつ機能追加していく形でプロダクトを作っていきます。
+しかし、それではエンドユーザが確認できるのはプロダクトがすべてできてからとなります。</p><p>そこで、アジャイル開発では動くソフトウェアを短い間隔でリリースし、少しずつ機能追加していく形でプロダクトを作っていきます。
 なぜかというと、エンドユーザがプロダクトを触ってみないと具体的な意見を引き出せないからです。
 少しずつ実際に動くプロダクトをエンドユーザに提供することで、
-仮説検証をやりやすくしています。それがひいてはエンドユーザによりよい価値を提供することに繋がるわけです。</p>
-<h2 id=ビジネス側の人と開発者はプロジェクトを通して日々一緒に働く>
-ビジネス側の人と開発者は、プロジェクトを通して日々一緒に働く
-<a class=anchor href=#%e3%83%93%e3%82%b8%e3%83%8d%e3%82%b9%e5%81%b4%e3%81%ae%e4%ba%ba%e3%81%a8%e9%96%8b%e7%99%ba%e8%80%85%e3%81%af%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e3%82%92%e9%80%9a%e3%81%97%e3%81%a6%e6%97%a5%e3%80%85%e4%b8%80%e7%b7%92%e3%81%ab%e5%83%8d%e3%81%8f>#</a>
-</h2>
-<p>繰り返しになりますが、アジャイル開発において顧客とベンダは、
-エンドユーザによりよい価値を提供するという目標に向かって共に行動する仲間です。</p>
-<p>アジャイル開発では状況が刻々と変化します。そうしたなかで共通の目標が見えないまますすめると認識齟齬などが発生する可能性が出てきます。
-そうしたコミュニケーションエラーを低くするために<strong>関係者全員が一緒の場所で働く</strong>ことが理想です。</p>
-<h2 id=意欲に満ちた人々を集めてプロジェクトを構成する環境と支援を与え仕事が無事終わるまで彼らを信頼する>
-意欲に満ちた人々を集めてプロジェクトを構成する。環境と支援を与え仕事が無事終わるまで彼らを信頼する
-<a class=anchor href=#%e6%84%8f%e6%ac%b2%e3%81%ab%e6%ba%80%e3%81%a1%e3%81%9f%e4%ba%ba%e3%80%85%e3%82%92%e9%9b%86%e3%82%81%e3%81%a6%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e3%82%92%e6%a7%8b%e6%88%90%e3%81%99%e3%82%8b%e7%92%b0%e5%a2%83%e3%81%a8%e6%94%af%e6%8f%b4%e3%82%92%e4%b8%8e%e3%81%88%e4%bb%95%e4%ba%8b%e3%81%8c%e7%84%a1%e4%ba%8b%e7%b5%82%e3%82%8f%e3%82%8b%e3%81%be%e3%81%a7%e5%bd%bc%e3%82%89%e3%82%92%e4%bf%a1%e9%a0%bc%e3%81%99%e3%82%8b>#</a>
-</h2>
-<p>開発チームには<strong>意欲のある前向きな人々</strong>を集める。
+仮説検証をやりやすくしています。それがひいてはエンドユーザによりよい価値を提供することに繋がるわけです。</p><h2 id=ビジネス側の人と開発者はプロジェクトを通して日々一緒に働く>ビジネス側の人と開発者は、プロジェクトを通して日々一緒に働く
+<a class=anchor href=#%e3%83%93%e3%82%b8%e3%83%8d%e3%82%b9%e5%81%b4%e3%81%ae%e4%ba%ba%e3%81%a8%e9%96%8b%e7%99%ba%e8%80%85%e3%81%af%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e3%82%92%e9%80%9a%e3%81%97%e3%81%a6%e6%97%a5%e3%80%85%e4%b8%80%e7%b7%92%e3%81%ab%e5%83%8d%e3%81%8f>#</a></h2><p>繰り返しになりますが、アジャイル開発において顧客とベンダは、
+エンドユーザによりよい価値を提供するという目標に向かって共に行動する仲間です。</p><p>アジャイル開発では状況が刻々と変化します。そうしたなかで共通の目標が見えないまますすめると認識齟齬などが発生する可能性が出てきます。
+そうしたコミュニケーションエラーを低くするために<strong>関係者全員が一緒の場所で働く</strong>ことが理想です。</p><h2 id=意欲に満ちた人々を集めてプロジェクトを構成する環境と支援を与え仕事が無事終わるまで彼らを信頼する>意欲に満ちた人々を集めてプロジェクトを構成する。環境と支援を与え仕事が無事終わるまで彼らを信頼する
+<a class=anchor href=#%e6%84%8f%e6%ac%b2%e3%81%ab%e6%ba%80%e3%81%a1%e3%81%9f%e4%ba%ba%e3%80%85%e3%82%92%e9%9b%86%e3%82%81%e3%81%a6%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e3%82%92%e6%a7%8b%e6%88%90%e3%81%99%e3%82%8b%e7%92%b0%e5%a2%83%e3%81%a8%e6%94%af%e6%8f%b4%e3%82%92%e4%b8%8e%e3%81%88%e4%bb%95%e4%ba%8b%e3%81%8c%e7%84%a1%e4%ba%8b%e7%b5%82%e3%82%8f%e3%82%8b%e3%81%be%e3%81%a7%e5%bd%bc%e3%82%89%e3%82%92%e4%bf%a1%e9%a0%bc%e3%81%99%e3%82%8b>#</a></h2><p>開発チームには<strong>意欲のある前向きな人々</strong>を集める。
 よくアジャイル開発には開発スキルが必須で、コストをかけて高度な開発スキルをもつ人材をあつめなければならないと誤解をしている人が多い。
 実はこれは半分正解、半分間違っていて、
 高度な開発スキルを持っている人材は、そもそも技術習得に意欲的で前向きというオチです。
@@ -584,153 +97,68 @@
 そもそも、アジャイル開発ではどのような仕様になるかはプロジェクトが始まってみないとわかりません。
 そうした中で「高度なスキルを有する」といっても、どの技術に明るい人材を集めれば？となってしまうと思います。
 アプリケーションアーキテクチャや、フレームワークもプロジェクトが実際に始まって仮説検証をしてみないと決定できないのですから。
-ですので集めるメンバとしてはオブジェクト指向プログラミングの開発に長けているぐらいで大丈夫でしょう。</p>
-<p>人材を集めることができれば、関係者は開発チームを信頼して仕事を任せて、気持ちよく働けるよう配慮する。
-開発者はエンドユーザへの価値創造のために、自らが考え、自らの行動と判断に責任を持たないといけません。</p>
-<h2 id=情報を伝えるもっとも効率的で効果的な方法はフェイストゥフェイスで話をすること>
-情報を伝えるもっとも効率的で効果的な方法はフェイス・トゥ・フェイスで話をすること
-<a class=anchor href=#%e6%83%85%e5%a0%b1%e3%82%92%e4%bc%9d%e3%81%88%e3%82%8b%e3%82%82%e3%81%a3%e3%81%a8%e3%82%82%e5%8a%b9%e7%8e%87%e7%9a%84%e3%81%a7%e5%8a%b9%e6%9e%9c%e7%9a%84%e3%81%aa%e6%96%b9%e6%b3%95%e3%81%af%e3%83%95%e3%82%a7%e3%82%a4%e3%82%b9%e3%83%88%e3%82%a5%e3%83%95%e3%82%a7%e3%82%a4%e3%82%b9%e3%81%a7%e8%a9%b1%e3%82%92%e3%81%99%e3%82%8b%e3%81%93%e3%81%a8>#</a>
-</h2>
-<p>世の中には様々なコミュニケーションツールがありますが、
+ですので集めるメンバとしてはオブジェクト指向プログラミングの開発に長けているぐらいで大丈夫でしょう。</p><p>人材を集めることができれば、関係者は開発チームを信頼して仕事を任せて、気持ちよく働けるよう配慮する。
+開発者はエンドユーザへの価値創造のために、自らが考え、自らの行動と判断に責任を持たないといけません。</p><h2 id=情報を伝えるもっとも効率的で効果的な方法はフェイストゥフェイスで話をすること>情報を伝えるもっとも効率的で効果的な方法はフェイス・トゥ・フェイスで話をすること
+<a class=anchor href=#%e6%83%85%e5%a0%b1%e3%82%92%e4%bc%9d%e3%81%88%e3%82%8b%e3%82%82%e3%81%a3%e3%81%a8%e3%82%82%e5%8a%b9%e7%8e%87%e7%9a%84%e3%81%a7%e5%8a%b9%e6%9e%9c%e7%9a%84%e3%81%aa%e6%96%b9%e6%b3%95%e3%81%af%e3%83%95%e3%82%a7%e3%82%a4%e3%82%b9%e3%83%88%e3%82%a5%e3%83%95%e3%82%a7%e3%82%a4%e3%82%b9%e3%81%a7%e8%a9%b1%e3%82%92%e3%81%99%e3%82%8b%e3%81%93%e3%81%a8>#</a></h2><p>世の中には様々なコミュニケーションツールがありますが、
 <strong>相手とその場で会話する以上のコミュニケーション方法はありません</strong>。
-直接的な対話こそもっとも早く効率的で、それでいて最も効果的です。</p>
-<p>コミュニケーションにおいて大事なのは双方向であるということです。
+直接的な対話こそもっとも早く効率的で、それでいて最も効果的です。</p><p>コミュニケーションにおいて大事なのは双方向であるということです。
 特にメールは決まった仕様を伝えるだけのような一方通行なやり取りになりがちです。
 双方向なコミュニケーション構築のため、
 SlackやTeamsといったチャットベースのコミュニケーションツールのほうが良いでしょう。
 しかし、そうしたチャットベースのコミュニケーションを使う場面においても、
-直接的な対話にまさるものはないという意識はもってコミュニケーションするべきです。</p>
-<p>コミュニケーションにおいて表情や声のトーンといったノンバーバルなコミュニケーションが伝える情報はとても大きいです。
-ツールをつかったコミュニケーションはそういったノンバーバルな部分をつかったコミュニケーションがとれないためです。</p>
-<p>関係者全員が同じ空間に集まり、対面で双方向に対話することでお互いの意図を汲み取りやすくなります。</p>
-<h2 id=動くソフトウェアこそが進捗の最も重要な尺度>
-動くソフトウェアこそが進捗の最も重要な尺度
-<a class=anchor href=#%e5%8b%95%e3%81%8f%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2%e3%81%93%e3%81%9d%e3%81%8c%e9%80%b2%e6%8d%97%e3%81%ae%e6%9c%80%e3%82%82%e9%87%8d%e8%a6%81%e3%81%aa%e5%b0%ba%e5%ba%a6>#</a>
-</h2>
-<p>アジャイル開発では動くソフトウェアを短い間隔でリリースしますが、
-動いているすでに完成した機能が進捗をはかる重要な尺度になります。</p>
-<p>設計書の完成度など動くソフトウェア以外のものではかる進捗は実際に動作するまで問題に気づけない可能性があり尺度としては使えません。
-そこでアジャイルでは動くソフトウェアをなるだけ早いタイミングで見せられるように小さな単位でリリースする計画を立てます。</p>
-<p>ある機能がリリースまでに数週間かかるという場合、それは機能が大きすぎるとアジャイルでは判断します。
-機能を細分化して一つ一つの機能は数時間、どんなに長くても2~3日程度でリリースが完了する単位まで細分化すべきです。</p>
-<p><strong>リリースする単位が大きいとそれだけ開発時に考慮すべき事項が増えますし、見積もりも難しくなります。</strong>
+直接的な対話にまさるものはないという意識はもってコミュニケーションするべきです。</p><p>コミュニケーションにおいて表情や声のトーンといったノンバーバルなコミュニケーションが伝える情報はとても大きいです。
+ツールをつかったコミュニケーションはそういったノンバーバルな部分をつかったコミュニケーションがとれないためです。</p><p>関係者全員が同じ空間に集まり、対面で双方向に対話することでお互いの意図を汲み取りやすくなります。</p><h2 id=動くソフトウェアこそが進捗の最も重要な尺度>動くソフトウェアこそが進捗の最も重要な尺度
+<a class=anchor href=#%e5%8b%95%e3%81%8f%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2%e3%81%93%e3%81%9d%e3%81%8c%e9%80%b2%e6%8d%97%e3%81%ae%e6%9c%80%e3%82%82%e9%87%8d%e8%a6%81%e3%81%aa%e5%b0%ba%e5%ba%a6>#</a></h2><p>アジャイル開発では動くソフトウェアを短い間隔でリリースしますが、
+動いているすでに完成した機能が進捗をはかる重要な尺度になります。</p><p>設計書の完成度など動くソフトウェア以外のものではかる進捗は実際に動作するまで問題に気づけない可能性があり尺度としては使えません。
+そこでアジャイルでは動くソフトウェアをなるだけ早いタイミングで見せられるように小さな単位でリリースする計画を立てます。</p><p>ある機能がリリースまでに数週間かかるという場合、それは機能が大きすぎるとアジャイルでは判断します。
+機能を細分化して一つ一つの機能は数時間、どんなに長くても2~3日程度でリリースが完了する単位まで細分化すべきです。</p><p><strong>リリースする単位が大きいとそれだけ開発時に考慮すべき事項が増えますし、見積もりも難しくなります。</strong>
 受け入れも難しくなるでしょう。
-機能を細分化して数時間で終わるような単位になっていれば、メンバー間での認識齟齬が起きにくくなるという利点もあります。</p>
-<h2 id=アジャイルプロセスは持続可能な開発を促進する一定のペースを継続的に維持する>
-アジャイル･プロセスは持続可能な開発を促進する。一定のペースを継続的に維持する
-<a class=anchor href=#%e3%82%a2%e3%82%b8%e3%83%a3%e3%82%a4%e3%83%ab%e3%83%97%e3%83%ad%e3%82%bb%e3%82%b9%e3%81%af%e6%8c%81%e7%b6%9a%e5%8f%af%e8%83%bd%e3%81%aa%e9%96%8b%e7%99%ba%e3%82%92%e4%bf%83%e9%80%b2%e3%81%99%e3%82%8b%e4%b8%80%e5%ae%9a%e3%81%ae%e3%83%9a%e3%83%bc%e3%82%b9%e3%82%92%e7%b6%99%e7%b6%9a%e7%9a%84%e3%81%ab%e7%b6%ad%e6%8c%81%e3%81%99%e3%82%8b>#</a>
-</h2>
-<p>アジャイルにおいて大事なのは無理をしないことです。
+機能を細分化して数時間で終わるような単位になっていれば、メンバー間での認識齟齬が起きにくくなるという利点もあります。</p><h2 id=アジャイルプロセスは持続可能な開発を促進する一定のペースを継続的に維持する>アジャイル･プロセスは持続可能な開発を促進する。一定のペースを継続的に維持する
+<a class=anchor href=#%e3%82%a2%e3%82%b8%e3%83%a3%e3%82%a4%e3%83%ab%e3%83%97%e3%83%ad%e3%82%bb%e3%82%b9%e3%81%af%e6%8c%81%e7%b6%9a%e5%8f%af%e8%83%bd%e3%81%aa%e9%96%8b%e7%99%ba%e3%82%92%e4%bf%83%e9%80%b2%e3%81%99%e3%82%8b%e4%b8%80%e5%ae%9a%e3%81%ae%e3%83%9a%e3%83%bc%e3%82%b9%e3%82%92%e7%b6%99%e7%b6%9a%e7%9a%84%e3%81%ab%e7%b6%ad%e6%8c%81%e3%81%99%e3%82%8b>#</a></h2><p>アジャイルにおいて大事なのは無理をしないことです。
 ウォーターフォールの開発ではQCDの達成のために、（特に下流工程で起きがちですが）ときに残業をしてでも納期に間に合わせるといったことが行われます。
-これができるのはプロジェクトにおわりがあるからです。（すべきではないですが）期限があるからこそムチャがききます。</p>
-<p>しかし、アジャイルではプロジェクトに明確な終わりはありません、プロダクトをリリースしたあとも、
+これができるのはプロジェクトにおわりがあるからです。（すべきではないですが）期限があるからこそムチャがききます。</p><p>しかし、アジャイルではプロジェクトに明確な終わりはありません、プロダクトをリリースしたあとも、
 エンドユーザにより良い価値を提供する、あるいは顧客が目指すビジョンの実現に向けて継続的な開発が続きます。
 そうした中において、無茶をせず持続可能な無理のない開発ペースを保つというのはとても大事なことです。
 <strong>無理をした状態では、創意工夫をしたり、改善をしたりといった意欲が起きにくく、トータルでパフォーマンスが低下してしまいます。</strong>
-開発者だけでなく顧客も心身ともにベストな状態を保ちましょう。</p>
-<h2 id=技術や設計をレベルアップさせる意識が俊敏アジャイルさを高める>
-技術や設計をレベルアップさせる意識が、俊敏（アジャイル）さを高める
-<a class=anchor href=#%e6%8a%80%e8%a1%93%e3%82%84%e8%a8%ad%e8%a8%88%e3%82%92%e3%83%ac%e3%83%99%e3%83%ab%e3%82%a2%e3%83%83%e3%83%97%e3%81%95%e3%81%9b%e3%82%8b%e6%84%8f%e8%ad%98%e3%81%8c%e4%bf%8a%e6%95%8f%e3%82%a2%e3%82%b8%e3%83%a3%e3%82%a4%e3%83%ab%e3%81%95%e3%82%92%e9%ab%98%e3%82%81%e3%82%8b>#</a>
-</h2>
-<p>開発者は<strong>常に最新の技術を学び、効果的な技術はプロダクトに適用すること</strong>が求められます。
+開発者だけでなく顧客も心身ともにベストな状態を保ちましょう。</p><h2 id=技術や設計をレベルアップさせる意識が俊敏アジャイルさを高める>技術や設計をレベルアップさせる意識が、俊敏（アジャイル）さを高める
+<a class=anchor href=#%e6%8a%80%e8%a1%93%e3%82%84%e8%a8%ad%e8%a8%88%e3%82%92%e3%83%ac%e3%83%99%e3%83%ab%e3%82%a2%e3%83%83%e3%83%97%e3%81%95%e3%81%9b%e3%82%8b%e6%84%8f%e8%ad%98%e3%81%8c%e4%bf%8a%e6%95%8f%e3%82%a2%e3%82%b8%e3%83%a3%e3%82%a4%e3%83%ab%e3%81%95%e3%82%92%e9%ab%98%e3%82%81%e3%82%8b>#</a></h2><p>開発者は<strong>常に最新の技術を学び、効果的な技術はプロダクトに適用すること</strong>が求められます。
 特に昔ながらのプロジェクトによくある話として、&ldquo;稼働実績"という言葉があります。
 本番稼働していてバグが起きないことを確認しているから、該当箇所には手を入れないようにする仕草です。
 しかし、機能を追加開発していく中でそうした"稼働実績"を考慮したソースコードの改変はいつか無理が出てきます。
-気づけば歪なソースコードになってしまいます。</p>
-<p>なぜ"稼働実績"にこれまで頼っていたかというと、テストやデプロイのプロセスの自動化がなされていないため、
+気づけば歪なソースコードになってしまいます。</p><p>なぜ"稼働実績"にこれまで頼っていたかというと、テストやデプロイのプロセスの自動化がなされていないため、
 テスト・品質保証に膨大な時間がかかることからそれを削減するためです。
 逆に言うとテストやデプロイのプロセスを自動化し短時間で実施することができれば、
-&ldquo;稼働実績"に頼ることなく容易に変更できるようになり、ソフトウェアを"あるべき姿"に保てるはずです。</p>
-<p>ソフトウェアをきれいに保つということは俊敏さを高めるためにとても大事です。
+&ldquo;稼働実績"に頼ることなく容易に変更できるようになり、ソフトウェアを"あるべき姿"に保てるはずです。</p><p>ソフトウェアをきれいに保つということは俊敏さを高めるためにとても大事です。
 歪になったソフトウェアは影響範囲を見極めるだけで大ごとで、ちょっとした改修でも非常に大きなコストがかかります。
 プロダクトをリリースした直後は問題なくても、次第にどんどん改修コストが大きくなっていくことでしょう。
 ソフトウェアをきれいに保つことができていれば、変更も容易になり、たとえシステム全体の規模が大きくなっても、
-継続的な短期間での機能リリースが可能になるはずです。</p>
-<p>しかし、自動テストやデプロイの自動化はとても大変です。機能の実装以上に単体テストの実装難易度が高いこともよく起こります。
+継続的な短期間での機能リリースが可能になるはずです。</p><p>しかし、自動テストやデプロイの自動化はとても大変です。機能の実装以上に単体テストの実装難易度が高いこともよく起こります。
 またソフトウェアの自動テストが短い時間で完了するようソフトウェアを設計することも非常に大変です。
-非常に大変ですが、<strong>自動テストや自動デプロイは俊敏さを保つための分水嶺</strong>であり、これを怠ってはいけません。</p>
-<p><strong>開発に関わる関係者全員が最新技術を学ぶということに対して価値を認めることがとても大事です。</strong></p>
-<h2 id=シンプルさムダなく作れる量を最大限にすることが本質>
-シンプルさ（ムダなく作れる量を最大限にすること）が本質
-<a class=anchor href=#%e3%82%b7%e3%83%b3%e3%83%97%e3%83%ab%e3%81%95%e3%83%a0%e3%83%80%e3%81%aa%e3%81%8f%e4%bd%9c%e3%82%8c%e3%82%8b%e9%87%8f%e3%82%92%e6%9c%80%e5%a4%a7%e9%99%90%e3%81%ab%e3%81%99%e3%82%8b%e3%81%93%e3%81%a8%e3%81%8c%e6%9c%ac%e8%b3%aa>#</a>
-</h2>
-<p>アジャイルはウォーターフォールに比べて少ない要員で早く開発できるとよく言われます。
+非常に大変ですが、<strong>自動テストや自動デプロイは俊敏さを保つための分水嶺</strong>であり、これを怠ってはいけません。</p><p><strong>開発に関わる関係者全員が最新技術を学ぶということに対して価値を認めることがとても大事です。</strong></p><h2 id=シンプルさムダなく作れる量を最大限にすることが本質>シンプルさ（ムダなく作れる量を最大限にすること）が本質
+<a class=anchor href=#%e3%82%b7%e3%83%b3%e3%83%97%e3%83%ab%e3%81%95%e3%83%a0%e3%83%80%e3%81%aa%e3%81%8f%e4%bd%9c%e3%82%8c%e3%82%8b%e9%87%8f%e3%82%92%e6%9c%80%e5%a4%a7%e9%99%90%e3%81%ab%e3%81%99%e3%82%8b%e3%81%93%e3%81%a8%e3%81%8c%e6%9c%ac%e8%b3%aa>#</a></h2><p>アジャイルはウォーターフォールに比べて少ない要員で早く開発できるとよく言われます。
 これは半分正解、半分間違っています。
 アジャイルが早く開発できるのは <strong>無駄なもの(=価値を生まないもの)を作らないから</strong> です。
 たとえエクストリーム・プログラミングのプラクティスを採用したとしても、
 ウォーターフォールモデルのように最初に全ての機能を定義して、
 それを全部作っていたらとても時間がかかるでしょう。
-それこそウォーターフォールと違って人員が少ないのですから、ウォーターフォール以上に時間がかかるのは火を見るより明らかです。</p>
-<p>アジャイルでは <strong>「ムダ=価値を生まない」を探して「やめる勇気」を持つこと</strong> がとても大事です。
-これはプロダクトの機能だけでなく、アジャイル開発チームの開発プロセスも対象です。</p>
-<p>日々の作業の中から、全員が無駄を見つけ削減することが、開発チームの機敏性を高め、生産性を向上させることに繋がります。</p>
-<h2 id=自己組織化したチームのメンバーが協調して動く方がパフォーマンスが高い>
-自己組織化したチームのメンバーが協調して動く方が、パフォーマンスが高い
-<a class=anchor href=#%e8%87%aa%e5%b7%b1%e7%b5%84%e7%b9%94%e5%8c%96%e3%81%97%e3%81%9f%e3%83%81%e3%83%bc%e3%83%a0%e3%81%ae%e3%83%a1%e3%83%b3%e3%83%90%e3%83%bc%e3%81%8c%e5%8d%94%e8%aa%bf%e3%81%97%e3%81%a6%e5%8b%95%e3%81%8f%e6%96%b9%e3%81%8c%e3%83%91%e3%83%95%e3%82%a9%e3%83%bc%e3%83%9e%e3%83%b3%e3%82%b9%e3%81%8c%e9%ab%98%e3%81%84>#</a>
-</h2>
-<p>自己組織化チームという言葉が出てきました。これこそアジャイル開発チームが目指すべき姿です。
+それこそウォーターフォールと違って人員が少ないのですから、ウォーターフォール以上に時間がかかるのは火を見るより明らかです。</p><p>アジャイルでは <strong>「ムダ=価値を生まない」を探して「やめる勇気」を持つこと</strong> がとても大事です。
+これはプロダクトの機能だけでなく、アジャイル開発チームの開発プロセスも対象です。</p><p>日々の作業の中から、全員が無駄を見つけ削減することが、開発チームの機敏性を高め、生産性を向上させることに繋がります。</p><h2 id=自己組織化したチームのメンバーが協調して動く方がパフォーマンスが高い>自己組織化したチームのメンバーが協調して動く方が、パフォーマンスが高い
+<a class=anchor href=#%e8%87%aa%e5%b7%b1%e7%b5%84%e7%b9%94%e5%8c%96%e3%81%97%e3%81%9f%e3%83%81%e3%83%bc%e3%83%a0%e3%81%ae%e3%83%a1%e3%83%b3%e3%83%90%e3%83%bc%e3%81%8c%e5%8d%94%e8%aa%bf%e3%81%97%e3%81%a6%e5%8b%95%e3%81%8f%e6%96%b9%e3%81%8c%e3%83%91%e3%83%95%e3%82%a9%e3%83%bc%e3%83%9e%e3%83%b3%e3%82%b9%e3%81%8c%e9%ab%98%e3%81%84>#</a></h2><p>自己組織化チームという言葉が出てきました。これこそアジャイル開発チームが目指すべき姿です。
 <strong>自己組織化チームとはチームの外部から指示されるのではなく、自分の仕事を達成するための最善の方法を選択する自律性を持つチーム</strong>です。
-開発チームは自分たちで規律やルールを決め、自ら率先して作業の改善や課題の解決に取り組みます。</p>
-<p>この自己組織化したチームというのは言葉で言うのは容易ですが、実現するのは非常に大変です。
+開発チームは自分たちで規律やルールを決め、自ら率先して作業の改善や課題の解決に取り組みます。</p><p>この自己組織化したチームというのは言葉で言うのは容易ですが、実現するのは非常に大変です。
 当たり前ですがチームがある日突然急に自己組織化するなんてことはありません。
 少なくとも、変えようという思いを持ったメンバーがいなければできませんし、
-そうしたメンバーが少しずつ少しづつ地道に変化を促してようやく実現できるのが自己組織化したチームです。</p>
-<p>自己組織化した組織になるとどうなるかというと、特定メンバーに依存しすぎないチームになります。
+そうしたメンバーが少しずつ少しづつ地道に変化を促してようやく実現できるのが自己組織化したチームです。</p><p>自己組織化した組織になるとどうなるかというと、特定メンバーに依存しすぎないチームになります。
 そうすると特定の誰かが抜けてもプロジェクトが行き詰まることが少なくなります。
 また、メンバーの当事者意識が高まるという効果もあります。
-それがひいてはパフォーマンスの向上に繋がるというわけです。</p>
-<h2 id=定期的なふりかえりにより開発チームのパフォーマンスをより高めるようにする>
-定期的な「ふりかえり」により、開発チームのパフォーマンスをより高めるようにする
-<a class=anchor href=#%e5%ae%9a%e6%9c%9f%e7%9a%84%e3%81%aa%e3%81%b5%e3%82%8a%e3%81%8b%e3%81%88%e3%82%8a%e3%81%ab%e3%82%88%e3%82%8a%e9%96%8b%e7%99%ba%e3%83%81%e3%83%bc%e3%83%a0%e3%81%ae%e3%83%91%e3%83%95%e3%82%a9%e3%83%bc%e3%83%9e%e3%83%b3%e3%82%b9%e3%82%92%e3%82%88%e3%82%8a%e9%ab%98%e3%82%81%e3%82%8b%e3%82%88%e3%81%86%e3%81%ab%e3%81%99%e3%82%8b>#</a>
-</h2>
-<p>先の自己組織化したチームにも関連した話になりますが、
+それがひいてはパフォーマンスの向上に繋がるというわけです。</p><h2 id=定期的なふりかえりにより開発チームのパフォーマンスをより高めるようにする>定期的な「ふりかえり」により、開発チームのパフォーマンスをより高めるようにする
+<a class=anchor href=#%e5%ae%9a%e6%9c%9f%e7%9a%84%e3%81%aa%e3%81%b5%e3%82%8a%e3%81%8b%e3%81%88%e3%82%8a%e3%81%ab%e3%82%88%e3%82%8a%e9%96%8b%e7%99%ba%e3%83%81%e3%83%bc%e3%83%a0%e3%81%ae%e3%83%91%e3%83%95%e3%82%a9%e3%83%bc%e3%83%9e%e3%83%b3%e3%82%b9%e3%82%92%e3%82%88%e3%82%8a%e9%ab%98%e3%82%81%e3%82%8b%e3%82%88%e3%81%86%e3%81%ab%e3%81%99%e3%82%8b>#</a></h2><p>先の自己組織化したチームにも関連した話になりますが、
 アジャイルではチームが常に成長し続けるために毎週振り返り（よく"レトロスペクティブ&rdquo;、&ldquo;レトロ"と呼ばれます）を開発メンバ全員で行います。
-この振り返りこそアジャイルの開発プロセスにおいて最も肝心な部分です。</p>
-<p>このレトロの場でチームが抱えている課題や、ムダを見つけていきます。
+この振り返りこそアジャイルの開発プロセスにおいて最も肝心な部分です。</p><p>このレトロの場でチームが抱えている課題や、ムダを見つけていきます。
 例えば今週はパフォーマンスが上がらなかったとか、リモートワークの難しさなど、
 日頃の開発の中で上がるモヤモヤをここで共有します。メンバーが抱えているモヤモヤこそ改善のポイントです。
-ここで大事なのは<strong>開発で直面する様々な問題はチームで立ち向かうべき問題であり、個人の責任にしない</strong>ということです。</p>
-<p>例えば、開発をすすめる中で障害を作り込んだとします。効率の悪い自動テストができているとかでもいいでしょう。
+ここで大事なのは<strong>開発で直面する様々な問題はチームで立ち向かうべき問題であり、個人の責任にしない</strong>ということです。</p><p>例えば、開発をすすめる中で障害を作り込んだとします。効率の悪い自動テストができているとかでもいいでしょう。
 アジャイルチームはこの問題を作り込んだ開発プロセス自体に問題があると考え、それに対処する手をチーム全員で考えます。
-決して問題を作り込んだ個人を責めるようなことがあってはいけません。</p>
-<p>特定の個人が責められることがないということは、それは心理的安全性が高いということです。
+決して問題を作り込んだ個人を責めるようなことがあってはいけません。</p><p>特定の個人が責められることがないということは、それは心理的安全性が高いということです。
 <strong>チームの心理的安全性が高くなければモヤモヤを共有することもできません。</strong>
-振り返りの場では気楽に何でも相談できる空気を作ることが大事です。</p>
-<hr>
-<p>ここまででアジャイルの概要の説明はおわりです。最後にまとめます。</p>
-<a href=/agile-dev-guide/docs/agile/conclude/ class=book-btn>
-まとめ
-</a>
-</article>
-<footer class=book-footer>
-<div class="flex flex-wrap justify-between">
-</div>
-<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
-</footer>
-<div class=book-comments>
-</div>
-<label for=menu-control class="hidden book-menu-overlay"></label>
-</div>
-<aside class=book-toc>
-<div class=book-toc-content>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#顧客満足を最優先し価値のあるソフトウェアを早く継続的に提供する>顧客満足を最優先し、価値のあるソフトウェアを早く継続的に提供する</a></li>
-<li><a href=#要求の変更はたとえ開発の後期であっても歓迎する>要求の変更はたとえ開発の後期であっても歓迎する</a></li>
-<li><a href=#動くソフトウェアを2-3週間から2-3ヶ月というできるだけ短い時間間隔でリリースする>動くソフトウェアを2-3週間から2-3ヶ月というできるだけ短い時間間隔でリリースする</a></li>
-<li><a href=#ビジネス側の人と開発者はプロジェクトを通して日々一緒に働く>ビジネス側の人と開発者は、プロジェクトを通して日々一緒に働く</a></li>
-<li><a href=#意欲に満ちた人々を集めてプロジェクトを構成する環境と支援を与え仕事が無事終わるまで彼らを信頼する>意欲に満ちた人々を集めてプロジェクトを構成する。環境と支援を与え仕事が無事終わるまで彼らを信頼する</a></li>
-<li><a href=#情報を伝えるもっとも効率的で効果的な方法はフェイストゥフェイスで話をすること>情報を伝えるもっとも効率的で効果的な方法はフェイス・トゥ・フェイスで話をすること</a></li>
-<li><a href=#動くソフトウェアこそが進捗の最も重要な尺度>動くソフトウェアこそが進捗の最も重要な尺度</a></li>
-<li><a href=#アジャイルプロセスは持続可能な開発を促進する一定のペースを継続的に維持する>アジャイル･プロセスは持続可能な開発を促進する。一定のペースを継続的に維持する</a></li>
-<li><a href=#技術や設計をレベルアップさせる意識が俊敏アジャイルさを高める>技術や設計をレベルアップさせる意識が、俊敏（アジャイル）さを高める</a></li>
-<li><a href=#シンプルさムダなく作れる量を最大限にすることが本質>シンプルさ（ムダなく作れる量を最大限にすること）が本質</a></li>
-<li><a href=#自己組織化したチームのメンバーが協調して動く方がパフォーマンスが高い>自己組織化したチームのメンバーが協調して動く方が、パフォーマンスが高い</a></li>
-<li><a href=#定期的なふりかえりにより開発チームのパフォーマンスをより高めるようにする>定期的な「ふりかえり」により、開発チームのパフォーマンスをより高めるようにする</a></li>
-</ul>
-</nav>
-</div>
-</aside>
-</main>
-</body>
-</html>
+振り返りの場では気楽に何でも相談できる空気を作ることが大事です。</p><hr><p>ここまででアジャイルの概要の説明はおわりです。最後にまとめます。</p><a href=/agile-dev-guide/docs/agile/conclude/ class=book-btn>まとめ</a></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#顧客満足を最優先し価値のあるソフトウェアを早く継続的に提供する>顧客満足を最優先し、価値のあるソフトウェアを早く継続的に提供する</a></li><li><a href=#要求の変更はたとえ開発の後期であっても歓迎する>要求の変更はたとえ開発の後期であっても歓迎する</a></li><li><a href=#動くソフトウェアを2-3週間から2-3ヶ月というできるだけ短い時間間隔でリリースする>動くソフトウェアを2-3週間から2-3ヶ月というできるだけ短い時間間隔でリリースする</a></li><li><a href=#ビジネス側の人と開発者はプロジェクトを通して日々一緒に働く>ビジネス側の人と開発者は、プロジェクトを通して日々一緒に働く</a></li><li><a href=#意欲に満ちた人々を集めてプロジェクトを構成する環境と支援を与え仕事が無事終わるまで彼らを信頼する>意欲に満ちた人々を集めてプロジェクトを構成する。環境と支援を与え仕事が無事終わるまで彼らを信頼する</a></li><li><a href=#情報を伝えるもっとも効率的で効果的な方法はフェイストゥフェイスで話をすること>情報を伝えるもっとも効率的で効果的な方法はフェイス・トゥ・フェイスで話をすること</a></li><li><a href=#動くソフトウェアこそが進捗の最も重要な尺度>動くソフトウェアこそが進捗の最も重要な尺度</a></li><li><a href=#アジャイルプロセスは持続可能な開発を促進する一定のペースを継続的に維持する>アジャイル･プロセスは持続可能な開発を促進する。一定のペースを継続的に維持する</a></li><li><a href=#技術や設計をレベルアップさせる意識が俊敏アジャイルさを高める>技術や設計をレベルアップさせる意識が、俊敏（アジャイル）さを高める</a></li><li><a href=#シンプルさムダなく作れる量を最大限にすることが本質>シンプルさ（ムダなく作れる量を最大限にすること）が本質</a></li><li><a href=#自己組織化したチームのメンバーが協調して動く方がパフォーマンスが高い>自己組織化したチームのメンバーが協調して動く方が、パフォーマンスが高い</a></li><li><a href=#定期的なふりかえりにより開発チームのパフォーマンスをより高めるようにする>定期的な「ふりかえり」により、開発チームのパフォーマンスをより高めるようにする</a></li></ul></nav></div></aside></main></body></html>

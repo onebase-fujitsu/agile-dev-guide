@@ -1,968 +1,293 @@
-<!doctype html><html lang=en dir=ltr>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=description content="E2Eテスト # E2Eテストとは # ここまでソフトウェアの単体テストやインテグレーションテストのやり方を見てきました。 しかし、ServerやCl">
-<meta name=theme-color content="#FFFFFF"><meta property="og:title" content="E2Eテスト">
-<meta property="og:description" content="E2Eテスト # E2Eテストとは # ここまでソフトウェアの単体テストやインテグレーションテストのやり方を見てきました。 しかし、ServerやCl">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/"><meta property="article:section" content="docs">
-<title>E2Eテスト | Fujitsu Agile Development Guide</title>
-<link rel=manifest href=/agile-dev-guide/manifest.json>
-<link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon>
-<link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous>
-</head>
-<body dir=ltr>
-<input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control>
-<main class="container flex">
-<aside class=book-menu>
-<div class=book-menu-content>
-<nav>
-<h2 class=book-brand>
-<a href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span>
-</a>
-</h2>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/>はじめに</a>
-</li>
-<li>
-<input type=checkbox id=section-b077c62e2cf275f367b13c9cd484dcf6 class=toggle>
-<label for=section-b077c62e2cf275f367b13c9cd484dcf6 class="flex justify-between">
-<a role=button>アジャイル</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/>アジャイル開発12の原則</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/>まとめ</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-488859b49087c05cd9f2afa3c2804c61 class=toggle>
-<label for=section-488859b49087c05cd9f2afa3c2804c61 class="flex justify-between">
-<a role=button>スクラム</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/overview/>スクラムとは</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/roles/>ロール</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/products/>成果物</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/events/>イベント</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/conclude/>まとめ</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-f43a50e4d00e3398d279579a5a9a0783 class=toggle>
-<label for=section-f43a50e4d00e3398d279579a5a9a0783 class="flex justify-between">
-<a role=button>エクストリームプログラミング</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/>エクストリームプログラミングとは</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/>エクストリームプログラミングのプラクティス</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/>まとめ</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-4881c8ea96a48f6fd2540db502c204e0 class=toggle checked>
-<label for=section-4881c8ea96a48f6fd2540db502c204e0 class="flex justify-between">
-<a role=button>ソフトウェアテスト</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/overview/>ソフトウェアテストを始めよう</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/>ウォーミングアップ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/>ボウリングゲーム</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/>テストダブル</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/ class=active>E2Eテスト</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-6668e94793f2c3410fae208f25d1f417 class=toggle>
-<label for=section-6668e94793f2c3410fae208f25d1f417 class="flex justify-between">
-<a role=button>ソフトウェア設計</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/>アジャイル開発に求められるソフトウェア設計</a>
-</li>
-<li>
-<input type=checkbox id=section-fd21b9cd7e31d8e1d2ba14b32452065e class=toggle>
-<label for=section-fd21b9cd7e31d8e1d2ba14b32452065e class="flex justify-between">
-<a role=button>SOLID原則</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/>単一責任の原則(SRP)</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/>オープン・クローズドの原則(OCP)</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/>リスコフの置換原則(LSP)</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>依存性逆転の原則(DIP)</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/>インターフェース分離の原則(ISP)</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-ee4c81ada0b6a9ee859cebeab00ca76e class=toggle>
-<label for=section-ee4c81ada0b6a9ee859cebeab00ca76e class="flex justify-between">
-<a role=button>デザインパターン</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/designpattern/designpattern/>デザインパターン</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-a16dbb8fa8b2df15e7da65eb13e2d51a class=toggle>
-<label for=section-a16dbb8fa8b2df15e7da65eb13e2d51a class="flex justify-between">
-<a role=button>アジャイルの実践</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/>1日目</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/>2日目</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/>3日目</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/>4日目</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/>5日目</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/>6日目</a>
-</li>
-</ul>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/>おわりに</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/>推奨書籍</a>
-</li>
-<li class=book-section-flat>
-<span>全体編</span>
-<ul>
-<li>
-<input type=checkbox id=section-e99c955bf75208a72cc409dac3a52e06 class=toggle>
-<label for=section-e99c955bf75208a72cc409dac3a52e06 class="flex justify-between">
-<a role=button>リーンスタートアップアジャイル</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/overview/>リーンスタートアップアジャイルの流れ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/organization/>体制・役割</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/productvision/>プロダクトビジョン / バリュープロポジション</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-9be0117e86ea19505cc5ceb0d72e959e class=toggle>
-<label for=section-9be0117e86ea19505cc5ceb0d72e959e class="flex justify-between">
-<a role=button>モダナイゼーションアジャイル</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/overview/>モダナイゼーションアジャイルの流れ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/organization/>体制・役割</a>
-</li>
-<li>
-<input type=checkbox id=section-bde04692c1fd3ecde39ac4bab024fff3 class=toggle>
-<label for=section-bde04692c1fd3ecde39ac4bab024fff3 class="flex justify-between">
-<a role=button>Swift Method</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/overview/>Swift Method とは</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/eventstorming/>Event Storming</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/boris/>Boris</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/snape/>SnapE</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/slices/>Slices</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/techchoice/>Tech Choice</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class=book-section-flat>
-<span>Team編</span>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/workstyle/>チームの働き方</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/balancedteam/>バランスチーム</a>
-</li>
-<li>
-<input type=checkbox id=section-567421c4f32cd12e88a451ff3fc3c989 class=toggle>
-<label for=section-567421c4f32cd12e88a451ff3fc3c989 class="flex justify-between">
-<a role=button>マインドセット</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/onebase/>ONEbaseの価値観</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/psychologicalsafety/>心理的安全性</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/xp/>XPの価値観</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/practice/>プラクティスの取り入れ方</a>
-</li>
-</ul>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/teambuilding/>チームビルディング</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/remotework/>リモートワーク</a>
-</li>
-<li>
-<input type=checkbox id=section-b52b30221e4a89615e78dbb78082bc47 class=toggle>
-<label for=section-b52b30221e4a89615e78dbb78082bc47 class="flex justify-between">
-<a role=button>チームのアクティビティ</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/officestandup/>全体スタンドアップ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamstandup/>チームスタンドアップ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/preipm/>Pre-IPM</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/ipm/>IPM</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/cl/>CLミーティング</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/retro/>レトロスペクティブ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/salesmeeting/>営業確認会議</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/internalsync/>Internal Sync</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/riskmitigations/>Risks & Mitigations</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/feedback/>フィードバック</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/icebreak/>Ice Break</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamhealthcheck/>Team Health Check</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/1on1/>1on1</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/exercise/>ラジオ体操</a>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=section-0ca98ed05d635a669132a6c12086bd7c class=toggle>
-<label for=section-0ca98ed05d635a669132a6c12086bd7c class="flex justify-between">
-<a role=button>チームのプラクティス</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/facilitation/>ファシリテーション</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/okrs/>OKRs</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class=book-section-flat>
-<span>Designer編</span>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/overview/>Designerとは</a>
-</li>
-<li>
-<input type=checkbox id=section-0356f56143a8f1215a9a8d2120898187 class=toggle>
-<label for=section-0356f56143a8f1215a9a8d2120898187 class="flex justify-between">
-<a role=button>Designerのプラクティス</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/persona/>ペルソナ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/scenario/>シナリオ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchplanning/>リサーチ計画立案</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/prototyping/>プロトタイピング</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/script/>スクリプト作成</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchaction/>リサーチ実施</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/synthesize/>シンセサイズ</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class=book-section-flat>
-<span>Product Manager編</span>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/overview/>Product Managerとは</a>
-</li>
-<li>
-<input type=checkbox id=section-8fbae8de73ef8326d3c4d80af4144c79 class=toggle>
-<label for=section-8fbae8de73ef8326d3c4d80af4144c79 class="flex justify-between">
-<a role=button>Product Managerのプラクティス</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/roadmap/>プロダクトロードマップ</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/>MVP</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstorymapping/>ユーザーストーリーマッピング</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/>ユーザーストーリー</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/>2×2</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class=book-section-flat>
-<span>Developer編</span>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/overview/>Developerとは</a>
-</li>
-<li>
-<input type=checkbox id=section-8663d063f439d3f63d1a0dffad20b22d class=toggle>
-<label for=section-8663d063f439d3f63d1a0dffad20b22d class="flex justify-between">
-<a role=button>Developerのプラクティス</a>
-</label>
-<ul>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/tdd/>TDD</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/cicd/>CI/CD</a>
-</li>
-<li>
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/pairprogramming/>ペアプログラミング</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</nav>
-<script>(function(){var a=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(b){localStorage.setItem("menu.scrollTop",a.scrollTop)}),a.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
-</div>
-</aside>
-<div class=book-page>
-<header class=book-header>
-<div class="flex align-center justify-between">
-<label for=menu-control>
-<img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu>
-</label>
+<!doctype html><html lang=en dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="E2Eテスト # E2Eテストとは # ここまでソフトウェアの単体テストやインテグレーションテストのやり方を見てきました。 しかし、ServerやCl"><meta name=theme-color content="#FFFFFF"><meta property="og:title" content="E2Eテスト"><meta property="og:description" content="E2Eテスト # E2Eテストとは # ここまでソフトウェアの単体テストやインテグレーションテストのやり方を見てきました。 しかし、ServerやCl"><meta property="og:type" content="article"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/"><meta property="article:section" content="docs"><title>E2Eテスト | Fujitsu Agile Development Guide</title><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=icon href=/agile-dev-guide/favicon.png type=image/x-icon><link rel=stylesheet href=/agile-dev-guide/book.min.958cea7827621d6fbcb3acf091344c3e44e3d2a9428f9c3c38bb9eb37bf8c45d.css integrity="sha256-lYzqeCdiHW+8s6zwkTRMPkTj0qlCj5w8OLues3v4xF0=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span></a></h2><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/>はじめに</a></li><li><input type=checkbox id=section-b077c62e2cf275f367b13c9cd484dcf6 class=toggle>
+<label for=section-b077c62e2cf275f367b13c9cd484dcf6 class="flex justify-between"><a role=button>アジャイル</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/>アジャイル開発12の原則</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-488859b49087c05cd9f2afa3c2804c61 class=toggle>
+<label for=section-488859b49087c05cd9f2afa3c2804c61 class="flex justify-between"><a role=button>スクラム</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/overview/>スクラムとは</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/roles/>ロール</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/products/>成果物</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/events/>イベント</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-f43a50e4d00e3398d279579a5a9a0783 class=toggle>
+<label for=section-f43a50e4d00e3398d279579a5a9a0783 class="flex justify-between"><a role=button>エクストリームプログラミング</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/>エクストリームプログラミングとは</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/>エクストリームプログラミングのプラクティス</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-4881c8ea96a48f6fd2540db502c204e0 class=toggle checked>
+<label for=section-4881c8ea96a48f6fd2540db502c204e0 class="flex justify-between"><a role=button>ソフトウェアテスト</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/overview/>ソフトウェアテストを始めよう</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/>ウォーミングアップ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/>ボウリングゲーム</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/>テストダブル</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/ class=active>E2Eテスト</a></li></ul></li><li><input type=checkbox id=section-6668e94793f2c3410fae208f25d1f417 class=toggle>
+<label for=section-6668e94793f2c3410fae208f25d1f417 class="flex justify-between"><a role=button>ソフトウェア設計</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/>アジャイル開発に求められるソフトウェア設計</a></li><li><input type=checkbox id=section-fd21b9cd7e31d8e1d2ba14b32452065e class=toggle>
+<label for=section-fd21b9cd7e31d8e1d2ba14b32452065e class="flex justify-between"><a role=button>SOLID原則</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/>単一責任の原則(SRP)</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/>オープン・クローズドの原則(OCP)</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/>リスコフの置換原則(LSP)</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>依存性逆転の原則(DIP)</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/>インターフェース分離の原則(ISP)</a></li></ul></li><li><input type=checkbox id=section-ee4c81ada0b6a9ee859cebeab00ca76e class=toggle>
+<label for=section-ee4c81ada0b6a9ee859cebeab00ca76e class="flex justify-between"><a role=button>デザインパターン</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/designpattern/designpattern/>デザインパターン</a></li></ul></li></ul></li><li><input type=checkbox id=section-a16dbb8fa8b2df15e7da65eb13e2d51a class=toggle>
+<label for=section-a16dbb8fa8b2df15e7da65eb13e2d51a class="flex justify-between"><a role=button>アジャイルの実践</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/>1日目</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/>2日目</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/>3日目</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/>4日目</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/>5日目</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/>6日目</a></li></ul></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/>おわりに</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/>推奨書籍</a></li><li class=book-section-flat><span>全体編</span><ul><li><input type=checkbox id=section-e99c955bf75208a72cc409dac3a52e06 class=toggle>
+<label for=section-e99c955bf75208a72cc409dac3a52e06 class="flex justify-between"><a role=button>リーンスタートアップアジャイル</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/overview/>リーンスタートアップアジャイルの流れ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/organization/>体制・役割</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/productvision/>プロダクトビジョン / バリュープロポジション</a></li></ul></li><li><input type=checkbox id=section-9be0117e86ea19505cc5ceb0d72e959e class=toggle>
+<label for=section-9be0117e86ea19505cc5ceb0d72e959e class="flex justify-between"><a role=button>モダナイゼーションアジャイル</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/overview/>モダナイゼーションアジャイルの流れ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/organization/>体制・役割</a></li><li><input type=checkbox id=section-bde04692c1fd3ecde39ac4bab024fff3 class=toggle>
+<label for=section-bde04692c1fd3ecde39ac4bab024fff3 class="flex justify-between"><a role=button>Swift Method</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/overview/>Swift Method とは</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/eventstorming/>Event Storming</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/boris/>Boris</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/snape/>SnapE</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/slices/>Slices</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/techchoice/>Tech Choice</a></li></ul></li></ul></li></ul></li><li class=book-section-flat><span>Team編</span><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/workstyle/>チームの働き方</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/balancedteam/>バランスチーム</a></li><li><input type=checkbox id=section-567421c4f32cd12e88a451ff3fc3c989 class=toggle>
+<label for=section-567421c4f32cd12e88a451ff3fc3c989 class="flex justify-between"><a role=button>マインドセット</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/onebase/>ONEbaseの価値観</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/psychologicalsafety/>心理的安全性</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/xp/>XPの価値観</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/practice/>プラクティスの取り入れ方</a></li></ul></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/teambuilding/>チームビルディング</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/remotework/>リモートワーク</a></li><li><input type=checkbox id=section-b52b30221e4a89615e78dbb78082bc47 class=toggle>
+<label for=section-b52b30221e4a89615e78dbb78082bc47 class="flex justify-between"><a role=button>チームのアクティビティ</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/officestandup/>全体スタンドアップ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamstandup/>チームスタンドアップ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/preipm/>Pre-IPM</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/ipm/>IPM</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/cl/>CLミーティング</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/retro/>レトロスペクティブ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/salesmeeting/>営業確認会議</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/internalsync/>Internal Sync</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/riskmitigations/>Risks & Mitigations</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/feedback/>フィードバック</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/icebreak/>Ice Break</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamhealthcheck/>Team Health Check</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/1on1/>1on1</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/exercise/>ラジオ体操</a></li></ul></li><li><input type=checkbox id=section-0ca98ed05d635a669132a6c12086bd7c class=toggle>
+<label for=section-0ca98ed05d635a669132a6c12086bd7c class="flex justify-between"><a role=button>チームのプラクティス</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/facilitation/>ファシリテーション</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/okrs/>OKRs</a></li></ul></li></ul></li><li class=book-section-flat><span>Designer編</span><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/overview/>Designerとは</a></li><li><input type=checkbox id=section-0356f56143a8f1215a9a8d2120898187 class=toggle>
+<label for=section-0356f56143a8f1215a9a8d2120898187 class="flex justify-between"><a role=button>Designerのプラクティス</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/persona/>ペルソナ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/scenario/>シナリオ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchplanning/>リサーチ計画立案</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/prototyping/>プロトタイピング</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/script/>スクリプト作成</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchaction/>リサーチ実施</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/synthesize/>シンセサイズ</a></li></ul></li></ul></li><li class=book-section-flat><span>Product Manager編</span><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/overview/>Product Managerとは</a></li><li><input type=checkbox id=section-8fbae8de73ef8326d3c4d80af4144c79 class=toggle>
+<label for=section-8fbae8de73ef8326d3c4d80af4144c79 class="flex justify-between"><a role=button>Product Managerのプラクティス</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/roadmap/>プロダクトロードマップ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/>MVP</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstorymapping/>ユーザーストーリーマッピング</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/>ユーザーストーリー</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/>2×2</a></li></ul></li></ul></li><li class=book-section-flat><span>Developer編</span><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/overview/>Developerとは</a></li><li><input type=checkbox id=section-8663d063f439d3f63d1a0dffad20b22d class=toggle>
+<label for=section-8663d063f439d3f63d1a0dffad20b22d class="flex justify-between"><a role=button>Developerのプラクティス</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/tdd/>TDD</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/cicd/>CI/CD</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/pairprogramming/>ペアプログラミング</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/soroprogramming/>ソロプログラミング</a></li></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu></label>
 <strong>E2Eテスト</strong>
-<label for=toc-control>
-<img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents">
-</label>
-</div>
-<aside class="hidden clearfix">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#e2eテストとは>E2Eテストとは</a></li>
-<li><a href=#e2eテストツール>E2Eテストツール</a>
-<ul>
-<li><a href=#selenium>Selenium</a></li>
-<li><a href=#cypress>Cypress</a></li>
-<li><a href=#testcafe>Testcafe</a></li>
-<li><a href=#mabl>mabl</a></li>
-<li><a href=#autify>Autify</a></li>
-<li><a href=#e2eテストツールの選定>E2Eテストツールの選定</a></li>
-</ul>
-</li>
-<li><a href=#サンプルアプリケーション>サンプルアプリケーション</a></li>
-<li><a href=#testcafeによるe2eテスト>testcafeによるE2Eテスト</a>
-<ul>
-<li><a href=#テストのシナリオを考えよう>テストのシナリオを考えよう</a></li>
-<li><a href=#最初のテスト>最初のテスト</a></li>
-<li><a href=#2番目のテスト>2番目のテスト</a></li>
-<li><a href=#3番目のテスト>3番目のテスト</a></li>
-<li><a href=#4番目のテスト>4番目のテスト</a></li>
-<li><a href=#最後のテスト>最後のテスト</a></li>
-</ul>
-</li>
-<li><a href=#まとめ>まとめ</a></li>
-</ul>
-</nav>
-</aside>
-</header>
-<article class=markdown><h1 id=e2eテスト>
-E2Eテスト
-<a class=anchor href=#e2e%e3%83%86%e3%82%b9%e3%83%88>#</a>
-</h1>
-<h2 id=e2eテストとは>
-E2Eテストとは
-<a class=anchor href=#e2e%e3%83%86%e3%82%b9%e3%83%88%e3%81%a8%e3%81%af>#</a>
-</h2>
-<p>ここまでソフトウェアの単体テストやインテグレーションテストのやり方を見てきました。
+<label for=toc-control><img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#e2eテストとは>E2Eテストとは</a></li><li><a href=#e2eテストツール>E2Eテストツール</a><ul><li><a href=#selenium>Selenium</a></li><li><a href=#cypress>Cypress</a></li><li><a href=#testcafe>Testcafe</a></li><li><a href=#mabl>mabl</a></li><li><a href=#autify>Autify</a></li><li><a href=#e2eテストツールの選定>E2Eテストツールの選定</a></li></ul></li><li><a href=#サンプルアプリケーション>サンプルアプリケーション</a></li><li><a href=#testcafeによるe2eテスト>testcafeによるE2Eテスト</a><ul><li><a href=#テストのシナリオを考えよう>テストのシナリオを考えよう</a></li><li><a href=#最初のテスト>最初のテスト</a></li><li><a href=#2番目のテスト>2番目のテスト</a></li><li><a href=#3番目のテスト>3番目のテスト</a></li><li><a href=#4番目のテスト>4番目のテスト</a></li><li><a href=#最後のテスト>最後のテスト</a></li></ul></li><li><a href=#まとめ>まとめ</a></li></ul></nav></aside></header><article class=markdown><h1 id=e2eテスト>E2Eテスト
+<a class=anchor href=#e2e%e3%83%86%e3%82%b9%e3%83%88>#</a></h1><h2 id=e2eテストとは>E2Eテストとは
+<a class=anchor href=#e2e%e3%83%86%e3%82%b9%e3%83%88%e3%81%a8%e3%81%af>#</a></h2><p>ここまでソフトウェアの単体テストやインテグレーションテストのやり方を見てきました。
 しかし、ServerやClientがきちんと連携してシステムが正しく振る舞うことができるかどうかはまだわかりません。
-そこで実施するのがE2E(End to End)テストというシステム全体の通しテストです。受け入れテストと呼ばれる場合もあります。</p>
-<p>今回のサンプルアプリケーションはWebアプリケーションですが、一般ユーザと同じようにブラウザの画面操作を行い、
-システムの挙動が期待通りになっているかを確認していきます。</p>
-<p>このE2Eテストも自動化して行うことがとても大事です。
-システムの機能追加や改修を行う度に自動テストも見直し修正していって、ソフトウェアと一緒に育てていきます。</p>
-<h2 id=e2eテストツール>
-E2Eテストツール
-<a class=anchor href=#e2e%e3%83%86%e3%82%b9%e3%83%88%e3%83%84%e3%83%bc%e3%83%ab>#</a>
-</h2>
-<p>E2Eテストの自動化ツールには様々なものがあります。いくつか紹介します。</p>
-<blockquote class="book-hint warning">
-<p><strong>E2Eツールの選定について</strong></p>
-<p>ソフトウェアと一緒にテストスクリプトを育てていく関係で、後からのツールの変更はかなり難しいものになります。
+そこで実施するのがE2E(End to End)テストというシステム全体の通しテストです。受け入れテストと呼ばれる場合もあります。</p><p>今回のサンプルアプリケーションはWebアプリケーションですが、一般ユーザと同じようにブラウザの画面操作を行い、
+システムの挙動が期待通りになっているかを確認していきます。</p><p>このE2Eテストも自動化して行うことがとても大事です。
+システムの機能追加や改修を行う度に自動テストも見直し修正していって、ソフトウェアと一緒に育てていきます。</p><h2 id=e2eテストツール>E2Eテストツール
+<a class=anchor href=#e2e%e3%83%86%e3%82%b9%e3%83%88%e3%83%84%e3%83%bc%e3%83%ab>#</a></h2><p>E2Eテストの自動化ツールには様々なものがあります。いくつか紹介します。</p><blockquote class="book-hint warning"><p><strong>E2Eツールの選定について</strong></p><p>ソフトウェアと一緒にテストスクリプトを育てていく関係で、後からのツールの変更はかなり難しいものになります。
 また、テストスクリプトはE2Eテストツール毎に互換はありません。
-後からでも変更はやろうと思えばできますが、かなりリスクの高いものになるという認識を持ってください。</p>
-<p><strong>最初にプロジェクトの特性を見極めて適切なE2Eテストツールを選定することが大事です。</strong></p>
-</blockquote>
-<h3 id=selenium>
-Selenium
-<a class=anchor href=#selenium>#</a>
-</h3>
-<p><a href=https://www.selenium.dev/>https://www.selenium.dev/</a></p>
-<p>ブラウザ自動操作ツールの元祖。ブラウザテストフレームワークの王道とも言えるツールです。
+後からでも変更はやろうと思えばできますが、かなりリスクの高いものになるという認識を持ってください。</p><p><strong>最初にプロジェクトの特性を見極めて適切なE2Eテストツールを選定することが大事です。</strong></p></blockquote><h3 id=selenium>Selenium
+<a class=anchor href=#selenium>#</a></h3><p><a href=https://www.selenium.dev/>https://www.selenium.dev/</a></p><p>ブラウザ自動操作ツールの元祖。ブラウザテストフレームワークの王道とも言えるツールです。
 プログラミングライブラリが豊富で、JavaやC#、Python、Rubyなどでテストスクリプトを書くことができます。
-あと、Seleniumは厳密にはE2Eテストツールでなく自動操作ツールなので、スクレイピングなの用途にもよく使われます。</p>
-<p>デメリットとしては、処理の度にWaitコマンドで待ち時間をスクリプト側で制御する必要があるところや、
+あと、Seleniumは厳密にはE2Eテストツールでなく自動操作ツールなので、スクレイピングなの用途にもよく使われます。</p><p>デメリットとしては、処理の度にWaitコマンドで待ち時間をスクリプト側で制御する必要があるところや、
 UI変更に弱く、変更が多い画面に不向きで修正コストが大きいところがあります。
-あとパフォーマンスがそこまで良くない印象です。</p>
-<p>あとはWebDriverのインストールが必要だったり、設定項目が多いというのも問題としてあります。
+あとパフォーマンスがそこまで良くない印象です。</p><p>あとはWebDriverのインストールが必要だったり、設定項目が多いというのも問題としてあります。
 これはローカル環境だと自由に設定できるので問題ないのですが、
-<strong>CI/CDパイプライン上でE2Eテストをするときに大きなネックになることが多い</strong>ので、採用は慎重にしてください。</p>
-<blockquote class="book-hint warning">
-<p><strong>CI/CDパイプラインでのネックとは</strong></p>
-<p>使用するCI/CDパイプラインによっては使用できる仮想マシンの環境に制約があります。
+<strong>CI/CDパイプライン上でE2Eテストをするときに大きなネックになることが多い</strong>ので、採用は慎重にしてください。</p><blockquote class="book-hint warning"><p><strong>CI/CDパイプラインでのネックとは</strong></p><p>使用するCI/CDパイプラインによっては使用できる仮想マシンの環境に制約があります。
 例えばgitlab CIは自由にDocker Imageをpullしてその上で、CI/CDスクリプトを実行できるため自由度が高いですが、
-Azure Pipelinesでは <a href="https://docs.microsoft.com/ja-jp/azure/devops/pipelines/agents/hosted?view=azure-devops">Azureが提供しているVM Image</a> しか使用することができません。</p>
-<p>セットアップのスクリプトを組むこともできますが、その分パイプラインの実行に時間がかかるようになってしまうため要注意です。</p>
-</blockquote>
-<h3 id=cypress>
-Cypress
-<a class=anchor href=#cypress>#</a>
-</h3>
-<p><a href=https://www.cypress.io/>https://www.cypress.io/</a></p>
-<p>ブラウザの裏でNode.jsのサーバープロセスを動かし、ブラウザ上のテストランナーとやり取りすることで、
+Azure Pipelinesでは <a href="https://docs.microsoft.com/ja-jp/azure/devops/pipelines/agents/hosted?view=azure-devops">Azureが提供しているVM Image</a> しか使用することができません。</p><p>セットアップのスクリプトを組むこともできますが、その分パイプラインの実行に時間がかかるようになってしまうため要注意です。</p></blockquote><h3 id=cypress>Cypress
+<a class=anchor href=#cypress>#</a></h3><p><a href=https://www.cypress.io/>https://www.cypress.io/</a></p><p>ブラウザの裏でNode.jsのサーバープロセスを動かし、ブラウザ上のテストランナーとやり取りすることで、
 ブラウザ外の操作（例えばファイルシステムや、ネットワークのコントロールといった）ができます。
 導入も非常に簡単ですし、操作速度も非常に高速です。
-また、SeleniumのようにWaitコマンドを使わなくてもよしなにやってくれるのはいいところです。</p>
-<p>また、後述のTestcafeと違って良いところはテストスクリプトのアサーションライブラリに
-Javascriptのテストではとても一般的に使用されている、MochaやChaiを使用できることです。</p>
-<p>デメリットとしてはテストスクリプト言語がJavascriptに固定されること、
+また、SeleniumのようにWaitコマンドを使わなくてもよしなにやってくれるのはいいところです。</p><p>また、後述のTestcafeと違って良いところはテストスクリプトのアサーションライブラリに
+Javascriptのテストではとても一般的に使用されている、MochaやChaiを使用できることです。</p><p>デメリットとしてはテストスクリプト言語がJavascriptに固定されること、
 また、複数ブラウザウィンドウを同時操作するということもできないので、チャットのように2つのウィンドウを同時に操作みたいなテストケースには対応できません。
-以前はChromeのみでしたが、FirefoxやEdgeにも対応しました。</p>
-<h3 id=testcafe>
-Testcafe
-<a class=anchor href=#testcafe>#</a>
-</h3>
-<p><a href=https://testcafe.io/>https://testcafe.io/</a></p>
-<p>これもCypressと同じくNode.jsで動くテストランナーです。
-Testcafeは2016年頃登場した、比較的新しいツールで、CypressとTestcafeは特徴がよく似ているためよく比較されます。</p>
-<p><a href=https://www.browserstack.com/>BrowserStack</a> に対応しているのはCypressにはない大きな利点です。
+以前はChromeのみでしたが、FirefoxやEdgeにも対応しました。</p><h3 id=testcafe>Testcafe
+<a class=anchor href=#testcafe>#</a></h3><p><a href=https://testcafe.io/>https://testcafe.io/</a></p><p>これもCypressと同じくNode.jsで動くテストランナーです。
+Testcafeは2016年頃登場した、比較的新しいツールで、CypressとTestcafeは特徴がよく似ているためよく比較されます。</p><p><a href=https://www.browserstack.com/>BrowserStack</a> に対応しているのはCypressにはない大きな利点です。
 ブラウザ互換性を担保する必要があるプロジェクトでは重宝するでしょう。
-また2021年の2月にリリースされたv1.10.0複数ブラウザウィンドウテストがサポートされたこともCypressには無い大きな利点になります。</p>
-<p>デメリットとしてはアサーションライブラリが独自のものになるため、習得にはすこし時間がかかることです。</p>
-<h3 id=mabl>
-mabl
-<a class=anchor href=#mabl>#</a>
-</h3>
-<p><a href=https://www.mabl.com/>https://www.mabl.com/</a></p>
-<p>AIを使った受け入れテストの自動化が可能という触れ込みです。
-Chromeの拡張機能をつかってブラウザ操作を記憶してテストスクリプトを作成するイメージになります。</p>
-<p>非エンジニアが受け入れテストを作る場合に重宝されると思います。</p>
-<h3 id=autify>
-Autify
-<a class=anchor href=#autify>#</a>
-</h3>
-<p><a href=https://autify.com/ja>https://autify.com/ja</a></p>
-<p>これもmoblと同じくノーコードでテストスクリプトを作成するツールです。
-こちらも非エンジニアが受け入れテストを作る場合に重宝されるでしょう。</p>
-<h3 id=e2eテストツールの選定>
-E2Eテストツールの選定
-<a class=anchor href=#e2e%e3%83%86%e3%82%b9%e3%83%88%e3%83%84%e3%83%bc%e3%83%ab%e3%81%ae%e9%81%b8%e5%ae%9a>#</a>
-</h3>
-<p>他にもE2Eテストツールには様々なものがありますが、ツールをどのように選定するかの判断はとても難しいです。
-プロダクトやプロジェクトの特性にもよるため、一概にこれというものがありません。</p>
-<p>一つ大きな選定のポイントとして、ノーコードで受け入れテストを作成・管理したいか、
-スクリプトを組んできめ細やかで自由度の高いテストを組みたいかというポイントがあると思います。</p>
-<p>ツールも日進月歩で進化しておりこれがいいというものはありませんが、
-前述の通り後からの変更はかなり大変ですので、プロジェクトで慎重に吟味して決定してください。</p>
-<h2 id=サンプルアプリケーション>
-サンプルアプリケーション
-<a class=anchor href=#%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3>#</a>
-</h2>
-<p>もし、前のテストダブルの節でリポジトリをクローンされていない方は以下のコマンドを実行してください。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>git clone -b https://github.com/Onebase-Fujitsu/simple-todo-app.git
-</code></pre></div><p>このアプリケーションはシンプルなタスク管理アプリケーションになります。
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/#サンプルアプリケーション>アプリケーションの詳細な説明はこちら</a> で解説してありますので、ご一読ください。</p>
-<p>ルートのディレクトリにe2eというディレクトリがありますので、まず以下のコマンドを実行してみてください。</p>
-<p>e2eテストの起動(Mac/Linuxの場合)</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>cd e2e
-npm install
-npm run test
-</code></pre></div><p>e2eテストの起動(Windowsの場合)</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>chdir e2e
-npm install
-npm run test
-</code></pre></div><p><code>npm run test</code>コマンドを実行するとChromeのウィンドウが一瞬開いてすぐ閉じると思います。
-もしChromeをインストールされていない方は <a href=https://www.google.com/intl/ja_jp/chrome/>こちらからChromeをインストール</a> して試してみてください。</p>
-<p><img src=testcafe.jpg alt=testcafe></p>
-<p>この画面が出たらこのセクションを始める準備は大丈夫です。</p>
-<h2 id=testcafeによるe2eテスト>
-testcafeによるE2Eテスト
-<a class=anchor href=#testcafe%e3%81%ab%e3%82%88%e3%82%8be2e%e3%83%86%e3%82%b9%e3%83%88>#</a>
-</h2>
-<p>e2eディレクトリ配下のpackage.jsonをみてみましょう。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
-  <span style=color:#f92672>&#34;name&#34;</span>: <span style=color:#e6db74>&#34;e2e-test&#34;</span>,
-  <span style=color:#f92672>&#34;version&#34;</span>: <span style=color:#e6db74>&#34;1.0.0&#34;</span>,
-  <span style=color:#f92672>&#34;description&#34;</span>: <span style=color:#e6db74>&#34;&#34;</span>,
-  <span style=color:#f92672>&#34;main&#34;</span>: <span style=color:#e6db74>&#34;test/test.js&#34;</span>,
-  <span style=color:#f92672>&#34;scripts&#34;</span>: {
-    <span style=color:#f92672>&#34;test&#34;</span>: <span style=color:#e6db74>&#34;./node_modules/.bin/testcafe &#39;chrome&#39; ./test&#34;</span>
-  },
-  <span style=color:#f92672>&#34;author&#34;</span>: <span style=color:#e6db74>&#34;&#34;</span>,
-  <span style=color:#f92672>&#34;license&#34;</span>: <span style=color:#e6db74>&#34;ISC&#34;</span>,
-  <span style=color:#f92672>&#34;devDependencies&#34;</span>: {
-    <span style=color:#f92672>&#34;testcafe&#34;</span>: <span style=color:#e6db74>&#34;^1.15.2&#34;</span>
-  }
-}
-</code></pre></div><p>testcafeだけ入れてある極々シンプルなものになっています。
+また2021年の2月にリリースされたv1.10.0複数ブラウザウィンドウテストがサポートされたこともCypressには無い大きな利点になります。</p><p>デメリットとしてはアサーションライブラリが独自のものになるため、習得にはすこし時間がかかることです。</p><h3 id=mabl>mabl
+<a class=anchor href=#mabl>#</a></h3><p><a href=https://www.mabl.com/>https://www.mabl.com/</a></p><p>AIを使った受け入れテストの自動化が可能という触れ込みです。
+Chromeの拡張機能をつかってブラウザ操作を記憶してテストスクリプトを作成するイメージになります。</p><p>非エンジニアが受け入れテストを作る場合に重宝されると思います。</p><h3 id=autify>Autify
+<a class=anchor href=#autify>#</a></h3><p><a href=https://autify.com/ja>https://autify.com/ja</a></p><p>これもmoblと同じくノーコードでテストスクリプトを作成するツールです。
+こちらも非エンジニアが受け入れテストを作る場合に重宝されるでしょう。</p><h3 id=e2eテストツールの選定>E2Eテストツールの選定
+<a class=anchor href=#e2e%e3%83%86%e3%82%b9%e3%83%88%e3%83%84%e3%83%bc%e3%83%ab%e3%81%ae%e9%81%b8%e5%ae%9a>#</a></h3><p>他にもE2Eテストツールには様々なものがありますが、ツールをどのように選定するかの判断はとても難しいです。
+プロダクトやプロジェクトの特性にもよるため、一概にこれというものがありません。</p><p>一つ大きな選定のポイントとして、ノーコードで受け入れテストを作成・管理したいか、
+スクリプトを組んできめ細やかで自由度の高いテストを組みたいかというポイントがあると思います。</p><p>ツールも日進月歩で進化しておりこれがいいというものはありませんが、
+前述の通り後からの変更はかなり大変ですので、プロジェクトで慎重に吟味して決定してください。</p><h2 id=サンプルアプリケーション>サンプルアプリケーション
+<a class=anchor href=#%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3>#</a></h2><p>もし、前のテストダブルの節でリポジトリをクローンされていない方は以下のコマンドを実行してください。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>git clone -b https://github.com/Onebase-Fujitsu/simple-todo-app.git
+</span></span></code></pre></div><p>このアプリケーションはシンプルなタスク管理アプリケーションになります。
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/#サンプルアプリケーション>アプリケーションの詳細な説明はこちら</a> で解説してありますので、ご一読ください。</p><p>ルートのディレクトリにe2eというディレクトリがありますので、まず以下のコマンドを実行してみてください。</p><p>e2eテストの起動(Mac/Linuxの場合)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>cd e2e
+</span></span><span style=display:flex><span>npm install
+</span></span><span style=display:flex><span>npm run test
+</span></span></code></pre></div><p>e2eテストの起動(Windowsの場合)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>chdir e2e
+</span></span><span style=display:flex><span>npm install
+</span></span><span style=display:flex><span>npm run test
+</span></span></code></pre></div><p><code>npm run test</code>コマンドを実行するとChromeのウィンドウが一瞬開いてすぐ閉じると思います。
+もしChromeをインストールされていない方は <a href=https://www.google.com/intl/ja_jp/chrome/>こちらからChromeをインストール</a> して試してみてください。</p><p><img src=testcafe.jpg alt=testcafe></p><p>この画面が出たらこのセクションを始める準備は大丈夫です。</p><h2 id=testcafeによるe2eテスト>testcafeによるE2Eテスト
+<a class=anchor href=#testcafe%e3%81%ab%e3%82%88%e3%82%8be2e%e3%83%86%e3%82%b9%e3%83%88>#</a></h2><p>e2eディレクトリ配下のpackage.jsonをみてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;name&#34;</span>: <span style=color:#e6db74>&#34;e2e-test&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;version&#34;</span>: <span style=color:#e6db74>&#34;1.0.0&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;description&#34;</span>: <span style=color:#e6db74>&#34;&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;main&#34;</span>: <span style=color:#e6db74>&#34;test/test.js&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;scripts&#34;</span>: {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;test&#34;</span>: <span style=color:#e6db74>&#34;./node_modules/.bin/testcafe &#39;chrome&#39; ./test&#34;</span>
+</span></span><span style=display:flex><span>  },
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;author&#34;</span>: <span style=color:#e6db74>&#34;&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;license&#34;</span>: <span style=color:#e6db74>&#34;ISC&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;devDependencies&#34;</span>: {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;testcafe&#34;</span>: <span style=color:#e6db74>&#34;^1.15.2&#34;</span>
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>testcafeだけ入れてある極々シンプルなものになっています。
 test用のスクリプトをみると<code>"test": "./node_modules/.bin/testcafe 'chrome' ./test"</code>となっていますね。
 chromeを他のブラウザに変更すると他のブラウザでテストすることもできます。
 また、いちいち自動操作の画面が出てきて煩わしいというかたは<code>chrome</code>の部分を<code>chrome:headless</code>に変更すると、
-ヘッドレスクロームでE2Eテストを実行できますので覚えておいてください。</p>
-<p>さて、testディレクトリにはtest.jsファイルがありますが、このファイルはまだ空でなにも記載されてません。
-ここにテストを書いていくことになります。</p>
-<h3 id=テストのシナリオを考えよう>
-テストのシナリオを考えよう
-<a class=anchor href=#%e3%83%86%e3%82%b9%e3%83%88%e3%81%ae%e3%82%b7%e3%83%8a%e3%83%aa%e3%82%aa%e3%82%92%e8%80%83%e3%81%88%e3%82%88%e3%81%86>#</a>
-</h3>
-<p>E2Eテストを作るときに一番最初にやることは受け入れテストのシナリオを考えることです。
+ヘッドレスクロームでE2Eテストを実行できますので覚えておいてください。</p><p>さて、testディレクトリにはtest.jsファイルがありますが、このファイルはまだ空でなにも記載されてません。
+ここにテストを書いていくことになります。</p><h3 id=テストのシナリオを考えよう>テストのシナリオを考えよう
+<a class=anchor href=#%e3%83%86%e3%82%b9%e3%83%88%e3%81%ae%e3%82%b7%e3%83%8a%e3%83%aa%e3%82%aa%e3%82%92%e8%80%83%e3%81%88%e3%82%88%e3%81%86>#</a></h3><p>E2Eテストを作るときに一番最初にやることは受け入れテストのシナリオを考えることです。
 プロダクトバックログにはプロダクトとして実装してほしい内容が簡潔に記載されているはずです。
-要はそれをシナリオテストとして担保できるようにしていきます。</p>
-<p>ここではシナリオをこのようにしてみることにしてみました。</p>
-<pre tabindex=0><code>1. ブラウザを開いてhttp://localhost:3030を開くと、タイトルバーと、タスクの作成UIが表示される
+要はそれをシナリオテストとして担保できるようにしていきます。</p><p>ここではシナリオをこのようにしてみることにしてみました。</p><pre tabindex=0><code>1. ブラウザを開いてhttp://localhost:3030を開くと、タイトルバーと、タスクの作成UIが表示される
 2. タイトルと説明を入れて保存を押すと、タスク一覧にタスクが追加される
 3. 作成したタスクをクリックすると完了済みの状態になる
 4. 完了済みのタスクを再度クリックすると未完了状態になる
 5. ゴミ場ボタンをクリックするとタスクが表示されなくなる
-</code></pre><p>その上でこのClientのHTMLの構造をみてみましょう。</p>
-<p><img src=clientHTML.jpg alt=client></p>
-<p>実際の画面と照らし合わせるとこんな感じです。</p>
-<p><img src=clientHTML2.jpg alt=client2></p>
-<p>このHTML文書の構造はE2Eテストを書く上でとても大事です。
+</code></pre><p>その上でこのClientのHTMLの構造をみてみましょう。</p><p><img src=clientHTML.jpg alt=client></p><p>実際の画面と照らし合わせるとこんな感じです。</p><p><img src=clientHTML2.jpg alt=client2></p><p>このHTML文書の構造はE2Eテストを書く上でとても大事です。
 というのもTestcafeではSelectorという命令をつかって要素を指定していきます。
-<strong>「どこに何があって」「どうすれば要素を一意に特定できるか」を考えながら書く</strong>のがとても大事です。</p>
-<p>それではこのシナリオテストを順番に実装していってみましょう。</p>
-<h3 id=最初のテスト>
-最初のテスト
-<a class=anchor href=#%e6%9c%80%e5%88%9d%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a>
-</h3>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#75715e>// test.js
-</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Selector</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;testcafe&#39;</span>;
-
-<span style=color:#a6e22e>fixture</span> <span style=color:#e6db74>`test target`</span>
-    .<span style=color:#a6e22e>page</span> <span style=color:#e6db74>`http://localhost:3000`</span>;
-
-<span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;test name&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
-})
-</code></pre></div><p>まずこれがtestcafeを用いたE2Eテストスクリプトの雛形になります。
-では、早速以下を確認するテストを書いてみましょう。</p>
-<ul>
-<li>タイトルバーがあること</li>
-<li>インプットが2つあること</li>
-<li>インプットが2つとも空であること</li>
-<li>タスクの作成ボタンが有ること</li>
-</ul>
-<p>これはTestcafeに限った話ではないのですが、<strong>公式のリファレンスを見ながら書くこと</strong> はとても大事です。
-リファレンスは必ず見ましょう。</p>
-<p><a href=https://testcafe.io/documentation/402632/reference>https://testcafe.io/documentation/402632/reference</a></p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#75715e>// test.js
-</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Selector</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;testcafe&#39;</span>;
-
-<span style=color:#a6e22e>fixture</span> <span style=color:#e6db74>`test target`</span>
-    .<span style=color:#a6e22e>page</span> <span style=color:#e6db74>`http://localhost:3000`</span>;
-
-<span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスク一覧画面を見ることができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
-    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;body&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;Simple TodoList Application&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;&#39;</span>)
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;&#39;</span>)
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SAVE&#34;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-})
-</code></pre></div><p>最初のテストコードのテストコードはこんな感じになります。
-早速テストを動かしてみてください。無事通ると思います。</p>
-<p>内容はコードの通りでそんなに難しいことは書いてませんが、上から順番に以下の内容をテストしています。</p>
-<ol>
-<li>body要素のなかにSimple TodoList Applicationというテキストが含まれていること</li>
-<li>taskNameInputというIDを持つinput要素が存在すること</li>
-<li>taskNameInputというIDを持つinput要素は今何も入力されていないこと</li>
-<li>taskDescriptionInputというIDを持つinput要素が存在すること</li>
-<li>taskDescriptionInputというIDを持つinput要素は今何も入力されていないこと</li>
-<li>SAVEというテキストを含むbutton要素が存在すること</li>
-</ol>
-<p>ざっとこんな感じです。Javascriptに慣れていない方でもなんとなく何やってるかはコードを見るだけでも想像できるのではないでしょうか？</p>
-<h3 id=2番目のテスト>
-2番目のテスト
-<a class=anchor href=#2%e7%95%aa%e7%9b%ae%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a>
-</h3>
-<p>では次に<code>2. タイトルと説明を入れて保存を押すと、タスク一覧にタスクが追加される</code>をテストしてみましょう。
-ここでは以下の内容をテストしてきます。</p>
-<ul>
-<li>タスクタイトル入力欄に文字を入力できる</li>
-<li>タスク説明入力欄に文字を入力できる</li>
-<li>SAVEボタンをクリックする</li>
-<li>タスク一覧の末尾に入力したタスクが追加される</li>
-</ul>
-<p>これも1番目のテストと同じように書けますので、もしリファレンスをみて自力で実装できそうであれば、やってみてください。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Selector</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;testcafe&#39;</span>;
-
-<span style=color:#a6e22e>fixture</span> <span style=color:#e6db74>`test target`</span>
-    .<span style=color:#a6e22e>page</span> <span style=color:#e6db74>`http://localhost:3000`</span>;
-
-<span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスク一覧画面を見ることができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
-    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;body&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;Simple TodoList Application&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;&#39;</span>)
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;&#39;</span>)
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SAVE&#34;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-})
-
-<span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスクを作成することができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
-    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
-        .<span style=color:#a6e22e>typeText</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>), <span style=color:#e6db74>&#39;title&#39;</span>, {<span style=color:#a6e22e>replace</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>})
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;title&#39;</span>)
-        .<span style=color:#a6e22e>typeText</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>), <span style=color:#e6db74>&#39;description&#39;</span>, {<span style=color:#a6e22e>replace</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>})
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;description&#39;</span>)
-        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SAVE&#34;</span>))
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h3&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;title&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;description&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-})
-</code></pre></div><p>2番目のテストコードはこのようにしてみました。</p>
-<p><code>typeText()</code>は文字通り文字入力を実行する命令です。また、<code>click()</code>が画面の要素をクリックする命令です。
-これもやってることはそんなに難しくないと思います。</p>
-<p>最初に文字入力をおこなって、それがちゃんとテキストフィードに反映されていることを確認。
-2番めの入力欄でも文字入力を行って、その確認をしてから、作成ボタンをクリックしています。</p>
-<p>その後はタスクが作成されていることの確認です。
-ここでタスクを新規に作成したとき、作成されたタスクは一覧の一番下に表示されるので、それをうまくSelectorで指定したいです。</p>
-<p>そこで<code>Selector('ul').child().nth(-1)</code>という記述でulタグの子要素(つまりli要素)で、最も最後の要素を指定しています。
-その中のh3要素のテキストとp要素のテキストが入力した通りのものであることと、ゴミ箱ボタンが有ることを評価しているというわけです。</p>
-<p>ここまで大丈夫でしょうか？</p>
-<blockquote class="book-hint info">
-<p><strong>なぜ最初の要素じゃなくて最後の要素？</strong></p>
-<p>このテストを見たときに「あれ？<code>Selector('ul').child().nth(-1)</code>は<code>Selector('ul').child().nth(0)</code>にして最初の要素をとるようにしてもいいのでは？」と思われた方も多いと思います。</p>
-<p>ここで最後の要素を撮ってるのには理由があります。
+<strong>「どこに何があって」「どうすれば要素を一意に特定できるか」を考えながら書く</strong>のがとても大事です。</p><p>それではこのシナリオテストを順番に実装していってみましょう。</p><h3 id=最初のテスト>最初のテスト
+<a class=anchor href=#%e6%9c%80%e5%88%9d%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#75715e>// test.js
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Selector</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;testcafe&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>fixture</span> <span style=color:#e6db74>`test target`</span>
+</span></span><span style=display:flex><span>    .<span style=color:#a6e22e>page</span> <span style=color:#e6db74>`http://localhost:3000`</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;test name&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><p>まずこれがtestcafeを用いたE2Eテストスクリプトの雛形になります。
+では、早速以下を確認するテストを書いてみましょう。</p><ul><li>タイトルバーがあること</li><li>インプットが2つあること</li><li>インプットが2つとも空であること</li><li>タスクの作成ボタンが有ること</li></ul><p>これはTestcafeに限った話ではないのですが、<strong>公式のリファレンスを見ながら書くこと</strong> はとても大事です。
+リファレンスは必ず見ましょう。</p><p><a href=https://testcafe.io/documentation/402632/reference>https://testcafe.io/documentation/402632/reference</a></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#75715e>// test.js
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Selector</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;testcafe&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>fixture</span> <span style=color:#e6db74>`test target`</span>
+</span></span><span style=display:flex><span>    .<span style=color:#a6e22e>page</span> <span style=color:#e6db74>`http://localhost:3000`</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスク一覧画面を見ることができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;body&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;Simple TodoList Application&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;&#39;</span>)
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;&#39;</span>)
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SAVE&#34;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><p>最初のテストコードのテストコードはこんな感じになります。
+早速テストを動かしてみてください。無事通ると思います。</p><p>内容はコードの通りでそんなに難しいことは書いてませんが、上から順番に以下の内容をテストしています。</p><ol><li>body要素のなかにSimple TodoList Applicationというテキストが含まれていること</li><li>taskNameInputというIDを持つinput要素が存在すること</li><li>taskNameInputというIDを持つinput要素は今何も入力されていないこと</li><li>taskDescriptionInputというIDを持つinput要素が存在すること</li><li>taskDescriptionInputというIDを持つinput要素は今何も入力されていないこと</li><li>SAVEというテキストを含むbutton要素が存在すること</li></ol><p>ざっとこんな感じです。Javascriptに慣れていない方でもなんとなく何やってるかはコードを見るだけでも想像できるのではないでしょうか？</p><h3 id=2番目のテスト>2番目のテスト
+<a class=anchor href=#2%e7%95%aa%e7%9b%ae%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>では次に<code>2. タイトルと説明を入れて保存を押すと、タスク一覧にタスクが追加される</code>をテストしてみましょう。
+ここでは以下の内容をテストしてきます。</p><ul><li>タスクタイトル入力欄に文字を入力できる</li><li>タスク説明入力欄に文字を入力できる</li><li>SAVEボタンをクリックする</li><li>タスク一覧の末尾に入力したタスクが追加される</li></ul><p>これも1番目のテストと同じように書けますので、もしリファレンスをみて自力で実装できそうであれば、やってみてください。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Selector</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;testcafe&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>fixture</span> <span style=color:#e6db74>`test target`</span>
+</span></span><span style=display:flex><span>    .<span style=color:#a6e22e>page</span> <span style=color:#e6db74>`http://localhost:3000`</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスク一覧画面を見ることができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;body&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;Simple TodoList Application&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;&#39;</span>)
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;&#39;</span>)
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SAVE&#34;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスクを作成することができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>typeText</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>), <span style=color:#e6db74>&#39;title&#39;</span>, {<span style=color:#a6e22e>replace</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>})
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;title&#39;</span>)
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>typeText</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>), <span style=color:#e6db74>&#39;description&#39;</span>, {<span style=color:#a6e22e>replace</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>})
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;description&#39;</span>)
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SAVE&#34;</span>))
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h3&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;title&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;description&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><p>2番目のテストコードはこのようにしてみました。</p><p><code>typeText()</code>は文字通り文字入力を実行する命令です。また、<code>click()</code>が画面の要素をクリックする命令です。
+これもやってることはそんなに難しくないと思います。</p><p>最初に文字入力をおこなって、それがちゃんとテキストフィードに反映されていることを確認。
+2番めの入力欄でも文字入力を行って、その確認をしてから、作成ボタンをクリックしています。</p><p>その後はタスクが作成されていることの確認です。
+ここでタスクを新規に作成したとき、作成されたタスクは一覧の一番下に表示されるので、それをうまくSelectorで指定したいです。</p><p>そこで<code>Selector('ul').child().nth(-1)</code>という記述でulタグの子要素(つまりli要素)で、最も最後の要素を指定しています。
+その中のh3要素のテキストとp要素のテキストが入力した通りのものであることと、ゴミ箱ボタンが有ることを評価しているというわけです。</p><p>ここまで大丈夫でしょうか？</p><blockquote class="book-hint info"><p><strong>なぜ最初の要素じゃなくて最後の要素？</strong></p><p>このテストを見たときに「あれ？<code>Selector('ul').child().nth(-1)</code>は<code>Selector('ul').child().nth(0)</code>にして最初の要素をとるようにしてもいいのでは？」と思われた方も多いと思います。</p><p>ここで最後の要素を撮ってるのには理由があります。
 たとえば、何かしらのタスクが作成された状態で、このテストを動かしたとします。
-そうするとどうでしょう。1番目のタスクを評価するように書いてしまうと必ずテストが失敗してしまいます。</p>
-<p>これを防ぐためには「テストを実行する前にDBの状態をクリアする」もしくは「DBの状態がどんな状態でもテストが通るようにする」の2つの選択肢があるわけです。
-ここでは最後のli要素を取るという後者のアプローチを取っているわけですね。</p>
-<p>E2Eテストを書く際は、<strong>テストを何度も再実行するという前提で書くことがとても大事です。</strong></p>
-</blockquote>
-<h3 id=3番目のテスト>
-3番目のテスト
-<a class=anchor href=#3%e7%95%aa%e7%9b%ae%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a>
-</h3>
-<p>つぎに<code>3. 作成したタスクをクリックすると完了済みの状態になる</code>に取り組んでみましょう。
-完了済みの状態はh3タグとpタグの属性値で表現されているということを踏まえて次のテストを書いてみてください。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Selector</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;testcafe&#39;</span>;
-
-<span style=color:#a6e22e>fixture</span> <span style=color:#e6db74>`test target`</span>
-    .<span style=color:#a6e22e>page</span> <span style=color:#e6db74>`http://localhost:3000`</span>;
-
-<span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスク一覧画面を見ることができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
-    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;body&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;Simple TodoList Application&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;&#39;</span>)
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;&#39;</span>)
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SAVE&#34;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-})
-
-<span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスクを作成することができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
-    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
-        .<span style=color:#a6e22e>typeText</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>), <span style=color:#e6db74>&#39;title&#39;</span>, {<span style=color:#a6e22e>replace</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>})
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;title&#39;</span>)
-        .<span style=color:#a6e22e>typeText</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>), <span style=color:#e6db74>&#39;description&#39;</span>, {<span style=color:#a6e22e>replace</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>})
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;description&#39;</span>)
-        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SAVE&#34;</span>))
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h3&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;title&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;description&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-})
-
-<span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスク完了することができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
-    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
-        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h3&#39;</span>).<span style=color:#a6e22e>withAttribute</span>(<span style=color:#e6db74>&#39;style&#39;</span>, <span style=color:#e6db74>&#39;text-decoration: line-through;&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withAttribute</span>(<span style=color:#e6db74>&#39;style&#39;</span>, <span style=color:#e6db74>&#39;text-decoration: line-through;&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-})
-</code></pre></div><p>一例としてはこんな感じでしょうか。
+そうするとどうでしょう。1番目のタスクを評価するように書いてしまうと必ずテストが失敗してしまいます。</p><p>これを防ぐためには「テストを実行する前にDBの状態をクリアする」もしくは「DBの状態がどんな状態でもテストが通るようにする」の2つの選択肢があるわけです。
+ここでは最後のli要素を取るという後者のアプローチを取っているわけですね。</p><p>E2Eテストを書く際は、<strong>テストを何度も再実行するという前提で書くことがとても大事です。</strong></p></blockquote><h3 id=3番目のテスト>3番目のテスト
+<a class=anchor href=#3%e7%95%aa%e7%9b%ae%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>つぎに<code>3. 作成したタスクをクリックすると完了済みの状態になる</code>に取り組んでみましょう。
+完了済みの状態はh3タグとpタグの属性値で表現されているということを踏まえて次のテストを書いてみてください。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Selector</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;testcafe&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>fixture</span> <span style=color:#e6db74>`test target`</span>
+</span></span><span style=display:flex><span>    .<span style=color:#a6e22e>page</span> <span style=color:#e6db74>`http://localhost:3000`</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスク一覧画面を見ることができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;body&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;Simple TodoList Application&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;&#39;</span>)
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;&#39;</span>)
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SAVE&#34;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスクを作成することができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>typeText</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>), <span style=color:#e6db74>&#39;title&#39;</span>, {<span style=color:#a6e22e>replace</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>})
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;title&#39;</span>)
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>typeText</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>), <span style=color:#e6db74>&#39;description&#39;</span>, {<span style=color:#a6e22e>replace</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>})
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;description&#39;</span>)
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SAVE&#34;</span>))
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h3&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;title&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;description&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスク完了することができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h3&#39;</span>).<span style=color:#a6e22e>withAttribute</span>(<span style=color:#e6db74>&#39;style&#39;</span>, <span style=color:#e6db74>&#39;text-decoration: line-through;&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withAttribute</span>(<span style=color:#e6db74>&#39;style&#39;</span>, <span style=color:#e6db74>&#39;text-decoration: line-through;&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><p>一例としてはこんな感じでしょうか。
 リストの最後の要素をクリックして、そのあとh3要素のstyle属性にtext-decoration: line-throughが設定されているh3要素が存在していること、
-同じくp要素が存在していることを確認しています。</p>
-<h3 id=4番目のテスト>
-4番目のテスト
-<a class=anchor href=#4%e7%95%aa%e7%9b%ae%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a>
-</h3>
-<p>3番目のテストができていたら<code>4. 完了済みのタスクを再度クリックすると未完了状態になる</code>はできたも同然ですね。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Selector</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;testcafe&#39;</span>;
-
-<span style=color:#a6e22e>fixture</span> <span style=color:#e6db74>`test target`</span>
-    .<span style=color:#a6e22e>page</span> <span style=color:#e6db74>`http://localhost:3000`</span>;
-
-<span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスク一覧画面を見ることができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
-    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;body&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;Simple TodoList Application&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;&#39;</span>)
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;&#39;</span>)
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SAVE&#34;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-})
-
-<span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスクを作成することができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
-    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
-        .<span style=color:#a6e22e>typeText</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>), <span style=color:#e6db74>&#39;title&#39;</span>, {<span style=color:#a6e22e>replace</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>})
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;title&#39;</span>)
-        .<span style=color:#a6e22e>typeText</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>), <span style=color:#e6db74>&#39;description&#39;</span>, {<span style=color:#a6e22e>replace</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>})
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;description&#39;</span>)
-        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SAVE&#34;</span>))
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h3&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;title&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;description&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-})
-
-<span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスク完了することができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
-    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
-        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h3&#39;</span>).<span style=color:#a6e22e>withAttribute</span>(<span style=color:#e6db74>&#39;style&#39;</span>, <span style=color:#e6db74>&#39;text-decoration: line-through;&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withAttribute</span>(<span style=color:#e6db74>&#39;style&#39;</span>, <span style=color:#e6db74>&#39;text-decoration: line-through;&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-})
-
-<span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスクを未完了に戻すことができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
-    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
-        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h3&#39;</span>).<span style=color:#a6e22e>withAttribute</span>(<span style=color:#e6db74>&#39;style&#39;</span>, <span style=color:#e6db74>&#39;text-decoration: none;&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withAttribute</span>(<span style=color:#e6db74>&#39;style&#39;</span>, <span style=color:#e6db74>&#39;text-decoration: none;&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-})
-</code></pre></div><h3 id=最後のテスト>
-最後のテスト
-<a class=anchor href=#%e6%9c%80%e5%be%8c%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a>
-</h3>
-<p>最後に<code>5. ゴミ場ボタンをクリックするとタスクが表示されなくなる</code>に取り組んでみましょう。
-これも最初はリファレンスを見ながら自力で書いてみてください。</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Selector</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;testcafe&#39;</span>;
-
-<span style=color:#a6e22e>fixture</span> <span style=color:#e6db74>`test target`</span>
-    .<span style=color:#a6e22e>page</span> <span style=color:#e6db74>`http://localhost:3000`</span>;
-
-<span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスク一覧画面を見ることができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
-    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;body&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;Simple TodoList Application&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;&#39;</span>)
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;&#39;</span>)
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SAVE&#34;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-})
-
-<span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスクを作成することができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
-    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
-        .<span style=color:#a6e22e>typeText</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>), <span style=color:#e6db74>&#39;title&#39;</span>, {<span style=color:#a6e22e>replace</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>})
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;title&#39;</span>)
-        .<span style=color:#a6e22e>typeText</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>), <span style=color:#e6db74>&#39;description&#39;</span>, {<span style=color:#a6e22e>replace</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>})
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;description&#39;</span>)
-        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SAVE&#34;</span>))
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h3&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;title&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;description&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-})
-
-<span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスク完了することができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
-    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
-        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h3&#39;</span>).<span style=color:#a6e22e>withAttribute</span>(<span style=color:#e6db74>&#39;style&#39;</span>, <span style=color:#e6db74>&#39;text-decoration: line-through;&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withAttribute</span>(<span style=color:#e6db74>&#39;style&#39;</span>, <span style=color:#e6db74>&#39;text-decoration: line-through;&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-})
-
-<span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスクを未完了に戻すことができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
-    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
-        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h3&#39;</span>).<span style=color:#a6e22e>withAttribute</span>(<span style=color:#e6db74>&#39;style&#39;</span>, <span style=color:#e6db74>&#39;text-decoration: none;&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withAttribute</span>(<span style=color:#e6db74>&#39;style&#39;</span>, <span style=color:#e6db74>&#39;text-decoration: none;&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
-})
-
-<span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスクを削除することができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
-    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
-        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;button&#39;</span>))
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h3&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;title&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>notOk</span>()
-        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;description&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>notOk</span>()
-})
-</code></pre></div><p>存在しないことを確認したいので、作成したときに書いたテストの最後を<code>.ok()</code>から<code>.notOk()</code>に変更するだけです！</p>
-<p>以上で予定していたシナリオをすべてスクリプトに書くことができました！お疲れさまです！</p>
-<h2 id=まとめ>
-まとめ
-<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a>
-</h2>
-<p><a href=https://github.com/Onebase-Fujitsu/simple-todo-app/tree/e2etest>完成したテストを含むリポジトリはこちら</a> で公開しています。</p>
-<p>また、<a href=https://github.com/Onebase-Fujitsu/simple-todo-app/blob/e2etest/e2e/test/test.js>テストスクリプトファイルはこちら</a> です。</p>
-<p>testcafeによるE2Eテストはいかがでしょうか？
+同じくp要素が存在していることを確認しています。</p><h3 id=4番目のテスト>4番目のテスト
+<a class=anchor href=#4%e7%95%aa%e7%9b%ae%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>3番目のテストができていたら<code>4. 完了済みのタスクを再度クリックすると未完了状態になる</code>はできたも同然ですね。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Selector</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;testcafe&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>fixture</span> <span style=color:#e6db74>`test target`</span>
+</span></span><span style=display:flex><span>    .<span style=color:#a6e22e>page</span> <span style=color:#e6db74>`http://localhost:3000`</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスク一覧画面を見ることができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;body&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;Simple TodoList Application&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;&#39;</span>)
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;&#39;</span>)
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SAVE&#34;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスクを作成することができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>typeText</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>), <span style=color:#e6db74>&#39;title&#39;</span>, {<span style=color:#a6e22e>replace</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>})
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;title&#39;</span>)
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>typeText</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>), <span style=color:#e6db74>&#39;description&#39;</span>, {<span style=color:#a6e22e>replace</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>})
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;description&#39;</span>)
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SAVE&#34;</span>))
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h3&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;title&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;description&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスク完了することができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h3&#39;</span>).<span style=color:#a6e22e>withAttribute</span>(<span style=color:#e6db74>&#39;style&#39;</span>, <span style=color:#e6db74>&#39;text-decoration: line-through;&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withAttribute</span>(<span style=color:#e6db74>&#39;style&#39;</span>, <span style=color:#e6db74>&#39;text-decoration: line-through;&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスクを未完了に戻すことができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h3&#39;</span>).<span style=color:#a6e22e>withAttribute</span>(<span style=color:#e6db74>&#39;style&#39;</span>, <span style=color:#e6db74>&#39;text-decoration: none;&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withAttribute</span>(<span style=color:#e6db74>&#39;style&#39;</span>, <span style=color:#e6db74>&#39;text-decoration: none;&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><h3 id=最後のテスト>最後のテスト
+<a class=anchor href=#%e6%9c%80%e5%be%8c%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>最後に<code>5. ゴミ場ボタンをクリックするとタスクが表示されなくなる</code>に取り組んでみましょう。
+これも最初はリファレンスを見ながら自力で書いてみてください。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Selector</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;testcafe&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>fixture</span> <span style=color:#e6db74>`test target`</span>
+</span></span><span style=display:flex><span>    .<span style=color:#a6e22e>page</span> <span style=color:#e6db74>`http://localhost:3000`</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスク一覧画面を見ることができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;body&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;Simple TodoList Application&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;&#39;</span>)
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;&#39;</span>)
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SAVE&#34;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスクを作成することができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>typeText</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>), <span style=color:#e6db74>&#39;title&#39;</span>, {<span style=color:#a6e22e>replace</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>})
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskNameInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;title&#39;</span>)
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>typeText</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>), <span style=color:#e6db74>&#39;description&#39;</span>, {<span style=color:#a6e22e>replace</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>})
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;input#taskDescriptionInput&#39;</span>).<span style=color:#a6e22e>value</span>).<span style=color:#a6e22e>eql</span>(<span style=color:#e6db74>&#39;description&#39;</span>)
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#34;SAVE&#34;</span>))
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h3&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;title&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;description&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;button&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスク完了することができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h3&#39;</span>).<span style=color:#a6e22e>withAttribute</span>(<span style=color:#e6db74>&#39;style&#39;</span>, <span style=color:#e6db74>&#39;text-decoration: line-through;&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withAttribute</span>(<span style=color:#e6db74>&#39;style&#39;</span>, <span style=color:#e6db74>&#39;text-decoration: line-through;&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスクを未完了に戻すことができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>))
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h3&#39;</span>).<span style=color:#a6e22e>withAttribute</span>(<span style=color:#e6db74>&#39;style&#39;</span>, <span style=color:#e6db74>&#39;text-decoration: none;&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withAttribute</span>(<span style=color:#e6db74>&#39;style&#39;</span>, <span style=color:#e6db74>&#39;text-decoration: none;&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>ok</span>()
+</span></span><span style=display:flex><span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>test</span>(<span style=color:#e6db74>&#39;タスクを削除することができる&#39;</span>, <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>t</span> =&gt; {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>t</span>
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;button&#39;</span>))
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;h3&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;title&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>notOk</span>()
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;description&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>notOk</span>()
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><p>存在しないことを確認したいので、作成したときに書いたテストの最後を<code>.ok()</code>から<code>.notOk()</code>に変更するだけです！</p><p>以上で予定していたシナリオをすべてスクリプトに書くことができました！お疲れさまです！</p><h2 id=まとめ>まとめ
+<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a></h2><p><a href=https://github.com/Onebase-Fujitsu/simple-todo-app/tree/e2etest>完成したテストを含むリポジトリはこちら</a> で公開しています。</p><p>また、<a href=https://github.com/Onebase-Fujitsu/simple-todo-app/blob/e2etest/e2e/test/test.js>テストスクリプトファイルはこちら</a> です。</p><p>testcafeによるE2Eテストはいかがでしょうか？
 新しく出てきたライブラリですので多少覚えることは多いかもしれませんが、
-手続き的に操作と評価を書くだけですので、やってることは非常に単純だということがおわかりいただけたのではないかと思います。</p>
-<p>testcafeの素晴らしい所はなにより導入が簡単というところで、<code>npm install -D testcafe</code>コマンド一発で導入が完了します。
+手続き的に操作と評価を書くだけですので、やってることは非常に単純だということがおわかりいただけたのではないかと思います。</p><p>testcafeの素晴らしい所はなにより導入が簡単というところで、<code>npm install -D testcafe</code>コマンド一発で導入が完了します。
 headlessモードのChromeで動かせば、CI/CDパイプライン上でも簡単に動かすことができますし、
-たとえheadlessモードであっても、テストに失敗したときはその時の様子のスクリーンショットを残すことができたりとかなり強力です。</p>
-<p>ぜひ試してみてください。また、冒頭にも書いたように様々なE2Eテストツールがありますので、
-色々試してみて自分のプロジェクトにあったテストツールを探してみましょう。</p>
-<hr>
-<p>テストについては以上です。次に変更に強いソフトウェアを書く技術について学んでいきましょう。</p>
-<a href=/agile-dev-guide/docs/softwaredesign/about/ class=book-btn>
-ソフトウェア設計
-</a>
-</article>
-<footer class=book-footer>
-<div class="flex flex-wrap justify-between">
-</div>
-<script>(function(){function a(c){const a=window.getSelection(),b=document.createRange();b.selectNodeContents(c),a.removeAllRanges(),a.addRange(b)}document.querySelectorAll("pre code").forEach(b=>{b.addEventListener("click",function(c){a(b.parentElement),navigator.clipboard&&navigator.clipboard.writeText(b.parentElement.textContent)})})})()</script>
-</footer>
-<div class=book-comments>
-</div>
-<label for=menu-control class="hidden book-menu-overlay"></label>
-</div>
-<aside class=book-toc>
-<div class=book-toc-content>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#e2eテストとは>E2Eテストとは</a></li>
-<li><a href=#e2eテストツール>E2Eテストツール</a>
-<ul>
-<li><a href=#selenium>Selenium</a></li>
-<li><a href=#cypress>Cypress</a></li>
-<li><a href=#testcafe>Testcafe</a></li>
-<li><a href=#mabl>mabl</a></li>
-<li><a href=#autify>Autify</a></li>
-<li><a href=#e2eテストツールの選定>E2Eテストツールの選定</a></li>
-</ul>
-</li>
-<li><a href=#サンプルアプリケーション>サンプルアプリケーション</a></li>
-<li><a href=#testcafeによるe2eテスト>testcafeによるE2Eテスト</a>
-<ul>
-<li><a href=#テストのシナリオを考えよう>テストのシナリオを考えよう</a></li>
-<li><a href=#最初のテスト>最初のテスト</a></li>
-<li><a href=#2番目のテスト>2番目のテスト</a></li>
-<li><a href=#3番目のテスト>3番目のテスト</a></li>
-<li><a href=#4番目のテスト>4番目のテスト</a></li>
-<li><a href=#最後のテスト>最後のテスト</a></li>
-</ul>
-</li>
-<li><a href=#まとめ>まとめ</a></li>
-</ul>
-</nav>
-</div>
-</aside>
-</main>
-</body>
-</html>
+たとえheadlessモードであっても、テストに失敗したときはその時の様子のスクリーンショットを残すことができたりとかなり強力です。</p><p>ぜひ試してみてください。また、冒頭にも書いたように様々なE2Eテストツールがありますので、
+色々試してみて自分のプロジェクトにあったテストツールを探してみましょう。</p><hr><p>テストについては以上です。次に変更に強いソフトウェアを書く技術について学んでいきましょう。</p><a href=/agile-dev-guide/docs/softwaredesign/about/ class=book-btn>ソフトウェア設計</a></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#e2eテストとは>E2Eテストとは</a></li><li><a href=#e2eテストツール>E2Eテストツール</a><ul><li><a href=#selenium>Selenium</a></li><li><a href=#cypress>Cypress</a></li><li><a href=#testcafe>Testcafe</a></li><li><a href=#mabl>mabl</a></li><li><a href=#autify>Autify</a></li><li><a href=#e2eテストツールの選定>E2Eテストツールの選定</a></li></ul></li><li><a href=#サンプルアプリケーション>サンプルアプリケーション</a></li><li><a href=#testcafeによるe2eテスト>testcafeによるE2Eテスト</a><ul><li><a href=#テストのシナリオを考えよう>テストのシナリオを考えよう</a></li><li><a href=#最初のテスト>最初のテスト</a></li><li><a href=#2番目のテスト>2番目のテスト</a></li><li><a href=#3番目のテスト>3番目のテスト</a></li><li><a href=#4番目のテスト>4番目のテスト</a></li><li><a href=#最後のテスト>最後のテスト</a></li></ul></li><li><a href=#まとめ>まとめ</a></li></ul></nav></div></aside></main></body></html>
