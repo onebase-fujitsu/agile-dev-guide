@@ -6,7 +6,7 @@ bookToc: true
 
 # 4日目
 
-3日まででReact+Reduxで作ったフロントエンドとSpring Bootで作ったバックエンドを連携させることができました。
+3日まででReactで作ったフロントエンドとSpring Bootで作ったバックエンドを連携させることができました。
 しかし、タスクを表示することができましたが、タスクを追加する機能がまだありません。
 4日目からはどんどん機能を追加してみましょう。
 
@@ -32,26 +32,45 @@ bookToc: true
 npm install react-router-dom @types/react-router-dom
 ```
 
-そして、App.tsxを以下のように編集してみましょう
+そして、App.tsxを以下のように編集してみましょう。
 
 ```typescript jsx
 // App.tsx
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import Home from './pages/Home'
 
-function App() {
-  return (
+const App = () => (
     <div className="App">
-      <BrowserRouter>
-        <Switch>
-          <Route path="/" exact render={() => <Home/>} />
-        </Switch>
-      </BrowserRouter>
+        <Routes>
+            <Route path="/" element={<Home/>}/>
+        </Routes>
     </div>
-  )
-}
+)
 
 export default App
+```
+
+次にindex.tsxを以下のように編集してみましょう。
+
+```typescript jsx
+// index.tsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import './index.css'
+import {BrowserRouter} from 'react-router-dom'
+import App from './App'
+import TodoProvider from './context/TodoContext'
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+root.render(
+  <React.StrictMode>
+    <TodoProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </TodoProvider>
+  </React.StrictMode>
+)
 ```
 
 この状態で [http://localhost:3000/](http://localhost:3000/) にアクセスするとHome画面が表示されます。ここはこれまでの動作と変わりません。
@@ -68,9 +87,8 @@ export default App
 
 ```typescript jsx
 // Header.test.tsx
-import {cleanup, screen} from '@testing-library/react'  // 変更
+import {cleanup, render, screen} from '@testing-library/react'  // 変更
 import Header from '../../components/Header'
-import { render } from '../../test-utils'   // 追加
 
 describe('Header', () => {
   afterEach(() => {
@@ -89,35 +107,82 @@ describe('Header', () => {
 ヘッダーに`/`へのリンクと、`/newTask`へのリンクがあることを確認するテストを追加しました。
 
 テストが書けたら実装も追加します。
-今回はicon画像を使いたいので、[HeroIcons](https://heroicons.com/) を導入してから、Header.tsxを編集します。
+今回はicon画像を使いたいので、[Styled Icons](https://styled-icons.dev/) を導入してから、Header.tsxを編集します。
 
 ```shell
-npm install @heroicons/react
+npm install styled-icons
 ```
 
 ```typescript jsx
 // Header.tsx
-import {Link} from "react-router-dom";
-import {HomeIcon, PencilAltIcon} from "@heroicons/react/solid";
+import styled from 'styled-components'
+import {Link} from 'react-router-dom'
+import {Task, Home} from 'styled-icons/material'
+
+const Wrapper = styled.div`
+  height: 100vh;
+  width: 12rem;
+  border-right-width: 1px;
+  border-right-style: solid;
+  border-right-color: #e5e7eb;
+`
+
+const H1 = styled.h1`
+  padding: 1rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  letter-spacing: -0.025rem;
+`
+
+const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  color: #6b7280;
+`
+
+const StyledLink = styled(Link)`
+  padding: 1rem;
+  &:hover {
+    background-color: #f3f4f6;
+    color: #374151;
+  }
+`
+
+const StyledHome = styled(Home)`
+  width: 1.25rem;
+  margin-right: 0.75rem;
+`
+
+const StyledTask = styled(Task)`
+  width: 1.25rem;
+  margin-right: 0.75rem;
+`
+
+const H2 = styled.h2`
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+`
 
 const Header = () => (
-  <div data-testid="Header" className="h-screen w-48 border-r bg-white">
-    <h1 className="font-semibold p-4 text-xl tracking-tight">Todo App</h1>
-    <div className="h-3/4 flex flex-col justify-start text-gray-500">
-      <Link to="/" className="p-4 hover:bg-gray-100 hover:text-gray-700 transition duration-200 ease-in">
-        <h2 className="text-sm flex items-center">
-          <HomeIcon className="w-5 mr-3"/>
-          <span className="hover:text-black transition duration-200 ease-linear">Home</span>
-        </h2>
-      </Link>
-      <Link to="/newTask" className="p-4 hover:bg-gray-100 hover:text-gray-700 transition duration-200 ease-in">
-        <h2 className="text-sm flex items-center">
-          <PencilAltIcon className="w-5 mr-3"/>
-          <span className="hover:text-black transition duration-200 ease-linear">New Task</span>
-        </h2>
-      </Link>
-    </div>
-  </div>
+  <Wrapper data-testid="Header">
+    <H1>Todo App</H1>
+    <Div>
+      <StyledLink to="/">
+        <H2>
+          <StyledHome />
+          Home
+        </H2>
+      </StyledLink>
+      <StyledLink to="/newTask">
+        <H2>
+          <StyledTask />
+          New Task
+        </H2>
+      </StyledLink>
+    </Div>
+  </Wrapper>
 )
 
 export default Header
@@ -140,39 +205,53 @@ export default Header
 ```
 
 Routerに依存しているのでLinkがRouterに依存しているのにそれを無視してレンダリングしようとしたからですね。
-というわけで、test-utils.jsxも編集してしまいましょう。
+というわけで、`Header.test.tsx`のレンダリングオプションを追加しましょう。また、結合テストの役割を果たす`Home.test.tsx`にも同様のレンダリングオプションを追加します。
 
-```javascript
-// test-utils.jsx
-import {render as rtlRender} from '@testing-library/react'
-import {configureStore} from '@reduxjs/toolkit'
-import {Provider} from 'react-redux'
-import todoSlice from './stores/todoSlice'
-import {BrowserRouter} from 'react-router-dom'
+```typescript jsx
+// Header.test.tsx
+import {cleanup, render, screen} from '@testing-library/react'
+import Header from '../../components/Header'
+import {BrowserRouter} from "react-router-dom";
 
-function render(
-    ui,
-    {
-        preloadedState,
-        store = configureStore({
-            reducer: {todos: todoSlice.reducer},
-            preloadedState,
-        }),
-        ...renderOptions
-    } = {}
-) {
-    function Wrapper({children}) {
-        return (
-            <Provider store={store}>
-                <BrowserRouter>{children}</BrowserRouter>
-            </Provider>
-        )
-    }
-    return rtlRender(ui, {wrapper: Wrapper, ...renderOptions})
-}
+describe('Header', () => {
+  afterEach(() => {
+    cleanup()
+  })
 
-export * from '@testing-library/react'
-export {render}
+  it('ヘッダーの初期表示', () => {
+    render(<Header />, {wrapper: BrowserRouter})            // 修正
+    expect(screen.getByText('Todo App')).toBeInTheDocument()
+    expect(screen.getByText('Home').closest('a')).toHaveAttribute('href', '/')
+    expect(screen.getByText('New Task').closest('a')).toHaveAttribute('href', '/newTask')
+  })
+})
+
+```
+
+```typescript jsx
+// Home.test.tsx
+
+// 中略
+
+  it('画面構成', async () => {
+    mock.onGet('/todos').reply(200, [])
+
+    await act(() => {
+      render(<Home />, {wrapper: BrowserRouter})  // 修正
+    })
+
+    expect(screen.queryByTestId('Header')).toBeTruthy()
+    expect(screen.queryByTestId('TodoList')).toBeTruthy()
+  })
+
+// 中略
+
+    await act(() => {
+      render(<TodoProvider><Home /></TodoProvider>, {wrapper: BrowserRouter})  // 修正
+    })
+
+    expect(mock.history.get[0].url).toEqual('/todos')
+    expect(screen.getByText('title')).toBeInTheDocument()
 ```
 
 これでひとまずテストは通ったと思います。
@@ -187,34 +266,36 @@ export {render}
 
 ### タスク作成画面の作成
 
-では次にタスク作成画面を作成しましょう。まず、タスク作成画面のテストを作成します。
-page配下にNewTask.test.tsxを作成しましょう。
+では次にタスク作成画面を作成しましょう。
+
+まず、タスク作成画面のテストを作成します。
+`__test__/page`ディレクトリ配下に`NewTask.test.tsx`を作成しましょう。
 
 ```typescript jsx
 // NewTask.test.tsx
-import {cleanup, screen} from '@testing-library/react'
-import {render} from '../../test-utils'
+import {cleanup, render, screen} from '@testing-library/react'
+import {BrowserRouter} from 'react-router-dom'
 
 describe('タスク作成画面', () => {
 
-    afterEach(() => {
-        cleanup()
-    })
+  afterEach(() => {
+    cleanup()
+  })
 
-    it('画面構成', async () => {
-        render(<NewTask />)
+  it('画面構成', async () => {
+    render(<NewTask />, {wrapper: BrowserRouter})
 
-        expect(screen.queryByTestId('Header')).toBeTruthy()
-        expect(screen.queryByTestId('NewTaskForm')).toBeInTheDocument()
-    })
+    expect(screen.queryByTestId('Header')).toBeTruthy()
+    expect(screen.queryByTestId('NewTaskForm')).toBeInTheDocument()
+  })
 })
 ```
 
-画面のテスト内容はHeaderとタスクを入力するFormコンポーネントで構成されていることというテストにしました。
+テスト内容は「画面構成がHeaderとタスクを入力するFormコンポーネントであること」を確認するテストにしました。
 もちろん、NewTaskコンポーネントも、NewTaskFormコンポーネントもまだ無いためこのテストは失敗します。
 
 まず、NewTaskFromコンポーネントを作成していきましょう。
-components配下にNewTaskForm.tsxを作成します。
+`components`ディレクトリ配下に`NewTaskForm.tsx`を作成します。
 
 ```typescript jsx
 // NewTaskFrom.tsx
@@ -230,7 +311,7 @@ export default NewTaskForm
 
 いったん中身は空で大丈夫です。
 
-その上で、page配下にNewTask.tsxを作成します。
+その上で、`page`ディレクトリ配下に`NewTask.tsx`を作成します。
 
 ```typescript jsx
 // NewTask.tsx
@@ -254,8 +335,7 @@ NewTaskFormコンポーネントにはタスクの入力とテキストボック
 
 ```typescript jsx
 // NewTaskForm.test.tsx
-import {cleanup, fireEvent, screen} from "@testing-library/react";
-import {render} from "../../test-utils";
+import {cleanup, fireEvent, render, screen} from '@testing-library/react'
 import NewTaskForm from "../../components/NewTaskForm";
 
 
@@ -290,9 +370,10 @@ const NewTaskForm = () => {
 
   return (
     <form data-testid="NewTaskForm">
-      <label htmlFor="titleInput">Title</label>
+      <label htmlFor="titleInput">Title
       <input id="titleInput" data-testid="TitleInput" type="text" value={taskInput}
              onChange={(event) => setTaskInput(event.target.value)}/>
+      </label>
       <button type="button">
         Send
       </button>
@@ -310,22 +391,18 @@ export default NewTaskForm
 
 ```typescript jsx
 // App.tsx
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom'
 import Home from './pages/Home'
-import NewTask from "./pages/NewTask";    // 追記
+import NewTask from './pages/NewTask'
 
-function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Switch>
-          <Route path="/" exact render={() => <Home />} />
-          <Route path="/newTask" exact render={() => <NewTask />} />    // 追記
-        </Switch>
-      </BrowserRouter>
-    </div>
-  )
-}
+const App = () => (
+  <div className="App">
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/newTask" element={<NewTask />} />
+    </Routes>
+  </div>
+)
 
 export default App
 ```
@@ -339,45 +416,127 @@ App.tsxにルーティング設定を追加しました。この状態でメニ�
 ```typescript jsx
 // NewTaskForm.tsx
 import {useState} from 'react'
+import styled from 'styled-components'
 
+const Wrapper = styled.form`
+  width: 100%;
+  padding: 2rem;
+`
+
+const DivForm = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
+  margin-bottom: 1.5rem;
+`
+
+const DivLabel = styled.div`
+  width: 100%;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+`
+
+const Label = styled.label`
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  color: #374151;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+`
+const Input = styled.input`
+  appearance: none;
+  display: block;
+  width: 100%;
+  color: #374151;
+  border-width: 1px;
+  border-color: #E5E7EB;
+  border-style: solid;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
+  &:focus {
+    outline: 0;
+    background-color: #ffffff;
+    border-color: #6B7280;
+  }
+`
+const Button = styled.button`
+  box-shadow: 0 1px 5px 2px rgb(0 0 0 / 0.1);
+  background-color: #4ADE80;
+  &:hover {
+    background-color: #A7F3D0;
+  }
+  &:focus {
+    outline: 0;
+  }
+  color: #ffffff;
+  font-weight: 700;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border-style: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 100%;
+`
 const NewTaskForm = () => {
   const [taskInput, setTaskInput] = useState('')
 
   return (
-    <form data-testid="NewTaskForm" className="w-full p-8">
-      <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full px-3">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="titleInput"
-          >
-            Title
-          </label>
-          <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="titleInput"
-            data-testid="TitleInput"
-            type="text"
-            value={taskInput}
-            onChange={(event) => setTaskInput(event.target.value)}
-          />
-        </div>
-      </div>
-      <div className="md:flex md:items-center">
-        <div className="md:w-1/3">
-          <button
-            className="shadow bg-green-400 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-            type="button"
-          >
-            Send
-          </button>
-        </div>
-      </div>
-    </form>
+    <Wrapper data-testid="NewTaskForm">
+      <DivForm>
+        <DivLabel>
+          <Label htmlFor="titleInput">Title
+            <Input id="titleInput" data-testid="TitleInput" type="text" value={taskInput}
+                   onChange={(event) => setTaskInput(event.target.value)}/>
+          </Label>
+        </DivLabel>
+      </DivForm>
+        <Button type="button">
+          Send
+        </Button>
+    </Wrapper>
   )
 }
 
 export default NewTaskForm
+```
+
+```typescript jsx
+/* NewTask.tsx */
+import styled from 'styled-components'
+import Header from '../components/Header'
+import NewTaskForm from '../components/NewTaskForm'
+
+const Div = styled.div`
+  display: flex;
+`
+
+const NewTask = () => (
+  <Div data-testid="NewTask" className="flex">
+    <Header />
+    <NewTaskForm />
+  </Div>
+)
+
+export default NewTask
+
+```
+
+```css
+/* index.css */
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
 ```
 
 ![デザイン適用](newTaskDesigned.jpg)
@@ -414,8 +573,8 @@ describe('TodoApi', () => {
 
     expect(mock.history.post[0].url).toEqual('/todos')
     expect(mock.history.post[0].data).toEqual(JSON.stringify({title: 'title'}))
-    expect(mock.history.post[0].headers['Content-Type']).toEqual("application/json")
-    expect(mock.history.post[0].headers['X-Requested-With']).toEqual("XMLHttpRequest")
+    expect(mock.history.post[0].headers?.['Content-Type']).toEqual("application/json")
+    expect(mock.history.post[0].headers?.['X-Requested-With']).toEqual("XMLHttpRequest")
     expect(response.id).toEqual(1)
     expect(response.title).toEqual('title')
     expect(response.completed).toEqual(false)
@@ -429,7 +588,12 @@ describe('TodoApi', () => {
 ```typescript
 // TodoApi.ts
 import axios from 'axios'
-import {Todo} from '../stores/todoSlice'
+
+export interface Todo {
+  id: number
+  title: string
+  completed: boolean
+}
 
 export const getTodos = async () => {
   const response = await axios.get<Todo[]>('/todos')
@@ -449,118 +613,19 @@ export const postTodos = async (title: string) => {
 
 このテストを満たす実装はこのようになります。これでAPIを呼ぶ処理はできました。
 
-### Reducerへの登録
-
-では次にReducerにこれを登録していきましょう。まずはテストから。
-
-```typescript
-// todoSlice.test.ts
-import todoSlice, {getTodoAction, postTodoAction} from '../../stores/todoSlice'
-
-describe('todo reducer', () => {
-  
-  // 中略
-  
-  it('post todo is pending', async () => {
-    const action = {type: postTodoAction.pending.type}
-    const state = todoSlice.reducer([], action)
-    expect(state.length).toEqual(0)
-  })
-
-  it('post todo is fulfilled', async () => {
-    const action = {
-      type: postTodoAction.fulfilled.type,
-      payload:
-        {
-          id: 2,
-          title: 'hoge',
-          completed: false,
-        },
-    }
-
-    const initialState = [{
-      id: 1,
-      title: 'title',
-      completed: false
-    }]
-    const state = todoSlice.reducer(initialState, action)
-    expect(state.length).toEqual(2)
-    expect(state[0].id).toEqual(1)
-    expect(state[0].title).toEqual('title')
-    expect(state[0].completed).toEqual(false)
-    expect(state[1].id).toEqual(2)
-    expect(state[1].title).toEqual('hoge')
-    expect(state[1].completed).toEqual(false)
-  })
-
-  it('post todo is rejected', async () => {
-    const action = {type: postTodoAction.rejected.type}
-    const state = todoSlice.reducer([], action)
-    expect(state.length).toEqual(0)
-  })
-})
-```
-
-3件のテストを追加しました。
-getのテストと違って、成功したときに**既存のStateにサーバからの戻り値を追加する差分更新のテストにしています。**
-差分更新にしているというのが結構大事です。APIの設計については後述します。
-
-```typescript
-// todoSlice.ts
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import {getTodos, postTodos} from '../features/TodoApi'
-
-export interface Todo {
-  id: number
-  title: string
-  completed: boolean
-}
-
-export const getTodoAction = createAsyncThunk<Todo[]>(
-  'get /todos',
-  async (): Promise<Todo[]> => getTodos()
-)
-
-export const postTodoAction = createAsyncThunk<Todo, {title: string}>(
-  'post /todos',
-  async (arg): Promise<Todo> => postTodos(arg.title)
-)
-
-export const todoSlice = createSlice({
-  name: 'todos',
-  initialState: [] as Todo[],
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(getTodoAction.fulfilled, (state, action) => action.payload)
-    builder.addCase(postTodoAction.fulfilled, (state, action) => [...state, action.payload])
-  },
-})
-
-export default todoSlice
-```
-
-これを満たす実装はこのようになります。
-
-{{< hint warning >}}
-**Reducerの書き方について**
-
-StateはImmutableであり変更不可です。ReducerであってもStateを直接更新してはいけません。必ず新しいStateを作成して返す必要があります。
-
-つまり、**`(state, action) => state.push(action.payload)`のような記述は厳禁**ですので気をつけてください。
-{{< /hint >}}
 
 ### タスク作成フォームへの組み込み
 
-最後に、作成ボタンを押したらこれを呼び出す処理を書いていきましょう。
+次に、作成ボタンを押したらこれを呼び出す処理を書いていきましょう。
 
 
 ```typescript jsx
 // NewTaskForm.test.tsx
-import {cleanup, fireEvent, screen} from '@testing-library/react'
-import MockAdapter from "axios-mock-adapter";
-import axios from "axios";
-import NewTaskForm from '../../components/NewTaskForm'
-import {render} from '../../test-utils'
+import {cleanup, fireEvent, render, screen} from '@testing-library/react'
+import NewTaskForm from "../../components/NewTaskForm";
+import MockAdapter from 'axios-mock-adapter'
+import axios from 'axios'
+
 
 describe('NewEntryFormコンポーネント', () => {
   let mock: MockAdapter
@@ -574,22 +639,20 @@ describe('NewEntryFormコンポーネント', () => {
     cleanup()
   })
 
-  it('初期表示', () => {
-    render(<NewTaskForm />)
+  it("初期表示", () => {
+    render(<NewTaskForm/>)
     expect(screen.queryByLabelText('Title')).toBeTruthy()
-    expect(screen.getByTestId('TitleInput')).toHaveValue('')
+    expect(screen.getByTestId("TitleInput")).toHaveValue('')
     expect(screen.queryByText('Send')).toBeTruthy()
   })
 
-  it('タスク名を編集できる', () => {
-    render(<NewTaskForm />)
-    fireEvent.change(screen.getByTestId('TitleInput'), {
-      target: {value: 'title text'},
-    })
-    expect(screen.getByTestId('TitleInput')).toHaveValue('title text')
+  it("タスク名を編集できる", () => {
+    render(<NewTaskForm/>)
+    fireEvent.change(screen.getByTestId('TitleInput'), {target: {value: 'title text'}})
+    expect(screen.getByTestId("TitleInput")).toHaveValue('title text')
   })
 
-  it("作成ボタンを押したら、作成がリクエストされる", async () => {
+  it("作成ボタンを押したら、作成がリクエストされる",  () => {
     render(<NewTaskForm />)
     fireEvent.change(screen.getByTestId('TitleInput'), {
       target: {value: 'title text'},
@@ -605,54 +668,49 @@ describe('NewEntryFormコンポーネント', () => {
 
 ```typescript jsx
 // NewTaskForm.tsx
-import {useState} from 'react'
-import {useDispatch} from "react-redux";
-import {AppDispatch} from "../stores/store";
-import {postTodoAction} from "../stores/todoSlice";
+
+// 中略
 
 const NewTaskForm = () => {
   const [taskInput, setTaskInput] = useState('')
-  const dispatch: AppDispatch = useDispatch()
+  const todoContext = React.useContext(TodoContext)
+
+  const handleSend = () => {
+    postTodos(taskInput).then((res) =>
+      todoContext?.setTodos([
+        ...todoContext.todos,
+        {
+          id: res.id,
+          title: res.title,
+          completed: res.completed
+        }
+      ])
+    ).catch(() => {
+    })
+  }
 
   return (
-    <form data-testid="NewTaskForm" className="w-full p-8">
-      <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full px-3">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="titleInput"
-          >
-            Title
-          </label>
-          <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="titleInput"
-            data-testid="TitleInput"
-            type="text"
-            value={taskInput}
-            onChange={(event) => setTaskInput(event.target.value)}
-          />
-        </div>
-      </div>
-      <div className="md:flex md:items-center">
-        <div className="md:w-1/3">
-          <button
-            className="shadow bg-green-400 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-            type="button"
-            onClick={() => dispatch(postTodoAction({title: taskInput}))}
-          >
-            Send
-          </button>
-        </div>
-      </div>
-    </form>
+    <Wrapper data-testid='NewTaskForm'>
+      <DivForm>
+        <DivLabel>
+          <Label htmlFor='titleInput'>Title
+            <Input id='titleInput' data-testid='TitleInput' type='text' value={taskInput}
+                   onChange={(event) => setTaskInput(event.target.value)} />
+          </Label>
+        </DivLabel>
+      </DivForm>
+      <Button type='button' onClick={() => handleSend()}>
+        Send
+      </Button>
+    </Wrapper>
   )
 }
 
 export default NewTaskForm
 ```
 
-実装はこのようになります。buttonをonClickしたときにpostTodoActionをdispatchするだけですね。
+実装はこのようになります。buttonをonClickしたときにhandleSendを呼び出し、その中でpostTodosを呼び出す形にしています。
+また、既存のTodoContextにサーバからの戻り値を追加する差分更新の設計にしています。 差分更新にしているというのが結構大事です。APIの設計については後述する[API設計](/agile-dev-guide/docs/practice/day5/#api設計)で解説します。
 
 ![postTodo](postTodos.jpg)
 
@@ -678,29 +736,30 @@ HTTP通信のオーバーヘッドはメモリアクセスや、ディスクア�
 
 ```typescript jsx
 // App.tsx
-import {useDispatch} from "react-redux";
-import {useEffect} from "react";
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom'
+import {useContext, useEffect} from 'react'
 import Home from './pages/Home'
 import NewTask from './pages/NewTask'
-import {AppDispatch} from "./stores/store";
-import {getTodoAction} from "./stores/todoSlice";
+import {TodoContext} from './context/TodoContext'
+import {getTodos} from './features/TodoApi'
 
-function App() {
-  const dispatch: AppDispatch = useDispatch()
+const App = () => {
+  const todoContext = useContext(TodoContext)
 
   useEffect(() => {
-    dispatch(getTodoAction())
-  })
+    const fetchData = async () => {
+      const response = await getTodos()
+      todoContext?.setTodos(response)
+    }
+    fetchData()
+  }, [])
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Switch>
-          <Route path="/" exact render={() => <Home />} />
-          <Route path="/newTask" exact render={() => <NewTask />} />
-        </Switch>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/newTask" element={<NewTask />} />
+      </Routes>
     </div>
   )
 }
@@ -710,14 +769,20 @@ export default App
 
 ```typescript jsx
 // Home.tsx
-import Header from '../components/Header'
+import React from 'react'
+import styled from 'styled-components'
 import TodoList from '../components/TodoList'
+import Header from '../components/Header'
+
+const Div = styled.div`
+  display: flex;
+`
 
 const Home = () => (
-  <div data-testid="Home" className="flex">
-    <Header/>
-    <TodoList/>
-  </div>
+  <Div>
+    <Header />
+    <TodoList />
+  </Div>
 )
 
 export default Home
@@ -727,29 +792,33 @@ Home.tsxがだいぶスッキリしました。テストも合わせて修正し
 
 ```typescript jsx
 // Home.test.tsx
-import {cleanup, screen} from '@testing-library/react'
-import {render} from '../../test-utils'
+import {cleanup, render, screen, waitFor} from '@testing-library/react'
+import {BrowserRouter} from 'react-router-dom'
 import Home from '../../pages/Home'
 
 describe('Home画面', () => {
+
   afterEach(() => {
     cleanup()
   })
 
-  it('画面構成', () => {
-    render(<Home />)
-    expect(screen.queryByTestId('Header')).toBeTruthy()
-    expect(screen.queryByTestId('TodoList')).toBeTruthy()
+  it('画面構成', async () => {
+    render(<Home />, {wrapper: BrowserRouter})
+
+    await waitFor(() => expect(screen.queryByTestId('Header')).toBeTruthy())
+    await waitFor(() => expect(screen.queryByTestId('TodoList')).toBeTruthy())
   })
 })
+
 ```
 
 ```typescript jsx
 // App.test.tsx
-import axios from "axios";
-import MockAdapter from "axios-mock-adapter";
-import {render} from "../test-utils";
-import App from "../App";
+import axios from 'axios'
+import MockAdapter from 'axios-mock-adapter'
+import {render} from '@testing-library/react'
+import {BrowserRouter} from 'react-router-dom'
+import App from '../App'
 
 describe('App', () => {
   let mock: MockAdapter
@@ -770,8 +839,7 @@ describe('App', () => {
         completed: false,
       },
     ])
-    const initialState = {todos: []}
-    render(<App />, {preloadedState: initialState})
+    render(<App />, {wrapper: BrowserRouter})
 
     expect(mock.history.get[0].url).toEqual('/todos')
   })

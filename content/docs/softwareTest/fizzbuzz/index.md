@@ -435,10 +435,10 @@ public class FizzBuzzTest {
     @Test
     void 数字の3と5の倍数を入力すると文字列のFizzBuzzが返ってくる() {
         FizzBuzz fb = new FizzBuzz();
-        assertThat(fb.getResponse(15)).contains("FizzBuzz");
-        assertThat(fb.getResponse(30)).contains("FizzBuzz");
-        assertThat(fb.getResponse(45)).contains("FizzBuzz");
-        assertThat(fb.getResponse(60)).contains("FizzBuzz");
+        assertThat(fb.getResponse(15)).isEqualTo("FizzBuzz");
+        assertThat(fb.getResponse(30)).isEqualTo("FizzBuzz");
+        assertThat(fb.getResponse(45)).isEqualTo("FizzBuzz");
+        assertThat(fb.getResponse(60)).isEqualTo("FizzBuzz");
     }
 }
 ```

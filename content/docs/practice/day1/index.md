@@ -60,7 +60,7 @@ Javascriptとそのスーパーセットである、Typescriptはプロジェク
 ましてや、眺めているだけでは決してあなたの身につくことないでしょう。
 
 このサンプルアプリケーションではSpring Framework(Spring Boot)や、
-React.jsやReduxその他多くのOSSを使用していますが、わからないことを都度 **各ライブラリやフレームワークの公式のリファレンスや [MDN](https://developer.mozilla.org/ja/docs/Web)** を読み、
+React.jsその他多くのOSSを使用していますが、わからないことを都度 **各ライブラリやフレームワークの公式のリファレンスや [MDN](https://developer.mozilla.org/ja/docs/Web)** を読み、
 理解するよう努めることがとても大事です。
 
 **公式のリファレンス以上に参考になるドキュメントはWeb上のどこにもない** ということを肝に銘じ、
@@ -74,28 +74,19 @@ React.jsやReduxその他多くのOSSを使用していますが、わからな�
 ### reactアプリの作成
 
 ```shell
-npx create-react-app todo-app-client --template redux-typescript --use-npm
+npx create-react-app todo-app-client --template typescript --use-npm
 ```
 
-今回はredux-typescriptのtemplateから作成を始めます。
+今回はtypescriptのtemplateから作成を始めます。
 `create-react-app`を使ってクライアントの雛形を作りました。
 
-このTemplateには不要な初期実装が含まれてますので、ひとまずApp.cssや`features/counter`配下など諸々を削除しました。
-そして、storesディレクトリと、componentsディレクトリ、pagesディレクトリを作成し、ファイルを以下のように整理しました。
+このTemplateには不要な初期実装が含まれてますので、ひとまずApp.tsxとindex.tsx、setupTests.ts以外のファイルを削除しました。
 
 ```
 src
 ├── App.tsx
-├── components
-├── features
 ├── index.tsx
-├── pages
-├── react-app-env.d.ts
-├── serviceWorker.ts
-├── setupTests.ts
-└── stores
-    ├── hooks.ts
-    └── store.ts
+└── setupTests.ts
 ```
 
 ### eslintの設定
@@ -214,7 +205,6 @@ onebase@Onebase-Maguro todo-app-client % npm run lint
    3:17  error  Missing file extension for "./App"                          import/extensions
    4:23  error  Unable to resolve path to module './stores/store'           import/no-unresolved
    4:23  error  Missing file extension for "./stores/store"                 import/extensions
-   5:1   error  `react-redux` import should occur before import of `./App`  import/order
    8:3   error  JSX not allowed in files with extension '.tsx'              react/jsx-filename-extension
   13:34  error  Missing trailing comma                                      comma-dangle
   15:1   error  Too many blank lines at the end of file. Max of 0 allowed   no-multiple-empty-lines
@@ -286,16 +276,19 @@ package.jsonのscriptに修正用のコマンドも入れてしまいましょ�
 これで設定は完了です。`npm run fix`を実行してみましょう。
 
 ```
-/Users/onebase/IdeaProjects/todo-app/client/src/App.tsx
-  1:8  error  'React' was used before it was defined  no-use-before-define
 
-/Users/onebase/IdeaProjects/todo-app/client/src/index.tsx
-  1:8  error  'React' was used before it was defined  no-use-before-define
+/Users/onebase/IdeaProjects/todo-app-client/src/App.tsx
+  2:18  error  Unexpected use of file extension "svg" for "./logo.svg"  import/extensions
+  2:18  error  Unable to resolve path to module './logo.svg'            import/no-unresolved
+  3:8   error  Unable to resolve path to module './App.css'             import/no-unresolved
+
+/Users/onebase/IdeaProjects/todo-app-client/src/index.tsx
+  3:8  error  Unable to resolve path to module './index.css'  import/no-unresolved
 
 ```
 
-ほとんどのエラーがprettierにより修正され、エラーが2つだけ出力されました。
-これはApp.tsxとindex.tsxの1行目のReactのimportを削除すると解消されます。
+ほとんどのエラーがprettierにより修正され、エラーが4つだけ出力されました。 これはApp.tsxとindex.tsxの不要なimport文や不要なlinkを削除すると解消されます。
+
 
 ここまでのソースコードは [https://github.com/Onebase-Fujitsu/todo-app-client/tree/step1](https://github.com/Onebase-Fujitsu/todo-app-client/tree/step1) においてあります。
 
@@ -316,136 +309,47 @@ Material UIはコンポーネントが提供されているため、さっと見
 Tailwind CSSやstyled-componentsなどはその点自由にデザインを組めますが、
 両者でコーディングスタイルは大きく異なっています。
 
-個人的にはTailwind CSSを推しているため今回はTailwind CSSを導入してみます。
+今回はstyled-componentsを導入してみます。
 
 {{< hint info >}}
 
-**なぜTailwind CSS?**
+**styled-componentsの利点**
 
-制約こそデザインシステムだというライブラリの考え方に共感するところが多いからです。
-Tailwind CSSは予め用意されたクラス名定義を組み合わせでデザインをしていくわけですが、
-その定義から外れたようなデザインがとてもしにくくなっているのが特徴です。
+styled-componentsで定義するスタイルはReactのコンポーネントそのものです。このため、styled-componentsを利用することで、componentとstyleのマッピングが無くなります。
 
-アジャイル開発では最初にデザインシステムがない状態から始めることが一般的です。
-その状態において自由度の高すぎるCSS記述はアプリデザインの一貫性の欠如をもたらします。
+さらに、ローカルスコープで利用できるため、複数のコンポーネントで同一の名前が使用でき、長い命名に悩まされる必要がなくなります。
 
-自由な記述ができないことで、デザインに一貫性を保ち、それがデザインシステムになっていくという思想は、非常にアジャイル的だと筆者は思っています。
-
-styled-componentはTailwind CSSと比較してとにかく自由です。
-どんなデザインでも普通のHTML + CSS(SASS)と同じように実装できるでしょう。
-そういった部分に価値観を置くのであれば、styled-componentsの採用も考えていいでしょう。
-将来自由度の高いデザイン記述が必要になる可能性は無いとは言えません。プロジェクトの特性に合わせて選択しましょう。
+また、styled-componentsを使用すると、CSSコードを記述してコンポーネントのスタイルを設定できるため、他のCSSフレームワークに比べて学習コストが低いことも利点の一つです。
 
 {{< /hint >}}
 
-Tailwind CSSの導入方法はこちらに書いてあるので、これに習って導入してみましょう。
+styled-componentsの導入方法は[こちら](https://styled-components.com/)に書いてあるので、これに習って導入してみましょう。
 
-[https://tailwindcss.com/docs/guides/create-react-app](https://tailwindcss.com/docs/guides/create-react-app)
-
-tailwind cssのインストールコマンドをまず叩いて、
+styled-componentsの導入は非常に簡単で以下のコマンドを実行するだけです。
 
 ```shell
-npm install -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
-npm install @craco/craco
+npm install --save styled-components @types/styled-components
 ```
 
-package.jsonのスクリプトを編集
-```
-// package.json
-"scripts": {
-    "start": "craco start",   // 変更
-    "build": "craco build",   // 変更
-    "test": "craco test",     // 変更
-    "eject": "react-scripts eject",
-    "lint": "eslint --ext .ts,.tsx ./src",
-    "fix": "npm run format && npm run lint:fix",
-    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
-    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'"
-  },
-```
-
-craco.config.jsを新規に作成
-
-```javascript
-// craco.config.js
-module.exports = {
-    style: {
-        postcss: {
-            plugins: [
-                require('tailwindcss'),
-                require('autoprefixer'),
-            ],
-        },
-    },
-}
-```
-
-Tailwind CSSの初期設定コマンドを実行
-
-```shell
-npx tailwindcss-cli@latest init
-```
-
-tailwind.config.jsが生成されるので、中身を更新
-
-```javascript
-// tailwind.config.js
-module.exports = {
-    purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],   // 更新
-    darkMode: false, // or 'media' or 'class'
-    theme: {
-        extend: {},
-    },
-    variants: {
-        extend: {},
-    },
-    plugins: [],
-}
-```
-
-src直下にindex.cssを作成して
-
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-
-index.tsxで読み込み
-
-```javascript
-import {StrictMode} from 'react'
-import ReactDOM from 'react-dom'
-import {Provider} from 'react-redux'
-import './index.css'  // 追加
-import App from './App'
-import {store} from './stores/store'
-
-ReactDOM.render(
-  <StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </StrictMode>,
-  document.getElementById('root')
-)
-```
-
-これでTailwind CSSの導入ができました。
+これでstyled-components導入ができました。
 正しく導入できているか確認してみましょう。
+
+App.tsxを以下のように変更してコンパイルしてみましょう。
 
 ```javascript
 // App.tsx
-function App() {
-    return (
-        <div className="text-red-500">test</div>
-    )
+import styled from 'styled-components'
+
+const Div = styled.div`
+    color: red;
+`
+
+function App() { 
+  return <Div>test</Div>
 }
 
 export default App
 ```
-
-App.tsxを以下のように変更してコンパイルしてみましょう。
 
 ```shell
 npm run start
@@ -470,7 +374,7 @@ React Testing Libraryはcreate-react-app時に一緒に導入されているた�
 ```javascript
 // .eslintrc.js
 module.exports = {
-    // 省略
+    // 中略
   rules: {
     'import/extensions': [
       'error',
@@ -491,7 +395,6 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'import/no-extraneous-dependencies': 'off', // 追加
   },
-    // 省略
 };
 ```
 
@@ -511,6 +414,7 @@ module.exports = {
     es2021: true,
     "jest/globals": true,       // 追記
   },
+  // 中略
   plugins: [
     'react',
     '@typescript-eslint',
@@ -539,16 +443,9 @@ src
 ├── __tests__
 │   └── components
 │       └── Header.test.tsx  // 新規作成
-├── components
-├── features
-├── index.css
-├── index.tsx
-├── pages
-├── react-app-env.d.ts
-├── setupTests.ts
-└── stores
-    ├── hooks.ts
-    └── store.ts
+│── index.tsx
+└── setupTests.ts
+
 ```
 
 ```typescript jsx
@@ -568,8 +465,6 @@ describe("Header", () => {
 ```
 
 最初のテストはこのようにしてみました。h1要素があることを確認しています。
-当然この時点ではshallowはenzymeが提供しているレンダリングメソッドの1つで、コンポーネントをshallowRenderingしてくれます。
-仮想的に直接Headerコンポーネントだけをレンダリングしていると考えてみてください。
 
 この時点ではHeaderコンポーネントは作成されていないので、当然失敗します。
 npm run testを実行するとこのような表示になっているはずです。
@@ -602,7 +497,7 @@ Time:        0.358 s, estimated 1 s
 
 ### Headerの実装
 
-src/components配下にHeader.tsxを作成します。
+src配下にcomponentsディレクトリを作成し、その配下にHeader.tsxを作成します。
 
 ```typescript jsx
 // Header.tsx
@@ -664,16 +559,11 @@ src
 │         └── Home.test.tsx
 ├── components
 │     └── Header.tsx
-├── features
 ├── index.css
 ├── index.tsx
 ├── pages
 │     └── Home.tsx
-├── react-app-env.d.ts
-├── setupTests.ts
-└── stores
-    ├── hooks.ts
-    └── store.ts
+└── setupTests.ts
 ```
 
 ```typescript jsx
@@ -714,18 +604,52 @@ Home.test.tsxと、Home.tsxはそれぞれこのようにしてみました。
 この状態でApp.tsxを以下のように変更してみましょう。
 
 ```typescript jsx
+// App.tsx
 import Home from "./pages/Home";
 
-function App() {
-  return (
-    <div className="App">
-      <Home />
-    </div>
-  )
-}
+const App = () => (
+      <div className="App">
+        <Home />
+      </div>
+)
 
 export default App
 ```
+
+このままではeslintがfunctionの定義方法についてエラーを出すため、これも修正します。
+
+```typescript jsx
+// .eslintrc.js
+module.exports = {
+    // 中略
+  rules: {
+    'import/extensions': [
+      'error',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      }
+    ],
+    'react/jsx-filename-extension': [
+      'error',
+      {
+        extensions: ['.jsx', '.tsx']
+      }
+    ],
+    'react/react-in-jsx-scope': 'off',
+    'import/prefer-default-export': 'off',
+    'import/no-extraneous-dependencies': 'off',
+    'react/function-component-definition': [ //追加ここから
+        2,
+      {
+        namedComponents: 'arrow-function',
+      },
+    ], //追加ここまで
+};
+```
+
 
 `npm run start`を実行して [https://localhost:3000](https://localhost:3000) にアクセスしてみましょう。
 
@@ -736,25 +660,69 @@ TodoAppという文字列が表示されていたら成功です！
 ## デザインの適用
 
 このままだと寂しいのでHeaderにデザインを適用してみましょう。
-Tailwind CSSでは予め定義されたclass名を使ってデザインを適用していきます。
-例えばmarginを設定したい場合は該当のDOMに`m-1`といったクラス名を適用したらいいですし、
-文字の色を変えたい場合は`text-red-500`のようなクラス名を適用します。
-どのようなCSS定義があるかは `https://tailwindcss.com/docs` を参照してください。
+styled-componentsを使ってデザインを適用していきます。
+styled-componentsの使い方については[こちら](https://styled-components.com/docs/basics#getting-started)を参照してください。
 
 実際にデザインをヘッダーに適用していきましょう。
 
 ```typescript jsx
 // Header.tsx
-const Header = () => (
-  <div data-testid="Header" className="flex items-center bg-green-500 p-6">
-    <h1 className="font-semibold text-xl text-white tracking-tight">Todo App</h1>
-  </div>
-)
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: #10B981;
+  padding: 1.5rem;
+`
+
+const Title = styled.h1`
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  color: #ffffff;
+  letter-spacing: -0.025em;
+`
+
+const Header = () =>
+  <Wrapper data-testid='Header'>
+    <Title>Todo App</Title>
+  </Wrapper>
 
 export default Header
 ```
 
 Header.tsxをこのように変更してみました。
+
+次にReactのデフォルトスタイルを修正します。
+
+src直下にindex.cssを作成して
+```css
+/* index.css */
+body {
+    margin: 0;
+}
+```
+
+index.tsxで読み込むことでデフォルトマージンを削除します。
+
+```typescript jsx
+// index.tsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import './index.css' //追加
+import App from './App'
+import reportWebVitals from './reportWebVitals'
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+)
+```
+
+以上でスタイルの適用は完了です。
 
 ![ヘッダーにデザイン適用](home_apply_design.jpg)
 
@@ -762,6 +730,20 @@ Header.tsxをこのように変更してみました。
 一気に華やかになってきましたね。
 
 ここまでのソースコードは [https://github.com/Onebase-Fujitsu/todo-app-client/tree/step3](https://github.com/Onebase-Fujitsu/todo-app-client/tree/step3) に置いてあります。
+
+{{< hint warning >}}
+
+**styled-components使用時の注意点**
+
+実際にstyled-componentsを使用してお気づきかもしれませんが、styled-componentsは非常に自由度の高いCSSフレームワークです。
+
+そのため、チームメンバーがそれぞれ自由に開発を進めると、可読性が下がりバグの原因に繋がります。
+例えばデザインのみを定義したcomponentと、何か機能を持ったcomponentとを一見して見分けることができません。
+また、定義したcomponentの全体像がわかりにくくなります。
+
+そのためチームで開発する際には、ディレクトリ構成やファイル構造、命名規則などのルールを定めて使用しましょう。
+
+{{< /hint >}}
 
 ---
 
@@ -775,6 +757,6 @@ Header.tsxをこのように変更してみました。
 
 ---
 
-2日目に続きます
+2日目に続きます。
 
 {{< button relref="/docs/practice/day2" >}}2日目{{< /button >}}

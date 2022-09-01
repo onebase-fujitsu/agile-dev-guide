@@ -302,25 +302,67 @@ class TodoControllerTest {
 
 ```typescript jsx
 // TodoList.tsx
-import {useSelector} from 'react-redux'
-import {RootState} from '../stores/store'
+import React from 'react'
+import styled from 'styled-components'
+import {TodoContext} from '../context/TodoContext'
 
+const Ul = styled.ul`
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+`
+
+const Li = styled.li`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 1rem;
+`
+
+const Div =styled.div`
+  width: 100%;
+  display: flex;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #E5E7EB;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 1px 5px 2px rgb(0 0 0 / 0.1);
+`
+
+const Label = styled.label`
+  display: inline-flex;
+  align-items: center;
+  margin-right: 1rem;
+`
+
+const Input = styled.input`
+  height: 1.25rem;
+  width: 1.25rem;
+  color: #4B5563;
+`
+const P = styled.p`
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+`
 const TodoList = () => {
-  const todos = useSelector((state: RootState) => state.todos)
-
+  const todoContext = React.useContext(TodoContext)
   return (
-          <ul data-testid="TodoList" className="w-full p-8 flex flex-col">
-            {todos.map((todo) => (
-                    <li key={todo.id} className="w-full flex justify-center items-center pb-4">
-                      <div className="border-2 flex border-gray-200 w-full rounded-lg shadow-lg p-4">
-                        <label className="inline-flex items-center mr-4">
-                          <input type="checkbox" className="form-checkbox h-5 w-5 text-gray-600" defaultChecked={todo.completed} />
-                        </label>
-                        <p className="text-xl font-bold">{todo.title}</p>
-                      </div>
-                    </li>
-            ))}
-          </ul>
+    <Ul data-testid="TodoList">
+      {todoContext?.todos.map((todo) => (
+        <Li key={todo.id}>
+          <Div>
+            <Label>
+              <Input type="checkbox" defaultChecked={todo.completed}/>
+            </Label>
+            <P>{todo.title}</P>
+          </Div>
+        </Li>
+      ))}
+    </Ul>
   )
 }
 
@@ -562,7 +604,7 @@ APIがクライアントにレスポンスを返すときに適切なステー�
 これも難しいところではありますが、200で空の配列を返すのが正しいと考えます。
 リクエスト自体は正しいのですが、クエリの結果配列が空になってしまったという考え方になります。
 
-このようにGETリクエスト一つとって
+このようにGETリクエスト一つとっても条件に応じて様々な考慮が必要になります。
 
 ### クライアントに忖度しない
 
