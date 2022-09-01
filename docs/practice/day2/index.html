@@ -18,19 +18,9 @@
 <label for=section-8fbae8de73ef8326d3c4d80af4144c79 class="flex justify-between"><a role=button>Product Managerのプラクティス</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/roadmap/>プロダクトロードマップ</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/>MVP</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstorymapping/>ユーザーストーリーマッピング</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/>ユーザーストーリー</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/>2×2</a></li></ul></li></ul></li><li class=book-section-flat><span>Developer編</span><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/overview/>Developerとは</a></li><li><input type=checkbox id=section-8663d063f439d3f63d1a0dffad20b22d class=toggle>
 <label for=section-8663d063f439d3f63d1a0dffad20b22d class="flex justify-between"><a role=button>Developerのプラクティス</a></label><ul><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/tdd/>TDD</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/cicd/>CI/CD</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/pairprogramming/>ペアプログラミング</a></li><li><a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/soroprogramming/>ソロプログラミング</a></li></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu></label>
 <strong>2日目</strong>
-<label for=toc-control><img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#reduxの導入>Reduxの導入</a></li><li><a href=#非同期通信のテストと実装>非同期通信のテストと実装</a><ul><li><a href=#非同期通信のテスト>非同期通信のテスト</a></li><li><a href=#非同期通信の実装>非同期通信の実装</a></li></ul></li><li><a href=#reducerのテストと実装>Reducerのテストと実装</a><ul><li><a href=#reducerの登録>Reducerの登録</a></li><li><a href=#reducerのテスト>Reducerのテスト</a></li><li><a href=#reducerの実装>Reducerの実装</a></li></ul></li><li><a href=#タスク一覧表示コンポーネントのテストと実装>タスク一覧表示コンポーネントのテストと実装</a><ul><li><a href=#タスク一覧表示コンポーネントのテスト>タスク一覧表示コンポーネントのテスト</a></li><li><a href=#タスク一覧表示コンポーネントの実装>タスク一覧表示コンポーネントの実装</a></li><li><a href=#redux-connected-componentsのテスト>Redux Connected Componentsのテスト</a></li></ul></li><li><a href=#ホーム画面への組み込み>ホーム画面への組み込み</a><ul><li><a href=#ホーム画面のテスト>ホーム画面のテスト</a></li><li><a href=#ホーム画面の実装>ホーム画面の実装</a></li></ul></li><li><a href=#クライアントの動作確認>クライアントの動作確認</a></li></ul></nav></aside></header><article class=markdown><h1 id=2日目>2日目
+<label for=toc-control><img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#非同期通信のテストと実装>非同期通信のテストと実装</a><ul><li><a href=#非同期通信のテスト>非同期通信のテスト</a></li><li><a href=#非同期通信の実装>非同期通信の実装</a></li></ul></li><li><a href=#タスク一覧表示コンポーネントのテストと実装>タスク一覧表示コンポーネントのテストと実装</a><ul><li><a href=#タスク一覧表示コンポーネントのテスト>タスク一覧表示コンポーネントのテスト</a></li><li><a href=#タスク一覧表示コンポーネントの実装>タスク一覧表示コンポーネントの実装</a></li><li><a href=#リスト表示のテスト>リスト表示のテスト</a></li></ul></li><li><a href=#ホーム画面への組み込み>ホーム画面への組み込み</a><ul><li><a href=#ホーム画面のテスト>ホーム画面のテスト</a></li><li><a href=#ホーム画面の実装>ホーム画面の実装</a></li></ul></li><li><a href=#クライアントの動作確認>クライアントの動作確認</a></li></ul></nav></aside></header><article class=markdown><h1 id=2日目>2日目
 <a class=anchor href=#2%e6%97%a5%e7%9b%ae>#</a></h1><p>2日目はClientがServerに対してHTTPリクエストを実行するところ、そして、Serverの初期設定をして簡単なAPIを作って見るところをやってみましょう。
-ここからだいぶ難しくなると思いますが、頑張っていきましょう。</p><h2 id=reduxの導入>Reduxの導入
-<a class=anchor href=#redux%e3%81%ae%e5%b0%8e%e5%85%a5>#</a></h2><p>今回一番最初に<code>create-react-app</code>コマンドを実行したときtemplateにredux-typescriptをしていたのを覚えてますでしょうか。</p><pre tabindex=0><code>npx create-react-app todo-app-client --template redux-typescript --use-npm
-</code></pre><p>このtemplateにはすでに <a href=https://redux-toolkit.js.org/>redux-toolkit</a> を使用するのに必要なモジュールが含まれています。
-<a href=https://redux.js.org/>redux</a> は状態管理のライブラリですが、
-redux-toolkitはそれをReactで使用できるようにした <a href=https://react-redux.js.org/>React-Redux</a> や、
-reduxを便利に使用するための仕組みを同梱したものです。</p><p>Reduxについては公式のドキュメントを読んでください。Reduxは非常に難解なライブラリの1つですが、使いこなすと非常に強力です。
-ドキュメントも非常に量が多いですが、このセクションを始める前に最低限、以下を読んでおくことをおすすめします</p><ul><li><a href=https://redux.js.org/tutorials/essentials/part-1-overview-concepts>https://redux.js.org/tutorials/essentials/part-1-overview-concepts</a><ul><li>この記事を起因とする一連のRedux Essential</li></ul></li><li><a href=https://redux-toolkit.js.org/usage/usage-with-typescript>https://redux-toolkit.js.org/usage/usage-with-typescript</a></li><li><a href=https://redux.js.org/usage/writing-tests>https://redux.js.org/usage/writing-tests</a></li><li><a href=https://redux.js.org/style-guide/style-guide>https://redux.js.org/style-guide/style-guide</a><ul><li>ベストプラクティス。メチャクチャ大事。</li></ul></li></ul><blockquote class="book-hint info"><p><strong>Reduxを最初から入れるべきか?</strong></p><p>Reduxを最初からいれるべきかどうかというのは非常に議論が分かれる部分ですが、筆者は <strong>Reduxは最初から入れるべき</strong> という考えです。
-というのも、<strong>どのようなアプリであっても遅かれ早かれスケールします。</strong></p><p>Reduxの導入を嫌煙する理由に導入コストが大きいというものがあります。
-しかしRedux-Toolkitの登場によってRedux導入のコストはかなり低く、楽に導入できるようになりました。</p><p>ある程度アプリが大きくなった状態で後からReduxを入れるのはかなり作業量が大きくなり難しいです。
-それなら最初からReduxを前提としてアプリを書いたほうがいいだろうという考えです。</p><p>Redux導入のコストは楽になりましたが、学習コストは依然として高いままです（これはReactも）。
-導入の際はプロジェクトメンバに使い方を事前に学習してもらうなどして臨むようにすると良いでしょう。</p></blockquote><h2 id=非同期通信のテストと実装>非同期通信のテストと実装
+ここからだいぶ難しくなると思いますが、頑張っていきましょう。</p><h2 id=非同期通信のテストと実装>非同期通信のテストと実装
 <a class=anchor href=#%e9%9d%9e%e5%90%8c%e6%9c%9f%e9%80%9a%e4%bf%a1%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88%e3%81%a8%e5%ae%9f%e8%a3%85>#</a></h2><h3 id=非同期通信のテスト>非同期通信のテスト
 <a class=anchor href=#%e9%9d%9e%e5%90%8c%e6%9c%9f%e9%80%9a%e4%bf%a1%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>まず、トップ画面を開いたらタスクの一覧を取得して、取得できたタスク一覧を表示するという機能を作ってみましょう。
 Webブラウザには <a href=https://developer.mozilla.org/ja/docs/Web/API/Fetch_API>fetchAPI</a> という機能があります。
@@ -86,158 +76,42 @@ getTodo()を実行したときに、ちゃんと<code>/todo</code>に対してGe
 <a class=anchor href=#%e9%9d%9e%e5%90%8c%e6%9c%9f%e9%80%9a%e4%bf%a1%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><p>テストが実装できたら、これを実装してみましょう。
 src配下にfeaturesというディレクトリを作成し、TodoApi.tsを作成します。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// TodoApi.ts
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>axios</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>Todo</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../stores/todoSlice&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>Todo</span> {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>number</span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>title</span>: <span style=color:#66d9ef>string</span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>boolean</span>
+</span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>getTodos</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
 </span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>response</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>axios</span>.<span style=color:#66d9ef>get</span>&lt;<span style=color:#f92672>Todo</span><span style=color:#960050;background-color:#1e0010>[]</span>&gt;(<span style=color:#e6db74>&#39;/todos&#39;</span>)
 </span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>data</span>
 </span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>また、src配下のstoresに<code>todoSlice.ts</code>というファイルを作りましょう。いったん、Todoのインタフェースだけ定義してあげます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// todoSlice.ts
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>Todo</span> {
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>number</span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>title</span>: <span style=color:#66d9ef>string</span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>boolean</span>
-</span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>実装はこのようになりました。ひとまずこれでAPIのテストは通るはずです。
-テストが通ったのを確認したら次のステップに行きましょう。</p><h2 id=reducerのテストと実装>Reducerのテストと実装
-<a class=anchor href=#reducer%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88%e3%81%a8%e5%ae%9f%e8%a3%85>#</a></h2><p>さて、APIの利用準備が整ったらReducerを作っていきましょう。ReducerとはReduxのStateを変更する関数のことです。
-ReduxではStateを直接変更することは許されておらず、必ずReducerを通じて変更しなければなりません。</p><p>先程、Todo一覧をGetする非同期処理を実装しましたが、その非同期処理を呼び、戻り地をStateに反映する処理を実装してみましょう。</p><h3 id=reducerの登録>Reducerの登録
-<a class=anchor href=#reducer%e3%81%ae%e7%99%bb%e9%8c%b2>#</a></h3><p>Redux-ToolkitではSliceという概念があります。これはStateとReducerを一纏めにしたものだと考えてください。
-まず、Reducerを作ります。</p><p>先程作成したtodoSlice.tsに以下のように変更してください。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// todoSlice.ts
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>createAsyncThunk</span>, <span style=color:#a6e22e>createSlice</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@reduxjs/toolkit&#39;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>Todo</span> {
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>number</span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>title</span>: <span style=color:#66d9ef>string</span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>boolean</span>
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>todoSlice</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createSlice</span>({
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>name</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;todos&#39;</span>,
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>initialState</span><span style=color:#f92672>:</span> [] <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>Todo</span>[],
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>reducers</span><span style=color:#f92672>:</span> {},
-</span></span><span style=display:flex><span>})
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>todoSlice</span>
-</span></span></code></pre></div><p>ひとまず機能は実装せず、StateとしてTodo[]の配列を保持するという設定だけ入れました。
-その上で、store.tsにこれを登録してあげます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// store.ts
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>configureStore</span>, <span style=color:#a6e22e>ThunkAction</span>, <span style=color:#a6e22e>Action</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@reduxjs/toolkit&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>todoSlice</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./todoSlice&#39;</span>   <span style=color:#75715e>// 追記
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>store</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>configureStore</span>({
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>reducer</span><span style=color:#f92672>:</span> {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>todos</span>: <span style=color:#66d9ef>todoSlice.reducer</span>,     <span style=color:#75715e>// 追記
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  },
-</span></span><span style=display:flex><span>})
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>type</span> <span style=color:#a6e22e>AppDispatch</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>typeof</span> <span style=color:#a6e22e>store</span>.<span style=color:#a6e22e>dispatch</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>type</span> <span style=color:#a6e22e>RootState</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>ReturnType</span>&lt;<span style=color:#f92672>typeof</span> <span style=color:#a6e22e>store.getState</span>&gt;
-</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>type</span> <span style=color:#a6e22e>AppThunk</span>&lt;<span style=color:#f92672>ReturnType</span> <span style=color:#960050;background-color:#1e0010>=</span> <span style=color:#a6e22e>void</span>&gt; <span style=color:#f92672>=</span> <span style=color:#a6e22e>ThunkAction</span><span style=color:#f92672>&lt;</span>
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>ReturnType</span>,
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>RootState</span>,
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>unknown</span>,
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Action</span>&lt;<span style=color:#f92672>string</span>&gt;
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&gt;</span>
-</span></span></code></pre></div><p>これでReducerを使う準備が整いました。ではテストを書いていきましょう。</p><h3 id=reducerのテスト>Reducerのテスト
-<a class=anchor href=#reducer%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p><code>__tests__</code>配下に<code>store</code>ディレクトリを作成し、<code>todoSlice.test.ts</code>を作成してください。
-Reducerは <strong>変更前のStateに対して、Actionを実行し、変更後のStateを返す</strong> 純粋な関数ですのでテストは非常に簡単に書くことができます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// todoSlice.test.ts
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>todoSlice</span>, {<span style=color:#a6e22e>getTodoAction</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../../stores/todoSlice&#34;</span>;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#34;todo reducer&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#34;initial state&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>todoSlice</span>.<span style=color:#a6e22e>reducer</span>(<span style=color:#66d9ef>undefined</span>, {<span style=color:#66d9ef>type</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>undefined</span>})).<span style=color:#a6e22e>toEqual</span>([])
-</span></span><span style=display:flex><span>  })
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;get todo is pending&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>action</span> <span style=color:#f92672>=</span> {<span style=color:#66d9ef>type</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>getTodoAction</span>.<span style=color:#a6e22e>pending</span>.<span style=color:#66d9ef>type</span>}
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>state</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>todoSlice</span>.<span style=color:#a6e22e>reducer</span>([], <span style=color:#a6e22e>action</span>)
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>.<span style=color:#a6e22e>length</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#ae81ff>0</span>)
-</span></span><span style=display:flex><span>  })
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;get todo is fulfilled&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>action</span> <span style=color:#f92672>=</span> {
-</span></span><span style=display:flex><span>      <span style=color:#66d9ef>type</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>getTodoAction</span>.<span style=color:#a6e22e>fulfilled</span>.<span style=color:#66d9ef>type</span>, <span style=color:#a6e22e>payload</span><span style=color:#f92672>:</span> [{
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>1</span>,
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;hoge&#39;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>false</span>
-</span></span><span style=display:flex><span>      }]
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>state</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>todoSlice</span>.<span style=color:#a6e22e>reducer</span>([], <span style=color:#a6e22e>action</span>)
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>.<span style=color:#a6e22e>length</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#ae81ff>1</span>)
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>id</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#ae81ff>1</span>)
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>title</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;hoge&#39;</span>)
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>completed</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#66d9ef>false</span>)
-</span></span><span style=display:flex><span>  })
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;get todo is rejected&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>action</span> <span style=color:#f92672>=</span> {<span style=color:#66d9ef>type</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>getTodoAction</span>.<span style=color:#a6e22e>rejected</span>.<span style=color:#66d9ef>type</span>}
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>state</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>todoSlice</span>.<span style=color:#a6e22e>reducer</span>([], <span style=color:#a6e22e>action</span>)
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>state</span>.<span style=color:#a6e22e>length</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#ae81ff>0</span>)
-</span></span><span style=display:flex><span>  })
-</span></span><span style=display:flex><span>})
-</span></span></code></pre></div><p>4つのテストを実装しました。
-最初のテストはSliceを作ったとき最初の初期状態が空の配列になることを確認しています。</p><p>残る3つはGet /Todoの非同期処理に関わるテストで上から順番に</p><ul><li>非同期処理が実行中はStateの状態は変化しない</li><li>非同期処理が完了したら取得した内容がそのままStateに反映される</li><li>非同期処理がエラーだったらStateの状態は変化しない</li></ul><p>ことを確認しているテストです。ここまで大丈夫でしょうか。</p><p>pending、fulfilled、rejectedとは？となるかもしれませんが、
-これはRedux-Toolkitで非同期処理を実装するのに使う、
-<a href=https://redux-toolkit.js.org/api/createAsyncThunk>createAsyncThunk</a> が自動で作成してくれるActionです。
-今回はgetTodoActionという名前のアクションを作成することにしました。</p><p>このgetTodoActionはまだ実装されてませんが、先程featureに実装したAPIを呼び出すものになるのは明白ですので、
-<code>createAsyncThunk</code>を使用する前提でテストを記述しています。</p><p>わからない所があれば都度公式のリファレンスやドキュメントを読んで理解してください。</p><h3 id=reducerの実装>Reducerの実装
-<a class=anchor href=#reducer%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><p>それではReducerを実装してみましょう。ReduxのReducerでは通常副作用のある（つまりasync/awaitを含むような）処理を記述することはできません。
-そこで、使われるのが <a href=https://github.com/reduxjs/redux-thunk>redux-thunk</a> というmiddlewareです。
-createAsyncThunkを使うとThunkを使った処理が簡単に記述できます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// todoSlice.ts
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>createAsyncThunk</span>, <span style=color:#a6e22e>createSlice</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@reduxjs/toolkit&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>getTodos</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../features/TodoApi&#39;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>Todo</span> {
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>number</span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>title</span>: <span style=color:#66d9ef>string</span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>boolean</span>
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>getTodoAction</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createAsyncThunk</span>&lt;<span style=color:#f92672>Todo</span><span style=color:#960050;background-color:#1e0010>[]</span>&gt;(
-</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#39;get /todos&#39;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>async</span> ()<span style=color:#f92672>:</span> <span style=color:#a6e22e>Promise</span>&lt;<span style=color:#f92672>Todo</span><span style=color:#960050;background-color:#1e0010>[]</span>&gt; <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>getTodos</span>()
-</span></span><span style=display:flex><span>)
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>todoSlice</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createSlice</span>({
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>name</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;todos&#39;</span>,
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>initialState</span><span style=color:#f92672>:</span> [] <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>Todo</span>[],
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>reducers</span><span style=color:#f92672>:</span> {},
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>extraReducers</span><span style=color:#f92672>:</span> (<span style=color:#a6e22e>builder</span>) <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>builder</span>.<span style=color:#a6e22e>addCase</span>(<span style=color:#a6e22e>getTodoAction</span>.<span style=color:#a6e22e>fulfilled</span>, (<span style=color:#a6e22e>state</span>, <span style=color:#a6e22e>action</span>) <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>action</span>.<span style=color:#a6e22e>payload</span>)
-</span></span><span style=display:flex><span>  },
-</span></span><span style=display:flex><span>})
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>todoSlice</span>
-</span></span></code></pre></div><p>getTodoActionはこのように実装しました。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>getTodoAction</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createAsyncThunk</span>&lt;<span style=color:#f92672>Todo</span><span style=color:#960050;background-color:#1e0010>[]</span>&gt;(
-</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#39;get /todos&#39;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>async</span> ()<span style=color:#f92672>:</span> <span style=color:#a6e22e>Promise</span>&lt;<span style=color:#f92672>Todo</span><span style=color:#960050;background-color:#1e0010>[]</span>&gt; <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>getTodos</span>()
-</span></span><span style=display:flex><span>)
-</span></span></code></pre></div><p>createAsyncThunkで非同期のActionを作成し、その中で先程作ったgetTodo()を呼んでPromise&lt;Todo[]>を返却するようにしています。
-作成したアクションをextraReducers（reducersではないので注意）に登録しているのが以下の部分です。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>todoSlice</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createSlice</span>({
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>name</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;todos&#39;</span>,
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>initialState</span><span style=color:#f92672>:</span> [] <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>Todo</span>[],
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>reducers</span><span style=color:#f92672>:</span> {},
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>extraReducers</span><span style=color:#f92672>:</span> (<span style=color:#a6e22e>builder</span>) <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>builder</span>.<span style=color:#a6e22e>addCase</span>(<span style=color:#a6e22e>getTodoAction</span>.<span style=color:#a6e22e>fulfilled</span>, (<span style=color:#a6e22e>state</span>, <span style=color:#a6e22e>action</span>) <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>action</span>.<span style=color:#a6e22e>payload</span>)
-</span></span><span style=display:flex><span>  },
-</span></span><span style=display:flex><span>})
-</span></span></code></pre></div><p>getTodoActionが正常に完了したときに新しいアクションをどうするかを記載しています。
-ここではstateがどのような状態であれ、getTodo()の戻り値(つまりaction.payload)を新しいstateとして返却するとしました。
-ひとまず、現状テストは通っているはずです。</p><p>これでReducerの実装は終わりました。次に作成したSliceを使ってコンポーネントの描画をしてみましょう。</p><h2 id=タスク一覧表示コンポーネントのテストと実装>タスク一覧表示コンポーネントのテストと実装
-<a class=anchor href=#%e3%82%bf%e3%82%b9%e3%82%af%e4%b8%80%e8%a6%a7%e8%a1%a8%e7%a4%ba%e3%82%b3%e3%83%b3%e3%83%9d%e3%83%bc%e3%83%8d%e3%83%b3%e3%83%88%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88%e3%81%a8%e5%ae%9f%e8%a3%85>#</a></h2><p>Reduxを使うことによる最大の利点はコンポーネント間の依存を小さくし、
-<strong>各コンポーネントを非常にシンプルな状態に保つことができること</strong> です。</p><p>これからタスク一覧のコンポーネントを作成しますが、このコンポーネントはStateの状態にしたがって画面を描画するだけになります。
-すなわちテストの実装も非常に簡単です。</p><h3 id=タスク一覧表示コンポーネントのテスト>タスク一覧表示コンポーネントのテスト
+テストが通ったのを確認したら次のステップに行きましょう。</p><h2 id=タスク一覧表示コンポーネントのテストと実装>タスク一覧表示コンポーネントのテストと実装
+<a class=anchor href=#%e3%82%bf%e3%82%b9%e3%82%af%e4%b8%80%e8%a6%a7%e8%a1%a8%e7%a4%ba%e3%82%b3%e3%83%b3%e3%83%9d%e3%83%bc%e3%83%8d%e3%83%b3%e3%83%88%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88%e3%81%a8%e5%ae%9f%e8%a3%85>#</a></h2><p>これからタスク一覧のコンポーネントを作成します。</p><h3 id=タスク一覧表示コンポーネントのテスト>タスク一覧表示コンポーネントのテスト
 <a class=anchor href=#%e3%82%bf%e3%82%b9%e3%82%af%e4%b8%80%e8%a6%a7%e8%a1%a8%e7%a4%ba%e3%82%b3%e3%83%b3%e3%83%9d%e3%83%bc%e3%83%8d%e3%83%b3%e3%83%88%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p><strong>tests</strong>/components配下にTodoList.test.tsxを作成しましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>//TodoList.test.tsx
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>screen</span>, <span style=color:#a6e22e>render</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>render</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>TodoList</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../components/TodoList&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>MockAdapter</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;axios-mock-adapter&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>axios</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;axios&#34;</span>;
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;TodoList Component&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cleanup</span>()
+</span></span><span style=display:flex><span><span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;TodoList.tsx Component&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>mock</span>: <span style=color:#66d9ef>MockAdapter</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>beforeEach</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>mock</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>MockAdapter</span>(<span style=color:#a6e22e>axios</span>)
 </span></span><span style=display:flex><span>  })
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;ステートが空ならリストも空&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>reset</span>()
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;getTodosの戻り値が空ならリストも空&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>onGet</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>).<span style=color:#a6e22e>reply</span>(<span style=color:#ae81ff>200</span>, [])
+</span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>TodoList</span> /&gt;)
+</span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByRole</span>(<span style=color:#e6db74>&#39;list&#39;</span>).<span style=color:#a6e22e>hasChildNodes</span>()).<span style=color:#a6e22e>toEqual</span>(<span style=color:#66d9ef>false</span>)
 </span></span><span style=display:flex><span>  })
 </span></span><span style=display:flex><span>})
@@ -258,103 +132,93 @@ TodoListはまだ実装されていませんので、当然失敗するはずで
       at Object.&lt;anonymous&gt; (src/__tests__/components/TodoList.test.tsx:21:13)
 </code></pre><h3 id=タスク一覧表示コンポーネントの実装>タスク一覧表示コンポーネントの実装
 <a class=anchor href=#%e3%82%bf%e3%82%b9%e3%82%af%e4%b8%80%e8%a6%a7%e8%a1%a8%e7%a4%ba%e3%82%b3%e3%83%b3%e3%83%9d%e3%83%bc%e3%83%8d%e3%83%b3%e3%83%88%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><p>ではコンポーネントを実装していきましょう。src/components配下にTodoList.tsxを作成します。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// TodoList.tsx
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>useSelector</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-redux&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>RootState</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../stores/store&#39;</span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>React</span>, {<span style=color:#a6e22e>useEffect</span>, <span style=color:#a6e22e>useState</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>getTodos</span>, <span style=color:#a6e22e>Todo</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../features/TodoApi&#39;</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>TodoList</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>todos</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>useSelector</span>((<span style=color:#a6e22e>state</span>: <span style=color:#66d9ef>RootState</span>) <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>state</span>.<span style=color:#a6e22e>todos</span>)
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> [<span style=color:#a6e22e>todos</span>, <span style=color:#a6e22e>setTodos</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>useState</span>&lt;<span style=color:#f92672>Todo</span><span style=color:#960050;background-color:#1e0010>[]</span>&gt;([])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>useEffect</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>fetchData</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>response</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>getTodos</span>()
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>setTodos</span>(<span style=color:#a6e22e>response</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fetchData</span>()
+</span></span><span style=display:flex><span>  }, [])
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> (
-</span></span><span style=display:flex><span>          &lt;<span style=color:#f92672>ul</span> <span style=color:#a6e22e>data</span><span style=color:#960050;background-color:#1e0010>-</span><span style=color:#a6e22e>testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#39;TodoList&#39;</span>&gt;
-</span></span><span style=display:flex><span>            {<span style=color:#a6e22e>todos</span>.<span style=color:#a6e22e>map</span>((<span style=color:#a6e22e>todo</span>) <span style=color:#f92672>=&gt;</span> (
-</span></span><span style=display:flex><span>                    &lt;<span style=color:#f92672>li</span> <span style=color:#a6e22e>key</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>todo</span>.<span style=color:#a6e22e>id</span>}&gt;{<span style=color:#a6e22e>todo</span>.<span style=color:#a6e22e>title</span>}&lt;/<span style=color:#f92672>li</span>&gt;
-</span></span><span style=display:flex><span>            ))}
-</span></span><span style=display:flex><span>          &lt;/<span style=color:#f92672>ul</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>ul</span> <span style=color:#a6e22e>data</span><span style=color:#960050;background-color:#1e0010>-</span><span style=color:#a6e22e>testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#39;TodoList&#39;</span>&gt;
+</span></span><span style=display:flex><span>      {<span style=color:#a6e22e>todos</span>.<span style=color:#a6e22e>map</span>((<span style=color:#a6e22e>todo</span>) <span style=color:#f92672>=&gt;</span> (
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>li</span> <span style=color:#a6e22e>key</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>todo</span>.<span style=color:#a6e22e>id</span>}&gt;{<span style=color:#a6e22e>todo</span>.<span style=color:#a6e22e>title</span>}&lt;/<span style=color:#f92672>li</span>&gt;
+</span></span><span style=display:flex><span>      ))}
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>ul</span>&gt;
 </span></span><span style=display:flex><span>  )
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>TodoList</span>
-</span></span></code></pre></div><p>useSelectorはReduxのStateから情報を引き出す処理です。ここではstate.todosを読み込んでます。
-読み込んだtodosは配列ですので、1件ずつ表示しているだけです。
-コンポーネントが非常にシンプルになっているかとおもいます。</p><h3 id=redux-connected-componentsのテスト>Redux Connected Componentsのテスト
-<a class=anchor href=#redux-connected-components%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>さて、コンポーネントの実装は終わったので、これをテストしてみましょう。
-先程作成した、<code>TodoList.test.tsx</code>に<code>import TodoList from "../../components/TodoList";</code>を加えてテストを実行してみましょう。</p><p>どうでしょう、成功したと思いきやまだ失敗しています。
-これはなぜかというと、このTodoListComponentは他のコンポーネントには依存してませんが、ReduxのStateに依存してますよね。</p><p>一度index.tsxを見てみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>StrictMode</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>ReactDOM</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-dom&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>Provider</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-redux&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#e6db74>&#39;./index.css&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>App</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./App&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>store</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./stores/store&#39;</span>
+</span></span></code></pre></div><p><code>useState()</code>は関数コンポーネントでstateを管理するためのReactが提供している関数です。
+さらに、<code>useEffect()</code>を利用し、画面描画時にtodosの中身にgetTodosの戻り値を詰めています。</p><p>また<code>useEffect()</code>で非同期処理を呼び出す場合は、直接関数を実行するとメモリーリークの原因となるため注意が必要です。
+今回は<code>useEffect()</code>内で非同期関数を定義し、それを実行することで回避しています。
+<code>useState()</code>や<code>useEffect()</code>について詳しく知りたい方は<a href=https://ja.reactjs.org/docs/hooks-intro.html>こちら</a>を参照してください。</p><h3 id=リスト表示のテスト>リスト表示のテスト
+<a class=anchor href=#%e3%83%aa%e3%82%b9%e3%83%88%e8%a1%a8%e7%a4%ba%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>リストが返却された場合のテストも追加してみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// TodoList.test.tsx
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>render</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>TodoList</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../components/TodoList&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>MockAdapter</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios-mock-adapter&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>axios</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>act</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-dom/test-utils&#39;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>ReactDOM</span>.<span style=color:#a6e22e>render</span>(
-</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>StrictMode</span>&gt;
-</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>Provider</span> <span style=color:#a6e22e>store</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>store</span>}&gt;
-</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>App</span> /&gt;
-</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>Provider</span>&gt;
-</span></span><span style=display:flex><span>  &lt;/<span style=color:#f92672>StrictMode</span>&gt;,
-</span></span><span style=display:flex><span>  document.<span style=color:#a6e22e>getElementById</span>(<span style=color:#e6db74>&#39;root&#39;</span>)
-</span></span><span style=display:flex><span>)
-</span></span></code></pre></div><p><code>&lt;Provider store={store}></code>という記述があると思いますが、これが非常に重要で、
-この記述があるおかげで、App以下のコンポーネントはReduxのStoreを使うことができます。</p><p>しかし、現在の<code>TodoList.test.tsx</code>に実装したテストではその依存関係を無視して、<code>render(&lt;TodoList />)</code>と、TodoListのみを直でレンダリングしてます。
-なので、storeが使えずエラーになっているわけです。</p><p>これを解消するための方法は、公式のドキュメントにしっかり記載があり、
-<a href=https://redux.js.org/usage/writing-tests#components>ReactTestingLibraryのRender関数をカスタマイズした独自のRender関数を作ることで対処</a> します。</p><p>src直下にtest-utils.jsxを作成します。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#75715e>// test-utils.jsx
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>render</span> <span style=color:#a6e22e>as</span> <span style=color:#a6e22e>rtlRender</span>} <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>configureStore</span>} <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;@reduxjs/toolkit&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>Provider</span>} <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;react-redux&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>todoSlice</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;./stores/todoSlice&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;TodoList.tsx Component&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>mock</span>: <span style=color:#66d9ef>MockAdapter</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>render</span>(
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>ui</span>,
-</span></span><span style=display:flex><span>        {
-</span></span><span style=display:flex><span>          <span style=color:#a6e22e>preloadedState</span>,
-</span></span><span style=display:flex><span>          <span style=color:#a6e22e>store</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>configureStore</span>({
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>reducer</span><span style=color:#f92672>:</span> {<span style=color:#a6e22e>todos</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>todoSlice</span>.<span style=color:#a6e22e>reducer</span>},
-</span></span><span style=display:flex><span>            <span style=color:#a6e22e>preloadedState</span>,
-</span></span><span style=display:flex><span>          }),
-</span></span><span style=display:flex><span>          ...<span style=color:#a6e22e>renderOptions</span>
-</span></span><span style=display:flex><span>        } <span style=color:#f92672>=</span> {}
-</span></span><span style=display:flex><span>) {
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>Wrapper</span>({<span style=color:#a6e22e>children</span>}) {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#f92672>&lt;</span><span style=color:#a6e22e>Provider</span> <span style=color:#a6e22e>store</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>store</span>}<span style=color:#f92672>&gt;</span>{<span style=color:#a6e22e>children</span>}<span style=color:#f92672>&lt;</span><span style=color:#960050;background-color:#1e0010>/Provider&gt;</span>
-</span></span><span style=display:flex><span>  }
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>rtlRender</span>(<span style=color:#a6e22e>ui</span>, {<span style=color:#a6e22e>wrapper</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>Wrapper</span>, ...<span style=color:#a6e22e>renderOptions</span>})
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#f92672>*</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> {<span style=color:#a6e22e>render</span>}
-</span></span></code></pre></div><p>ソースコード見ていただけるとわかると思いますが、公式のドキュメントに記載されてる関数ほぼそのままです。</p><p>このrender関数のいい所はpreloadStateにStateの初期状態を設定できるところです。
-ではこのrender関数をつかって<code>TodoList.test.tsx</code>を書き直してみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// TodoList.test.tsx
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>render</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../test-utils&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>TodoList</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../../components/TodoList&#34;</span>;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;TodoList Component&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cleanup</span>()
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>beforeEach</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>mock</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>MockAdapter</span>(<span style=color:#a6e22e>axios</span>)
 </span></span><span style=display:flex><span>  })
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;ステートが空ならリストも空&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>initialState</span> <span style=color:#f92672>=</span> {<span style=color:#a6e22e>todos</span><span style=color:#f92672>:</span> []}
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>TodoList</span> /&gt;, {<span style=color:#a6e22e>preloadedState</span>: <span style=color:#66d9ef>initialState</span>})
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>reset</span>()
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;getTodosの戻り値が空ならリストも空&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>onGet</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>).<span style=color:#a6e22e>reply</span>(<span style=color:#ae81ff>200</span>, [])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>act</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>TodoList</span> /&gt;)
+</span></span><span style=display:flex><span>    })
+</span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByRole</span>(<span style=color:#e6db74>&#39;list&#39;</span>).<span style=color:#a6e22e>hasChildNodes</span>()).<span style=color:#a6e22e>toEqual</span>(<span style=color:#66d9ef>false</span>)
 </span></span><span style=display:flex><span>  })
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;リストアイテムを表示する&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>initialState</span> <span style=color:#f92672>=</span> {<span style=color:#a6e22e>todos</span><span style=color:#f92672>:</span> [{<span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>1</span>, <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;hoge&#39;</span>, <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>false</span>}]}
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>TodoList</span> /&gt;, {<span style=color:#a6e22e>preloadedState</span>: <span style=color:#66d9ef>initialState</span>})
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByRole</span>(<span style=color:#e6db74>&#39;listitem&#39;</span>).<span style=color:#a6e22e>textContent</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;hoge&#39;</span>)
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;getTodosの戻り値があればリストアイテムを表示&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>onGet</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>).<span style=color:#a6e22e>reply</span>(<span style=color:#ae81ff>200</span>, [
+</span></span><span style=display:flex><span>      {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>1</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    ])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>act</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>TodoList</span> /&gt;)
+</span></span><span style=display:flex><span>    })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByRole</span>(<span style=color:#e6db74>&#39;list&#39;</span>).<span style=color:#a6e22e>hasChildNodes</span>()).<span style=color:#a6e22e>toEqual</span>(<span style=color:#66d9ef>true</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByRole</span>(<span style=color:#e6db74>&#39;listitem&#39;</span>).<span style=color:#a6e22e>textContent</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;title&#39;</span>)
 </span></span><span style=display:flex><span>  })
 </span></span><span style=display:flex><span>})
-</span></span></code></pre></div><p>このコンポーネントはStateの件数に応じてリストを表示しているだけですので、現状このぐらいのテストで十分でしょう。
+</span></span></code></pre></div><p>ここではコンポーネントのレンダリングの前に<code>act()</code>を使用しています。
+もし気になる方は試しに<code>act()</code>を外してテストを実行してみてください。テストが通らないと思います。
+これは非同期処理特有の罠で、APIへの応答はMockしているのですが、 APIリクエストの戻り値はPromiseで、それがまだペンディングの状態になっており処理を堰き止めています。 つまりGETのリクエストを投げて、その応答がまだ帰ってきていない状態になっているということです。</p><p>このコンポーネントはgetTodosの戻り値に応じてリストを表示しているだけですので、現状このぐらいのテストで十分でしょう。
 これでテストが通っていたらひとまず大丈夫です。</p><h2 id=ホーム画面への組み込み>ホーム画面への組み込み
-<a class=anchor href=#%e3%83%9b%e3%83%bc%e3%83%a0%e7%94%bb%e9%9d%a2%e3%81%b8%e3%81%ae%e7%b5%84%e3%81%bf%e8%be%bc%e3%81%bf>#</a></h2><p>Stateの状態に応じてタスクを表示するコンポーネントはできましたが、肝心の画面への組み込みができていませんし、
-作成したActionを呼び出すこともしてませんので、これをやっていきましょう。</p><h3 id=ホーム画面のテスト>ホーム画面のテスト
-<a class=anchor href=#%e3%83%9b%e3%83%bc%e3%83%a0%e7%94%bb%e9%9d%a2%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>ホーム画面を表示したらgetTodoActionを実行するという処理を実装してみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// Home.test.tsx
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+<a class=anchor href=#%e3%83%9b%e3%83%bc%e3%83%a0%e7%94%bb%e9%9d%a2%e3%81%b8%e3%81%ae%e7%b5%84%e3%81%bf%e8%be%bc%e3%81%bf>#</a></h2><p>getTodosの戻り値に応じてタスクを表示するコンポーネントはできましたが、肝心の画面への組み込みができていません。
+ここではホーム画面への組み込みをやっていきましょう。</p><h3 id=ホーム画面のテスト>ホーム画面のテスト
+<a class=anchor href=#%e3%83%9b%e3%83%bc%e3%83%a0%e7%94%bb%e9%9d%a2%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>ホーム画面を表示したらgetTodosを実行するという処理を実装してみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// Home.test.tsx
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>render</span>, <span style=color:#a6e22e>screen</span>, <span style=color:#a6e22e>waitFor</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>MockAdapter</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios-mock-adapter&#39;</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>axios</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>render</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../test-utils&#39;</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Home</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../pages/Home&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>act</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-dom/test-utils&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>TodoProvider</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../context/TodoContext&#39;</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;Home画面&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
 </span></span><span style=display:flex><span>  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>mock</span>: <span style=color:#66d9ef>MockAdapter</span>
@@ -368,8 +232,13 @@ TodoListはまだ実装されていませんので、当然失敗するはずで
 </span></span><span style=display:flex><span>    <span style=color:#a6e22e>cleanup</span>()
 </span></span><span style=display:flex><span>  })
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#34;画面構成&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>Home</span> /&gt;)
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;画面構成&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>onGet</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>).<span style=color:#a6e22e>reply</span>(<span style=color:#ae81ff>200</span>, [])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>act</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>Home</span> /&gt;)
+</span></span><span style=display:flex><span>    })
+</span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByTestId</span>(<span style=color:#e6db74>&#39;Header&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
 </span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByTestId</span>(<span style=color:#e6db74>&#39;TodoList&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
 </span></span><span style=display:flex><span>  })
@@ -379,126 +248,192 @@ TodoListはまだ実装されていませんので、当然失敗するはずで
 </span></span><span style=display:flex><span>      {
 </span></span><span style=display:flex><span>        <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>1</span>,
 </span></span><span style=display:flex><span>        <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title&#39;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>false</span>,
-</span></span><span style=display:flex><span>      },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>      }
 </span></span><span style=display:flex><span>    ])
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>initialState</span> <span style=color:#f92672>=</span> {<span style=color:#a6e22e>todos</span><span style=color:#f92672>:</span> []}
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>Home</span> /&gt;, {<span style=color:#a6e22e>preloadedState</span>: <span style=color:#66d9ef>initialState</span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>act</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>TodoProvider</span>&gt;&lt;<span style=color:#f92672>Home</span> /&gt;&lt;/<span style=color:#f92672>TodoProvider</span>&gt;)
+</span></span><span style=display:flex><span>    })
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#66d9ef>get</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>url</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>)
 </span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#39;title&#39;</span>)).<span style=color:#a6e22e>toBeInTheDocument</span>()
 </span></span><span style=display:flex><span>  })
 </span></span><span style=display:flex><span>})
-</span></span></code></pre></div><p>作成したテストはこのようなものです。元々あったホーム画面の初期表示のテストを拡充しました。
-このHomeもReduxのStoreに依存することになるため、<strong>renderの関数をtest-utils.jsで実装したrenderに変更するのを忘れないでください。</strong></p><p>また、APIのテストを実装するときに使用したaxios-mock-adapterが再び登場しました。
-Sliceはモックしておらず、本物のtodoSliceを使用しているのが非常に大事で、要はインテグレーションテストになっています。</p><p>なぜSliceをモックせずHTTP Clientだけをモックしているかというと、
-<a href=https://redux.js.org/usage/writing-tests#action-creators--thunks>公式のドキュメントがそれを推奨している</a> からです。
-Reducerをモックして実施するComponentのテストに果たして意味があるのかということですね。</p><h3 id=ホーム画面の実装>ホーム画面の実装
-<a class=anchor href=#%e3%83%9b%e3%83%bc%e3%83%a0%e7%94%bb%e9%9d%a2%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><p>ホーム画面を表示したあと、副次的な処理としてgetTodoActionを実行するということでReactの<code>useEffect()</code>を使えば良さそうです。
-useEffect()については <a href=https://ja.reactjs.org/docs/hooks-effect.html>https://ja.reactjs.org/docs/hooks-effect.html</a> を読みましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// Home.tsx
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>useEffect</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>useDispatch</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-redux&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Header</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../components/Header&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>TodoList</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../components/TodoList&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>AppDispatch</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../stores/store&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>getTodoAction</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../stores/todoSlice&#39;</span>
+</span></span></code></pre></div><p>作成したテストはこのようなものです。元々あったホーム画面の初期表示のテストを拡充しました。</p><p>また、APIのテストを実装するときに使用したaxios-mock-adapterが再び登場しました。
+本物の値を使用しているのが非常に大事で、要はインテグレーションテストになっています。</p><h3 id=ホーム画面の実装>ホーム画面の実装
+<a class=anchor href=#%e3%83%9b%e3%83%bc%e3%83%a0%e7%94%bb%e9%9d%a2%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><p>テストを書いてる際に気づいた方もいるかもしれませんが、ホーム画面とTodoListコンポーネントの役割に重複があります。
+今回は以下のようにそれぞれの役割を定義します。</p><ul><li>ホーム画面：<ul><li>Apiを呼び出しタスク一覧を取得する</li></ul></li><li>TodoListコンポーネント：<ul><li>取得したタスク一覧を描画する</li></ul></li></ul><p>今回はコンポーネント感でのプロパティの受け渡しに<code>useContext()</code>を利用します。
+<code>useContext()</code>を利用することで、プロパティをグローバルに管理することができます。
+また、<code>useContext()</code>も<code>useState()</code>や<code>useEffect（）</code>と同様にReact hooksの一つです。詳しく知りたい方は<a href=https://ja.reactjs.org/docs/hooks-reference.html#usecontext>こちら</a>を参照してください。</p><p>実際のコードは以下です。</p><p>まず、src配下に<code>context</code>ディレクトリを作成し、その中に<code>TodoContext.tsx</code>を作成します。</p><pre tabindex=0><code>src
+├── App.tsx
+├── __tests__
+├── components
+├── context
+│     └── TodoContext.tsx
+├── features
+├── pages
+├── index.css
+├── index.tsx
+└── setupTests.ts
+</code></pre><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// TodoContext.tsx
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>React</span>, {<span style=color:#a6e22e>createContext</span>, <span style=color:#a6e22e>useMemo</span>, <span style=color:#a6e22e>useState</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>Todo</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../features/TodoApi&#39;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Home</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>dispatch</span>: <span style=color:#66d9ef>AppDispatch</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>useDispatch</span>()
+</span></span><span style=display:flex><span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>Props</span> <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>children</span>: <span style=color:#66d9ef>React.ReactNode</span>
+</span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>useEffect</span>(() <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>dispatch</span>(<span style=color:#a6e22e>getTodoAction</span>())
-</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>InitialState</span> <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>todos</span>: <span style=color:#66d9ef>Todo</span>[]
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>setTodos</span>: <span style=color:#66d9ef>React.Dispatch</span>&lt;<span style=color:#f92672>React.SetStateAction</span><span style=color:#960050;background-color:#1e0010>&lt;</span><span style=color:#a6e22e>Todo</span><span style=color:#960050;background-color:#1e0010>[]</span>&gt;<span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>TodoContext</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createContext</span>&lt;<span style=color:#f92672>InitialState</span> <span style=color:#960050;background-color:#1e0010>|</span> <span style=color:#a6e22e>null</span>&gt;(<span style=color:#66d9ef>null</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>TodoProvider</span>: <span style=color:#66d9ef>React.FC</span>&lt;<span style=color:#f92672>Props</span>&gt; <span style=color:#f92672>=</span> ({<span style=color:#a6e22e>children</span>}) <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> [<span style=color:#a6e22e>todos</span>, <span style=color:#a6e22e>setTodos</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>useState</span>&lt;<span style=color:#f92672>Todo</span><span style=color:#960050;background-color:#1e0010>[]</span>&gt;([])
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>todosValue</span><span style=color:#f92672>=</span> <span style=color:#a6e22e>useMemo</span>(() <span style=color:#f92672>=&gt;</span> ({<span style=color:#a6e22e>todos</span>, <span style=color:#a6e22e>setTodos</span>}), [<span style=color:#a6e22e>todos</span>, <span style=color:#a6e22e>setTodos</span>]);
 </span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> (
-</span></span><span style=display:flex><span>          &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>data</span><span style=color:#960050;background-color:#1e0010>-</span><span style=color:#a6e22e>testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Home&#34;</span>&gt;
-</span></span><span style=display:flex><span>            &lt;<span style=color:#f92672>Header</span> /&gt;
-</span></span><span style=display:flex><span>            &lt;<span style=color:#f92672>TodoList</span> /&gt;
-</span></span><span style=display:flex><span>          &lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>TodoContext.Provider</span> <span style=color:#a6e22e>value</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>todosValue</span>}&gt;
+</span></span><span style=display:flex><span>      {<span style=color:#a6e22e>children</span>}
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>TodoContext.Provider</span>&gt;
 </span></span><span style=display:flex><span>  )
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>Home</span>
-</span></span></code></pre></div><p>useEffect()内で、getTodoAction()をDispatchしています。
-DispatchはActionを実際に発行する処理です。
-さらにHeaderの下に先程作成したTodoListコンポーネントを組み込みました。</p><p>これでどうでしょうか？テストは通りますでしょうか？</p><pre tabindex=0><code>      30 |     expect(screen.getByText(&#34;Todo App&#34;)).toBeInTheDocument()
-      31 |     expect(mock.history.get[0].url).toEqual(&#39;/todos&#39;)
-    &gt; 32 |     expect(screen.getByText(&#39;title&#39;)).toBeInTheDocument()
-         |                   ^
-      33 |   })
-      34 | })
-      35 |
-
-      at Object.getElementError (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/config.js:34:12)
-      at node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:71:38
-      at getByText (node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:54:17)
-      at Object.&lt;anonymous&gt; (src/__tests__/pages/Home.test.tsx:32:19)
-
-Test Suites: 1 failed, 4 passed, 5 total
-Tests:       1 failed, 8 passed, 9 total
-Snapshots:   0 total
-Time:        1.989 s, estimated 2 s
-</code></pre><p>どうにもおかしいですね。/todosにちゃんとGetのリクエストは行っていて、Getのレスポンスの内容もMockされています。
-なのに、画面にはまだそれが反映されていないようです。</p><p>これは非同期処理特有の罠で、APIへの応答はMockしているのですが、
-APIリクエストの戻り値はPromiseで、それがまだペンディングの状態になっており処理を堰き止めています。
-つまりGETのリクエストを投げて、その応答がまだ帰ってきていない状態になっているということです。</p><p>ですので、ペンディングになっているPromiseを完了させる必要があります。
-大した処理ではないので自前で実装してもいいでのすが、ここでは <a href=https://www.npmjs.com/package/flush-promises>flush-promises</a> というライブラリを使ってしまいます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>npm install --save-dev flush-promises
-</span></span></code></pre></div><p>flush-promisesが導入できたら、Home.test.tsxを少し編集しましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// Home.test.tsx
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>MockAdapter</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios-mock-adapter&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>axios</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>flushPromises</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;flush-promises&#39;</span>    <span style=color:#75715e>// 追記
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>render</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../test-utils&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Home</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../pages/Home&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>TodoProvider</span>
+</span></span></code></pre></div><p><code>TodoContext.tsx</code>では、<code>TodoContext</code>と<code>TodoProvider</code>の2つを定義しています。</p><p><code>TodoContext</code>はTodoの配列をとその中身を設定するための関数を持っています。また、<code>TodoProvider</code>は<code>TodoContext</code>を子コンポーネントで使用できるようにするため、<code>TodoContex.Provider</code>で子コンポーネントをラップする形になっています。</p><p>次に、<code>TodoList.tsx</code>をTodoContexを使用するように修正します。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// TodoList.test.tsx
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>render</span>, <span style=color:#a6e22e>screen</span>, <span style=color:#a6e22e>waitFor</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>React</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>TodoList</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../components/TodoList&#39;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;Home画面&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>mock</span>: <span style=color:#66d9ef>MockAdapter</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;TodoList.tsx Component&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>todoContextMock</span>: <span style=color:#66d9ef>jest.Mock</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>  <span style=color:#a6e22e>beforeEach</span>(() <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>mock</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>MockAdapter</span>(<span style=color:#a6e22e>axios</span>)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>todoContextMock</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>React</span>.<span style=color:#a6e22e>useContext</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>jest</span>.<span style=color:#a6e22e>fn</span>()
 </span></span><span style=display:flex><span>  })
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>reset</span>()
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cleanup</span>()
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;todoContextが空ならリストも空&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>todoContextMock</span>.<span style=color:#a6e22e>mockReturnValue</span>({
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>todos</span><span style=color:#f92672>:</span> []
+</span></span><span style=display:flex><span>    })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>TodoList</span> /&gt;)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByRole</span>(<span style=color:#e6db74>&#39;list&#39;</span>).<span style=color:#a6e22e>hasChildNodes</span>()).<span style=color:#a6e22e>toEqual</span>(<span style=color:#66d9ef>false</span>)
 </span></span><span style=display:flex><span>  })
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#34;画面構成&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>Home</span> /&gt;)
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByTestId</span>(<span style=color:#e6db74>&#39;Header&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByTestId</span>(<span style=color:#e6db74>&#39;TodoList&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
-</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;todoContextがあればリストアイテムを表示&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>todoContextMock</span>.<span style=color:#a6e22e>mockReturnValue</span>({
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>todos</span><span style=color:#f92672>:</span> [
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>1</span>,
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title&#39;</span>,
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>      ]
+</span></span><span style=display:flex><span>    })
 </span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>TodoList</span> /&gt;)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByRole</span>(<span style=color:#e6db74>&#39;list&#39;</span>).<span style=color:#a6e22e>hasChildNodes</span>()).<span style=color:#a6e22e>toEqual</span>(<span style=color:#66d9ef>true</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>waitFor</span>(() <span style=color:#f92672>=&gt;</span>
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByRole</span>(<span style=color:#e6db74>&#39;listitem&#39;</span>).<span style=color:#a6e22e>textContent</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;title&#39;</span>)
+</span></span><span style=display:flex><span>    )
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><p>axiosのmockに関する記述は削除し、新たにTodoContextのmockに関する記述を追加しています。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// TodoList.tsx
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>React</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>TodoContext</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../context/TodoContext&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>TodoList</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>todoContext</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>React</span>.<span style=color:#a6e22e>useContext</span>(<span style=color:#a6e22e>TodoContext</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> (
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>ul</span> <span style=color:#a6e22e>data</span><span style=color:#960050;background-color:#1e0010>-</span><span style=color:#a6e22e>testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#39;TodoList&#39;</span>&gt;
+</span></span><span style=display:flex><span>      {<span style=color:#a6e22e>todoContext</span><span style=color:#f92672>?</span>.<span style=color:#a6e22e>todos</span>.<span style=color:#a6e22e>map</span>((<span style=color:#a6e22e>todo</span>) <span style=color:#f92672>=&gt;</span> (
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>li</span> <span style=color:#a6e22e>key</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>todo</span>.<span style=color:#a6e22e>id</span>}&gt;{<span style=color:#a6e22e>todo</span>.<span style=color:#a6e22e>title</span>}&lt;/<span style=color:#f92672>li</span>&gt;
+</span></span><span style=display:flex><span>      ))}
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>ul</span>&gt;
+</span></span><span style=display:flex><span>  )
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>TodoList</span>
+</span></span></code></pre></div><p>実装も同様にApi呼び出しを削除し、TodoContextの使用に関する記述を追加しています。 結果として、TodoContextの値のみに依存する非常にシンプルな作りに修正することができました。</p><p>次に、<code>Home.tsx</code>の修正です。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// Home.test.tsx
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 中略
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
 </span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;ホーム画面の初期表示&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
 </span></span><span style=display:flex><span>    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>onGet</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>).<span style=color:#a6e22e>reply</span>(<span style=color:#ae81ff>200</span>, [
 </span></span><span style=display:flex><span>      {
 </span></span><span style=display:flex><span>        <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>1</span>,
 </span></span><span style=display:flex><span>        <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title&#39;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>false</span>,
-</span></span><span style=display:flex><span>      },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>      }
 </span></span><span style=display:flex><span>    ])
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>initialState</span> <span style=color:#f92672>=</span> {<span style=color:#a6e22e>todos</span><span style=color:#f92672>:</span> []}
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>Home</span> /&gt;, {<span style=color:#a6e22e>preloadedState</span>: <span style=color:#66d9ef>initialState</span>})
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#34;Todo App&#34;</span>)).<span style=color:#a6e22e>toBeInTheDocument</span>()
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>act</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>TodoProvider</span>&gt;&lt;<span style=color:#f92672>Home</span> /&gt;&lt;/<span style=color:#f92672>TodoProvider</span>&gt;)     <span style=color:#75715e>// 修正
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    })
+</span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#66d9ef>get</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>url</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>)
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>flushPromises</span>()     <span style=color:#75715e>// 追記
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#39;title&#39;</span>)).<span style=color:#a6e22e>toBeInTheDocument</span>()
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#39;title&#39;</span>)).<span style=color:#a6e22e>toBeInTheDocument</span>()
 </span></span><span style=display:flex><span>  })
-</span></span><span style=display:flex><span>})
-</span></span></code></pre></div><p><code>await flushPromise()</code>を実行すると、堰き止められていたPromiseが動き出します！</p><pre tabindex=0><code> PASS  src/__tests__/features/TodoApi.test.ts
- PASS  src/__tests__/components/TodoList.test.tsx
- PASS  src/__tests__/pages/Home.test.tsx
- PASS  src/__tests__/components/Header.test.tsx
- PASS  src/__tests__/stores/todoSlice.test.ts
+</span></span></code></pre></div><p>テストでもTodoContextを使用したいので、HomeコンポーネントをTodoProviderでラップします。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// Home.tsx
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>React</span>, {<span style=color:#a6e22e>useContext</span>, <span style=color:#a6e22e>useEffect</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>TodoList</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../components/TodoList&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Header</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../components/Header&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>getTodos</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../features/TodoApi&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>TodoContext</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../context/TodoContext&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Home</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>todoContext</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>useContext</span>(<span style=color:#a6e22e>TodoContext</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>useEffect</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>fetchData</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>response</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>getTodos</span>()
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>todoContext</span><span style=color:#f92672>?</span>.<span style=color:#a6e22e>setTodos</span>(<span style=color:#a6e22e>response</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fetchData</span>()
+</span></span><span style=display:flex><span>  }, [])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> (
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>Header</span> /&gt;
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>TodoList</span> /&gt;
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>  )
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>Home</span>
+</span></span></code></pre></div><p>ホーム画面では、これまでTodoListコンポーネントで実施していたApiの呼び出しと戻り値の格納を担当しています。この際、戻り値の格納先がTodoContextになっていることがポイントです。</p><p>これで全てのテストが通る状態になったと思います。</p><pre tabindex=0><code>Watch Usage: Press w to show more.
+ PASS  src/__test__/features/TodoApi.test.ts
+ PASS  src/__test__/components/TodoList.test.tsx
+ PASS  src/__test__/pages/Home.test.tsx
 
-Test Suites: 5 passed, 5 total
-Tests:       9 passed, 9 total
+Test Suites: 3 passed, 3 total
+Tests:       5 passed, 5 total
 Snapshots:   0 total
-Time:        1.847 s, estimated 2 s
+Time:        0.663 s, estimated 1 s
 Ran all test suites related to changed files.
-</code></pre><p>テストが全件通りました！ひとまずこれでクライアントの実装は完了です。
-ここまでのソースコードは
+</code></pre><p>最後に、<code>Home.tsx</code>でTodoContextを使用できるようにするため、<code>index.tsx</code>を修正します。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// index.tsx
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>React</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>ReactDOM</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-dom/client&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#e6db74>&#39;./index.css&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>App</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./App&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>TodoProvider</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./context/TodoContext&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>root</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>ReactDOM</span>.<span style=color:#a6e22e>createRoot</span>(document.<span style=color:#a6e22e>getElementById</span>(<span style=color:#e6db74>&#39;root&#39;</span>) <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>HTMLElement</span>)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>root</span>.<span style=color:#a6e22e>render</span>(
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>React.StrictMode</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>TodoProvider</span>&gt;    <span style=color:#75715e>// 修正
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>      &lt;<span style=color:#f92672>App</span> /&gt;
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>TodoProvider</span>&gt;   <span style=color:#75715e>// 修正
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  &lt;/<span style=color:#f92672>React.StrictMode</span>&gt;
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><p>これでホーム画面への組み込みは完了です。</p><p>ここまでのソースコードは
 <a href=https://github.com/Onebase-Fujitsu/todo-app-client/tree/step4>https://github.com/Onebase-Fujitsu/todo-app-client/tree/step4</a>
 に置いてあります。</p><p>ここは慣れていないと非常に難しい部分だと思いますので、
 公式のリファレンスを参考にしながら少しずつトライしてみましょう。</p><h2 id=クライアントの動作確認>クライアントの動作確認
@@ -509,9 +444,9 @@ Ran all test suites related to changed files.
 <a href=https://jsonplaceholder.typicode.com/>JSON Placeholder</a> というサービスがあります。</p><p>これは予め定義されたJSONを返してくれるサービスで、
 例えば <a href=https://jsonplaceholder.typicode.com/todos>https://jsonplaceholder.typicode.com/todos</a> にアクセスすると、
 200件のTodoをJSONで返してくれます。</p><p>TodoApi.tsを開いてリクエスト先のURLを一時的に変更してみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// TodoApi.ts
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>axios</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios&#39;</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>Todo</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../stores/todoSlice&#39;</span>
-</span></span><span style=display:flex><span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// 中略
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>getTodos</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
 </span></span><span style=display:flex><span>  <span style=color:#75715e>// const response = await axios.get&lt;Todo[]&gt;(&#39;/todos&#39;)
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>response</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>axios</span>.<span style=color:#66d9ef>get</span>&lt;<span style=color:#f92672>Todo</span><span style=color:#960050;background-color:#1e0010>[]</span>&gt;(<span style=color:#e6db74>&#39;https://jsonplaceholder.typicode.com/todos&#39;</span>)
@@ -521,4 +456,4 @@ Ran all test suites related to changed files.
 <a href=https://jsonplaceholder.typicode.com/todos>https://jsonplaceholder.typicode.com/todos</a>
 が応答してるjsonのtitle部分になっていることがわかると思います。</p><p>正しく処理されていそうですね！</p><p>JSON Placeholderは予め定義されているJSONの他にも <a href=https://my-json-server.typicode.com/>自分で作成したJSONを応答させるようにすること</a> もできます。
 サーバの実装は当分先だけどClientだけどうなるか見たいというときはこういったサービスを活用するといいですね。</p><p>正しく動作していることが確認できたら再びリクエスト先を/todosに戻しておいてください。
-次はサーバの実装をやってみましょう。</p><hr><p>3日目に続きます</p><a href=/agile-dev-guide/docs/practice/day3/ class=book-btn>3日目</a></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#reduxの導入>Reduxの導入</a></li><li><a href=#非同期通信のテストと実装>非同期通信のテストと実装</a><ul><li><a href=#非同期通信のテスト>非同期通信のテスト</a></li><li><a href=#非同期通信の実装>非同期通信の実装</a></li></ul></li><li><a href=#reducerのテストと実装>Reducerのテストと実装</a><ul><li><a href=#reducerの登録>Reducerの登録</a></li><li><a href=#reducerのテスト>Reducerのテスト</a></li><li><a href=#reducerの実装>Reducerの実装</a></li></ul></li><li><a href=#タスク一覧表示コンポーネントのテストと実装>タスク一覧表示コンポーネントのテストと実装</a><ul><li><a href=#タスク一覧表示コンポーネントのテスト>タスク一覧表示コンポーネントのテスト</a></li><li><a href=#タスク一覧表示コンポーネントの実装>タスク一覧表示コンポーネントの実装</a></li><li><a href=#redux-connected-componentsのテスト>Redux Connected Componentsのテスト</a></li></ul></li><li><a href=#ホーム画面への組み込み>ホーム画面への組み込み</a><ul><li><a href=#ホーム画面のテスト>ホーム画面のテスト</a></li><li><a href=#ホーム画面の実装>ホーム画面の実装</a></li></ul></li><li><a href=#クライアントの動作確認>クライアントの動作確認</a></li></ul></nav></div></aside></main></body></html>
+次はサーバの実装をやってみましょう。</p><hr><p>3日目に続きます</p><a href=/agile-dev-guide/docs/practice/day3/ class=book-btn>3日目</a></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#非同期通信のテストと実装>非同期通信のテストと実装</a><ul><li><a href=#非同期通信のテスト>非同期通信のテスト</a></li><li><a href=#非同期通信の実装>非同期通信の実装</a></li></ul></li><li><a href=#タスク一覧表示コンポーネントのテストと実装>タスク一覧表示コンポーネントのテストと実装</a><ul><li><a href=#タスク一覧表示コンポーネントのテスト>タスク一覧表示コンポーネントのテスト</a></li><li><a href=#タスク一覧表示コンポーネントの実装>タスク一覧表示コンポーネントの実装</a></li><li><a href=#リスト表示のテスト>リスト表示のテスト</a></li></ul></li><li><a href=#ホーム画面への組み込み>ホーム画面への組み込み</a><ul><li><a href=#ホーム画面のテスト>ホーム画面のテスト</a></li><li><a href=#ホーム画面の実装>ホーム画面の実装</a></li></ul></li><li><a href=#クライアントの動作確認>クライアントの動作確認</a></li></ul></nav></div></aside></main></body></html>

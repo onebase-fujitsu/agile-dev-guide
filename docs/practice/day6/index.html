@@ -110,18 +110,13 @@ test.jsを以下のように変更します。</p><div class=highlight><pre tabi
 <a href=https://github.com/Onebase-Fujitsu/todo-app/tree/step2>https://github.com/Onebase-Fujitsu/todo-app/tree/step2</a>
 にあります。</p><h2 id=さらなるアプリのスケールに向けて>さらなるアプリのスケールに向けて
 <a class=anchor href=#%e3%81%95%e3%82%89%e3%81%aa%e3%82%8b%e3%82%a2%e3%83%97%e3%83%aa%e3%81%ae%e3%82%b9%e3%82%b1%e3%83%bc%e3%83%ab%e3%81%ab%e5%90%91%e3%81%91%e3%81%a6>#</a></h2><p>ここまで、簡単なSPAのアプリケーションを1からテスト駆動開発で作成し、バックエンドのAPIと連携させ、
-一連のプロセスをE2Eテストするというところまで来ました。</p><p>まだReduxのState管理をするにあたって、fetchした内容をそのままStateに入れていますが、
-本当であれば <a href=https://github.com/paularmstrong/normalizr>Normalizr.js</a> で正規化して入れるべきです。
-詳しくは <a href=https://redux.js.org/style-guide/style-guide>Redux Style Guide</a> を読んでみてください。</p><p>ReduxのState管理方法も規約がありません。このままでは開発者によって無造作にStateが作られ、管理できなくなってしまうでしょう。
-<a href=https://medium.com/@scbarrus/the-ducks-file-structure-for-redux-d63c41b7035c>Ducks Pattern</a> や
-<a href=https://github.com/erikras/ducks-modular-redux>Re-Ducks Pattern</a> といったReduxの管理方法のパターンがありますので、
-そういったパターンに従うようにチーム内で合意をとるようにすると良いでしょう。</p><p>一般的には以下のようなState管理をするとよいと言われています。</p><ul><li>Domain Data<ul><li>バックエンドからfetchしたアプリケーションが表示したり変更したりするデータ</li></ul></li><li>App State<ul><li>アプリケーション独自の振る舞いのためのデータ</li><li>データの選択状態やデータフェッチのローディング状態</li></ul></li><li>UI State<ul><li>現在の表示方法のためのデータ</li><li>モーダルが開かれているかどうかや、通知バーの状態など</li></ul></li></ul><p>また、Componentの分割粒度も曖昧なままです。
+一連のプロセスをE2Eテストするというところまで来ました。</p><p>しかし、Componentの分割粒度も曖昧なままです。
 複数人で開発をすすめるとどうしても開発者によってComponentの分割粒度にばらつきがでます。
 意図せず巨大なComponentができてしまうかもしれません。
 そこで取り入れたいのが <a href=https://bradfrost.com/blog/post/atomic-web-design/>Atomic Design</a> の考え方です。</p><p>アプリ開発はとにかく自由度が大きいです。アジャイル開発となれば開発に関する裁量は開発者に委ねられるため、
 無数にある開発手法の中から最適なものを選択し、アーキテクチャを決定して、実装していかなければなりません。</p><p>そして、自由度が高くなればなるほどに、個人間での開発スタイルやスキルの"ブレ"が問題になってきます。
 <strong>チーム開発において最も大事なのは規約です。</strong>
-このハンズオンでも一番最初にやったのはeslintの設定でした。規約はとにかく大事です。</p><p>コンポーネントの分割粒度はこうする、ReduxのState管理はこうする、バックエンドのAPIはこうするとチーム内でかならず合意形成をとり、
+このハンズオンでも一番最初にやったのはeslintの設定でした。規約はとにかく大事です。</p><p>コンポーネントの分割粒度はこうする、バックエンドのAPIはこうするとチーム内でかならず合意形成をとり、
 lintのように自動でチェックできるものはlintに規約を落とし込んでコードの品質を保つようにしてください。</p><p>もし、コードの品質を保つことできないメンバーがいるようなら、チーム内で勉強会などを開くと良いです。
 そして、そもそもとしてコードの品質を保つことができないようなメンバーをその時点で参画させるべきではありません。
 事前に教育を受けてもらうなどし、一定のスキル水準に達したところでプロジェクトに参画してもらうべきでしょう。</p><p>まだバックエンドの変更API<code>PATCH /todos/{id}</code>も実装できていませんし、まだまだやることは山のようにあります。
