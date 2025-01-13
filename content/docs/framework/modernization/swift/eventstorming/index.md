@@ -151,4 +151,4 @@ Event Stormingを初めて実施する方に言葉で説明するだけでは、
 - [Tanzu Practices Event Storming](https://tanzu.vmware.com/developer/practices/event-storming/)
 {{< /hint >}}
 
-{{< button relref="../boris" >}}Boris{{< /button >}}
+{{< button relref="../boris/index.md" >}}Boris{{< /button >}}

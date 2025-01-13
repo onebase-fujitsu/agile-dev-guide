@@ -58,18 +58,18 @@ IPMで開発の見通しを立てて、デイリースタンドアップで日�
     - 改善に向けたアクションを決めます。
 
 {{< button relref="#イテレーション開発の基本的な考え方" >}}イテレーション{{< /button >}}
-{{< button relref="../activities/preipm" >}}Pre-IPM{{< /button >}}
-{{< button relref="../activities/ipm" >}}IPM{{< /button >}}
-{{< button relref="../activities/officestandup" >}}全体スタンドアップ{{< /button >}}
-{{< button relref="../activities/teamstandup" >}}チームスタンドアップ{{< /button >}}
-{{< button relref="../activities/retro" >}}レトロスペクティブ{{< /button >}}
+{{< button relref="../activities/preipm/index.md" >}}Pre-IPM{{< /button >}}
+{{< button relref="../activities/ipm/index.md" >}}IPM{{< /button >}}
+{{< button relref="../activities/officestandup/index.md" >}}全体スタンドアップ{{< /button >}}
+{{< button relref="../activities/teamstandup/index.md" >}}チームスタンドアップ{{< /button >}}
+{{< button relref="../activities/retro/index.md" >}}レトロスペクティブ{{< /button >}}
 
 これらを基本としつつ、プロジェクトの体制やチームの状況によって以下を普段のサイクルに取り入れます。
 
-{{< button relref="../activities/cl" >}}CLミーティング{{< /button >}}
-{{< button relref="../activities/feedback" >}}フィードバック{{< /button >}}
-{{< button relref="../activities/salesmeeting" >}}営業確認会議{{< /button >}}
-{{< button relref="../activities/internalsync" >}}Internal Sync{{< /button >}}
+{{< button relref="../activities/cl/index.md" >}}CLミーティング{{< /button >}}
+{{< button relref="../activities/feedback/index.md" >}}フィードバック{{< /button >}}
+{{< button relref="../activities/salesmeeting/index.md" >}}営業確認会議{{< /button >}}
+{{< button relref="../activities/internalsync/index.md" >}}Internal Sync{{< /button >}}
 
 {{< hint info >}}
 **一日のスケジュールの例**

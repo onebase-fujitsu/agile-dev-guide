@@ -129,11 +129,11 @@ Swift Methodは、巨大で複雑な（モノリスな）システムを近代�
 1. Tech Choice  
    シナリオに着手するために必要な技術選定をします
 
-{{< button relref="../eventstorming" >}}Event Storming{{< /button >}}
-{{< button relref="../boris" >}}Boris{{< /button >}}
-{{< button relref="../snape" >}}SnapE{{< /button >}}
-{{< button relref="../slices" >}}Slices{{< /button >}}
-{{< button relref="../techchoice" >}}Tech Choice{{< /button >}}
+{{< button relref="../eventstorming/index.md" >}}Event Storming{{< /button >}}
+{{< button relref="../boris/index.md" >}}Boris{{< /button >}}
+{{< button relref="../snape/index.md" >}}SnapE{{< /button >}}
+{{< button relref="../slices/index.md" >}}Slices{{< /button >}}
+{{< button relref="../techchoice/index.md" >}}Tech Choice{{< /button >}}
 
 ### 開発
 1. Pre-IPM  
