@@ -74,19 +74,20 @@ React.jsその他多くのOSSを使用していますが、わからないこと
 ### reactアプリの作成
 
 ```shell
-npx create-react-app todo-app-client --template typescript --use-npm
+npm create vite@latest todo-app-client -- --template react-ts
 ```
 
 今回はtypescriptのtemplateから作成を始めます。
-`create-react-app`を使ってクライアントの雛形を作りました。
+[vite](https://vite.dev/guide/)を使ってクライアントの雛形を作りました。
 
-このTemplateには不要な初期実装が含まれてますので、ひとまずApp.tsxとindex.tsx、setupTests.ts以外のファイルを削除しました。
+このTemplateには不要な初期実装が含まれてますので、ひとまずmain.tsxとindex.tsx、vite-env.d.ts以外のファイルを削除しました。
+（削除したファイルを参照している箇所も削除してください。）
 
 ```
 src
 ├── App.tsx
-├── index.tsx
-└── setupTests.ts
+├── main.tsx
+└── vite-env.d.ts
 ```
 
 ### eslintの設定
@@ -102,90 +103,53 @@ npx eslint --initコマンドを叩くと設定ウィザードがでてきます
 
 ```
 onebase@Onebase-Maguro todo-app-client % npx eslint --init            
-✔ How would you like to use ESLint? · style
+✔ How would you like to use ESLint? · problems
 ✔ What type of modules does your project use? · esm
 ✔ Which framework does your project use? · react
-✔ Does your project use TypeScript? · No / Yes
+✔ Does your project use TypeScript? · Yes
 ✔ Where does your code run? · browser
-✔ How would you like to define a style for your project? · guide
-✔ Which style guide do you want to follow? · airbnb
-✔ What format do you want your config file to be in? · JavaScript
+✔ Would you like to install them now? · Yes
+✔ Which package manager do you use? · npm
 ```
 
 eslintに必要なパッケージが導入されます。　eslintの設定ファイルはjavascriptでもYAMLでもどっちでもいいのですが、
 今回はjavascriptにします。
 
-eslint --initを実行するとeslintrc.jsが出力されますが、少し手を加えます。
+eslint --initを実行するとeslint.config.jsが出力されますが、少し手を加えます。
 
 ```Javascript
-//.eslintrc.js
-module.exports = {
-    env: {
-        browser: true,
-        es2021: true,
-    },
-    extends: [
-        'plugin:react/recommended',
-        'airbnb',
-    ],
-    parser: '@typescript-eslint/parser',
-    parserOptions: {
-        ecmaFeatures: {
-            jsx: true,
-        },
-        ecmaVersion: 12,
-        sourceType: 'module',
-        tsconfigRootDir: __dirname,
-        project: ['./tsconfig.json'],
-    },
-    plugins: [
-        'react',
-        '@typescript-eslint',
-    ],
-    rules: {
-        'import/extensions': [
-            'error',
-            {
-                js: 'never',
-                jsx: 'never',
-                ts: 'never',
-                tsx: 'never',
-            }
-        ],
-        'react/jsx-filename-extension': [
-            'error',
-            {
-                extensions: ['.jsx', '.tsx']
-            }
-        ],
-        'react/react-in-jsx-scope': 'off',
-        'import/prefer-default-export': 'off',
-    },
-    settings: {
-        'import/resolver': {
-            node: {
-                paths: ['src'],
-                extensions: ['.js', '.jsx', '.ts', '.tsx']
-            }
-        }
-    }
-};
+// eslint.config.js
+import globals from "globals";
+import pluginJs from "@eslint/js";
+import tseslint from "typescript-eslint";
+import pluginReact from "eslint-plugin-react";
+import pluginReactJSXRuntime from "eslint-plugin-react/configs/jsx-runtime.js"; // 追加
+
+
+/** @type {import('eslint').Linter.Config[]} */
+export default [
+  {files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"]},
+  {languageOptions: { globals: globals.browser }},
+  pluginJs.configs.recommended,
+  ...tseslint.configs.recommended,
+  pluginReact.configs.flat.recommended,
+  pluginReactJSXRuntime // 追加
+];
 ```
 
 さらにpackage.jsonにlintのscriptを追記します。
 ```json
 {
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint --ext .ts,.tsx ./src"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "preview": "vite preview"
   }
 }
 ```
 
-この時点でnpm run lintを実行すると様々なエラーが出力されるはずです。
+この時点で`npm run lint`を実行すると様々なエラーが出力されるはずです。
 
 ```bash
 onebase@Onebase-Maguro todo-app-client % npm run lint
@@ -352,7 +316,7 @@ export default App
 ```
 
 ```shell
-npm run start
+npm run dev
 ```
 
 ![tailwind](tailwind.jpg)
