@@ -107,4 +107,4 @@ External Systems/ UI 、Story、Risksに分類されます。
 - [Tanzu Practices Boris](https://tanzu.vmware.com/developer/practices/boris/)
 {{< /hint >}}
 
-{{< button relref="../snape" >}}SnapE{{< /button >}}
+{{< button relref="../snape/index.md" >}}SnapE{{< /button >}}

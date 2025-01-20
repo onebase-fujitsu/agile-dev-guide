@@ -73,4 +73,4 @@ Slicesとして明確な手順や決まった成果物イメージはありま�
 - [Tanzu Practices Swift Method](https://tanzu.vmware.com/developer/practices/swift-method/)
 {{< /hint >}}
 
-{{< button relref="../techchoice" >}}Tech Choice{{< /button >}}
+{{< button relref="../techchoice/index.md" >}}Tech Choice{{< /button >}}

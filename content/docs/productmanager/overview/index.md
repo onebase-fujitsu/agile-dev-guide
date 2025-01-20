@@ -30,9 +30,9 @@ Product Managerは、多くのところから出てくるさまざまなアイ�
   - チームが開発できるか
   - 素早くデリバリーすることができるか
 
-{{< button relref="../practices/2x2" >}}2×2{{< /button >}}
-{{< button relref="../practices/roadmap" >}}プロダクトロードマップ{{< /button >}}
-{{< button relref="../practices/userstorymapping" >}}ユーザーストーリーマップ{{< /button >}}
+{{< button relref="../practices/2x2/index.md" >}}2×2{{< /button >}}
+{{< button relref="../practices/roadmap/index.md" >}}プロダクトロードマップ{{< /button >}}
+{{< button relref="../practices/userstorymapping/index.md" >}}ユーザーストーリーマップ{{< /button >}}
 {{< button relref="#バックログ管理" >}}バックログ{{< /button >}}
 
 ## バックログ管理
@@ -60,7 +60,7 @@ Product Managerはバックログの管理に責任を持ち、効率的かつ�
   リファクタリング、新規機能のSPIKE、開発環境の構築、CI/CDパイプラインの改善、また、ユーザー追加に伴う環境の追加設定や、インシデントの調査などの保守作業はchoreとしてバックログ管理を行い、ユーザーストーリーとバグを含めてDeveloperの作業を一元管理できるようにします。
   技術的な内容となることが多いためDeveloperが基本的に作成しますが、作業を実施するタイミングはその優先度を考慮してProduct Managerが判断するようにします。
 
-{{< button relref="../practices/userstory" >}}ユーザーストーリー{{< /button >}}
+{{< button relref="../practices/userstory/index.md" >}}ユーザーストーリー{{< /button >}}
 
 ### バックログ管理のポイント
 - 小さくわかりやすい作業
@@ -98,7 +98,7 @@ Product Managerはバックログの管理に責任を持ち、効率的かつ�
   バックログのどの作業を誰がいつ開始していつ終了したかを記録し、常にチームのメンバーやステークホルダーが見えるようにしておきます。
   リアルタイムな情報を常に記録し見えるようにすることで、コミュニケーションを効率化し、状況の把握や分析を行うことができます。
 
-{{< button relref="../practices/userstory#ユーザーストーリーのポイント" >}}ユーザーストーリー（INVESTモデル）{{< /button >}}
+{{< button relref="../practices/userstory/index.md#ユーザーストーリーのポイント" >}}ユーザーストーリー（INVESTモデル）{{< /button >}}
 {{< button relref="/docs/team/activities/ipm" >}}IPM{{< /button >}}
 
 ## リリース管理

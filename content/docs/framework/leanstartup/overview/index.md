@@ -73,7 +73,7 @@ Scopingでは、プロジェクトの開始にあたって関係者が集まり�
 > - レトロ
 
 {{< button relref="/docs/team/practices/okrs" >}}OKRs{{< /button >}}
-{{< button relref="../productvision" >}}プロダクトビジョン / バリュープロポジション{{< /button >}}
+{{< button relref="../productvision/index.md" >}}プロダクトビジョン / バリュープロポジション{{< /button >}}
 
 ## Discovery & Framing
 Discovery & Framing(D&F)では、プロダクトのアイデアを調査および検証して、プロダクトの開発に必要な情報を取得します。

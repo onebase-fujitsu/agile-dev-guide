@@ -102,4 +102,4 @@ External Systems/ UI 、Story、Risksに分類されます。
 - [Tanzu Practices Boris](https://tanzu.vmware.com/developer/practices/boris/)
 {{< /hint >}}
 
-{{< button relref="../slices" >}}Slices{{< /button >}}
+{{< button relref="../slices/index.md" >}}Slices{{< /button >}}
