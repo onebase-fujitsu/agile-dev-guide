@@ -80,7 +80,18 @@ npm create vite@latest todo-app-client -- --template react-ts
 今回はtypescriptのtemplateから作成を始めます。
 [vite](https://vite.dev/guide/)を使ってクライアントの雛形を作りました。
 
-このTemplateには不要な初期実装が含まれてますので、ひとまずmain.tsxとindex.tsx、vite-env.d.ts以外のファイルを削除しました。
+
+コマンド実行後、以下のログが表示されるため、指示に従ってコマンドを実行します。
+```console
+Done. Now run:
+
+  cd todo-app-client
+  npm install
+  npm run dev
+```  
+※`npm run dev`を実行し、起動できることを確認したらCtrl + Cで終了してください。
+
+このTemplateには不要な初期実装が含まれてますので、ひとまずmain.tsxとindex.tsx、vite-env.d.ts以外のファイルを削除しました。  
 （削除したファイルを参照している箇所も削除してください。）
 
 ```
@@ -102,20 +113,29 @@ npx eslint --init
 npx eslint --initコマンドを叩くと設定ウィザードがでてきますので、以下に従って実行します。
 
 ```
-onebase@Onebase-Maguro todo-app-client % npx eslint --init            
+onebase@Onebase-Maguro todo-app-client % npx eslint --init  
+
+...中略...
+
 ✔ How would you like to use ESLint? · problems
 ✔ What type of modules does your project use? · esm
 ✔ Which framework does your project use? · react
-✔ Does your project use TypeScript? · Yes
+✔ Does your project use TypeScript? · typescript
 ✔ Where does your code run? · browser
-✔ Would you like to install them now? · Yes
-✔ Which package manager do you use? · npm
+The config that you've selected requires the following dependencies:
+
+eslint, globals, @eslint/js, typescript-eslint, eslint-plugin-react
+✔ Would you like to install them now? · No / Yes
+✔ Which package manager do you want to use? · npm
+
+...中略...
+
 ```
 
 eslintに必要なパッケージが導入されます。　eslintの設定ファイルはjavascriptでもYAMLでもどっちでもいいのですが、
 今回はjavascriptにします。
 
-eslint --initを実行するとeslint.config.jsが出力されますが、少し手を加えます。
+`npx eslint --init`を実行するとeslint.config.jsが出力されますが、少し手を加えます。
 
 ```Javascript
 // eslint.config.js
@@ -131,19 +151,29 @@ export default [
   {files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"]},
   {languageOptions: { globals: globals.browser }},
   pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
-  pluginReactJSXRuntime // 追加
+  ...tseslint.configs.recommended, 
+    {                                               // 追加
+        ...pluginReact.configs.flat.recommended,    // ←元々あった記載を変更
+        settings: {                                 // 追加
+            react: {                                // 追加
+                version: "detect",                  // 追加
+            },                                      // 追加     
+        },                                          // 追加
+    },                                              // 追加
+  pluginReactJSXRuntime                             // 追加
 ];
 ```
+**※注：** 上記記載を追加すると、エディター上では波線が表示され、  
+「 シンボル 'eslint-plugin-react/ configs/ jsx-runtime. js' を解決できません」と表示されるが、  
+`npm run lint`実行に必要な操作のため、無視
 
-さらにpackage.jsonにlintのscriptを追記します。
+さらにpackage.jsonのlintのscriptを更新します。
 ```json
 {
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'", // 更新
     "preview": "vite preview"
   }
 }
@@ -152,62 +182,31 @@ export default [
 この時点で`npm run lint`を実行すると様々なエラーが出力されるはずです。
 
 ```bash
-onebase@Onebase-Maguro todo-app-client % npm run lint
+onebase@Onebase-Maguro todo-app-client % npm run lint 
 
-> todo-app-client@0.1.0 lint
-> eslint --ext .ts,.tsx ./src
+> todo-app-client@0.0.0 lint
+> eslint 'src/**/*.{js,jsx,ts,tsx}'
 
+Warning: React version not specified in eslint-plugin-react settings. See https://github.com/jsx-eslint/eslint-plugin-react#configuration .
 
-/Users/onebase/IdeaProjects/todo-app-client/src/App.tsx
-  1:8   error  'React' was used before it was defined          no-use-before-define
-  5:5   error  JSX not allowed in files with extension '.tsx'  react/jsx-filename-extension
-  5:25  error  A space is required before closing bracket      react/jsx-tag-spacing
+/Users/onebase/IdeaProject/todo-app-vite/todo-app-client/src/App.tsx
+  10:9  error  Using target="_blank" without rel="noreferrer" (which implies rel="noopener") is a security risk in older browsers: see https://mathiasbynens.github.io/rel-noopener/#recommendations  react/jsx-no-target-blank
 
-/Users/onebase/IdeaProjects/todo-app-client/src/index.tsx
-   1:8   error  'React' was used before it was defined                      no-use-before-define
-   3:17  error  Unable to resolve path to module './App'                    import/no-unresolved
-   3:17  error  Missing file extension for "./App"                          import/extensions
-   4:23  error  Unable to resolve path to module './stores/store'           import/no-unresolved
-   4:23  error  Missing file extension for "./stores/store"                 import/extensions
-   8:3   error  JSX not allowed in files with extension '.tsx'              react/jsx-filename-extension
-  13:34  error  Missing trailing comma                                      comma-dangle
-  15:1   error  Too many blank lines at the end of file. Max of 0 allowed   no-multiple-empty-lines
-
-/Users/onebase/IdeaProjects/todo-app-client/src/stores/hooks.ts
-  2:45  error  Unable to resolve path to module './store'  import/no-unresolved
-  2:45  error  Missing file extension for "./store"        import/extensions
-
-✖ 14 problems (14 errors, 0 warnings)
-  4 errors and 0 warnings potentially fixable with the `--fix` option.
-
+✖ 1 problem (1 error, 0 warnings)
+  1 error and 0 warnings potentially fixable with the `--fix` option.
 ```
 
 
 ### prettierの設定
 
 指摘するだけですと不便ですので、自動で修正してくれるようにprettierを導入します。
-まず、eslintからprettierの競合設定を外す拡張を導入します。
 
 ```bash
-npm i --save-dev eslint-config-prettier
-```
-
-```javascript
-extends: [
-    'plugin:react/recommended',
-    'airbnb',
-    'prettier'  // 追記
-],
-```
-
-.eslintrc.jsのextendsにprettierの設定をいれました。
-次にprettierを導入します。
-
-```bash
+npm install --save-dev eslint-config-prettier
 npm install --save-dev prettier
 ```
 
-プロジェクトルートディレクトリ配下に`.prettierrc`ファイルを作成します。
+`todo-app-client`ディレクトリ配下に`.prettierrc`ファイルを作成します。
 
 ```
 // .prettierrc
@@ -216,7 +215,7 @@ npm install --save-dev prettier
     "tabWidth": 2,
     "semi": false,
     "bracketSpacing": false,
-    "jsxBracketSameLine": true
+    "bracketSameLine": true
 }
 ```
 
@@ -225,14 +224,13 @@ package.jsonのscriptに修正用のコマンドも入れてしまいましょ�
 ```json
 {
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint --ext .ts,.tsx ./src",
-    "fix": "npm run format && npm run lint:fix",
-    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
-    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "preview": "vite preview",
+    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",  // 追加
+    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",    // 追加
+    "fix": "npm run format && npm run lint:fix"               // 追加
   }
 }
 ```
@@ -240,15 +238,13 @@ package.jsonのscriptに修正用のコマンドも入れてしまいましょ�
 これで設定は完了です。`npm run fix`を実行してみましょう。
 
 ```
-
 /Users/onebase/IdeaProjects/todo-app-client/src/App.tsx
   2:18  error  Unexpected use of file extension "svg" for "./logo.svg"  import/extensions
   2:18  error  Unable to resolve path to module './logo.svg'            import/no-unresolved
   3:8   error  Unable to resolve path to module './App.css'             import/no-unresolved
 
-/Users/onebase/IdeaProjects/todo-app-client/src/index.tsx
+/Users/onebase/IdeaProjects/todo-app-client/src/main.tsx
   3:8  error  Unable to resolve path to module './index.css'  import/no-unresolved
-
 ```
 
 ほとんどのエラーがprettierにより修正され、エラーが4つだけ出力されました。 これはApp.tsxとindex.tsxの不要なimport文や不要なlinkを削除すると解消されます。
