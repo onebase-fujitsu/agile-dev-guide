@@ -14,7 +14,8 @@ bookToc: true
 ### Spring Initializr
 Spring Bootのプロジェクトを作成するときは [Spring Initializr](https://start.spring.io/) を使います。
 
-![Spring Initializr](SpringInitializr.jpg)
+![InteliJ_generate](InteliJ_generate1.png)
+![InteliJ_generate](InteliJ_generate2.png)
 
 今回はGradle Projectで開発言語はKotlinにします。
 

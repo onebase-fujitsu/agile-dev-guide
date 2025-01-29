@@ -199,10 +199,45 @@ Warning: React version not specified in eslint-plugin-react settings. See https:
 
 ### prettierの設定
 
-指摘するだけですと不便ですので、自動で修正してくれるようにprettierを導入します。
+指摘するだけですと不便ですので、自動で修正してくれるようにprettierを導入します。   
+まず、eslintからprettierの競合設定を外す拡張を導入します。
 
 ```bash
 npm install --save-dev eslint-config-prettier
+````
+
+`eslint.config.js`にeslint-config-prettierの設定を追加します。
+```js
+import globals from "globals";
+import pluginJs from "@eslint/js";
+import tseslint from "typescript-eslint";
+import pluginReact from "eslint-plugin-react";
+import pluginReactJSXRuntime from "eslint-plugin-react/configs/jsx-runtime.js";
+import eslintConfigPrettier from "eslint-config-prettier";      // 追加
+
+
+/** @type {import('eslint').Linter.Config[]} */
+export default [
+  {files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"]},
+  {languageOptions: { globals: globals.browser }},
+  pluginJs.configs.recommended,
+  ...tseslint.configs.recommended,
+  {
+    ...pluginReact.configs.flat.recommended,
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
+  },
+  pluginReactJSXRuntime,
+  eslintConfigPrettier,     // 追加
+];
+```
+
+次にprettierを導入します。
+
+```bash
 npm install --save-dev prettier
 ```
 
@@ -237,20 +272,28 @@ package.jsonのscriptに修正用のコマンドも入れてしまいましょ�
 
 これで設定は完了です。`npm run fix`を実行してみましょう。
 
+```bash
+onebase@Onebase-Tsurumi todo-app-client % npm run fix
+
+> todo-app-client@0.0.0 fix
+> npm run format && npm run lint:fix
+
+
+> todo-app-client@0.0.0 format
+> prettier --write 'src/**/*.{js,jsx,ts,tsx}'
+
+src/App.tsx 28ms (unchanged)
+src/main.tsx 2ms (unchanged)
+src/vite-env.d.ts 1ms (unchanged)
+
+> todo-app-client@0.0.0 lint:fix
+> eslint --fix 'src/**/*.{js,jsx,ts,tsx}'
+
 ```
-/Users/onebase/IdeaProjects/todo-app-client/src/App.tsx
-  2:18  error  Unexpected use of file extension "svg" for "./logo.svg"  import/extensions
-  2:18  error  Unable to resolve path to module './logo.svg'            import/no-unresolved
-  3:8   error  Unable to resolve path to module './App.css'             import/no-unresolved
 
-/Users/onebase/IdeaProjects/todo-app-client/src/main.tsx
-  3:8  error  Unable to resolve path to module './index.css'  import/no-unresolved
-```
+これらの設定により、エラーがprettierにより修正されるようになります。 
 
-ほとんどのエラーがprettierにより修正され、エラーが4つだけ出力されました。 これはApp.tsxとindex.tsxの不要なimport文や不要なlinkを削除すると解消されます。
-
-
-ここまでのソースコードは [https://github.com/Onebase-Fujitsu/todo-app-client/tree/step1](https://github.com/Onebase-Fujitsu/todo-app-client/tree/step1) においてあります。
+ここまでのソースコードは [https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step1](https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step1) においてあります。
 
 ### css in JSの設定
 
@@ -319,69 +362,103 @@ npm run dev
 
 ブラウザで赤い文字でtestと表示されているのが確認できたら正しく導入できていますので、確認できたらApp.tsxをもとに戻しておいてください。
 
-ここまでのソースは [https://github.com/Onebase-Fujitsu/todo-app-client/tree/step2](https://github.com/Onebase-Fujitsu/todo-app-client/tree/step2) に置いてあります。
+ここまでのソースは [https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step2](https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step2) に置いてあります。
 
 ### テスト環境の整備
 
-次にクライアントのテスト環境を整備していきます。
-ReactのTestライブラリとして著名なものにenzymeとReact Testing Libraryがあります。
-どちらを使ってもいいのですが、enzymeはreact16までしか現在対応していないため、
-今回はReact Testing Libraryを採用することにします。
-React Testing Libraryはcreate-react-app時に一緒に導入されているため、個別のインストールや設定作業は不要で使用できます。
+次にクライアントのテスト環境を整備していきます。  
+ReactのTestライブラリとして著名なものにenzymeとReact Testing Libraryがあります。  
+どちらを使ってもいいのですが、enzymeはreact16までしか現在対応していないため、  
+今回はReact Testing Libraryを採用することにします。  
 
-次にimportでDevDependenciesのライブラリを読み込んでいるためeslintがエラーを出してしまいますので、これはoffにしてしまいます。
+必要なパッケージをインストールします
+- jest-environment-jsdom: Jest で DOM 要素のテストに必要
+- @testing-library/react: React で Testing Library を使用するために必要
+- @testing-library/jest-dom: Jest のカスタム DOM 要素マッチャーを提供
+- @testing-library/user-event: イベントのテストに使用
+```bash
+npm install --save-dev jest @types/jest ts-jest
+npm install --save-dev jest-environment-jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event
+```
+
+次に、Jestの設定ファイルを作成します。
+```bash
+npx ts-jest config:init
+```
 
 ```javascript
-// .eslintrc.js
-module.exports = {
-    // 中略
-  rules: {
-    'import/extensions': [
-      'error',
-      {
-        js: 'never',
-        jsx: 'never',
-        ts: 'never',
-        tsx: 'never',
-      }
-    ],
-    'react/jsx-filename-extension': [
-      'error',
-      {
-        extensions: ['.jsx', '.tsx']
-      }
-    ],
-    'react/react-in-jsx-scope': 'off',
-    'import/prefer-default-export': 'off',
-    'import/no-extraneous-dependencies': 'off', // 追加
-  },
+// jest.config.js
+/** @type {import('ts-jest').JestConfigWithTsJest} **/
+export default {
+    transform: {
+        "^.+.tsx?$": ["ts-jest",{}],
+    },
+    preset: "ts-jest",                          // 追加
+    testEnvironment: "jest-environment-jsdom",  // 追加
 };
 ```
 
-create-react-appは標準でテストランナーにJestを採用しているのですが、このままではeslintがJestの処理に対してエラーを出すため、これも修正していきます。
-まず、eslint-plugin-jestを導入。
-
-```shell
-npm install --save-dev eslint-plugin-jest
-```
-
-そして、.eslintrc.jsに以下の二行を追加します。
-
-```javascript
-module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-    "jest/globals": true,       // 追記
-  },
-  // 中略
-  plugins: [
-    'react',
-    '@typescript-eslint',
-    "jest"                      // 追記
-  ]
+tsconfig.jsonに設定を追加します。
+```json
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {                      // 追加
+    "jsx": "react-jsx",                     // 追加 
+    "esModuleInterop": true ,               // 追加
+    "types": ["@testing-library/jest-dom"]  // 追加
+  }                                         // 追加
 }
 ```
+
+tsconfig.app.jsonの設定を変更します。
+```json
+{
+  // 中略
+  "include": ["src","test"]　 // 更新
+}
+```
+
+`jest.setup.ts`を`todo-app-client`直下に作成し、Testing Library のセットアップを行います。
+```typescript
+// jest.setup.ts
+import "@testing-library/jest-dom";
+```
+
+`jest.config.js` を更新し、`jest.setup.ts` を読み込むように設定します。
+```javascript
+// jest.config.js
+/** @type {import('ts-jest').JestConfigWithTsJest} **/
+export default {
+    transform: {
+        "^.+.tsx?$": ["ts-jest",{}],
+    },
+    preset: "ts-jest",
+    testEnvironment: "jest-environment-jsdom",
+    setupFilesAfterEnv: ["./jest.setup.ts"],        // 追加
+};
+```
+
+
+package.json にテストコマンドを追加します。
+```json
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "preview": "vite preview",
+    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
+    "fix": "npm run format && npm run lint:fix",
+    "test": "jest --watchAll"            // 追加
+  }
+}
+```
+
 
 この状態で`npm run test`を実行してみましょう。テストランナーが立ち上がり、src配下のファイルの変更を監視しはじめます。
 ファイルの変更があるたびにテストを実行してくれるようになります。
@@ -389,23 +466,22 @@ module.exports = {
 Jestはsrcディレクトリに直下に`__tests__`ディレクトリを作るか、
 どこでもいいので`*.test.ts`という形式でテストファイルを作ると自動でテストが動きます。
 
-どちらでもいいのですが、今回は前者の`__tests__`ディレクトリを作成する形式でいきます。
+どちらでもいいのですが、今回は後者の形式で、srcディレクトリと並列で`test`ディレクトリを作成する形式でいきます。
 
 ## ヘッダーの作成
 
 ### テストの作成
 
-src直下に__tests__ディレクトリを作成し、その配下にcomponentsディレクトリを作成して、その配下にHeader.test.tsxを作りましょう。
+`todo-app-client`直下にtestディレクトリを作成し、その配下にcomponentsディレクトリを作成して、その配下にHeader.test.tsxを作りましょう。
 
 ```
-src
-├── App.tsx
-├── __tests__
-│   └── components
-│       └── Header.test.tsx  // 新規作成
-│── index.tsx
-└── setupTests.ts
-
+├── src
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── vite-env.d.ts
+└── test
+    └── components
+        └── Header.test.tsx
 ```
 
 ```typescript jsx
@@ -430,28 +506,28 @@ describe("Header", () => {
 npm run testを実行するとこのような表示になっているはずです。
 
 ```
-FAIL  src/__tests__/components/Header.test.tsx
-Header
-✕ ヘッダーの初期表示 (1 ms)
+> todo-app-client@0.0.0 test
+> jest
 
-● Header › ヘッダーの初期表示
+ FAIL  test/Header.test.tsx
+  ● Test suite failed to run
 
-    ReferenceError: Header is not defined
+    test/Header.test.tsx:10:17 - error TS2552: Cannot find name 'Header'. Did you mean 'Headers'?
 
-       7 |
-       8 |   it("ヘッダーの初期表示", () => {
-    >  9 |     render(<Header />)
-         |             ^
-      10 |     expect(screen.getByText('Todo App')).toBeInTheDocument()
-      11 |   })
-      12 | })
+    10         render(<Header />)
+                       ~~~~~~
 
-      at Object.<anonymous> (src/__tests__/components/Header.test.tsx:5:30)
+      node_modules/typescript/lib/lib.dom.d.ts:13175:13
+        13175 declare var Headers: {
+                          ~~~~~~~
+        'Headers' is declared here.
 
 Test Suites: 1 failed, 1 total
-Tests:       1 failed, 1 total
+Tests:       0 total
 Snapshots:   0 total
-Time:        0.358 s, estimated 1 s
+Time:        0.546 s
+Ran all test suites.
+
 ```
 
 
@@ -472,9 +548,9 @@ Header.tsxを作ったら、Header.test.tsxを開き、先程作ったHeaderコ�
 
 ```typescript jsx
 import {cleanup, render, screen} from "@testing-library/react";
-import Header from "../../components/Header";
+import Header from "../../src/components/Header";
 
-describe("Header", () => {
+describe("Header", () => 
   afterEach(() => {
     cleanup()
   })
@@ -488,16 +564,15 @@ describe("Header", () => {
 
 このファイルを保存してテストを実行すると、テストが無事通っていることがわかると思います。
 ```
-Watch Usage: Press w to show more.
- PASS  src/__tests__/components/Header.test.tsx
+ PASS  test/components/Header.test.tsx
   Header
-    ✓ ヘッダーの初期表示 (6 ms)
+    ✓ ヘッダーの初期表示 (10 ms)
 
 Test Suites: 1 passed, 1 total
 Tests:       1 passed, 1 total
 Snapshots:   0 total
-Time:        0.579 s, estimated 1 s
-
+Time:        0.689 s
+Ran all test suites.
 ```
 最初のテストが通りました！おめでとうございます。
 
@@ -510,26 +585,26 @@ Headerは作りましたがまだReactアプリに組み込んでいないため
 同様にsrc/pages配下に`Home.tsx`を作成しましょう。
 
 ```
-src
-├── App.tsx
-├── __tests__
-│     ├── components
-│     │     └── Header.test.tsx
-│     └── pages
-│         └── Home.test.tsx
-├── components
-│     └── Header.tsx
-├── index.css
-├── index.tsx
-├── pages
-│     └── Home.tsx
-└── setupTests.ts
+├── src
+│        ├── App.tsx
+│        ├── components
+│        │       └── Header.tsx
+│        ├── main.tsx
+│        ├── pages
+│        │       └── Home.tsx
+│        └── vite-env.d.ts
+└── test
+         ├── components
+         │       └── Header.test.tsx
+         └── pages
+                 └── Home.test.tsx
+
 ```
 
 ```typescript jsx
 // Home.test.tsx
 import {cleanup, render, screen} from "@testing-library/react";
-import Home from "../../pages/Home";
+import Home from "../../src/pages/Home";
 
 describe("Home画面", () => {
 
@@ -576,42 +651,7 @@ const App = () => (
 export default App
 ```
 
-このままではeslintがfunctionの定義方法についてエラーを出すため、これも修正します。
-
-```typescript jsx
-// .eslintrc.js
-module.exports = {
-    // 中略
-  rules: {
-    'import/extensions': [
-      'error',
-      {
-        js: 'never',
-        jsx: 'never',
-        ts: 'never',
-        tsx: 'never',
-      }
-    ],
-    'react/jsx-filename-extension': [
-      'error',
-      {
-        extensions: ['.jsx', '.tsx']
-      }
-    ],
-    'react/react-in-jsx-scope': 'off',
-    'import/prefer-default-export': 'off',
-    'import/no-extraneous-dependencies': 'off',
-    'react/function-component-definition': [ //追加ここから
-        2,
-      {
-        namedComponents: 'arrow-function',
-      },
-    ], //追加ここまで
-};
-```
-
-
-`npm run start`を実行して [https://localhost:3000](https://localhost:3000) にアクセスしてみましょう。
+`npm run dev`を実行して [https://localhost:5173](https://localhost:5173) にアクセスしてみましょう。
 
 ![ホーム画面](home_initial.jpg)
 
@@ -689,7 +729,7 @@ root.render(
 ヘッダーに背景色をつけて、Headerの文字を白に、そして大きくしてみました。
 一気に華やかになってきましたね。
 
-ここまでのソースコードは [https://github.com/Onebase-Fujitsu/todo-app-client/tree/step3](https://github.com/Onebase-Fujitsu/todo-app-client/tree/step3) に置いてあります。
+ここまでのソースコードは [https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step3](https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step3) に置いてあります。
 
 {{< hint warning >}}
 
