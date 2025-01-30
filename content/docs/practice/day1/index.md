@@ -49,6 +49,18 @@ Javascriptとそのスーパーセットである、Typescriptはプロジェク
 
 ![アーキテクチャ](arch.jpg)
 
+
+ディレクトリ構成は以下の形で進めていきます。
+```
+todo-app
+├── e2e                 // e2eテスト用のディレクトリ
+├── todo-app-client     // Client Appのディレクトリ
+└── todo-app-server     // Backend Appのディレクトリ
+```
+
+まずは、任意の場所にtodo-appディレクトリを作成しましょう。
+
+
 ## クライアントの環境構築
 
 {{< hint warning >}}
