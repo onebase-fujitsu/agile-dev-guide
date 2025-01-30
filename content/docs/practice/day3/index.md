@@ -11,12 +11,14 @@ bookToc: true
 
 ## バックエンドの初期設定
 
-### Spring Initializr
-Spring Bootのプロジェクトを作成するときは [Spring Initializr](https://start.spring.io/) を使います。
+### Spring Bootのプロジェクト作成
+Spring Bootのプロジェクトを作成するときはIntelliJの「新規ブロジェクト作成」からSpring Bootを選択すると簡単です。
 
-![InteliJ_generate](InteliJ_generate1.png)
-![InteliJ_generate](InteliJ_generate2.png)
+![IntelliJ_generate](IntelliJ_newProject.png)
+![IntelliJ_generate](IntelliJ_generate1.png)
+![IntelliJ_generate](IntelliJ_generate2.png)
 
+生成場所はtodo-app-clientと並列になるようにしましょう。
 今回はGradle Projectで開発言語はKotlinにします。
 
 Spring Bootのバージョンはその時の安定版を指定すると良いです。
@@ -24,7 +26,10 @@ Spring Bootのバージョンはその時の安定版を指定すると良いで
 Artifact名は今回はtodo-app-serverとしました。
 依存ライブラリですが、後からでも追加できますので、ここではいったん、Spring Webのみ追加しました。
 
-これでGenerateしましょう。雛形となるプロジェクトがダウンロードされるはずです。
+これでGenerateしましょう。
+
+
+※[Spring Initializr](https://start.spring.io/) でプロジェクトを作成することもできます。
 
 ### DBの設定
 
@@ -119,14 +124,15 @@ DBのスキーマを手動で管理するのはメチャクチャ大変ですの
 ```kotlin
 // build.gradle.kts
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-jdbc")
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	implementation("org.flywaydb:flyway-core")                       // 追記
-	runtimeOnly("org.postgresql:postgresql")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    implementation("org.flywaydb:flyway-database-postgresql")
+    runtimeOnly("org.postgresql:postgresql")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 ```
 
@@ -203,7 +209,7 @@ flyway_schema_historyというテーブル共にtodoテーブルがFlywayによ�
 Flywayはアプリケーション起動時にdb/migrationディレクトリ配下のSQLを確認して、DBのマイグレーションを実行してくれます。
 
 これでバックエンド開発の下準備が整いました。ここまでのソースコードは
-[https://github.com/Onebase-Fujitsu/todo-app-server/tree/step1](https://github.com/Onebase-Fujitsu/todo-app-server/tree/step1)
+[https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step5](https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step5)
 に置いてあります。
 
 ## GET /todosの実装
