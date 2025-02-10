@@ -1,1 +1,934 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>富士通アジャイルデベロップメントガイドブック on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/</link><description>Recent content in 富士通アジャイルデベロップメントガイドブック on Fujitsu Agile Development Guide</description><generator>Hugo -- gohugo.io</generator><language>ja</language><lastBuildDate>Wed, 04 Aug 2021 14:37:44 +0900</lastBuildDate><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/index.xml" rel="self" type="application/rss+xml"/><item><title>1日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/</guid><description>1日目 # アプリケーションの要件 # では、早速アジャイル開発で実際に動くアプリケーションを作ってみましょう。 今回は、簡単な例としてタスク管理のア</description></item><item><title>Designerとは</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/overview/</guid><description>Designerとは # Designerは、デザイン上の意思決定という形で価値を届けます。 その仕事はユーザーにとって望ましく、使いやすいソリュ</description></item><item><title>Developerとは</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/overview/</guid><description>Developerとは # Developer(Dev)は、バックログを実装しプロダクトを作ることに責任を持ちます。また、ソリューションの検討に</description></item><item><title>ONEbaseの価値観</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/onebase/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/onebase/</guid><description>ONEbaseの価値観 # Core Values # 3 Things to Make it Work / 3 Agreements # 3 Things to Make it Work / 3つの成功させるためのポイント # 1. Trust in team &amp;amp; process / チームとプロセスへの信頼 2. Interest in</description></item><item><title>Product Managerとは</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/overview/</guid><description>Product Managerとは # Product Manager(PdM)は、会社やユーザーにとって価値を生み出すプロダクトを発見し、実現できるようにチームを導きます</description></item><item><title>Swift Method とは</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/overview/</guid><description>Swift Method とは # 背景 # レガシーシステムをモダナイズする際に以下のような問題点に直面します。 レガシーシステムについて知識のある人がいなくなっている 言</description></item><item><title>TDD</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/tdd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/tdd/</guid><description>TDD # 概要 # テスト駆動開発（Test-Driven Development; TDD）は、先にテストを書き、次に機能の実装し、その後コードのリファクタリングを行うという</description></item><item><title>アジャイルソフトウェア開発宣言</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/</guid><description>アジャイルソフトウェア開発宣言 # アジャイル開発とはなにかという問いに対して簡潔に答えるとすると、 「アジャイルソフトウェア開発宣言のマインドに</description></item><item><title>アジャイル開発に求められるソフトウェア設計</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/</guid><description>アジャイル開発に求められるソフトウェア設計 # アジャイル開発では開発の途中で求められるソフトウェア仕様がどんどん変化します。 そのため、変化に強</description></item><item><title>エクストリームプログラミングとは</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/</guid><description>エクストリームプログラミングとは # エクストリームプログラミング（以下、XP）はアジャイルソフトウェア開発宣言をだしたメンバーの一人、 Kent Bec</description></item><item><title>スクラムとは</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/overview/</guid><description>スクラムとは # スクラムはアジャイルの開発手法の1つです。1990年代にJeff SutherlandとKen Schwaberによって策定されま</description></item><item><title>ソフトウェアテストを始めよう</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/overview/</guid><description>ソフトウェアテストを始めよう # ここまでアジャイルやスクラム、XPについて学んできました。 それぞれ、マインドセットや枠組みの話でしたので 「結局</description></item><item><title>チームの働き方</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/workstyle/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/workstyle/</guid><description>チームの働き方 # 心理的な安全性のあるチームで、安定したペースでの開発を目指します。 ペアワーク すべての作業をペアで行います。 手戻り防止、情報シ</description></item><item><title>デザインパターン</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/designpattern/designpattern/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/designpattern/designpattern/</guid><description>デザインパターンとは # 後日執筆予定</description></item><item><title>はじめに</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/</guid><description>はじめに # 近年アジャイルや内製化が叫ばれて久しいですが、それは弊社でも同じです。 しかし、アジャイル開発はこれまで行われてきたウォーターフォー</description></item><item><title>ファシリテーション</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/facilitation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/facilitation/</guid><description>ファシリテーション # 概要 # 会議やミーティング（MTG）が円滑に進むよう支援することです。 ファシリテーションの役割を担う人を「ファシリテーター</description></item><item><title>プロダクトロードマップ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/roadmap/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/roadmap/</guid><description>プロダクトロードマップ # 概要 # プロダクトロードマップとは、プロダクトのビジョンを実現するための道のり（戦略）を明らかにするものです。 プロダク</description></item><item><title>ペルソナ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/persona/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/persona/</guid><description>ペルソナ # 概要 # ペルソナとは、ユーザーのプロトタイプモデルです。 多数の実ユーザーを対象にヒアリングなどによる調査を行い、類似するニーズ、ゴー</description></item><item><title>モダナイゼーションアジャイルの流れ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/overview/</guid><description>モダナイゼーションアジャイルの流れ # モダナイゼーションアジャイルでは、既存のブラックボックス化しているレガシーシステムに対して、ビジネス視点</description></item><item><title>リーンスタートアップアジャイルの流れ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/overview/</guid><description>リーンスタートアップアジャイルの流れ # リーンスタートアップアジャイルでは、ユーザーに対する仮説検証を繰り返しながら、アジリティを持ってプロダ</description></item><item><title>全体スタンドアップ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/officestandup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/officestandup/</guid><description>全体スタンドアップ # 概要 # 同じ職場で働く全チームが集まって、立ちながら行うミーティングです。 以下の内容を共有します。 NewFaces（新しい</description></item><item><title>単一責任の原則(SRP)</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/</guid><description>単一責任の原則(The Single Responsibility Principle) # 単一責任の原則(SRP)とはなにか？ # 単一責任の原則(SRP)とはクラスを変更する理由は1つ以上存在してはなら</description></item><item><title>2日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/</guid><description>2日目 # 2日目はClientがServerに対してHTTPリクエストを実行するところ、そして、Serverの初期設定をして簡単なAPIを作っ</description></item><item><title>CI/CD</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/cicd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/cicd/</guid><description>CI/CD # 概要 # CI/CDとは継続的インテグレーション（CI）と継続的デリバリー（CD）を組み合わせたプラクティスです。ビルド/テスト/デプロイを</description></item><item><title>Event Storming</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/eventstorming/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/eventstorming/</guid><description>Event Storming # 概要 # Event Stormingは、既存システムをいくつかの小さい単位のサービスに分解したいときに使うアクティビティの一つです。 既存システムの</description></item><item><title>MVP</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/</guid><description>MVP # 概要 # MVP(Minimum Viable Product)とは、ユーザーに価値を提供できる最小限のプロダクトのことです。 仮説検証のプロセスで利用します。 最小限（Mini</description></item><item><title>OKRs</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/okrs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/okrs/</guid><description>OKRs # 概要 # OKRs（Objectives and Key Results）とは、目標管理の手法のひとつです。 チームの目標（Objectives）と、目標達</description></item><item><title>アジャイル開発12の原則</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/</guid><description>アジャイル開発12の原則 # アジャイルソフトウェア開発宣言 で宣言されていた内容は、 アジャイル開発をする上で大事なマインドセットを述べたものでし</description></item><item><title>ウォーミングアップ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/</guid><description>ウォーミングアップ # ここではテスト駆動開発の手法で極々簡単なコンソールアプリケーションを作ってみようと思います。 開発言語はここではJavaを</description></item><item><title>エクストリームプログラミングのプラクティス</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/</guid><description>エクストリームプログラミングのプラクティス # チームメンバーとしての顧客 # 顧客と開発者は同じ空間で机を突き合わせて、親密に仕事をするのが望まし</description></item><item><title>オープン・クローズドの原則(OCP)</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/</guid><description>オープン・クローズドの原則(The Open Closed Principle) # オープン・クローズドの原則(OCP)とはなにか？ # オープン・クローズドの原則(OCP)とは ソフトウ</description></item><item><title>シナリオ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/scenario/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/scenario/</guid><description>シナリオ # 概要 # シナリオは、ターゲットユーザーがどのような流れでソフトウェアを利用するかを時系列で具体的に記入したものです。 シナリオは、以下</description></item><item><title>チームスタンドアップ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamstandup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamstandup/</guid><description>チームスタンドアップ # 概要 # チームのメンバー全員で立ちながら行うミーティングです。 以下の内容を共有し、タスクの確認を行います。 昨日やったこと</description></item><item><title>バランスチーム</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/balancedteam/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/balancedteam/</guid><description>バランスチーム # 3つの役割 # バランスチームでは、ビジネス価値・ユーザー価値・技術的な実現性のそれぞれに責任を持つ3つの役割（Product M</description></item><item><title>ロール</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/roles/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/roles/</guid><description>ロール # スクラムではアジャイル開発チームにおける役割を3つ規定しています。 プロダクトオーナー プロダクト開発チーム スクラムマスター それぞれにつ</description></item><item><title>体制・役割</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/organization/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/organization/</guid><description>体制・役割 # Coreチーム # Product Managers # Product Managers(PdMs)は正しいものを作るためにビジネス価値、ユーザー価値、技術的な難易度を踏まえて</description></item><item><title>体制・役割</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/organization/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/organization/</guid><description>体制・役割 # Coreチーム # Product Managers # Product Managers(PdMs)は正しいものを作るためにビジネス価値、ユーザー価値、技術的な難易度を踏まえて</description></item><item><title>心理的安全性</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/psychologicalsafety/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/psychologicalsafety/</guid><description>心理的安全性 # プロジェクトの実行にあたって「心理的安全性」を確保することは非常に重要です。 「心理的安全性」とは、チームのメンバーがアイデア、</description></item><item><title>3日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/</guid><description>3日目 # 2日目まででタスク一覧をサーバに対して要求して、レスポンスに応じてタスク一覧を画面に描画するフロントエンドができました。 ただ、現時点</description></item><item><title>Boris</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/boris/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/boris/</guid><description>Boris # 概要 # Borisは既存システムをいくつかの小さい単位のサービスに分解したいときに使うアクティビティの一つです。サービス候補（Event S</description></item><item><title>Pre-IPM</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/preipm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/preipm/</guid><description>Pre-IPM # 概要 # Pre-IPMは、IPM(Iteration Planning Meeting)に向けて、ドラフト版のユーザーストーリーをDeveloper観点で確</description></item><item><title>XPの価値観</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/xp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/xp/</guid><description>XPの価値観 # XPは5つの価値観に基づいています。 コミュニケーション プロジェクトの各段階で、チームの全員が共同で作業を行います。 シンプル 開発</description></item><item><title>プロダクトビジョン / バリュープロポジション</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/productvision/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/productvision/</guid><description>プロダクトビジョン / バリュープロポジション # 概要 # プロダクトビジョンは、プロダクトを通じて実現しようとしている世界を定義します。 プロジェクト</description></item><item><title>ペアプログラミング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/pairprogramming/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/pairprogramming/</guid><description>ペアプログラミング # 概要 # ペアプログラミングは、開発者がペアになってプログラミングを行うという手法です。 ドライバーとナビゲーターの二人一組で</description></item><item><title>ボウリングゲーム</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/</guid><description>ボウリングゲーム # 最初の一歩ではウォーミングアップとしてFizzBuzzを書いてみました。 ここでは少しだけ難易度を上げたより実践的な例として</description></item><item><title>まとめ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/</guid><description>まとめ # アジャイルソフトウェア開発宣言とアジャイル開発12の原則まで読んできました。 実はここまで具体的な開発手法は一つもでてきていません。す</description></item><item><title>まとめ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/</guid><description>まとめ # エクストリームプログラミング(XP)はシンプルかつ具体的な集合から構築されているアジャイル開発プロセスです。 そして、この開発プロセス</description></item><item><title>ユーザーストーリーマッピング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstorymapping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstorymapping/</guid><description>ユーザーストーリーマッピング # 概要 # ユーザーストーリーマッピングでは、ユーザーストーリーを抽出しながら、ユーザーのアクション（横軸）、優先度</description></item><item><title>リサーチ計画立案</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchplanning/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchplanning/</guid><description>リサーチ計画立案 # 概要 # リサーチ計画立案では、次回のユーザーリサーチで検証すべき仮説と、その検証方法について計画します。 以下の手順で準備を進</description></item><item><title>リスコフの置換原則(LSP)</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/</guid><description>リスコフの置換原則(The Liskov Substitution Principle) # リスコフの置換原則(LSP)とはなにか？ # リスコフの置換原則(LSP)とは 派生型はその基本型と置換可能でな</description></item><item><title>成果物</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/products/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/products/</guid><description>成果物 # スクラムガイドにおいてスクラムチームが作成するべき成果物は3つ規定されています。 プロダクトバックログ スプリントバックログ インクリメン</description></item><item><title>4日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/</guid><description>4日目 # 3日まででReactで作ったフロントエンドとSpring Bootで作ったバックエンドを連携させることができました。 しかし、タスクを表</description></item><item><title>IPM</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/ipm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/ipm/</guid><description>IPM # 概要 # IPM(Iteration Planning Meeting)は、各ユーザーストーリーの見積もりを行って次のイテレーションの計画を立てるミーティングです。 Product Managerが</description></item><item><title>SnapE</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/snape/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/snape/</guid><description>SnapE # 概要 # SnapEは既存システムをいくつかの小さい単位のサービスに分解したいときに使うアクティビティの一つです。サービス候補（Event S</description></item><item><title>イベント</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/events/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/events/</guid><description>イベント # 画像出典: アジャイル開発とは（中編） ちょうど富士通の公開ページにスクラムのプロセスを解説している図があったため、これを使って説明し</description></item><item><title>ソロプログラミング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/soroprogramming/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/soroprogramming/</guid><description>ソロプログラミング # 概要 # ソロプログラミングは、開発者が1人でプログラミングを行うという手法です。これまで多くのSIの現場で採用されており、</description></item><item><title>チームビルディング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/teambuilding/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/teambuilding/</guid><description>チームビルディング # チームビルディングは、チームの目的や目標の達成に向かって、各メンバーが主体的に能力を発揮しながら一丸となるチームを目指す</description></item><item><title>テストダブル</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/</guid><description>テストダブル # テスト駆動開発の開発の流れがわかってきたところで、次にテストダブルを使用したテストについて学んでいきましょう。 テストダブルとは</description></item><item><title>プラクティスの取り入れ方</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/practice/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/practice/</guid><description>プラクティスの取り入れ方 # Practices（手法やツール）は氷山の一角に過ぎません。目に見える氷山の下にはPrinciples（原理・原則</description></item><item><title>プロトタイピング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/prototyping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/prototyping/</guid><description>プロトタイピング # 概要 # プロトタイピングでは、ソフトウェアのUIデザインを行います。 以下のように作業しします。 シナリオに沿って、画面遷移と各</description></item><item><title>ユーザーストーリー</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/</guid><description>ユーザーストーリー # 概要 # ユーザーストーリーとはユーザーの要求（誰が、どのような目的で、何をしたいのか）を表わすものです。 ユーザーストーリー</description></item><item><title>依存性逆転の原則(DIP)</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/</guid><description>依存性逆転の原則(The Dependency Inversion Principle) # 依存性逆転の原則とは # 依存性逆転の原則(DIP)とは 上位のモジュールは下位のモジュールに依存してはいけない。</description></item><item><title>2×2</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/</guid><description>2×2 # 概要 # 2×2(two by two)とは、優先順位を徹底して意思決定を行うための手法です。 意思決定をするための2つの観点を縦軸と横軸に設定</description></item><item><title>5日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/</guid><description>5日目 # ではTodoを作成するバックエンドAPIを作成していきましょう。 タスク作成バックエンドAPI # テスト # まず、サーバのテストを書いてみ</description></item><item><title>CLミーティング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/cl/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/cl/</guid><description>CLミーティング # 概要 # CLミーティングは、CL(Client Liaison)/PMOとの情報共有の場です。 目的 # 定期的に情報を共有して、プ</description></item><item><title>E2Eテスト</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/</guid><description>E2Eテスト # E2Eテストとは # ここまでソフトウェアの単体テストやインテグレーションテストのやり方を見てきました。 しかし、ServerやCl</description></item><item><title>Slices</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/slices/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/slices/</guid><description>Slices # 概要 # Slicesは、どこから開発を始めるか決めるアクティビティです。Swiftメソッド全体の位置付けとしては4つ目のアクティビティとな</description></item><item><title>インターフェース分離の原則(ISP)</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/</guid><description>インターフェース分離の原則(The Interface Segregation Principle) # インタフェース分離の原則とは # インターフェス分離の原則(ISP)とは クライアントにクライアントが利</description></item><item><title>スクリプト作成</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/script/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/script/</guid><description>スクリプト作成 # 概要 # スクリプト作成では、リサーチ当日の流れや確認事項を整理したトークスクリプトを作成します。 以下の内容を記載します。 ターゲ</description></item><item><title>まとめ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/conclude/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/conclude/</guid><description>まとめ # ここまでスクラムのロール、スクラムチームが作成すべき成果物、そしてスクラムチームの開発の流れを見てきました。 ここで説明した内容をプラ</description></item><item><title>リモートワーク</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/remotework/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/remotework/</guid><description>リモートワーク # リモートワークではコミュニケーションの主な手法はオンラインになります。 オンラインでのコミュニケーションでは顔を合わせないため</description></item><item><title>6日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/</guid><description>6日目 # クライアントとサーバを連携させてタスクを作成することができるようになったので、シナリオテストを作成していきましょう。 モノレポの作成 #</description></item><item><title>Tech Choice</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/techchoice/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/techchoice/</guid><description>Tech Choice # 概要 # Tech Choiceは、開発に着手するにあたってチームで話し合ってどの技術を使うか決めるアクティビティです。Swiftメソッド全体の位</description></item><item><title>リサーチ実施</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchaction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchaction/</guid><description>リサーチ実施 # 概要 # リサーチでは、仮説を検証するための情報を得るため、ユーザーへのインタビューや、ユーザーテストなどを行います。 以下の作業を</description></item><item><title>レトロスペクティブ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/retro/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/retro/</guid><description>レトロスペクティブ # 概要 # レトロスペクティブ（レトロ）は、チームの活動の振り返りを行う活動です。 イテレーションでよかったこと、よくなかった点</description></item><item><title>シンセサイズ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/synthesize/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/synthesize/</guid><description>シンセサイズ # 概要 # シンセサイズでは、リサーチの結果から仮説は検証されたか、新たな発見があったかなどをまとめ、学びとして蓄積します。 シンセサ</description></item><item><title>営業確認会議</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/salesmeeting/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/salesmeeting/</guid><description>営業確認会議 # 概要 # 営業確認会議は、各エンドユーザーの窓口になっている営業チームやその他の担当者との情報共有の場です。 また、必要に応じて営業</description></item><item><title>Internal Sync</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/internalsync/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/internalsync/</guid><description>Internal Sync # 概要 # Internal Syncは、社内メンバーのみで集まって実施するミーティングです。 その日の作業の学びの共有や不明点の解消をしたり、今後の方針・</description></item><item><title>おわりに</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/</guid><description>おわりに # まず、あなたは本書を最後まで読み切りました！お疲れさまです！ あなたはアジャイル開発者への第一歩を踏み出しました。 「本書を理解したら</description></item><item><title>Risks &amp; Mitigations</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/riskmitigations/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/riskmitigations/</guid><description>Risks &amp;amp; Mitigations # 概要 # チームの目標を達成するためにどのようなリスクがあるかを挙げて、そのリスクを軽減するための対策を検討します。 一人ひとりの思い込み</description></item><item><title>推奨書籍</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/</guid><description>推奨書籍 # ここでは特定の言語、アーキテクチャに依存しないものを推挙しています。 リーダブルコード # https://www.amazon.co.jp/dp/4873115655/ ここで紹介するまでも無いと思いますが、チー</description></item><item><title>フィードバック</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/feedback/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/feedback/</guid><description>フィードバック # 概要 # 相手の行動に対しての評価、改善点を率直に伝えます。 先輩/後輩、立場等関係なく、フラットに行いましょう。 フィードバックは</description></item><item><title>Ice Break</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/icebreak/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/icebreak/</guid><description>Ice Break # 概要 # 開発業務から離れて、チームで一緒にゲームなどを行います。 目的 # メンバ間のコミュニケーション活性化や心身のリフレッシュを目的としま</description></item><item><title>Team Health Check</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamhealthcheck/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamhealthcheck/</guid><description>Team Health Check # 概要 # チームで匿名のアンケートを実施し、チームの状態を可視化します。 目的 # アンケートの結果を踏まえ、意見を共有することでメンバーがど</description></item><item><title>1on1</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/1on1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/1on1/</guid><description>1on1 # 概要 # チームのメンバー間で1対1で対話します。 キャリア形成を意識した部下と上司とで行う1on1ではなく、より身近なメンバーと気軽に話をし</description></item><item><title>ラジオ体操</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/exercise/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/exercise/</guid><description>ラジオ体操 # 概要 # 体力向上、健康の保持増進を図る目的に考案された、伴奏つきの体操です。 日本では、誰もが気軽に楽しめる運動として広く国民に親し</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>富士通アジャイルデベロップメントガイドブック on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/</link><description>Recent content in 富士通アジャイルデベロップメントガイドブック on Fujitsu Agile Development Guide</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Mon, 01 Jan 0001 00:00:00 +0000</lastBuildDate><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/index.xml" rel="self" type="application/rss+xml"/><item><title>1日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/</guid><description>&lt;h1 id="1日目">
+ 1日目
+ &lt;a class="anchor" href="#1%e6%97%a5%e7%9b%ae">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="アプリケーションの要件">
+ アプリケーションの要件
+ &lt;a class="anchor" href="#%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%81%ae%e8%a6%81%e4%bb%b6">#&lt;/a>
+&lt;/h2>
+&lt;p>では、早速アジャイル開発で実際に動くアプリケーションを作ってみましょう。
+今回は、簡単な例としてタスク管理のアプリを作ってみます。
+こういったハンズオンでなにをもってアジャイル開発と言うかは難しいところなのですが、
+事前にかっちりとした設計はせずに都度必要な機能を継ぎ足していく形で進めます。
+都度、新しい機能を追加するStoryが追加されているという体で読み進めてください。&lt;/p></description></item><item><title>Designerとは</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/overview/</guid><description>&lt;h1 id="designerとは">
+ Designerとは
+ &lt;a class="anchor" href="#designer%e3%81%a8%e3%81%af">#&lt;/a>
+&lt;/h1>
+&lt;p>Designerは、デザイン上の意思決定という形で価値を届けます。
+その仕事はユーザーにとって望ましく、使いやすいソリューションを定義するためにユーザーを深く理解することです。
+Product Managerと協力してユーザーリサーチと組み合わせてユーザーやソリューションに関する思い込みを検証します。&lt;/p></description></item><item><title>Developerとは</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/overview/</guid><description>&lt;h1 id="developerとは">
+ Developerとは
+ &lt;a class="anchor" href="#developer%e3%81%a8%e3%81%af">#&lt;/a>
+&lt;/h1>
+&lt;p>Developer(Dev)は、バックログを実装しプロダクトを作ることに責任を持ちます。また、ソリューションの検討にあたって技術的な側面で意見を出し、チームの理解や判断に一役を買います。
+開発における基本的な考え方は&lt;a href="https://12factor.net/ja/">Twelve-Factor&lt;/a>に則ります。&lt;/p></description></item><item><title>ONEbaseの価値観</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/onebase/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/onebase/</guid><description>&lt;h1 id="onebaseの価値観">
+ ONEbaseの価値観
+ &lt;a class="anchor" href="#onebase%e3%81%ae%e4%be%a1%e5%80%a4%e8%a6%b3">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="core-values">
+ Core Values
+ &lt;a class="anchor" href="#core-values">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;img src="onebaseValue1.jpg" alt="onebaseValue1" />&lt;/p>
+&lt;h2 id="3-things-to-make-it-work--3-agreements">
+ 3 Things to Make it Work / 3 Agreements
+ &lt;a class="anchor" href="#3-things-to-make-it-work--3-agreements">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;img src="onebaseValue2.jpg" alt="onebaseValue2" />&lt;/p>
+&lt;h3 id="3-things-to-make-it-work--3つの成功させるためのポイント">
+ 3 Things to Make it Work / 3つの成功させるためのポイント
+ &lt;a class="anchor" href="#3-things-to-make-it-work--3%e3%81%a4%e3%81%ae%e6%88%90%e5%8a%9f%e3%81%95%e3%81%9b%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ae%e3%83%9d%e3%82%a4%e3%83%b3%e3%83%88">#&lt;/a>
+&lt;/h3>
+&lt;pre tabindex="0">&lt;code>1. Trust in team &amp;amp; process / チームとプロセスへの信頼
+2. Interest in users / ユーザーへの関心
+3. Willingness to be wrong / 間違ってもいいという気持ち
+&lt;/code>&lt;/pre>&lt;h3 id="3-agreements--3つの合意">
+ 3 Agreements / 3つの合意
+ &lt;a class="anchor" href="#3-agreements--3%e3%81%a4%e3%81%ae%e5%90%88%e6%84%8f">#&lt;/a>
+&lt;/h3>
+&lt;pre tabindex="0">&lt;code>1. Decisions today are what we start woth tomorrow 
+ 今日の決定が明日のスタートとなる
+2. We&amp;#39;re not supposed to get it right today, just get close 
+ 今日の決定が正しいとは限らない
+3. Our confidence in decisions are based on current understanding 
+ 決断に対する自信は、現在の理解に基づいている
+&lt;/code>&lt;/pre></description></item><item><title>Product Managerとは</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/overview/</guid><description>&lt;h1 id="product-managerとは">
+ Product Managerとは
+ &lt;a class="anchor" href="#product-manager%e3%81%a8%e3%81%af">#&lt;/a>
+&lt;/h1>
+&lt;p>Product Manager(PdM)は、会社やユーザーにとって価値を生み出すプロダクトを発見し、実現できるようにチームを導きます。
+良い機能をリリースするための意思決定をチームを巻き込みながら進めていきます。
+ユーザーは誰なのか、何を必要としているか、プロダクトはビジネスにどんな影響をあたえるのか、ステークホルダーは誰かを、明確に理解する必要があります。また、チームと密接に連携する必要があります。&lt;/p></description></item><item><title>Swift Method とは</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/overview/</guid><description>&lt;h1 id="swift-method-とは">
+ Swift Method とは
+ &lt;a class="anchor" href="#swift-method-%e3%81%a8%e3%81%af">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="背景">
+ 背景
+ &lt;a class="anchor" href="#%e8%83%8c%e6%99%af">#&lt;/a>
+&lt;/h2>
+&lt;p>レガシーシステムをモダナイズする際に以下のような問題点に直面します。&lt;/p>
+&lt;ul>
+&lt;li>レガシーシステムについて知識のある人がいなくなっている&lt;/li>
+&lt;li>言語、テクノロジーが古く理解できない&lt;/li>
+&lt;li>ソースコードのコメントや設計書等がメンテナンスされていない&lt;/li>
+&lt;li>その場しのぎの技術負債が溜まっている&lt;/li>
+&lt;li>どの機能が重要なのか、優先順位が分からない&lt;/li>
+&lt;li>要件が変わっている&lt;/li>
+&lt;/ul>
+&lt;p>このようなレガシーシステムのブラックボックス化が招く問題により、
+メンテナンスや、新規要件への対応、影響調査が難しくなり、
+必要のない資料、機能、プログラムの解析に時間を使うことになってしまいます。&lt;/p></description></item><item><title>TDD</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/tdd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/tdd/</guid><description>&lt;h1 id="tdd">
+ TDD
+ &lt;a class="anchor" href="#tdd">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>テスト駆動開発（Test-Driven Development; TDD）は、先にテストを書き、次に機能の実装し、その後コードのリファクタリングを行うという工程を繰り返す開発手法です。&lt;br>
+&lt;a href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/#テストファーストの開発">テストファーストの開発&lt;/a>、&lt;a href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/#テスト駆動開発とは">テスト駆動開発とは&lt;/a>も合わせて参照してください。&lt;/p></description></item><item><title>アジャイルソフトウェア開発宣言</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/</guid><description>&lt;h1 id="アジャイルソフトウェア開発宣言">
+ アジャイルソフトウェア開発宣言
+ &lt;a class="anchor" href="#%e3%82%a2%e3%82%b8%e3%83%a3%e3%82%a4%e3%83%ab%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2%e9%96%8b%e7%99%ba%e5%ae%a3%e8%a8%80">#&lt;/a>
+&lt;/h1>
+&lt;p>アジャイル開発とはなにかという問いに対して簡潔に答えるとすると、
+&lt;strong>「アジャイルソフトウェア開発宣言のマインドに則り、アジャイル開発12の原則に従った開発」&lt;/strong>
+となります。
+ではさっそく &lt;a href="https://agilemanifesto.org/iso/ja/manifesto.html">アジャイルソフトウェア開発宣言&lt;/a> に目を通してみましょう。&lt;/p></description></item><item><title>アジャイル開発に求められるソフトウェア設計</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/about/</guid><description>&lt;h1 id="アジャイル開発に求められるソフトウェア設計">
+ アジャイル開発に求められるソフトウェア設計
+ &lt;a class="anchor" href="#%e3%82%a2%e3%82%b8%e3%83%a3%e3%82%a4%e3%83%ab%e9%96%8b%e7%99%ba%e3%81%ab%e6%b1%82%e3%82%81%e3%82%89%e3%82%8c%e3%82%8b%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2%e8%a8%ad%e8%a8%88">#&lt;/a>
+&lt;/h1>
+&lt;p>アジャイル開発では開発の途中で求められるソフトウェア仕様がどんどん変化します。
+そのため、変化に強い「柔軟な」設計が求められます。&lt;/p></description></item><item><title>エクストリームプログラミングとは</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/</guid><description>&lt;h1 id="エクストリームプログラミングとは">
+ エクストリームプログラミングとは
+ &lt;a class="anchor" href="#%e3%82%a8%e3%82%af%e3%82%b9%e3%83%88%e3%83%aa%e3%83%bc%e3%83%a0%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%9f%e3%83%b3%e3%82%b0%e3%81%a8%e3%81%af">#&lt;/a>
+&lt;/h1>
+&lt;p>エクストリームプログラミング（以下、XP）はアジャイルソフトウェア開発宣言をだしたメンバーの一人、
+Kent Beckが提唱したアジャイルの枠組みの中で開発を行っていくための&lt;strong>より実践的なプラクティス集&lt;/strong>です。
+スクラムでは会議体や成果物を規定していましたが、その枠組の中でどのように開発していくかまでは定義していませんでした。
+XPのプラクティスは、スクラムで規定されていない&amp;quot;どのように開発していくか&amp;quot;を補完してくれるものです。&lt;/p></description></item><item><title>スクラムとは</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/overview/</guid><description>&lt;h1 id="スクラムとは">
+ スクラムとは
+ &lt;a class="anchor" href="#%e3%82%b9%e3%82%af%e3%83%a9%e3%83%a0%e3%81%a8%e3%81%af">#&lt;/a>
+&lt;/h1>
+&lt;p>スクラムはアジャイルの開発手法の1つです。1990年代にJeff SutherlandとKen Schwaberによって策定されました。
+スクラムには以下の特徴があります。&lt;/p></description></item><item><title>ソフトウェアテストを始めよう</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/overview/</guid><description>&lt;h1 id="ソフトウェアテストを始めよう">
+ ソフトウェアテストを始めよう
+ &lt;a class="anchor" href="#%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2%e3%83%86%e3%82%b9%e3%83%88%e3%82%92%e5%a7%8b%e3%82%81%e3%82%88%e3%81%86">#&lt;/a>
+&lt;/h1>
+&lt;p>ここまでアジャイルやスクラム、XPについて学んできました。
+それぞれ、マインドセットや枠組みの話でしたので
+「結局、具体的にどうやって開発するんだ？」と思われた方も多いと思います。&lt;/p></description></item><item><title>チームの働き方</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/workstyle/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/workstyle/</guid><description>&lt;h1 id="チームの働き方">
+ チームの働き方
+ &lt;a class="anchor" href="#%e3%83%81%e3%83%bc%e3%83%a0%e3%81%ae%e5%83%8d%e3%81%8d%e6%96%b9">#&lt;/a>
+&lt;/h1>
+&lt;p>&lt;strong>心理的な安全性のあるチームで、安定したペースでの開発を目指します。&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>ペアワーク&lt;/strong>
+&lt;ul>
+&lt;li>すべての作業をペアで行います。&lt;/li>
+&lt;li>手戻り防止、情報シェア、スキルトランスファーなどの効果があります。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>集中&lt;/strong>
+&lt;ul>
+&lt;li>プロジェクトに100%専任にします。（クライアントのメンバーも含む）&lt;/li>
+&lt;li>ミーティング中、脇で会話しないようにします。&lt;/li>
+&lt;li>お菓子・飲み物を事務所に設置し、自由に利用します。（買いに行く時間が無駄）&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>フラット&lt;/strong>
+&lt;ul>
+&lt;li>メンバーは全員フラットな関係（リーダーなし）を維持し、ニックネームで呼び合います。&lt;/li>
+&lt;li>一人一人を尊重し、発言の機会を作ります。&lt;/li>
+&lt;li>良いことも悪いこともすべてチームで対応します。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>タイムボックス&lt;/strong>
+&lt;ul>
+&lt;li>時間を意識しリズムよく作業します。&lt;/li>
+&lt;li>議論が長引いている場合は議題の分割を考えます。&lt;/li>
+&lt;li>議論が詰まる時には何があれば判断できるかを考えます。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>疲れをためない&lt;/strong>
+&lt;ul>
+&lt;li>1時間に5~10分程度の休憩を取ります。&lt;/li>
+&lt;li>卓球でリフレッシュします。&lt;/li>
+&lt;li>18:00退社を厳守します。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>カイゼンと成長&lt;/strong>
+&lt;ul>
+&lt;li>毎週チームでのレトロスペクティブを行います。&lt;/li>
+&lt;li>ペアでのフィードバックの時間を定期的に確保します。&lt;/li>
+&lt;li>チームの健康状態を意識し、早めに対処をします。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="チームのリズム">
+ チームのリズム
+ &lt;a class="anchor" href="#%e3%83%81%e3%83%bc%e3%83%a0%e3%81%ae%e3%83%aa%e3%82%ba%e3%83%a0">#&lt;/a>
+&lt;/h2>
+&lt;p>チームは、一週間単位のイテレーションで、開発を実施します。
+IPMで開発の見通しを立てて、デイリースタンドアップで日々の状況の確認、金曜日にレトロスペクティブ（振り返り）を行って翌週にさらに良いチームになるよう改善を続けて行きます。&lt;/p></description></item><item><title>デザインパターン</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/designpattern/designpattern/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/designpattern/designpattern/</guid><description>&lt;h1 id="デザインパターンとは">
+ デザインパターンとは
+ &lt;a class="anchor" href="#%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3%e3%83%91%e3%82%bf%e3%83%bc%e3%83%b3%e3%81%a8%e3%81%af">#&lt;/a>
+&lt;/h1>
+&lt;p>後日執筆予定&lt;/p></description></item><item><title>はじめに</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/</guid><description>&lt;h1 id="はじめに">
+ はじめに
+ &lt;a class="anchor" href="#%e3%81%af%e3%81%98%e3%82%81%e3%81%ab">#&lt;/a>
+&lt;/h1>
+&lt;p>近年アジャイルや内製化が叫ばれて久しいですが、それは弊社でも同じです。
+しかし、アジャイル開発はこれまで行われてきたウォーターフォール開発と違って、
+画一的な開発では立ち行かないもので、それ故にナレッジの明文化がなされていなかった分野でもあります。&lt;/p></description></item><item><title>ファシリテーション</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/facilitation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/facilitation/</guid><description>&lt;h1 id="ファシリテーション">
+ ファシリテーション
+ &lt;a class="anchor" href="#%e3%83%95%e3%82%a1%e3%82%b7%e3%83%aa%e3%83%86%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>会議やミーティング（MTG）が円滑に進むよう支援することです。
+ファシリテーションの役割を担う人を「ファシリテーター」と言います。&lt;/p></description></item><item><title>プロダクトロードマップ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/roadmap/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/roadmap/</guid><description>&lt;h1 id="プロダクトロードマップ">
+ プロダクトロードマップ
+ &lt;a class="anchor" href="#%e3%83%97%e3%83%ad%e3%83%80%e3%82%af%e3%83%88%e3%83%ad%e3%83%bc%e3%83%89%e3%83%9e%e3%83%83%e3%83%97">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>プロダクトロードマップとは、プロダクトのビジョンを実現するための道のり（戦略）を明らかにするものです。
+プロダクトのビジョンに向かって開発を進める手助けとなるような連続したゴールで構成し、時間ともにどのように進化していくかの見込みを示します。&lt;/p></description></item><item><title>ペルソナ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/persona/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/persona/</guid><description>&lt;h1 id="ペルソナ">
+ ペルソナ
+ &lt;a class="anchor" href="#%e3%83%9a%e3%83%ab%e3%82%bd%e3%83%8a">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>ペルソナとは、ユーザーのプロトタイプモデルです。
+多数の実ユーザーを対象にヒアリングなどによる調査を行い、類似するニーズ、ゴール、コンテキスト、及びタスクを収集して、ペルソナを作成します。
+情報が不足している場合、仮説を立ててペルソナを作成し（プロトペルソナ）、検証を行った上で内容を更新していきます。&lt;/p></description></item><item><title>モダナイゼーションアジャイルの流れ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/overview/</guid><description>&lt;h1 id="モダナイゼーションアジャイルの流れ">
+ モダナイゼーションアジャイルの流れ
+ &lt;a class="anchor" href="#%e3%83%a2%e3%83%80%e3%83%8a%e3%82%a4%e3%82%bc%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%82%a2%e3%82%b8%e3%83%a3%e3%82%a4%e3%83%ab%e3%81%ae%e6%b5%81%e3%82%8c">#&lt;/a>
+&lt;/h1>
+&lt;p>モダナイゼーションアジャイルでは、既存のブラックボックス化しているレガシーシステムに対して、ビジネス視点で分析を行い、必要なものから開発を行います。リーンスタートアップアジャイルと同様、「リーンXP」の開発手法を「バランスチーム」の中で実践します。&lt;/p></description></item><item><title>リーンスタートアップアジャイルの流れ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/overview/</guid><description>&lt;h1 id="リーンスタートアップアジャイルの流れ">
+ リーンスタートアップアジャイルの流れ
+ &lt;a class="anchor" href="#%e3%83%aa%e3%83%bc%e3%83%b3%e3%82%b9%e3%82%bf%e3%83%bc%e3%83%88%e3%82%a2%e3%83%83%e3%83%97%e3%82%a2%e3%82%b8%e3%83%a3%e3%82%a4%e3%83%ab%e3%81%ae%e6%b5%81%e3%82%8c">#&lt;/a>
+&lt;/h1>
+&lt;p>リーンスタートアップアジャイルでは、ユーザーに対する仮説検証を繰り返しながら、アジリティを持ってプロダクトを開発し続ける「リーンXP」の開発手法を、「バランスチーム」の中で実践します。&lt;/p></description></item><item><title>全体スタンドアップ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/officestandup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/officestandup/</guid><description>&lt;h1 id="全体スタンドアップ">
+ 全体スタンドアップ
+ &lt;a class="anchor" href="#%e5%85%a8%e4%bd%93%e3%82%b9%e3%82%bf%e3%83%b3%e3%83%89%e3%82%a2%e3%83%83%e3%83%97">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>同じ職場で働く全チームが集まって、立ちながら行うミーティングです。
+以下の内容を共有します。&lt;/p>
+&lt;ul>
+&lt;li>NewFaces（新しいメンバー）&lt;/li>
+&lt;li>Interestings（面白い、興味があること）&lt;/li>
+&lt;li>Helps（困っていること、手伝って欲しいこと）&lt;/li>
+&lt;li>Events（本日のイベント）&lt;/li>
+&lt;/ul>
+&lt;h2 id="目的">
+ 目的
+ &lt;a class="anchor" href="#%e7%9b%ae%e7%9a%84">#&lt;/a>
+&lt;/h2>
+&lt;p>同じ職場で働くメンバーと一緒に日々の仕事のリズムを作ります。
+また、チームを超えたコミュニケーションの場を提供します。&lt;/p></description></item><item><title>単一責任の原則(SRP)</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/</guid><description>&lt;h1 id="単一責任の原則the-single-responsibility-principle">
+ 単一責任の原則(The Single Responsibility Principle)
+ &lt;a class="anchor" href="#%e5%8d%98%e4%b8%80%e8%b2%ac%e4%bb%bb%e3%81%ae%e5%8e%9f%e5%89%87the-single-responsibility-principle">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="単一責任の原則srpとはなにか">
+ 単一責任の原則(SRP)とはなにか？
+ &lt;a class="anchor" href="#%e5%8d%98%e4%b8%80%e8%b2%ac%e4%bb%bb%e3%81%ae%e5%8e%9f%e5%89%87srp%e3%81%a8%e3%81%af%e3%81%aa%e3%81%ab%e3%81%8b">#&lt;/a>
+&lt;/h2>
+&lt;p>単一責任の原則(SRP)とは&lt;strong>クラスを変更する理由は1つ以上存在してはならない&lt;/strong>という原則です。&lt;/p></description></item><item><title>2日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/</guid><description>&lt;h1 id="2日目">
+ 2日目
+ &lt;a class="anchor" href="#2%e6%97%a5%e7%9b%ae">#&lt;/a>
+&lt;/h1>
+&lt;p>2日目はClientがServerに対してHTTPリクエストを実行するところ、そして、Serverの初期設定をして簡単なAPIを作って見るところをやってみましょう。
+ここからだいぶ難しくなると思いますが、頑張っていきましょう。&lt;/p></description></item><item><title>CI/CD</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/cicd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/cicd/</guid><description>&lt;h1 id="cicd">
+ CI/CD
+ &lt;a class="anchor" href="#cicd">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>CI/CDとは継続的インテグレーション（CI）と継続的デリバリー（CD）を組み合わせたプラクティスです。ビルド/テスト/デプロイを自動化することで、繰り返し実行が可能となります。&lt;/p></description></item><item><title>Event Storming</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/eventstorming/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/eventstorming/</guid><description>&lt;h1 id="event-storming">
+ Event Storming
+ &lt;a class="anchor" href="#event-storming">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>Event Stormingは、既存システムをいくつかの小さい単位のサービスに分解したいときに使うアクティビティの一つです。
+既存システムの「現状」と「あるべき姿」を可視化し、チーム全員が共通の認識を持つためのアクティビティです。
+Swiftメソッド全体の位置付けとしては1つ目のアクティビティとなっています。&lt;br>
+Event Stormingの大まかな流れは以下の通りです。&lt;/p></description></item><item><title>MVP</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/</guid><description>&lt;h1 id="mvp">
+ MVP
+ &lt;a class="anchor" href="#mvp">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>MVP(Minimum Viable Product)とは、ユーザーに価値を提供できる最小限のプロダクトのことです。
+仮説検証のプロセスで利用します。&lt;/p>
+&lt;ul>
+&lt;li>最小限（Minimum） : 最小限の時間・投資で作る&lt;/li>
+&lt;li>実行可能（Viable） : ユーザーに価値を示し仮説を検証するのに十分な体験を提供する&lt;/li>
+&lt;/ul>
+&lt;h2 id="なぜmvp">
+ なぜMVP?
+ &lt;a class="anchor" href="#%e3%81%aa%e3%81%9cmvp">#&lt;/a>
+&lt;/h2>
+&lt;p>MVPは最小限のコストで最大の仮説を検証し、最大のリスクを最小化するのに利用されます。&lt;br>
+早期にプロダクトをユーザーに利用してもらいフィードバックを得ることで、プロダクトを作り続けるべきか、ビジネスとして継続するべきか、を判断するのに役立ちます。
+最小のコストで仮説を検証することで、仮説に誤りがありビジネスを継続しないという判断になった場合でも失うことは少なくて済みます。&lt;br>
+また、仮説検証のプロセスの一部であったとしても、早期にプロダクトをユーザーに提供することは、認知度をあげて競合に対して優位になります。&lt;/p></description></item><item><title>OKRs</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/okrs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/practices/okrs/</guid><description>&lt;h1 id="okrs">
+ OKRs
+ &lt;a class="anchor" href="#okrs">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;img src="Okr.jpg" alt="OKR" />&lt;/p>
+&lt;p>OKRs（Objectives and Key Results）とは、目標管理の手法のひとつです。&lt;br>
+チームの目標（Objectives）と、目標達成のために必要な成果（Key Results）を結び付け、こまめにOKRsの進捗確認、フィードバックを行います。&lt;/p></description></item><item><title>アジャイル開発12の原則</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/</guid><description>&lt;h1 id="アジャイル開発12の原則">
+ アジャイル開発12の原則
+ &lt;a class="anchor" href="#%e3%82%a2%e3%82%b8%e3%83%a3%e3%82%a4%e3%83%ab%e9%96%8b%e7%99%ba12%e3%81%ae%e5%8e%9f%e5%89%87">#&lt;/a>
+&lt;/h1>
+&lt;p>&lt;a href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/">アジャイルソフトウェア開発宣言&lt;/a> で宣言されていた内容は、
+アジャイル開発をする上で大事なマインドセットを述べたものでした。
+ではその背景にもなる &lt;a href="https://agilemanifesto.org/iso/ja/principles.html">アジャイル開発12の原則&lt;/a> を見ていきましょう。先のアジャイルソフトウェア開発宣言のページにリンクがあります。&lt;/p></description></item><item><title>ウォーミングアップ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/</guid><description>&lt;h1 id="ウォーミングアップ">
+ ウォーミングアップ
+ &lt;a class="anchor" href="#%e3%82%a6%e3%82%a9%e3%83%bc%e3%83%9f%e3%83%b3%e3%82%b0%e3%82%a2%e3%83%83%e3%83%97">#&lt;/a>
+&lt;/h1>
+&lt;p>ここではテスト駆動開発の手法で極々簡単なコンソールアプリケーションを作ってみようと思います。
+開発言語はここではJavaを使用しますが、
+これから挙げる例題はいずれも有名な問題を題材に取り上げますので、お好きな言語で挑戦されてみてください。&lt;/p></description></item><item><title>エクストリームプログラミングのプラクティス</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/</guid><description>&lt;h1 id="エクストリームプログラミングのプラクティス">
+ エクストリームプログラミングのプラクティス
+ &lt;a class="anchor" href="#%e3%82%a8%e3%82%af%e3%82%b9%e3%83%88%e3%83%aa%e3%83%bc%e3%83%a0%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%9f%e3%83%b3%e3%82%b0%e3%81%ae%e3%83%97%e3%83%a9%e3%82%af%e3%83%86%e3%82%a3%e3%82%b9">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="チームメンバーとしての顧客">
+ チームメンバーとしての顧客
+ &lt;a class="anchor" href="#%e3%83%81%e3%83%bc%e3%83%a0%e3%83%a1%e3%83%b3%e3%83%90%e3%83%bc%e3%81%a8%e3%81%97%e3%81%a6%e3%81%ae%e9%a1%a7%e5%ae%a2">#&lt;/a>
+&lt;/h2>
+&lt;p>顧客と開発者は同じ空間で机を突き合わせて、親密に仕事をするのが望ましいです。
+同じ空間で仕事をすることで、お互いに相手の問題を把握することができ、その問題の解決に向けて一緒に取り組めるからです。
+これは文字通り物理的な距離の話をしていて、顧客と開発者が同じ部屋で作業するのが最も理想的です。
+距離が離れれば離れるほど、顧客をほんとうの意味でのチームに組み込むのが困難になります。&lt;/p></description></item><item><title>オープン・クローズドの原則(OCP)</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/</guid><description>&lt;h1 id="オープンクローズドの原則the-open-closed-principle">
+ オープン・クローズドの原則(The Open Closed Principle)
+ &lt;a class="anchor" href="#%e3%82%aa%e3%83%bc%e3%83%97%e3%83%b3%e3%82%af%e3%83%ad%e3%83%bc%e3%82%ba%e3%83%89%e3%81%ae%e5%8e%9f%e5%89%87the-open-closed-principle">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="オープンクローズドの原則ocpとはなにか">
+ オープン・クローズドの原則(OCP)とはなにか？
+ &lt;a class="anchor" href="#%e3%82%aa%e3%83%bc%e3%83%97%e3%83%b3%e3%82%af%e3%83%ad%e3%83%bc%e3%82%ba%e3%83%89%e3%81%ae%e5%8e%9f%e5%89%87ocp%e3%81%a8%e3%81%af%e3%81%aa%e3%81%ab%e3%81%8b">#&lt;/a>
+&lt;/h2>
+&lt;p>オープン・クローズドの原則(OCP)とは
+&lt;strong>ソフトウェアの構成要素(クラス、モジュール、関数など)は拡張に対して開いて(オープン)いて、修正に対しては閉じて(クローズド)いなければならない&lt;/strong>
+という原則です。&lt;/p></description></item><item><title>シナリオ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/scenario/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/scenario/</guid><description>&lt;h1 id="シナリオ">
+ シナリオ
+ &lt;a class="anchor" href="#%e3%82%b7%e3%83%8a%e3%83%aa%e3%82%aa">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>シナリオは、ターゲットユーザーがどのような流れでソフトウェアを利用するかを時系列で具体的に記入したものです。&lt;/p>
+&lt;p>&lt;img src="scenario_example.jpg" alt="scenario" />&lt;/p>
+&lt;p>シナリオは、以下のように作成します。&lt;/p></description></item><item><title>チームスタンドアップ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamstandup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamstandup/</guid><description>&lt;h1 id="チームスタンドアップ">
+ チームスタンドアップ
+ &lt;a class="anchor" href="#%e3%83%81%e3%83%bc%e3%83%a0%e3%82%b9%e3%82%bf%e3%83%b3%e3%83%89%e3%82%a2%e3%83%83%e3%83%97">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>チームのメンバー全員で立ちながら行うミーティングです。
+以下の内容を共有し、タスクの確認を行います。&lt;/p>
+&lt;ul>
+&lt;li>昨日やったこと&lt;/li>
+&lt;li>今日やること&lt;/li>
+&lt;li>学び・困っていること&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="dailystand.jpg" alt="dailystand" />
+&lt;img src="task_confirm.png" alt="task" />&lt;/p></description></item><item><title>バランスチーム</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/balancedteam/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/balancedteam/</guid><description>&lt;h1 id="バランスチーム">
+ バランスチーム
+ &lt;a class="anchor" href="#%e3%83%90%e3%83%a9%e3%83%b3%e3%82%b9%e3%83%81%e3%83%bc%e3%83%a0">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="3つの役割">
+ 3つの役割
+ &lt;a class="anchor" href="#3%e3%81%a4%e3%81%ae%e5%bd%b9%e5%89%b2">#&lt;/a>
+&lt;/h2>
+&lt;p>バランスチームでは、ビジネス価値・ユーザー価値・技術的な実現性のそれぞれに責任を持つ3つの役割（Product Manager/Designer/Developer）でチームを形成します。これによって、スピーディーかつ正しい判断が可能となり、プロダクトを成功に導きます。
+プロダクトの成功には、いずれの視点も不可欠であり、それぞれが情報を提供し合い、各視点の考えを尊重することが重要です。
+このために、チームは小規模の体制とし、同じ場所に集まって作業を行い、お互いにフラットな関係として常に自発的にコミュニケーションを取り合います。&lt;/p></description></item><item><title>ロール</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/roles/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/roles/</guid><description>&lt;h1 id="ロール">
+ ロール
+ &lt;a class="anchor" href="#%e3%83%ad%e3%83%bc%e3%83%ab">#&lt;/a>
+&lt;/h1>
+&lt;p>スクラムではアジャイル開発チームにおける役割を3つ規定しています。&lt;/p>
+&lt;ul>
+&lt;li>プロダクトオーナー&lt;/li>
+&lt;li>プロダクト開発チーム&lt;/li>
+&lt;li>スクラムマスター&lt;/li>
+&lt;/ul>
+&lt;p>それぞれについて見ていきましょう。&lt;/p></description></item><item><title>体制・役割</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/organization/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/organization/</guid><description>&lt;h1 id="体制役割">
+ 体制・役割
+ &lt;a class="anchor" href="#%e4%bd%93%e5%88%b6%e5%bd%b9%e5%89%b2">#&lt;/a>
+&lt;/h1>
+&lt;p>&lt;img src="leanstartup-role.jpg" alt="role" />&lt;/p>
+&lt;h2 id="coreチーム">
+ Coreチーム
+ &lt;a class="anchor" href="#core%e3%83%81%e3%83%bc%e3%83%a0">#&lt;/a>
+&lt;/h2>
+&lt;h3 id="product-managers">
+ Product Managers
+ &lt;a class="anchor" href="#product-managers">#&lt;/a>
+&lt;/h3>
+&lt;p>Product Managers(PdMs)は正しいものを作るためにビジネス価値、ユーザー価値、技術的な難易度を踏まえて機能の優先度付けを行い価値あるプロダクトを提供することに責任を持ちます。
+ユーザーストーリーを作成してチーム内で正しく情報共有を行い、開発完了後には受け入れ確認としてプロダクトが意図した通りに価値を提供するものになっていることを確認します。
+その他にも、PdMsはCoreチーム内のコミュニケーションに加えて、CLミーティングやInception/Outceptionを開催してPMOや他チームとの間の情報連携を行います。
+様々な情報を把握していることから、会議の全体進行などはPdMsが中心となることが多くなります（全体を把握しているメンバーが進行するのがスムーズ）。&lt;/p></description></item><item><title>体制・役割</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/organization/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/organization/</guid><description>&lt;h1 id="体制役割">
+ 体制・役割
+ &lt;a class="anchor" href="#%e4%bd%93%e5%88%b6%e5%bd%b9%e5%89%b2">#&lt;/a>
+&lt;/h1>
+&lt;p>&lt;img src="modernization-role.jpg" alt="role" />&lt;/p>
+&lt;h2 id="coreチーム">
+ Coreチーム
+ &lt;a class="anchor" href="#core%e3%83%81%e3%83%bc%e3%83%a0">#&lt;/a>
+&lt;/h2>
+&lt;h3 id="product-managers">
+ Product Managers
+ &lt;a class="anchor" href="#product-managers">#&lt;/a>
+&lt;/h3>
+&lt;p>Product Managers(PdMs)は正しいものを作るためにビジネス価値、ユーザー価値、技術的な難易度を踏まえて機能の優先度付けを行い価値あるプロダクトを提供することに責任を持ちます。
+ユーザーストーリーを作成してチーム内で正しく情報共有を行い、開発完了後には受け入れ確認としてプロダクトが意図した通りに価値を提供するものになっていることを確認します。
+その他にも、PdMsはCoreチーム内のコミュニケーションに加えて、CLミーティングやInception/Outceptionを開催してCoreチームとStakeholders/Informedとの間の情報連携を行います。
+様々な情報を把握していることから、会議の全体進行などはPdMsが中心となることが多くなります（全体を把握しているメンバーが進行するのがスムーズ）。
+また、Designerが参画しない場合には、モックアップを作るなどしてDevsがデザインストーリーを実装するために、必要な情報を提示する必要があります。&lt;/p></description></item><item><title>心理的安全性</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/psychologicalsafety/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/psychologicalsafety/</guid><description>&lt;h1 id="心理的安全性">
+ 心理的安全性
+ &lt;a class="anchor" href="#%e5%bf%83%e7%90%86%e7%9a%84%e5%ae%89%e5%85%a8%e6%80%a7">#&lt;/a>
+&lt;/h1>
+&lt;p>プロジェクトの実行にあたって「心理的安全性」を確保することは非常に重要です。
+「心理的安全性」とは、チームのメンバーがアイデア、質問、懸念、ミスなどを発言しても、拒絶されたり、罰せられたりせず、安心して発言・行動できる状念を言います。
+「心理的安全性」が高い状態を維持できれば、以下のようなメリットが得られます。&lt;/p></description></item><item><title>3日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/</guid><description>&lt;h1 id="3日目">
+ 3日目
+ &lt;a class="anchor" href="#3%e6%97%a5%e7%9b%ae">#&lt;/a>
+&lt;/h1>
+&lt;p>2日目まででタスク一覧をサーバに対して要求して、レスポンスに応じてタスク一覧を画面に描画するフロントエンドができました。
+ただ、現時点でリクエストに対して応答するバックエンドがまだありませんので、これを作っていきましょう。&lt;/p></description></item><item><title>Boris</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/boris/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/boris/</guid><description>&lt;h1 id="boris">
+ Boris
+ &lt;a class="anchor" href="#boris">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>Borisは既存システムをいくつかの小さい単位のサービスに分解したいときに使うアクティビティの一つです。サービス候補（Event Stormingのアウトプット）間の繋がり（通信の仕方やデータ）をチームで洗い出し、ディスカッションすることで、サービス間の関係に対してチームが共通の認識を持つことができます。Swiftメソッド全体の位置付けとしては2つ目のアクティビティとなっています。&lt;/p></description></item><item><title>Pre-IPM</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/preipm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/preipm/</guid><description>&lt;h1 id="pre-ipm">
+ Pre-IPM
+ &lt;a class="anchor" href="#pre-ipm">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>Pre-IPMは、IPM(Iteration Planning Meeting)に向けて、ドラフト版のユーザーストーリーをDeveloper観点で確認するミーティングです。
+Product Manager、Designer、Developer1ペアで実施します。&lt;/p></description></item><item><title>XPの価値観</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/xp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/xp/</guid><description>&lt;h1 id="xpの価値観">
+ XPの価値観
+ &lt;a class="anchor" href="#xp%e3%81%ae%e4%be%a1%e5%80%a4%e8%a6%b3">#&lt;/a>
+&lt;/h1>
+&lt;p>XPは5つの価値観に基づいています。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>コミュニケーション&lt;/p>
+&lt;p>プロジェクトの各段階で、チームの全員が共同で作業を行います。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>シンプル&lt;/p>
+&lt;p>開発者は、製品に価値をもたらすシンプルなコードを書くことで、時間と労力を節約するよう努めます。&lt;/p></description></item><item><title>プロダクトビジョン / バリュープロポジション</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/productvision/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/leanstartup/productvision/</guid><description>&lt;h1 id="プロダクトビジョン--バリュープロポジション">
+ プロダクトビジョン / バリュープロポジション
+ &lt;a class="anchor" href="#%e3%83%97%e3%83%ad%e3%83%80%e3%82%af%e3%83%88%e3%83%93%e3%82%b8%e3%83%a7%e3%83%b3--%e3%83%90%e3%83%aa%e3%83%a5%e3%83%bc%e3%83%97%e3%83%ad%e3%83%9d%e3%82%b8%e3%82%b7%e3%83%a7%e3%83%b3">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>プロダクトビジョンは、プロダクトを通じて実現しようとしている世界を定義します。
+プロジェクトのメンバーは常にこのビジョンを意識し、日々の判断を下していきます。&lt;/p></description></item><item><title>ペアプログラミング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/pairprogramming/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/pairprogramming/</guid><description>&lt;h1 id="ペアプログラミング">
+ ペアプログラミング
+ &lt;a class="anchor" href="#%e3%83%9a%e3%82%a2%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%9f%e3%83%b3%e3%82%b0">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>ペアプログラミングは、開発者がペアになってプログラミングを行うという手法です。
+ドライバーとナビゲーターの二人一組でコードを書きます。
+ドライバーはコードを書くのに集中し、ナビゲーターは設計を頭に浮かべたりしてドライバーの進む道を提示したり助言したりします。&lt;/p></description></item><item><title>ボウリングゲーム</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/</guid><description>&lt;h1 id="ボウリングゲーム">
+ ボウリングゲーム
+ &lt;a class="anchor" href="#%e3%83%9c%e3%82%a6%e3%83%aa%e3%83%b3%e3%82%b0%e3%82%b2%e3%83%bc%e3%83%a0">#&lt;/a>
+&lt;/h1>
+&lt;p>最初の一歩ではウォーミングアップとしてFizzBuzzを書いてみました。
+ここでは少しだけ難易度を上げたより実践的な例としてボウリングのスコア計算のプログラムを書いてみましょう。&lt;/p></description></item><item><title>まとめ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/</guid><description>&lt;h1 id="まとめ">
+ まとめ
+ &lt;a class="anchor" href="#%e3%81%be%e3%81%a8%e3%82%81">#&lt;/a>
+&lt;/h1>
+&lt;p>アジャイルソフトウェア開発宣言とアジャイル開発12の原則まで読んできました。
+実はここまで具体的な開発手法は一つもでてきていません。すべてマインドセットの話になっています。&lt;/p></description></item><item><title>まとめ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/</guid><description>&lt;h1 id="まとめ">
+ まとめ
+ &lt;a class="anchor" href="#%e3%81%be%e3%81%a8%e3%82%81">#&lt;/a>
+&lt;/h1>
+&lt;p>エクストリームプログラミング(XP)はシンプルかつ具体的な集合から構築されているアジャイル開発プロセスです。
+そして、この開発プロセスは多くのチームで使われており、十分な成果を上げています。&lt;/p></description></item><item><title>ユーザーストーリーマッピング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstorymapping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstorymapping/</guid><description>&lt;h1 id="ユーザーストーリーマッピング">
+ ユーザーストーリーマッピング
+ &lt;a class="anchor" href="#%e3%83%a6%e3%83%bc%e3%82%b6%e3%83%bc%e3%82%b9%e3%83%88%e3%83%bc%e3%83%aa%e3%83%bc%e3%83%9e%e3%83%83%e3%83%94%e3%83%b3%e3%82%b0">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>ユーザーストーリーマッピングでは、ユーザーストーリーを抽出しながら、ユーザーのアクション（横軸）、優先度（縦軸）によってマッピングを行い、ユーザーストーリーを整理します。&lt;/p></description></item><item><title>リサーチ計画立案</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchplanning/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchplanning/</guid><description>&lt;h1 id="リサーチ計画立案">
+ リサーチ計画立案
+ &lt;a class="anchor" href="#%e3%83%aa%e3%82%b5%e3%83%bc%e3%83%81%e8%a8%88%e7%94%bb%e7%ab%8b%e6%a1%88">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>リサーチ計画立案では、次回のユーザーリサーチで検証すべき仮説と、その検証方法について計画します。&lt;/p>
+&lt;p>以下の手順で準備を進めます。&lt;/p></description></item><item><title>リスコフの置換原則(LSP)</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/</guid><description>&lt;h1 id="リスコフの置換原則the-liskov-substitution-principle">
+ リスコフの置換原則(The Liskov Substitution Principle)
+ &lt;a class="anchor" href="#%e3%83%aa%e3%82%b9%e3%82%b3%e3%83%95%e3%81%ae%e7%bd%ae%e6%8f%9b%e5%8e%9f%e5%89%87the-liskov-substitution-principle">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="リスコフの置換原則lspとはなにか">
+ リスコフの置換原則(LSP)とはなにか？
+ &lt;a class="anchor" href="#%e3%83%aa%e3%82%b9%e3%82%b3%e3%83%95%e3%81%ae%e7%bd%ae%e6%8f%9b%e5%8e%9f%e5%89%87lsp%e3%81%a8%e3%81%af%e3%81%aa%e3%81%ab%e3%81%8b">#&lt;/a>
+&lt;/h2>
+&lt;p>リスコフの置換原則(LSP)とは
+&lt;strong>派生型はその基本型と置換可能でなければならない&lt;/strong>
+というものです。
+この原則に従わなかったたときどういう事が起こるでしょうか？&lt;/p></description></item><item><title>成果物</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/products/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/products/</guid><description>&lt;h1 id="成果物">
+ 成果物
+ &lt;a class="anchor" href="#%e6%88%90%e6%9e%9c%e7%89%a9">#&lt;/a>
+&lt;/h1>
+&lt;p>スクラムガイドにおいてスクラムチームが作成するべき成果物は3つ規定されています。&lt;/p>
+&lt;ul>
+&lt;li>プロダクトバックログ&lt;/li>
+&lt;li>スプリントバックログ&lt;/li>
+&lt;li>インクリメント&lt;/li>
+&lt;/ul>
+&lt;p>それぞれについて見ていきましょう。&lt;/p></description></item><item><title>4日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/</guid><description>&lt;h1 id="4日目">
+ 4日目
+ &lt;a class="anchor" href="#4%e6%97%a5%e7%9b%ae">#&lt;/a>
+&lt;/h1>
+&lt;p>3日まででReactで作ったフロントエンドとSpring Bootで作ったバックエンドを連携させることができました。
+しかし、タスクを表示することができましたが、タスクを追加する機能がまだありません。
+4日目からはどんどん機能を追加してみましょう。&lt;/p></description></item><item><title>IPM</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/ipm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/ipm/</guid><description>&lt;h1 id="ipm">
+ IPM
+ &lt;a class="anchor" href="#ipm">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>IPM(Iteration Planning Meeting)は、各ユーザーストーリーの見積もりを行って次のイテレーションの計画を立てるミーティングです。
+Product Managerが進行し、Product ManagerとDesignerから提供価値の説明を行い、Developerが全員で見積もりを行います。&lt;/p></description></item><item><title>SnapE</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/snape/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/snape/</guid><description>&lt;h1 id="snape">
+ SnapE
+ &lt;a class="anchor" href="#snape">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>SnapEは既存システムをいくつかの小さい単位のサービスに分解したいときに使うアクティビティの一つです。サービス候補（Event Stormingのアウトプット）の中身（通信の仕方や所有データ、ストーリ、リスク・・等）をチームで洗い出し、ディスカッションすることで、各サービスの中身に対して、チームが共通の認識を持つことができます。Swiftメソッド全体の位置付けとしては3つ目のアクティビティとなっています。&lt;/p></description></item><item><title>イベント</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/events/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/events/</guid><description>&lt;h1 id="イベント">
+ イベント
+ &lt;a class="anchor" href="#%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88">#&lt;/a>
+&lt;/h1>
+&lt;p>&lt;img src="../process.jpg" alt="スクラムのプロセス" />
+画像出典: &lt;a href="https://www.fujitsu.com/jp/group/fst/about/resources/featurestories/about-agile-02.html">アジャイル開発とは（中編）&lt;/a>&lt;/p>
+&lt;p>ちょうど富士通の公開ページにスクラムのプロセスを解説している図があったため、これを使って説明していこうとおもいます。&lt;/p></description></item><item><title>ソロプログラミング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/soroprogramming/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/soroprogramming/</guid><description>&lt;h1 id="ソロプログラミング">
+ ソロプログラミング
+ &lt;a class="anchor" href="#%e3%82%bd%e3%83%ad%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%9f%e3%83%b3%e3%82%b0">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>ソロプログラミングは、開発者が1人でプログラミングを行うという手法です。これまで多くのSIの現場で採用されており、
+開発者は設計・開発・テストを1人で黙々と作業します。&lt;/p></description></item><item><title>チームビルディング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/teambuilding/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/teambuilding/</guid><description>&lt;h1 id="チームビルディング">
+ チームビルディング
+ &lt;a class="anchor" href="#%e3%83%81%e3%83%bc%e3%83%a0%e3%83%93%e3%83%ab%e3%83%87%e3%82%a3%e3%83%b3%e3%82%b0">#&lt;/a>
+&lt;/h1>
+&lt;p>チームビルディングは、チームの目的や目標の達成に向かって、各メンバーが主体的に能力を発揮しながら一丸となるチームを目指す取り組みです。&lt;br>
+チームビルディングによって以下の効果を得られます。&lt;/p></description></item><item><title>テストダブル</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/</guid><description>&lt;h1 id="テストダブル">
+ テストダブル
+ &lt;a class="anchor" href="#%e3%83%86%e3%82%b9%e3%83%88%e3%83%80%e3%83%96%e3%83%ab">#&lt;/a>
+&lt;/h1>
+&lt;p>テスト駆動開発の開発の流れがわかってきたところで、次にテストダブルを使用したテストについて学んでいきましょう。&lt;/p>
+&lt;h2 id="テストダブルとは">
+ テストダブルとは
+ &lt;a class="anchor" href="#%e3%83%86%e3%82%b9%e3%83%88%e3%83%80%e3%83%96%e3%83%ab%e3%81%a8%e3%81%af">#&lt;/a>
+&lt;/h2>
+&lt;p>テスト対象となるクラスやメソッドが、ほかのクラスに依存していないケースはほとんどありません。
+依存しているクラスもまた、ほかのクラスに依存しています。&lt;/p></description></item><item><title>プラクティスの取り入れ方</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/practice/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/practice/</guid><description>&lt;h1 id="プラクティスの取り入れ方">
+ プラクティスの取り入れ方
+ &lt;a class="anchor" href="#%e3%83%97%e3%83%a9%e3%82%af%e3%83%86%e3%82%a3%e3%82%b9%e3%81%ae%e5%8f%96%e3%82%8a%e5%85%a5%e3%82%8c%e6%96%b9">#&lt;/a>
+&lt;/h1>
+&lt;p>&lt;img src="PracticesPrinciplesValues.png" alt="PracticesPrinciplesValues" />&lt;/p>
+&lt;p>Practices（手法やツール）は氷山の一角に過ぎません。目に見える氷山の下にはPrinciples（原理・原則）、Values（価値観）が存在します。
+Practicesを表面的に真似て利用するのではなく、その基にあるPrinciplesやValuesを意識して学ぶ姿勢が重要になります。&lt;/p></description></item><item><title>プロトタイピング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/prototyping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/prototyping/</guid><description>&lt;h1 id="プロトタイピング">
+ プロトタイピング
+ &lt;a class="anchor" href="#%e3%83%97%e3%83%ad%e3%83%88%e3%82%bf%e3%82%a4%e3%83%94%e3%83%b3%e3%82%b0">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>プロトタイピングでは、ソフトウェアのUIデザインを行います。&lt;/p>
+&lt;p>以下のように作業しします。&lt;/p>
+&lt;ul>
+&lt;li>シナリオに沿って、画面遷移と各画面のレイアウトを検討
+&lt;ul>
+&lt;li>満たすべき要求を整理し、各自ラフスケッチを作りシェアしても良い。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>大まかな全体像ができたら、ツールでUIを制作する&lt;/li>
+&lt;li>適宜Product Manager、Developerとシェア&lt;/li>
+&lt;/ul>
+&lt;h2 id="プロトタイピングのポイント">
+ プロトタイピングのポイント
+ &lt;a class="anchor" href="#%e3%83%97%e3%83%ad%e3%83%88%e3%82%bf%e3%82%a4%e3%83%94%e3%83%b3%e3%82%b0%e3%81%ae%e3%83%9d%e3%82%a4%e3%83%b3%e3%83%88">#&lt;/a>
+&lt;/h2>
+&lt;ul>
+&lt;li>レイアウトの微調整ができていない段階でも、プロトタイプとしてリサーチすることはできる。問題ないことを確認後、開発向けに精度を高めていく形で良い&lt;/li>
+&lt;li>検証したい仮説やイテレーションのスケジュールに合わせて段階的に作る。一気に全画面を作らない&lt;/li>
+&lt;li>Developerとの連携や、軌道修正がしやすいツールで行う（Figmaを利用）&lt;/li>
+&lt;li>スタイルガイド（カラー、文字）など作っておく&lt;/li>
+&lt;li>可能な限り初めから共通部品化（Component化）し、変更に強い作りを目指す&lt;/li>
+&lt;li>UIデザインのスキルは一朝一夕につかない&lt;/li>
+&lt;/ul>
+&lt;a href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/script/" class="book-btn">スクリプト作成&lt;/a></description></item><item><title>ユーザーストーリー</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/</guid><description>&lt;h1 id="ユーザーストーリー">
+ ユーザーストーリー
+ &lt;a class="anchor" href="#%e3%83%a6%e3%83%bc%e3%82%b6%e3%83%bc%e3%82%b9%e3%83%88%e3%83%bc%e3%83%aa%e3%83%bc">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>ユーザーストーリーとはユーザーの要求（誰が、どのような目的で、何をしたいのか）を表わすものです。&lt;br>
+ユーザーストーリーでは、ユーザーの要求を以下の形式で記載します。&lt;/p></description></item><item><title>依存性逆転の原則(DIP)</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/</guid><description>&lt;h1 id="依存性逆転の原則the-dependency-inversion-principle">
+ 依存性逆転の原則(The Dependency Inversion Principle)
+ &lt;a class="anchor" href="#%e4%be%9d%e5%ad%98%e6%80%a7%e9%80%86%e8%bb%a2%e3%81%ae%e5%8e%9f%e5%89%87the-dependency-inversion-principle">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="依存性逆転の原則とは">
+ 依存性逆転の原則とは
+ &lt;a class="anchor" href="#%e4%be%9d%e5%ad%98%e6%80%a7%e9%80%86%e8%bb%a2%e3%81%ae%e5%8e%9f%e5%89%87%e3%81%a8%e3%81%af">#&lt;/a>
+&lt;/h2>
+&lt;p>依存性逆転の原則(DIP)とは&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>上位のモジュールは下位のモジュールに依存してはいけない。どちらのモジュールも「抽象」に依存すべきである。&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>「抽象」は実装の詳細に依存してはいけない。実装の詳細が「抽象」に依存すべきである。&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;p>というものです。&lt;/p></description></item><item><title>2×2</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/</guid><description>&lt;h1 id="22">
+ 2×2
+ &lt;a class="anchor" href="#22">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>2×2(two by two)とは、優先順位を徹底して意思決定を行うための手法です。
+意思決定をするための2つの観点を縦軸と横軸に設定してそれぞれの観点毎に順序付けをすることで、四象限の右上のものが「今やるべきもの」、左下のものが「やらなくて良いもの」、と優先度を決めることができます。&lt;/p></description></item><item><title>5日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/</guid><description>&lt;h1 id="5日目">
+ 5日目
+ &lt;a class="anchor" href="#5%e6%97%a5%e7%9b%ae">#&lt;/a>
+&lt;/h1>
+&lt;p>ではTodoを作成するバックエンドAPIを作成していきましょう。&lt;/p>
+&lt;h2 id="タスク作成バックエンドapi">
+ タスク作成バックエンドAPI
+ &lt;a class="anchor" href="#%e3%82%bf%e3%82%b9%e3%82%af%e4%bd%9c%e6%88%90%e3%83%90%e3%83%83%e3%82%af%e3%82%a8%e3%83%b3%e3%83%89api">#&lt;/a>
+&lt;/h2>
+&lt;h3 id="テスト">
+ テスト
+ &lt;a class="anchor" href="#%e3%83%86%e3%82%b9%e3%83%88">#&lt;/a>
+&lt;/h3>
+&lt;p>まず、サーバのテストを書いてみましょう。
+&lt;code>POST /todos&lt;/code>に対してJSONをボディにセットして、リクエストしたときの、 レスポンスコードとレスポンスデータを確認するテストを書いてみます。&lt;/p></description></item><item><title>CLミーティング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/cl/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/cl/</guid><description>&lt;h1 id="clミーティング">
+ CLミーティング
+ &lt;a class="anchor" href="#cl%e3%83%9f%e3%83%bc%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>CLミーティングは、CL(Client Liaison)/PMOとの情報共有の場です。&lt;/p>
+&lt;p>&lt;img src="PMO.jpg" alt="PMO" />&lt;/p>
+&lt;h2 id="目的">
+ 目的
+ &lt;a class="anchor" href="#%e7%9b%ae%e7%9a%84">#&lt;/a>
+&lt;/h2>
+&lt;p>定期的に情報を共有して、プロジェクト成功に向けた協力体制を作ります。&lt;/p></description></item><item><title>E2Eテスト</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/</guid><description>&lt;h1 id="e2eテスト">
+ E2Eテスト
+ &lt;a class="anchor" href="#e2e%e3%83%86%e3%82%b9%e3%83%88">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="e2eテストとは">
+ E2Eテストとは
+ &lt;a class="anchor" href="#e2e%e3%83%86%e3%82%b9%e3%83%88%e3%81%a8%e3%81%af">#&lt;/a>
+&lt;/h2>
+&lt;p>ここまでソフトウェアの単体テストやインテグレーションテストのやり方を見てきました。
+しかし、ServerやClientがきちんと連携してシステムが正しく振る舞うことができるかどうかはまだわかりません。
+そこで実施するのがE2E(End to End)テストというシステム全体の通しテストです。受け入れテストと呼ばれる場合もあります。&lt;/p></description></item><item><title>Slices</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/slices/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/slices/</guid><description>&lt;h1 id="slices">
+ Slices
+ &lt;a class="anchor" href="#slices">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>Slicesは、どこから開発を始めるか決めるアクティビティです。Swiftメソッド全体の位置付けとしては4つ目のアクティビティとなっています。&lt;br>
+Slicesの大まかな流れは以下の通りです。&lt;/p></description></item><item><title>インターフェース分離の原則(ISP)</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/</guid><description>&lt;h1 id="インターフェース分離の原則the-interface-segregation-principle">
+ インターフェース分離の原則(The Interface Segregation Principle)
+ &lt;a class="anchor" href="#%e3%82%a4%e3%83%b3%e3%82%bf%e3%83%bc%e3%83%95%e3%82%a7%e3%83%bc%e3%82%b9%e5%88%86%e9%9b%a2%e3%81%ae%e5%8e%9f%e5%89%87the-interface-segregation-principle">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="インタフェース分離の原則とは">
+ インタフェース分離の原則とは
+ &lt;a class="anchor" href="#%e3%82%a4%e3%83%b3%e3%82%bf%e3%83%95%e3%82%a7%e3%83%bc%e3%82%b9%e5%88%86%e9%9b%a2%e3%81%ae%e5%8e%9f%e5%89%87%e3%81%a8%e3%81%af">#&lt;/a>
+&lt;/h2>
+&lt;p>インターフェス分離の原則(ISP)とは &lt;strong>クライアントにクライアントが利用しないメソッドへの依存を強制してはいけない&lt;/strong> という原則です。
+この原則は「太った」インタフェースをうまくシェイプアップしてくれるものです。
+「太った」インタフェースを持つクラスは多数のインタフェースを抱え込んでおり、部分的にしかインタフェース同士が強い関連性を持っていません。
+このことは、視点を変えると強い関連性があるインタフェース同士をまとめてグループ化できるということです。
+グループ化されたメンバ関数は、それぞれ異なるクライアントにサービスを提供することになります。
+なぜなら、クライアントによって必要なメンバ関数は異なるからです。&lt;/p></description></item><item><title>スクリプト作成</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/script/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/script/</guid><description>&lt;h1 id="スクリプト作成">
+ スクリプト作成
+ &lt;a class="anchor" href="#%e3%82%b9%e3%82%af%e3%83%aa%e3%83%97%e3%83%88%e4%bd%9c%e6%88%90">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>スクリプト作成では、リサーチ当日の流れや確認事項を整理したトークスクリプトを作成します。&lt;/p>
+&lt;p>以下の内容を記載します。&lt;/p>
+&lt;ul>
+&lt;li>ターゲットユーザー&lt;/li>
+&lt;li>今回のリサーチの目的、検証したい仮説
+&lt;ul>
+&lt;li>Generative&lt;/li>
+&lt;li>Evaluative&lt;/li>
+&lt;li>Usability&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>準備物&lt;/li>
+&lt;li>スクリプトそのもの
+&lt;ul>
+&lt;li>インタビュアーの発言&lt;/li>
+&lt;li>依頼するタスク/確認する仮説&lt;/li>
+&lt;li>確認事項&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="スクリプト作成のポイント">
+ スクリプト作成のポイント
+ &lt;a class="anchor" href="#%e3%82%b9%e3%82%af%e3%83%aa%e3%83%97%e3%83%88%e4%bd%9c%e6%88%90%e3%81%ae%e3%83%9d%e3%82%a4%e3%83%b3%e3%83%88">#&lt;/a>
+&lt;/h2>
+&lt;ul>
+&lt;li>必ず事前のリハーサルをする
+&lt;ul>
+&lt;li>誰かにインタビュイーをしてもらう&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>形式はこだわらず、インタビュアーが話しやすいように調整する&lt;/li>
+&lt;/ul>
+&lt;a href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchaction/" class="book-btn">リサーチ実施&lt;/a></description></item><item><title>まとめ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/conclude/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/scrum/conclude/</guid><description>&lt;h1 id="まとめ">
+ まとめ
+ &lt;a class="anchor" href="#%e3%81%be%e3%81%a8%e3%82%81">#&lt;/a>
+&lt;/h1>
+&lt;p>ここまでスクラムのロール、スクラムチームが作成すべき成果物、そしてスクラムチームの開発の流れを見てきました。
+ここで説明した内容をプラダクトオーナーやプロダクト開発チーム全員が理解している事が大事です。&lt;/p></description></item><item><title>リモートワーク</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/remotework/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/remotework/</guid><description>&lt;h1 id="リモートワーク">
+ リモートワーク
+ &lt;a class="anchor" href="#%e3%83%aa%e3%83%a2%e3%83%bc%e3%83%88%e3%83%af%e3%83%bc%e3%82%af">#&lt;/a>
+&lt;/h1>
+&lt;p>リモートワークではコミュニケーションの主な手法はオンラインになります。
+オンラインでのコミュニケーションでは顔を合わせないため、
+メンバー間での心理的距離が広がり雑談へのハードルが上がります。
+このため、円滑にコミュニケーションを取り、
+心理的安全性の高いチームを作り上げるためには、以下のような対応が必要です。&lt;/p></description></item><item><title>6日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/</guid><description>&lt;h1 id="6日目">
+ 6日目
+ &lt;a class="anchor" href="#6%e6%97%a5%e7%9b%ae">#&lt;/a>
+&lt;/h1>
+&lt;p>クライアントとサーバを連携させてタスクを作成することができるようになったので、シナリオテストを作成していきましょう。&lt;/p>
+&lt;h2 id="e2eテストの環境構築">
+ e2eテストの環境構築
+ &lt;a class="anchor" href="#e2e%e3%83%86%e3%82%b9%e3%83%88%e3%81%ae%e7%92%b0%e5%a2%83%e6%a7%8b%e7%af%89">#&lt;/a>
+&lt;/h2>
+&lt;p>まずe2eテスト用の環境を作成していきましょう。&lt;/p></description></item><item><title>Tech Choice</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/techchoice/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/techchoice/</guid><description>&lt;h1 id="tech-choice">
+ Tech Choice
+ &lt;a class="anchor" href="#tech-choice">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>Tech Choiceは、開発に着手するにあたってチームで話し合ってどの技術を使うか決めるアクティビティです。Swiftメソッド全体の位置付けとしては5つ目のアクティビティとなっています。Slicesで開発着手するシナリオの優先順位を決めた後に実施します。&lt;/p></description></item><item><title>リサーチ実施</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchaction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchaction/</guid><description>&lt;h1 id="リサーチ実施">
+ リサーチ実施
+ &lt;a class="anchor" href="#%e3%83%aa%e3%82%b5%e3%83%bc%e3%83%81%e5%ae%9f%e6%96%bd">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>リサーチでは、仮説を検証するための情報を得るため、ユーザーへのインタビューや、ユーザーテストなどを行います。&lt;/p>
+&lt;p>以下の作業を実施します。&lt;/p></description></item><item><title>レトロスペクティブ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/retro/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/retro/</guid><description>&lt;h1 id="レトロスペクティブ">
+ レトロスペクティブ
+ &lt;a class="anchor" href="#%e3%83%ac%e3%83%88%e3%83%ad%e3%82%b9%e3%83%9a%e3%82%af%e3%83%86%e3%82%a3%e3%83%96">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>レトロスペクティブ（レトロ）は、チームの活動の振り返りを行う活動です。
+イテレーションでよかったこと、よくなかった点を遠慮なく出し合い、改善に向けたアクションを決めます。
+お酒を飲みながらリラックスした状態で実施します。&lt;/p></description></item><item><title>シンセサイズ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/synthesize/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/synthesize/</guid><description>&lt;h1 id="シンセサイズ">
+ シンセサイズ
+ &lt;a class="anchor" href="#%e3%82%b7%e3%83%b3%e3%82%bb%e3%82%b5%e3%82%a4%e3%82%ba">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>シンセサイズでは、リサーチの結果から仮説は検証されたか、新たな発見があったかなどをまとめ、学びとして蓄積します。&lt;/p>
+&lt;p>シンセサイズでは、以下を実施します。&lt;/p></description></item><item><title>営業確認会議</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/salesmeeting/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/salesmeeting/</guid><description>&lt;h1 id="営業確認会議">
+ 営業確認会議
+ &lt;a class="anchor" href="#%e5%96%b6%e6%a5%ad%e7%a2%ba%e8%aa%8d%e4%bc%9a%e8%ad%b0">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>営業確認会議は、各エンドユーザーの窓口になっている営業チームやその他の担当者との情報共有の場です。
+また、必要に応じて営業チームへのリサーチの協力などの依頼を行います。&lt;/p></description></item><item><title>Internal Sync</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/internalsync/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/internalsync/</guid><description>&lt;h1 id="internal-sync">
+ Internal Sync
+ &lt;a class="anchor" href="#internal-sync">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>Internal Syncは、社内メンバーのみで集まって実施するミーティングです。
+その日の作業の学びの共有や不明点の解消をしたり、今後の方針・進め方について相談したりします。&lt;/p></description></item><item><title>おわりに</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/</guid><description>&lt;h1 id="おわりに">
+ おわりに
+ &lt;a class="anchor" href="#%e3%81%8a%e3%82%8f%e3%82%8a%e3%81%ab">#&lt;/a>
+&lt;/h1>
+&lt;p>まず、あなたは本書を最後まで読み切りました！お疲れさまです！
+あなたはアジャイル開発者への第一歩を踏み出しました。&lt;/p>
+&lt;p>「本書を理解したらアジャイル開発者なのでは？」と思われたかもしれません。
+しかし、残念ながらそうではなく、本書はアジャイル開発者への第一歩に過ぎません。
+また、特定の研修やプログラムを受けたらアジャイル開発者になるかというとそういうものでありません。&lt;/p></description></item><item><title>Risks &amp; Mitigations</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/riskmitigations/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/riskmitigations/</guid><description>&lt;h1 id="risks--mitigations">
+ Risks &amp;amp; Mitigations
+ &lt;a class="anchor" href="#risks--mitigations">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>チームの目標を達成するためにどのようなリスクがあるかを挙げて、そのリスクを軽減するための対策を検討します。
+一人ひとりの思い込み（Assumption）を可視化し、インパクトやチームの学習状況などから優先度付けを行って対策をとります。&lt;/p></description></item><item><title>推奨書籍</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/</guid><description>&lt;h1 id="推奨書籍">
+ 推奨書籍
+ &lt;a class="anchor" href="#%e6%8e%a8%e5%a5%a8%e6%9b%b8%e7%b1%8d">#&lt;/a>
+&lt;/h1>
+&lt;p>ここでは特定の言語、アーキテクチャに依存しないものを推挙しています。&lt;/p>
+&lt;h2 id="リーダブルコード">
+ リーダブルコード
+ &lt;a class="anchor" href="#%e3%83%aa%e3%83%bc%e3%83%80%e3%83%96%e3%83%ab%e3%82%b3%e3%83%bc%e3%83%89">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;a href="https://www.amazon.co.jp/dp/4873115655/">https://www.amazon.co.jp/dp/4873115655/&lt;/a>&lt;/p>
+&lt;p>ここで紹介するまでも無いと思いますが、チーム開発における必読の本で、
+この本を読まずにプロダクト開発に参画するのは他人の家に土足で上がり込むようなものです。&lt;/p></description></item><item><title>フィードバック</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/feedback/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/feedback/</guid><description>&lt;h1 id="フィードバック">
+ フィードバック
+ &lt;a class="anchor" href="#%e3%83%95%e3%82%a3%e3%83%bc%e3%83%89%e3%83%90%e3%83%83%e3%82%af">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>相手の行動に対しての評価、改善点を率直に伝えます。&lt;/p>
+&lt;ul>
+&lt;li>先輩/後輩、立場等関係なく、フラットに行いましょう。&lt;/li>
+&lt;li>フィードバックは必ず１対１で行いましょう。&lt;/li>
+&lt;/ul>
+&lt;h3 id="フィードバックの内容">
+ フィードバックの内容
+ &lt;a class="anchor" href="#%e3%83%95%e3%82%a3%e3%83%bc%e3%83%89%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%e5%86%85%e5%ae%b9">#&lt;/a>
+&lt;/h3>
+&lt;ul>
+&lt;li>相手のプラスになることを伝えましょう。&lt;/li>
+&lt;li>状況に合わせて内容を変えましょう。
+&lt;ul>
+&lt;li>強み/伸びしろ&lt;/li>
+&lt;li>上手くいっていること/変えるといいこと&lt;/li>
+&lt;li>新しく始めること/やめるといいこと/続けるといいこと&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="フィードバックの考え方">
+ フィードバックの考え方
+ &lt;a class="anchor" href="#%e3%83%95%e3%82%a3%e3%83%bc%e3%83%89%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%e8%80%83%e3%81%88%e6%96%b9">#&lt;/a>
+&lt;/h3>
+&lt;pre tabindex="0">&lt;code>どうしたら私個人としてより良いチームメンバになれるか
+どうしたらより良く一緒に働けるか
+&lt;/code>&lt;/pre>&lt;h2 id="目的">
+ 目的
+ &lt;a class="anchor" href="#%e7%9b%ae%e7%9a%84">#&lt;/a>
+&lt;/h2>
+&lt;p>各個人の良い点を伸ばす・悪い点を改善することで成長を促します。
+また、より良いチームを作ることにつながります。&lt;/p></description></item><item><title>Ice Break</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/icebreak/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/icebreak/</guid><description>&lt;h1 id="ice-break">
+ Ice Break
+ &lt;a class="anchor" href="#ice-break">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>開発業務から離れて、チームで一緒にゲームなどを行います。&lt;/p>
+&lt;h2 id="目的">
+ 目的
+ &lt;a class="anchor" href="#%e7%9b%ae%e7%9a%84">#&lt;/a>
+&lt;/h2>
+&lt;p>メンバ間のコミュニケーション活性化や心身のリフレッシュを目的とします。&lt;/p></description></item><item><title>Team Health Check</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamhealthcheck/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamhealthcheck/</guid><description>&lt;h1 id="team-health-check">
+ Team Health Check
+ &lt;a class="anchor" href="#team-health-check">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>チームで匿名のアンケートを実施し、チームの状態を可視化します。&lt;/p>
+&lt;h2 id="目的">
+ 目的
+ &lt;a class="anchor" href="#%e7%9b%ae%e7%9a%84">#&lt;/a>
+&lt;/h2>
+&lt;p>アンケートの結果を踏まえ、意見を共有することでメンバーがどう思っているかを知り、
+チームに必要なアクションをとって、より良いチームにしていくことが目的です。&lt;/p></description></item><item><title>1on1</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/1on1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/1on1/</guid><description>&lt;h1 id="1on1">
+ 1on1
+ &lt;a class="anchor" href="#1on1">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>チームのメンバー間で1対1で対話します。
+キャリア形成を意識した部下と上司とで行う1on1ではなく、より身近なメンバーと気軽に話をします。&lt;/p></description></item><item><title>ラジオ体操</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/exercise/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/exercise/</guid><description>&lt;h1 id="ラジオ体操">
+ ラジオ体操
+ &lt;a class="anchor" href="#%e3%83%a9%e3%82%b8%e3%82%aa%e4%bd%93%e6%93%8d">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>体力向上、健康の保持増進を図る目的に考案された、伴奏つきの体操です。&lt;br>
+日本では、誰もが気軽に楽しめる運動として広く国民に親しまれています。&lt;/p></description></item></channel></rss>

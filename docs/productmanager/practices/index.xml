@@ -1,1 +1,57 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Product Managerのプラクティス on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/</link><description>Recent content in Product Managerのプラクティス on Fujitsu Agile Development Guide</description><generator>Hugo -- gohugo.io</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/index.xml" rel="self" type="application/rss+xml"/><item><title>プロダクトロードマップ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/roadmap/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/roadmap/</guid><description>プロダクトロードマップ # 概要 # プロダクトロードマップとは、プロダクトのビジョンを実現するための道のり（戦略）を明らかにするものです。 プロダク</description></item><item><title>MVP</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/</guid><description>MVP # 概要 # MVP(Minimum Viable Product)とは、ユーザーに価値を提供できる最小限のプロダクトのことです。 仮説検証のプロセスで利用します。 最小限（Mini</description></item><item><title>ユーザーストーリーマッピング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstorymapping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstorymapping/</guid><description>ユーザーストーリーマッピング # 概要 # ユーザーストーリーマッピングでは、ユーザーストーリーを抽出しながら、ユーザーのアクション（横軸）、優先度</description></item><item><title>ユーザーストーリー</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/</guid><description>ユーザーストーリー # 概要 # ユーザーストーリーとはユーザーの要求（誰が、どのような目的で、何をしたいのか）を表わすものです。 ユーザーストーリー</description></item><item><title>2×2</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/</guid><description>2×2 # 概要 # 2×2(two by two)とは、優先順位を徹底して意思決定を行うための手法です。 意思決定をするための2つの観点を縦軸と横軸に設定</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Product Managerのプラクティス on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/</link><description>Recent content in Product Managerのプラクティス on Fujitsu Agile Development Guide</description><generator>Hugo</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/index.xml" rel="self" type="application/rss+xml"/><item><title>プロダクトロードマップ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/roadmap/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/roadmap/</guid><description>&lt;h1 id="プロダクトロードマップ">
+ プロダクトロードマップ
+ &lt;a class="anchor" href="#%e3%83%97%e3%83%ad%e3%83%80%e3%82%af%e3%83%88%e3%83%ad%e3%83%bc%e3%83%89%e3%83%9e%e3%83%83%e3%83%97">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>プロダクトロードマップとは、プロダクトのビジョンを実現するための道のり（戦略）を明らかにするものです。
+プロダクトのビジョンに向かって開発を進める手助けとなるような連続したゴールで構成し、時間ともにどのように進化していくかの見込みを示します。&lt;/p></description></item><item><title>MVP</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/mvp/</guid><description>&lt;h1 id="mvp">
+ MVP
+ &lt;a class="anchor" href="#mvp">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>MVP(Minimum Viable Product)とは、ユーザーに価値を提供できる最小限のプロダクトのことです。
+仮説検証のプロセスで利用します。&lt;/p>
+&lt;ul>
+&lt;li>最小限（Minimum） : 最小限の時間・投資で作る&lt;/li>
+&lt;li>実行可能（Viable） : ユーザーに価値を示し仮説を検証するのに十分な体験を提供する&lt;/li>
+&lt;/ul>
+&lt;h2 id="なぜmvp">
+ なぜMVP?
+ &lt;a class="anchor" href="#%e3%81%aa%e3%81%9cmvp">#&lt;/a>
+&lt;/h2>
+&lt;p>MVPは最小限のコストで最大の仮説を検証し、最大のリスクを最小化するのに利用されます。&lt;br>
+早期にプロダクトをユーザーに利用してもらいフィードバックを得ることで、プロダクトを作り続けるべきか、ビジネスとして継続するべきか、を判断するのに役立ちます。
+最小のコストで仮説を検証することで、仮説に誤りがありビジネスを継続しないという判断になった場合でも失うことは少なくて済みます。&lt;br>
+また、仮説検証のプロセスの一部であったとしても、早期にプロダクトをユーザーに提供することは、認知度をあげて競合に対して優位になります。&lt;/p></description></item><item><title>ユーザーストーリーマッピング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstorymapping/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstorymapping/</guid><description>&lt;h1 id="ユーザーストーリーマッピング">
+ ユーザーストーリーマッピング
+ &lt;a class="anchor" href="#%e3%83%a6%e3%83%bc%e3%82%b6%e3%83%bc%e3%82%b9%e3%83%88%e3%83%bc%e3%83%aa%e3%83%bc%e3%83%9e%e3%83%83%e3%83%94%e3%83%b3%e3%82%b0">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>ユーザーストーリーマッピングでは、ユーザーストーリーを抽出しながら、ユーザーのアクション（横軸）、優先度（縦軸）によってマッピングを行い、ユーザーストーリーを整理します。&lt;/p></description></item><item><title>ユーザーストーリー</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/userstory/</guid><description>&lt;h1 id="ユーザーストーリー">
+ ユーザーストーリー
+ &lt;a class="anchor" href="#%e3%83%a6%e3%83%bc%e3%82%b6%e3%83%bc%e3%82%b9%e3%83%88%e3%83%bc%e3%83%aa%e3%83%bc">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>ユーザーストーリーとはユーザーの要求（誰が、どのような目的で、何をしたいのか）を表わすものです。&lt;br>
+ユーザーストーリーでは、ユーザーの要求を以下の形式で記載します。&lt;/p></description></item><item><title>2×2</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/productmanager/practices/2x2/</guid><description>&lt;h1 id="22">
+ 2×2
+ &lt;a class="anchor" href="#22">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>2×2(two by two)とは、優先順位を徹底して意思決定を行うための手法です。
+意思決定をするための2つの観点を縦軸と横軸に設定してそれぞれの観点毎に順序付けをすることで、四象限の右上のものが「今やるべきもの」、左下のものが「やらなくて良いもの」、と優先度を決めることができます。&lt;/p></description></item></channel></rss>

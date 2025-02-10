@@ -1,1 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>エクストリームプログラミング on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/</link><description>Recent content in エクストリームプログラミング on Fujitsu Agile Development Guide</description><generator>Hugo -- gohugo.io</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/index.xml" rel="self" type="application/rss+xml"/><item><title>エクストリームプログラミングとは</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/</guid><description>エクストリームプログラミングとは # エクストリームプログラミング（以下、XP）はアジャイルソフトウェア開発宣言をだしたメンバーの一人、 Kent Bec</description></item><item><title>エクストリームプログラミングのプラクティス</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/</guid><description>エクストリームプログラミングのプラクティス # チームメンバーとしての顧客 # 顧客と開発者は同じ空間で机を突き合わせて、親密に仕事をするのが望まし</description></item><item><title>まとめ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/</guid><description>まとめ # エクストリームプログラミング(XP)はシンプルかつ具体的な集合から構築されているアジャイル開発プロセスです。 そして、この開発プロセス</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>エクストリームプログラミング on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/</link><description>Recent content in エクストリームプログラミング on Fujitsu Agile Development Guide</description><generator>Hugo</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/index.xml" rel="self" type="application/rss+xml"/><item><title>エクストリームプログラミングとは</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/overview/</guid><description>&lt;h1 id="エクストリームプログラミングとは">
+ エクストリームプログラミングとは
+ &lt;a class="anchor" href="#%e3%82%a8%e3%82%af%e3%82%b9%e3%83%88%e3%83%aa%e3%83%bc%e3%83%a0%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%9f%e3%83%b3%e3%82%b0%e3%81%a8%e3%81%af">#&lt;/a>
+&lt;/h1>
+&lt;p>エクストリームプログラミング（以下、XP）はアジャイルソフトウェア開発宣言をだしたメンバーの一人、
+Kent Beckが提唱したアジャイルの枠組みの中で開発を行っていくための&lt;strong>より実践的なプラクティス集&lt;/strong>です。
+スクラムでは会議体や成果物を規定していましたが、その枠組の中でどのように開発していくかまでは定義していませんでした。
+XPのプラクティスは、スクラムで規定されていない&amp;quot;どのように開発していくか&amp;quot;を補完してくれるものです。&lt;/p></description></item><item><title>エクストリームプログラミングのプラクティス</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/</guid><description>&lt;h1 id="エクストリームプログラミングのプラクティス">
+ エクストリームプログラミングのプラクティス
+ &lt;a class="anchor" href="#%e3%82%a8%e3%82%af%e3%82%b9%e3%83%88%e3%83%aa%e3%83%bc%e3%83%a0%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%9f%e3%83%b3%e3%82%b0%e3%81%ae%e3%83%97%e3%83%a9%e3%82%af%e3%83%86%e3%82%a3%e3%82%b9">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="チームメンバーとしての顧客">
+ チームメンバーとしての顧客
+ &lt;a class="anchor" href="#%e3%83%81%e3%83%bc%e3%83%a0%e3%83%a1%e3%83%b3%e3%83%90%e3%83%bc%e3%81%a8%e3%81%97%e3%81%a6%e3%81%ae%e9%a1%a7%e5%ae%a2">#&lt;/a>
+&lt;/h2>
+&lt;p>顧客と開発者は同じ空間で机を突き合わせて、親密に仕事をするのが望ましいです。
+同じ空間で仕事をすることで、お互いに相手の問題を把握することができ、その問題の解決に向けて一緒に取り組めるからです。
+これは文字通り物理的な距離の話をしていて、顧客と開発者が同じ部屋で作業するのが最も理想的です。
+距離が離れれば離れるほど、顧客をほんとうの意味でのチームに組み込むのが困難になります。&lt;/p></description></item><item><title>まとめ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/conclude/</guid><description>&lt;h1 id="まとめ">
+ まとめ
+ &lt;a class="anchor" href="#%e3%81%be%e3%81%a8%e3%82%81">#&lt;/a>
+&lt;/h1>
+&lt;p>エクストリームプログラミング(XP)はシンプルかつ具体的な集合から構築されているアジャイル開発プロセスです。
+そして、この開発プロセスは多くのチームで使われており、十分な成果を上げています。&lt;/p></description></item></channel></rss>

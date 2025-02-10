@@ -1,1 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>モダナイゼーションアジャイル on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/</link><description>Recent content in モダナイゼーションアジャイル on Fujitsu Agile Development Guide</description><generator>Hugo -- gohugo.io</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/index.xml" rel="self" type="application/rss+xml"/><item><title>モダナイゼーションアジャイルの流れ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/overview/</guid><description>モダナイゼーションアジャイルの流れ # モダナイゼーションアジャイルでは、既存のブラックボックス化しているレガシーシステムに対して、ビジネス視点</description></item><item><title>体制・役割</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/organization/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/organization/</guid><description>体制・役割 # Coreチーム # Product Managers # Product Managers(PdMs)は正しいものを作るためにビジネス価値、ユーザー価値、技術的な難易度を踏まえて</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>モダナイゼーションアジャイル on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/</link><description>Recent content in モダナイゼーションアジャイル on Fujitsu Agile Development Guide</description><generator>Hugo</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/index.xml" rel="self" type="application/rss+xml"/><item><title>モダナイゼーションアジャイルの流れ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/overview/</guid><description>&lt;h1 id="モダナイゼーションアジャイルの流れ">
+ モダナイゼーションアジャイルの流れ
+ &lt;a class="anchor" href="#%e3%83%a2%e3%83%80%e3%83%8a%e3%82%a4%e3%82%bc%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%82%a2%e3%82%b8%e3%83%a3%e3%82%a4%e3%83%ab%e3%81%ae%e6%b5%81%e3%82%8c">#&lt;/a>
+&lt;/h1>
+&lt;p>モダナイゼーションアジャイルでは、既存のブラックボックス化しているレガシーシステムに対して、ビジネス視点で分析を行い、必要なものから開発を行います。リーンスタートアップアジャイルと同様、「リーンXP」の開発手法を「バランスチーム」の中で実践します。&lt;/p></description></item><item><title>体制・役割</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/organization/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/organization/</guid><description>&lt;h1 id="体制役割">
+ 体制・役割
+ &lt;a class="anchor" href="#%e4%bd%93%e5%88%b6%e5%bd%b9%e5%89%b2">#&lt;/a>
+&lt;/h1>
+&lt;p>&lt;img src="modernization-role.jpg" alt="role" />&lt;/p>
+&lt;h2 id="coreチーム">
+ Coreチーム
+ &lt;a class="anchor" href="#core%e3%83%81%e3%83%bc%e3%83%a0">#&lt;/a>
+&lt;/h2>
+&lt;h3 id="product-managers">
+ Product Managers
+ &lt;a class="anchor" href="#product-managers">#&lt;/a>
+&lt;/h3>
+&lt;p>Product Managers(PdMs)は正しいものを作るためにビジネス価値、ユーザー価値、技術的な難易度を踏まえて機能の優先度付けを行い価値あるプロダクトを提供することに責任を持ちます。
+ユーザーストーリーを作成してチーム内で正しく情報共有を行い、開発完了後には受け入れ確認としてプロダクトが意図した通りに価値を提供するものになっていることを確認します。
+その他にも、PdMsはCoreチーム内のコミュニケーションに加えて、CLミーティングやInception/Outceptionを開催してCoreチームとStakeholders/Informedとの間の情報連携を行います。
+様々な情報を把握していることから、会議の全体進行などはPdMsが中心となることが多くなります（全体を把握しているメンバーが進行するのがスムーズ）。
+また、Designerが参画しない場合には、モックアップを作るなどしてDevsがデザインストーリーを実装するために、必要な情報を提示する必要があります。&lt;/p></description></item></channel></rss>

@@ -1,1 +1,190 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>チームのアクティビティ on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/</link><description>Recent content in チームのアクティビティ on Fujitsu Agile Development Guide</description><generator>Hugo -- gohugo.io</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/index.xml" rel="self" type="application/rss+xml"/><item><title>全体スタンドアップ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/officestandup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/officestandup/</guid><description>全体スタンドアップ # 概要 # 同じ職場で働く全チームが集まって、立ちながら行うミーティングです。 以下の内容を共有します。 NewFaces（新しい</description></item><item><title>チームスタンドアップ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamstandup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamstandup/</guid><description>チームスタンドアップ # 概要 # チームのメンバー全員で立ちながら行うミーティングです。 以下の内容を共有し、タスクの確認を行います。 昨日やったこと</description></item><item><title>Pre-IPM</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/preipm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/preipm/</guid><description>Pre-IPM # 概要 # Pre-IPMは、IPM(Iteration Planning Meeting)に向けて、ドラフト版のユーザーストーリーをDeveloper観点で確</description></item><item><title>IPM</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/ipm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/ipm/</guid><description>IPM # 概要 # IPM(Iteration Planning Meeting)は、各ユーザーストーリーの見積もりを行って次のイテレーションの計画を立てるミーティングです。 Product Managerが</description></item><item><title>CLミーティング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/cl/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/cl/</guid><description>CLミーティング # 概要 # CLミーティングは、CL(Client Liaison)/PMOとの情報共有の場です。 目的 # 定期的に情報を共有して、プ</description></item><item><title>レトロスペクティブ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/retro/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/retro/</guid><description>レトロスペクティブ # 概要 # レトロスペクティブ（レトロ）は、チームの活動の振り返りを行う活動です。 イテレーションでよかったこと、よくなかった点</description></item><item><title>営業確認会議</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/salesmeeting/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/salesmeeting/</guid><description>営業確認会議 # 概要 # 営業確認会議は、各エンドユーザーの窓口になっている営業チームやその他の担当者との情報共有の場です。 また、必要に応じて営業</description></item><item><title>Internal Sync</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/internalsync/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/internalsync/</guid><description>Internal Sync # 概要 # Internal Syncは、社内メンバーのみで集まって実施するミーティングです。 その日の作業の学びの共有や不明点の解消をしたり、今後の方針・</description></item><item><title>Risks &amp; Mitigations</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/riskmitigations/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/riskmitigations/</guid><description>Risks &amp;amp; Mitigations # 概要 # チームの目標を達成するためにどのようなリスクがあるかを挙げて、そのリスクを軽減するための対策を検討します。 一人ひとりの思い込み</description></item><item><title>フィードバック</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/feedback/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/feedback/</guid><description>フィードバック # 概要 # 相手の行動に対しての評価、改善点を率直に伝えます。 先輩/後輩、立場等関係なく、フラットに行いましょう。 フィードバックは</description></item><item><title>Ice Break</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/icebreak/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/icebreak/</guid><description>Ice Break # 概要 # 開発業務から離れて、チームで一緒にゲームなどを行います。 目的 # メンバ間のコミュニケーション活性化や心身のリフレッシュを目的としま</description></item><item><title>Team Health Check</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamhealthcheck/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamhealthcheck/</guid><description>Team Health Check # 概要 # チームで匿名のアンケートを実施し、チームの状態を可視化します。 目的 # アンケートの結果を踏まえ、意見を共有することでメンバーがど</description></item><item><title>1on1</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/1on1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/1on1/</guid><description>1on1 # 概要 # チームのメンバー間で1対1で対話します。 キャリア形成を意識した部下と上司とで行う1on1ではなく、より身近なメンバーと気軽に話をし</description></item><item><title>ラジオ体操</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/exercise/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/exercise/</guid><description>ラジオ体操 # 概要 # 体力向上、健康の保持増進を図る目的に考案された、伴奏つきの体操です。 日本では、誰もが気軽に楽しめる運動として広く国民に親し</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>チームのアクティビティ on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/</link><description>Recent content in チームのアクティビティ on Fujitsu Agile Development Guide</description><generator>Hugo</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/index.xml" rel="self" type="application/rss+xml"/><item><title>全体スタンドアップ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/officestandup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/officestandup/</guid><description>&lt;h1 id="全体スタンドアップ">
+ 全体スタンドアップ
+ &lt;a class="anchor" href="#%e5%85%a8%e4%bd%93%e3%82%b9%e3%82%bf%e3%83%b3%e3%83%89%e3%82%a2%e3%83%83%e3%83%97">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>同じ職場で働く全チームが集まって、立ちながら行うミーティングです。
+以下の内容を共有します。&lt;/p>
+&lt;ul>
+&lt;li>NewFaces（新しいメンバー）&lt;/li>
+&lt;li>Interestings（面白い、興味があること）&lt;/li>
+&lt;li>Helps（困っていること、手伝って欲しいこと）&lt;/li>
+&lt;li>Events（本日のイベント）&lt;/li>
+&lt;/ul>
+&lt;h2 id="目的">
+ 目的
+ &lt;a class="anchor" href="#%e7%9b%ae%e7%9a%84">#&lt;/a>
+&lt;/h2>
+&lt;p>同じ職場で働くメンバーと一緒に日々の仕事のリズムを作ります。
+また、チームを超えたコミュニケーションの場を提供します。&lt;/p></description></item><item><title>チームスタンドアップ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamstandup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamstandup/</guid><description>&lt;h1 id="チームスタンドアップ">
+ チームスタンドアップ
+ &lt;a class="anchor" href="#%e3%83%81%e3%83%bc%e3%83%a0%e3%82%b9%e3%82%bf%e3%83%b3%e3%83%89%e3%82%a2%e3%83%83%e3%83%97">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>チームのメンバー全員で立ちながら行うミーティングです。
+以下の内容を共有し、タスクの確認を行います。&lt;/p>
+&lt;ul>
+&lt;li>昨日やったこと&lt;/li>
+&lt;li>今日やること&lt;/li>
+&lt;li>学び・困っていること&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="dailystand.jpg" alt="dailystand" />
+&lt;img src="task_confirm.png" alt="task" />&lt;/p></description></item><item><title>Pre-IPM</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/preipm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/preipm/</guid><description>&lt;h1 id="pre-ipm">
+ Pre-IPM
+ &lt;a class="anchor" href="#pre-ipm">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>Pre-IPMは、IPM(Iteration Planning Meeting)に向けて、ドラフト版のユーザーストーリーをDeveloper観点で確認するミーティングです。
+Product Manager、Designer、Developer1ペアで実施します。&lt;/p></description></item><item><title>IPM</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/ipm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/ipm/</guid><description>&lt;h1 id="ipm">
+ IPM
+ &lt;a class="anchor" href="#ipm">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>IPM(Iteration Planning Meeting)は、各ユーザーストーリーの見積もりを行って次のイテレーションの計画を立てるミーティングです。
+Product Managerが進行し、Product ManagerとDesignerから提供価値の説明を行い、Developerが全員で見積もりを行います。&lt;/p></description></item><item><title>CLミーティング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/cl/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/cl/</guid><description>&lt;h1 id="clミーティング">
+ CLミーティング
+ &lt;a class="anchor" href="#cl%e3%83%9f%e3%83%bc%e3%83%86%e3%82%a3%e3%83%b3%e3%82%b0">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>CLミーティングは、CL(Client Liaison)/PMOとの情報共有の場です。&lt;/p>
+&lt;p>&lt;img src="PMO.jpg" alt="PMO" />&lt;/p>
+&lt;h2 id="目的">
+ 目的
+ &lt;a class="anchor" href="#%e7%9b%ae%e7%9a%84">#&lt;/a>
+&lt;/h2>
+&lt;p>定期的に情報を共有して、プロジェクト成功に向けた協力体制を作ります。&lt;/p></description></item><item><title>レトロスペクティブ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/retro/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/retro/</guid><description>&lt;h1 id="レトロスペクティブ">
+ レトロスペクティブ
+ &lt;a class="anchor" href="#%e3%83%ac%e3%83%88%e3%83%ad%e3%82%b9%e3%83%9a%e3%82%af%e3%83%86%e3%82%a3%e3%83%96">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>レトロスペクティブ（レトロ）は、チームの活動の振り返りを行う活動です。
+イテレーションでよかったこと、よくなかった点を遠慮なく出し合い、改善に向けたアクションを決めます。
+お酒を飲みながらリラックスした状態で実施します。&lt;/p></description></item><item><title>営業確認会議</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/salesmeeting/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/salesmeeting/</guid><description>&lt;h1 id="営業確認会議">
+ 営業確認会議
+ &lt;a class="anchor" href="#%e5%96%b6%e6%a5%ad%e7%a2%ba%e8%aa%8d%e4%bc%9a%e8%ad%b0">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>営業確認会議は、各エンドユーザーの窓口になっている営業チームやその他の担当者との情報共有の場です。
+また、必要に応じて営業チームへのリサーチの協力などの依頼を行います。&lt;/p></description></item><item><title>Internal Sync</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/internalsync/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/internalsync/</guid><description>&lt;h1 id="internal-sync">
+ Internal Sync
+ &lt;a class="anchor" href="#internal-sync">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>Internal Syncは、社内メンバーのみで集まって実施するミーティングです。
+その日の作業の学びの共有や不明点の解消をしたり、今後の方針・進め方について相談したりします。&lt;/p></description></item><item><title>Risks &amp; Mitigations</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/riskmitigations/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/riskmitigations/</guid><description>&lt;h1 id="risks--mitigations">
+ Risks &amp;amp; Mitigations
+ &lt;a class="anchor" href="#risks--mitigations">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>チームの目標を達成するためにどのようなリスクがあるかを挙げて、そのリスクを軽減するための対策を検討します。
+一人ひとりの思い込み（Assumption）を可視化し、インパクトやチームの学習状況などから優先度付けを行って対策をとります。&lt;/p></description></item><item><title>フィードバック</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/feedback/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/feedback/</guid><description>&lt;h1 id="フィードバック">
+ フィードバック
+ &lt;a class="anchor" href="#%e3%83%95%e3%82%a3%e3%83%bc%e3%83%89%e3%83%90%e3%83%83%e3%82%af">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>相手の行動に対しての評価、改善点を率直に伝えます。&lt;/p>
+&lt;ul>
+&lt;li>先輩/後輩、立場等関係なく、フラットに行いましょう。&lt;/li>
+&lt;li>フィードバックは必ず１対１で行いましょう。&lt;/li>
+&lt;/ul>
+&lt;h3 id="フィードバックの内容">
+ フィードバックの内容
+ &lt;a class="anchor" href="#%e3%83%95%e3%82%a3%e3%83%bc%e3%83%89%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%e5%86%85%e5%ae%b9">#&lt;/a>
+&lt;/h3>
+&lt;ul>
+&lt;li>相手のプラスになることを伝えましょう。&lt;/li>
+&lt;li>状況に合わせて内容を変えましょう。
+&lt;ul>
+&lt;li>強み/伸びしろ&lt;/li>
+&lt;li>上手くいっていること/変えるといいこと&lt;/li>
+&lt;li>新しく始めること/やめるといいこと/続けるといいこと&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="フィードバックの考え方">
+ フィードバックの考え方
+ &lt;a class="anchor" href="#%e3%83%95%e3%82%a3%e3%83%bc%e3%83%89%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%e8%80%83%e3%81%88%e6%96%b9">#&lt;/a>
+&lt;/h3>
+&lt;pre tabindex="0">&lt;code>どうしたら私個人としてより良いチームメンバになれるか
+どうしたらより良く一緒に働けるか
+&lt;/code>&lt;/pre>&lt;h2 id="目的">
+ 目的
+ &lt;a class="anchor" href="#%e7%9b%ae%e7%9a%84">#&lt;/a>
+&lt;/h2>
+&lt;p>各個人の良い点を伸ばす・悪い点を改善することで成長を促します。
+また、より良いチームを作ることにつながります。&lt;/p></description></item><item><title>Ice Break</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/icebreak/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/icebreak/</guid><description>&lt;h1 id="ice-break">
+ Ice Break
+ &lt;a class="anchor" href="#ice-break">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>開発業務から離れて、チームで一緒にゲームなどを行います。&lt;/p>
+&lt;h2 id="目的">
+ 目的
+ &lt;a class="anchor" href="#%e7%9b%ae%e7%9a%84">#&lt;/a>
+&lt;/h2>
+&lt;p>メンバ間のコミュニケーション活性化や心身のリフレッシュを目的とします。&lt;/p></description></item><item><title>Team Health Check</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamhealthcheck/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/teamhealthcheck/</guid><description>&lt;h1 id="team-health-check">
+ Team Health Check
+ &lt;a class="anchor" href="#team-health-check">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>チームで匿名のアンケートを実施し、チームの状態を可視化します。&lt;/p>
+&lt;h2 id="目的">
+ 目的
+ &lt;a class="anchor" href="#%e7%9b%ae%e7%9a%84">#&lt;/a>
+&lt;/h2>
+&lt;p>アンケートの結果を踏まえ、意見を共有することでメンバーがどう思っているかを知り、
+チームに必要なアクションをとって、より良いチームにしていくことが目的です。&lt;/p></description></item><item><title>1on1</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/1on1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/1on1/</guid><description>&lt;h1 id="1on1">
+ 1on1
+ &lt;a class="anchor" href="#1on1">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>チームのメンバー間で1対1で対話します。
+キャリア形成を意識した部下と上司とで行う1on1ではなく、より身近なメンバーと気軽に話をします。&lt;/p></description></item><item><title>ラジオ体操</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/exercise/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/activities/exercise/</guid><description>&lt;h1 id="ラジオ体操">
+ ラジオ体操
+ &lt;a class="anchor" href="#%e3%83%a9%e3%82%b8%e3%82%aa%e4%bd%93%e6%93%8d">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>体力向上、健康の保持増進を図る目的に考案された、伴奏つきの体操です。&lt;br>
+日本では、誰もが気軽に楽しめる運動として広く国民に親しまれています。&lt;/p></description></item></channel></rss>

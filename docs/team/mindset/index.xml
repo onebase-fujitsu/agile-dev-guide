@@ -1,1 +1,56 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>マインドセット on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/</link><description>Recent content in マインドセット on Fujitsu Agile Development Guide</description><generator>Hugo -- gohugo.io</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/index.xml" rel="self" type="application/rss+xml"/><item><title>ONEbaseの価値観</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/onebase/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/onebase/</guid><description>ONEbaseの価値観 # Core Values # 3 Things to Make it Work / 3 Agreements # 3 Things to Make it Work / 3つの成功させるためのポイント # 1. Trust in team &amp;amp; process / チームとプロセスへの信頼 2. Interest in</description></item><item><title>心理的安全性</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/psychologicalsafety/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/psychologicalsafety/</guid><description>心理的安全性 # プロジェクトの実行にあたって「心理的安全性」を確保することは非常に重要です。 「心理的安全性」とは、チームのメンバーがアイデア、</description></item><item><title>XPの価値観</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/xp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/xp/</guid><description>XPの価値観 # XPは5つの価値観に基づいています。 コミュニケーション プロジェクトの各段階で、チームの全員が共同で作業を行います。 シンプル 開発</description></item><item><title>プラクティスの取り入れ方</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/practice/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/practice/</guid><description>プラクティスの取り入れ方 # Practices（手法やツール）は氷山の一角に過ぎません。目に見える氷山の下にはPrinciples（原理・原則</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>マインドセット on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/</link><description>Recent content in マインドセット on Fujitsu Agile Development Guide</description><generator>Hugo</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/index.xml" rel="self" type="application/rss+xml"/><item><title>ONEbaseの価値観</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/onebase/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/onebase/</guid><description>&lt;h1 id="onebaseの価値観">
+ ONEbaseの価値観
+ &lt;a class="anchor" href="#onebase%e3%81%ae%e4%be%a1%e5%80%a4%e8%a6%b3">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="core-values">
+ Core Values
+ &lt;a class="anchor" href="#core-values">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;img src="onebaseValue1.jpg" alt="onebaseValue1" />&lt;/p>
+&lt;h2 id="3-things-to-make-it-work--3-agreements">
+ 3 Things to Make it Work / 3 Agreements
+ &lt;a class="anchor" href="#3-things-to-make-it-work--3-agreements">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;img src="onebaseValue2.jpg" alt="onebaseValue2" />&lt;/p>
+&lt;h3 id="3-things-to-make-it-work--3つの成功させるためのポイント">
+ 3 Things to Make it Work / 3つの成功させるためのポイント
+ &lt;a class="anchor" href="#3-things-to-make-it-work--3%e3%81%a4%e3%81%ae%e6%88%90%e5%8a%9f%e3%81%95%e3%81%9b%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ae%e3%83%9d%e3%82%a4%e3%83%b3%e3%83%88">#&lt;/a>
+&lt;/h3>
+&lt;pre tabindex="0">&lt;code>1. Trust in team &amp;amp; process / チームとプロセスへの信頼
+2. Interest in users / ユーザーへの関心
+3. Willingness to be wrong / 間違ってもいいという気持ち
+&lt;/code>&lt;/pre>&lt;h3 id="3-agreements--3つの合意">
+ 3 Agreements / 3つの合意
+ &lt;a class="anchor" href="#3-agreements--3%e3%81%a4%e3%81%ae%e5%90%88%e6%84%8f">#&lt;/a>
+&lt;/h3>
+&lt;pre tabindex="0">&lt;code>1. Decisions today are what we start woth tomorrow 
+ 今日の決定が明日のスタートとなる
+2. We&amp;#39;re not supposed to get it right today, just get close 
+ 今日の決定が正しいとは限らない
+3. Our confidence in decisions are based on current understanding 
+ 決断に対する自信は、現在の理解に基づいている
+&lt;/code>&lt;/pre></description></item><item><title>心理的安全性</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/psychologicalsafety/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/psychologicalsafety/</guid><description>&lt;h1 id="心理的安全性">
+ 心理的安全性
+ &lt;a class="anchor" href="#%e5%bf%83%e7%90%86%e7%9a%84%e5%ae%89%e5%85%a8%e6%80%a7">#&lt;/a>
+&lt;/h1>
+&lt;p>プロジェクトの実行にあたって「心理的安全性」を確保することは非常に重要です。
+「心理的安全性」とは、チームのメンバーがアイデア、質問、懸念、ミスなどを発言しても、拒絶されたり、罰せられたりせず、安心して発言・行動できる状念を言います。
+「心理的安全性」が高い状態を維持できれば、以下のようなメリットが得られます。&lt;/p></description></item><item><title>XPの価値観</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/xp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/xp/</guid><description>&lt;h1 id="xpの価値観">
+ XPの価値観
+ &lt;a class="anchor" href="#xp%e3%81%ae%e4%be%a1%e5%80%a4%e8%a6%b3">#&lt;/a>
+&lt;/h1>
+&lt;p>XPは5つの価値観に基づいています。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>コミュニケーション&lt;/p>
+&lt;p>プロジェクトの各段階で、チームの全員が共同で作業を行います。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>シンプル&lt;/p>
+&lt;p>開発者は、製品に価値をもたらすシンプルなコードを書くことで、時間と労力を節約するよう努めます。&lt;/p></description></item><item><title>プラクティスの取り入れ方</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/practice/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/mindset/practice/</guid><description>&lt;h1 id="プラクティスの取り入れ方">
+ プラクティスの取り入れ方
+ &lt;a class="anchor" href="#%e3%83%97%e3%83%a9%e3%82%af%e3%83%86%e3%82%a3%e3%82%b9%e3%81%ae%e5%8f%96%e3%82%8a%e5%85%a5%e3%82%8c%e6%96%b9">#&lt;/a>
+&lt;/h1>
+&lt;p>&lt;img src="PracticesPrinciplesValues.png" alt="PracticesPrinciplesValues" />&lt;/p>
+&lt;p>Practices（手法やツール）は氷山の一角に過ぎません。目に見える氷山の下にはPrinciples（原理・原則）、Values（価値観）が存在します。
+Practicesを表面的に真似て利用するのではなく、その基にあるPrinciplesやValuesを意識して学ぶ姿勢が重要になります。&lt;/p></description></item></channel></rss>

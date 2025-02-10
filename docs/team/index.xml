@@ -1,1 +1,77 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Team編 on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/</link><description>Recent content in Team編 on Fujitsu Agile Development Guide</description><generator>Hugo -- gohugo.io</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/index.xml" rel="self" type="application/rss+xml"/><item><title>チームの働き方</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/workstyle/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/workstyle/</guid><description>チームの働き方 # 心理的な安全性のあるチームで、安定したペースでの開発を目指します。 ペアワーク すべての作業をペアで行います。 手戻り防止、情報シ</description></item><item><title>バランスチーム</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/balancedteam/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/balancedteam/</guid><description>バランスチーム # 3つの役割 # バランスチームでは、ビジネス価値・ユーザー価値・技術的な実現性のそれぞれに責任を持つ3つの役割（Product M</description></item><item><title>チームビルディング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/teambuilding/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/teambuilding/</guid><description>チームビルディング # チームビルディングは、チームの目的や目標の達成に向かって、各メンバーが主体的に能力を発揮しながら一丸となるチームを目指す</description></item><item><title>リモートワーク</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/remotework/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/remotework/</guid><description>リモートワーク # リモートワークではコミュニケーションの主な手法はオンラインになります。 オンラインでのコミュニケーションでは顔を合わせないため</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Team編 on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/</link><description>Recent content in Team編 on Fujitsu Agile Development Guide</description><generator>Hugo</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/index.xml" rel="self" type="application/rss+xml"/><item><title>チームの働き方</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/workstyle/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/workstyle/</guid><description>&lt;h1 id="チームの働き方">
+ チームの働き方
+ &lt;a class="anchor" href="#%e3%83%81%e3%83%bc%e3%83%a0%e3%81%ae%e5%83%8d%e3%81%8d%e6%96%b9">#&lt;/a>
+&lt;/h1>
+&lt;p>&lt;strong>心理的な安全性のあるチームで、安定したペースでの開発を目指します。&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>ペアワーク&lt;/strong>
+&lt;ul>
+&lt;li>すべての作業をペアで行います。&lt;/li>
+&lt;li>手戻り防止、情報シェア、スキルトランスファーなどの効果があります。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>集中&lt;/strong>
+&lt;ul>
+&lt;li>プロジェクトに100%専任にします。（クライアントのメンバーも含む）&lt;/li>
+&lt;li>ミーティング中、脇で会話しないようにします。&lt;/li>
+&lt;li>お菓子・飲み物を事務所に設置し、自由に利用します。（買いに行く時間が無駄）&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>フラット&lt;/strong>
+&lt;ul>
+&lt;li>メンバーは全員フラットな関係（リーダーなし）を維持し、ニックネームで呼び合います。&lt;/li>
+&lt;li>一人一人を尊重し、発言の機会を作ります。&lt;/li>
+&lt;li>良いことも悪いこともすべてチームで対応します。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>タイムボックス&lt;/strong>
+&lt;ul>
+&lt;li>時間を意識しリズムよく作業します。&lt;/li>
+&lt;li>議論が長引いている場合は議題の分割を考えます。&lt;/li>
+&lt;li>議論が詰まる時には何があれば判断できるかを考えます。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>疲れをためない&lt;/strong>
+&lt;ul>
+&lt;li>1時間に5~10分程度の休憩を取ります。&lt;/li>
+&lt;li>卓球でリフレッシュします。&lt;/li>
+&lt;li>18:00退社を厳守します。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>カイゼンと成長&lt;/strong>
+&lt;ul>
+&lt;li>毎週チームでのレトロスペクティブを行います。&lt;/li>
+&lt;li>ペアでのフィードバックの時間を定期的に確保します。&lt;/li>
+&lt;li>チームの健康状態を意識し、早めに対処をします。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="チームのリズム">
+ チームのリズム
+ &lt;a class="anchor" href="#%e3%83%81%e3%83%bc%e3%83%a0%e3%81%ae%e3%83%aa%e3%82%ba%e3%83%a0">#&lt;/a>
+&lt;/h2>
+&lt;p>チームは、一週間単位のイテレーションで、開発を実施します。
+IPMで開発の見通しを立てて、デイリースタンドアップで日々の状況の確認、金曜日にレトロスペクティブ（振り返り）を行って翌週にさらに良いチームになるよう改善を続けて行きます。&lt;/p></description></item><item><title>バランスチーム</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/balancedteam/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/balancedteam/</guid><description>&lt;h1 id="バランスチーム">
+ バランスチーム
+ &lt;a class="anchor" href="#%e3%83%90%e3%83%a9%e3%83%b3%e3%82%b9%e3%83%81%e3%83%bc%e3%83%a0">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="3つの役割">
+ 3つの役割
+ &lt;a class="anchor" href="#3%e3%81%a4%e3%81%ae%e5%bd%b9%e5%89%b2">#&lt;/a>
+&lt;/h2>
+&lt;p>バランスチームでは、ビジネス価値・ユーザー価値・技術的な実現性のそれぞれに責任を持つ3つの役割（Product Manager/Designer/Developer）でチームを形成します。これによって、スピーディーかつ正しい判断が可能となり、プロダクトを成功に導きます。
+プロダクトの成功には、いずれの視点も不可欠であり、それぞれが情報を提供し合い、各視点の考えを尊重することが重要です。
+このために、チームは小規模の体制とし、同じ場所に集まって作業を行い、お互いにフラットな関係として常に自発的にコミュニケーションを取り合います。&lt;/p></description></item><item><title>チームビルディング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/teambuilding/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/teambuilding/</guid><description>&lt;h1 id="チームビルディング">
+ チームビルディング
+ &lt;a class="anchor" href="#%e3%83%81%e3%83%bc%e3%83%a0%e3%83%93%e3%83%ab%e3%83%87%e3%82%a3%e3%83%b3%e3%82%b0">#&lt;/a>
+&lt;/h1>
+&lt;p>チームビルディングは、チームの目的や目標の達成に向かって、各メンバーが主体的に能力を発揮しながら一丸となるチームを目指す取り組みです。&lt;br>
+チームビルディングによって以下の効果を得られます。&lt;/p></description></item><item><title>リモートワーク</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/remotework/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/team/remotework/</guid><description>&lt;h1 id="リモートワーク">
+ リモートワーク
+ &lt;a class="anchor" href="#%e3%83%aa%e3%83%a2%e3%83%bc%e3%83%88%e3%83%af%e3%83%bc%e3%82%af">#&lt;/a>
+&lt;/h1>
+&lt;p>リモートワークではコミュニケーションの主な手法はオンラインになります。
+オンラインでのコミュニケーションでは顔を合わせないため、
+メンバー間での心理的距離が広がり雑談へのハードルが上がります。
+このため、円滑にコミュニケーションを取り、
+心理的安全性の高いチームを作り上げるためには、以下のような対応が必要です。&lt;/p></description></item></channel></rss>

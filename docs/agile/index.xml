@@ -1,1 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>アジャイル on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/</link><description>Recent content in アジャイル on Fujitsu Agile Development Guide</description><generator>Hugo -- gohugo.io</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/index.xml" rel="self" type="application/rss+xml"/><item><title>アジャイルソフトウェア開発宣言</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/</guid><description>アジャイルソフトウェア開発宣言 # アジャイル開発とはなにかという問いに対して簡潔に答えるとすると、 「アジャイルソフトウェア開発宣言のマインドに</description></item><item><title>アジャイル開発12の原則</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/</guid><description>アジャイル開発12の原則 # アジャイルソフトウェア開発宣言 で宣言されていた内容は、 アジャイル開発をする上で大事なマインドセットを述べたものでし</description></item><item><title>まとめ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/</guid><description>まとめ # アジャイルソフトウェア開発宣言とアジャイル開発12の原則まで読んできました。 実はここまで具体的な開発手法は一つもでてきていません。す</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>アジャイル on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/</link><description>Recent content in アジャイル on Fujitsu Agile Development Guide</description><generator>Hugo</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/index.xml" rel="self" type="application/rss+xml"/><item><title>アジャイルソフトウェア開発宣言</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/</guid><description>&lt;h1 id="アジャイルソフトウェア開発宣言">
+ アジャイルソフトウェア開発宣言
+ &lt;a class="anchor" href="#%e3%82%a2%e3%82%b8%e3%83%a3%e3%82%a4%e3%83%ab%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2%e9%96%8b%e7%99%ba%e5%ae%a3%e8%a8%80">#&lt;/a>
+&lt;/h1>
+&lt;p>アジャイル開発とはなにかという問いに対して簡潔に答えるとすると、
+&lt;strong>「アジャイルソフトウェア開発宣言のマインドに則り、アジャイル開発12の原則に従った開発」&lt;/strong>
+となります。
+ではさっそく &lt;a href="https://agilemanifesto.org/iso/ja/manifesto.html">アジャイルソフトウェア開発宣言&lt;/a> に目を通してみましょう。&lt;/p></description></item><item><title>アジャイル開発12の原則</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/principle/</guid><description>&lt;h1 id="アジャイル開発12の原則">
+ アジャイル開発12の原則
+ &lt;a class="anchor" href="#%e3%82%a2%e3%82%b8%e3%83%a3%e3%82%a4%e3%83%ab%e9%96%8b%e7%99%ba12%e3%81%ae%e5%8e%9f%e5%89%87">#&lt;/a>
+&lt;/h1>
+&lt;p>&lt;a href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/manifest/">アジャイルソフトウェア開発宣言&lt;/a> で宣言されていた内容は、
+アジャイル開発をする上で大事なマインドセットを述べたものでした。
+ではその背景にもなる &lt;a href="https://agilemanifesto.org/iso/ja/principles.html">アジャイル開発12の原則&lt;/a> を見ていきましょう。先のアジャイルソフトウェア開発宣言のページにリンクがあります。&lt;/p></description></item><item><title>まとめ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/agile/conclude/</guid><description>&lt;h1 id="まとめ">
+ まとめ
+ &lt;a class="anchor" href="#%e3%81%be%e3%81%a8%e3%82%81">#&lt;/a>
+&lt;/h1>
+&lt;p>アジャイルソフトウェア開発宣言とアジャイル開発12の原則まで読んできました。
+実はここまで具体的な開発手法は一つもでてきていません。すべてマインドセットの話になっています。&lt;/p></description></item></channel></rss>

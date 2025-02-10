@@ -1,1 +1,52 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>アジャイルの実践 on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/</link><description>Recent content in アジャイルの実践 on Fujitsu Agile Development Guide</description><generator>Hugo -- gohugo.io</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/index.xml" rel="self" type="application/rss+xml"/><item><title>1日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/</guid><description>1日目 # アプリケーションの要件 # では、早速アジャイル開発で実際に動くアプリケーションを作ってみましょう。 今回は、簡単な例としてタスク管理のア</description></item><item><title>2日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/</guid><description>2日目 # 2日目はClientがServerに対してHTTPリクエストを実行するところ、そして、Serverの初期設定をして簡単なAPIを作っ</description></item><item><title>3日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/</guid><description>3日目 # 2日目まででタスク一覧をサーバに対して要求して、レスポンスに応じてタスク一覧を画面に描画するフロントエンドができました。 ただ、現時点</description></item><item><title>4日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/</guid><description>4日目 # 3日まででReactで作ったフロントエンドとSpring Bootで作ったバックエンドを連携させることができました。 しかし、タスクを表</description></item><item><title>5日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/</guid><description>5日目 # ではTodoを作成するバックエンドAPIを作成していきましょう。 タスク作成バックエンドAPI # テスト # まず、サーバのテストを書いてみ</description></item><item><title>6日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/</guid><description>6日目 # クライアントとサーバを連携させてタスクを作成することができるようになったので、シナリオテストを作成していきましょう。 モノレポの作成 #</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>アジャイルの実践 on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/</link><description>Recent content in アジャイルの実践 on Fujitsu Agile Development Guide</description><generator>Hugo</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/index.xml" rel="self" type="application/rss+xml"/><item><title>1日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/</guid><description>&lt;h1 id="1日目">
+ 1日目
+ &lt;a class="anchor" href="#1%e6%97%a5%e7%9b%ae">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="アプリケーションの要件">
+ アプリケーションの要件
+ &lt;a class="anchor" href="#%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%81%ae%e8%a6%81%e4%bb%b6">#&lt;/a>
+&lt;/h2>
+&lt;p>では、早速アジャイル開発で実際に動くアプリケーションを作ってみましょう。
+今回は、簡単な例としてタスク管理のアプリを作ってみます。
+こういったハンズオンでなにをもってアジャイル開発と言うかは難しいところなのですが、
+事前にかっちりとした設計はせずに都度必要な機能を継ぎ足していく形で進めます。
+都度、新しい機能を追加するStoryが追加されているという体で読み進めてください。&lt;/p></description></item><item><title>2日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day2/</guid><description>&lt;h1 id="2日目">
+ 2日目
+ &lt;a class="anchor" href="#2%e6%97%a5%e7%9b%ae">#&lt;/a>
+&lt;/h1>
+&lt;p>2日目はClientがServerに対してHTTPリクエストを実行するところ、そして、Serverの初期設定をして簡単なAPIを作って見るところをやってみましょう。
+ここからだいぶ難しくなると思いますが、頑張っていきましょう。&lt;/p></description></item><item><title>3日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/</guid><description>&lt;h1 id="3日目">
+ 3日目
+ &lt;a class="anchor" href="#3%e6%97%a5%e7%9b%ae">#&lt;/a>
+&lt;/h1>
+&lt;p>2日目まででタスク一覧をサーバに対して要求して、レスポンスに応じてタスク一覧を画面に描画するフロントエンドができました。
+ただ、現時点でリクエストに対して応答するバックエンドがまだありませんので、これを作っていきましょう。&lt;/p></description></item><item><title>4日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/</guid><description>&lt;h1 id="4日目">
+ 4日目
+ &lt;a class="anchor" href="#4%e6%97%a5%e7%9b%ae">#&lt;/a>
+&lt;/h1>
+&lt;p>3日まででReactで作ったフロントエンドとSpring Bootで作ったバックエンドを連携させることができました。
+しかし、タスクを表示することができましたが、タスクを追加する機能がまだありません。
+4日目からはどんどん機能を追加してみましょう。&lt;/p></description></item><item><title>5日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/</guid><description>&lt;h1 id="5日目">
+ 5日目
+ &lt;a class="anchor" href="#5%e6%97%a5%e7%9b%ae">#&lt;/a>
+&lt;/h1>
+&lt;p>ではTodoを作成するバックエンドAPIを作成していきましょう。&lt;/p>
+&lt;h2 id="タスク作成バックエンドapi">
+ タスク作成バックエンドAPI
+ &lt;a class="anchor" href="#%e3%82%bf%e3%82%b9%e3%82%af%e4%bd%9c%e6%88%90%e3%83%90%e3%83%83%e3%82%af%e3%82%a8%e3%83%b3%e3%83%89api">#&lt;/a>
+&lt;/h2>
+&lt;h3 id="テスト">
+ テスト
+ &lt;a class="anchor" href="#%e3%83%86%e3%82%b9%e3%83%88">#&lt;/a>
+&lt;/h3>
+&lt;p>まず、サーバのテストを書いてみましょう。
+&lt;code>POST /todos&lt;/code>に対してJSONをボディにセットして、リクエストしたときの、 レスポンスコードとレスポンスデータを確認するテストを書いてみます。&lt;/p></description></item><item><title>6日目</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/</guid><description>&lt;h1 id="6日目">
+ 6日目
+ &lt;a class="anchor" href="#6%e6%97%a5%e7%9b%ae">#&lt;/a>
+&lt;/h1>
+&lt;p>クライアントとサーバを連携させてタスクを作成することができるようになったので、シナリオテストを作成していきましょう。&lt;/p>
+&lt;h2 id="e2eテストの環境構築">
+ e2eテストの環境構築
+ &lt;a class="anchor" href="#e2e%e3%83%86%e3%82%b9%e3%83%88%e3%81%ae%e7%92%b0%e5%a2%83%e6%a7%8b%e7%af%89">#&lt;/a>
+&lt;/h2>
+&lt;p>まずe2eテスト用の環境を作成していきましょう。&lt;/p></description></item></channel></rss>

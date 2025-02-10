@@ -1,1 +1,37 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Developerのプラクティス on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/</link><description>Recent content in Developerのプラクティス on Fujitsu Agile Development Guide</description><generator>Hugo -- gohugo.io</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/index.xml" rel="self" type="application/rss+xml"/><item><title>TDD</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/tdd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/tdd/</guid><description>TDD # 概要 # テスト駆動開発（Test-Driven Development; TDD）は、先にテストを書き、次に機能の実装し、その後コードのリファクタリングを行うという</description></item><item><title>CI/CD</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/cicd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/cicd/</guid><description>CI/CD # 概要 # CI/CDとは継続的インテグレーション（CI）と継続的デリバリー（CD）を組み合わせたプラクティスです。ビルド/テスト/デプロイを</description></item><item><title>ペアプログラミング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/pairprogramming/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/pairprogramming/</guid><description>ペアプログラミング # 概要 # ペアプログラミングは、開発者がペアになってプログラミングを行うという手法です。 ドライバーとナビゲーターの二人一組で</description></item><item><title>ソロプログラミング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/soroprogramming/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/soroprogramming/</guid><description>ソロプログラミング # 概要 # ソロプログラミングは、開発者が1人でプログラミングを行うという手法です。これまで多くのSIの現場で採用されており、</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Developerのプラクティス on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/</link><description>Recent content in Developerのプラクティス on Fujitsu Agile Development Guide</description><generator>Hugo</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/index.xml" rel="self" type="application/rss+xml"/><item><title>TDD</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/tdd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/tdd/</guid><description>&lt;h1 id="tdd">
+ TDD
+ &lt;a class="anchor" href="#tdd">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>テスト駆動開発（Test-Driven Development; TDD）は、先にテストを書き、次に機能の実装し、その後コードのリファクタリングを行うという工程を繰り返す開発手法です。&lt;br>
+&lt;a href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/#テストファーストの開発">テストファーストの開発&lt;/a>、&lt;a href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/#テスト駆動開発とは">テスト駆動開発とは&lt;/a>も合わせて参照してください。&lt;/p></description></item><item><title>CI/CD</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/cicd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/cicd/</guid><description>&lt;h1 id="cicd">
+ CI/CD
+ &lt;a class="anchor" href="#cicd">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>CI/CDとは継続的インテグレーション（CI）と継続的デリバリー（CD）を組み合わせたプラクティスです。ビルド/テスト/デプロイを自動化することで、繰り返し実行が可能となります。&lt;/p></description></item><item><title>ペアプログラミング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/pairprogramming/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/pairprogramming/</guid><description>&lt;h1 id="ペアプログラミング">
+ ペアプログラミング
+ &lt;a class="anchor" href="#%e3%83%9a%e3%82%a2%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%9f%e3%83%b3%e3%82%b0">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>ペアプログラミングは、開発者がペアになってプログラミングを行うという手法です。
+ドライバーとナビゲーターの二人一組でコードを書きます。
+ドライバーはコードを書くのに集中し、ナビゲーターは設計を頭に浮かべたりしてドライバーの進む道を提示したり助言したりします。&lt;/p></description></item><item><title>ソロプログラミング</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/soroprogramming/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/soroprogramming/</guid><description>&lt;h1 id="ソロプログラミング">
+ ソロプログラミング
+ &lt;a class="anchor" href="#%e3%82%bd%e3%83%ad%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%9f%e3%83%b3%e3%82%b0">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>ソロプログラミングは、開発者が1人でプログラミングを行うという手法です。これまで多くのSIの現場で採用されており、
+開発者は設計・開発・テストを1人で黙々と作業します。&lt;/p></description></item></channel></rss>

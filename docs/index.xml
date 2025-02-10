@@ -1,1 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docs on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/</link><description>Recent content in Docs on Fujitsu Agile Development Guide</description><generator>Hugo -- gohugo.io</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>はじめに</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/</guid><description>はじめに # 近年アジャイルや内製化が叫ばれて久しいですが、それは弊社でも同じです。 しかし、アジャイル開発はこれまで行われてきたウォーターフォー</description></item><item><title>おわりに</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/</guid><description>おわりに # まず、あなたは本書を最後まで読み切りました！お疲れさまです！ あなたはアジャイル開発者への第一歩を踏み出しました。 「本書を理解したら</description></item><item><title>推奨書籍</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/</guid><description>推奨書籍 # ここでは特定の言語、アーキテクチャに依存しないものを推挙しています。 リーダブルコード # https://www.amazon.co.jp/dp/4873115655/ ここで紹介するまでも無いと思いますが、チー</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Docs on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/</link><description>Recent content in Docs on Fujitsu Agile Development Guide</description><generator>Hugo</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>はじめに</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/introduction/</guid><description>&lt;h1 id="はじめに">
+ はじめに
+ &lt;a class="anchor" href="#%e3%81%af%e3%81%98%e3%82%81%e3%81%ab">#&lt;/a>
+&lt;/h1>
+&lt;p>近年アジャイルや内製化が叫ばれて久しいですが、それは弊社でも同じです。
+しかし、アジャイル開発はこれまで行われてきたウォーターフォール開発と違って、
+画一的な開発では立ち行かないもので、それ故にナレッジの明文化がなされていなかった分野でもあります。&lt;/p></description></item><item><title>おわりに</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/inclosing/</guid><description>&lt;h1 id="おわりに">
+ おわりに
+ &lt;a class="anchor" href="#%e3%81%8a%e3%82%8f%e3%82%8a%e3%81%ab">#&lt;/a>
+&lt;/h1>
+&lt;p>まず、あなたは本書を最後まで読み切りました！お疲れさまです！
+あなたはアジャイル開発者への第一歩を踏み出しました。&lt;/p>
+&lt;p>「本書を理解したらアジャイル開発者なのでは？」と思われたかもしれません。
+しかし、残念ながらそうではなく、本書はアジャイル開発者への第一歩に過ぎません。
+また、特定の研修やプログラムを受けたらアジャイル開発者になるかというとそういうものでありません。&lt;/p></description></item><item><title>推奨書籍</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/recommendedbooks/</guid><description>&lt;h1 id="推奨書籍">
+ 推奨書籍
+ &lt;a class="anchor" href="#%e6%8e%a8%e5%a5%a8%e6%9b%b8%e7%b1%8d">#&lt;/a>
+&lt;/h1>
+&lt;p>ここでは特定の言語、アーキテクチャに依存しないものを推挙しています。&lt;/p>
+&lt;h2 id="リーダブルコード">
+ リーダブルコード
+ &lt;a class="anchor" href="#%e3%83%aa%e3%83%bc%e3%83%80%e3%83%96%e3%83%ab%e3%82%b3%e3%83%bc%e3%83%89">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;a href="https://www.amazon.co.jp/dp/4873115655/">https://www.amazon.co.jp/dp/4873115655/&lt;/a>&lt;/p>
+&lt;p>ここで紹介するまでも無いと思いますが、チーム開発における必読の本で、
+この本を読まずにプロダクト開発に参画するのは他人の家に土足で上がり込むようなものです。&lt;/p></description></item></channel></rss>

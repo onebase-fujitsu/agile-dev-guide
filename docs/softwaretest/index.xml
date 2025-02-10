@@ -1,1 +1,38 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ソフトウェアテスト on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/</link><description>Recent content in ソフトウェアテスト on Fujitsu Agile Development Guide</description><generator>Hugo -- gohugo.io</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/index.xml" rel="self" type="application/rss+xml"/><item><title>ソフトウェアテストを始めよう</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/overview/</guid><description>ソフトウェアテストを始めよう # ここまでアジャイルやスクラム、XPについて学んできました。 それぞれ、マインドセットや枠組みの話でしたので 「結局</description></item><item><title>ウォーミングアップ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/</guid><description>ウォーミングアップ # ここではテスト駆動開発の手法で極々簡単なコンソールアプリケーションを作ってみようと思います。 開発言語はここではJavaを</description></item><item><title>ボウリングゲーム</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/</guid><description>ボウリングゲーム # 最初の一歩ではウォーミングアップとしてFizzBuzzを書いてみました。 ここでは少しだけ難易度を上げたより実践的な例として</description></item><item><title>テストダブル</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/</guid><description>テストダブル # テスト駆動開発の開発の流れがわかってきたところで、次にテストダブルを使用したテストについて学んでいきましょう。 テストダブルとは</description></item><item><title>E2Eテスト</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/</guid><description>E2Eテスト # E2Eテストとは # ここまでソフトウェアの単体テストやインテグレーションテストのやり方を見てきました。 しかし、ServerやCl</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ソフトウェアテスト on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/</link><description>Recent content in ソフトウェアテスト on Fujitsu Agile Development Guide</description><generator>Hugo</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/index.xml" rel="self" type="application/rss+xml"/><item><title>ソフトウェアテストを始めよう</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/overview/</guid><description>&lt;h1 id="ソフトウェアテストを始めよう">
+ ソフトウェアテストを始めよう
+ &lt;a class="anchor" href="#%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2%e3%83%86%e3%82%b9%e3%83%88%e3%82%92%e5%a7%8b%e3%82%81%e3%82%88%e3%81%86">#&lt;/a>
+&lt;/h1>
+&lt;p>ここまでアジャイルやスクラム、XPについて学んできました。
+それぞれ、マインドセットや枠組みの話でしたので
+「結局、具体的にどうやって開発するんだ？」と思われた方も多いと思います。&lt;/p></description></item><item><title>ウォーミングアップ</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/</guid><description>&lt;h1 id="ウォーミングアップ">
+ ウォーミングアップ
+ &lt;a class="anchor" href="#%e3%82%a6%e3%82%a9%e3%83%bc%e3%83%9f%e3%83%b3%e3%82%b0%e3%82%a2%e3%83%83%e3%83%97">#&lt;/a>
+&lt;/h1>
+&lt;p>ここではテスト駆動開発の手法で極々簡単なコンソールアプリケーションを作ってみようと思います。
+開発言語はここではJavaを使用しますが、
+これから挙げる例題はいずれも有名な問題を題材に取り上げますので、お好きな言語で挑戦されてみてください。&lt;/p></description></item><item><title>ボウリングゲーム</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/</guid><description>&lt;h1 id="ボウリングゲーム">
+ ボウリングゲーム
+ &lt;a class="anchor" href="#%e3%83%9c%e3%82%a6%e3%83%aa%e3%83%b3%e3%82%b0%e3%82%b2%e3%83%bc%e3%83%a0">#&lt;/a>
+&lt;/h1>
+&lt;p>最初の一歩ではウォーミングアップとしてFizzBuzzを書いてみました。
+ここでは少しだけ難易度を上げたより実践的な例としてボウリングのスコア計算のプログラムを書いてみましょう。&lt;/p></description></item><item><title>テストダブル</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/</guid><description>&lt;h1 id="テストダブル">
+ テストダブル
+ &lt;a class="anchor" href="#%e3%83%86%e3%82%b9%e3%83%88%e3%83%80%e3%83%96%e3%83%ab">#&lt;/a>
+&lt;/h1>
+&lt;p>テスト駆動開発の開発の流れがわかってきたところで、次にテストダブルを使用したテストについて学んでいきましょう。&lt;/p>
+&lt;h2 id="テストダブルとは">
+ テストダブルとは
+ &lt;a class="anchor" href="#%e3%83%86%e3%82%b9%e3%83%88%e3%83%80%e3%83%96%e3%83%ab%e3%81%a8%e3%81%af">#&lt;/a>
+&lt;/h2>
+&lt;p>テスト対象となるクラスやメソッドが、ほかのクラスに依存していないケースはほとんどありません。
+依存しているクラスもまた、ほかのクラスに依存しています。&lt;/p></description></item><item><title>E2Eテスト</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/</guid><description>&lt;h1 id="e2eテスト">
+ E2Eテスト
+ &lt;a class="anchor" href="#e2e%e3%83%86%e3%82%b9%e3%83%88">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="e2eテストとは">
+ E2Eテストとは
+ &lt;a class="anchor" href="#e2e%e3%83%86%e3%82%b9%e3%83%88%e3%81%a8%e3%81%af">#&lt;/a>
+&lt;/h2>
+&lt;p>ここまでソフトウェアの単体テストやインテグレーションテストのやり方を見てきました。
+しかし、ServerやClientがきちんと連携してシステムが正しく振る舞うことができるかどうかはまだわかりません。
+そこで実施するのがE2E(End to End)テストというシステム全体の通しテストです。受け入れテストと呼ばれる場合もあります。&lt;/p></description></item></channel></rss>

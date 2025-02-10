@@ -1,1 +1,56 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SOLID原則 on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/</link><description>Recent content in SOLID原則 on Fujitsu Agile Development Guide</description><generator>Hugo -- gohugo.io</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/index.xml" rel="self" type="application/rss+xml"/><item><title>単一責任の原則(SRP)</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/</guid><description>単一責任の原則(The Single Responsibility Principle) # 単一責任の原則(SRP)とはなにか？ # 単一責任の原則(SRP)とはクラスを変更する理由は1つ以上存在してはなら</description></item><item><title>オープン・クローズドの原則(OCP)</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/</guid><description>オープン・クローズドの原則(The Open Closed Principle) # オープン・クローズドの原則(OCP)とはなにか？ # オープン・クローズドの原則(OCP)とは ソフトウ</description></item><item><title>リスコフの置換原則(LSP)</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/</guid><description>リスコフの置換原則(The Liskov Substitution Principle) # リスコフの置換原則(LSP)とはなにか？ # リスコフの置換原則(LSP)とは 派生型はその基本型と置換可能でな</description></item><item><title>依存性逆転の原則(DIP)</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/</guid><description>依存性逆転の原則(The Dependency Inversion Principle) # 依存性逆転の原則とは # 依存性逆転の原則(DIP)とは 上位のモジュールは下位のモジュールに依存してはいけない。</description></item><item><title>インターフェース分離の原則(ISP)</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/</guid><description>インターフェース分離の原則(The Interface Segregation Principle) # インタフェース分離の原則とは # インターフェス分離の原則(ISP)とは クライアントにクライアントが利</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SOLID原則 on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/</link><description>Recent content in SOLID原則 on Fujitsu Agile Development Guide</description><generator>Hugo</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/index.xml" rel="self" type="application/rss+xml"/><item><title>単一責任の原則(SRP)</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/</guid><description>&lt;h1 id="単一責任の原則the-single-responsibility-principle">
+ 単一責任の原則(The Single Responsibility Principle)
+ &lt;a class="anchor" href="#%e5%8d%98%e4%b8%80%e8%b2%ac%e4%bb%bb%e3%81%ae%e5%8e%9f%e5%89%87the-single-responsibility-principle">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="単一責任の原則srpとはなにか">
+ 単一責任の原則(SRP)とはなにか？
+ &lt;a class="anchor" href="#%e5%8d%98%e4%b8%80%e8%b2%ac%e4%bb%bb%e3%81%ae%e5%8e%9f%e5%89%87srp%e3%81%a8%e3%81%af%e3%81%aa%e3%81%ab%e3%81%8b">#&lt;/a>
+&lt;/h2>
+&lt;p>単一責任の原則(SRP)とは&lt;strong>クラスを変更する理由は1つ以上存在してはならない&lt;/strong>という原則です。&lt;/p></description></item><item><title>オープン・クローズドの原則(OCP)</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/</guid><description>&lt;h1 id="オープンクローズドの原則the-open-closed-principle">
+ オープン・クローズドの原則(The Open Closed Principle)
+ &lt;a class="anchor" href="#%e3%82%aa%e3%83%bc%e3%83%97%e3%83%b3%e3%82%af%e3%83%ad%e3%83%bc%e3%82%ba%e3%83%89%e3%81%ae%e5%8e%9f%e5%89%87the-open-closed-principle">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="オープンクローズドの原則ocpとはなにか">
+ オープン・クローズドの原則(OCP)とはなにか？
+ &lt;a class="anchor" href="#%e3%82%aa%e3%83%bc%e3%83%97%e3%83%b3%e3%82%af%e3%83%ad%e3%83%bc%e3%82%ba%e3%83%89%e3%81%ae%e5%8e%9f%e5%89%87ocp%e3%81%a8%e3%81%af%e3%81%aa%e3%81%ab%e3%81%8b">#&lt;/a>
+&lt;/h2>
+&lt;p>オープン・クローズドの原則(OCP)とは
+&lt;strong>ソフトウェアの構成要素(クラス、モジュール、関数など)は拡張に対して開いて(オープン)いて、修正に対しては閉じて(クローズド)いなければならない&lt;/strong>
+という原則です。&lt;/p></description></item><item><title>リスコフの置換原則(LSP)</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/lsp/</guid><description>&lt;h1 id="リスコフの置換原則the-liskov-substitution-principle">
+ リスコフの置換原則(The Liskov Substitution Principle)
+ &lt;a class="anchor" href="#%e3%83%aa%e3%82%b9%e3%82%b3%e3%83%95%e3%81%ae%e7%bd%ae%e6%8f%9b%e5%8e%9f%e5%89%87the-liskov-substitution-principle">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="リスコフの置換原則lspとはなにか">
+ リスコフの置換原則(LSP)とはなにか？
+ &lt;a class="anchor" href="#%e3%83%aa%e3%82%b9%e3%82%b3%e3%83%95%e3%81%ae%e7%bd%ae%e6%8f%9b%e5%8e%9f%e5%89%87lsp%e3%81%a8%e3%81%af%e3%81%aa%e3%81%ab%e3%81%8b">#&lt;/a>
+&lt;/h2>
+&lt;p>リスコフの置換原則(LSP)とは
+&lt;strong>派生型はその基本型と置換可能でなければならない&lt;/strong>
+というものです。
+この原則に従わなかったたときどういう事が起こるでしょうか？&lt;/p></description></item><item><title>依存性逆転の原則(DIP)</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/</guid><description>&lt;h1 id="依存性逆転の原則the-dependency-inversion-principle">
+ 依存性逆転の原則(The Dependency Inversion Principle)
+ &lt;a class="anchor" href="#%e4%be%9d%e5%ad%98%e6%80%a7%e9%80%86%e8%bb%a2%e3%81%ae%e5%8e%9f%e5%89%87the-dependency-inversion-principle">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="依存性逆転の原則とは">
+ 依存性逆転の原則とは
+ &lt;a class="anchor" href="#%e4%be%9d%e5%ad%98%e6%80%a7%e9%80%86%e8%bb%a2%e3%81%ae%e5%8e%9f%e5%89%87%e3%81%a8%e3%81%af">#&lt;/a>
+&lt;/h2>
+&lt;p>依存性逆転の原則(DIP)とは&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>上位のモジュールは下位のモジュールに依存してはいけない。どちらのモジュールも「抽象」に依存すべきである。&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>「抽象」は実装の詳細に依存してはいけない。実装の詳細が「抽象」に依存すべきである。&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;p>というものです。&lt;/p></description></item><item><title>インターフェース分離の原則(ISP)</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/isp/</guid><description>&lt;h1 id="インターフェース分離の原則the-interface-segregation-principle">
+ インターフェース分離の原則(The Interface Segregation Principle)
+ &lt;a class="anchor" href="#%e3%82%a4%e3%83%b3%e3%82%bf%e3%83%bc%e3%83%95%e3%82%a7%e3%83%bc%e3%82%b9%e5%88%86%e9%9b%a2%e3%81%ae%e5%8e%9f%e5%89%87the-interface-segregation-principle">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="インタフェース分離の原則とは">
+ インタフェース分離の原則とは
+ &lt;a class="anchor" href="#%e3%82%a4%e3%83%b3%e3%82%bf%e3%83%95%e3%82%a7%e3%83%bc%e3%82%b9%e5%88%86%e9%9b%a2%e3%81%ae%e5%8e%9f%e5%89%87%e3%81%a8%e3%81%af">#&lt;/a>
+&lt;/h2>
+&lt;p>インターフェス分離の原則(ISP)とは &lt;strong>クライアントにクライアントが利用しないメソッドへの依存を強制してはいけない&lt;/strong> という原則です。
+この原則は「太った」インタフェースをうまくシェイプアップしてくれるものです。
+「太った」インタフェースを持つクラスは多数のインタフェースを抱え込んでおり、部分的にしかインタフェース同士が強い関連性を持っていません。
+このことは、視点を変えると強い関連性があるインタフェース同士をまとめてグループ化できるということです。
+グループ化されたメンバ関数は、それぞれ異なるクライアントにサービスを提供することになります。
+なぜなら、クライアントによって必要なメンバ関数は異なるからです。&lt;/p></description></item></channel></rss>

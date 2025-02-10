@@ -1,1 +1,64 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Swift Method on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/</link><description>Recent content in Swift Method on Fujitsu Agile Development Guide</description><generator>Hugo -- gohugo.io</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/index.xml" rel="self" type="application/rss+xml"/><item><title>Swift Method とは</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/overview/</guid><description>Swift Method とは # 背景 # レガシーシステムをモダナイズする際に以下のような問題点に直面します。 レガシーシステムについて知識のある人がいなくなっている 言</description></item><item><title>Event Storming</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/eventstorming/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/eventstorming/</guid><description>Event Storming # 概要 # Event Stormingは、既存システムをいくつかの小さい単位のサービスに分解したいときに使うアクティビティの一つです。 既存システムの</description></item><item><title>Boris</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/boris/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/boris/</guid><description>Boris # 概要 # Borisは既存システムをいくつかの小さい単位のサービスに分解したいときに使うアクティビティの一つです。サービス候補（Event S</description></item><item><title>SnapE</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/snape/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/snape/</guid><description>SnapE # 概要 # SnapEは既存システムをいくつかの小さい単位のサービスに分解したいときに使うアクティビティの一つです。サービス候補（Event S</description></item><item><title>Slices</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/slices/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/slices/</guid><description>Slices # 概要 # Slicesは、どこから開発を始めるか決めるアクティビティです。Swiftメソッド全体の位置付けとしては4つ目のアクティビティとな</description></item><item><title>Tech Choice</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/techchoice/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/techchoice/</guid><description>Tech Choice # 概要 # Tech Choiceは、開発に着手するにあたってチームで話し合ってどの技術を使うか決めるアクティビティです。Swiftメソッド全体の位</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Swift Method on Fujitsu Agile Development Guide</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/</link><description>Recent content in Swift Method on Fujitsu Agile Development Guide</description><generator>Hugo</generator><language>ja</language><atom:link href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/index.xml" rel="self" type="application/rss+xml"/><item><title>Swift Method とは</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/overview/</guid><description>&lt;h1 id="swift-method-とは">
+ Swift Method とは
+ &lt;a class="anchor" href="#swift-method-%e3%81%a8%e3%81%af">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="背景">
+ 背景
+ &lt;a class="anchor" href="#%e8%83%8c%e6%99%af">#&lt;/a>
+&lt;/h2>
+&lt;p>レガシーシステムをモダナイズする際に以下のような問題点に直面します。&lt;/p>
+&lt;ul>
+&lt;li>レガシーシステムについて知識のある人がいなくなっている&lt;/li>
+&lt;li>言語、テクノロジーが古く理解できない&lt;/li>
+&lt;li>ソースコードのコメントや設計書等がメンテナンスされていない&lt;/li>
+&lt;li>その場しのぎの技術負債が溜まっている&lt;/li>
+&lt;li>どの機能が重要なのか、優先順位が分からない&lt;/li>
+&lt;li>要件が変わっている&lt;/li>
+&lt;/ul>
+&lt;p>このようなレガシーシステムのブラックボックス化が招く問題により、
+メンテナンスや、新規要件への対応、影響調査が難しくなり、
+必要のない資料、機能、プログラムの解析に時間を使うことになってしまいます。&lt;/p></description></item><item><title>Event Storming</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/eventstorming/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/eventstorming/</guid><description>&lt;h1 id="event-storming">
+ Event Storming
+ &lt;a class="anchor" href="#event-storming">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>Event Stormingは、既存システムをいくつかの小さい単位のサービスに分解したいときに使うアクティビティの一つです。
+既存システムの「現状」と「あるべき姿」を可視化し、チーム全員が共通の認識を持つためのアクティビティです。
+Swiftメソッド全体の位置付けとしては1つ目のアクティビティとなっています。&lt;br>
+Event Stormingの大まかな流れは以下の通りです。&lt;/p></description></item><item><title>Boris</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/boris/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/boris/</guid><description>&lt;h1 id="boris">
+ Boris
+ &lt;a class="anchor" href="#boris">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>Borisは既存システムをいくつかの小さい単位のサービスに分解したいときに使うアクティビティの一つです。サービス候補（Event Stormingのアウトプット）間の繋がり（通信の仕方やデータ）をチームで洗い出し、ディスカッションすることで、サービス間の関係に対してチームが共通の認識を持つことができます。Swiftメソッド全体の位置付けとしては2つ目のアクティビティとなっています。&lt;/p></description></item><item><title>SnapE</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/snape/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/snape/</guid><description>&lt;h1 id="snape">
+ SnapE
+ &lt;a class="anchor" href="#snape">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>SnapEは既存システムをいくつかの小さい単位のサービスに分解したいときに使うアクティビティの一つです。サービス候補（Event Stormingのアウトプット）の中身（通信の仕方や所有データ、ストーリ、リスク・・等）をチームで洗い出し、ディスカッションすることで、各サービスの中身に対して、チームが共通の認識を持つことができます。Swiftメソッド全体の位置付けとしては3つ目のアクティビティとなっています。&lt;/p></description></item><item><title>Slices</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/slices/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/slices/</guid><description>&lt;h1 id="slices">
+ Slices
+ &lt;a class="anchor" href="#slices">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>Slicesは、どこから開発を始めるか決めるアクティビティです。Swiftメソッド全体の位置付けとしては4つ目のアクティビティとなっています。&lt;br>
+Slicesの大まかな流れは以下の通りです。&lt;/p></description></item><item><title>Tech Choice</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/techchoice/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/framework/modernization/swift/techchoice/</guid><description>&lt;h1 id="tech-choice">
+ Tech Choice
+ &lt;a class="anchor" href="#tech-choice">#&lt;/a>
+&lt;/h1>
+&lt;h2 id="概要">
+ 概要
+ &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
+&lt;/h2>
+&lt;p>Tech Choiceは、開発に着手するにあたってチームで話し合ってどの技術を使うか決めるアクティビティです。Swiftメソッド全体の位置付けとしては5つ目のアクティビティとなっています。Slicesで開発着手するシナリオの優先順位を決めた後に実施します。&lt;/p></description></item></channel></rss>
