@@ -23,13 +23,24 @@ We are currently not accepting contributions from outside Fujitsu.
 
    Follow the instructions on the [Hugo](https://gohugo.io/getting-started/installing/) website for installation.
 
+   ```shell
+   brew install hugo
+    ```
+   Clone agile-dev-guide to any working directory.
+
 3. launch development server
 
    After moving to the working directory...
+
+   Update submodules.
+   ```shell
+   git submodule update --init --recursive
+   ```
    
-    ```shell
-    hugo server -D
-    ```
+   Start the hugo server.
+   ```shell
+   hugo server -D
+   ```
    
 4. browse [http://localhost:1313/agile-dev-guide/](http://localhost:1313/agile-dev-guide/) 🚀
 
