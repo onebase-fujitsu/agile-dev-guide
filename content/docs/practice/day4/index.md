@@ -13,12 +13,12 @@ bookToc: true
 ## タスクの追加画面を作る
 
 いまClientのアプリケーションにはまだルーターの機能がありません。
-例えば、 [http://localhost:3000/](http://localhost:3000/) にアクセスしてもHome画面が表示されていますし、
-[http://localhost:3000/hogehoge](http://localhost:3000/hogehoge) にアクセスしてもHome画面が表示されます。
+例えば、 [http://localhost:5173/](http://localhost:5173/) にアクセスしてもHome画面が表示されていますし、
+[http://localhost:5173/hogehoge](http://localhost:5173/hogehoge) にアクセスしてもHome画面が表示されます。
 
 これはちょっとイケてないので、ルーターの機能を実装してみます。
-ここでは [http://localhost:3000/](http://localhost:3000/) にアクセスするとHome画面が、
-そして [http://localhost:3000/newTask](http://localhost:3000/newTask) にアクセスするとタスク管理画面が開くようにしてみましょう。
+ここでは [http://localhost:5173/](http://localhost:5173/) にアクセスするとHome画面が、
+そして [http://localhost:5173/newTask](http://localhost:5173/newTask) にアクセスするとタスク管理画面が開くようにしてみましょう。
 
 ### ルーターの導入
 
@@ -29,31 +29,35 @@ bookToc: true
 まずreact-router-domを導入します。
 
 ```shell
-npm install react-router-dom @types/react-router-dom
+npm install react-router-dom@^5.3.4 @types/react-router-dom@^5.3.3
 ```
 
 そして、App.tsxを以下のように編集してみましょう。
 
 ```typescript jsx
 // App.tsx
-import {Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import Home from './pages/Home'
 
-const App = () => (
-    <div className="App">
-        <Routes>
-            <Route path="/" element={<Home/>}/>
-        </Routes>
-    </div>
-)
+function App() {
+    return (
+        <div className="App">
+            <BrowserRouter>
+                <Switch>
+                    <Route path="/" exact render={() => <Home />} />
+                </Switch>
+            </BrowserRouter>
+        </div>
+    )
+}
 
 export default App
 ```
 
-次にindex.tsxを以下のように編集してみましょう。
+次にmain.tsxを以下のように編集してみましょう。
 
 ```typescript jsx
-// index.tsx
+// main.tsx
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
@@ -73,14 +77,14 @@ root.render(
 )
 ```
 
-この状態で [http://localhost:3000/](http://localhost:3000/) にアクセスするとHome画面が表示されます。ここはこれまでの動作と変わりません。
-そこで [http://localhost:3000/hoge](http://localhost:3000/hoge) にアクセスすると、先程と代わって真っ白な画面になると思います。
+この状態で [http://localhost:5173/](http://localhost:5173/) にアクセスするとHome画面が表示されます。ここはこれまでの動作と変わりません。
+そこで [http://localhost:5173/hoge](http://localhost:5173/hoge) にアクセスすると、先程と代わって真っ白な画面になると思います。
 
 つまりこれは`/`というパスだったらホームコンポーネントを表示するよという設定なわけです。
 
 ### ヘッダーの作り込み
 
-ではヘッダーにメニューを作り込んでいきましょう。
+ではヘッダーにメニューを作り込んでいきましょう。  
 せっかくなので、ここでデザインも作り込んでいきます。
 
 まずテストから。
@@ -88,7 +92,7 @@ root.render(
 ```typescript jsx
 // Header.test.tsx
 import {cleanup, render, screen} from '@testing-library/react'  // 変更
-import Header from '../../components/Header'
+import Header from '../../src/components/Header'
 
 describe('Header', () => {
   afterEach(() => {
@@ -210,7 +214,7 @@ Routerに依存しているのでLinkがRouterに依存しているのにそれ�
 ```typescript jsx
 // Header.test.tsx
 import {cleanup, render, screen} from '@testing-library/react'
-import Header from '../../components/Header'
+import Header from '../../src/components/Header'
 import {BrowserRouter} from "react-router-dom";
 
 describe('Header', () => {
@@ -261,7 +265,7 @@ describe('Header', () => {
 メニューができて芋っぽさがなくなりました。しかし、New Taskをクリックすると真っ白な画面になってしまいます。
 
 ここまでのソースは
-[https://github.com/Onebase-Fujitsu/todo-app-client/tree/step5](https://github.com/Onebase-Fujitsu/todo-app-client/tree/step5)
+[https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step7](https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step7)
 に置いてあります。
 
 ### タスク作成画面の作成
@@ -336,7 +340,7 @@ NewTaskFormコンポーネントにはタスクの入力とテキストボック
 ```typescript jsx
 // NewTaskForm.test.tsx
 import {cleanup, fireEvent, render, screen} from '@testing-library/react'
-import NewTaskForm from "../../components/NewTaskForm";
+import NewTaskForm from "../../src/components/NewTaskForm";
 
 
 describe('NewEntryFormコンポーネント', () => {
@@ -409,9 +413,9 @@ export default App
 
 App.tsxにルーティング設定を追加しました。この状態でメニューをクリックすると画面が切り替わるようになったはずです。
 
-![newTask画面](newTaskInitial.jpg)
+![newTask画面](newTaskInitial.png)
 
-せっかくなのでフォームにデザインを適用してみます。
+フォームにデザインを適用してみます。
 
 ```typescript jsx
 // NewTaskForm.tsx
@@ -544,7 +548,7 @@ a {
 デザインが適用されてだいぶアプリっぽくなりましたね。
 
 ここまでのソースは
-[https://github.com/Onebase-Fujitsu/todo-app-client/tree/step6](https://github.com/Onebase-Fujitsu/todo-app-client/tree/step6)
+[https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step8](https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step8)
 に置いてあります。
 
 ## タスク作成機能の作成
@@ -556,7 +560,7 @@ a {
 // TodoApi.test.ts
 import MockAdapter from 'axios-mock-adapter'
 import axios from 'axios'
-import {getTodos, postTodos} from '../../features/TodoApi'
+import {getTodos, postTodos} from '../../src/features/TodoApi'
 
 describe('TodoApi', () => {
   
@@ -590,24 +594,28 @@ describe('TodoApi', () => {
 import axios from 'axios'
 
 export interface Todo {
-  id: number
-  title: string
-  completed: boolean
+    id: number
+    title: string
+    completed: boolean
 }
 
 export const getTodos = async () => {
-  const response = await axios.get<Todo[]>('/todos')
-  return response.data
+    const response = await axios.get<Todo[]>('/todos')
+    return response.data
 }
 
 export const postTodos = async (title: string) => {
-  const requestJson = {title}
-  const headers = {
-    'X-Requested-With': 'XMLHttpRequest',
-    'Content-Type': 'application/json',
-  }
-  const response = await axios.post<Todo>('/todos', JSON.stringify(requestJson), {headers})
-  return response.data
+    const requestJson = {title}
+    const headers = {
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/json',
+    }
+    const response = await axios.post<Todo>(
+        '/todos',
+        JSON.stringify(requestJson),
+        {headers},
+    )
+    return response.data
 }
 ```
 
@@ -622,7 +630,7 @@ export const postTodos = async (title: string) => {
 ```typescript jsx
 // NewTaskForm.test.tsx
 import {cleanup, fireEvent, render, screen} from '@testing-library/react'
-import NewTaskForm from "../../components/NewTaskForm";
+import NewTaskForm from "../../src/components/NewTaskForm";
 import MockAdapter from 'axios-mock-adapter'
 import axios from 'axios'
 
@@ -641,6 +649,7 @@ describe('NewEntryFormコンポーネント', () => {
 
   it("初期表示", () => {
     render(<NewTaskForm/>)
+      
     expect(screen.queryByLabelText('Title')).toBeTruthy()
     expect(screen.getByTestId("TitleInput")).toHaveValue('')
     expect(screen.queryByText('Send')).toBeTruthy()
@@ -649,6 +658,7 @@ describe('NewEntryFormコンポーネント', () => {
   it("タスク名を編集できる", () => {
     render(<NewTaskForm/>)
     fireEvent.change(screen.getByTestId('TitleInput'), {target: {value: 'title text'}})
+      
     expect(screen.getByTestId("TitleInput")).toHaveValue('title text')
   })
 
@@ -658,6 +668,7 @@ describe('NewEntryFormコンポーネント', () => {
       target: {value: 'title text'},
     })
     fireEvent.click(screen.getByText('Send'))
+      
     expect(mock.history.post[0].url).toEqual('/todos')
     expect(mock.history.post[0].data).toEqual(JSON.stringify({title: 'title text'}))
   })
@@ -672,38 +683,45 @@ describe('NewEntryFormコンポーネント', () => {
 // 中略
 
 const NewTaskForm = () => {
-  const [taskInput, setTaskInput] = useState('')
-  const todoContext = React.useContext(TodoContext)
+    const [taskInput, setTaskInput] = useState('')
+    const todoContext = useContext(TodoContext)
 
-  const handleSend = () => {
-    postTodos(taskInput).then((res) =>
-      todoContext?.setTodos([
-        ...todoContext.todos,
-        {
-          id: res.id,
-          title: res.title,
-          completed: res.completed
-        }
-      ])
-    ).catch(() => {
-    })
-  }
+    const handleSend = () => {
+        postTodos(taskInput)
+            .then((res) =>
+                todoContext?.setTodos([
+                    ...todoContext.todos,
+                    {
+                        id: res.id,
+                        title: res.title,
+                        completed: res.completed,
+                    },
+                ]),
+            )
+            .catch(() => {})
+    }
 
-  return (
-    <Wrapper data-testid='NewTaskForm'>
-      <DivForm>
-        <DivLabel>
-          <Label htmlFor='titleInput'>Title
-            <Input id='titleInput' data-testid='TitleInput' type='text' value={taskInput}
-                   onChange={(event) => setTaskInput(event.target.value)} />
-          </Label>
-        </DivLabel>
-      </DivForm>
-      <Button type='button' onClick={() => handleSend()}>
-        Send
-      </Button>
-    </Wrapper>
-  )
+    return (
+        <Wrapper data-testid="NewTaskForm">
+            <DivForm>
+                <DivLabel>
+                    <Label htmlFor="titleInput">
+                        Title
+                        <Input
+                            id="titleInput"
+                            data-testid="TitleInput"
+                            type="text"
+                            value={taskInput}
+                            onChange={(event) => setTaskInput(event.target.value)}
+                        />
+                    </Label>
+                </DivLabel>
+            </DivForm>
+            <Button type="button" onClick={() => handleSend()}>
+                Send
+            </Button>
+        </Wrapper>
+    )
 }
 
 export default NewTaskForm
@@ -788,7 +806,12 @@ const Home = () => (
 export default Home
 ```
 
-Home.tsxがだいぶスッキリしました。テストも合わせて修正してしまいましょう。
+Home.tsxがだいぶスッキリしました。
+
+テストも合わせて修正してしまいましょう。
+
+Home.tsxからロジックを移植されたので、  
+Home.test.tsxのテストを移植しApp.tsx用のテストを新規作成しました。
 
 ```typescript jsx
 // Home.test.tsx
@@ -811,6 +834,7 @@ describe('Home画面', () => {
 })
 
 ```
+
 
 ```typescript jsx
 // App.test.tsx
@@ -851,7 +875,7 @@ describe('App', () => {
 メニューからページ遷移をしても/todosにGETはされないことが確認できるはずです。
 
 ここまでのソースは
-[https://github.com/Onebase-Fujitsu/todo-app-client/tree/step7](https://github.com/Onebase-Fujitsu/todo-app-client/tree/step7)
+[https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step9](https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step9)
 に置いてあります。
 
 ---

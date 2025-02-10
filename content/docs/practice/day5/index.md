@@ -291,7 +291,7 @@ class TodoControllerTest {
 これでテストは動くはずです。データを追加できるようになったため、データを追加した後Getでレスポンスデータを確認するテストを追記しても良いでしょう。
 
 ここまでのサーバのソースコードは
-[https://github.com/Onebase-Fujitsu/todo-app-server/tree/step3](https://github.com/Onebase-Fujitsu/todo-app-server/tree/step3)
+[https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step10](https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step10)
 においてあります。
 
 ## タスク画面のデザインの適用
@@ -374,7 +374,7 @@ export default TodoList
 ![DesignedTaskList](DesignedTaskList.jpg)
 
 ここまでのクライアントのソースコードは
-[https://github.com/Onebase-Fujitsu/todo-app-client/tree/step8](https://github.com/Onebase-Fujitsu/todo-app-client/tree/step8)
+[https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step11](https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step11)
 に置いてあります。
 
 ## API設計

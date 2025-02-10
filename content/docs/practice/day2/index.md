@@ -51,7 +51,7 @@ npm install --save-dev axios-mock-adapter
 筆者は後者の方ががいいと考えています。`GET /todos`というエンドポイントからTodoを一覧で取得できることが明確だからです。
 
 さて、ではテストを書いていきましょう。
-`__test__`配下にfeaturesというディレクトリを作成し、`TodoApi.test.ts`というファイルを作成し、最初のテストを実装していきます。
+`test`配下にfeaturesというディレクトリを作成し、`TodoApi.test.ts`というファイルを作成し、最初のテストを実装していきます。
 
 ```typescript
 // TodoApi.test.ts
@@ -123,12 +123,12 @@ export const getTodos = async () => {
 
 ### タスク一覧表示コンポーネントのテスト
 
-__tests__/components配下にTodoList.test.tsxを作成しましょう。
+`test/components`配下にTodoList.test.tsxを作成しましょう。
 
 ```typescript jsx
 //TodoList.test.tsx
 import {render, screen} from '@testing-library/react'
-import TodoList from '../../components/TodoList'
+import TodoList from '../../src/components/TodoList'
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 
@@ -158,20 +158,19 @@ describe('TodoList.tsx Component', () => {
 TodoListはまだ実装されていませんので、当然失敗するはずです。
 
 ```
- FAIL  src/__tests__/components/TodoList.test.tsx
-  ● TodoList Component › ステートが空ならリストも空
+ FAIL  test/components/TodoList.test.tsx
+  ● Test suite failed to run
 
-    ReferenceError: TodoList is not defined
+    test/components/TodoList.test.tsx:3:22 - error TS2307: Cannot find module '../../src/components/TodoList' or its corresponding type declarations.
 
-      19 |   // })
-      20 |   it('ステートが空ならリストも空', () => {
-    > 21 |     render(<TodoList />)
-         |             ^
-      22 |     expect(screen.getByRole('list').hasChildNodes()).toEqual(false)
-      23 |   })
-      24 | })
+    3 import TodoList from '../../src/components/TodoList'
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-      at Object.<anonymous> (src/__tests__/components/TodoList.test.tsx:21:13)
+Test Suites: 1 failed, 3 passed, 4 total
+Tests:       3 passed, 3 total
+Snapshots:   0 total
+Time:        0.695 s, estimated 1 s
+Ran all test suites.
 ```
 
 ### タスク一覧表示コンポーネントの実装
@@ -180,7 +179,7 @@ TodoListはまだ実装されていませんので、当然失敗するはずで
 
 ```typescript jsx
 // TodoList.tsx
-import React, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import {getTodos, Todo} from '../features/TodoApi'
 
 const TodoList = () => {
@@ -195,16 +194,15 @@ const TodoList = () => {
   }, [])
 
   return (
-    <ul data-testid='TodoList'>
-      {todos.map((todo) => (
-        <li key={todo.id}>{todo.title}</li>
-      ))}
-    </ul>
+          <ul data-testid="TodoList">
+            {todos.map((todo) => (
+                    <li key={todo.id}>{todo.title}</li>
+            ))}
+          </ul>
   )
 }
 
 export default TodoList
-
 ```
 
 `useState()`は関数コンポーネントでstateを管理するためのReactが提供している関数です。
@@ -212,7 +210,7 @@ export default TodoList
 
 また`useEffect()`で非同期処理を呼び出す場合は、直接関数を実行するとメモリーリークの原因となるため注意が必要です。
 今回は`useEffect()`内で非同期関数を定義し、それを実行することで回避しています。
-`useState()`や`useEffect()`について詳しく知りたい方は[こちら](https://ja.reactjs.org/docs/hooks-intro.html)を参照してください。
+`useState()`や`useEffect()`について詳しく知りたい方は[こちら](https://ja.react.dev/reference/react/hooks)を参照してください。
 
 ### リスト表示のテスト
 
@@ -221,10 +219,10 @@ export default TodoList
 ```typescript jsx
 // TodoList.test.tsx
 import {render, screen} from '@testing-library/react'
-import TodoList from '../../components/TodoList'
+import TodoList from '../../src/components/TodoList'
 import MockAdapter from 'axios-mock-adapter'
 import axios from 'axios'
-import {act} from 'react-dom/test-utils'
+import {act} from "react";
 
 describe('TodoList.tsx Component', () => {
   let mock: MockAdapter
@@ -350,7 +348,7 @@ describe('Home画面', () => {
 
 今回はコンポーネント感でのプロパティの受け渡しに`useContext()`を利用します。
 `useContext()`を利用することで、プロパティをグローバルに管理することができます。
-また、`useContext()`も`useState()`や`useEffect（）`と同様にReact hooksの一つです。詳しく知りたい方は[こちら](https://ja.reactjs.org/docs/hooks-reference.html#usecontext)を参照してください。
+また、`useContext()`も`useState()`や`useEffect（）`と同様にReact hooksの一つです。詳しく知りたい方は[こちら](https://ja.react.dev/reference/react/useContext)を参照してください。
 
 実際のコードは以下です。
 
@@ -359,15 +357,18 @@ describe('Home画面', () => {
 ```
 src
 ├── App.tsx
-├── __tests__
 ├── components
+│    └── 省略
 ├── context
-│     └── TodoContext.tsx
+│    └── TodoContext.tsx  // 作成
 ├── features
-├── pages
+│    └── 省略
 ├── index.css
-├── index.tsx
-└── setupTests.ts
+├── main.tsx
+├── pages
+│    └── 省略
+└── vite-env.d.ts
+
 ```
 
 ```typescript jsx
@@ -388,28 +389,27 @@ export const TodoContext = createContext<InitialState | null>(null)
 
 const TodoProvider: React.FC<Props> = ({children}) => {
   const [todos, setTodos] = useState<Todo[]>([])
-  const todosValue= useMemo(() => ({todos, setTodos}), [todos, setTodos]);
+  const todosValue = useMemo(() => ({todos, setTodos}), [todos, setTodos])
   return (
-    <TodoContext.Provider value={todosValue}>
-      {children}
-    </TodoContext.Provider>
+          <TodoContext.Provider value={todosValue}>{children}</TodoContext.Provider>
   )
 }
 
 export default TodoProvider
+
 ```
 
 `TodoContext.tsx`では、`TodoContext`と`TodoProvider`の2つを定義しています。
 
 `TodoContext`はTodoの配列をとその中身を設定するための関数を持っています。また、`TodoProvider`は`TodoContext`を子コンポーネントで使用できるようにするため、`TodoContex.Provider`で子コンポーネントをラップする形になっています。
 
-次に、`TodoList.tsx`をTodoContexを使用するように修正します。
+次に、`TodoList.tsx`をTodoContextを使用するように修正します。
 
 ```typescript jsx
 // TodoList.test.tsx
 import {render, screen, waitFor} from '@testing-library/react'
 import React from 'react'
-import TodoList from '../../components/TodoList'
+import TodoList from '../../src/components/TodoList'
 
 describe('TodoList.tsx Component', () => {
   let todoContextMock: jest.Mock
@@ -462,8 +462,8 @@ const TodoList = () => {
 
   return (
     <ul data-testid='TodoList'>
-      {todoContext?.todos.map((todo) => (
-        <li key={todo.id}>{todo.title}</li>
+      {Array.isArray(todoContext?.todos) && todoContext.todos.map((todo) => (
+              <li key={todo.id}>{todo.title}</li>
       ))}
     </ul>
   )
@@ -504,7 +504,7 @@ export default TodoList
 
 ```typescript jsx
 // Home.tsx
-import React, {useContext, useEffect} from 'react'
+import {useContext, useEffect} from 'react'
 import TodoList from '../components/TodoList'
 import Header from '../components/Header'
 import {getTodos} from '../features/TodoApi'
@@ -522,10 +522,10 @@ const Home = () => {
   }, [])
 
   return (
-    <div>
-      <Header />
-      <TodoList />
-    </div>
+          <div>
+            <Header />
+            <TodoList />
+          </div>
   )
 }
 
@@ -537,22 +537,24 @@ export default Home
 これで全てのテストが通る状態になったと思います。
 
 ```
-Watch Usage: Press w to show more.
- PASS  src/__test__/features/TodoApi.test.ts
- PASS  src/__test__/components/TodoList.test.tsx
- PASS  src/__test__/pages/Home.test.tsx
+ PASS  test/features/TodoApi.test.ts
+ PASS  test/components/Header.test.tsx
+ PASS  test/components/TodoList.test.tsx
+ PASS  test/pages/Home.test.tsx
 
-Test Suites: 3 passed, 3 total
-Tests:       5 passed, 5 total
+Test Suites: 4 passed, 4 total
+Tests:       6 passed, 6 total
 Snapshots:   0 total
-Time:        0.663 s, estimated 1 s
-Ran all test suites related to changed files.
+Time:        0.973 s, estimated 1 s
+Ran all test suites.
+
+Watch Usage: Press w to show more.
 ```
 
-最後に、`Home.tsx`でTodoContextを使用できるようにするため、`index.tsx`を修正します。
+最後に、`Home.tsx`でTodoContextを使用できるようにするため、`main.tsx`を修正します。
 
 ```typescript jsx
-// index.tsx
+// main.tsx
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
@@ -561,11 +563,11 @@ import TodoProvider from './context/TodoContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
-  <React.StrictMode>
-    <TodoProvider>    // 修正
-      <App />
-    </TodoProvider>   // 修正
-  </React.StrictMode>
+        <React.StrictMode>
+          <TodoProvider>    // 修正
+            <App />
+          </TodoProvider>   // 修正
+        </React.StrictMode>
 )
 ```
 
@@ -580,14 +582,8 @@ root.render(
 
 ## クライアントの動作確認
 
-さてクライアントの実装は終わりましたが、`npm run start`を実行して`http://localhost:3000`にアクセスしても、
+さてクライアントの実装は終わりましたが、`npm run dev`を実行して`http://localhost:5173` にアクセスしても、
 1日目の実装結果となにも変わりありませんよね。
-
-![chrome dev tool](chrome-404.jpg)
-
-しかし、Chromeの開発者ツールをつかって画面表示に際して発生したトラフィックを見てみると、
-ちゃんと/todoに対してリクエストを行っている様子が確認できます。
-まだサーバが実装されていませんので、まだ404になるのは当然ですね。
 
 しかし、このままだとちゃんとクライアントの実装ができてるか少し不安だと思うので、ちょっとしたツールをご紹介します。
 [JSON Placeholder](https://jsonplaceholder.typicode.com/) というサービスがあります。
@@ -610,7 +606,7 @@ export const getTodos = async () => {
 }
 ```
 
-この状態で再びhttp://localhost:3000を開くと文字列がズラズラ表示されます！
+この状態で再び`http://localhost:5173` を開くと文字列がズラズラ表示されます！
 
 ![with jsonPlaceholder](json-placeholder.jpg)
 

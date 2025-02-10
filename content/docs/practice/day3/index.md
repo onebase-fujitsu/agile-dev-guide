@@ -11,11 +11,14 @@ bookToc: true
 
 ## バックエンドの初期設定
 
-### Spring Initializr
-Spring Bootのプロジェクトを作成するときは [Spring Initializr](https://start.spring.io/) を使います。
+### Spring Bootのプロジェクト作成
+Spring Bootのプロジェクトを作成するときはIntelliJの「新規ブロジェクト作成」からSpring Bootを選択すると簡単です。
 
-![Spring Initializr](SpringInitializr.jpg)
+![IntelliJ_generate](IntelliJ_newProject.png)
+![IntelliJ_generate](IntelliJ_generate1.png)
+![IntelliJ_generate](IntelliJ_generate2.png)
 
+生成場所はtodo-app-clientと並列になるようにしましょう。
 今回はGradle Projectで開発言語はKotlinにします。
 
 Spring Bootのバージョンはその時の安定版を指定すると良いです。
@@ -23,7 +26,10 @@ Spring Bootのバージョンはその時の安定版を指定すると良いで
 Artifact名は今回はtodo-app-serverとしました。
 依存ライブラリですが、後からでも追加できますので、ここではいったん、Spring Webのみ追加しました。
 
-これでGenerateしましょう。雛形となるプロジェクトがダウンロードされるはずです。
+これでGenerateしましょう。
+
+
+※[Spring Initializr](https://start.spring.io/) でプロジェクトを作成することもできます。
 
 ### DBの設定
 
@@ -118,14 +124,15 @@ DBのスキーマを手動で管理するのはメチャクチャ大変ですの
 ```kotlin
 // build.gradle.kts
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-jdbc")
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	implementation("org.flywaydb:flyway-core")                       // 追記
-	runtimeOnly("org.postgresql:postgresql")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    implementation("org.flywaydb:flyway-database-postgresql")
+    runtimeOnly("org.postgresql:postgresql")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 ```
 
@@ -202,7 +209,7 @@ flyway_schema_historyというテーブル共にtodoテーブルがFlywayによ�
 Flywayはアプリケーション起動時にdb/migrationディレクトリ配下のSQLを確認して、DBのマイグレーションを実行してくれます。
 
 これでバックエンド開発の下準備が整いました。ここまでのソースコードは
-[https://github.com/Onebase-Fujitsu/todo-app-server/tree/step1](https://github.com/Onebase-Fujitsu/todo-app-server/tree/step1)
+[https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step5](https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step5)
 に置いてあります。
 
 ## GET /todosの実装
@@ -453,9 +460,6 @@ BUILD SUCCESSFUL in 4s
 
 テストが通る様子が確認できると思います。
 
-ここまでのソースは
-[https://github.com/Onebase-Fujitsu/todo-app-server/tree/step2](https://github.com/Onebase-Fujitsu/todo-app-server/tree/step2)
-に置いてあります。
 
 ## クライアントとサーバの連携
 
@@ -468,33 +472,46 @@ BUILD SUCCESSFUL in 4s
 サーバを起動した状態でクライアントを起動しましょう。
 
 ```shell
-npm run start
+npm run dev
 ```
 
-その状態で [http://localhost:3000](http://localhost:3000) にアクセスすると、まだ、/todosに対するリクエストに404が返っていると思います。
+その状態で [http://localhost:5173/](http://localhost:5173/) にアクセスすると、構築したサーバへの/todosのGETリクエストは送信されておらず、  
+304が返却されていることが確認できると思います。
+![304](getTodos304.png)
 
-![404](getTodos404.jpg)
-
-それもそのはず、Clientはlocalhost:3000/todosにリクエストしている一方で、サーバは8080ポートで起動しているからです。
+それもそのはず、Clientはlocalhost:5173/todosにリクエストしている一方で、サーバは8080ポートで起動しているからです。
 そこでClientにProxyの設定を入れてあげます。
 
-Clientのpackage.jsonを開いたら一行`"proxy": "http://localhost:8080",`という設定を追記して、再度Clientを起動してみましょう。
+Clientの`vite.config.ts`を開いたら以下の設定を追記して、再度Clientを起動してみましょう。
 
-```json
-package.json
-{
-  ...
-  "proxy": "http://localhost:8080",
-  ...
-}
+```typescript
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  server: {                                    // 追記
+    proxy: {                                   // 追記    
+      "/todos": {                              // 追記
+        target: "http://localhost:8080",       // 追記
+        changeOrigin: true                     // 追記
+      }                                        // 追記
+    }                                          // 追記
+  }                                            // 追記 
+})
+
 ```
 
-![200](getTodos200.jpg)
+![200](getTodos200.png)
 
 proxyの設定によりServerが応答できるようになり、200が返却されているのが確認できると思います。
 
 おめでとうございまいます！最初のサーバAPIとクライアントを連携させたアプリケーションを実装することができました！
 
+ここまでのソースは
+[https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step6](https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step6)
+に置いてあります。
 ---
 
 4日目に続きます

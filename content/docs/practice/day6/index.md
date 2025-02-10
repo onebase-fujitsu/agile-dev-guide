@@ -8,30 +8,6 @@ bookToc: true
 
 クライアントとサーバを連携させてタスクを作成することができるようになったので、シナリオテストを作成していきましょう。
 
-## モノレポの作成
-
-まず、これまで別に管理していたクライアントとサーバを一纏めにしたリポジトリを作りましょう。
-
-```shell
-mkdir todo-app
-cd todo-app
-git init
-git submodule add https://github.com/Onebase-Fujitsu/todo-app-server.git server
-git submodule add https://github.com/Onebase-Fujitsu/todo-app-client.git client
-```
-
-submoduleを追加できたたらserverとclientの依存ライブラリの解決をしておいてください。
-
-```shell
-cd client
-npm install
-```
-
-```shell
-cd server
-./gradlew build
-```
-
 ## e2eテストの環境構築
 
 まずe2eテスト用の環境を作成していきましょう。
@@ -57,15 +33,18 @@ npm install --save-dev testcafe
 {
   "name": "todo-app",
   "version": "1.0.0",
-  "description": "",
   "main": "test/test.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
     "test": "./node_modules/.bin/testcafe 'chrome' ./test"
   },
   "author": "",
   "license": "ISC",
+  "description": "",
   "devDependencies": {
-    "testcafe": "^1.16.0"
+    "testcafe": "^3.7.1"
   }
 }
 ```
@@ -81,7 +60,7 @@ npm run test
 
 
 ここまでのリポジトリは
-[https://github.com/Onebase-Fujitsu/todo-app/tree/step1](https://github.com/Onebase-Fujitsu/todo-app/tree/step1)
+[https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step12](https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step12)
 においてあります。
 
 ## e2eテストの作成
@@ -94,7 +73,7 @@ test.jsを以下のように変更します。
 import { Selector } from 'testcafe';
 
 fixture `test target`
-    .page `http://localhost:3000`;
+    .page `http://localhost:5173`;
 
 test('タスク一覧画面を見ることができる', async t => {
     await t
@@ -130,7 +109,7 @@ onebase@Onebase-Maguro e2e % npm run test
 import { Selector } from 'testcafe';
 
 fixture `test target`
-    .page `http://localhost:3000`;
+    .page `http://localhost:5173`;
 
 test('タスク一覧画面を見ることができる', async t => {
     await t
@@ -143,9 +122,9 @@ test('タスクを作成することができる', async t => {
     await t
         .click(Selector('a').withText("New Task"))
         .expect(Selector('input').exists).ok()
-        .expect(Selector('button').withText("SEND").exists).ok()
+        .expect(Selector('button').withText("Send").exists).ok()
         .typeText(Selector('input'), 'e2e test title', {replace: true})
-        .click(Selector('button').withText("SEND"))
+        .click(Selector('button').withText("Send"))
         .click(Selector('a').withText("Home"))
         .expect(Selector('ul').child().nth(-1).textContent).contains('e2e test title')
 })
@@ -154,7 +133,7 @@ test('タスクを作成することができる', async t => {
 これも実行すると問題なく通るはずです。
 
 ここまでのリポジトリは
-[https://github.com/Onebase-Fujitsu/todo-app/tree/step2](https://github.com/Onebase-Fujitsu/todo-app/tree/step2)
+[https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step13](https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step13)
 にあります。
 
 ## さらなるアプリのスケールに向けて
