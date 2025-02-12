@@ -26,7 +26,7 @@ bookToc: true
 この２つは後から変更することが非常に困難であり、プロジェクトの特性を見極めて慎重に決定する必要があります。
 最初を丁寧にやればやるほど後から楽になります。最初の検討を怠ってはいけません。
 
-{{< hint info >}}
+{{% hint info %}}
 
 **開発言語変更の例**
 
@@ -39,7 +39,7 @@ Javascriptとそのスーパーセットである、Typescriptはプロジェク
 
 ソフトウェアの開発規模が大きくなるにつれ次第に変更は難しくなります。
 最初の開発言語は慎重にやるべきです。
-{{< /hint >}}
+{{% /hint %}}
 
 ## プロジェクトの構成
 
@@ -63,7 +63,7 @@ todo-app
 
 ## クライアントの環境構築
 
-{{< hint warning >}}
+{{% hint warning %}}
 
 **ハンズオンを始めるにあたって**
 
@@ -81,7 +81,7 @@ React.jsその他多くのOSSを使用していますが、わからないこと
 コピペでしかソースコードを書けないエンジニアの特徴に **エラーメッセージを読もうとしない**、**公式のドキュメントを読もうとしない**、**英語のドキュメントを読もうとしない**というのがあります。
 そうならないようにしましょう。
 
-{{< /hint >}}
+{{% /hint %}}
 
 ### reactアプリの作成
 
@@ -326,7 +326,7 @@ Tailwind CSSやstyled-componentsなどはその点自由にデザインを組め
 
 今回はstyled-componentsを導入してみます。
 
-{{< hint info >}}
+{{% hint info %}}
 
 **styled-componentsの利点**
 
@@ -336,7 +336,7 @@ styled-componentsで定義するスタイルはReactのコンポーネントそ�
 
 また、styled-componentsを使用すると、CSSコードを記述してコンポーネントのスタイルを設定できるため、他のCSSフレームワークに比べて学習コストが低いことも利点の一つです。
 
-{{< /hint >}}
+{{% /hint %}}
 
 styled-componentsの導入方法は[こちら](https://styled-components.com/)に書いてあるので、これに習って導入してみましょう。
 
@@ -743,7 +743,7 @@ root.render(
 
 ここまでのソースコードは [https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step3](https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step3) に置いてあります。
 
-{{< hint warning >}}
+{{% hint warning %}}
 
 **styled-components使用時の注意点**
 
@@ -755,7 +755,7 @@ root.render(
 
 そのためチームで開発する際には、ディレクトリ構成やファイル構造、命名規則などのルールを定めて使用しましょう。
 
-{{< /hint >}}
+{{% /hint %}}
 
 ---
 
@@ -771,4 +771,4 @@ root.render(
 
 2日目に続きます。
 
-{{< button relref="/docs/practice/day2" >}}2日目{{< /button >}}
+{{% button relref="/docs/practice/day2" %}}2日目{{% /button %}}

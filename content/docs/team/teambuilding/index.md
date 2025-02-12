@@ -15,9 +15,9 @@ bookToc: false
 
 チームビルディングには以下のようなアクティビティが有効です。
 
-{{< button relref="../activities/retro/index.md" >}}レトロスペクティブ{{< /button >}}
-{{< button relref="../activities/feedback/index.md" >}}フィードバック{{< /button >}}
-{{< button relref="../activities/icebreak/index.md" >}}Ice Break{{< /button >}}
-{{< button relref="../activities/teamhealthcheck/index.md" >}}Team Health Check{{< /button >}}
-{{< button relref="../activities/1on1/index.md" >}}1on1{{< /button >}}
-{{< button relref="../activities/exercise/index.md" >}}ラジオ体操{{< /button >}}
+{{% button relref="../activities/retro/index.md" %}}レトロスペクティブ{{% /button %}}
+{{% button relref="../activities/feedback/index.md" %}}フィードバック{{% /button %}}
+{{% button relref="../activities/icebreak/index.md" %}}Ice Break{{% /button %}}
+{{% button relref="../activities/teamhealthcheck/index.md" %}}Team Health Check{{% /button %}}
+{{% button relref="../activities/1on1/index.md" %}}1on1{{% /button %}}
+{{% button relref="../activities/exercise/index.md" %}}ラジオ体操{{% /button %}}

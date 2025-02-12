@@ -33,4 +33,4 @@ bookToc: false
 
 それでは早速アジャイルとはなにかについて概念から学んでいきましょう。
 
-{{< button relref="/docs/agile/manifest" >}}アジャイルとは{{< /button >}}
+{{% button relref="/docs/agile/manifest" %}}アジャイルとは{{% /button %}}

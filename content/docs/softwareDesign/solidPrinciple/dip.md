@@ -18,7 +18,7 @@ bookToc: true
 上位のモジュールが下位のモジュールに依存することは、従来のソフトウェア開発において非常によくあることです。
 例えばよくあるWeb三層アーキテクチャを例に上げると、ControllerクラスはServiceクラスに依存しますし、ServiceクラスはRepositoryクラスに依存します。
 
-{{<mermaid>}}
+{{< mermaid >}}
 flowchart LR
 Controller --> Service
 Service --> Repository
@@ -38,7 +38,7 @@ Service --> Repository
 
 ## 階層化
 
-{{<mermaid>}}
+{{< mermaid >}}
 flowchart LR
 Controller --> Service
 Service --> Repository
@@ -51,7 +51,7 @@ Service --> Repository
 
 より適切な階層モデルをいかに示します。
 
-{{<mermaid>}}
+{{< mermaid >}}
 flowchart BT
     subgraph RepositoryLayer
     Repository --> RepositoryInterface
@@ -183,9 +183,9 @@ Lampはこのインタフェースを実装する立場であり、従って依�
 ## 実践的な例
 
 実はここまでのドキュメントを順番に読まれていた方はDIPに準じたアプリケーションの具体的な実装の例を見ています。
-[テストダブルの章で使用したサンプルアプリケーション]({{< ref "/docs/softwaretest/testdouble#バックエンドの構造" >}}) を覚えてますでしょうか？
+[テストダブルの章で使用したサンプルアプリケーション]({{% ref "/docs/softwaretest/testdouble#バックエンドの構造" %}}) を覚えてますでしょうか？
 
-{{<mermaid>}}
+{{< mermaid >}}
 classDiagram
 class TodoAppController{
 TodoAppService todoAppService
@@ -374,4 +374,4 @@ class TodoAppRepository implements TodoAppServiceInterface {
 
 それでは最後にインタフェース分離の原則(ISP)について見てみましょう。
 
-{{< button relref="/docs/softwareDesign/solidPrinciple/isp" >}}インタフェース分離の原則{{< /button >}}
+{{% button relref="/docs/softwareDesign/solidPrinciple/isp" %}}インタフェース分離の原則{{% /button %}}

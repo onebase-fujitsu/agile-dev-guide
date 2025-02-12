@@ -35,7 +35,7 @@ bookToc: true
 >   - Swift Methodの概要説明
 > - レトロ
 
-{{< button relref="/docs/team/activities/riskmitigations" >}}Risks & Mitigations{{< /button >}}
+{{% button relref="/docs/team/activities/riskmitigations" %}}Risks & Mitigations{{% /button %}}
 
 ## 分析
 Swift Methodを用いて現行業務を分析して、モダナイゼーション後のシステムの全体像を掴み、開発の見通しを立てます。
@@ -44,12 +44,12 @@ Swift Methodを用いて現行業務を分析して、モダナイゼーショ�
 段階的にモダナイゼーションを行う場合は、各断面でのシステムの全体像とモダナイゼーション対象の範囲を可視化します。  
 まずは、直近で開発する対象を明確にし、開発着手して以降も分析した内容のアップデート、及び、次に開発すべき機能の優先順位付けを行っていきます。
 
-{{< button relref="../swift/overview/index.md" >}}Swift Method{{< /button >}}
+{{% button relref="../swift/overview/index.md" %}}Swift Method{{% /button %}}
 
 ## 開発
 分析フェーズで優先度付けした順に各イテレーションで開発していきます。
 
-{{< button relref="/docs/team/workstyle#イテレーション開発の基本的な考え方" >}}イテレーション開発{{< /button >}}
+{{% button relref="/docs/team/workstyle#イテレーション開発の基本的な考え方" %}}イテレーション開発{{% /button %}}
 
 ## Outception
 開発期間を振り返って以降に継続的に開発を行っていくために、Outceptionを実施します。  
@@ -66,4 +66,4 @@ Swift Methodを用いて現行業務を分析して、モダナイゼーショ�
 >   - 今後の開発予定のスライスと優先順位
 > - レトロ
 
-{{< button relref="/docs/team/activities/retro" >}}レトロ{{< /button >}}
+{{% button relref="/docs/team/activities/retro" %}}レトロ{{% /button %}}

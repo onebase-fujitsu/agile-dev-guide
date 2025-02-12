@@ -28,4 +28,4 @@ bookToc: true
   - 誰かにインタビュイーをしてもらう
 - 形式はこだわらず、インタビュアーが話しやすいように調整する
 
-{{< button relref="researchaction" >}}リサーチ実施{{< /button >}}
+{{% button relref="researchaction" %}}リサーチ実施{{% /button %}}

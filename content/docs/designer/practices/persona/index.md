@@ -53,7 +53,7 @@ bookToc: true
 
   ペルソナの名前をつける時は、プロジェクト関係者がペルソナを共有できるように、また、ペルソナとは異なる先入観を抱くことがないように、プロジェクト関係者や身近な人の名前は避けるようにします。
 
-{{< hint info >}}
+{{% hint info %}}
 **Tips**
 
 **ペルソナ・エコシステム**
@@ -62,6 +62,6 @@ bookToc: true
 システムを利用するユーザーだけでなく、関連部署や意思決定に関わる部署も記述します。
 
 ![persona ecosystem](persona_ecosystem.jpg)
-{{< /hint >}}
+{{% /hint %}}
 
-{{< button relref="scenario" >}}シナリオ{{< /button >}}
+{{% button relref="scenario" %}}シナリオ{{% /button %}}

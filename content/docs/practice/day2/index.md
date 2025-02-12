@@ -626,4 +626,4 @@ JSON Placeholderは予め定義されているJSONの他にも [自分で作成�
 
 3日目に続きます
 
-{{< button relref="/docs/practice/day3" >}}3日目{{< /button >}}
+{{% button relref="/docs/practice/day3" %}}3日目{{% /button %}}

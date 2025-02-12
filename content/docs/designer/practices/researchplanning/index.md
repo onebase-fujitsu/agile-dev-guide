@@ -26,10 +26,10 @@ bookToc: true
 - 常日頃からリスクやアサンプションについて考えておく
 - リサーチ計画の立案は難しいが、回数を重ねるごとに勘所が見えてくる
 
-{{< hint info >}}
+{{% hint info %}}
 **リサーチ計画立案 例**
 
 ![research planning example](research_planning_example1.jpg)
-{{< /hint >}}
+{{% /hint %}}
 
-{{< button relref="prototyping" >}}プロトタイピング{{< /button >}}
+{{% button relref="prototyping" %}}プロトタイピング{{% /button %}}

@@ -7,7 +7,7 @@ bookToc: true
 # TDD
 ## 概要
 テスト駆動開発（Test-Driven Development; TDD）は、先にテストを書き、次に機能の実装し、その後コードのリファクタリングを行うという工程を繰り返す開発手法です。  
-[テストファーストの開発]({{< ref "/docs/xp/practice#テストファーストの開発" >}})、[テスト駆動開発とは]({{< ref "/docs/softwaretest/fizzbuzz#テスト駆動開発とは" >}})も合わせて参照してください。
+[テストファーストの開発]({{% ref "/docs/xp/practice#テストファーストの開発" %}})、[テスト駆動開発とは]({{% ref "/docs/softwaretest/fizzbuzz#テスト駆動開発とは" %}})も合わせて参照してください。
 
 ## なぜTDD?
 

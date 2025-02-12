@@ -21,7 +21,7 @@ Product Managers(PdMs)は正しいものを作るためにビジネス価値、�
 
 業務知識がありビジネス的な判断ができる顧客に参画いただき、1チームにつき富士通1人と顧客1人の1ペアが担当します。
 
-{{< button relref="/docs/productmanager/overview" >}}Product Manager{{< /button >}}
+{{% button relref="/docs/productmanager/overview" %}}Product Manager{{% /button %}}
 
 ### Developers
 Developers(Devs)はプロダクトを正しく作ることに責任を持ちます。
@@ -33,7 +33,7 @@ Devsの一人一人がこれら全てをカバーすることは必須ではあ�
 
 1チームにつき富士通の2〜3ペア（4〜6人）が担当します。
 
-{{< button relref="/docs/developer/overview" >}}Developer{{< /button >}}
+{{% button relref="/docs/developer/overview" %}}Developer{{% /button %}}
 
 ### (Optional) Designers
 Designersは正しいものを作るためにユーザーのことを理解し、プロダクトによってユーザーに価値を提供することに責任を持ちます。
@@ -41,7 +41,7 @@ Designersは正しいものを作るためにユーザーのことを理解し�
 
 ユーザーの業務に理解がある顧客に参画いただき、1チームにつき富士通1人と顧客1人の1ペアが担当します。
 
-{{< button relref="/docs/designer/overview" >}}Designer{{< /button >}}
+{{% button relref="/docs/designer/overview" %}}Designer{{% /button %}}
 
 ## Stakeholders
 Stakeholdersはプロジェクトを成功に導く役割を担います。

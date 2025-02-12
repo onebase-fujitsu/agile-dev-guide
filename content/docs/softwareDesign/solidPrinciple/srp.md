@@ -12,7 +12,7 @@ bookToc: true
 
 例えば以下に示すような設計を考えます。
 
-{{<mermaid>}}
+{{< mermaid >}}
 classDiagram
 Computational Geometry Application --> Rectangle
 Graphical Application --> Rectangle
@@ -45,7 +45,7 @@ Rectangleクラスには2つのメソッドがあり、1つはスクリーンに
 これを防ぐためにはRectangleクラスを以下のように2つに分け、Rectangleのジオメトリの演算処理をGeometricRectangleクラスに任せてしまうことです。
 こうしておけば、四角形を塗りつぶす方法に変更が生じてもジオメトリの計算を扱うアプリケーションは影響を受けずにすみます。
 
-{{<mermaid>}}
+{{< mermaid >}}
 classDiagram
 Computational Geometry Application --> Geometric Rectangle
 Graphical Application --> Rectangle
@@ -84,7 +84,7 @@ interface Modem {
 
 ではここで、この2つの機能を以下のように分離すべきかどうかというと、それは**アプリケーションが今後どのように変更されるかどうかによります。**
 
-{{<mermaid>}}
+{{< mermaid >}}
 classDiagram
 ModemImplementation ..|> DataChannel
 ModemImplementation ..|> Connection
@@ -111,7 +111,7 @@ class Connection {
 
 例えば以下のような設計があったとします。
 
-{{<mermaid>}}
+{{< mermaid >}}
 classDiagram
 Employee --> Persistence Subsystem
 class Employee {
@@ -134,4 +134,4 @@ Modemの例のように私達は何かに付けて複数の役割を結合して
 
 では次にオープン・クローズドの原則(OCP)について見てみましょう。
 
-{{< button relref="/docs/softwareDesign/solidPrinciple/ocp" >}}オープン・クローズドの原則{{< /button >}}
+{{% button relref="/docs/softwareDesign/solidPrinciple/ocp" %}}オープン・クローズドの原則{{% /button %}}

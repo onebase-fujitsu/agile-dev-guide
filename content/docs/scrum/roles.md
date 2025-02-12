@@ -109,4 +109,4 @@ Designという言葉の意味は設計です。決して見た目のような�
 もし気が向いたら成果物やイベントのページを見たあとでこのページを再度読んでみましょう。
 新たな発見があるかもしれません。
 
-{{< button relref="/docs/scrum/products" >}}スクラムにおける成果物{{< /button >}}
+{{% button relref="/docs/scrum/products" %}}スクラムにおける成果物{{% /button %}}

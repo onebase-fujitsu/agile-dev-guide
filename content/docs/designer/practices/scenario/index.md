@@ -33,4 +33,4 @@ bookToc: true
 - シナリオを書くことで、新たなアサンプション、自分たちが知らない箇所、ペルソナの要求に気づくことがある
 - ペルソナ同様、あらたな事実や誤りに気づいたら随時修正する
 
-{{< button relref="researchplanning" >}}リサーチ計画立案{{< /button >}}
+{{% button relref="researchplanning" %}}リサーチ計画立案{{% /button %}}

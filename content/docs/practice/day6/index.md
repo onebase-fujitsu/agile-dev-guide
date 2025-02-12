@@ -168,4 +168,4 @@ lintのように自動でチェックできるものはlintに規約を落とし
 
 まとめに続きます
 
-{{< button relref="/docs/inClosing" >}}おわりに{{< /button >}}
+{{% button relref="/docs/inClosing" %}}おわりに{{% /button %}}

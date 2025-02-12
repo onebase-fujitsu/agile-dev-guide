@@ -59,18 +59,18 @@ Slicesの大まかな流れは以下の通りです。
  
   ![2x2](BusinessValueSample.jpg)
 
-{{< hint info >}}
+{{% hint info %}}
 **Tips**
 
 Slicesとして明確な手順や決まった成果物イメージはありません。
 エンゲージメント時に実践した流れに基づいて手順を記載していますが、あくまでも一例です。
 直近で開発すべきシナリオを選定してチームで認識を合わせ、ストーリーを作成して開発に着手できるようにする、
 という目標を達成することができれば、形のあるアウトプットを残すことに時間をかける必要はありません。
-{{< /hint >}}
+{{% /hint %}}
 
-{{< hint info >}}
+{{% hint info %}}
 **参考資料**
 - [Tanzu Practices Swift Method](https://tanzu.vmware.com/developer/practices/swift-method/)
-{{< /hint >}}
+{{% /hint %}}
 
-{{< button relref="../techchoice/index.md" >}}Tech Choice{{< /button >}}
+{{% button relref="../techchoice/index.md" %}}Tech Choice{{% /button %}}

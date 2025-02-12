@@ -57,21 +57,21 @@ IPMで開発の見通しを立てて、デイリースタンドアップで日�
     - お酒を飲みながら、今週よかったこと、よくなかった点を遠慮なく出し合います。
     - 改善に向けたアクションを決めます。
 
-{{< button relref="#イテレーション開発の基本的な考え方" >}}イテレーション{{< /button >}}
-{{< button relref="../activities/preipm/index.md" >}}Pre-IPM{{< /button >}}
-{{< button relref="../activities/ipm/index.md" >}}IPM{{< /button >}}
-{{< button relref="../activities/officestandup/index.md" >}}全体スタンドアップ{{< /button >}}
-{{< button relref="../activities/teamstandup/index.md" >}}チームスタンドアップ{{< /button >}}
-{{< button relref="../activities/retro/index.md" >}}レトロスペクティブ{{< /button >}}
+{{% button relref="#イテレーション開発の基本的な考え方" %}}イテレーション{{% /button %}}
+{{% button relref="../activities/preipm/index.md" %}}Pre-IPM{{% /button %}}
+{{% button relref="../activities/ipm/index.md" %}}IPM{{% /button %}}
+{{% button relref="../activities/officestandup/index.md" %}}全体スタンドアップ{{% /button %}}
+{{% button relref="../activities/teamstandup/index.md" %}}チームスタンドアップ{{% /button %}}
+{{% button relref="../activities/retro/index.md" %}}レトロスペクティブ{{% /button %}}
 
 これらを基本としつつ、プロジェクトの体制やチームの状況によって以下を普段のサイクルに取り入れます。
 
-{{< button relref="../activities/cl/index.md" >}}CLミーティング{{< /button >}}
-{{< button relref="../activities/feedback/index.md" >}}フィードバック{{< /button >}}
-{{< button relref="../activities/salesmeeting/index.md" >}}営業確認会議{{< /button >}}
-{{< button relref="../activities/internalsync/index.md" >}}Internal Sync{{< /button >}}
+{{% button relref="../activities/cl/index.md" %}}CLミーティング{{% /button %}}
+{{% button relref="../activities/feedback/index.md" %}}フィードバック{{% /button %}}
+{{% button relref="../activities/salesmeeting/index.md" %}}営業確認会議{{% /button %}}
+{{% button relref="../activities/internalsync/index.md" %}}Internal Sync{{% /button %}}
 
-{{< hint info >}}
+{{% hint info %}}
 **一日のスケジュールの例**
 > 例1
 > - 09:06~09:15 全体スタンドアップ＋チームスタンドアップ
@@ -89,7 +89,7 @@ IPMで開発の見通しを立てて、デイリースタンドアップで日�
 > - 12:30~13:30 Lunch
 > - 13:30~17:00 開発
 > - 17:00~18:00 Internal Sync
-{{< /hint >}}
+{{% /hint %}}
 
 ## イテレーション開発の基本的な考え方
 イテレーション開発では、前のイテレーションの「チーム活動」や「レトロスペクティブ」、「顧客からのフィードバック」をもとに、次のイテレーションのやり方をアップデートします。

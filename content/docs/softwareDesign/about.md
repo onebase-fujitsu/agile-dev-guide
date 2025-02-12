@@ -23,4 +23,4 @@ bookToc: true
 
 では早速SOLID原則の最初の”S”である単一責任の原則(SRP)から見てみましょう。
 
-{{< button relref="/docs/softwareDesign/solidPrinciple/srp" >}}単一責任の原則{{< /button >}}
+{{% button relref="/docs/softwareDesign/solidPrinciple/srp" %}}単一責任の原則{{% /button %}}

@@ -41,7 +41,7 @@ C++やJavaのようなオブジェクト指向言語は宣言が固定されて�
 モジュールをある固定した「抽象」に依存させておけば、修正に対してコードを閉じることができるからです。
 抽象を使えば、コードを修正しなくても、抽象派生のクラスを新たに追加するだけでモジュールの振る舞いを拡張することができます。
 
-{{<mermaid>}}
+{{< mermaid >}}
 classDiagram
 Client --> Server
 {{< /mermaid >}}
@@ -49,7 +49,7 @@ Client --> Server
 この例ではClientがServerの両方の実装が「具体的に」実装されてしまっています。
 ClientクラスはServerクラスを利用しているので、Clientオブジェクト別のServerオブジェクトを利用することに慣ればClientクラスを変更する必要があります。
 
-{{<mermaid>}}
+{{< mermaid >}}
 classDiagram
 Client --> ClientInterface
 Server ..|> ClientInterface
@@ -340,4 +340,4 @@ public abstract class Shape {
 
 では次にリスコフの置換原則(LSP)について見ていきましょう。
 
-{{< button relref="/docs/softwareDesign/solidPrinciple/lsp" >}}リスコフの置換原則{{< /button >}}
+{{% button relref="/docs/softwareDesign/solidPrinciple/lsp" %}}リスコフの置換原則{{% /button %}}

@@ -102,7 +102,7 @@ class Rectangle {
 
 もちろん、正方形は長方形のひとつであるので、したがってSquare(正方形)クラスはRectangle(長方形)クラスから派生するものとみなすのは至って自然です。
 
-{{<mermaid>}}
+{{< mermaid >}}
 classDiagram
     Square --|> Rectangle
 {{< /mermaid >}}
@@ -286,4 +286,4 @@ public class Derived extends Bass {
 
 では次に依存性逆転の原則(DIP)について見ていきましょう。
 
-{{< button relref="/docs/softwareDesign/solidPrinciple/dip" >}}依存性逆転の原則{{< /button >}}
+{{% button relref="/docs/softwareDesign/solidPrinciple/dip" %}}依存性逆転の原則{{% /button %}}

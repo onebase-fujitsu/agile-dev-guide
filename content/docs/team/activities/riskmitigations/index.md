@@ -35,7 +35,7 @@ bookToc: true
 ![riskactivity](riskactivity.jpg)
 ![riskmitigation](riskmitigation.jpg)
 
-{{< hint info >}}
+{{% hint info %}}
 **Tips**
 
 - リスク抽出にあたっての問いかけ
@@ -76,4 +76,4 @@ bookToc: true
   - 多くの人が強く実感するニーズ／要求であるか検証する
   - 実現可能で、ユーザーに求められ、目的に適うソリューションであるか検証する
   - 機能するビジネスモデルであるか検証する
-{{< /hint >}}
+{{% /hint %}}

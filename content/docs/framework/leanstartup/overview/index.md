@@ -47,7 +47,7 @@ Scopingでは、プロジェクトの開始にあたって関係者が集まり�
 
 また、プロジェクトにおけるリスクの抽出を行い、アクションを検討します。
 
-{{< button relref="/docs/team/activities/riskmitigations" >}}Risks & Mitigations{{< /button >}}
+{{% button relref="/docs/team/activities/riskmitigations" %}}Risks & Mitigations{{% /button %}}
 
 ## Kick off
 プロジェクト開始時にKick offミーティングを実施し、ゴールと成功指標の確認、プロダクトビジョン／バリュープロポジションの作成、技術スタックの確認、直近の予定の認識合わせを行います。
@@ -72,8 +72,8 @@ Scopingでは、プロジェクトの開始にあたって関係者が集まり�
 > - Risk & Mitigations
 > - レトロ
 
-{{< button relref="/docs/team/practices/okrs" >}}OKRs{{< /button >}}
-{{< button relref="../productvision/index.md" >}}プロダクトビジョン / バリュープロポジション{{< /button >}}
+{{% button relref="/docs/team/practices/okrs" %}}OKRs{{% /button %}}
+{{% button relref="../productvision/index.md" %}}プロダクトビジョン / バリュープロポジション{{% /button %}}
 
 ## Discovery & Framing
 Discovery & Framing(D&F)では、プロダクトのアイデアを調査および検証して、プロダクトの開発に必要な情報を取得します。
@@ -87,7 +87,7 @@ Discoveryでは、プロダクトのビジネスケースとターゲットユ�
 - プロダクトによる利害関係者、及び、競合他社や製品の分析を行い、ビジネスモデルを理解する
 - プロダクトの技術的な実現性を評価する
 
-{{< button relref="/docs/designer/practices/persona" >}}ペルソナ{{< /button >}}
+{{% button relref="/docs/designer/practices/persona" %}}ペルソナ{{% /button %}}
 
 ### Framing
 Framingでは、ユーザー、ビジネス、技術スタックに対してさらに理解を深め、課題を解決する優先度の高い機能を絞り込みます。
@@ -99,13 +99,13 @@ Framingでは、ユーザー、ビジネス、技術スタックに対してさ�
 - 機能の優先度を整理し、MVPを定義する
 - プロダクトの基本的なアプリケーション構造の方針を検討する
 
-{{< button relref="/docs/designer/practices/persona" >}}ペルソナ{{< /button >}}
-{{< button relref="/docs/designer/practices/scenario" >}}シナリオ{{< /button >}}
-{{< button relref="/docs/designer/practices/researchplanning" >}}リサーチ計画{{< /button >}}
-{{< button relref="/docs/designer/practices/prototyping" >}}プロトタイピング{{< /button >}}
-{{< button relref="/docs/designer/practices/researchaction" >}}リサーチ{{< /button >}}
-{{< button relref="/docs/productmanager/practices/userstorymapping" >}}ユーザーストーリーマッピング{{< /button >}}
-{{< button relref="/docs/productmanager/practices/mvp" >}}MVP{{< /button >}}
+{{% button relref="/docs/designer/practices/persona" %}}ペルソナ{{% /button %}}
+{{% button relref="/docs/designer/practices/scenario" %}}シナリオ{{% /button %}}
+{{% button relref="/docs/designer/practices/researchplanning" %}}リサーチ計画{{% /button %}}
+{{% button relref="/docs/designer/practices/prototyping" %}}プロトタイピング{{% /button %}}
+{{% button relref="/docs/designer/practices/researchaction" %}}リサーチ{{% /button %}}
+{{% button relref="/docs/productmanager/practices/userstorymapping" %}}ユーザーストーリーマッピング{{% /button %}}
+{{% button relref="/docs/productmanager/practices/mvp" %}}MVP{{% /button %}}
 
 ## Inception
 Discovery & Framing後にプロダクトを本格的に開発していくにあたって、チーム全員のプロダクトに関する理解を深めるために、Inceptionを実施します。
@@ -131,13 +131,13 @@ Discovery & Framing後にプロダクトを本格的に開発していくにあ�
 > - Risk & Mitigations
 > - レトロ
 
-{{< button relref="/docs/team/activities/riskmitigations" >}}Risks & Mitigations{{< /button >}}
+{{% button relref="/docs/team/activities/riskmitigations" %}}Risks & Mitigations{{% /button %}}
 
 ## Development
 ユーザーへのインタビューなどで検証できた自信度の高いものを、優先度が高いものから順に各イテレーションで開発していきます。  
 MVPを作ったら、プロダクトを実際にユーザーに使ってもらってテストを行い、学びを得て、次の開発を続けていきます。
 
-{{< button relref="/docs/team/workstyle#イテレーション開発の基本的な考え方" >}}イテレーション開発{{< /button >}}
+{{% button relref="/docs/team/workstyle#イテレーション開発の基本的な考え方" %}}イテレーション開発{{% /button %}}
 
 ## Outception
 開発期間を振り返って以降に継続的に開発を行っていくために、Outceptionを実施します。  
@@ -158,4 +158,4 @@ MVPを作ったら、プロダクトを実際にユーザーに使ってもら�
 > - Risk & Mitigations
 > - レトロ
 
-{{< button relref="/docs/team/activities/retro" >}}レトロ{{< /button >}}
+{{% button relref="/docs/team/activities/retro" %}}レトロ{{% /button %}}

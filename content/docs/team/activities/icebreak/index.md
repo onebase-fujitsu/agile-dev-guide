@@ -22,7 +22,7 @@ bookToc: true
 - やる時間を決める
 - 楽しく遊ぶ
 
-{{< hint info >}}
+{{% hint info %}}
 **実施例**
 - 卓球  
   ![卓球](tabletennis.jpg)
@@ -38,4 +38,4 @@ bookToc: true
   [[遊び方]](https://gigazine.net/news/20180508-geoguessr/)  
   ![GeoGuessr](geoguessr.jpg)
 - 雑談
-{{< /hint >}}
+{{% /hint %}}

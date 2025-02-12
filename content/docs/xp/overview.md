@@ -24,4 +24,4 @@ XPはより実践的なプラクティス集だということを念頭に置い
 
 それでは早速XPのプラクティスについて見ていきましょう。
 
-{{< button relref="/docs/xp/practice" >}}XPのプラクティス{{< /button >}}
+{{% button relref="/docs/xp/practice" %}}XPのプラクティス{{% /button %}}

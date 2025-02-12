@@ -9,14 +9,14 @@ bookToc: true
 ## 概要
 Borisは既存システムをいくつかの小さい単位のサービスに分解したいときに使うアクティビティの一つです。サービス候補（Event Stormingのアウトプット）間の繋がり（通信の仕方やデータ）をチームで洗い出し、ディスカッションすることで、サービス間の関係に対してチームが共通の認識を持つことができます。Swiftメソッド全体の位置付けとしては2つ目のアクティビティとなっています。 
 
-{{< hint info >}}
+{{% hint info %}}
 **参考資料の原文**
 ```
 複雑なシステムにおけるサービス間の関係を特定して、
 想定されるターゲット・システム・アーキテクチャを明らかにし、
 それをSnapEを使って記録します。
 ```
-{{< /hint >}}
+{{% /hint %}}
 
 ## 参加者
 ### Must
@@ -30,19 +30,19 @@ Borisは既存システムをいくつかの小さい単位のサービスに分
 - 既存システムのアーキテクト、セキュリティ担当・・・  
   議論してる中で「これどうなってるんだっけ？」になった際に、その場で解決できると良いです。
 
-{{< hint info >}}
+{{% hint info %}}
 **参考資料の原文**
 ```
 ビジネスステークホルダー、アーキテクト、テクニカルリード、デベロッパー、コアメンバー
 ```
-{{< /hint >}}
+{{% /hint %}}
 
 ## 次のアクティビティに進むための条件
 
 ※Step2：BorisとStep3：SnapEは2つを行ったりきたりするので、Boris完了時の状態を明確に定めることはできません。
 - （Event Stormingで可視化した）ビジネスフローに必要なサービス候補間の連携情報（通信方式、送受信データ）が可視化できた
 
-{{< hint info >}}
+{{% hint info %}}
 **参考資料の原文**
 ```
 Borisの演習の最後には、サービス、API、データ、イベントの振り付けと、
@@ -56,7 +56,7 @@ External Systems/ UI 、Story、Risksに分類されます。
 各SnapEは、API、Data、External Systems/UI、Pub/Sub、Story、Risksの
 6つのカテゴリに関するドキュメントで構成されています。
 ```
-{{< /hint >}}
+{{% /hint %}}
 
 ## 進め方
 ### 基本ルール
@@ -95,16 +95,16 @@ External Systems/ UI 、Story、Risksに分類されます。
 
 ![alt](BorisSample.jpg)
 
-{{< hint info >}}
+{{% hint info %}}
 **Tips**
 - 最終的なアウトプットはクモの巣のようになります。Borisの名称の由来このクモの巣から来ています。
 
 ![alt](OutputImageBoris.jpg)
-{{< /hint >}}
+{{% /hint %}}
 
-{{< hint info >}}
+{{% hint info %}}
 **参考資料**
 - [Tanzu Practices Boris](https://tanzu.vmware.com/developer/practices/boris/)
-{{< /hint >}}
+{{% /hint %}}
 
-{{< button relref="../snape/index.md" >}}SnapE{{< /button >}}
+{{% button relref="../snape/index.md" %}}SnapE{{% /button %}}
