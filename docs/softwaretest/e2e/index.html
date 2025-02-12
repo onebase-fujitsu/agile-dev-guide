@@ -34,22 +34,18 @@
 そこで実施するのがE2E(End to End)テストというシステム全体の通しテストです。受け入れテストと呼ばれる場合もあります。</p><p>今回のサンプルアプリケーションはWebアプリケーションですが、一般ユーザと同じようにブラウザの画面操作を行い、
 システムの挙動が期待通りになっているかを確認していきます。</p><p>このE2Eテストも自動化して行うことがとても大事です。
 システムの機能追加や改修を行う度に自動テストも見直し修正していって、ソフトウェアと一緒に育てていきます。</p><h2 id=e2eテストツール>E2Eテストツール
-<a class=anchor href=#e2e%e3%83%86%e3%82%b9%e3%83%88%e3%83%84%e3%83%bc%e3%83%ab>#</a></h2><p>E2Eテストの自動化ツールには様々なものがあります。いくつか紹介します。</p><blockquote class="book-hint warning">**E2Eツールの選定について**
-ソフトウェアと一緒にテストスクリプトを育てていく関係で、後からのツールの変更はかなり難しいものになります。
+<a class=anchor href=#e2e%e3%83%86%e3%82%b9%e3%83%88%e3%83%84%e3%83%bc%e3%83%ab>#</a></h2><p>E2Eテストの自動化ツールには様々なものがあります。いくつか紹介します。</p><blockquote class="book-hint warning"><p><strong>E2Eツールの選定について</strong></p><p>ソフトウェアと一緒にテストスクリプトを育てていく関係で、後からのツールの変更はかなり難しいものになります。
 また、テストスクリプトはE2Eテストツール毎に互換はありません。
-後からでも変更はやろうと思えばできますが、かなりリスクの高いものになるという認識を持ってください。
-**最初にプロジェクトの特性を見極めて適切なE2Eテストツールを選定することが大事です。**</blockquote><h3 id=selenium>Selenium
+後からでも変更はやろうと思えばできますが、かなりリスクの高いものになるという認識を持ってください。</p><p><strong>最初にプロジェクトの特性を見極めて適切なE2Eテストツールを選定することが大事です。</strong></p></blockquote><h3 id=selenium>Selenium
 <a class=anchor href=#selenium>#</a></h3><p><a href=https://www.selenium.dev/>https://www.selenium.dev/</a></p><p>ブラウザ自動操作ツールの元祖。ブラウザテストフレームワークの王道とも言えるツールです。
 プログラミングライブラリが豊富で、JavaやC#、Python、Rubyなどでテストスクリプトを書くことができます。
 あと、Seleniumは厳密にはE2Eテストツールでなく自動操作ツールなので、スクレイピングなの用途にもよく使われます。</p><p>デメリットとしては、処理の度にWaitコマンドで待ち時間をスクリプト側で制御する必要があるところや、
 UI変更に弱く、変更が多い画面に不向きで修正コストが大きいところがあります。
 あとパフォーマンスがそこまで良くない印象です。</p><p>あとはWebDriverのインストールが必要だったり、設定項目が多いというのも問題としてあります。
 これはローカル環境だと自由に設定できるので問題ないのですが、
-<strong>CI/CDパイプライン上でE2Eテストをするときに大きなネックになることが多い</strong>ので、採用は慎重にしてください。</p><blockquote class="book-hint warning">**CI/CDパイプラインでのネックとは**
-使用するCI/CDパイプラインによっては使用できる仮想マシンの環境に制約があります。
+<strong>CI/CDパイプライン上でE2Eテストをするときに大きなネックになることが多い</strong>ので、採用は慎重にしてください。</p><blockquote class="book-hint warning"><p><strong>CI/CDパイプラインでのネックとは</strong></p><p>使用するCI/CDパイプラインによっては使用できる仮想マシンの環境に制約があります。
 例えばgitlab CIは自由にDocker Imageをpullしてその上で、CI/CDスクリプトを実行できるため自由度が高いですが、
-Azure Pipelinesでは [Azureが提供しているVM Image](https://docs.microsoft.com/ja-jp/azure/devops/pipelines/agents/hosted?view=azure-devops) しか使用することができません。
-セットアップのスクリプトを組むこともできますが、その分パイプラインの実行に時間がかかるようになってしまうため要注意です。</blockquote><h3 id=cypress>Cypress
+Azure Pipelinesでは <a href="https://docs.microsoft.com/ja-jp/azure/devops/pipelines/agents/hosted?view=azure-devops">Azureが提供しているVM Image</a> しか使用することができません。</p><p>セットアップのスクリプトを組むこともできますが、その分パイプラインの実行に時間がかかるようになってしまうため要注意です。</p></blockquote><h3 id=cypress>Cypress
 <a class=anchor href=#cypress>#</a></h3><p><a href=https://www.cypress.io/>https://www.cypress.io/</a></p><p>ブラウザの裏でNode.jsのサーバープロセスを動かし、ブラウザ上のテストランナーとやり取りすることで、
 ブラウザ外の操作（例えばファイルシステムや、ネットワークのコントロールといった）ができます。
 導入も非常に簡単ですし、操作速度も非常に高速です。
@@ -71,7 +67,7 @@ Chromeの拡張機能をつかってブラウザ操作を記憶してテスト�
 前述の通り後からの変更はかなり大変ですので、プロジェクトで慎重に吟味して決定してください。</p><h2 id=サンプルアプリケーション>サンプルアプリケーション
 <a class=anchor href=#%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3>#</a></h2><p>もし、前のテストダブルの節でリポジトリをクローンされていない方は以下のコマンドを実行してください。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>git clone -b https://github.com/Onebase-Fujitsu/simple-todo-app.git
 </span></span></code></pre></div><p>このアプリケーションはシンプルなタスク管理アプリケーションになります。
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/#サンプルアプリケーション>アプリケーションの詳細な説明はこちら</a> で解説してありますので、ご一読ください。</p><p>ルートのディレクトリにe2eというディレクトリがありますので、まず以下のコマンドを実行してみてください。</p><p>e2eテストの起動(Mac/Linuxの場合)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>cd e2e
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/#%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3>アプリケーションの詳細な説明はこちら</a> で解説してありますので、ご一読ください。</p><p>ルートのディレクトリにe2eというディレクトリがありますので、まず以下のコマンドを実行してみてください。</p><p>e2eテストの起動(Mac/Linuxの場合)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>cd e2e
 </span></span><span style=display:flex><span>npm install
 </span></span><span style=display:flex><span>npm run test
 </span></span></code></pre></div><p>e2eテストの起動(Windowsの場合)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>chdir e2e
@@ -167,14 +163,10 @@ chromeを他のブラウザに変更すると他のブラウザでテストす�
 これもやってることはそんなに難しくないと思います。</p><p>最初に文字入力をおこなって、それがちゃんとテキストフィードに反映されていることを確認。
 2番めの入力欄でも文字入力を行って、その確認をしてから、作成ボタンをクリックしています。</p><p>その後はタスクが作成されていることの確認です。
 ここでタスクを新規に作成したとき、作成されたタスクは一覧の一番下に表示されるので、それをうまくSelectorで指定したいです。</p><p>そこで<code>Selector('ul').child().nth(-1)</code>という記述でulタグの子要素(つまりli要素)で、最も最後の要素を指定しています。
-その中のh3要素のテキストとp要素のテキストが入力した通りのものであることと、ゴミ箱ボタンが有ることを評価しているというわけです。</p><p>ここまで大丈夫でしょうか？</p><blockquote class="book-hint info">**なぜ最初の要素じゃなくて最後の要素？**
-このテストを見たときに「あれ？`Selector('ul').child().nth(-1)`は`Selector('ul').child().nth(0)`にして最初の要素をとるようにしてもいいのでは？」と思われた方も多いと思います。
-ここで最後の要素を撮ってるのには理由があります。
+その中のh3要素のテキストとp要素のテキストが入力した通りのものであることと、ゴミ箱ボタンが有ることを評価しているというわけです。</p><p>ここまで大丈夫でしょうか？</p><blockquote class="book-hint info"><p><strong>なぜ最初の要素じゃなくて最後の要素？</strong></p><p>このテストを見たときに「あれ？<code>Selector('ul').child().nth(-1)</code>は<code>Selector('ul').child().nth(0)</code>にして最初の要素をとるようにしてもいいのでは？」と思われた方も多いと思います。</p><p>ここで最後の要素を撮ってるのには理由があります。
 たとえば、何かしらのタスクが作成された状態で、このテストを動かしたとします。
-そうするとどうでしょう。1番目のタスクを評価するように書いてしまうと必ずテストが失敗してしまいます。
-これを防ぐためには「テストを実行する前にDBの状態をクリアする」もしくは「DBの状態がどんな状態でもテストが通るようにする」の2つの選択肢があるわけです。
-ここでは最後のli要素を取るという後者のアプローチを取っているわけですね。
-E2Eテストを書く際は、**テストを何度も再実行するという前提で書くことがとても大事です。**</blockquote><h3 id=3番目のテスト>3番目のテスト
+そうするとどうでしょう。1番目のタスクを評価するように書いてしまうと必ずテストが失敗してしまいます。</p><p>これを防ぐためには「テストを実行する前にDBの状態をクリアする」もしくは「DBの状態がどんな状態でもテストが通るようにする」の2つの選択肢があるわけです。
+ここでは最後のli要素を取るという後者のアプローチを取っているわけですね。</p><p>E2Eテストを書く際は、<strong>テストを何度も再実行するという前提で書くことがとても大事です。</strong></p></blockquote><h3 id=3番目のテスト>3番目のテスト
 <a class=anchor href=#3%e7%95%aa%e7%9b%ae%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>つぎに<code>3. 作成したタスクをクリックすると完了済みの状態になる</code>に取り組んでみましょう。
 完了済みの状態はh3タグとpタグの属性値で表現されているということを踏まえて次のテストを書いてみてください。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>Selector</span> } <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;testcafe&#39;</span>;
 </span></span><span style=display:flex><span>
@@ -307,4 +299,4 @@ E2Eテストを書く際は、**テストを何度も再実行するという前
 手続き的に操作と評価を書くだけですので、やってることは非常に単純だということがおわかりいただけたのではないかと思います。</p><p>testcafeの素晴らしい所はなにより導入が簡単というところで、<code>npm install -D testcafe</code>コマンド一発で導入が完了します。
 headlessモードのChromeで動かせば、CI/CDパイプライン上でも簡単に動かすことができますし、
 たとえheadlessモードであっても、テストに失敗したときはその時の様子のスクリーンショットを残すことができたりとかなり強力です。</p><p>ぜひ試してみてください。また、冒頭にも書いたように様々なE2Eテストツールがありますので、
-色々試してみて自分のプロジェクトにあったテストツールを探してみましょう。</p><hr><p>テストについては以上です。次に変更に強いソフトウェアを書く技術について学んでいきましょう。</p><a href=/agile-dev-guide/docs/softwaredesign/about/ class=book-btn>ソフトウェア設計</a></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#e2eテストとは>E2Eテストとは</a></li><li><a href=#e2eテストツール>E2Eテストツール</a><ul><li><a href=#selenium>Selenium</a></li><li><a href=#cypress>Cypress</a></li><li><a href=#testcafe>Testcafe</a></li><li><a href=#mabl>mabl</a></li><li><a href=#autify>Autify</a></li><li><a href=#e2eテストツールの選定>E2Eテストツールの選定</a></li></ul></li><li><a href=#サンプルアプリケーション>サンプルアプリケーション</a></li><li><a href=#testcafeによるe2eテスト>testcafeによるE2Eテスト</a><ul><li><a href=#テストのシナリオを考えよう>テストのシナリオを考えよう</a></li><li><a href=#最初のテスト>最初のテスト</a></li><li><a href=#2番目のテスト>2番目のテスト</a></li><li><a href=#3番目のテスト>3番目のテスト</a></li><li><a href=#4番目のテスト>4番目のテスト</a></li><li><a href=#最後のテスト>最後のテスト</a></li></ul></li><li><a href=#まとめ>まとめ</a></li></ul></nav></div></aside></main></body></html>
+色々試してみて自分のプロジェクトにあったテストツールを探してみましょう。</p><hr><p>テストについては以上です。次に変更に強いソフトウェアを書く技術について学んでいきましょう。</p><p><a href=/agile-dev-guide/docs/softwaredesign/about/ class=book-btn>ソフトウェア設計</a></p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#e2eテストとは>E2Eテストとは</a></li><li><a href=#e2eテストツール>E2Eテストツール</a><ul><li><a href=#selenium>Selenium</a></li><li><a href=#cypress>Cypress</a></li><li><a href=#testcafe>Testcafe</a></li><li><a href=#mabl>mabl</a></li><li><a href=#autify>Autify</a></li><li><a href=#e2eテストツールの選定>E2Eテストツールの選定</a></li></ul></li><li><a href=#サンプルアプリケーション>サンプルアプリケーション</a></li><li><a href=#testcafeによるe2eテスト>testcafeによるE2Eテスト</a><ul><li><a href=#テストのシナリオを考えよう>テストのシナリオを考えよう</a></li><li><a href=#最初のテスト>最初のテスト</a></li><li><a href=#2番目のテスト>2番目のテスト</a></li><li><a href=#3番目のテスト>3番目のテスト</a></li><li><a href=#4番目のテスト>4番目のテスト</a></li><li><a href=#最後のテスト>最後のテスト</a></li></ul></li><li><a href=#まとめ>まとめ</a></li></ul></nav></div></aside></main></body></html>

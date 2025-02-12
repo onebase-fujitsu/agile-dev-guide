@@ -39,15 +39,13 @@
 <a class=anchor href=#%e3%82%a2%e3%83%bc%e3%82%ad%e3%83%86%e3%82%af%e3%83%81%e3%83%a3%e3%81%a8%e9%96%8b%e7%99%ba%e8%a8%80%e8%aa%9e%e3%83%95%e3%83%ac%e3%83%bc%e3%83%a0%e3%83%af%e3%83%bc%e3%82%af%e3%81%ae%e6%b1%ba%e5%ae%9a>#</a></h2><p>実は、一番難しいのがプロジェクト立ち上げのときだったりします。
 アジャイル開発ではあらゆる変更を受け入れるようにSOLID原則などのプログラミング技法に則って開発をすすめます。
 しかし、それでも開発を進めてからでは変更が難しいものがいくつかあります。</p><p>一つは開発言語、そしてもう一つはフレームワークです。</p><p>この２つは後から変更することが非常に困難であり、プロジェクトの特性を見極めて慎重に決定する必要があります。
-最初を丁寧にやればやるほど後から楽になります。最初の検討を怠ってはいけません。</p><blockquote class="book-hint info">**開発言語変更の例**
-Javascriptとそのスーパーセットである、Typescriptはプロジェクト内で共存が可能で、
+最初を丁寧にやればやるほど後から楽になります。最初の検討を怠ってはいけません。</p><blockquote class="book-hint info"><p><strong>開発言語変更の例</strong></p><p>Javascriptとそのスーパーセットである、Typescriptはプロジェクト内で共存が可能で、
 順次置き換えていくと言った戦略が取れるでしょう。
 また、JavaとKotlinも順次置き換える戦略がとることができ、
 現に筆者のプロジェクトでは当初JavascriptとJavaを採用していましたが、
 開発に着手して１ヶ月半ほどでTypescriptとKotlinに変更しました。
-しかし、これはまだ着手してまもなく規模もそこまで大きくなかったため踏み切れたものです。
-ソフトウェアの開発規模が大きくなるにつれ次第に変更は難しくなります。
-最初の開発言語は慎重にやるべきです。</blockquote><h2 id=プロジェクトの構成>プロジェクトの構成
+しかし、これはまだ着手してまもなく規模もそこまで大きくなかったため踏み切れたものです。</p><p>ソフトウェアの開発規模が大きくなるにつれ次第に変更は難しくなります。
+最初の開発言語は慎重にやるべきです。</p></blockquote><h2 id=プロジェクトの構成>プロジェクトの構成
 <a class=anchor href=#%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e3%81%ae%e6%a7%8b%e6%88%90>#</a></h2><p>今回は簡単なタスク管理アプリを作ってみます。
 これから作るのはフロントエンドはReactで開発言語はTypescript、バックエンドはSpring Bootで開発言語はKotlinで、
 フロントエンドとバックエンドがHTTPでJSONをやり取りして、画面を描画する極々シンプルなSPAアプリケーションです。</p><p><img src=arch.jpg alt=アーキテクチャ></p><p>ディレクトリ構成は以下の形で進めていきます。</p><pre tabindex=0><code>todo-app
@@ -55,17 +53,13 @@ Javascriptとそのスーパーセットである、Typescriptはプロジェク
 ├── todo-app-client     // Client Appのディレクトリ
 └── todo-app-server     // Backend Appのディレクトリ
 </code></pre><p>まずは、任意の場所にtodo-appディレクトリを作成しましょう。</p><h2 id=クライアントの環境構築>クライアントの環境構築
-<a class=anchor href=#%e3%82%af%e3%83%a9%e3%82%a4%e3%82%a2%e3%83%b3%e3%83%88%e3%81%ae%e7%92%b0%e5%a2%83%e6%a7%8b%e7%af%89>#</a></h2><blockquote class="book-hint warning">**ハンズオンを始めるにあたって**
-ハンズオン形式で細かくソースコードを提示しながらアプリケーションを作っていきますが、
+<a class=anchor href=#%e3%82%af%e3%83%a9%e3%82%a4%e3%82%a2%e3%83%b3%e3%83%88%e3%81%ae%e7%92%b0%e5%a2%83%e6%a7%8b%e7%af%89>#</a></h2><blockquote class="book-hint warning"><p><strong>ハンズオンを始めるにあたって</strong></p><p>ハンズオン形式で細かくソースコードを提示しながらアプリケーションを作っていきますが、
 それをただ写すだけでは意味がありませんし、それがあなたの身につくことはありません。
-ましてや、眺めているだけでは決してあなたの身につくことないでしょう。
-このサンプルアプリケーションではSpring Framework(Spring Boot)や、
-React.jsその他多くのOSSを使用していますが、わからないことを都度 **各ライブラリやフレームワークの公式のリファレンスや [MDN](https://developer.mozilla.org/ja/docs/Web)** を読み、
-理解するよう努めることがとても大事です。
-**公式のリファレンス以上に参考になるドキュメントはWeb上のどこにもない** ということを肝に銘じ、
-公式のリファレンスを読めるようになりましょう。
-コピペでしかソースコードを書けないエンジニアの特徴に **エラーメッセージを読もうとしない**、**公式のドキュメントを読もうとしない**、**英語のドキュメントを読もうとしない**というのがあります。
-そうならないようにしましょう。</blockquote><h3 id=reactアプリの作成>reactアプリの作成
+ましてや、眺めているだけでは決してあなたの身につくことないでしょう。</p><p>このサンプルアプリケーションではSpring Framework(Spring Boot)や、
+React.jsその他多くのOSSを使用していますが、わからないことを都度 <strong>各ライブラリやフレームワークの公式のリファレンスや <a href=https://developer.mozilla.org/ja/docs/Web>MDN</a></strong> を読み、
+理解するよう努めることがとても大事です。</p><p><strong>公式のリファレンス以上に参考になるドキュメントはWeb上のどこにもない</strong> ということを肝に銘じ、
+公式のリファレンスを読めるようになりましょう。</p><p>コピペでしかソースコードを書けないエンジニアの特徴に <strong>エラーメッセージを読もうとしない</strong>、<strong>公式のドキュメントを読もうとしない</strong>、<strong>英語のドキュメントを読もうとしない</strong>というのがあります。
+そうならないようにしましょう。</p></blockquote><h3 id=reactアプリの作成>reactアプリの作成
 <a class=anchor href=#react%e3%82%a2%e3%83%97%e3%83%aa%e3%81%ae%e4%bd%9c%e6%88%90>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>npm create vite@latest todo-app-client -- --template react-ts
 </span></span></code></pre></div><p>今回はtypescriptのtemplateから作成を始めます。
 <a href=https://vite.dev/guide/>vite</a>を使ってクライアントの雛形を作りました。</p><p>コマンド実行後、以下のログが表示されるため、指示に従ってコマンドを実行します。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-console data-lang=console><span style=display:flex><span>Done. Now run:
@@ -208,10 +202,7 @@ eslint, globals, @eslint/js, typescript-eslint, eslint-plugin-react
 有名どころはこの辺になるかと思います。</p><ul><li>Material UI</li><li>Tailwind CSS</li><li>styled-components</li><li>Chakra UI</li></ul><p>Material UIはスタイル適用済みのUI Componentを提供するもので、Tailwind CSSやstyled-components、Chakra UIはJSXファイルの中でスタイルを規定していくものです。
 Material UIはコンポーネントが提供されているため、さっと見た目のいいアプリを作るのにはいいですが、
 いかにもな"Material UI"感がでてしまうのが難点です。</p><p>Tailwind CSSやstyled-componentsなどはその点自由にデザインを組めますが、
-両者でコーディングスタイルは大きく異なっています。</p><p>今回はstyled-componentsを導入してみます。</p><blockquote class="book-hint info">**styled-componentsの利点**
-styled-componentsで定義するスタイルはReactのコンポーネントそのものです。このため、styled-componentsを利用することで、componentとstyleのマッピングが無くなります。
-さらに、ローカルスコープで利用できるため、複数のコンポーネントで同一の名前が使用でき、長い命名に悩まされる必要がなくなります。
-また、styled-componentsを使用すると、CSSコードを記述してコンポーネントのスタイルを設定できるため、他のCSSフレームワークに比べて学習コストが低いことも利点の一つです。</blockquote><p>styled-componentsの導入方法は<a href=https://styled-components.com/>こちら</a>に書いてあるので、これに習って導入してみましょう。</p><p>styled-componentsの導入は非常に簡単で以下のコマンドを実行するだけです。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>npm install --save styled-components @types/styled-components
+両者でコーディングスタイルは大きく異なっています。</p><p>今回はstyled-componentsを導入してみます。</p><blockquote class="book-hint info"><p><strong>styled-componentsの利点</strong></p><p>styled-componentsで定義するスタイルはReactのコンポーネントそのものです。このため、styled-componentsを利用することで、componentとstyleのマッピングが無くなります。</p><p>さらに、ローカルスコープで利用できるため、複数のコンポーネントで同一の名前が使用でき、長い命名に悩まされる必要がなくなります。</p><p>また、styled-componentsを使用すると、CSSコードを記述してコンポーネントのスタイルを設定できるため、他のCSSフレームワークに比べて学習コストが低いことも利点の一つです。</p></blockquote><p>styled-componentsの導入方法は<a href=https://styled-components.com/>こちら</a>に書いてあるので、これに習って導入してみましょう。</p><p>styled-componentsの導入は非常に簡単で以下のコマンドを実行するだけです。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>npm install --save styled-components @types/styled-components
 </span></span></code></pre></div><p>これでstyled-components導入ができました。
 正しく導入できているか確認してみましょう。</p><p>App.tsxを以下のように変更してコンパイルしてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#75715e>// App.tsx
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>styled</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;styled-components&#39;</span>
@@ -452,13 +443,10 @@ styled-componentsの使い方については<a href=https://styled-components.co
 </span></span><span style=display:flex><span>  &lt;/<span style=color:#f92672>React.StrictMode</span>&gt;
 </span></span><span style=display:flex><span>)
 </span></span></code></pre></div><p>以上でスタイルの適用は完了です。</p><p><img src=home_apply_design.jpg alt=ヘッダーにデザイン適用></p><p>ヘッダーに背景色をつけて、Headerの文字を白に、そして大きくしてみました。
-一気に華やかになってきましたね。</p><p>ここまでのソースコードは <a href=https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step3>https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step3</a> に置いてあります。</p><blockquote class="book-hint warning">**styled-components使用時の注意点**
-実際にstyled-componentsを使用してお気づきかもしれませんが、styled-componentsは非常に自由度の高いCSSフレームワークです。
-そのため、チームメンバーがそれぞれ自由に開発を進めると、可読性が下がりバグの原因に繋がります。
+一気に華やかになってきましたね。</p><p>ここまでのソースコードは <a href=https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step3>https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step3</a> に置いてあります。</p><blockquote class="book-hint warning"><p><strong>styled-components使用時の注意点</strong></p><p>実際にstyled-componentsを使用してお気づきかもしれませんが、styled-componentsは非常に自由度の高いCSSフレームワークです。</p><p>そのため、チームメンバーがそれぞれ自由に開発を進めると、可読性が下がりバグの原因に繋がります。
 例えばデザインのみを定義したcomponentと、何か機能を持ったcomponentとを一見して見分けることができません。
-また、定義したcomponentの全体像がわかりにくくなります。
-そのためチームで開発する際には、ディレクトリ構成やファイル構造、命名規則などのルールを定めて使用しましょう。</blockquote><hr><p>一日目はクライアントアプリの環境構築と最初の画面表示までいきました。
+また、定義したcomponentの全体像がわかりにくくなります。</p><p>そのためチームで開発する際には、ディレクトリ構成やファイル構造、命名規則などのルールを定めて使用しましょう。</p></blockquote><hr><p>一日目はクライアントアプリの環境構築と最初の画面表示までいきました。
 環境構築はアプリ構築になれている方がやらないとかなり難しい部分だったりします。
 というのもアプリの初期構築はそんなに回数こなすものでもないためです。</p><p>特にReactは最初の環境構築がcreate-react-appで簡略化されたとはいえ難しいです。
 まだReactのフレームワークも触りの部分しか扱っていません。
-ここまで、躓くことが無いように頑張ってください。</p><hr><p>2日目に続きます。</p><a href=/agile-dev-guide/docs/practice/day2/ class=book-btn>2日目</a></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#アプリケーションの要件>アプリケーションの要件</a></li><li><a href=#アーキテクチャと開発言語フレームワークの決定>アーキテクチャと開発言語、フレームワークの決定</a></li><li><a href=#プロジェクトの構成>プロジェクトの構成</a></li><li><a href=#クライアントの環境構築>クライアントの環境構築</a><ul><li><a href=#reactアプリの作成>reactアプリの作成</a></li><li><a href=#eslintの設定>eslintの設定</a></li><li><a href=#prettierの設定>prettierの設定</a></li><li><a href=#css-in-jsの設定>css in JSの設定</a></li><li><a href=#テスト環境の整備>テスト環境の整備</a></li></ul></li><li><a href=#ヘッダーの作成>ヘッダーの作成</a><ul><li><a href=#テストの作成>テストの作成</a></li><li><a href=#headerの実装>Headerの実装</a></li></ul></li><li><a href=#画面の表示>画面の表示</a></li><li><a href=#デザインの適用>デザインの適用</a></li></ul></nav></div></aside></main></body></html>
+ここまで、躓くことが無いように頑張ってください。</p><hr><p>2日目に続きます。</p><p><a href=/agile-dev-guide/docs/practice/day2/ class=book-btn>2日目</a></p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#アプリケーションの要件>アプリケーションの要件</a></li><li><a href=#アーキテクチャと開発言語フレームワークの決定>アーキテクチャと開発言語、フレームワークの決定</a></li><li><a href=#プロジェクトの構成>プロジェクトの構成</a></li><li><a href=#クライアントの環境構築>クライアントの環境構築</a><ul><li><a href=#reactアプリの作成>reactアプリの作成</a></li><li><a href=#eslintの設定>eslintの設定</a></li><li><a href=#prettierの設定>prettierの設定</a></li><li><a href=#css-in-jsの設定>css in JSの設定</a></li><li><a href=#テスト環境の整備>テスト環境の整備</a></li></ul></li><li><a href=#ヘッダーの作成>ヘッダーの作成</a><ul><li><a href=#テストの作成>テストの作成</a></li><li><a href=#headerの実装>Headerの実装</a></li></ul></li><li><a href=#画面の表示>画面の表示</a></li><li><a href=#デザインの適用>デザインの適用</a></li></ul></nav></div></aside></main></body></html>

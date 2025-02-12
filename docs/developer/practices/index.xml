@@ -7,7 +7,7 @@
  &lt;a class="anchor" href="#%e6%a6%82%e8%a6%81">#&lt;/a>
 &lt;/h2>
 &lt;p>テスト駆動開発（Test-Driven Development; TDD）は、先にテストを書き、次に機能の実装し、その後コードのリファクタリングを行うという工程を繰り返す開発手法です。&lt;br>
-&lt;a href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/#テストファーストの開発">テストファーストの開発&lt;/a>、&lt;a href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/#テスト駆動開発とは">テスト駆動開発とは&lt;/a>も合わせて参照してください。&lt;/p></description></item><item><title>CI/CD</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/cicd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/cicd/</guid><description>&lt;h1 id="cicd">
+&lt;a href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/xp/practice/#%e3%83%86%e3%82%b9%e3%83%88%e3%83%95%e3%82%a1%e3%83%bc%e3%82%b9%e3%83%88%e3%81%ae%e9%96%8b%e7%99%ba">テストファーストの開発&lt;/a>、&lt;a href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/#%e3%83%86%e3%82%b9%e3%83%88%e9%a7%86%e5%8b%95%e9%96%8b%e7%99%ba%e3%81%a8%e3%81%af">テスト駆動開発とは&lt;/a>も合わせて参照してください。&lt;/p></description></item><item><title>CI/CD</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/cicd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/developer/practices/cicd/</guid><description>&lt;h1 id="cicd">
  CI/CD
  &lt;a class="anchor" href="#cicd">#&lt;/a>
 &lt;/h1>

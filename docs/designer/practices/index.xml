@@ -58,7 +58,7 @@
 &lt;li>可能な限り初めから共通部品化（Component化）し、変更に強い作りを目指す&lt;/li>
 &lt;li>UIデザインのスキルは一朝一夕につかない&lt;/li>
 &lt;/ul>
-&lt;a href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/script/" class="book-btn">スクリプト作成&lt;/a></description></item><item><title>スクリプト作成</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/script/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/script/</guid><description>&lt;h1 id="スクリプト作成">
+&lt;p>&lt;a href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/script/" class="book-btn">スクリプト作成&lt;/a>&lt;/p></description></item><item><title>スクリプト作成</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/script/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/script/</guid><description>&lt;h1 id="スクリプト作成">
  スクリプト作成
  &lt;a class="anchor" href="#%e3%82%b9%e3%82%af%e3%83%aa%e3%83%97%e3%83%88%e4%bd%9c%e6%88%90">#&lt;/a>
 &lt;/h1>
@@ -98,7 +98,7 @@
 &lt;/li>
 &lt;li>形式はこだわらず、インタビュアーが話しやすいように調整する&lt;/li>
 &lt;/ul>
-&lt;a href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchaction/" class="book-btn">リサーチ実施&lt;/a></description></item><item><title>リサーチ実施</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchaction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchaction/</guid><description>&lt;h1 id="リサーチ実施">
+&lt;p>&lt;a href="https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchaction/" class="book-btn">リサーチ実施&lt;/a>&lt;/p></description></item><item><title>リサーチ実施</title><link>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchaction/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://onebase-fujitsu.github.io/agile-dev-guide/docs/designer/practices/researchaction/</guid><description>&lt;h1 id="リサーチ実施">
  リサーチ実施
  &lt;a class="anchor" href="#%e3%83%aa%e3%82%b5%e3%83%bc%e3%83%81%e5%ae%9f%e6%96%bd">#&lt;/a>
 &lt;/h1>
