@@ -129,11 +129,11 @@ Swift Methodは、巨大で複雑な（モノリスな）システムを近代�
 1. Tech Choice  
    シナリオに着手するために必要な技術選定をします
 
-{{< button relref="../eventstorming/index.md" >}}Event Storming{{< /button >}}
-{{< button relref="../boris/index.md" >}}Boris{{< /button >}}
-{{< button relref="../snape/index.md" >}}SnapE{{< /button >}}
-{{< button relref="../slices/index.md" >}}Slices{{< /button >}}
-{{< button relref="../techchoice/index.md" >}}Tech Choice{{< /button >}}
+{{% button relref="../eventstorming/index.md" %}}Event Storming{{% /button %}}
+{{% button relref="../boris/index.md" %}}Boris{{% /button %}}
+{{% button relref="../snape/index.md" %}}SnapE{{% /button %}}
+{{% button relref="../slices/index.md" %}}Slices{{% /button %}}
+{{% button relref="../techchoice/index.md" %}}Tech Choice{{% /button %}}
 
 ### 開発
 1. Pre-IPM  
@@ -145,19 +145,19 @@ Swift Methodは、巨大で複雑な（モノリスな）システムを近代�
 1. Accept  
   できたモノを確認しSwiftでのOutputに対してupdateの有無を判断します
 
-開発の流れは[チームの働き方]({{< ref "/docs/team/workstyle#イテレーション開発の基本的な考え方" >}})に則ります。
+開発の流れは[チームの働き方]({{% ref "/docs/team/workstyle#イテレーション開発の基本的な考え方" %}})に則ります。
 
-{{< button relref="/docs/team/activities/preipm" >}}Pre-IPM{{< /button >}}
-{{< button relref="/docs/team/activities/ipm" >}}IPM{{< /button >}}
+{{% button relref="/docs/team/activities/preipm" %}}Pre-IPM{{% /button %}}
+{{% button relref="/docs/team/activities/ipm" %}}IPM{{% /button %}}
 
-{{< hint info >}}
+{{% hint info %}}
 **Tips**
 - 気付き・学びがあれば随時前のStepに戻って見直します。
 - 開発に入ってからも分析（Swift）で作成したものを継続して更新し続けます。
 - Swift Methodは、VMware Tanzuにおいて過去の実績に基づいて、Event Stormingなどの複数のツールを集めて、モダナイズをする際の手法として定着させたものです。Boris、SnapEなどは独自にやり方を作り上げているため、インターネットで検索しても単語として出てきません。
-{{< /hint >}}
+{{% /hint %}}
 
-{{< hint info >}}
+{{% hint info %}}
 **参考資料**
 - [Tanzu Practices Swift Method](https://tanzu.vmware.com/developer/practices/swift-method/)
-{{< /hint >}}
+{{% /hint %}}

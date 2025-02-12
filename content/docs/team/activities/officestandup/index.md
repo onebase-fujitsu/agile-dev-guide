@@ -34,8 +34,8 @@ bookToc: true
   - Events: 投稿者がイベントの共有を行う
 - 一本締めで終了
 
-{{< hint info >}}
+{{% hint info %}}
 **Tips**
 - 10分以上の時間をかけないようにQuickに実施する
 - 直接業務に関係ないようなことでも気軽にInterestingsやHelpsにあげる（些細なことでもチームメンバーには新鮮かも）
-{{< /hint >}}
+{{% /hint %}}

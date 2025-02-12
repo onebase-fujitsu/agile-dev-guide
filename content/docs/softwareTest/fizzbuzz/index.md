@@ -513,4 +513,4 @@ FizzBuzzはとても有名な問題なので様々な実装方法があります
 
 では次にちょっと難易度を上げた問題に取り組んでみましょう。
 
-{{< button relref="/docs/softwareTest/bowlingGame/index" >}}ボウリングゲーム{{< /button >}}
+{{% button relref="/docs/softwareTest/bowlingGame/index" %}}ボウリングゲーム{{% /button %}}

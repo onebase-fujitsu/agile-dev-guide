@@ -40,7 +40,7 @@ OKRs（Objectives and Key Results）とは、目標管理の手法のひとつ�
 - OKRsの共有に関する心理的安全性
   - OKRsをオープンにすることが心理的安全性を損なうことにつながると感じられる場合、共有する範囲をチームや個人に絞ることも可能です（ただしアクションを行うにあたってメンバーの協力が得づらいことがデメリット）
 
-{{< hint info >}}
+{{% hint info %}}
 **OKRsの設定例**
 - Objectives：チームがSwift Methodを理解している
 - Key Results：以下のSwift Methodの各アクティビティがチーム内で一人でも教えられる状態になる
@@ -56,4 +56,4 @@ OKRs（Objectives and Key Results）とは、目標管理の手法のひとつ�
   - 5:アクティビティを人に教えられる
 
 ![OKRSample](OkrSample.jpg)
-{{< /hint >}}
+{{% /hint %}}

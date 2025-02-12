@@ -516,4 +516,4 @@ proxyの設定によりServerが応答できるようになり、200が返却さ
 
 4日目に続きます
 
-{{< button relref="/docs/practice/day4" >}}4日目{{< /button >}}
+{{% button relref="/docs/practice/day4" %}}4日目{{% /button %}}

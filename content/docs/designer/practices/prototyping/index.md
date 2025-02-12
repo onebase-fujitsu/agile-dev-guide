@@ -25,4 +25,4 @@ bookToc: true
 - 可能な限り初めから共通部品化（Component化）し、変更に強い作りを目指す
 - UIデザインのスキルは一朝一夕につかない
 
-{{< button relref="script" >}}スクリプト作成{{< /button >}}
+{{% button relref="script" %}}スクリプト作成{{% /button %}}

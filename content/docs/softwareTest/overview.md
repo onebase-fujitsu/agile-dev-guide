@@ -20,4 +20,4 @@ bookToc: true
 
 早速始めてみましょう。
 
-{{< button relref="/docs/softwareTest/fizzbuzz/index" >}}ウォーミングアップ{{< /button >}}
+{{% button relref="/docs/softwareTest/fizzbuzz/index" %}}ウォーミングアップ{{% /button %}}

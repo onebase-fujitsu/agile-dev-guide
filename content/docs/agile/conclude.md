@@ -26,4 +26,4 @@ bookToc: true
 
 では次にスクラムやエクストリーム・プログラミングを学んで具体的な開発手法を学びましょう。
 
-{{< button relref="/docs/scrum/overview" >}}スクラムとは{{< /button >}}
+{{% button relref="/docs/scrum/overview" %}}スクラムとは{{% /button %}}

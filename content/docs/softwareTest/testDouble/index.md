@@ -151,7 +151,7 @@ dependencies {
 さて、次にバックエンドの作りを見てみましょう。
 バックエンドは極々一般的な3層アーキテクチャになっています。
 
-{{<mermaid>}}
+{{< mermaid >}}
 classDiagram
 class TodoAppController{
   TodoAppService todoAppService
@@ -208,7 +208,7 @@ ClockService ..|> ClockServiceInterface
 
 TodoAppControllerはTodoAppControllerInterfaceに依存していて、TodoAppServiceはTodoAppServiceInterfaceに依存しています。
 そしてTodoAppServiceがTodoAppControllerInterfaceの実装をしており、同様にTodoAppRepositoryがTodoAppServiceInterfaceの実装をしています。
-これは [依存性逆転の原則(DIP)]({{< ref "/docs/softwareDesign/solidPrinciple/dip" >}}) に従ったものです。
+これは [依存性逆転の原則(DIP)]({{% ref "/docs/softwareDesign/solidPrinciple/dip" %}}) に従ったものです。
 抽象に依存するようにして結合度を下げています。これについては後述します。
 
 また、TodoAppServiceはClockServiceInterfaceにも依存しています。now()は現在時刻を返す実装になっています。
@@ -1049,7 +1049,7 @@ public void タスクがあるとその情報を取得できる() {
 
 ここまでできましたでしょうか？おめでとうございます！あなたは時間を自由自在にコントロールできました！
 
-{{< hint info >}}
+{{% hint info %}}
 **MockBeanのユースケース**
 
 ここでは時間でしたが、世の中には様々な予測不可能なものがあります。
@@ -1063,7 +1063,7 @@ public void タスクがあるとその情報を取得できる() {
 
 そこで今回覚えたMockです！APIのレスポンスをモッキングしてDIしてしまえば、どんなAPIのレスポンスでもテストで作れてしまうわけです！
 いかに便利で強力な仕組みか理解できましたか？
-{{< /hint >}}
+{{% /hint %}}
 
 ### 時間をコントロールする
 
@@ -1558,4 +1558,4 @@ any()というのはMockitoが提供している引数のMatcherです。
 
 では次にE2Eテストについて見ていきましょう。
 
-{{< button relref="/docs/softwareTest/e2e" >}}E2Eテスト{{< /button >}}
+{{% button relref="/docs/softwareTest/e2e" %}}E2Eテスト{{% /button %}}

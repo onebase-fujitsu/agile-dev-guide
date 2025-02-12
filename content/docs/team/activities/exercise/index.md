@@ -21,7 +21,7 @@ bookToc: true
 ## 進め方
 - YouTube等のサイトで動画を再生しながら、チーム全員でラジオ体操を行います
 
-{{< hint info >}}
+{{% hint info %}}
 **参考資料**
 - [ラジオ体操第一（YouTube）](https://www.youtube.com/watch?v=feSVtC1BSeQ)
-{{< /hint >}}
+{{% /hint %}}

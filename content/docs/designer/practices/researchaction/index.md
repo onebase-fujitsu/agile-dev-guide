@@ -26,4 +26,4 @@ bookToc: true
 - リサーチは最長1時間
 - ユーザーテストのtipは人間中心設計の本にまとめられているので読む
 
-{{< button relref="synthesize" >}}シンセサイズ{{< /button >}}
+{{% button relref="synthesize" %}}シンセサイズ{{% /button %}}

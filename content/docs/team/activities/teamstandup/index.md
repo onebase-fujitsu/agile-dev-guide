@@ -32,7 +32,7 @@ bookToc: true
   - タスクの優先度の見直し
 - 一本締めで終了
 
-{{< hint info >}}
+{{% hint info %}}
 **Tips**
 - 10分以上時間をかけないようにQuickに実施する
 - 個別に共有・議論したいことがある場合には別途時間を取って行う
@@ -40,4 +40,4 @@ bookToc: true
 - チームの共有タスクの確認に全メンバーが必要がない場合には、チームスタンドアップを終了後にメンバーを分けて実施する
   - InfraチームとDeveloperの共有タスク: Infraチーム + Developer + Product Manager
   - Product ManagerとDesignerの共有タスク: Product Manager + Designer
-{{< /hint >}}
+{{% /hint %}}

@@ -21,17 +21,17 @@ SnapEは既存システムをいくつかの小さい単位のサービスに分
 - 既存システムのアーキテクト、セキュリティ担当・・・  
   議論してる中で「これどうなってるんだっけ？」になった際に、その場で解決できると良いです。
 
-{{< hint info >}}
+{{% hint info %}}
 **参考資料の原文**
 ```
 ビジネスステークホルダー、アーキテクト、テクニカルリード、デベロッパー、コアメンバー
 ```
-{{< /hint >}}
+{{% /hint %}}
 
 ## 次のアクティビティに進むための条件
 - （Borisで可視化した）各サービス候補に必要な情報（必要なAPI、所有するデータ、連携する外部システム、呼び出せれる画面、受け取るor送る必要があるキュー、サービス候補実現に必要なストーリ、実現する際のリスク）が可視化できた
 
-{{< hint info >}}
+{{% hint info %}}
 **参考資料の原文**
 ```
 Borisの演習の最後には、サービス、API、データ、イベントの振り付けと、
@@ -45,7 +45,7 @@ External Systems/ UI 、Story、Risksに分類されます。
 各SnapEは、API、Data、External Systems/UI、Pub/Sub、Story、Risksの
 6つのカテゴリに関するドキュメントで構成されています。
 ```
-{{< /hint >}}
+{{% /hint %}}
 
 ## 進め方
 ### 基本ルール
@@ -97,9 +97,9 @@ External Systems/ UI 、Story、Risksに分類されます。
 
 ![alt](SnapESample.jpg)
 
-{{< hint info >}}
+{{% hint info %}}
 **参考資料**
 - [Tanzu Practices Boris](https://tanzu.vmware.com/developer/practices/boris/)
-{{< /hint >}}
+{{% /hint %}}
 
-{{< button relref="../slices/index.md" >}}Slices{{< /button >}}
+{{% button relref="../slices/index.md" %}}Slices{{% /button %}}

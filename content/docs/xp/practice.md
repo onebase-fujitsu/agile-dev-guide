@@ -231,4 +231,4 @@ XPチームは現行のストーリーの一群を処理できる方法のうち
 
 最後にXPのまとめです。
 
-{{< button relref="/docs/xp/conclude" >}}まとめ{{< /button >}}
+{{% button relref="/docs/xp/conclude" %}}まとめ{{% /button %}}

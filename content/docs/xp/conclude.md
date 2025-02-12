@@ -16,4 +16,4 @@ XPは非常に汎用性の高いソフトウェア開発手法であり、多く
 
 それでは次に、ソフトウェアテストについて学んでいきましょう。
 
-{{< button relref="/docs/softwareTest/overview" >}}ソフトウェアテスト{{< /button >}}
+{{% button relref="/docs/softwareTest/overview" %}}ソフトウェアテスト{{% /button %}}

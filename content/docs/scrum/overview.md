@@ -28,4 +28,4 @@ bookToc: true
 
 それでは早速スクラムのルールについて見ていきましょう。
 
-{{< button relref="/docs/scrum/roles" >}}スクラムにおけるロール{{< /button >}}
+{{% button relref="/docs/scrum/roles" %}}スクラムにおけるロール{{% /button %}}

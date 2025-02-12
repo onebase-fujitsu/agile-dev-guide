@@ -882,4 +882,4 @@ describe('App', () => {
 
 5日目に続きます
 
-{{< button relref="/docs/practice/day5" >}}5日目{{< /button >}}
+{{% button relref="/docs/practice/day5" %}}5日目{{% /button %}}

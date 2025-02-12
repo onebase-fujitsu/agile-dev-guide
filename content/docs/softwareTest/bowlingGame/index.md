@@ -50,7 +50,7 @@ bookToc: true
 
 まずボウリングのゲームをクラスで表現してみましょう。
 
-{{<mermaid>}}
+{{< mermaid >}}
 classDiagram
 Game "1" --> "10" Frame
 Frame "1" --> "1..3" Throw
@@ -125,7 +125,7 @@ public class Frame {
 異なるFrame同士をまとめるのはGameオブジェクトということになりますが、
 GameはFrameに依存していて、FrameもまたGameに依存することになります。
 
-{{<mermaid>}}
+{{< mermaid >}}
 classDiagram
     Game --> Frame
     Frame --> Game
@@ -137,13 +137,13 @@ classDiagram
 つまりFrameに前後のフレームへのポインタを保持しておいて、Frameのスコアを計算するときは、
 後のフレームのピンの本数を連結リストを辿って取得するという方法ですね。
 
-{{<mermaid>}}
+{{< mermaid >}}
 graph LR
     Frame1 --> Frame2
     Frame2 --> Frame3
     Frame3 --> Frame4
     Frame4 --> ...
-{{</mermaid>}}
+{{< /mermaid >}}
 
 こうすると、結構複雑なプログラムになりそうな気がしますね。
 例えばストライクを3連続出したとすると、最初のフレームのFrameのスコアを計算するのに、
@@ -909,4 +909,4 @@ BowlingGameKataはテスト駆動開発の形として有名な問題です。
 
 次にテストダブルについて学んでみましょう。
 
-{{< button relref="/docs/softwareTest/testDouble" >}}テストダブル{{< /button >}}
+{{% button relref="/docs/softwareTest/testDouble" %}}テストダブル{{% /button %}}

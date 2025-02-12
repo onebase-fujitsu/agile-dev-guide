@@ -45,7 +45,7 @@ bookToc: true
 
     ![teamHealthCheckSample](teamHealthCheckSample.jpg)
 
-{{< hint info >}}
+{{% hint info %}}
 **参考資料**
  - [TeamHealthCheck Template](https://docs.google.com/forms/d/1aXiWplcLOdq4VQZZmYfO_zzYkUYXZT-xNtx0cGMC7KE/edit?usp=sharing)
-{{< /hint >}}
+{{% /hint %}}

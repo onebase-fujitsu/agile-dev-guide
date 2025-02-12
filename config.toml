@@ -7,3 +7,8 @@ theme = "book"
 [params]
     BookTheme = 'light'
     BookSearch = false
+
+[markup]
+    [markup.goldmark]
+        [markup.goldmark.renderer]
+            unsafe = true

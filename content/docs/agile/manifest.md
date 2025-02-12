@@ -127,4 +127,4 @@ bookToc: true
 アジャイルソフトウェア開発宣言はアジャイル開発に臨む開発者持つべきマインドセットについて述べているということがわかると思います。
 では次にこれらのマインドセットの背景にあたるアジャイル開発12の原則を見ていきましょう。
 
-{{< button relref="/docs/agile/principle" >}}アジャイル開発12の原則{{< /button >}}
+{{% button relref="/docs/agile/principle" %}}アジャイル開発12の原則{{% /button %}}
