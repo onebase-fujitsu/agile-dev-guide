@@ -22,63 +22,91 @@ bookToc: true
 
 ### ルーターの導入
 
-ルーターの実装には [react-router-dom](https://reactrouter.com/) が必要なので、これを導入します。
+ルーターの実装には [React Router](https://reactrouter.com/) が必要なので、これを導入します。
 これはルーティング機能もDOMとして宣言してしまうライブラリです。
-これだけどあまりピンとこないと思いますので、どういう実装になるのかを実際に見てもらった方が早いと思います。
+これだけだとあまりピンとこないと思いますので、どういう実装になるのかを実際に見てもらった方が早いと思います。
 
-まずreact-router-domを導入します。
+まずReact Routerを導入します。
 
 ```shell
-npm install react-router-dom@^5.3.4 @types/react-router-dom@^5.3.3
+npm install react-router
 ```
+
+{{% hint info %}}
+
+**`react-router-dom`ではなく`react-router`です**
+
+以前は`react-router-dom`というパッケージからimportするのが一般的でしたが、
+現在の`react-router-dom`は`react-router`を再エクスポートするだけの薄いパッケージになっており、
+v7で更新が止まっています。**新規に入れるなら`react-router`を使ってください。**
+
+また、npm上の[`@types/react-router-dom`](https://www.npmjs.com/package/@types/react-router-dom)は
+**v5系向けの型定義**で更新が止まっています。React Routerは型定義を同梱しているため不要どころか有害です。
+
+`react-router`はNode.js 22.22.0以上を要求します。1日目の環境要件を満たしていれば問題ありません。
+
+{{% /hint %}}
 
 そして、App.tsxを以下のように編集してみましょう。
 
 ```typescript jsx
 // App.tsx
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {Route, Routes} from 'react-router'
 import Home from './pages/Home'
 
-function App() {
-    return (
-        <div className="App">
-            <BrowserRouter>
-                <Switch>
-                    <Route path="/" exact render={() => <Home />} />
-                </Switch>
-            </BrowserRouter>
-        </div>
-    )
-}
+const App = () => (
+  <div className="App">
+    <Routes>
+      <Route path="/" element={<Home />} />
+    </Routes>
+  </div>
+)
 
 export default App
 ```
+
+`<Routes>`と`<Route>`で「どのパスならどのコンポーネントを表示するか」という対応表を宣言します。
 
 次にmain.tsxを以下のように編集してみましょう。
 
 ```typescript jsx
 // main.tsx
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import {StrictMode} from 'react'
+import {createRoot} from 'react-dom/client'
 import './index.css'
-import {BrowserRouter} from 'react-router-dom'
-import App from './App'
-import TodoProvider from './context/TodoContext'
+import {BrowserRouter} from 'react-router'   // 追加
+import App from './App.tsx'
+import TodoProvider from './context/TodoProvider'
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
-root.render(
-  <React.StrictMode>
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
     <TodoProvider>
-      <BrowserRouter>
+      <BrowserRouter>     {/* 追加 */}
         <App />
-      </BrowserRouter>
+      </BrowserRouter>    {/* 追加 */}
     </TodoProvider>
-  </React.StrictMode>
+  </StrictMode>,
 )
 ```
 
+{{% hint warning %}}
+
+**`<BrowserRouter>`はアプリ全体で1つだけ**
+
+`<BrowserRouter>`はここ(アプリのルート)に**1箇所だけ**置きます。
+`App.tsx`の中にも書いてしまうとRouterが二重になり、以下のエラーで動かなくなります。
+
+```
+Error: You cannot render a <Router> inside another <Router>. You should never have more than one in your app.
+```
+
+ルーティングの対応表を書く`<Routes>`と、履歴を管理する`<BrowserRouter>`は役割が別、と覚えておきましょう。
+
+{{% /hint %}}
+
 この状態で [http://localhost:5173/](http://localhost:5173/) にアクセスするとHome画面が表示されます。ここはこれまでの動作と変わりません。
 そこで [http://localhost:5173/hoge](http://localhost:5173/hoge) にアクセスすると、先程と代わって真っ白な画面になると思います。
+(このとき、開発者ツールのコンソールには`No routes matched location "/hoge"`と表示されます)
 
 つまりこれは`/`というパスだったらホームコンポーネントを表示するよという設定なわけです。
 
@@ -111,17 +139,31 @@ describe('Header', () => {
 ヘッダーに`/`へのリンクと、`/newTask`へのリンクがあることを確認するテストを追加しました。
 
 テストが書けたら実装も追加します。
-今回はicon画像を使いたいので、[Styled Icons](https://styled-icons.dev/) を導入してから、Header.tsxを編集します。
+今回はicon画像を使いたいので、[Styled Icons](https://github.com/styled-icons/styled-icons) を導入してから、Header.tsxを編集します。
+
+今回使うのはMaterial Designのアイコン2つだけなので、
+全アイコンセットを含むメタパッケージ(`styled-icons`)ではなく、Material用のパッケージだけを導入します。
 
 ```shell
-npm install styled-icons
+npm install @styled-icons/material
 ```
+
+{{% hint warning %}}
+
+**アイコンライブラリの選定について**
+
+styled-iconsは2024年7月を最後に更新が止まっています。
+現時点ではReact 19 / styled-components 6でも動作しますが、
+新規プロジェクトでメンテナンス状況を重視するなら
+[lucide-react](https://lucide.dev/) などの現役のライブラリも検討してください。
+
+{{% /hint %}}
 
 ```typescript jsx
 // Header.tsx
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
-import {Task, Home} from 'styled-icons/material'
+import {Link} from 'react-router'
+import {Task, Home} from '@styled-icons/material'
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -195,27 +237,25 @@ export default Header
 しかし、このテストはそもそもレンダーで失敗します。
 
 ```
-  ● Header › ヘッダーの初期表示
+ FAIL  test/components/Header.test.tsx > Header > ヘッダーの初期表示
+TypeError: Cannot destructure property 'basename' of 'React$1.useContext(...)' as it is null.
+ ❯ LinkWithRef node_modules/react-router/dist/development/lib/dom/lib.js:288:8
+ ❯ Object.react_stack_bottom_frame node_modules/react-dom/cjs/react-dom-client.development.js:25904:20
+ ❯ renderWithHooks node_modules/react-dom/cjs/react-dom-client.development.js:7662:22
+ ❯ updateForwardRef node_modules/react-dom/cjs/react-dom-client.development.js:9724:19
 
-    Invariant failed: You should not use <Link> outside a <Router>
-
-      18 |     return <Provider store={store}>{children}</Provider>
-      19 |   }
-    > 20 |   return rtlRender(ui, {wrapper: Wrapper, ...renderOptions})
-         |          ^
-      21 | }
-      22 |
-      23 | export * from '@testing-library/react'
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
 ```
 
-Routerに依存しているのでLinkがRouterに依存しているのにそれを無視してレンダリングしようとしたからですね。
+`<Link>`は内部でRouterのContextを読みにいくのですが、Routerの外でレンダリングしたためContextが`null`になり、失敗しています。
 というわけで、`Header.test.tsx`のレンダリングオプションを追加しましょう。また、結合テストの役割を果たす`Home.test.tsx`にも同様のレンダリングオプションを追加します。
 
 ```typescript jsx
 // Header.test.tsx
 import {cleanup, render, screen} from '@testing-library/react'
 import Header from '../../src/components/Header'
-import {BrowserRouter} from "react-router-dom";
+import {MemoryRouter} from 'react-router'   // 追加
 
 describe('Header', () => {
   afterEach(() => {
@@ -223,17 +263,17 @@ describe('Header', () => {
   })
 
   it('ヘッダーの初期表示', () => {
-    render(<Header />, {wrapper: BrowserRouter})            // 修正
+    render(<Header />, {wrapper: MemoryRouter})            // 修正
     expect(screen.getByText('Todo App')).toBeInTheDocument()
     expect(screen.getByText('Home').closest('a')).toHaveAttribute('href', '/')
     expect(screen.getByText('New Task').closest('a')).toHaveAttribute('href', '/newTask')
   })
 })
-
 ```
 
 ```typescript jsx
 // Home.test.tsx
+import {MemoryRouter} from 'react-router'   // 追加
 
 // 中略
 
@@ -241,7 +281,7 @@ describe('Header', () => {
     mock.onGet('/todos').reply(200, [])
 
     await act(() => {
-      render(<Home />, {wrapper: BrowserRouter})  // 修正
+      render(<Home />, {wrapper: MemoryRouter})  // 修正
     })
 
     expect(screen.queryByTestId('Header')).toBeTruthy()
@@ -251,12 +291,27 @@ describe('Header', () => {
 // 中略
 
     await act(() => {
-      render(<TodoProvider><Home /></TodoProvider>, {wrapper: BrowserRouter})  // 修正
+      render(<TodoProvider><Home /></TodoProvider>, {wrapper: MemoryRouter})  // 修正
     })
 
     expect(mock.history.get[0].url).toEqual('/todos')
     expect(screen.getByText('title')).toBeInTheDocument()
 ```
+
+{{% hint info %}}
+
+**テストでは`BrowserRouter`ではなく`MemoryRouter`を使う**
+
+`BrowserRouter`はブラウザの履歴API(テストではjsdomのURL)を直接触ります。
+テストの中でURLが書き換わると、後続のテストが前のテストの遷移結果を引きずってしまいます。
+
+`MemoryRouter`は履歴をメモリ上に持つのでテストごとに独立します。
+`initialEntries={['/newTask']}`のように**開始URLを指定**することもできるので、
+特定のページから始まるテストも書けます。
+
+テストでRouterが必要になったら`MemoryRouter`を使いましょう。
+
+{{% /hint %}}
 
 これでひとまずテストは通ったと思います。
 
@@ -273,12 +328,12 @@ describe('Header', () => {
 では次にタスク作成画面を作成しましょう。
 
 まず、タスク作成画面のテストを作成します。
-`__test__/page`ディレクトリ配下に`NewTask.test.tsx`を作成しましょう。
+`test/pages`ディレクトリ配下に`NewTask.test.tsx`を作成しましょう。
 
 ```typescript jsx
 // NewTask.test.tsx
 import {cleanup, render, screen} from '@testing-library/react'
-import {BrowserRouter} from 'react-router-dom'
+import {MemoryRouter} from 'react-router'
 
 describe('タスク作成画面', () => {
 
@@ -287,7 +342,7 @@ describe('タスク作成画面', () => {
   })
 
   it('画面構成', async () => {
-    render(<NewTask />, {wrapper: BrowserRouter})
+    render(<NewTask />, {wrapper: MemoryRouter})
 
     expect(screen.queryByTestId('Header')).toBeTruthy()
     expect(screen.queryByTestId('NewTaskForm')).toBeInTheDocument()
@@ -298,11 +353,11 @@ describe('タスク作成画面', () => {
 テスト内容は「画面構成がHeaderとタスクを入力するFormコンポーネントであること」を確認するテストにしました。
 もちろん、NewTaskコンポーネントも、NewTaskFormコンポーネントもまだ無いためこのテストは失敗します。
 
-まず、NewTaskFromコンポーネントを作成していきましょう。
-`components`ディレクトリ配下に`NewTaskForm.tsx`を作成します。
+まず、NewTaskFormコンポーネントを作成していきましょう。
+`src/components`ディレクトリ配下に`NewTaskForm.tsx`を作成します。
 
 ```typescript jsx
-// NewTaskFrom.tsx
+// NewTaskForm.tsx
 const NewTaskForm = () => {
 
   return (
@@ -315,7 +370,7 @@ export default NewTaskForm
 
 いったん中身は空で大丈夫です。
 
-その上で、`page`ディレクトリ配下に`NewTask.tsx`を作成します。
+その上で、`src/pages`ディレクトリ配下に`NewTask.tsx`を作成します。
 
 ```typescript jsx
 // NewTask.tsx
@@ -343,7 +398,7 @@ import {cleanup, fireEvent, render, screen} from '@testing-library/react'
 import NewTaskForm from "../../src/components/NewTaskForm";
 
 
-describe('NewEntryFormコンポーネント', () => {
+describe('NewTaskFormコンポーネント', () => {
   afterEach(() => {
     cleanup()
   })
@@ -395,15 +450,15 @@ export default NewTaskForm
 
 ```typescript jsx
 // App.tsx
-import {Route, Routes} from 'react-router-dom'
+import {Route, Routes} from 'react-router'
 import Home from './pages/Home'
-import NewTask from './pages/NewTask'
+import NewTask from './pages/NewTask'   // 追加
 
 const App = () => (
   <div className="App">
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/newTask" element={<NewTask />} />
+      <Route path="/newTask" element={<NewTask />} />   {/* 追加 */}
     </Routes>
   </div>
 )
@@ -635,7 +690,7 @@ import MockAdapter from 'axios-mock-adapter'
 import axios from 'axios'
 
 
-describe('NewEntryFormコンポーネント', () => {
+describe('NewTaskFormコンポーネント', () => {
   let mock: MockAdapter
 
   beforeEach(() => {
@@ -679,8 +734,12 @@ describe('NewEntryFormコンポーネント', () => {
 
 ```typescript jsx
 // NewTaskForm.tsx
+import {useContext, useState} from 'react'          // 更新
+import styled from 'styled-components'
+import {postTodos} from '../features/TodoApi'       // 追加
+import {TodoContext} from '../context/TodoContext'  // 追加
 
-// 中略
+// 中略 (styled-componentsの定義)
 
 const NewTaskForm = () => {
     const [taskInput, setTaskInput] = useState('')
@@ -754,7 +813,7 @@ HTTP通信のオーバーヘッドはメモリアクセスや、ディスクア�
 
 ```typescript jsx
 // App.tsx
-import {Route, Routes} from 'react-router-dom'
+import {Route, Routes} from 'react-router'
 import {useContext, useEffect} from 'react'
 import Home from './pages/Home'
 import NewTask from './pages/NewTask'
@@ -762,15 +821,15 @@ import {TodoContext} from './context/TodoContext'
 import {getTodos} from './features/TodoApi'
 
 const App = () => {
-  const todoContext = useContext(TodoContext)
+  const setTodos = useContext(TodoContext)?.setTodos
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await getTodos()
-      todoContext?.setTodos(response)
+      setTodos?.(response)
     }
     fetchData()
-  }, [])
+  }, [setTodos])
 
   return (
     <div className="App">
@@ -785,9 +844,14 @@ const App = () => {
 export default App
 ```
 
+依存配列に`setTodos`だけを入れているのは、2日目の`Home.tsx`と同じ理由です。
+
+`App`は`<BrowserRouter>`の内側かつ`<Routes>`の外側にいるため、
+メニューをクリックしてページが切り替わっても`App`自体は再マウントされません。
+だからここに置いた`useEffect`は、アプリを開いたときの一度だけ動きます。
+
 ```typescript jsx
 // Home.tsx
-import React from 'react'
 import styled from 'styled-components'
 import TodoList from '../components/TodoList'
 import Header from '../components/Header'
@@ -815,9 +879,9 @@ Home.test.tsxのテストを移植しApp.tsx用のテストを新規作成しま
 
 ```typescript jsx
 // Home.test.tsx
-import {cleanup, render, screen, waitFor} from '@testing-library/react'
-import {BrowserRouter} from 'react-router-dom'
-import Home from '../../pages/Home'
+import {cleanup, render, screen} from '@testing-library/react'
+import {MemoryRouter} from 'react-router'
+import Home from '../../src/pages/Home'
 
 describe('Home画面', () => {
 
@@ -825,24 +889,28 @@ describe('Home画面', () => {
     cleanup()
   })
 
-  it('画面構成', async () => {
-    render(<Home />, {wrapper: BrowserRouter})
+  it('画面構成', () => {
+    render(<Home />, {wrapper: MemoryRouter})
 
-    await waitFor(() => expect(screen.queryByTestId('Header')).toBeTruthy())
-    await waitFor(() => expect(screen.queryByTestId('TodoList')).toBeTruthy())
+    expect(screen.queryByTestId('Header')).toBeTruthy()
+    expect(screen.queryByTestId('TodoList')).toBeTruthy()
   })
 })
-
 ```
 
+Homeが自分でAPIを呼ばなくなったため、非同期を待つ必要がなくなりました。
+`waitFor`も使わなくなったので、importから削除しています。
+使わないimportを残しておくと`npm run build`が`noUnusedLocals`で失敗するので注意してください。
+
+`App.test.tsx`は`test`ディレクトリ直下に作成します(`src/App.tsx`と対応する位置です)。
 
 ```typescript jsx
 // App.test.tsx
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-import {render} from '@testing-library/react'
-import {BrowserRouter} from 'react-router-dom'
-import App from '../App'
+import {cleanup, render} from '@testing-library/react'
+import {MemoryRouter} from 'react-router'
+import App from '../src/App'
 
 describe('App', () => {
   let mock: MockAdapter
@@ -853,9 +921,10 @@ describe('App', () => {
 
   afterEach(() => {
     mock.reset()
+    cleanup()
   })
 
-  it('ホーム画面の初期表示', async () => {
+  it('ホーム画面の初期表示', () => {
     mock.onGet('/todos').reply(200, [
       {
         id: 1,
@@ -863,7 +932,7 @@ describe('App', () => {
         completed: false,
       },
     ])
-    render(<App />, {wrapper: BrowserRouter})
+    render(<App />, {wrapper: MemoryRouter})
 
     expect(mock.history.get[0].url).toEqual('/todos')
   })
@@ -871,8 +940,22 @@ describe('App', () => {
 ```
 
 これでテストは通るようになったと思います。
-ブラウザで動作を確認してみると、アプリケーションを開いた最初の一回だけ/todosにGETをしているのが確認でき、
+ブラウザで動作を確認してみると、アプリケーションを開いたときだけ/todosにGETをしているのが確認でき、
 メニューからページ遷移をしても/todosにGETはされないことが確認できるはずです。
+
+{{% hint info %}}
+
+**開発モードでGETが2回飛ぶのは正常です**
+
+`main.tsx`で`<StrictMode>`を使っているため、Reactは開発モードに限り
+コンポーネントを**わざと2回マウント**して`useEffect`のクリーンアップ漏れを検出します。
+そのため開発者ツールのNetworkタブには`GET /todos`が2回並びます。
+
+本番ビルド(`npm run build`と`npm run preview`)では1回だけです。
+ここで確認したいのは「**ページ遷移してもGETが増えない**」ことなので、
+メニューをクリックしてリクエストが増えないことを確認してください。
+
+{{% /hint %}}
 
 ここまでのソースは
 [https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step9](https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step9)

@@ -17,8 +17,8 @@ bookToc: true
 Webブラウザには [fetchAPI](https://developer.mozilla.org/ja/docs/Web/API/Fetch_API) という機能があります。
 ReactからfetchAPIを実行すると、指定したURLからリソースを取得することができます。
 
-しかし、今回はこのfetchAPIはしようせず、 [axios](https://axios-http.com/) を導入します。
-axiosはnode.jsのHTTP Clientです。axiosの類似のライブラリとしては [isomorphic-fetch](https://www.npmjs.com/package/isomorphic-fetch) などもあります。
+しかし、今回はこのfetchAPIは使用せず、 [axios](https://axios-http.com/) を導入します。
+axiosはnode.jsのHTTP Clientです。
 
 なぜブラウザ標準のAPIを使用しないかというと以下の理由からです。
 
@@ -30,9 +30,21 @@ HTTP Clientをモックしてしまえば、どんなレスポンスもスタブ
 まずはaxiosとモックライブラリであるaxios-mock-adapterを導入しましょう。
 
 ```shell
-npm install axios @types/axios
+npm install axios
 npm install --save-dev axios-mock-adapter
 ```
+
+{{% hint info %}}
+
+**`@types/axios`は不要です**
+
+かつては型定義を`@types/axios`から別途インストールする必要がありましたが、
+現在のaxiosは**パッケージ自身が型定義を同梱**しています。
+
+npm上の[`@types/axios`](https://www.npmjs.com/package/@types/axios)は
+「axios provides its own type definitions」として**非推奨(deprecated)**になっているので、インストールしないでください。
+
+{{% /hint %}}
 
 さて、テストの実装をしていく前に今回の機能を実現するAPIを軽く設計しないといけません。
 ひとまず今回は`/todos`に対してGETすると以下のフォーマットのJSON文書が取得できるとします。
@@ -48,7 +60,7 @@ npm install --save-dev axios-mock-adapter
 ```
 
 ルートが配列になっているJSONですね。エンベロープにくるむ(つまり最初にtodosのようなキーを作る)べきか、くるまない方がいいのかは議論が分かれるところですが、
-筆者は後者の方ががいいと考えています。`GET /todos`というエンドポイントからTodoを一覧で取得できることが明確だからです。
+筆者は後者の方がいいと考えています。`GET /todos`というエンドポイントからTodoを一覧で取得できることが明確だからです。
 
 さて、ではテストを書いていきましょう。
 `test`配下にfeaturesというディレクトリを作成し、`TodoApi.test.ts`というファイルを作成し、最初のテストを実装していきます。
@@ -57,7 +69,7 @@ npm install --save-dev axios-mock-adapter
 // TodoApi.test.ts
 import MockAdapter from 'axios-mock-adapter'
 import axios from 'axios'
-import {getTodos} from '../../features/TodoApi'
+import {getTodos} from '../../src/features/TodoApi'
 
 describe('TodoApi', () => {
   let mock: MockAdapter
@@ -90,7 +102,7 @@ describe('TodoApi', () => {
 ```
 
 最初のテストはこのようにしました。axios-mock-adapterでHTTP通信をモックしており、
-getTodo()を実行したときに、ちゃんと`/todo`に対してGetのリクエストをしていること。
+`getTodos()`を実行したときに、ちゃんと`/todos`に対してGETのリクエストをしていること。
 戻り値のJSONのパースがうまくいっていることを確認しています。
 
 ### 非同期通信の実装
@@ -158,29 +170,34 @@ describe('TodoList.tsx Component', () => {
 TodoListはまだ実装されていませんので、当然失敗するはずです。
 
 ```
- FAIL  test/components/TodoList.test.tsx
-  ● Test suite failed to run
+ ❯ test/components/TodoList.test.tsx (0 test)
 
-    test/components/TodoList.test.tsx:3:22 - error TS2307: Cannot find module '../../src/components/TodoList' or its corresponding type declarations.
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
 
-    3 import TodoList from '../../src/components/TodoList'
-                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ FAIL  test/components/TodoList.test.tsx [ test/components/TodoList.test.tsx ]
+Error: Failed to resolve import "../../src/components/TodoList" from "test/components/TodoList.test.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /Users/onebase/IdeaProject/todo-app/todo-app-client/test/components/TodoList.test.tsx:5:21
 
-Test Suites: 1 failed, 3 passed, 4 total
-Tests:       3 passed, 3 total
-Snapshots:   0 total
-Time:        0.695 s, estimated 1 s
-Ran all test suites.
+ Test Files  1 failed | 3 passed (4)
+      Tests  3 passed (3)
 ```
+
+Vitestは型チェックをしないため、Jestのときのような「モジュールが見つからない」という型エラー(TS2307)ではなく、
+Vite自身がimportを解決できなかったというエラーになります。
 
 ### タスク一覧表示コンポーネントの実装
 
 ではコンポーネントを実装していきましょう。src/components配下にTodoList.tsxを作成します。
 
+`Todo`のimportに`type`が付いていることに注目してください。
+1日目に作った雛形は`verbatimModuleSyntax`が有効になっており、
+型としてしか使わないものは`type`を付けてimportしないと`npm run build`が失敗します。
+
 ```typescript jsx
 // TodoList.tsx
 import {useEffect, useState} from 'react'
-import {getTodos, Todo} from '../features/TodoApi'
+import {getTodos, type Todo} from '../features/TodoApi'
 
 const TodoList = () => {
   const [todos, setTodos] = useState<Todo[]>([])
@@ -222,7 +239,7 @@ import {render, screen} from '@testing-library/react'
 import TodoList from '../../src/components/TodoList'
 import MockAdapter from 'axios-mock-adapter'
 import axios from 'axios'
-import {act} from "react";
+import {act} from '@testing-library/react'
 
 describe('TodoList.tsx Component', () => {
   let mock: MockAdapter
@@ -283,12 +300,10 @@ getTodosの戻り値に応じてタスクを表示するコンポーネントは
 
 ```typescript jsx
 // Home.test.tsx
-import {cleanup, render, screen, waitFor} from '@testing-library/react'
+import {act, cleanup, render, screen} from '@testing-library/react'
 import MockAdapter from 'axios-mock-adapter'
 import axios from 'axios'
-import Home from '../../pages/Home'
-import {act} from 'react-dom/test-utils'
-import TodoProvider from '../../context/TodoContext'
+import Home from '../../src/pages/Home'
 
 describe('Home画面', () => {
   let mock: MockAdapter
@@ -323,7 +338,7 @@ describe('Home画面', () => {
     ])
 
     await act(() => {
-      render(<TodoProvider><Home /></TodoProvider>)
+      render(<Home />)
     })
 
     expect(mock.history.get[0].url).toEqual('/todos')
@@ -337,6 +352,9 @@ describe('Home画面', () => {
 また、APIのテストを実装するときに使用したaxios-mock-adapterが再び登場しました。
 本物の値を使用しているのが非常に大事で、要はインテグレーションテストになっています。
 
+なお`act`は`react-dom/test-utils`ではなく`@testing-library/react`からimportしてください。
+`react-dom/test-utils`の`act`はReact 19で非推奨になり、使用すると警告が出力されます。
+
 ### ホーム画面の実装
 
 テストを書いてる際に気づいた方もいるかもしれませんが、ホーム画面とTodoListコンポーネントの役割に重複があります。
@@ -346,13 +364,13 @@ describe('Home画面', () => {
 - TodoListコンポーネント：
   - 取得したタスク一覧を描画する
 
-今回はコンポーネント感でのプロパティの受け渡しに`useContext()`を利用します。
+今回はコンポーネント間でのプロパティの受け渡しに`useContext()`を利用します。
 `useContext()`を利用することで、プロパティをグローバルに管理することができます。
 また、`useContext()`も`useState()`や`useEffect（）`と同様にReact hooksの一つです。詳しく知りたい方は[こちら](https://ja.react.dev/reference/react/useContext)を参照してください。
 
 実際のコードは以下です。
 
-まず、src配下に`context`ディレクトリを作成し、その中に`TodoContext.tsx`を作成します。
+まず、src配下に`context`ディレクトリを作成し、その中に`TodoContext.ts`と`TodoProvider.tsx`を作成します。
 
 ```
 src
@@ -360,48 +378,68 @@ src
 ├── components
 │    └── 省略
 ├── context
-│    └── TodoContext.tsx  // 作成
+│    ├── TodoContext.ts    // 作成
+│    └── TodoProvider.tsx  // 作成
 ├── features
 │    └── 省略
 ├── index.css
 ├── main.tsx
-├── pages
-│    └── 省略
-└── vite-env.d.ts
-
+└── pages
+     └── 省略
 ```
 
-```typescript jsx
-// TodoContext.tsx
-import React, {createContext, useMemo, useState} from 'react'
-import {Todo} from '../features/TodoApi'
+```typescript
+// TodoContext.ts
+import {createContext} from 'react'
+import type {Dispatch, SetStateAction} from 'react'
+import type {Todo} from '../features/TodoApi'
 
-type Props = {
-  children: React.ReactNode
-}
-
-type InitialState = {
+export interface InitialState {
   todos: Todo[]
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>
+  setTodos: Dispatch<SetStateAction<Todo[]>>
 }
 
 export const TodoContext = createContext<InitialState | null>(null)
+```
 
-const TodoProvider: React.FC<Props> = ({children}) => {
+```typescript jsx
+// TodoProvider.tsx
+import {useMemo, useState} from 'react'
+import type {ReactNode} from 'react'
+import type {Todo} from '../features/TodoApi'
+import {TodoContext} from './TodoContext'
+
+const TodoProvider = ({children}: {children: ReactNode}) => {
   const [todos, setTodos] = useState<Todo[]>([])
-  const todosValue = useMemo(() => ({todos, setTodos}), [todos, setTodos])
-  return (
-          <TodoContext.Provider value={todosValue}>{children}</TodoContext.Provider>
-  )
+  const todosValue = useMemo(() => ({todos, setTodos}), [todos])
+
+  return <TodoContext.Provider value={todosValue}>{children}</TodoContext.Provider>
 }
 
 export default TodoProvider
-
 ```
 
-`TodoContext.tsx`では、`TodoContext`と`TodoProvider`の2つを定義しています。
+`TodoContext`はTodoの配列と、その中身を設定するための関数を持っています。
+また、`TodoProvider`は`TodoContext`を子コンポーネントで使用できるようにするため、`TodoContext.Provider`で子コンポーネントをラップする形になっています。
 
-`TodoContext`はTodoの配列をとその中身を設定するための関数を持っています。また、`TodoProvider`は`TodoContext`を子コンポーネントで使用できるようにするため、`TodoContex.Provider`で子コンポーネントをラップする形になっています。
+{{% hint info %}}
+
+**なぜ2つのファイルに分けるのか**
+
+`TodoContext`と`TodoProvider`を1つのファイルにまとめて書くこともできますが、そうすると
+1日目に設定したESLintの`react-refresh/only-export-components`に**エラーとして**怒られ、`npm run lint`が通らなくなります。
+
+Viteの Fast Refresh は「コンポーネントだけを export しているファイル」でしか正しく動作しません。
+コンポーネント以外のもの(ここではContext)を一緒に export していると、
+ファイルを保存したときに画面の状態を保ったまま更新できず、まるごと再読み込みになってしまいます。
+
+lintの指摘は「動かないから直せ」ではなく「開発体験が落ちるから分けろ」という意味です。素直に従っておきましょう。
+
+{{% /hint %}}
+
+なお、`TodoContext.ts`で`Todo`や`Dispatch`を`import type`と書いているのは、
+1日目のテンプレートが`verbatimModuleSyntax`を有効にしているためです。
+型としてしか使わないものは`import type`と書かないと`npm run build`が失敗します。
 
 次に、`TodoList.tsx`をTodoContextを使用するように修正します。
 
@@ -409,13 +447,14 @@ export default TodoProvider
 // TodoList.test.tsx
 import {render, screen, waitFor} from '@testing-library/react'
 import React from 'react'
+import type {Mock} from 'vitest'                    // 追加
 import TodoList from '../../src/components/TodoList'
 
 describe('TodoList.tsx Component', () => {
-  let todoContextMock: jest.Mock
+  let todoContextMock: Mock                         // 更新
 
   beforeEach(() => {
-    todoContextMock = React.useContext = jest.fn()
+    todoContextMock = React.useContext = vi.fn()    // 更新
   })
 
   it('todoContextが空ならリストも空', () => {
@@ -452,6 +491,10 @@ describe('TodoList.tsx Component', () => {
 
 axiosのmockに関する記述は削除し、新たにTodoContextのmockに関する記述を追加しています。
 
+`vi`はVitestが提供するモック用のオブジェクトで、Jestの`jest`に対応します。
+`vite.config.ts`で`globals: true`を設定してあるので、`describe`や`expect`と同じく**importなしで**使えます。
+ただし`Mock`は型なので、こちらは`import type {Mock} from 'vitest'`と明示的にimportする必要があります。
+
 ```typescript jsx
 // TodoList.tsx
 import React from 'react'
@@ -478,6 +521,7 @@ export default TodoList
 
 ```typescript jsx
 // Home.test.tsx
+import TodoProvider from '../../src/context/TodoProvider'   // 追加
 
 // 中略
 
@@ -511,21 +555,21 @@ import {getTodos} from '../features/TodoApi'
 import {TodoContext} from '../context/TodoContext'
 
 const Home = () => {
-  const todoContext = useContext(TodoContext)
+  const setTodos = useContext(TodoContext)?.setTodos
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await getTodos()
-      todoContext?.setTodos(response)
+      setTodos?.(response)
     }
     fetchData()
-  }, [])
+  }, [setTodos])
 
   return (
-          <div>
-            <Header />
-            <TodoList />
-          </div>
+    <div>
+      <Header />
+      <TodoList />
+    </div>
   )
 }
 
@@ -534,47 +578,59 @@ export default Home
 
 ホーム画面では、これまでTodoListコンポーネントで実施していたApiの呼び出しと戻り値の格納を担当しています。この際、戻り値の格納先がTodoContextになっていることがポイントです。
 
+{{% hint info %}}
+
+**`useEffect`の依存配列に何を入れるか**
+
+`useEffect`の第2引数は依存配列と呼ばれ、ここに書いた値が変わったときだけ処理を再実行します。
+
+ここで`const todoContext = useContext(TodoContext)`と受け取って
+依存配列を`[]`のままにすると、ESLintの`react-hooks/exhaustive-deps`が
+「依存配列に`todoContext`が足りない」と警告します。
+
+だからといって`[todoContext]`にしてはいけません。
+`TodoProvider`は`todos`が変わるたびに新しいオブジェクトを作るため、
+「取得 → stateを更新 → todoContextが変わる → もう一度取得」の**無限ループ**になります。
+
+正解は、**`useState`が返すsetter関数は再レンダリングをまたいで同一である**ことを利用して、
+`setTodos`だけを取り出して依存配列に入れることです。
+
+{{% /hint %}}
+
 これで全てのテストが通る状態になったと思います。
 
 ```
- PASS  test/features/TodoApi.test.ts
- PASS  test/components/Header.test.tsx
- PASS  test/components/TodoList.test.tsx
- PASS  test/pages/Home.test.tsx
-
-Test Suites: 4 passed, 4 total
-Tests:       6 passed, 6 total
-Snapshots:   0 total
-Time:        0.973 s, estimated 1 s
-Ran all test suites.
-
-Watch Usage: Press w to show more.
+ Test Files  4 passed (4)
+      Tests  6 passed (6)
+   Start at  10:31:02
+   Duration  1.42s (transform 260ms, setup 205ms, import 480ms, tests 206ms, environment 1.19s)
 ```
+
+どのファイルが通ったのか個別に見たいときは`npx vitest run --reporter=verbose`を使ってください。
 
 最後に、`Home.tsx`でTodoContextを使用できるようにするため、`main.tsx`を修正します。
 
 ```typescript jsx
 // main.tsx
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import {StrictMode} from 'react'
+import {createRoot} from 'react-dom/client'
 import './index.css'
-import App from './App'
-import TodoProvider from './context/TodoContext'
+import App from './App.tsx'
+import TodoProvider from './context/TodoProvider'   // 追加
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
-root.render(
-        <React.StrictMode>
-          <TodoProvider>    // 修正
-            <App />
-          </TodoProvider>   // 修正
-        </React.StrictMode>
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <TodoProvider>      {/* 追加 */}
+      <App />
+    </TodoProvider>     {/* 追加 */}
+  </StrictMode>,
 )
 ```
 
 これでホーム画面への組み込みは完了です。
 
 ここまでのソースコードは
-[https://github.com/Onebase-Fujitsu/todo-app-client/tree/step4](https://github.com/Onebase-Fujitsu/todo-app-client/tree/step4)
+[https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step4](https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step4)
 に置いてあります。
 
 ここは慣れていないと非常に難しい部分だと思いますので、
@@ -584,6 +640,18 @@ root.render(
 
 さてクライアントの実装は終わりましたが、`npm run dev`を実行して`http://localhost:5173` にアクセスしても、
 1日目の実装結果となにも変わりありませんよね。
+
+{{% hint info %}}
+
+**開発モードでリクエストが2回飛ぶのは正常です**
+
+`main.tsx`で`<StrictMode>`を使っているため、Reactは開発モードに限り
+コンポーネントを**わざと2回マウント**して`useEffect`のクリーンアップ漏れを検出します。
+
+そのためブラウザの開発者ツールのNetworkタブには`GET /todos`が2回並びますが、不具合ではありません。
+本番ビルド(`npm run build`と`npm run preview`)では1回だけになります。
+
+{{% /hint %}}
 
 しかし、このままだとちゃんとクライアントの実装ができてるか少し不安だと思うので、ちょっとしたツールをご紹介します。
 [JSON Placeholder](https://jsonplaceholder.typicode.com/) というサービスがあります。

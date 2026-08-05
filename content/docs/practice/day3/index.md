@@ -485,22 +485,27 @@ npm run dev
 Clientの`vite.config.ts`を開いたら以下の設定を追記して、再度Clientを起動してみましょう。
 
 ```typescript
-import { defineConfig } from 'vite'
+// vite.config.ts
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  test: {                                      // 1日目に設定済み(消さないこと)
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['./test/setup.ts'],
+  },
   server: {                                    // 追記
-    proxy: {                                   // 追記    
+    proxy: {                                   // 追記
       "/todos": {                              // 追記
         target: "http://localhost:8080",       // 追記
         changeOrigin: true                     // 追記
       }                                        // 追記
     }                                          // 追記
-  }                                            // 追記 
+  }                                            // 追記
 })
-
 ```
 
 ![200](getTodos200.png)
