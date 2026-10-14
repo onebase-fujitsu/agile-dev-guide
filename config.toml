@@ -1,8 +1,19 @@
 baseURL = 'https://onebase-fujitsu.github.io/agile-dev-guide/'
-languageCode = "ja"
 hasCJKLanguage = true
-title = 'Fujitsu Agile Development Guide'
 theme = "book"
+defaultContentLanguage = 'ja'
+
+[languages]
+    [languages.ja]
+        languageCode = 'ja'
+        languageName = '日本語'
+        title = 'Fujitsu Agile Development Guide'
+        weight = 1
+    [languages.en]
+        languageCode = 'en'
+        languageName = 'English'
+        title = 'Fujitsu Agile Development Guide'
+        weight = 2
 
 [params]
     BookTheme = 'light'
