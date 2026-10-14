@@ -3,9 +3,10 @@
   #
 
 最初の一歩ではウォーミングアップとしてFizzBuzzを書いてみました。
-ここでは少しだけ難易度を上げたより実践的な例としてボウリングのスコア計算のプログラムを書いてみましょう。"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/"><meta property="og:site_name" content="Fujitsu Agile Development Guide"><meta property="og:title" content="ボウリングゲーム"><meta property="og:description" content="ボウリングゲーム # 最初の一歩ではウォーミングアップとしてFizzBuzzを書いてみました。 ここでは少しだけ難易度を上げたより実践的な例としてボウリングのスコア計算のプログラムを書いてみましょう。"><meta property="og:locale" content="ja"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>ボウリングゲーム | Fujitsu Agile Development Guide</title>
-<link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span></a></h2><ul><li><a href=/agile-dev-guide/docs/introduction/>はじめに</a></li><li><input type=checkbox id=section-fe72557a7878dded4efa0060e21abacc class=toggle>
+ここでは少しだけ難易度を上げたより実践的な例としてボウリングのスコア計算のプログラムを書いてみましょう。"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/"><meta property="og:site_name" content="Fujitsu Agile Development Guide"><meta property="og:title" content="ボウリングゲーム"><meta property="og:description" content="ボウリングゲーム # 最初の一歩ではウォーミングアップとしてFizzBuzzを書いてみました。 ここでは少しだけ難易度を上げたより実践的な例としてボウリングのスコア計算のプログラムを書いてみましょう。"><meta property="og:locale" content="ja"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>ボウリングゲーム | Fujitsu Agile Development Guide</title><link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span></a></h2><ul class=book-languages><li><input type=checkbox id=languages class=toggle>
+<label for=languages class="flex justify-between"><a role=button class="flex align-center"><img src=/agile-dev-guide/svg/translate.svg class=book-icon alt=Languages>
+日本語</a></label><ul><li><a href=/agile-dev-guide/en/>English</a></li></ul></li></ul><ul><li><a href=/agile-dev-guide/docs/introduction/>はじめに</a></li><li><input type=checkbox id=section-fe72557a7878dded4efa0060e21abacc class=toggle>
 <label for=section-fe72557a7878dded4efa0060e21abacc class="flex justify-between"><a role=button>アジャイル</a></label><ul><li><a href=/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a></li><li><a href=/agile-dev-guide/docs/agile/principle/>アジャイル開発12の原則</a></li><li><a href=/agile-dev-guide/docs/agile/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-60906829343241fe59efbb09409d99f8 class=toggle>
 <label for=section-60906829343241fe59efbb09409d99f8 class="flex justify-between"><a role=button>スクラム</a></label><ul><li><a href=/agile-dev-guide/docs/scrum/overview/>スクラムとは</a></li><li><a href=/agile-dev-guide/docs/scrum/roles/>ロール</a></li><li><a href=/agile-dev-guide/docs/scrum/products/>成果物</a></li><li><a href=/agile-dev-guide/docs/scrum/events/>イベント</a></li><li><a href=/agile-dev-guide/docs/scrum/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-8258873460fa80799dab8ced5b37f178 class=toggle>
 <label for=section-8258873460fa80799dab8ced5b37f178 class="flex justify-between"><a role=button>エクストリームプログラミング</a></label><ul><li><a href=/agile-dev-guide/docs/xp/overview/>エクストリームプログラミングとは</a></li><li><a href=/agile-dev-guide/docs/xp/practice/>エクストリームプログラミングのプラクティス</a></li><li><a href=/agile-dev-guide/docs/xp/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-ef522355473a56c6b477dd934de57bb8 class=toggle checked>
@@ -46,7 +47,7 @@ Throwクラスはどんな振る舞いを持つでしょうか？
 プレイヤーが倒したピンの本数を保持するぐらいですね（つまりPOJOになる）。
 単に本数を保持するだけであればこのクラスに"振る舞い"は特にないですね。
 振る舞いがないのであれば、依存関係チェーンを１つ上がってFrameに着目して見ましょう。</p><p>フレームオブジェクトはスコアを保持していて、倒したピンの本数や、フレームがストライクだったとか、
-スペアだったのかとを教えてくれるというようなメソッドがあるとなんとなく良さそうです。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FrameTest.java</span>
+スペアだったのかとを教えてくれるというようなメソッドがあるとなんとなく良さそうです。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FrameTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -67,7 +68,7 @@ Throwクラスはどんな振る舞いを持つでしょうか？
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>まずは単純に倒したピンの本数をスコアとして保持してくれるというテストを書いてみました。
 この時点ではFrameクラスもadd()メソッドも、getScore()メソッドもないので当然失敗します。</p><h3 id=最初の実装>最初の実装
-<a class=anchor href=#%e6%9c%80%e5%88%9d%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><p>これを満たす最小限の実装を考えてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Frame.java</span>
+<a class=anchor href=#%e6%9c%80%e5%88%9d%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><p>これを満たす最小限の実装を考えてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Frame.java</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Frame</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> score <span style=color:#f92672>=</span> 0;
 </span></span><span style=display:flex><span>
@@ -103,7 +104,7 @@ graph LR
 そのFrameの1投目のスコアを取ってきて&mldr;というロジックになります。</p><p>いったん、ここまでの作業を中断してGame側で投球を管理するようにしてみましょう。
 もし、Gameを作業するなかでFrameの連結リストへの必要性が出てきたら、改めて考えてみることにしましょう。</p><h3 id=gameの最初のテスト>Gameの最初のテスト
 <a class=anchor href=#game%e3%81%ae%e6%9c%80%e5%88%9d%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>Gameのテストを書いてみました。といっても先のFrameのテストとやってることは変わりませんね。
-テストのタイトルと、クラス名や変数名が変わっただけです。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
+テストのタイトルと、クラス名や変数名が変わっただけです。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -123,7 +124,7 @@ graph LR
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><h3 id=gameの最初の実装>Gameの最初の実装
-<a class=anchor href=#game%e3%81%ae%e6%9c%80%e5%88%9d%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><p>テストが失敗するのを確認したらGameクラスを実装してみます。これもFrameと同じですね。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
+<a class=anchor href=#game%e3%81%ae%e6%9c%80%e5%88%9d%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><p>テストが失敗するのを確認したらGameクラスを実装してみます。これもFrameと同じですね。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> score <span style=color:#f92672>=</span> 0;
 </span></span><span style=display:flex><span>
@@ -137,7 +138,7 @@ graph LR
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><h3 id=最後までゲームをやりきる>最後までゲームをやりきる
 <a class=anchor href=#%e6%9c%80%e5%be%8c%e3%81%be%e3%81%a7%e3%82%b2%e3%83%bc%e3%83%a0%e3%82%92%e3%82%84%e3%82%8a%e3%81%8d%e3%82%8b>#</a></h3><p>今のテストはボールを1回投げたテストしかありませんが、すでにボールを複数回投げることにも対応してそうですね。
-テストを補強して最後までゲームをやりきってみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
+テストを補強して最後までゲームをやりきってみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -162,7 +163,7 @@ graph LR
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>ボールを20回投げるようになりました。問題なくテストが通りますね。</p><h3 id=スペアのテスト>スペアのテスト
-<a class=anchor href=#%e3%82%b9%e3%83%9a%e3%82%a2%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>では早速スペアをやってみましょう。まずテストを書いてみます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
+<a class=anchor href=#%e3%82%b9%e3%83%9a%e3%82%a2%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>では早速スペアをやってみましょう。まずテストを書いてみます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -201,7 +202,7 @@ graph LR
 </span></span></code></pre></div><p>テストとしてはこんな感じになります。
 毎回Gameのインスタンスを作ったり、同じ投球をたくさん繰り返すのがちょっと大変になってきましたね。
 また、Gameに対してaddするというメソッド名もチグハグな感じがします。
-軽くリファクタリングしてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
+軽くリファクタリングしてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.BeforeEach;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
 </span></span><span style=display:flex><span>
@@ -247,7 +248,7 @@ add()メソッドはroll()メソッドに名前を変更しました。
 また、rollsManyというプライベート関数を使って簡単にたくさん投球ができるようにしました。
 さらに@BeforeEachでテストの前にGameのインスタンスを作るという書き方にしてみました。</p><p>これでテストを実行すると最後のスペアのテストだけ失敗します。
 早速これを実装してみましょう。</p><h3 id=スペアの実装>スペアの実装
-<a class=anchor href=#%e3%82%b9%e3%83%9a%e3%82%a2%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><p>今、Gameの実装はこの様になってます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
+<a class=anchor href=#%e3%82%b9%e3%83%9a%e3%82%a2%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><p>今、Gameの実装はこの様になってます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> score <span style=color:#f92672>=</span> 0;
 </span></span><span style=display:flex><span>
@@ -261,7 +262,7 @@ add()メソッドはroll()メソッドに名前を変更しました。
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>よくよく見てみると、roll()がスコアの計算をしていて、名前にあってませんね。
 さらにgetScore()はスコアを取得するところですが、本来はここでスコアを計算すべきなように見えます。
-ちょっとここでGameクラスについてもリファクタリングしてみましょう。</p><p>いったん、スペアのテストをコメントアウトします。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
+ちょっとここでGameクラスについてもリファクタリングしてみましょう。</p><p>いったん、スペアのテストをコメントアウトします。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.BeforeEach;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
 </span></span><span style=display:flex><span>
@@ -304,7 +305,7 @@ add()メソッドはroll()メソッドに名前を変更しました。
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>ではGameをリファクタリングしてみましょう。
 これを修正するためにはroll()を純粋に倒したピンの本数を記録するためのメソッドにしてしまって、
-getScore()でスコアの計算をするように変更すると良さそうですね。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
+getScore()でスコアの計算をするように変更すると良さそうですね。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>]</span>;
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0;
@@ -322,7 +323,7 @@ getScore()でスコアの計算をするように変更すると良さそうで�
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>できましたね。元あったテストはパスしましたし、スペアのテストのコメントアウトを外しましょう。
-では早速、スペアの実装に入ってみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
+では早速、スペアの実装に入ってみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>]</span>;
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0;
@@ -345,7 +346,7 @@ getScore()でスコアの計算をするように変更すると良さそうで�
 </span></span></code></pre></div><p>まずこんな処理を書いてみました。一見すると良さそうな気がしますね。
 でもこのように書いてしまうと、例えば1フレーム目の2投目と2フレーム目の1投目が合計10だと、スペアの判定になってしまいます。
 それは実装したい処理ではありませんよね。
-ストライクやスペアの実装にはフレームの概念が必要だということが分かります。</p><p>再びリファクタリングしてみましょう。また、スペアを確認するテストをコメントアウトしてください。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
+ストライクやスペアの実装にはフレームの概念が必要だということが分かります。</p><p>再びリファクタリングしてみましょう。また、スペアを確認するテストをコメントアウトしてください。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>]</span>;
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0;
@@ -366,7 +367,7 @@ getScore()でスコアの計算をするように変更すると良さそうで�
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>getScore()メソッドの実装をこのようにしてみました。
 iという各フレームの1投目の位置を保持する変数を作ってみました。
-各フレームのスコアはi番目の倒した本数と、i+1番目の倒した本数の合計になりますね。</p><p>これで元々のテストはパスしましたので、再度スペアの実装に挑んでみましょう。スペアを確認するテストのコメントアウトを外してください。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
+各フレームのスコアはi番目の倒した本数と、i+1番目の倒した本数の合計になりますね。</p><p>これで元々のテストはパスしましたので、再度スペアの実装に挑んでみましょう。スペアを確認するテストのコメントアウトを外してください。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>]</span>;
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0;
@@ -393,7 +394,7 @@ iという各フレームの1投目の位置を保持する変数を作ってみ
 スペアのときはi番目の次の次の配列を参照して加算するというふうにしてみました。</p><p>これでスペアの計算ができましたね！テストもパスすることができました！！
 スペアの実装はこれで終わりでしょうか？</p><p>iという変数名はこの関数を書いていない人が見たときに何の役割を担ってる変数なのかパッと見でわからないですし、
 spareを判定するところにコメントがありますが、そもそもコメントがないと読めないような処理というのは微妙ですよね。
-ということでリファクタリングをしてみましょう。</p><p>まずiをわかりやすい別の名前にします。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
+ということでリファクタリングをしてみましょう。</p><p>まずiをわかりやすい別の名前にします。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>]</span>;
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0;
@@ -417,7 +418,7 @@ spareを判定するところにコメントがありますが、そもそもコ
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>frameIndexという名前に変わりました。スペアの判定はどうしましょうか？
-ここではisSpare()のようなboolean値を返すプライベートメソッドを作ると良さそうですね。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
+ここではisSpare()のようなboolean値を返すプライベートメソッドを作ると良さそうですね。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>]</span>;
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0;
@@ -446,7 +447,7 @@ spareを判定するところにコメントがありますが、そもそもコ
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>このようにしてみました。変数名もわかりやすくなりましたし、スペアを取ったときの処理分岐もひと目で分かるようになりました！</p><p>ここまで来ると、Frameの連結リストにしなくてもなんとなくGameでスコアを保持しておけば実装できそうだという目星がつきますよね。
 Frame.javaとFrameTest.javaは消しちゃいましょう。</p><h3 id=ストライクのテスト>ストライクのテスト
-<a class=anchor href=#%e3%82%b9%e3%83%88%e3%83%a9%e3%82%a4%e3%82%af%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>では今度はストライクのテストを書いてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
+<a class=anchor href=#%e3%82%b9%e3%83%88%e3%83%a9%e3%82%a4%e3%82%af%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>では今度はストライクのテストを書いてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.BeforeEach;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
 </span></span><span style=display:flex><span>
@@ -499,7 +500,7 @@ Frame.javaとFrameTest.javaは消しちゃいましょう。</p><h3 id=ストラ
 </span></span></code></pre></div><p>こんな感じにしてみました。こうしてみると、</p><pre tabindex=0><code>game.roll(5);
 game.roll(5);
 </code></pre><p>がスペアを意味していたり、</p><pre tabindex=0><code>game.roll(10);
-</code></pre><p>がストライクを意味しているというのは少しソースコードからは読み取りづらいですね。ここもリファクタリングしてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.BeforeEach;
+</code></pre><p>がストライクを意味しているというのは少しソースコードからは読み取りづらいですね。ここもリファクタリングしてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.BeforeEach;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -557,7 +558,7 @@ game.roll(5);
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>こうすると良さそうですね。では早速実装してみましょう。</p><h3 id=ストライクの実装>ストライクの実装
-<a class=anchor href=#%e3%82%b9%e3%83%88%e3%83%a9%e3%82%a4%e3%82%af%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><p>スペアができたので、ストライクも同じように実装できそうですよね。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
+<a class=anchor href=#%e3%82%b9%e3%83%88%e3%83%a9%e3%82%a4%e3%82%af%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><p>スペアができたので、ストライクも同じように実装できそうですよね。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>]</span>;
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0;
@@ -589,7 +590,7 @@ game.roll(5);
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>こんな感じで実装できました。テストもパスできましたね。
-これもストライクの判定処理を切り出すリファクタリングをやってみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
+これもストライクの判定処理を切り出すリファクタリングをやってみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>]</span>;
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0;
 </span></span><span style=display:flex><span>
@@ -625,7 +626,7 @@ game.roll(5);
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>良さそうですね。最後の仕上げをしていきましょう。</p><h2 id=テストを補完>テストを補完
 <a class=anchor href=#%e3%83%86%e3%82%b9%e3%83%88%e3%82%92%e8%a3%9c%e5%ae%8c>#</a></h2><p>ストライクを1回とるテストとスペアを1回とるテストはできました。
-複数回とるテストがありませんので、これを書いてみましょう。</p><p>ボウリングはスコアの上限が300であることが知られていますので、これを確認するテストを追加しましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
+複数回とるテストがありませんので、これを書いてみましょう。</p><p>ボウリングはスコアの上限が300であることが知られていますので、これを確認するテストを追加しましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.BeforeEach;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
 </span></span><span style=display:flex><span>

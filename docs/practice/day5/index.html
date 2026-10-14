@@ -13,9 +13,10 @@
 
 まず、サーバのテストを書いてみましょう。
 POST /todosに対してJSONをボディにセットして、リクエストしたときの、 レスポンスコードとレスポンスデータを確認するテストを書いてみます。"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/"><meta property="og:site_name" content="Fujitsu Agile Development Guide"><meta property="og:title" content="5日目"><meta property="og:description" content="5日目 # ではTodoを作成するバックエンドAPIを作成していきましょう。
-タスク作成バックエンドAPI # テスト # まず、サーバのテストを書いてみましょう。 POST /todosに対してJSONをボディにセットして、リクエストしたときの、 レスポンスコードとレスポンスデータを確認するテストを書いてみます。"><meta property="og:locale" content="ja"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>5日目 | Fujitsu Agile Development Guide</title>
-<link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span></a></h2><ul><li><a href=/agile-dev-guide/docs/introduction/>はじめに</a></li><li><input type=checkbox id=section-fe72557a7878dded4efa0060e21abacc class=toggle>
+タスク作成バックエンドAPI # テスト # まず、サーバのテストを書いてみましょう。 POST /todosに対してJSONをボディにセットして、リクエストしたときの、 レスポンスコードとレスポンスデータを確認するテストを書いてみます。"><meta property="og:locale" content="ja"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>5日目 | Fujitsu Agile Development Guide</title><link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span></a></h2><ul class=book-languages><li><input type=checkbox id=languages class=toggle>
+<label for=languages class="flex justify-between"><a role=button class="flex align-center"><img src=/agile-dev-guide/svg/translate.svg class=book-icon alt=Languages>
+日本語</a></label><ul><li><a href=/agile-dev-guide/en/>English</a></li></ul></li></ul><ul><li><a href=/agile-dev-guide/docs/introduction/>はじめに</a></li><li><input type=checkbox id=section-fe72557a7878dded4efa0060e21abacc class=toggle>
 <label for=section-fe72557a7878dded4efa0060e21abacc class="flex justify-between"><a role=button>アジャイル</a></label><ul><li><a href=/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a></li><li><a href=/agile-dev-guide/docs/agile/principle/>アジャイル開発12の原則</a></li><li><a href=/agile-dev-guide/docs/agile/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-60906829343241fe59efbb09409d99f8 class=toggle>
 <label for=section-60906829343241fe59efbb09409d99f8 class="flex justify-between"><a role=button>スクラム</a></label><ul><li><a href=/agile-dev-guide/docs/scrum/overview/>スクラムとは</a></li><li><a href=/agile-dev-guide/docs/scrum/roles/>ロール</a></li><li><a href=/agile-dev-guide/docs/scrum/products/>成果物</a></li><li><a href=/agile-dev-guide/docs/scrum/events/>イベント</a></li><li><a href=/agile-dev-guide/docs/scrum/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-8258873460fa80799dab8ced5b37f178 class=toggle>
 <label for=section-8258873460fa80799dab8ced5b37f178 class="flex justify-between"><a role=button>エクストリームプログラミング</a></label><ul><li><a href=/agile-dev-guide/docs/xp/overview/>エクストリームプログラミングとは</a></li><li><a href=/agile-dev-guide/docs/xp/practice/>エクストリームプログラミングのプラクティス</a></li><li><a href=/agile-dev-guide/docs/xp/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-ef522355473a56c6b477dd934de57bb8 class=toggle>
@@ -36,8 +37,8 @@ POST /todosに対してJSONをボディにセットして、リクエストし�
 <a class=anchor href=#5%e6%97%a5%e7%9b%ae>#</a></h1><p>ではTodoを作成するバックエンドAPIを作成していきましょう。</p><h2 id=タスク作成バックエンドapi>タスク作成バックエンドAPI
 <a class=anchor href=#%e3%82%bf%e3%82%b9%e3%82%af%e4%bd%9c%e6%88%90%e3%83%90%e3%83%83%e3%82%af%e3%82%a8%e3%83%b3%e3%83%89api>#</a></h2><h3 id=テスト>テスト
 <a class=anchor href=#%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>まず、サーバのテストを書いてみましょう。
-<code>POST /todos</code>に対してJSONをボディにセットして、リクエストしたときの、 レスポンスコードとレスポンスデータを確認するテストを書いてみます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoControllerTest.kt
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
+<code>POST /todos</code>に対してJSONをボディにセットして、リクエストしたときの、 レスポンスコードとレスポンスデータを確認するテストを書いてみます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoControllerTest.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fasterxml.jackson.module.kotlin.readValue
@@ -88,25 +89,25 @@ POST /todosに対してJSONをボディにセットして、リクエストし�
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>これは先日書いた<code>Get /Todos</code>のテストと同等なので大丈夫でしょう。</p><h3 id=実装>実装
 <a class=anchor href=#%e5%ae%9f%e8%a3%85>#</a></h3><p>これも先日実装した<code>Get /Todos</code>とほぼ同等ですので、コードだけ示します。</p><h4 id=model>Model
-<a class=anchor href=#model>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// NewTodo.kt
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.model
+<a class=anchor href=#model>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// NewTodo.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.model
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>data</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>NewTodo</span>(
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>val</span> title: String,
 </span></span><span style=display:flex><span>)
 </span></span></code></pre></div><h4 id=controller層>Controller層
-<a class=anchor href=#controller%e5%b1%a4>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoControllerInterface.kt
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
+<a class=anchor href=#controller%e5%b1%a4>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoControllerInterface.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.NewTodo  <span style=color:#75715e>// 追加
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>TodoControllerInterface</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTodos</span>(): List&lt;Todo&gt;
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>createTodo</span>(newTodo: NewTodo): Todo  <span style=color:#75715e>// 追加
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>}
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoController.kt
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
+</span></span></span><span style=display:flex><span>}
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoController.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.NewTodo
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
@@ -122,29 +123,29 @@ POST /todosに対してJSONをボディにセットして、リクエストし�
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#75715e>// 追加
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>@PostMapping</span>(<span style=color:#e6db74>&#34;/todos&#34;</span>)
+</span></span></span><span style=display:flex><span>    <span style=color:#a6e22e>@PostMapping</span>(<span style=color:#e6db74>&#34;/todos&#34;</span>)
 </span></span><span style=display:flex><span>    <span style=color:#a6e22e>@ResponseStatus</span>(<span style=color:#a6e22e>HttpStatus</span>.CREATED)
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>createTodo</span>(<span style=color:#a6e22e>@RequestBody</span> newTodo: NewTodo): Todo {
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> todoService.createTodo(newTodo)
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><h4 id=service層>Service層
-<a class=anchor href=#service%e5%b1%a4>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoServiceInterface.kt
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.service
+<a class=anchor href=#service%e5%b1%a4>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoServiceInterface.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.service
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.NewTodo  <span style=color:#75715e>// 追加
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>TodoServiceInterface</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTodos</span>(): List&lt;Todo&gt;
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>createTodo</span>(newTodo: NewTodo): Todo      <span style=color:#75715e>// 追加
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>}
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoService.kt
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.service
+</span></span></span><span style=display:flex><span>}
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoService.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.service
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.controller.TodoControllerInterface
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.NewTodo  <span style=color:#75715e>// 追加
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.stereotype.Service
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#a6e22e>@Service</span>
@@ -154,16 +155,16 @@ POST /todosに対してJSONをボディにセットして、リクエストし�
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#75715e>// 追加
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>createTodo</span>(newTodo: NewTodo): Todo {
+</span></span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>createTodo</span>(newTodo: NewTodo): Todo {
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> todoRepository.createTodo(newTodo)
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><h5 id=repository層>Repository層
-<a class=anchor href=#repository%e5%b1%a4>#</a></h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoRepository.kt
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.repository
+<a class=anchor href=#repository%e5%b1%a4>#</a></h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoRepository.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.repository
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.NewTodo  <span style=color:#75715e>// 追加
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.service.TodoServiceInterface
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.jdbc.core.JdbcTemplate
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.jdbc.support.GeneratedKeyHolder
@@ -186,7 +187,7 @@ POST /todosに対してJSONをボディにセットして、リクエストし�
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#75715e>// 追加
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>createTodo</span>(newTodo: NewTodo): Todo {
+</span></span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>createTodo</span>(newTodo: NewTodo): Todo {
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> keyHolder = GeneratedKeyHolder()
 </span></span><span style=display:flex><span>        jdbcTemplate.update({ connection <span style=color:#f92672>-&gt;</span>
 </span></span><span style=display:flex><span>            <span style=color:#66d9ef>val</span> statement = connection.prepareStatement(
@@ -204,10 +205,10 @@ POST /todosに対してJSONをボディにセットして、リクエストし�
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>リポジトリは少しテクニカルなことをしていて、insert文を実行したときにインクリメントされた<code>id</code>を返すようにしていて、 それを使って、戻り値を返すようにしています。</p><p>こうすると、データを作成した後にサイドselect文を発行する必要がなくなりレスポンスが早くなります。</p><h3 id=再実行可能なテスト>再実行可能なテスト
 <a class=anchor href=#%e5%86%8d%e5%ae%9f%e8%a1%8c%e5%8f%af%e8%83%bd%e3%81%aa%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>さて、実装は完了したのでテストを動かして検証していきたいわけですが、このテストは問題なく動いているでしょうか？ このテストはデータベースの状態に強く依存していて、動く人もいれば動かない人もいます。
-もし、運良くテストが動いた人も、もう一度全件テストを動かすと失敗するはずです。</p><p>これはテストを実行する度に、todo_dbに対してデータの追加を行っているからで、 一度todoテーブルに対してデータを追加すると、2回目以降はidが1にはならないからです。 つまり、これは再現可能なテストになっていません。</p><p>この問題に対処するにはテストを実行する度にDBをリセットしてしまえばいいので、その設定をしてみましょう。</p><p>まず、src/test配下に<code>resources</code>ディレクトリを作成し、その中に<code>clear_db.sql</code>を作成します。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#75715e>/* clear_db.sql */</span>
+もし、運良くテストが動いた人も、もう一度全件テストを動かすと失敗するはずです。</p><p>これはテストを実行する度に、todo_dbに対してデータの追加を行っているからで、 一度todoテーブルに対してデータを追加すると、2回目以降はidが1にはならないからです。 つまり、これは再現可能なテストになっていません。</p><p>この問題に対処するにはテストを実行する度にDBをリセットしてしまえばいいので、その設定をしてみましょう。</p><p>まず、src/test配下に<code>resources</code>ディレクトリを作成し、その中に<code>clear_db.sql</code>を作成します。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#75715e>/* clear_db.sql */</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>truncate</span> <span style=color:#66d9ef>table</span> todo <span style=color:#66d9ef>restart</span> <span style=color:#66d9ef>identity</span> <span style=color:#66d9ef>cascade</span>;
-</span></span></code></pre></div><p>やっている内容は単純でtodoテーブルの内容をtruncateすると共に、idのシーケンスをリセットしています。 そして、テストを実行する度にこのSQLを実行したらいいわけですが、これもアノテーションを付与するだけで簡単に実現できます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoControllerTest.kt
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
+</span></span></code></pre></div><p>やっている内容は単純でtodoテーブルの内容をtruncateすると共に、idのシーケンスをリセットしています。 そして、テストを実行する度にこのSQLを実行したらいいわけですが、これもアノテーションを付与するだけで簡単に実現できます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoControllerTest.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fasterxml.jackson.module.kotlin.readValue
@@ -220,10 +221,10 @@ POST /todosに対してJSONをボディにセットして、リクエストし�
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.boot.test.web.client.TestRestTemplate
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.http.*
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.test.context.jdbc.Sql    <span style=color:#75715e>// 追加
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#a6e22e>@SpringBootTest</span>(webEnvironment = <span style=color:#a6e22e>SpringBootTest</span>.<span style=color:#a6e22e>WebEnvironment</span>.RANDOM_PORT)
 </span></span><span style=display:flex><span><span style=color:#a6e22e>@Sql</span>(scripts = [<span style=color:#e6db74>&#34;/clear_db.sql&#34;</span>])       <span style=color:#75715e>// 追加
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoControllerTest</span> {
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoControllerTest</span> {
 </span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Autowired</span>
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>lateinit</span> <span style=color:#66d9ef>var</span> restTemplate: TestRestTemplate
 </span></span><span style=display:flex><span>
@@ -261,8 +262,8 @@ POST /todosに対してJSONをボディにセットして、リクエストし�
 </span></span></code></pre></div><p>これでテストは動くはずです。データを追加できるようになったため、データを追加した後Getでレスポンスデータを確認するテストを追記しても良いでしょう。</p><p>ここまでのサーバのソースコードは
 <a href=https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step10>https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step10</a>
 においてあります。</p><h2 id=タスク画面のデザインの適用>タスク画面のデザインの適用
-<a class=anchor href=#%e3%82%bf%e3%82%b9%e3%82%af%e7%94%bb%e9%9d%a2%e3%81%ae%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3%e3%81%ae%e9%81%a9%e7%94%a8>#</a></h2><p><img src=NewTask.jpg alt=NewTask></p><p>現在クライアントを連携させると、NewTask画面で追加したタスクがHome画面に追加できていることがわかります。 しかし、デザインがまだ適用されていないので、デザインを適用してみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// TodoList.tsx
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>React</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
+<a class=anchor href=#%e3%82%bf%e3%82%b9%e3%82%af%e7%94%bb%e9%9d%a2%e3%81%ae%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3%e3%81%ae%e9%81%a9%e7%94%a8>#</a></h2><p><img src=NewTask.jpg alt=NewTask></p><p>現在クライアントを連携させると、NewTask画面で追加したタスクがHome画面に追加できていることがわかります。 しかし、デザインがまだ適用されていないので、デザインを適用してみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// TodoList.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>React</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>styled</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;styled-components&#39;</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>TodoContext</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../context/TodoContext&#39;</span>
 </span></span><span style=display:flex><span>
@@ -347,7 +348,7 @@ RESTではURL部分を「リソース」とみなし、HTTPメソッドとURLの
 <a class=anchor href=#%e3%83%91%e3%82%b9%e3%83%91%e3%83%a9%e3%83%a1%e3%83%bc%e3%82%bf>#</a></h4><p><strong>パスパラーメタはリソースの指定をおこなう</strong> ためのものです。 先程、<code>GET /todos/1</code>という例をだしましたが、これはTodo#1を取得するという命令でした。 このurlに含まれる<code>1</code>
 というのはクライアントが指定できるパラメータで、 汎用的に書くとつまり<code>GET /todos/${id}</code>という形で記述することができます。 パスに入れることで、特定のリソースに対する命令であることを明確にしていることがわかると思います。</p><p>クエリパラメータは原則GETメソッドでしか使えませんでしたが、パスパラメータはどのようなメソッドでも使うことができます。 パスパラメータが設定されているエンドポイントにおいて、パスパラメータは原則必須になるという特徴も覚えておいてください。
 つまり<code>GET /todos/</code>のような宣言は許可されません。</p><h4 id=リクエストボディ>リクエストボディ
-<a class=anchor href=#%e3%83%aa%e3%82%af%e3%82%a8%e3%82%b9%e3%83%88%e3%83%9c%e3%83%87%e3%82%a3>#</a></h4><p><strong>リクエストボディはリソースの作成や、置換を行う際に、その内容を記載するものです。</strong></p><p>例えば、<code>POST /todos</code>のAPIを実行たときのリクエストボディは以下のようになっていました。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+<a class=anchor href=#%e3%83%aa%e3%82%af%e3%82%a8%e3%82%b9%e3%83%88%e3%83%9c%e3%83%87%e3%82%a3>#</a></h4><p><strong>リクエストボディはリソースの作成や、置換を行う際に、その内容を記載するものです。</strong></p><p>例えば、<code>POST /todos</code>のAPIを実行たときのリクエストボディは以下のようになっていました。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
 </span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;Sample Title&#34;</span>
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>基本的にはJSON形式を使うことが一般的です。JSON文書であればClientもServerも取り扱いです。 また、ファイルのアップロードなどを取り扱う場合はmultipart/form-dataといった形式が取られます。</p><h3 id=レスポンス設計>レスポンス設計
@@ -358,7 +359,7 @@ Foundが表示されたことがあるのを見たことがない人はいない
 をみて、適切なものを選ぶようにしてください</p><h4 id=レスポンスデータの設計>レスポンスデータの設計
 <a class=anchor href=#%e3%83%ac%e3%82%b9%e3%83%9d%e3%83%b3%e3%82%b9%e3%83%87%e3%83%bc%e3%82%bf%e3%81%ae%e8%a8%ad%e8%a8%88>#</a></h4><h5 id=リストを返すエンドポイント>リストを返すエンドポイント
 <a class=anchor href=#%e3%83%aa%e3%82%b9%e3%83%88%e3%82%92%e8%bf%94%e3%81%99%e3%82%a8%e3%83%b3%e3%83%89%e3%83%9d%e3%82%a4%e3%83%b3%e3%83%88>#</a></h5><p>レスポンスデータは基本的にJSONで返すようにします。少し前まではXMLも使われることが多かったですが、今はJSON一択でよいです。 たとえば、<code>GET /todos</code>
-にアクセスした場合、このエンドポイントはリストを返すエンドポイントですので、以下のようなレスポンスを返すように設計すると良いです。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>[
+にアクセスした場合、このエンドポイントはリストを返すエンドポイントですので、以下のようなレスポンスを返すように設計すると良いです。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>[
 </span></span><span style=display:flex><span>  {
 </span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>1</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#1&#34;</span>,
@@ -375,7 +376,7 @@ Foundが表示されたことがあるのを見たことがない人はいない
 </span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#66d9ef>false</span>
 </span></span><span style=display:flex><span>  }
 </span></span><span style=display:flex><span>]
-</span></span></code></pre></div><p>リストのエンドポイントを設計する際にエンベロープにくるむべきかそうしないべきかは議論が分かれるところです。 エンベロープとは以下のようなものです。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span></code></pre></div><p>リストのエンドポイントを設計する際にエンベロープにくるむべきかそうしないべきかは議論が分かれるところです。 エンベロープとは以下のようなものです。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
 </span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;todos&#34;</span>: [
 </span></span><span style=display:flex><span>    {
 </span></span><span style=display:flex><span>      <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>1</span>,
@@ -398,7 +399,7 @@ Foundが表示されたことがあるのを見たことがない人はいない
 リストがTodoのリストであることは自明であるためです。</p><h5 id=オブジェクトを返すエンドポイント>オブジェクトを返すエンドポイント
 <a class=anchor href=#%e3%82%aa%e3%83%96%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e3%82%92%e8%bf%94%e3%81%99%e3%82%a8%e3%83%b3%e3%83%89%e3%83%9d%e3%82%a4%e3%83%b3%e3%83%88>#</a></h5><p><code>GET /todos/1</code>というように特定のリソースを取得するようなエンドポイントの場合は、
 配列ではなくオブジェクトを返すのが適当です。
-即ち、いかのようなレスポンスボディを返すと良いです。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>{
+即ち、いかのようなレスポンスボディを返すと良いです。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
 </span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>1</span>,
 </span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#1&#34;</span>,
 </span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#66d9ef>false</span>
@@ -411,7 +412,7 @@ Foundが表示されたことがあるのを見たことがない人はいない
 <a class=anchor href=#%e3%82%af%e3%83%a9%e3%82%a4%e3%82%a2%e3%83%b3%e3%83%88%e3%81%ab%e5%bf%96%e5%ba%a6%e3%81%97%e3%81%aa%e3%81%84>#</a></h3><p>APIのレスポンスデータを設計するにあたって一つ大事なポイントにクライアントに忖度しないというのがあります。
 これはどういうことかというと、<strong>一般的なデータ表現で、多くの情報を一度に返す</strong>ということです。</p><h4 id=一般的なデータ形式を使う>一般的なデータ形式を使う
 <a class=anchor href=#%e4%b8%80%e8%88%ac%e7%9a%84%e3%81%aa%e3%83%87%e3%83%bc%e3%82%bf%e5%bd%a2%e5%bc%8f%e3%82%92%e4%bd%bf%e3%81%86>#</a></h4><p>例えば、クライアントの画面でTodoの作成日付を「2021年11月10日　13時20分」のように出力するという要件があったとします。
-このとき、サーバはどういったデータ表現で日時情報を表すべきでしょうか？</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>[
+このとき、サーバはどういったデータ表現で日時情報を表すべきでしょうか？</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>[
 </span></span><span style=display:flex><span>  {
 </span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>1</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#1&#34;</span>,
@@ -422,7 +423,7 @@ Foundが表示されたことがあるのを見たことがない人はいない
 </span></span></code></pre></div><p>このようなJSONのレスポンスデータ設計は不適切です。というのも、Viewはアプリケーションの中でも特に変更の頻度が大きい部分です。
 もし、このようなJSONレスポンスをしてしまうと、日付の表示形態を変更したいとなったときに、クライアントだけでなくサーバも影響を受けて変更しないといけなくなります。
 データをうけてどのように表示するかを担うのはViewの部分。即ちClientになります。サーバはそれに忖度してはいけません。
-例えば日時情報であればRFC 3339で定義されている<code>2021-11-10T04:20:00Z</code>ないし<code>2021-11-10T13:20:00+09:00</code>のようなフォーマットで返すべきです。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>[
+例えば日時情報であればRFC 3339で定義されている<code>2021-11-10T04:20:00Z</code>ないし<code>2021-11-10T13:20:00+09:00</code>のようなフォーマットで返すべきです。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>[
 </span></span><span style=display:flex><span>  {
 </span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>1</span>,
 </span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#1&#34;</span>,
@@ -439,10 +440,10 @@ Foundが表示されたことがあるのを見たことがない人はいない
 <a class=anchor href=#swaggeroas30>#</a></h3><p>APIの仕様記述の標準仕様に <a href=https://swagger.io/>Swagger</a> があります。
 SwaggerはAPI仕様定義のデファクトスタンダードで、JSONないしYAMLでAPIの仕様を記述することができます。
 Swaggerの仕様については以下のリンクを参照してください。</p><p><a href=https://swagger.io/specification/>https://swagger.io/specification/</a></p><p>APIの設計をするにあたって、<a href=https://github.com/swagger-api/swagger-editor>Swagger Editor</a> を活用すると良いでしょう。
-Dockerをインストールした上で、以下のコマンドを起動するとSwagger Editorを起動することができます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>docker pull swaggerapi/swagger-editor
+Dockerをインストールした上で、以下のコマンドを起動するとSwagger Editorを起動することができます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>docker pull swaggerapi/swagger-editor
 </span></span><span style=display:flex><span>docker run -d -p 80:8080 swaggerapi/swagger-editor
 </span></span></code></pre></div><p><img src=swaggerEditor.jpg alt=SwaggerEditor></p><p>バックエンドの開発にあたっては、<strong>Swagger Editorをつかって仕様を最初に設計を行い。チーム内でレビューないし合意をとってから開発するプロセスを強く推奨します。</strong>
-例として、今回のTodoアプリケーションのバックエンドAPI構成例を以下に記載します。</p><p><a href=openapi.yaml>openapi.yaml</a></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-YAML data-lang=YAML><span style=display:flex><span><span style=color:#f92672>openapi</span>: <span style=color:#ae81ff>3.0.1</span>
+例として、今回のTodoアプリケーションのバックエンドAPI構成例を以下に記載します。</p><p><a href=openapi.yaml>openapi.yaml</a></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-YAML data-lang=YAML><span style=display:flex><span><span style=color:#f92672>openapi</span>: <span style=color:#ae81ff>3.0.1</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>info</span>:
 </span></span><span style=display:flex><span>  <span style=color:#f92672>title</span>: <span style=color:#ae81ff>Todo App</span>
 </span></span><span style=display:flex><span>  <span style=color:#f92672>description</span>: <span style=color:#ae81ff>This is the backend API definition for the task management application.</span>

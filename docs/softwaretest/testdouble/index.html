@@ -9,9 +9,10 @@
 
 テスト対象となるクラスやメソッドが、ほかのクラスに依存していないケースはほとんどありません。
 依存しているクラスもまた、ほかのクラスに依存しています。"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/"><meta property="og:site_name" content="Fujitsu Agile Development Guide"><meta property="og:title" content="テストダブル"><meta property="og:description" content="テストダブル # テスト駆動開発の開発の流れがわかってきたところで、次にテストダブルを使用したテストについて学んでいきましょう。
-テストダブルとは # テスト対象となるクラスやメソッドが、ほかのクラスに依存していないケースはほとんどありません。 依存しているクラスもまた、ほかのクラスに依存しています。"><meta property="og:locale" content="ja"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>テストダブル | Fujitsu Agile Development Guide</title>
-<link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span></a></h2><ul><li><a href=/agile-dev-guide/docs/introduction/>はじめに</a></li><li><input type=checkbox id=section-fe72557a7878dded4efa0060e21abacc class=toggle>
+テストダブルとは # テスト対象となるクラスやメソッドが、ほかのクラスに依存していないケースはほとんどありません。 依存しているクラスもまた、ほかのクラスに依存しています。"><meta property="og:locale" content="ja"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>テストダブル | Fujitsu Agile Development Guide</title><link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span></a></h2><ul class=book-languages><li><input type=checkbox id=languages class=toggle>
+<label for=languages class="flex justify-between"><a role=button class="flex align-center"><img src=/agile-dev-guide/svg/translate.svg class=book-icon alt=Languages>
+日本語</a></label><ul><li><a href=/agile-dev-guide/en/>English</a></li></ul></li></ul><ul><li><a href=/agile-dev-guide/docs/introduction/>はじめに</a></li><li><input type=checkbox id=section-fe72557a7878dded4efa0060e21abacc class=toggle>
 <label for=section-fe72557a7878dded4efa0060e21abacc class="flex justify-between"><a role=button>アジャイル</a></label><ul><li><a href=/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a></li><li><a href=/agile-dev-guide/docs/agile/principle/>アジャイル開発12の原則</a></li><li><a href=/agile-dev-guide/docs/agile/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-60906829343241fe59efbb09409d99f8 class=toggle>
 <label for=section-60906829343241fe59efbb09409d99f8 class="flex justify-between"><a role=button>スクラム</a></label><ul><li><a href=/agile-dev-guide/docs/scrum/overview/>スクラムとは</a></li><li><a href=/agile-dev-guide/docs/scrum/roles/>ロール</a></li><li><a href=/agile-dev-guide/docs/scrum/products/>成果物</a></li><li><a href=/agile-dev-guide/docs/scrum/events/>イベント</a></li><li><a href=/agile-dev-guide/docs/scrum/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-8258873460fa80799dab8ced5b37f178 class=toggle>
 <label for=section-8258873460fa80799dab8ced5b37f178 class="flex justify-between"><a role=button>エクストリームプログラミング</a></label><ul><li><a href=/agile-dev-guide/docs/xp/overview/>エクストリームプログラミングとは</a></li><li><a href=/agile-dev-guide/docs/xp/practice/>エクストリームプログラミングのプラクティス</a></li><li><a href=/agile-dev-guide/docs/xp/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-ef522355473a56c6b477dd934de57bb8 class=toggle checked>
@@ -41,16 +42,16 @@ Javaですと <a href=https://site.mockito.org/>Mockito</a>、 <a href=https://e
 Javascriptだと <a href=https://sinonjs.org/>Sinon.js</a> や <a href=https://github.com/testdouble/testdouble.js/>testdouble.js</a> が有名です。</p><h2 id=サンプルアプリケーション>サンプルアプリケーション
 <a class=anchor href=#%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3>#</a></h2><p>さて、ここからは具体的なアプリケーションをつかってテストの実装をやってみましょう。</p><p>サンプルアプリケーションは <a href=https://github.com/Onebase-Fujitsu/simple-todo-app>ここ</a> で公開してあります。</p><p><a href=https://github.com/Onebase-Fujitsu/simple-todo-app>https://github.com/Onebase-Fujitsu/simple-todo-app</a></p><p>まずはリポジトリをローカルにCloneしてみましょう。
 CloneしたらTerminalを2つ立ち上げて、フロントエンドとバックエンドを起動してみてください。
-実行にはJavaの実行環境と、Node.jsの実行環境が必要です。</p><p>リポジトリのClone</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>git clone https://github.com/Onebase-Fujitsu/simple-todo-app.git
-</span></span></code></pre></div><p>フロントエンドの起動(Mac/Linuxの場合)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>cd client
+実行にはJavaの実行環境と、Node.jsの実行環境が必要です。</p><p>リポジトリのClone</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>git clone https://github.com/Onebase-Fujitsu/simple-todo-app.git
+</span></span></code></pre></div><p>フロントエンドの起動(Mac/Linuxの場合)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>cd client
 </span></span><span style=display:flex><span>npm install
 </span></span><span style=display:flex><span>npm run start
-</span></span></code></pre></div><p>フロントエンドの起動(Windowsの場合)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>chdir client
+</span></span></code></pre></div><p>フロントエンドの起動(Windowsの場合)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>chdir client
 </span></span><span style=display:flex><span>npm install
 </span></span><span style=display:flex><span>npm run start
-</span></span></code></pre></div><p>バックエンドの起動(Mac/Linuxの場合)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>cd sever
+</span></span></code></pre></div><p>バックエンドの起動(Mac/Linuxの場合)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>cd sever
 </span></span><span style=display:flex><span>SERVER_PORT<span style=color:#f92672>=</span><span style=color:#ae81ff>8080</span> ./gradlew bootRun
-</span></span></code></pre></div><p>バックエンドの起動(Windowsの場合)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>chdir server
+</span></span></code></pre></div><p>バックエンドの起動(Windowsの場合)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>chdir server
 </span></span><span style=display:flex><span>SERVER_PORT<span style=color:#f92672>=</span><span style=color:#ae81ff>8080</span>
 </span></span><span style=display:flex><span>gradlew.bat bootRun
 </span></span></code></pre></div><p>まずは、このアプリケーションを動かしてみましょう。このアプリケーションはシンプルなToDo管理アプリケーションです。
@@ -67,7 +68,7 @@ OASはAPIの標準仕様で以前はSwaggerという名前で呼ばれていた�
 ということで一緒にハンズオン形式でテストを実装してみましょう。</p><h2 id=mockitoを使ったcontrollerのユニットテスト>Mockitoを使ったControllerのユニットテスト
 <a class=anchor href=#mockito%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%9fcontroller%e3%81%ae%e3%83%a6%e3%83%8b%e3%83%83%e3%83%88%e3%83%86%e3%82%b9%e3%83%88>#</a></h2><p>Spring Bootアプリケーションを新規に作るときは <a href=https://start.spring.io/>spring initializr</a> を使うんですが、
 テストのために必要な様々なライブラリはデフォルトでついてきます。</p><p><a href=https://github.com/Onebase-Fujitsu/simple-todo-app/blob/main/server/build.gradle>build.gradle</a>
-を見ると以下のような設定パラメータを見ることができます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-gradle data-lang=gradle><span style=display:flex><span>dependencies <span style=color:#f92672>{</span>
+を見ると以下のような設定パラメータを見ることができます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-gradle data-lang=gradle><span style=display:flex><span>dependencies <span style=color:#f92672>{</span>
 </span></span><span style=display:flex><span>	implementation <span style=color:#e6db74>&#39;org.springframework.boot:spring-boot-starter-jdbc:2.5.3&#39;</span>
 </span></span><span style=display:flex><span>	implementation <span style=color:#e6db74>&#39;org.springframework.boot:spring-boot-starter-web:2.5.3&#39;</span>
 </span></span><span style=display:flex><span>	implementation <span style=color:#e6db74>&#39;com.h2database:h2:1.4.200&#39;</span>
@@ -138,7 +139,7 @@ ClockService ..|> ClockServiceInterface
 Controllerの各メソッドは対応するServiceのメソッドを呼び出し、now()で現在時刻を取得して、DBの更新処理をよびだすという作りになっています。</p><h3 id=最初のテスト>最初のテスト
 <a class=anchor href=#%e6%9c%80%e5%88%9d%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>では早速getAllTask()のテストを書いていきましょう。
 getAllTasks()はタスクを全件取得するメソッドです。
-まずはタスクが0件のときに空の配列を返すということを確認するテストを書いていきましょう。</p><p><code>server\src\test\java\com.example.todoApp</code>配下に<code>controller</code>パッケージを新規に作成し<code>TodoAppControllerUnitTest.java</code>を作りましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerUnitTest.java</span>
+まずはタスクが0件のときに空の配列を返すということを確認するテストを書いていきましょう。</p><p><code>server\src\test\java\com.example.todoApp</code>配下に<code>controller</code>パッケージを新規に作成し<code>TodoAppControllerUnitTest.java</code>を作りましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerUnitTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>package</span> com.example.todoApp.controller;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.extension.ExtendWith;
@@ -153,7 +154,7 @@ getAllTasks()はタスクを全件取得するメソッドです。
 最初はおまじないだと思ってください。</p><p>さて、実際のプロダクトの実装ではServiceは実装されているのですが、ここで実装したいのはControllerの単体テストです。
 ちゃんとControllerがServiceを呼んでいるよねという確認や、Serviceからの戻り値に応じた返却をしているよねという検証をしたいです。
 ということで、ここでは本物のTodoAppServiceではなく、Serviceの代わりに成り代わって呼び出しの検証や、戻り値を設定できるオブジェクトを使ったテストがしたいです。</p><p>そこで使われるのが <strong>依存性注入(Dependency Injection)</strong> という仕組みです。よくDIと言われます。
-文字通り依存しているオブジェクトを注入する仕組みです。</p><p>百聞は一見にしかずといいますので、まずは以下のコードを書いてみてください。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerUnitTest.java</span>
+文字通り依存しているオブジェクトを注入する仕組みです。</p><p>百聞は一見にしかずといいますので、まずは以下のコードを書いてみてください。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerUnitTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>package</span> com.example.todoApp.controller;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.extension.ExtendWith;
@@ -172,7 +173,7 @@ getAllTasks()はタスクを全件取得するメソッドです。
 </span></span></code></pre></div><p><code>@Mock</code>と<code>@InjectMocks</code>というアノテーションが出てきました。
 これは共にMockitoの機能になります。</p><p><code>@Mock</code>はモックオブジェクトを作る宣言です。
 ここではTodoAppServiceのモックを作っています。</p><p><code>@InjectMocks</code>は<code>@Mock</code>で作成したモックオブジェクトを注入する対象です。
-ですので、上の記述はTodoAppControllerInterfaceのモックインスタンス<code>appService</code>を注入したTodoAppControllerクラスのインスタンス、<code>appController</code>を作成しています。</p><p>ではこれでどういう事ができるか実際にテストを書いてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerUnitTest.java</span>
+ですので、上の記述はTodoAppControllerInterfaceのモックインスタンス<code>appService</code>を注入したTodoAppControllerクラスのインスタンス、<code>appController</code>を作成しています。</p><p>ではこれでどういう事ができるか実際にテストを書いてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerUnitTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>package</span> com.example.todoApp.controller;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.example.todoApp.model.Task;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
@@ -213,7 +214,7 @@ verifyを使うことで呼ばれた回数を検証することができます�
 その設定通り空の配列が返ってきていることをここで検証できます。</p><p>こうしたMockitoを使った単体テストを書くと、<strong>高速で再現性の高いテストを書くことができます。</strong>
 例えば実際のプロダクトコードを使ってしまうと、DB直接アクセスしてしまって、
 実際のDBの状態に影響されてしまいます。</p><p>でもモックを使って依存するオブジェクトをモッキングしてしまえば、戻り値もなにもかもテストでコントロールできるわけです！</p><h3 id=2番目のテスト>2番目のテスト
-<a class=anchor href=#2%e7%95%aa%e7%9b%ae%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>では本当にモックは戻り値を予測可能な振る舞いにしているかどうかをもう一つテストを書いてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerUnitTest.java</span>
+<a class=anchor href=#2%e7%95%aa%e7%9b%ae%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>では本当にモックは戻り値を予測可能な振る舞いにしているかどうかをもう一つテストを書いてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerUnitTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>package</span> com.example.todoApp.controller;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.example.todoApp.model.Task;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
@@ -273,7 +274,7 @@ verifyを使うことで呼ばれた回数を検証することができます�
 このテスト動かしてみるとちゃんとパスすることが確認できるでしょう。テストで戻り値をコントロールできていることが分かりますね。</p><h3 id=例外のテスト>例外のテスト
 <a class=anchor href=#%e4%be%8b%e5%a4%96%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>TodoAppControllerのgetAllTasks()ではDBアクセスに失敗したときに例外をスローするようにしています。
 MockitoやJUnitを使わない場合、このような例外のテストは非常に大変です。
-実際に異常が発生する状況を再現してテストをする必要がありますし、そもそもそういった状況を再現することすら難しい場合も多くあります。</p><p>これもMockitoを使うと簡単に例外を発生させることができますし、また検査対象が例外をスローしたことを検証することも簡単にできます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerUnitTest.java</span>
+実際に異常が発生する状況を再現してテストをする必要がありますし、そもそもそういった状況を再現することすら難しい場合も多くあります。</p><p>これもMockitoを使うと簡単に例外を発生させることができますし、また検査対象が例外をスローしたことを検証することも簡単にできます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerUnitTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>package</span> com.example.todoApp.controller;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.example.todoApp.model.Task;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
@@ -344,7 +345,7 @@ MockitoやJUnitを使わない場合、このような例外のテストは非�
 appServiceのgetAllTasks()というメソッドが呼ばれたときに、DataAccessException例外をスローしなさいと宣言してます。
 それを検証しているのが<code>assertThrows()</code>です。appControllerのgetAllTasks()を呼んだときにResponseStatusExceptionがスローされているかどうかを検証しています。</p><p>例外も思うどおりコントロールできていることがわかるでしょう。</p><h3 id=引数のテスト>引数のテスト
 <a class=anchor href=#%e5%bc%95%e6%95%b0%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>TodoAppControllerInterfaceのgetAllTasks()はパラメータがなかったですが、その他のメソッドには引数が必要です。
-Controllerが引数を正しくセットしてServiceのメソッドを呼んでいるかの検証もできます。</p><p>引数の検証にはCaptorを使います。実際にテストを書いてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerUnitTest.java</span>
+Controllerが引数を正しくセットしてServiceのメソッドを呼んでいるかの検証もできます。</p><p>引数の検証にはCaptorを使います。実際にテストを書いてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerUnitTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>package</span> com.example.todoApp.controller;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.example.todoApp.model.NewTask;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.example.todoApp.model.Task;
@@ -442,7 +443,7 @@ Spring Bootでは擬似的にHTTP通信をおこなう、TestRestTemplateとい�
 実際にテストを書いてみてテストダブルと依存性注入の強力さを体感してみてください。
 コードを眺めるだけではなく実際に手を動かして書いてみることがとても大事です。一緒にやってみましょう。</p><h3 id=最初のテスト-1>最初のテスト
 <a class=anchor href=#%e6%9c%80%e5%88%9d%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88-1>#</a></h3><p>では早速テストを書いていきましょう。
-<code>server\src\test\java\com.example.todoApp.controller</code>配下に<code>TodoAppControllerIntegrationTest.java</code>を作りましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerIntegrationTest.java</span>
+<code>server\src\test\java\com.example.todoApp.controller</code>配下に<code>TodoAppControllerIntegrationTest.java</code>を作りましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerIntegrationTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.beans.factory.annotation.Autowired;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.boot.test.context.SpringBootTest;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.test.context.jdbc.Sql;
@@ -460,11 +461,11 @@ JUnitでは所定の順序でテストが実行されるわけですが、DBに�
 それ以降に実行されるテストはDBに値が格納されていることを前提にして書かないといけなくなります。
 つまり、テストの順番を意識したテストを書かないといけなくなるということです。</p><p>順序を意識するのはとても大変ですし、安易にテストの順番を入れ替えたり、
 削除したり追加したりといったリファクタリングが難しくなってしまいますので、
-今回はDBの内容を毎回クリアするSQLをテストの度に実行することで、テストの順序を気にしなくてもいいようにしています。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#75715e>/* clear_db.sql */</span>
+今回はDBの内容を毎回クリアするSQLをテストの度に実行することで、テストの順序を気にしなくてもいいようにしています。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#75715e>/* clear_db.sql */</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>truncate</span> <span style=color:#66d9ef>table</span> task;
 </span></span><span style=display:flex><span><span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>TABLE</span> task <span style=color:#66d9ef>ALTER</span> <span style=color:#66d9ef>COLUMN</span> id <span style=color:#66d9ef>RESTART</span> <span style=color:#66d9ef>WITH</span> <span style=color:#ae81ff>1</span>;
 </span></span></code></pre></div><p><code>@Autowired</code>はSpring FrameworkのDIコンテナからインスタンスを取得するための宣言です。
-ここでは、そこまでこれを意識した実装は行わないので、いったんおまじないぐらいに考えてください。</p><p>それでは、まずタスクが登録されていない状態でタスクを全件取得するAPIを呼び出すと空の配列が返ってくることを確認してみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerIntegrationTest.java</span>
+ここでは、そこまでこれを意識した実装は行わないので、いったんおまじないぐらいに考えてください。</p><p>それでは、まずタスクが登録されていない状態でタスクを全件取得するAPIを呼び出すと空の配列が返ってくることを確認してみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerIntegrationTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>package</span> com.example.todoApp.controller;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.example.todoApp.model.Task;
@@ -491,12 +492,12 @@ JUnitでは所定の順序でテストが実行されるわけですが、DBに�
 </span></span><span style=display:flex><span>  }
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>テストを実行してみましょう。IDEを使っている方はIDEからテストを呼び出してもいいですし、
-IDEを使っていない方はTerminalで</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>./gradlew test
-</span></span></code></pre></div><p>もしくは</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>gradlew.bat test
+IDEを使っていない方はTerminalで</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>./gradlew test
+</span></span></code></pre></div><p>もしくは</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>gradlew.bat test
 </span></span></code></pre></div><p>を実行してみましょう。通りましたでしょうか？</p><p>このテストではrestTemplateを使って擬似的にHTTPリクエストを行い、そのレスポンスを評価してます。
 個々では<code>/tasks</code>に対してGETメソッドでリクエストを実行してますね。
 そしてレスポンスが200番(つまりHttpStatus.OK)であり、Bodyが空配列のJSON<code>[]</code>であることを評価しています。</p><p>ここまでは大丈夫でしょうか？</p><h3 id=2番目のテスト-1>2番目のテスト
-<a class=anchor href=#2%e7%95%aa%e7%9b%ae%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88-1>#</a></h3><p>さて次にタスクを作ってみましょう。同じようにrestTemplateを使ってPOSTのリクエストをしたらいいですよね。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerIntegrationTest.java</span>
+<a class=anchor href=#2%e7%95%aa%e7%9b%ae%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88-1>#</a></h3><p>さて次にタスクを作ってみましょう。同じようにrestTemplateを使ってPOSTのリクエストをしたらいいですよね。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerIntegrationTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>package</span> com.example.todoApp.controller;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.example.todoApp.model.Task;
@@ -538,7 +539,7 @@ IDEを使っていない方はTerminalで</p><div class=highlight><pre tabindex=
 </span></span></code></pre></div><p>これもテストを実行すると問題なくテストは通るはずです。
 最初にJSONオブジェクトを作って、それをPOSTリクエストのBodyにつけています。
 そして、戻ってきたレスポンスが201番(HttpStatus.CREATED)であることを評価してます。</p><h3 id=時間を予測可能にする>時間を予測可能にする
-<a class=anchor href=#%e6%99%82%e9%96%93%e3%82%92%e4%ba%88%e6%b8%ac%e5%8f%af%e8%83%bd%e3%81%ab%e3%81%99%e3%82%8b>#</a></h3><p>では作ったタスクを取得してそれを評価してみましょう。ここから少し難しくなりますが、頑張ってついてきてください。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerIntegrationTest.java</span>
+<a class=anchor href=#%e6%99%82%e9%96%93%e3%82%92%e4%ba%88%e6%b8%ac%e5%8f%af%e8%83%bd%e3%81%ab%e3%81%99%e3%82%8b>#</a></h3><p>では作ったタスクを取得してそれを評価してみましょう。ここから少し難しくなりますが、頑張ってついてきてください。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerIntegrationTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>package</span> com.example.todoApp.controller;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.example.todoApp.model.Task;
@@ -597,7 +598,7 @@ IDEを使っていない方はTerminalで</p><div class=highlight><pre tabindex=
 </span></span><span style=display:flex><span>  }
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>タスクを作ってそのタスクを評価するテストを書きました。
-この後はタスクを作って、そのタスクに対する処理を続けて書くことになりますし、少しリファクタリングしましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerIntegrationTest.java</span>
+この後はタスクを作って、そのタスクに対する処理を続けて書くことになりますし、少しリファクタリングしましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerIntegrationTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>package</span> com.example.todoApp.controller;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.example.todoApp.model.Task;
@@ -676,13 +677,13 @@ public void タスクがあるとその情報を取得できる() {
   assertThat(response.getBody()[0].isDone).isEqualTo(false);
   System.out.println(response.getBody()[0].createdAt);
 }
-</code></pre><p>コンソールには以下のような出力がされるはずです。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>2021-08-19 19:19:40.381  INFO <span style=color:#ae81ff>11622</span> --- <span style=color:#f92672>[</span>o-auto-1-exec-1<span style=color:#f92672>]</span> o.a.c.c.C.<span style=color:#f92672>[</span>Tomcat<span style=color:#f92672>]</span>.<span style=color:#f92672>[</span>localhost<span style=color:#f92672>]</span>.<span style=color:#f92672>[</span>/<span style=color:#f92672>]</span>       : Initializing Spring DispatcherServlet <span style=color:#e6db74>&#39;dispatcherServlet&#39;</span>
+</code></pre><p>コンソールには以下のような出力がされるはずです。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>2021-08-19 19:19:40.381  INFO <span style=color:#ae81ff>11622</span> --- <span style=color:#f92672>[</span>o-auto-1-exec-1<span style=color:#f92672>]</span> o.a.c.c.C.<span style=color:#f92672>[</span>Tomcat<span style=color:#f92672>]</span>.<span style=color:#f92672>[</span>localhost<span style=color:#f92672>]</span>.<span style=color:#f92672>[</span>/<span style=color:#f92672>]</span>       : Initializing Spring DispatcherServlet <span style=color:#e6db74>&#39;dispatcherServlet&#39;</span>
 </span></span><span style=display:flex><span>2021-08-19 19:19:40.382  INFO <span style=color:#ae81ff>11622</span> --- <span style=color:#f92672>[</span>o-auto-1-exec-1<span style=color:#f92672>]</span> o.s.web.servlet.DispatcherServlet        : Initializing Servlet <span style=color:#e6db74>&#39;dispatcherServlet&#39;</span>
 </span></span><span style=display:flex><span>2021-08-19 19:19:40.383  INFO <span style=color:#ae81ff>11622</span> --- <span style=color:#f92672>[</span>o-auto-1-exec-1<span style=color:#f92672>]</span> o.s.web.servlet.DispatcherServlet        : Completed initialization in <span style=color:#ae81ff>1</span> ms
 </span></span><span style=display:flex><span>2021-08-19T10:19:40.427207Z
 </span></span></code></pre></div><p>最後の一行がprintln()の出力です。テストを実行した時間になっていると思います。
 つまり、<strong>テストを実行する度にこの値は変わってしまいます。</strong> このままでは再現性の高いテストを書くことができません。</p><p>そこで使うのがMockです。Mockitoを使ってClockServiceをモッキングした後、
-それを依存性注入して、now()を呼び出したときに特定の時間を返すようにしてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerIntegrationTest.java</span>
+それを依存性注入して、now()を呼び出したときに特定の時間を返すようにしてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerIntegrationTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>package</span> com.example.todoApp.controller;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.example.todoApp.model.Task;
@@ -792,7 +793,7 @@ public void タスクがあるとその情報を取得できる() {
 天気もどんな内容が返ってくるかわからないですよね？</p><p>そこで今回覚えたMockです！APIのレスポンスをモッキングしてDIしてしまえば、どんなAPIのレスポンスでもテストで作れてしまうわけです！
 いかに便利で強力な仕組みか理解できましたか？</p></blockquote><h3 id=時間をコントロールする>時間をコントロールする
 <a class=anchor href=#%e6%99%82%e9%96%93%e3%82%92%e3%82%b3%e3%83%b3%e3%83%88%e3%83%ad%e3%83%bc%e3%83%ab%e3%81%99%e3%82%8b>#</a></h3><p>では次に、タスクを作った30分後にタスクを完了したときのタスクの状態を評価するというテストを書いてみましょう。
-先のテストができていれば、もうこれはできたも同然だったりします。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerIntegrationTest.java</span>
+先のテストができていれば、もうこれはできたも同然だったりします。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerIntegrationTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>package</span> com.example.todoApp.controller;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.example.todoApp.model.Task;
@@ -897,7 +898,7 @@ public void タスクがあるとその情報を取得できる() {
 いかがでしょうか、時間を自由自在に操れるようになりましたか？</p><h3 id=例外のテスト-1>例外のテスト
 <a class=anchor href=#%e4%be%8b%e5%a4%96%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88-1>#</a></h3><p>さて、ここまで本物のDBにアクセスをしてテストを実行してきました。
 では、DBアクセス例外のテストはどうでしょうか？</p><p>他のテストでは本物のDBを使っているので、それに影響が無いようにしたいです。
-それを実現する機能もちゃんと用意されています。ではテストを書いてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerIntegrationTest.java</span>
+それを実現する機能もちゃんと用意されています。ではテストを書いてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerIntegrationTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>package</span> com.example.todoApp.controller;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.example.todoApp.model.Task;
@@ -1027,7 +1028,7 @@ class DBアクセスエラー {
 }
 </code></pre><p>最後に追加しているのが、DBアクセスエラーのテストです。doThrowでtodoAppServiceInterfaceのgetAllTasks()メソッドが呼ばれたときに、DataAccessException例外をスローするよう宣言しています。
 テストを実行するとちゃんとレスポンスとして500番(HttpStatus.INTERNAL_SERVER_ERROR)が返ってきているのが分かります。</p><p>getAllTasks()は引数が無いメソッドなのでいいですが、createNewTask()メソッドは引数の設定が必要です。
-例外をテストするときに、どんな引数が与えられても例外を返したいという場面は多いです。</p><p>それもMockitoなら簡単に実装できます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerIntegrationTest.java</span>
+例外をテストするときに、どんな引数が与えられても例外を返したいという場面は多いです。</p><p>それもMockitoなら簡単に実装できます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerIntegrationTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>package</span> com.example.todoApp.controller;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.example.todoApp.model.Task;

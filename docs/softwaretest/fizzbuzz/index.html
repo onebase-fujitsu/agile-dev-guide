@@ -4,9 +4,10 @@
 
 ここではテスト駆動開発の手法で極々簡単なコンソールアプリケーションを作ってみようと思います。
 開発言語はここではJavaを使用しますが、
-これから挙げる例題はいずれも有名な問題を題材に取り上げますので、お好きな言語で挑戦されてみてください。"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/"><meta property="og:site_name" content="Fujitsu Agile Development Guide"><meta property="og:title" content="ウォーミングアップ"><meta property="og:description" content="ウォーミングアップ # ここではテスト駆動開発の手法で極々簡単なコンソールアプリケーションを作ってみようと思います。 開発言語はここではJavaを使用しますが、 これから挙げる例題はいずれも有名な問題を題材に取り上げますので、お好きな言語で挑戦されてみてください。"><meta property="og:locale" content="ja"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>ウォーミングアップ | Fujitsu Agile Development Guide</title>
-<link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
-<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span></a></h2><ul><li><a href=/agile-dev-guide/docs/introduction/>はじめに</a></li><li><input type=checkbox id=section-fe72557a7878dded4efa0060e21abacc class=toggle>
+これから挙げる例題はいずれも有名な問題を題材に取り上げますので、お好きな言語で挑戦されてみてください。"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/"><meta property="og:site_name" content="Fujitsu Agile Development Guide"><meta property="og:title" content="ウォーミングアップ"><meta property="og:description" content="ウォーミングアップ # ここではテスト駆動開発の手法で極々簡単なコンソールアプリケーションを作ってみようと思います。 開発言語はここではJavaを使用しますが、 これから挙げる例題はいずれも有名な問題を題材に取り上げますので、お好きな言語で挑戦されてみてください。"><meta property="og:locale" content="ja"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>ウォーミングアップ | Fujitsu Agile Development Guide</title><link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/fizzbuzz/><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span></a></h2><ul class=book-languages><li><input type=checkbox id=languages class=toggle>
+<label for=languages class="flex justify-between"><a role=button class="flex align-center"><img src=/agile-dev-guide/svg/translate.svg class=book-icon alt=Languages>
+日本語</a></label><ul><li><a href=/agile-dev-guide/en/>English</a></li></ul></li></ul><ul><li><a href=/agile-dev-guide/docs/introduction/>はじめに</a></li><li><input type=checkbox id=section-fe72557a7878dded4efa0060e21abacc class=toggle>
 <label for=section-fe72557a7878dded4efa0060e21abacc class="flex justify-between"><a role=button>アジャイル</a></label><ul><li><a href=/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a></li><li><a href=/agile-dev-guide/docs/agile/principle/>アジャイル開発12の原則</a></li><li><a href=/agile-dev-guide/docs/agile/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-60906829343241fe59efbb09409d99f8 class=toggle>
 <label for=section-60906829343241fe59efbb09409d99f8 class="flex justify-between"><a role=button>スクラム</a></label><ul><li><a href=/agile-dev-guide/docs/scrum/overview/>スクラムとは</a></li><li><a href=/agile-dev-guide/docs/scrum/roles/>ロール</a></li><li><a href=/agile-dev-guide/docs/scrum/products/>成果物</a></li><li><a href=/agile-dev-guide/docs/scrum/events/>イベント</a></li><li><a href=/agile-dev-guide/docs/scrum/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-8258873460fa80799dab8ced5b37f178 class=toggle>
 <label for=section-8258873460fa80799dab8ced5b37f178 class="flex justify-between"><a role=button>エクストリームプログラミング</a></label><ul><li><a href=/agile-dev-guide/docs/xp/overview/>エクストリームプログラミングとは</a></li><li><a href=/agile-dev-guide/docs/xp/practice/>エクストリームプログラミングのプラクティス</a></li><li><a href=/agile-dev-guide/docs/xp/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-ef522355473a56c6b477dd934de57bb8 class=toggle checked>
@@ -39,14 +40,14 @@ FizzBuzzのルールは以下のとおりです。</p><ul><li>整数値の入力
 そちらを見てみてください。</p><h3 id=プロジェクトの作成>プロジェクトの作成
 <a class=anchor href=#%e3%83%97%e3%83%ad%e3%82%b8%e3%82%a7%e3%82%af%e3%83%88%e3%81%ae%e4%bd%9c%e6%88%90>#</a></h3><p>兎にも角にもまずは新規のプロジェクトを作ってみましょう。
 この例ではIntelliJ IDEAを使用してますが、皆さんの使い慣れたIDEを使ってもらって大丈夫です。</p><p><img src=newpj1.png alt=プロジェクトの新規作成1></p><p>まず、新規のGradleプロジェクトを作りましょう。</p><p><img src=newpj2.png alt=プロジェクトの新規作成2></p><p>名前はfizzbuzzにしてプロジェクトを作成。</p><p><img src=newpj3.png alt=プロジェクトの新規作成3></p><p>はい、ここまででプロジェクトの雛形はできました。ここまでは特に難しいところはないかと思います。
-さて、ここでbuild.gradleファイルを見てみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>dependencies {
+さて、ここでbuild.gradleファイルを見てみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span>dependencies {
 </span></span><span style=display:flex><span>    testImplementation <span style=color:#960050;background-color:#1e0010>&#39;</span>org.<span style=color:#a6e22e>junit</span>.<span style=color:#a6e22e>jupiter</span>:junit<span style=color:#f92672>-</span>jupiter<span style=color:#f92672>-</span>api:5.<span style=color:#a6e22e>7</span>.<span style=color:#a6e22e>0</span><span style=color:#960050;background-color:#1e0010>&#39;</span>
 </span></span><span style=display:flex><span>    testRuntimeOnly <span style=color:#960050;background-color:#1e0010>&#39;</span>org.<span style=color:#a6e22e>junit</span>.<span style=color:#a6e22e>jupiter</span>:junit<span style=color:#f92672>-</span>jupiter<span style=color:#f92672>-</span>engine:5.<span style=color:#a6e22e>7</span>.<span style=color:#a6e22e>0</span><span style=color:#960050;background-color:#1e0010>&#39;</span>
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>testImplementation &lsquo;org.junit.jupiter:junit-jupiter-api:5.7.0&rsquo;という記述が勝手にできているかと思います。
 このプロジェクトではJUnit5系を使いますということですね。</p><p>では早速テストを書いてみましょう。</p><h3 id=最初のテスト>最初のテスト
 <a class=anchor href=#%e6%9c%80%e5%88%9d%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>では最初のテストを書いてみましょう。test/java配下にFizzBuzzTest.javaというファイルを作ってから、
-以下を記述します。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzzTest.java</span>
+以下を記述します。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzzTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Assertions;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
 </span></span><span style=display:flex><span>
@@ -58,13 +59,13 @@ FizzBuzzのルールは以下のとおりです。</p><ul><li>整数値の入力
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>テストを書いたら早速実行してみましょう。失敗するはずです。
-まだFizzBuzzクラスもgetResponseという関数も作っていないのだから当たり前ですよね。</p><p><img src=firstTest.jpg alt=最初のテスト></p><p>もしIDEではなくテキストエディタを使われいるようでしたら、以下のコマンドを叩いてテストを実行してみてください。</p><p>LinuxやMacOSの場合</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>./gradlew test
-</span></span></code></pre></div><p>Windowsの場合</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>bradlew.bat test
+まだFizzBuzzクラスもgetResponseという関数も作っていないのだから当たり前ですよね。</p><p><img src=firstTest.jpg alt=最初のテスト></p><p>もしIDEではなくテキストエディタを使われいるようでしたら、以下のコマンドを叩いてテストを実行してみてください。</p><p>LinuxやMacOSの場合</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>./gradlew test
+</span></span></code></pre></div><p>Windowsの場合</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>bradlew.bat test
 </span></span></code></pre></div><h3 id=最初の実装>最初の実装
 <a class=anchor href=#%e6%9c%80%e5%88%9d%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><p>このテストを満たす最小の実装を考えます。
 テスト駆動開発において大事なのは、<strong>テストで実装した内容を満たす最小の実装を考えること</strong>です。
 このあと3の倍数だとか5の倍数だとかでてきますが、ここではその考慮をしてはいけません。
-ここでは1を入力したら1という文字列を返すことだけを考えましょう。</p><p>src/java配下にFizzBuzz.javaを作ります。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzz.java</span>
+ここでは1を入力したら1という文字列を返すことだけを考えましょう。</p><p>src/java配下にFizzBuzz.javaを作ります。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzz.java</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FizzBuzz</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getResponse</span>(<span style=color:#66d9ef>int</span> inputValue) {
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;1&#34;</span>;
@@ -73,7 +74,7 @@ FizzBuzzのルールは以下のとおりです。</p><ul><li>整数値の入力
 </span></span></code></pre></div><p><img src=firstImpl.jpg alt=最初の実装></p><p>こうですね！なにも考えずに"1"を返すだけ。テストも通りました！
 <strong>最初のテストと最初の実装ができましたね！</strong></p><h3 id=2番目のテスト>2番目のテスト
 <a class=anchor href=#2%e7%95%aa%e7%9b%ae%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>この実装では何を入力しても"1"が返ってきてしまいます。
-まずは入力した数値を文字列として返すということを実装してみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzzTest.java</span>
+まずは入力した数値を文字列として返すということを実装してみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzzTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Assertions;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
 </span></span><span style=display:flex><span>
@@ -98,7 +99,7 @@ FizzBuzzのルールは以下のとおりです。</p><ul><li>整数値の入力
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p><img src=secondTest.jpg alt=2番目のテスト></p><p>先のテストに2つテストを追加しました。追加したテストが失敗しているのがわかると思います。
 ではこれを満たす実装を考えてみてください。</p><h3 id=2番目の実装>2番目の実装
-<a class=anchor href=#2%e7%95%aa%e7%9b%ae%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzz.java</span>
+<a class=anchor href=#2%e7%95%aa%e7%9b%ae%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzz.java</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FizzBuzz</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getResponse</span>(<span style=color:#66d9ef>int</span> inputValue) {
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> String.<span style=color:#a6e22e>valueOf</span>(inputValue);
@@ -107,7 +108,7 @@ FizzBuzzのルールは以下のとおりです。</p><ul><li>整数値の入力
 </span></span></code></pre></div><p><img src=secondImpl.jpg alt=2番目の実装></p><p>1ではなくinputValueを文字列に変換して返すようにしました。
 これでテストが通るようになりましたね。</p><h3 id=3番目のテスト>3番目のテスト
 <a class=anchor href=#3%e7%95%aa%e7%9b%ae%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>ではFizzの実装をしてみましょう。
-Fizzは3の倍数を入力したときに返すので、それを確認するテストを書いてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzzTest.java</span>
+Fizzは3の倍数を入力したときに返すので、それを確認するテストを書いてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzzTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Assertions;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
 </span></span><span style=display:flex><span>
@@ -137,7 +138,7 @@ Fizzは3の倍数を入力したときに返すので、それを確認するテ
 </span></span></code></pre></div><p>もともとあった3のの入力をしたときのテストを消して、代わりに３の倍数の確認をするテストを書きました。</p><h3 id=3番目の実装>3番目の実装
 <a class=anchor href=#3%e7%95%aa%e7%9b%ae%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><p>さっそくこれを満たす実装を考えてみましょう。
 3の倍数のときにFizzを返して、
-それ以外のときは数字の文字列を返すようにしたら良さそうですよね？</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzz.java</span>
+それ以外のときは数字の文字列を返すようにしたら良さそうですよね？</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzz.java</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FizzBuzz</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getResponse</span>(<span style=color:#66d9ef>int</span> inputValue) {
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (inputValue <span style=color:#f92672>%</span> 3 <span style=color:#f92672>==</span> 0) {
@@ -147,7 +148,7 @@ Fizzは3の倍数を入力したときに返すので、それを確認するテ
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>これで3番めのテストを満たす実装を書くことができました。</p><h3 id=4番目のテスト>4番目のテスト
-<a class=anchor href=#4%e7%95%aa%e7%9b%ae%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>同じようにBuzzの挙動を確認するテストを書いてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzzTest.java</span>
+<a class=anchor href=#4%e7%95%aa%e7%9b%ae%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>同じようにBuzzの挙動を確認するテストを書いてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzzTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Assertions;
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
 </span></span><span style=display:flex><span>
@@ -187,14 +188,14 @@ Fizzは3の倍数を入力したときに返すので、それを確認するテ
 </span></span></code></pre></div><p>ここで15の入力を確認するテストを見てみると、
 Fizzを期待していたり、Buzzを期待していたりで、矛盾していることが分かります。
 これはテストが微妙ですね。</p><p>ちょっとテストの書き方を変えてみましょう。まず、build.gradleファイルを開いて
-<code>testImplementation 'org.assertj:assertj-core:3.8.0'</code>という一行を書き加えてみてください。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>dependencies {
+<code>testImplementation 'org.assertj:assertj-core:3.8.0'</code>という一行を書き加えてみてください。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span>dependencies {
 </span></span><span style=display:flex><span>    testImplementation <span style=color:#960050;background-color:#1e0010>&#39;</span>org.<span style=color:#a6e22e>junit</span>.<span style=color:#a6e22e>jupiter</span>:junit<span style=color:#f92672>-</span>jupiter<span style=color:#f92672>-</span>api:5.<span style=color:#a6e22e>7</span>.<span style=color:#a6e22e>0</span><span style=color:#960050;background-color:#1e0010>&#39;</span>
 </span></span><span style=display:flex><span>    testImplementation <span style=color:#960050;background-color:#1e0010>&#39;</span>org.<span style=color:#a6e22e>assertj</span>:assertj<span style=color:#f92672>-</span>core:3.<span style=color:#a6e22e>8</span>.<span style=color:#a6e22e>0</span><span style=color:#960050;background-color:#1e0010>&#39;</span>
 </span></span><span style=display:flex><span>    testRuntimeOnly <span style=color:#960050;background-color:#1e0010>&#39;</span>org.<span style=color:#a6e22e>junit</span>.<span style=color:#a6e22e>jupiter</span>:junit<span style=color:#f92672>-</span>jupiter<span style=color:#f92672>-</span>engine:5.<span style=color:#a6e22e>7</span>.<span style=color:#a6e22e>0</span><span style=color:#960050;background-color:#1e0010>&#39;</span>
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>JUnit5ではアサーションライブラリをユーザが自由に選択して入れれるようになっています。
 アッサーションライブラリというのは、値が正しいかを検証するライブリです。
-ここではassertJというライブラリを追加しました。</p><p>テストを書き直してみます。こんな感じで書いてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzzTest.java</span>
+ここではassertJというライブラリを追加しました。</p><p>テストを書き直してみます。こんな感じで書いてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzzTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -233,7 +234,7 @@ Fizzを期待していたり、Buzzを期待していたりで、矛盾してい
 </span></span></code></pre></div><p>assertJのいいところは期待値をメソッドチェーンで書くことができるところですね。
 15の入力については、Fizzという文字列を含んでいる、Buzzという文字列を含んでいるというテストになりました。
 これを実装してみましょう。</p><h3 id=4番目の実装>4番目の実装
-<a class=anchor href=#4%e7%95%aa%e7%9b%ae%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><p>Buzzの挙動を実装してみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzz.java</span>
+<a class=anchor href=#4%e7%95%aa%e7%9b%ae%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><p>Buzzの挙動を実装してみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzz.java</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FizzBuzz</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getResponse</span>(<span style=color:#66d9ef>int</span> inputValue) {
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (inputValue <span style=color:#f92672>%</span> 3 <span style=color:#f92672>==</span> 0) {
@@ -247,7 +248,7 @@ Fizzを期待していたり、Buzzを期待していたりで、矛盾してい
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>いったんこのように書いてみました。
 一見良さそうですが、これはテストを通るでしょうか？</p><p>動かしてみると分かりますが、これは通りません。
-3の倍数のときFizzを返してしまうので、15のときに”Fizz”が返ってしまいます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzz.java</span>
+3の倍数のときFizzを返してしまうので、15のときに”Fizz”が返ってしまいます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzz.java</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FizzBuzz</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getResponse</span>(<span style=color:#66d9ef>int</span> inputValue) {
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (inputValue <span style=color:#f92672>==</span> 15) {
@@ -264,7 +265,7 @@ Fizzを期待していたり、Buzzを期待していたりで、矛盾してい
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>それを踏まえていったん、15のときはFizzBuzzを返すようにしてみました。
 これだと今のテストは通りますね！</p><h3 id=最後のテスト>最後のテスト
-<a class=anchor href=#%e6%9c%80%e5%be%8c%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>いよいよ佳境です。3と5の倍数の挙動のテストを書いてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzzTest.java</span>
+<a class=anchor href=#%e6%9c%80%e5%be%8c%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>いよいよ佳境です。3と5の倍数の挙動のテストを書いてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzzTest.java</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -310,7 +311,7 @@ Fizzを期待していたり、Buzzを期待していたりで、矛盾してい
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>FizzBuzzを確認するテストを書きました。ここまで書くともう慣れてきましたよね？</p><h3 id=最後の実装>最後の実装
-<a class=anchor href=#%e6%9c%80%e5%be%8c%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><p>早速これを満たす実装を書いてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzz.java</span>
+<a class=anchor href=#%e6%9c%80%e5%be%8c%e3%81%ae%e5%ae%9f%e8%a3%85>#</a></h3><p>早速これを満たす実装を書いてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzz.java</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FizzBuzz</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getResponse</span>(<span style=color:#66d9ef>int</span> inputValue) {
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (inputValue <span style=color:#f92672>%</span> 3 <span style=color:#f92672>==</span> 0 <span style=color:#f92672>&amp;&amp;</span> inputValue <span style=color:#f92672>%</span> 5 <span style=color:#f92672>==</span> 0) {
@@ -331,7 +332,7 @@ Fizzを期待していたり、Buzzを期待していたりで、矛盾してい
 洗練させるプロセスが入ります。このプログラムは簡単なものなので、サクッと直してしまいましょう。
 ここで大事なのは<strong>テストは直さず実装をきれいする</strong>ということです。
 テストを直してしまうと、プログラムの挙動が変わってしまう可能性が出てきてしまいます。
-プログラムの挙動を変えないように実装を良くするのがリファクタリングです。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzz.java</span>
+プログラムの挙動を変えないように実装を良くするのがリファクタリングです。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FizzBuzz.java</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FizzBuzz</span> {
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getResponse</span>(<span style=color:#66d9ef>int</span> inputValue) {
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (inputValue <span style=color:#f92672>%</span> 15 <span style=color:#f92672>==</span> 0) {
