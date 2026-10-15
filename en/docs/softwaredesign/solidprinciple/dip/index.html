@@ -1,0 +1,275 @@
+<!doctype html><html lang=en dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  The Dependency Inversion Principle
+  #
+
+
+  What Is the Dependency Inversion Principle?
+  #
+
+The Dependency Inversion Principle (DIP) states that
+
+High-level modules should not depend on low-level modules. Both should depend on &ldquo;abstractions&rdquo;.
+&ldquo;Abstractions&rdquo; should not depend on implementation details. Implementation details should depend on &ldquo;abstractions&rdquo;.
+
+It is very common in traditional software development for high-level modules to depend on low-level modules.
+Take the common three-tier web architecture as an example: the Controller class depends on the Service class, and the Service class depends on the Repository class."><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/softwaredesign/solidprinciple/dip/"><meta property="og:site_name" content="Fujitsu Agile Development Guide"><meta property="og:title" content="Dependency Inversion Principle (DIP)"><meta property="og:description" content="The Dependency Inversion Principle # What Is the Dependency Inversion Principle? # The Dependency Inversion Principle (DIP) states that
+High-level modules should not depend on low-level modules. Both should depend on “abstractions”. “Abstractions” should not depend on implementation details. Implementation details should depend on “abstractions”. It is very common in traditional software development for high-level modules to depend on low-level modules. Take the common three-tier web architecture as an example: the Controller class depends on the Service class, and the Service class depends on the Repository class."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>Dependency Inversion Principle (DIP) | Fujitsu Agile Development Guide</title><link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/softwaredesign/solidprinciple/dip/><link rel=alternate hreflang=ja href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/ title=依存性逆転の原則(DIP)><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/agile-dev-guide/en/><span>Fujitsu Agile Development Guide</span></a></h2><ul class=book-languages><li><input type=checkbox id=languages class=toggle>
+<label for=languages class="flex justify-between"><a role=button class="flex align-center"><img src=/agile-dev-guide/svg/translate.svg class=book-icon alt=Languages>
+English</a></label><ul><li><a href=/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>日本語</a></li></ul></li></ul><ul><li><a href=/agile-dev-guide/en/docs/introduction/>Introduction</a></li><li><input type=checkbox id=section-26f8587d816918486e3411338e99965e class=toggle>
+<label for=section-26f8587d816918486e3411338e99965e class="flex justify-between"><a role=button>Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/agile/manifest/>Manifesto for Agile Software Development</a></li><li><a href=/agile-dev-guide/en/docs/agile/principle/>12 Principles of Agile Development</a></li><li><a href=/agile-dev-guide/en/docs/agile/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-3f7a3b5d22e80bae50acbf0bebe29b07 class=toggle>
+<label for=section-3f7a3b5d22e80bae50acbf0bebe29b07 class="flex justify-between"><a role=button>Scrum</a></label><ul><li><a href=/agile-dev-guide/en/docs/scrum/overview/>What is Scrum</a></li><li><a href=/agile-dev-guide/en/docs/scrum/roles/>Roles</a></li><li><a href=/agile-dev-guide/en/docs/scrum/products/>Artifacts</a></li><li><a href=/agile-dev-guide/en/docs/scrum/events/>Events</a></li><li><a href=/agile-dev-guide/en/docs/scrum/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-28ce590b98459d112a5e767cc6b3b04d class=toggle>
+<label for=section-28ce590b98459d112a5e767cc6b3b04d class="flex justify-between"><a role=button>Extreme Programming</a></label><ul><li><a href=/agile-dev-guide/en/docs/xp/overview/>What is Extreme Programming</a></li><li><a href=/agile-dev-guide/en/docs/xp/practice/>Extreme Programming Practices</a></li><li><a href=/agile-dev-guide/en/docs/xp/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-a3825c6f535b2464399db20dd841f3ac class=toggle>
+<label for=section-a3825c6f535b2464399db20dd841f3ac class="flex justify-between"><a role=button>Software Testing</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaretest/overview/>Getting Started with Software Testing</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/fizzbuzz/>Warming Up</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/bowlinggame/>Bowling Game</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/testdouble/>Test Doubles</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/e2e/>E2E Testing</a></li></ul></li><li><input type=checkbox id=section-d2676bcafbfd8f6850f60b777913e79b class=toggle checked>
+<label for=section-d2676bcafbfd8f6850f60b777913e79b class="flex justify-between"><a role=button>Software Design</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/about/>Software Design for Agile Development</a></li><li><input type=checkbox id=section-1d5d1d86d9abc5f3e1ff9ae3bf8dee3a class=toggle checked>
+<label for=section-1d5d1d86d9abc5f3e1ff9ae3bf8dee3a class="flex justify-between"><a role=button>SOLID Principles</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/srp/>Single Responsibility Principle (SRP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/ocp/>Open-Closed Principle (OCP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/lsp/>Liskov Substitution Principle (LSP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/dip/ class=active>Dependency Inversion Principle (DIP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/isp/>Interface Segregation Principle (ISP)</a></li></ul></li><li><input type=checkbox id=section-c82d883779a9175f08ed321f0a41c453 class=toggle>
+<label for=section-c82d883779a9175f08ed321f0a41c453 class="flex justify-between"><a role=button>Design Patterns</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/designpattern/designpattern/>Design Patterns</a></li></ul></li></ul></li><li><input type=checkbox id=section-c4e0d3ad193a9306b0791ca960be25bb class=toggle>
+<label for=section-c4e0d3ad193a9306b0791ca960be25bb class="flex justify-between"><a role=button>Agile in Practice</a></label><ul><li><a href=/agile-dev-guide/en/docs/practice/day1/>Day 1</a></li><li><a href=/agile-dev-guide/en/docs/practice/day2/>Day 2</a></li><li><a href=/agile-dev-guide/en/docs/practice/day3/>Day 3</a></li><li><a href=/agile-dev-guide/en/docs/practice/day4/>Day 4</a></li><li><a href=/agile-dev-guide/en/docs/practice/day5/>Day 5</a></li><li><a href=/agile-dev-guide/en/docs/practice/day6/>Day 6</a></li></ul></li><li><a href=/agile-dev-guide/en/docs/inclosing/>In Closing</a></li><li><a href=/agile-dev-guide/en/docs/recommendedbooks/>Recommended Books</a></li><li class=book-section-flat><span>Overall</span><ul><li><input type=checkbox id=section-49203faea468220b1d42544db4f42904 class=toggle>
+<label for=section-49203faea468220b1d42544db4f42904 class="flex justify-between"><a role=button>Lean Startup Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/overview/>Lean Startup Agile Flow</a></li><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/organization/>Structure and Roles</a></li><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/productvision/>Product Vision / Value Proposition</a></li></ul></li><li><input type=checkbox id=section-fbc99cb62f97af8f577e21318d383c53 class=toggle>
+<label for=section-fbc99cb62f97af8f577e21318d383c53 class="flex justify-between"><a role=button>Modernization Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/modernization/overview/>Modernization Agile Flow</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/organization/>Structure and Roles</a></li><li><input type=checkbox id=section-cb30e408eaf7a7ec013ed0dc4d3fb020 class=toggle>
+<label for=section-cb30e408eaf7a7ec013ed0dc4d3fb020 class="flex justify-between"><a role=button>Swift Method</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/overview/>What Is the Swift Method</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/eventstorming/>Event Storming</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/boris/>Boris</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/snape/>SnapE</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/slices/>Slices</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/techchoice/>Tech Choice</a></li></ul></li></ul></li></ul></li><li class=book-section-flat><span>Team</span><ul><li><a href=/agile-dev-guide/en/docs/team/workstyle/>How Our Team Works</a></li><li><a href=/agile-dev-guide/en/docs/team/balancedteam/>Balanced Team</a></li><li><input type=checkbox id=section-d6ef0f53ed2eae5373cce9f0cae94127 class=toggle>
+<label for=section-d6ef0f53ed2eae5373cce9f0cae94127 class="flex justify-between"><a role=button>Mindset</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/mindset/onebase/>ONEbase Values</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/psychologicalsafety/>Psychological Safety</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/xp/>XP Values</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/practice/>How to Adopt Practices</a></li></ul></li><li><a href=/agile-dev-guide/en/docs/team/teambuilding/>Team Building</a></li><li><a href=/agile-dev-guide/en/docs/team/remotework/>Remote Work</a></li><li><input type=checkbox id=section-ba58c7f3c79f8713fd38efabb55e90aa class=toggle>
+<label for=section-ba58c7f3c79f8713fd38efabb55e90aa class="flex justify-between"><a role=button>Team Activities</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/activities/officestandup/>Office Standup</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/teamstandup/>Team Standup</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/preipm/>Pre-IPM</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/ipm/>IPM</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/cl/>CL Meeting</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/retro/>Retrospective</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/salesmeeting/>Sales Sync Meeting</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/internalsync/>Internal Sync</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/riskmitigations/>Risks & Mitigations</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/feedback/>Feedback</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/icebreak/>Ice Break</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/teamhealthcheck/>Team Health Check</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/1on1/>1on1</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/exercise/>Radio Taiso</a></li></ul></li><li><input type=checkbox id=section-9283499da254b9f85e8a373a7c190a7e class=toggle>
+<label for=section-9283499da254b9f85e8a373a7c190a7e class="flex justify-between"><a role=button>Team Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/practices/facilitation/>Facilitation</a></li><li><a href=/agile-dev-guide/en/docs/team/practices/okrs/>OKRs</a></li></ul></li></ul></li><li class=book-section-flat><span>Designer</span><ul><li><a href=/agile-dev-guide/en/docs/designer/overview/>What Is a Designer</a></li><li><input type=checkbox id=section-b2cda318f2a04a4c6c2d6866191c7dd0 class=toggle>
+<label for=section-b2cda318f2a04a4c6c2d6866191c7dd0 class="flex justify-between"><a role=button>Designer Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/designer/practices/persona/>Persona</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/scenario/>Scenario</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/researchplanning/>Research Planning</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/prototyping/>Prototyping</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/script/>Script Creation</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/researchaction/>Conducting Research</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/synthesize/>Synthesize</a></li></ul></li></ul></li><li class=book-section-flat><span>Product Manager</span><ul><li><a href=/agile-dev-guide/en/docs/productmanager/overview/>What Is a Product Manager</a></li><li><input type=checkbox id=section-9026fc1a07f695d85c362dc4668a1edf class=toggle>
+<label for=section-9026fc1a07f695d85c362dc4668a1edf class="flex justify-between"><a role=button>Product Manager Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/productmanager/practices/roadmap/>Product Roadmap</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/mvp/>MVP</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/userstorymapping/>User Story Mapping</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/userstory/>User Story</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/2x2/>2×2</a></li></ul></li></ul></li><li class=book-section-flat><span>Developer</span><ul><li><a href=/agile-dev-guide/en/docs/developer/overview/>What Is a Developer</a></li><li><input type=checkbox id=section-9a270bfee03ee781c85e4c3c42434241 class=toggle>
+<label for=section-9a270bfee03ee781c85e4c3c42434241 class="flex justify-between"><a role=button>Developer Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/developer/practices/tdd/>TDD</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/cicd/>CI/CD</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/pairprogramming/>Pair Programming</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/soroprogramming/>Solo Programming</a></li></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu></label><h3>Dependency Inversion Principle (DIP)</h3><label for=toc-control><img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#what-is-the-dependency-inversion-principle>What Is the Dependency Inversion Principle?</a></li><li><a href=#layering>Layering</a></li><li><a href=#inversion-of-ownership>Inversion of Ownership</a></li><li><a href=#depend-on-abstractions>Depend on &ldquo;Abstractions&rdquo;</a></li><li><a href=#a-simple-example>A Simple Example</a><ul><li><a href=#button-and-lamp>Button and Lamp</a></li><li><a href=#finding-the-underlying-abstraction>Finding the Underlying Abstraction</a></li></ul></li><li><a href=#a-practical-example>A Practical Example</a></li><li><a href=#summary>Summary</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=the-dependency-inversion-principle>The Dependency Inversion Principle
+<a class=anchor href=#the-dependency-inversion-principle>#</a></h1><h2 id=what-is-the-dependency-inversion-principle>What Is the Dependency Inversion Principle?
+<a class=anchor href=#what-is-the-dependency-inversion-principle>#</a></h2><p>The Dependency Inversion Principle (DIP) states that</p><ul><li><strong>High-level modules should not depend on low-level modules. Both should depend on &ldquo;abstractions&rdquo;.</strong></li><li><strong>&ldquo;Abstractions&rdquo; should not depend on implementation details. Implementation details should depend on &ldquo;abstractions&rdquo;.</strong></li></ul><p>It is very common in traditional software development for high-level modules to depend on low-level modules.
+Take the common three-tier web architecture as an example: the Controller class depends on the Service class, and the Service class depends on the Repository class.</p><script src=/agile-dev-guide/mermaid.min.js></script><script>mermaid.initialize({flowchart:{useMaxWidth:!0},theme:"default"})</script><pre class=mermaid>
+flowchart LR
+Controller --> Service
+Service --> Repository
+</pre><p>In contrast, the structure of a well-designed object-oriented program &ldquo;inverts&rdquo; the dependency structure familiar from traditional procedural programming.</p><p>What does it mean for a high-level module to depend on a low-level module?
+It is the high-level modules that contain the important policy decisions and business models of the application and that define why the application exists.
+Yet if high-level modules depend on low-level modules, changes to the low-level modules directly affect the high-level modules and force them to change as well.
+That is a situation to be avoided at all costs.</p><p>Since it is the high-level modules that set the policy of the application,
+it makes sense for the high-level modules to influence the low-level modules that handle the implementation details.
+Therefore, the high-level modules responsible for business rules must be independent of, and take precedence over, the low-level modules that handle implementation details.
+In no case should a high-level module depend on a low-level module.</p><h2 id=layering>Layering
+<a class=anchor href=#layering>#</a></h2><pre class=mermaid>
+flowchart LR
+Controller --> Service
+Service --> Repository
+</pre><p>Look again at the diagram of the three-tier web architecture shown earlier.
+The high-level Controller layer uses the lower-level Service layer, and the Service layer in turn uses the even lower-level Repository layer.
+At first glance, this looks like a reasonable structure.
+However, in this structure the high-level Controller layer is affected by changes in every layer below it; it is a <strong>dependency structure through which impact propagates easily</strong>.</p><p>A more appropriate layered model is shown below.</p><pre class=mermaid>
+flowchart BT
+    subgraph RepositoryLayer
+    Repository --> RepositoryInterface
+    end
+    subgraph ServiceLayer
+    Service --> ServiceInterface
+    end
+    subgraph ControllerLayer
+    Controller --> ControllerInterface
+    end
+    Repository --> ServiceInterface
+    Service --> ControllerInterface
+</pre><p>Each high-level layer declares an abstract interface and receives the services it needs through that interface.
+The lower-level layers implement these abstract interfaces.</p><p>This way, each high-level class uses the lower layer through the abstract interface it declared itself,
+so the upper layers no longer depend on the lower layers.</p><p>Conversely, it is now the lower layers that depend on the abstract interfaces declared by the upper layers in order to receive services.</p><h2 id=inversion-of-ownership>Inversion of Ownership
+<a class=anchor href=#inversion-of-ownership>#</a></h2><p>Note here that <strong>what is &ldquo;inverted&rdquo; is not just the dependencies; the ownership of the interfaces is inverted as well</strong>.</p><p>Normally, the interface of a utility library is owned by the library itself.
+However, when the Dependency Inversion Principle is applied, the client owns the abstract interface, and the library&rsquo;s services can be said to derive from that interface.</p><p>Because ownership is inverted, the Controller layer is not affected by changes in the Service or Repository layers.
+Moreover, the Controller layer can be reused with any module that implements ControllerInterface.
+In other words, &ldquo;inverting&rdquo; dependencies produces a more flexible, durable, and mobile structure.</p><h2 id=depend-on-abstractions>Depend on &ldquo;Abstractions&rdquo;
+<a class=anchor href=#depend-on-abstractions>#</a></h2><p>In a word, the Dependency Inversion Principle can be described as the heuristic &ldquo;depend on abstractions&rdquo;.
+This principle advises that programs should not depend on concrete classes, and that all relationships in a program should terminate at an abstract class or an interface.</p><ul><li>No variable should hold a pointer or reference to a concrete class</li><li>No class should derive from a concrete class</li><li>No method should override a method implemented in its base class</li></ul><p>The Dependency Inversion Principle is, in essence, advice based on heuristics like these.
+However, these heuristics are bound to be violated at least once in any program.
+Someone has to create instances of concrete classes, and the module that creates them ends up depending on those instances.
+Also, there is no need to follow these heuristics for concrete classes that rarely change.
+If a class does not change frequently and no similar derived classes are created from it, depending on it directly does little harm.</p><p>For example, the class that handles strings is a concrete class in most systems. In Java, for instance, the String class handles concrete strings.
+This class rarely changes, so it is not a big problem for a program to depend on it directly.</p><p>However, the concrete classes implemented as part of an application program usually change frequently.
+You must never depend directly on classes like that, which are likely to change frequently.</p><p>Separation through interfaces is not perfect, either.
+Sometimes the interface of a frequently changing class has to change, and the impact can reach the abstract interface that represents that class.</p><p>From the viewpoint that an abstract interface is declared by the client class, that is, that it exists so the client itself can receive the services it needs,
+the interface changes <strong>only when the client needs a change</strong>.
+Such changes are driven solely by the client, and the classes that implement the abstract interface never affect the client.</p><h2 id=a-simple-example>A Simple Example
+<a class=anchor href=#a-simple-example>#</a></h2><h3 id=button-and-lamp>Button and Lamp
+<a class=anchor href=#button-and-lamp>#</a></h3><p>When one class sends messages to another, &ldquo;dependency inversion&rdquo; can be applied easily.
+Let&rsquo;s think about it using a button and a lamp as an example.</p><p>A Button object can sense the external environment. When a Button object receives a Poll message, it immediately determines whether the user has &ldquo;pressed&rdquo; it.
+The mechanism the Button object uses to sense the external state can be anything, whether a button icon in a GUI or a physical button you can press with your finger.
+The Button object simply senses whether the user has activated or deactivated it.</p><p>A Lamp object, on the other hand, affects the external environment. When this object receives a TurnOn message, it immediately turns on the light of some light-emitting device,
+and when it receives a TurnOff message, it turns that light off. Here too, the actual device that emits the light can be anything, whether an LED or an incandescent bulb.</p><p>If we think about a control system like this, it would typically look like the following.</p><pre class=mermaid>
+classDiagram
+class Button {
+    poll() void
+}
+class Lamp {
+    turnOn() void
+    turnOff() void
+}
+Button ..> Lamp
+</pre><p>In this example, the Button object receives a Poll message, determines whether the button has been pressed, and then simply sends a TurnOn or TurnOff message to the Lamp.</p><p>However, this Button class depends directly on the Lamp class, so the Button class is affected by changes to the Lamp class.
+Also, if a new Motor object comes along in place of Lamp, you cannot reuse Button to control it.
+In this example, the only thing a Button object can control is a Lamp object.</p><p>In other words, this design violates the Dependency Inversion Principle, because the high-level policy of the application is not separated from its low-level implementation.</p><h3 id=finding-the-underlying-abstraction>Finding the Underlying Abstraction
+<a class=anchor href=#finding-the-underlying-abstraction>#</a></h3><p>So what is the high-level policy? It is the &ldquo;underlying abstraction&rdquo; of the application: the essential part that is not affected when implementation details change.</p><p>In the Button and Lamp example, the &ldquo;underlying abstraction&rdquo; is relaying the on/off input received from the user to the physical object that emits light.
+What on/off sensing mechanism is used, or how the light is turned on, can be implemented with any physical device, right?
+In other words, the underlying abstraction is the essential part that is not affected by such things.</p><p>The following design improves on the previous one by inverting the dependency on the Lamp object.</p><pre class=mermaid>
+classDiagram
+class Button {
+poll() void
+}
+class ButtonServer {
+turnOn() void
+turnOff() void
+}
+class Lamp {
+turnOn() void
+turnOff() void
+}
+Button ..> ButtonServer
+Lamp ..|> ButtonServer
+</pre><p>Here, what Button depends on is an interface called ButtonServer.
+Lamp implements this interface, so rather than being depended upon, it depends on the interface.
+With this design, Button can control any device that implements the ButtonServer interface.</p><h2 id=a-practical-example>A Practical Example
+<a class=anchor href=#a-practical-example>#</a></h2><p>In fact, if you have been reading this guide in order, you have already seen a concrete example of an application that conforms to DIP.
+Do you remember <a href=https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/softwaretest/testdouble/#backend-structure>the sample application used in the test double chapter</a>
+?</p><pre class=mermaid>
+classDiagram
+class TodoAppController{
+TodoAppService todoAppService
+getAllTasks() List~Task~
+createTask(NewTask newTask) void
+finishTask(int taskId) void
+revertTask(int taskId) void
+deleteTask(int taskId) void
+}
+class TodoAppControllerInterface{
+getAllTasks() List~Task~
+createTask(NewTask newTask) void
+finishTask(int taskId) void
+revertTask(int taskId) void
+deleteTask(int taskId) void
+}
+class TodoAppService{
+TodoAppRepository todoAppRepository
+ClockService clockService
+getAllTasks() List~Task~
+createTask(NewTask newTask) void
+finishTask(int taskId) void
+revertTask(int taskId) void
+deleteTask(int taskId) void
+}
+class TodoAppServiceInterface{
+getAllTasks() List~Task~
+createTask(NewTask newTask, Instant now) void
+finishTask(int taskId, Instant now) void
+revertTask(int taskId, Instant now) void
+deleteTask(int taskId, Instant now) void
+}
+class TodoAppRepository{
+JdbcTemplate jdbcTemplate
+getAllTasks() List~Task~
+createTask(NewTask newTask, Instant now) void
+finishTask(int taskId, Instant now) void
+revertTask(int taskId, Instant now) void
+deleteTask(int taskId, Instant now) void
+}
+class ClockServiceInterface{
+now() Instant
+}
+class ClockService{
+now() Instant
+}
+TodoAppController ..> TodoAppControllerInterface
+TodoAppService ..|> TodoAppControllerInterface
+TodoAppService ..> TodoAppServiceInterface
+TodoAppRepository ..|> TodoAppServiceInterface
+TodoAppService ..> ClockServiceInterface
+ClockService ..|> ClockServiceInterface
+</pre><p>It may look a little complicated, but can you see that the implementation conforms to DIP?</p><p>Let&rsquo;s look at the actual source code.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppController.java</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@RestController</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoAppController</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Autowired</span>
+</span></span><span style=display:flex><span>    TodoAppControllerInterface todoAppService;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// concrete implementation</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>The TodoAppController class depends on TodoAppControllerInterface and uses the Service through the interface.
+The interface that TodoAppController depends on was implemented as follows.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppControllerInterface.java</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>TodoAppControllerInterface</span> {
+</span></span><span style=display:flex><span>    List<span style=color:#f92672>&lt;</span>Task<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getAllTasks</span>();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>createNewTask</span>(NewTask newTask);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>finishTask</span>(<span style=color:#66d9ef>int</span> taskId);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>revertTask</span>(<span style=color:#66d9ef>int</span> taskId);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>deleteTask</span>(<span style=color:#66d9ef>int</span> taskId);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>And as for the Service, TodoAppService is an implementation of TodoAppControllerInterface.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppService.java</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Service</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoAppService</span> <span style=color:#66d9ef>implements</span> TodoAppControllerInterface {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Autowired</span>
+</span></span><span style=display:flex><span>    TodoAppRepository todoAppRepository;
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> List<span style=color:#f92672>&lt;</span>Task<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getAllTasks</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// concrete implementation</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>createNewTask</span>(NewTask newTask) {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// concrete implementation</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>finishTask</span>(<span style=color:#66d9ef>int</span> taskId) {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// concrete implementation</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>revertTask</span>(<span style=color:#66d9ef>int</span> taskId) {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// concrete implementation</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>deleteTask</span>(<span style=color:#66d9ef>int</span> taskId) {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// concrete implementation</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>The same goes for the Repository. TodoAppService depends on TodoAppServiceInterface and uses the Repository through this interface.
+The declaration of the interface it depends on looked like this.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppServiceInterface.java</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>TodoAppServiceInterface</span> {
+</span></span><span style=display:flex><span>    List<span style=color:#f92672>&lt;</span>Task<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getAllTasks</span>();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>createNewTask</span>(NewTask newTask, Instant now);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>finishTask</span>(<span style=color:#66d9ef>int</span> taskId, Instant now);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>revertTask</span>(<span style=color:#66d9ef>int</span> taskId, Instant now);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>deleteTask</span>(<span style=color:#66d9ef>int</span> taskId, Instant now);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>And a concrete implementation class implements that declaration.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// TodoAppRepository.java</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Repository</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoAppRepository</span> <span style=color:#66d9ef>implements</span> TodoAppServiceInterface {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Autowired</span>
+</span></span><span style=display:flex><span>    JdbcTemplate jdbcTemplate;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> List<span style=color:#f92672>&lt;</span>Task<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getAllTasks</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// concrete implementation</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>createNewTask</span>(NewTask newTask, Instant now) {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// concrete implementation</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>finishTask</span>(<span style=color:#66d9ef>int</span> taskId, Instant now) {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// concrete implementation</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>revertTask</span>(<span style=color:#66d9ef>int</span> taskId, Instant now) {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// concrete implementation</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>deleteTask</span>(<span style=color:#66d9ef>int</span> taskId, Instant now) {
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// concrete implementation</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>You can see that no layer depends directly on a concrete implementation; each depends on an interface.</p><h2 id=summary>Summary
+<a class=anchor href=#summary>#</a></h2><p>In traditional procedural programming, the structure ends up with policy depending on implementation details.
+Such a structure is undesirable because the &ldquo;policy&rdquo; is affected by changes to the details.</p><p>In object-oriented programming, dependencies can be inverted by making both the policy and the implementation details depend on abstractions.
+Having this dependency inversion built in is the hallmark of good object-oriented design.
+If the dependencies are inverted, the design is object-oriented; if they are not, the design is procedural.</p><p>The Dependency Inversion Principle is essential for reaping the many benefits of object-oriented technology.
+Applying this principle properly is indispensable for building reusable frameworks.
+Because applying this principle completely separates abstractions from implementation details, the code becomes much easier to maintain.</p><hr><p>Finally, let&rsquo;s look at the Interface Segregation Principle (ISP).</p><p><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/isp/ class=book-btn>Interface Segregation Principle</a></p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#what-is-the-dependency-inversion-principle>What Is the Dependency Inversion Principle?</a></li><li><a href=#layering>Layering</a></li><li><a href=#inversion-of-ownership>Inversion of Ownership</a></li><li><a href=#depend-on-abstractions>Depend on &ldquo;Abstractions&rdquo;</a></li><li><a href=#a-simple-example>A Simple Example</a><ul><li><a href=#button-and-lamp>Button and Lamp</a></li><li><a href=#finding-the-underlying-abstraction>Finding the Underlying Abstraction</a></li></ul></li><li><a href=#a-practical-example>A Practical Example</a></li><li><a href=#summary>Summary</a></li></ul></nav></div></aside></main></body></html>

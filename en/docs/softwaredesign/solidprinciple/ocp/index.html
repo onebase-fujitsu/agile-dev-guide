@@ -1,0 +1,239 @@
+<!doctype html><html lang=en dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  The Open Closed Principle
+  #
+
+
+  What Is the Open-Closed Principle (OCP)?
+  #
+
+The Open-Closed Principle (OCP) states that
+software entities (classes, modules, functions, etc.) should be open for extension but closed for modification.
+With a &ldquo;rigid&rdquo; design, even a small change to a program affects every module that depends on the changed part.
+Applying the Open-Closed Principle lets you keep the impact of such modifications small.
+Modules designed according to the Open-Closed Principle have the following characteristics."><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/softwaredesign/solidprinciple/ocp/"><meta property="og:site_name" content="Fujitsu Agile Development Guide"><meta property="og:title" content="Open-Closed Principle (OCP)"><meta property="og:description" content="The Open Closed Principle # What Is the Open-Closed Principle (OCP)? # The Open-Closed Principle (OCP) states that software entities (classes, modules, functions, etc.) should be open for extension but closed for modification.
+With a “rigid” design, even a small change to a program affects every module that depends on the changed part. Applying the Open-Closed Principle lets you keep the impact of such modifications small.
+Modules designed according to the Open-Closed Principle have the following characteristics."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>Open-Closed Principle (OCP) | Fujitsu Agile Development Guide</title><link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/softwaredesign/solidprinciple/ocp/><link rel=alternate hreflang=ja href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/ title=オープン・クローズドの原則(OCP)><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/agile-dev-guide/en/><span>Fujitsu Agile Development Guide</span></a></h2><ul class=book-languages><li><input type=checkbox id=languages class=toggle>
+<label for=languages class="flex justify-between"><a role=button class="flex align-center"><img src=/agile-dev-guide/svg/translate.svg class=book-icon alt=Languages>
+English</a></label><ul><li><a href=/agile-dev-guide/docs/softwaredesign/solidprinciple/ocp/>日本語</a></li></ul></li></ul><ul><li><a href=/agile-dev-guide/en/docs/introduction/>Introduction</a></li><li><input type=checkbox id=section-26f8587d816918486e3411338e99965e class=toggle>
+<label for=section-26f8587d816918486e3411338e99965e class="flex justify-between"><a role=button>Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/agile/manifest/>Manifesto for Agile Software Development</a></li><li><a href=/agile-dev-guide/en/docs/agile/principle/>12 Principles of Agile Development</a></li><li><a href=/agile-dev-guide/en/docs/agile/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-3f7a3b5d22e80bae50acbf0bebe29b07 class=toggle>
+<label for=section-3f7a3b5d22e80bae50acbf0bebe29b07 class="flex justify-between"><a role=button>Scrum</a></label><ul><li><a href=/agile-dev-guide/en/docs/scrum/overview/>What is Scrum</a></li><li><a href=/agile-dev-guide/en/docs/scrum/roles/>Roles</a></li><li><a href=/agile-dev-guide/en/docs/scrum/products/>Artifacts</a></li><li><a href=/agile-dev-guide/en/docs/scrum/events/>Events</a></li><li><a href=/agile-dev-guide/en/docs/scrum/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-28ce590b98459d112a5e767cc6b3b04d class=toggle>
+<label for=section-28ce590b98459d112a5e767cc6b3b04d class="flex justify-between"><a role=button>Extreme Programming</a></label><ul><li><a href=/agile-dev-guide/en/docs/xp/overview/>What is Extreme Programming</a></li><li><a href=/agile-dev-guide/en/docs/xp/practice/>Extreme Programming Practices</a></li><li><a href=/agile-dev-guide/en/docs/xp/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-a3825c6f535b2464399db20dd841f3ac class=toggle>
+<label for=section-a3825c6f535b2464399db20dd841f3ac class="flex justify-between"><a role=button>Software Testing</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaretest/overview/>Getting Started with Software Testing</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/fizzbuzz/>Warming Up</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/bowlinggame/>Bowling Game</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/testdouble/>Test Doubles</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/e2e/>E2E Testing</a></li></ul></li><li><input type=checkbox id=section-d2676bcafbfd8f6850f60b777913e79b class=toggle checked>
+<label for=section-d2676bcafbfd8f6850f60b777913e79b class="flex justify-between"><a role=button>Software Design</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/about/>Software Design for Agile Development</a></li><li><input type=checkbox id=section-1d5d1d86d9abc5f3e1ff9ae3bf8dee3a class=toggle checked>
+<label for=section-1d5d1d86d9abc5f3e1ff9ae3bf8dee3a class="flex justify-between"><a role=button>SOLID Principles</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/srp/>Single Responsibility Principle (SRP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/ocp/ class=active>Open-Closed Principle (OCP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/lsp/>Liskov Substitution Principle (LSP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/dip/>Dependency Inversion Principle (DIP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/isp/>Interface Segregation Principle (ISP)</a></li></ul></li><li><input type=checkbox id=section-c82d883779a9175f08ed321f0a41c453 class=toggle>
+<label for=section-c82d883779a9175f08ed321f0a41c453 class="flex justify-between"><a role=button>Design Patterns</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/designpattern/designpattern/>Design Patterns</a></li></ul></li></ul></li><li><input type=checkbox id=section-c4e0d3ad193a9306b0791ca960be25bb class=toggle>
+<label for=section-c4e0d3ad193a9306b0791ca960be25bb class="flex justify-between"><a role=button>Agile in Practice</a></label><ul><li><a href=/agile-dev-guide/en/docs/practice/day1/>Day 1</a></li><li><a href=/agile-dev-guide/en/docs/practice/day2/>Day 2</a></li><li><a href=/agile-dev-guide/en/docs/practice/day3/>Day 3</a></li><li><a href=/agile-dev-guide/en/docs/practice/day4/>Day 4</a></li><li><a href=/agile-dev-guide/en/docs/practice/day5/>Day 5</a></li><li><a href=/agile-dev-guide/en/docs/practice/day6/>Day 6</a></li></ul></li><li><a href=/agile-dev-guide/en/docs/inclosing/>In Closing</a></li><li><a href=/agile-dev-guide/en/docs/recommendedbooks/>Recommended Books</a></li><li class=book-section-flat><span>Overall</span><ul><li><input type=checkbox id=section-49203faea468220b1d42544db4f42904 class=toggle>
+<label for=section-49203faea468220b1d42544db4f42904 class="flex justify-between"><a role=button>Lean Startup Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/overview/>Lean Startup Agile Flow</a></li><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/organization/>Structure and Roles</a></li><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/productvision/>Product Vision / Value Proposition</a></li></ul></li><li><input type=checkbox id=section-fbc99cb62f97af8f577e21318d383c53 class=toggle>
+<label for=section-fbc99cb62f97af8f577e21318d383c53 class="flex justify-between"><a role=button>Modernization Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/modernization/overview/>Modernization Agile Flow</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/organization/>Structure and Roles</a></li><li><input type=checkbox id=section-cb30e408eaf7a7ec013ed0dc4d3fb020 class=toggle>
+<label for=section-cb30e408eaf7a7ec013ed0dc4d3fb020 class="flex justify-between"><a role=button>Swift Method</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/overview/>What Is the Swift Method</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/eventstorming/>Event Storming</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/boris/>Boris</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/snape/>SnapE</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/slices/>Slices</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/techchoice/>Tech Choice</a></li></ul></li></ul></li></ul></li><li class=book-section-flat><span>Team</span><ul><li><a href=/agile-dev-guide/en/docs/team/workstyle/>How Our Team Works</a></li><li><a href=/agile-dev-guide/en/docs/team/balancedteam/>Balanced Team</a></li><li><input type=checkbox id=section-d6ef0f53ed2eae5373cce9f0cae94127 class=toggle>
+<label for=section-d6ef0f53ed2eae5373cce9f0cae94127 class="flex justify-between"><a role=button>Mindset</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/mindset/onebase/>ONEbase Values</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/psychologicalsafety/>Psychological Safety</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/xp/>XP Values</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/practice/>How to Adopt Practices</a></li></ul></li><li><a href=/agile-dev-guide/en/docs/team/teambuilding/>Team Building</a></li><li><a href=/agile-dev-guide/en/docs/team/remotework/>Remote Work</a></li><li><input type=checkbox id=section-ba58c7f3c79f8713fd38efabb55e90aa class=toggle>
+<label for=section-ba58c7f3c79f8713fd38efabb55e90aa class="flex justify-between"><a role=button>Team Activities</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/activities/officestandup/>Office Standup</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/teamstandup/>Team Standup</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/preipm/>Pre-IPM</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/ipm/>IPM</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/cl/>CL Meeting</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/retro/>Retrospective</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/salesmeeting/>Sales Sync Meeting</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/internalsync/>Internal Sync</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/riskmitigations/>Risks & Mitigations</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/feedback/>Feedback</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/icebreak/>Ice Break</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/teamhealthcheck/>Team Health Check</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/1on1/>1on1</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/exercise/>Radio Taiso</a></li></ul></li><li><input type=checkbox id=section-9283499da254b9f85e8a373a7c190a7e class=toggle>
+<label for=section-9283499da254b9f85e8a373a7c190a7e class="flex justify-between"><a role=button>Team Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/practices/facilitation/>Facilitation</a></li><li><a href=/agile-dev-guide/en/docs/team/practices/okrs/>OKRs</a></li></ul></li></ul></li><li class=book-section-flat><span>Designer</span><ul><li><a href=/agile-dev-guide/en/docs/designer/overview/>What Is a Designer</a></li><li><input type=checkbox id=section-b2cda318f2a04a4c6c2d6866191c7dd0 class=toggle>
+<label for=section-b2cda318f2a04a4c6c2d6866191c7dd0 class="flex justify-between"><a role=button>Designer Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/designer/practices/persona/>Persona</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/scenario/>Scenario</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/researchplanning/>Research Planning</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/prototyping/>Prototyping</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/script/>Script Creation</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/researchaction/>Conducting Research</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/synthesize/>Synthesize</a></li></ul></li></ul></li><li class=book-section-flat><span>Product Manager</span><ul><li><a href=/agile-dev-guide/en/docs/productmanager/overview/>What Is a Product Manager</a></li><li><input type=checkbox id=section-9026fc1a07f695d85c362dc4668a1edf class=toggle>
+<label for=section-9026fc1a07f695d85c362dc4668a1edf class="flex justify-between"><a role=button>Product Manager Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/productmanager/practices/roadmap/>Product Roadmap</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/mvp/>MVP</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/userstorymapping/>User Story Mapping</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/userstory/>User Story</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/2x2/>2×2</a></li></ul></li></ul></li><li class=book-section-flat><span>Developer</span><ul><li><a href=/agile-dev-guide/en/docs/developer/overview/>What Is a Developer</a></li><li><input type=checkbox id=section-9a270bfee03ee781c85e4c3c42434241 class=toggle>
+<label for=section-9a270bfee03ee781c85e4c3c42434241 class="flex justify-between"><a role=button>Developer Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/developer/practices/tdd/>TDD</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/cicd/>CI/CD</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/pairprogramming/>Pair Programming</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/soroprogramming/>Solo Programming</a></li></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu></label><h3>Open-Closed Principle (OCP)</h3><label for=toc-control><img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#what-is-the-open-closed-principle-ocp>What Is the Open-Closed Principle (OCP)?</a></li><li><a href=#depend-on-abstractions>Depend on &ldquo;Abstractions&rdquo;</a></li><li><a href=#a-concrete-example>A Concrete Example</a><ul><li><a href=#shape-drawing-that-does-not-follow-ocp>Shape Drawing That Does Not Follow OCP</a></li><li><a href=#implementing-shape-drawing-that-follows-ocp>Implementing Shape Drawing That Follows OCP</a></li></ul></li><li><a href=#pitfalls>Pitfalls</a></li><li><a href=#anticipation-and-natural-structure>Anticipation and &ldquo;Natural&rdquo; Structure</a></li><li><a href=#explicit-closure>Explicit Closure</a><ul><li><a href=#taking-ordering-out-of-the-shapes>Taking Ordering Out of the Shapes</a></li><li><a href=#using-a-table-driven-approach>Using a Table-Driven Approach</a></li></ul></li><li><a href=#summary>Summary</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=the-open-closed-principle>The Open Closed Principle
+<a class=anchor href=#the-open-closed-principle>#</a></h1><h2 id=what-is-the-open-closed-principle-ocp>What Is the Open-Closed Principle (OCP)?
+<a class=anchor href=#what-is-the-open-closed-principle-ocp>#</a></h2><p>The Open-Closed Principle (OCP) states that
+<strong>software entities (classes, modules, functions, etc.) should be open for extension but closed for modification</strong>.</p><p>With a &ldquo;rigid&rdquo; design, even a small change to a program affects every module that depends on the changed part.
+Applying the Open-Closed Principle lets you keep the impact of such modifications small.</p><p>Modules designed according to the Open-Closed Principle have the following characteristics.</p><ol><li><p><strong>They are open for extension</strong><br>This means that the behavior of the module can be extended.
+Even when the application&rsquo;s specifications change, you can handle the change by adding new behavior to the module.
+In other words, you are free to change what the module does.</p></li><li><p><strong>They are closed for modification</strong><br>Changing the behavior of the module does not affect the module&rsquo;s source code or binary code at all.
+Modules that have already been compiled into binary form, whether link libraries or DLLs, do not need to be touched.</p></li></ol><p>At first glance, these two characteristics seem to contradict each other.
+Normally, to extend the behavior of a module, you have to change the module&rsquo;s source code itself.
+It is also natural to think that you cannot change the behavior of a module without changing its source code.</p><p>So how can you change the behavior of a module without changing its source code?</p><h2 id=depend-on-abstractions>Depend on &ldquo;Abstractions&rdquo;
+<a class=anchor href=#depend-on-abstractions>#</a></h2><p>In object-oriented languages such as C++ and Java, you can use &ldquo;abstractions&rdquo; to express methods whose declarations are fixed but which are not bound to any particular implementation.
+In these languages, an &ldquo;abstraction&rdquo; is written as an abstract base class, and the methods that are not bound to any particular implementation are implemented in its derived classes.</p><p>Taking advantage of this &ldquo;abstraction&rdquo; mechanism is effective when designing modules.
+If a module depends on a fixed &ldquo;abstraction&rdquo;, the code can be closed for modification.
+With abstractions, you can extend the behavior of a module without modifying its code, simply by adding a new class derived from the abstraction.</p><script src=/agile-dev-guide/mermaid.min.js></script><script>mermaid.initialize({flowchart:{useMaxWidth:!0},theme:"default"})</script><pre class=mermaid>
+classDiagram
+Client --> Server
+</pre><p>In this example, both Client and Server are implemented &ldquo;concretely&rdquo;.
+Because the Client class uses the Server class, if the Client object needs to use a different Server object, the Client class has to be changed.</p><pre class=mermaid>
+classDiagram
+Client --> ClientInterface
+Server ..|> ClientInterface
+</pre><p>What if we use a design like the diagram above instead?
+The ClientInterface class is an abstract class with several abstract member functions.
+The Client class uses this abstract class.
+However, what the Client class actually uses is an object of the Server class, which derives from the abstract class.
+In other words, if the Client object wants to use a new Server class, all you have to do is add another class derived from ClientInterface.
+There is no need to change the Client class itself.</p><h2 id=a-concrete-example>A Concrete Example
+<a class=anchor href=#a-concrete-example>#</a></h2><h3 id=shape-drawing-that-does-not-follow-ocp>Shape Drawing That Does Not Follow OCP
+<a class=anchor href=#shape-drawing-that-does-not-follow-ocp>#</a></h3><p>First, let&rsquo;s look at an implementation that does not follow OCP.</p><p>The two structs Circle and Square share only their first data element, <code>ShapeType itsType;</code>; their other elements differ.
+<code>ShapeType itsType;</code> indicates the type of the shape, which is how the program determines whether it is a circle or a square.
+The <code>DrawAllShapes()</code> method walks through an array of pointers to the structs one by one,
+first checking the type and then calling the appropriate function for that type (<code>DrawCircle()</code> or <code>DrawSquare()</code>).</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#75715e>// shape.h
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>enum</span> <span style=color:#a6e22e>ShapeType</span> {circle, square};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Shape</span> {
+</span></span><span style=display:flex><span>    ShapeType itsType;
+</span></span><span style=display:flex><span>};
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#75715e>// circle.h
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Circle</span> {
+</span></span><span style=display:flex><span>    ShapeType itsType;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>double</span> itsRadius;
+</span></span><span style=display:flex><span>    Point itsCenter;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>DrawCircle</span>(<span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Circle</span><span style=color:#f92672>*</span>);
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#75715e>// square.h
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Square</span> {
+</span></span><span style=display:flex><span>    ShapeType itsType;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>double</span> itsSide;
+</span></span><span style=display:flex><span>    Point itsTopLeft;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>DrawSquare</span>(<span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Square</span><span style=color:#f92672>*</span>);
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-C++ data-lang=C++><span style=display:flex><span><span style=color:#75715e>// drawAllShapes.cc
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>typedef</span> <span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Shape</span> <span style=color:#f92672>*</span>ShapePointer;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>DrawAllShapes</span>(ShapePointer list[], <span style=color:#66d9ef>int</span> n) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> i;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (i<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>; i<span style=color:#f92672>&lt;</span>n; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Shape</span><span style=color:#f92672>*</span> s <span style=color:#f92672>=</span> list[i];
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>switch</span> (s <span style=color:#f92672>-&gt;</span> itsType) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>case</span> square:
+</span></span><span style=display:flex><span>                DrawSquare((<span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Square</span><span style=color:#f92672>*</span>)s);
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>case</span> circle:
+</span></span><span style=display:flex><span>                DrawCircle((<span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Circle</span><span style=color:#f92672>*</span>)s);
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>This <code>DrawAllShapes()</code> clearly violates the Open-Closed Principle.
+When you define a new kind of shape and want to draw it, <code>DrawAllShapes()</code> also has to be modified.
+In other words, this function is not closed for modification.</p><p>This program is just a simple example that only calls the drawing routines for shapes, so adding a new shape requires a change in only one place.
+In a real application, however, you would call many kinds of operations, such as moving, scaling, and transforming shapes.
+Each of those operations needs branching with a switch statement similar to the one used for drawing.
+As a result, adding a single new kind of shape requires changes everywhere such switch-based branching occurs.</p><p>There are other problems as well. What changes are needed to add a new kind of shape?</p><p>First, the new shape has to be registered in the ShapeType enum.
+Because every shape being handled depends on the declaration of this enum, all the shapes have to be recompiled,
+and for the same reason, the modules that depend on Shape need to be recompiled too.</p><p>So not only do you have to change every switch/case and if/else statement in the source code, you also have to recompile the binary files of every module that uses the Shape struct.
+Changing binary files means that not only DLLs and shared libraries but also other binary components have to be relinked.</p><p>In the end, the simple act of adding a new shape to the application changes not only the source code of various modules
+but also all of the modules&rsquo; binary files and library components.</p><p>This program is also very poorly portable. If you try to use <code>DrawAllShapes()</code> from another program,
+Square and Circle, which you do not even need, come tagged along as extras.</p><h3 id=implementing-shape-drawing-that-follows-ocp>Implementing Shape Drawing That Follows OCP
+<a class=anchor href=#implementing-shape-drawing-that-follows-ocp>#</a></h3><p>The code below solves the problems of the previous code by following OCP.
+Here, we first declare an abstract class named Shape that has just one abstract method, <code>Draw()</code>.
+Circle and Square are then classes derived from Shape.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Shape</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>Draw</span>();
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Square</span> <span style=color:#66d9ef>extends</span> Shape {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>double</span> itsSide;
+</span></span><span style=display:flex><span>    Point itsTopLeft;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Circle</span> <span style=color:#66d9ef>extends</span> Shape {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>double</span> itsRadius;
+</span></span><span style=display:flex><span>    Point itsCenter;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DrawingTool</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>DrawAllShapes</span>(List<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;</span> shapes) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (Shape shape : shapes) {
+</span></span><span style=display:flex><span>            shape.<span style=color:#a6e22e>Draw</span>();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Now, if you want to add a new shape, you just create a new class derived from Shape.
+<code>DrawAllShapes()</code> does not need to be touched at all, which means that <code>DrawAllShapes()</code> conforms to the Open-Closed Principle.</p><p>As mentioned earlier, a practical application also needs operations such as moving and transforming.
+Even so, adding a new shape is very easy: you just create a derived class for the new shape and implement all the required operations.
+There is no need to comb through the application looking for places that need changes.</p><p>Portability is also ensured, because no application that uses <code>DrawAllShapes()</code> has to deal with unwanted extras.</p><h2 id=pitfalls>Pitfalls
+<a class=anchor href=#pitfalls>#</a></h2><p>Now, what if the specification for <a href=#implementing-shape-drawing-that-follows-ocp>the previous example</a>
+changes so that <strong>all circles must be drawn before any squares</strong>?</p><p><code>DrawAllShapes()</code> is not closed against that kind of change.
+To handle this change, you would need to change the internal processing of <code>DrawAllShapes()</code>: first search the list for Circles and draw them,
+then search the list for Squares and draw them in the same way.</p><h2 id=anticipation-and-natural-structure>Anticipation and &ldquo;Natural&rdquo; Structure
+<a class=anchor href=#anticipation-and-natural-structure>#</a></h2><p>If we had anticipated this kind of specification change, we could have introduced a different &ldquo;abstraction&rdquo; to protect ourselves from it.
+However, the abstraction used in <a href=#implementing-shape-drawing-that-follows-ocp>the previous example</a>
+does not help against this kind of change; it only gets in the way.
+In other words, this abstraction was inappropriate.</p><p>At first glance, the model using the Shape base class looks perfectly natural.
+However, in a system where the drawing order matters more than the type of shape, the Shape-based model turns out not to be natural.</p><p>In other words, no matter how &ldquo;closed&rdquo; a module is, there can always be changes it cannot be closed against.
+<strong>There is no model that is natural in every case.</strong></p><p>Since it is impossible to be perfectly closed against every change, closure has to be strategic.
+That is, designers have to choose which kinds of changes they want their design to be closed against.
+Designers must guess which kinds of changes are likely to happen frequently, and build abstractions that protect them from those changes.</p><p>So how can we guess which changes are likely to happen?
+That is where user research and the hypothesis validation process come in.
+In agile development, we form hypotheses about what we should develop next.
+We interview users and have them try prototypes to decide which features to implement next.
+All we can do is use that series of processes to anticipate in advance which changes are likely.</p><h2 id=explicit-closure>Explicit Closure
+<a class=anchor href=#explicit-closure>#</a></h2><h3 id=taking-ordering-out-of-the-shapes>Taking Ordering Out of the Shapes
+<a class=anchor href=#taking-ordering-out-of-the-shapes>#</a></h3><p>Now, what should we do when the requirement <code>all circles must be drawn before any squares</code> actually comes up?
+Closure is achieved through abstraction. In other words, to close <code>DrawAllShapes()</code> against ordering, we need to abstract the ordering.
+It seems that we should abstract the ordering so that any kind of ordering can be expressed.</p><p>Being able to order means that, given two objects, you can find out which one should be drawn first.
+So let&rsquo;s achieve ordering by defining an abstract method named <code>Precedes</code> on Shape.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Shape</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>Draw</span>();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>Precedes</span>(Shape shape);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ShapeComparator</span> <span style=color:#66d9ef>implements</span> Comparator<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>compare</span>(Shape shape1, Shape shape2) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (shape1.<span style=color:#a6e22e>Precedes</span>(shape2)) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#f92672>-</span>1;
+</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>            retrun 1;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DrawingTool</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>DrawAllShapes</span>(List<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;</span> shapes) {
+</span></span><span style=display:flex><span>        List<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;</span> orderedShapes <span style=color:#f92672>=</span> DrawingOrderSort(shapes);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (Shape shape : orderedShapes) {
+</span></span><span style=display:flex><span>            shape.<span style=color:#a6e22e>Draw</span>();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    List<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>DrawingOrderSort</span>(List<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;</span> shapes) {
+</span></span><span style=display:flex><span>        List<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;</span> orderedShapes <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;</span>Shape<span style=color:#f92672>&gt;</span>(shapes);
+</span></span><span style=display:flex><span>        Collection.<span style=color:#a6e22e>sort</span>(orderedShapes, <span style=color:#66d9ef>new</span> ShapeComparator());
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> orderedShapes;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Here, we implemented the ordering by overriding the compare method of the Comparator class.
+As it stands, however, each Shape object has to override the <code>Precedes()</code> method to specify how it should be ordered.</p><p>For example, the <code>Precedes()</code> method for Circle would look like this.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Circle</span> <span style=color:#66d9ef>extends</span> Shape {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>double</span> itsRadius;
+</span></span><span style=display:flex><span>    Point itsCenter;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>Precedes</span>(Shape shape) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> shape <span style=color:#66d9ef>instanceof</span> Square;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>From the explanation so far, it should be obvious that this <code>Precedes()</code> violates the Open-Closed Principle.
+Of course, this is fine if new shapes are rarely defined, but if they are added frequently, it is crystal clear that this approach will become a problem.</p><h3 id=using-a-table-driven-approach>Using a Table-Driven Approach
+<a class=anchor href=#using-a-table-driven-approach>#</a></h3><p>Let&rsquo;s close the Shape derivatives so that the individual shapes do not need to know about each other.
+Here, we will use a table-driven approach.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Shape</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>Draw</span>();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>abstract</span> String <span style=color:#a6e22e>getType</span>();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> String<span style=color:#f92672>[]</span> typeOrderTable <span style=color:#f92672>=</span> {<span style=color:#e6db74>&#34;square&#34;</span>, <span style=color:#e6db74>&#34;circle&#34;</span>};
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>Precedes</span>(Shape shape) {
+</span></span><span style=display:flex><span>        String thisType <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>getType</span>();
+</span></span><span style=display:flex><span>        String argType <span style=color:#f92672>=</span> shape.<span style=color:#a6e22e>getType</span>();
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> thisOrd <span style=color:#f92672>=</span> <span style=color:#f92672>-</span>1;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> argOrd <span style=color:#f92672>=</span> <span style=color:#f92672>-</span>1;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> ord <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (String tableEntry : typeOrderTable) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (tableEntry.<span style=color:#a6e22e>equals</span>(thisType)) {
+</span></span><span style=display:flex><span>                thisOrd <span style=color:#f92672>=</span> ord;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (tableEntry.<span style=color:#a6e22e>equals</span>(argType)) {
+</span></span><span style=display:flex><span>                argOrd <span style=color:#f92672>=</span> ord;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> ((0 <span style=color:#f92672>&lt;=</span> argOrd) <span style=color:#f92672>&amp;&amp;</span> (0 <span style=color:#f92672>&lt;=</span> thisOrd)) {
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            ord<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> thisOrd <span style=color:#f92672>&lt;</span> argOrd;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Here, we created an array in Shape that defines the order of the elements.</p><p><code>private String[] typeOrderTable = {"square", "circle"};</code></p><p>That is the array.
+With this approach, DrawAllShapes can be closed against the general ordering problem,
+and in addition, when you create a new class derived from Shape, you no longer need to change the source code of each Shape derivative.</p><p>With this approach, the only thing that is not closed against the ordering of the various shapes is this array.
+It is a good idea to separate this table from the other modules and make it an independent module of its own.</p><h2 id=summary>Summary
+<a class=anchor href=#summary>#</a></h2><p>The Open-Closed Principle is at the heart of object-oriented design. By following it, you can make the most of the benefits that object-oriented technology offers (flexibility, reusability, and maintainability).
+However, using an object-oriented programming language does not automatically make your code conform to the Open-Closed Principle,
+nor does it mean you should use abstractions indiscriminately throughout the application.</p><p>Developers need to identify the parts of their code that change most frequently and apply abstractions to them appropriately.
+<strong>Refraining from premature &ldquo;abstraction&rdquo; is just as important as using &ldquo;abstraction&rdquo;.</strong></p><hr><p>Next, let&rsquo;s look at the Liskov Substitution Principle (LSP).</p><p><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/lsp/ class=book-btn>Liskov Substitution Principle</a></p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#what-is-the-open-closed-principle-ocp>What Is the Open-Closed Principle (OCP)?</a></li><li><a href=#depend-on-abstractions>Depend on &ldquo;Abstractions&rdquo;</a></li><li><a href=#a-concrete-example>A Concrete Example</a><ul><li><a href=#shape-drawing-that-does-not-follow-ocp>Shape Drawing That Does Not Follow OCP</a></li><li><a href=#implementing-shape-drawing-that-follows-ocp>Implementing Shape Drawing That Follows OCP</a></li></ul></li><li><a href=#pitfalls>Pitfalls</a></li><li><a href=#anticipation-and-natural-structure>Anticipation and &ldquo;Natural&rdquo; Structure</a></li><li><a href=#explicit-closure>Explicit Closure</a><ul><li><a href=#taking-ordering-out-of-the-shapes>Taking Ordering Out of the Shapes</a></li><li><a href=#using-a-table-driven-approach>Using a Table-Driven Approach</a></li></ul></li><li><a href=#summary>Summary</a></li></ul></nav></div></aside></main></body></html>

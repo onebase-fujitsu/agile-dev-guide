@@ -9,10 +9,10 @@
 
 テスト対象となるクラスやメソッドが、ほかのクラスに依存していないケースはほとんどありません。
 依存しているクラスもまた、ほかのクラスに依存しています。"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/"><meta property="og:site_name" content="Fujitsu Agile Development Guide"><meta property="og:title" content="テストダブル"><meta property="og:description" content="テストダブル # テスト駆動開発の開発の流れがわかってきたところで、次にテストダブルを使用したテストについて学んでいきましょう。
-テストダブルとは # テスト対象となるクラスやメソッドが、ほかのクラスに依存していないケースはほとんどありません。 依存しているクラスもまた、ほかのクラスに依存しています。"><meta property="og:locale" content="ja"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>テストダブル | Fujitsu Agile Development Guide</title><link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+テストダブルとは # テスト対象となるクラスやメソッドが、ほかのクラスに依存していないケースはほとんどありません。 依存しているクラスもまた、ほかのクラスに依存しています。"><meta property="og:locale" content="ja"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>テストダブル | Fujitsu Agile Development Guide</title><link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/><link rel=alternate hreflang=en href=https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/softwaretest/testdouble/ title="Test Doubles"><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span></a></h2><ul class=book-languages><li><input type=checkbox id=languages class=toggle>
 <label for=languages class="flex justify-between"><a role=button class="flex align-center"><img src=/agile-dev-guide/svg/translate.svg class=book-icon alt=Languages>
-日本語</a></label><ul><li><a href=/agile-dev-guide/en/>English</a></li></ul></li></ul><ul><li><a href=/agile-dev-guide/docs/introduction/>はじめに</a></li><li><input type=checkbox id=section-fe72557a7878dded4efa0060e21abacc class=toggle>
+日本語</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaretest/testdouble/>English</a></li></ul></li></ul><ul><li><a href=/agile-dev-guide/docs/introduction/>はじめに</a></li><li><input type=checkbox id=section-fe72557a7878dded4efa0060e21abacc class=toggle>
 <label for=section-fe72557a7878dded4efa0060e21abacc class="flex justify-between"><a role=button>アジャイル</a></label><ul><li><a href=/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a></li><li><a href=/agile-dev-guide/docs/agile/principle/>アジャイル開発12の原則</a></li><li><a href=/agile-dev-guide/docs/agile/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-60906829343241fe59efbb09409d99f8 class=toggle>
 <label for=section-60906829343241fe59efbb09409d99f8 class="flex justify-between"><a role=button>スクラム</a></label><ul><li><a href=/agile-dev-guide/docs/scrum/overview/>スクラムとは</a></li><li><a href=/agile-dev-guide/docs/scrum/roles/>ロール</a></li><li><a href=/agile-dev-guide/docs/scrum/products/>成果物</a></li><li><a href=/agile-dev-guide/docs/scrum/events/>イベント</a></li><li><a href=/agile-dev-guide/docs/scrum/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-8258873460fa80799dab8ced5b37f178 class=toggle>
 <label for=section-8258873460fa80799dab8ced5b37f178 class="flex justify-between"><a role=button>エクストリームプログラミング</a></label><ul><li><a href=/agile-dev-guide/docs/xp/overview/>エクストリームプログラミングとは</a></li><li><a href=/agile-dev-guide/docs/xp/practice/>エクストリームプログラミングのプラクティス</a></li><li><a href=/agile-dev-guide/docs/xp/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-ef522355473a56c6b477dd934de57bb8 class=toggle checked>
@@ -37,10 +37,16 @@
 また、依存する機能が外部サービスや乱数、システム時間など、期待する結果を予測できない場合には検証の精度を落とさざるを得ません。</p><p>そこで、依存する機能がユニットテストで扱いづらい場合や、ユニットテストの独立性を高めたい場合には、依存するオブジェクトを「代役」で置き換える方法が有効です。
 この代役となるオブジェクトはスタブやモックとして知られ、総称してテストダブル（TestDouble）と呼ばれます。</p><p>テストダブルには様々なパターンがあります</p><table><thead><tr><th style=text-align:left>テストダブル</th><th style=text-align:left>役割</th><th style=text-align:left>具体例</th></tr></thead><tbody><tr><td style=text-align:left>Stub</td><td style=text-align:left>テスト対象の依存オブジェクトに予測可能な振る舞いをする</td><td style=text-align:left>依存コンポーネントから取得できる値が変化したとき、テスト対象の挙動がどう変化するか確認するテスト</td></tr><tr><td style=text-align:left>Spy</td><td style=text-align:left>テスト対象から依存オブジェクトへの呼び出しを監視する</td><td style=text-align:left>テスト対象が既に実装された依存コンポーネントを呼び出した値や回数を検証するテスト</td></tr><tr><td style=text-align:left>Mock</td><td style=text-align:left>テスト対象から依存オブジェクトへの呼び出しを検証する</td><td style=text-align:left>テスト対象が依存コンポーネントに入力した内容を検証するテスト</td></tr><tr><td style=text-align:left>Fake</td><td style=text-align:left>テストの範囲内で本物と同じように動作する</td><td style=text-align:left>データベースを使用するテストの場合、膨大な時間がかかる場合がある。フェイクとして同機能をインメモリデータベースで実装しテストを高速化する。</td></tr><tr><td style=text-align:left>Dummy</td><td style=text-align:left>内部のパラメータや状態がなんであってもテストに影響を及ぼさない代替オブジェクト</td><td style=text-align:left>テストに関係はないがコンストラクタに与える値が足りない、その値を埋めるために作成する。</td></tr></tbody></table><h2 id=テストダブルを実現するライブラリ>テストダブルを実現するライブラリ
 <a class=anchor href=#%e3%83%86%e3%82%b9%e3%83%88%e3%83%80%e3%83%96%e3%83%ab%e3%82%92%e5%ae%9f%e7%8f%be%e3%81%99%e3%82%8b%e3%83%a9%e3%82%a4%e3%83%96%e3%83%a9%e3%83%aa>#</a></h2><p>テストダブルを実現するライブラリも様々なものがあります。
-Javaですと <a href=https://site.mockito.org/>Mockito</a>、 <a href=https://easymock.org/>EasyMock</a> 、
-<a href=http://jmock.org/>jMock</a> あたりでしょうか。
-Javascriptだと <a href=https://sinonjs.org/>Sinon.js</a> や <a href=https://github.com/testdouble/testdouble.js/>testdouble.js</a> が有名です。</p><h2 id=サンプルアプリケーション>サンプルアプリケーション
-<a class=anchor href=#%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3>#</a></h2><p>さて、ここからは具体的なアプリケーションをつかってテストの実装をやってみましょう。</p><p>サンプルアプリケーションは <a href=https://github.com/Onebase-Fujitsu/simple-todo-app>ここ</a> で公開してあります。</p><p><a href=https://github.com/Onebase-Fujitsu/simple-todo-app>https://github.com/Onebase-Fujitsu/simple-todo-app</a></p><p>まずはリポジトリをローカルにCloneしてみましょう。
+Javaですと <a href=https://site.mockito.org/>Mockito</a>
+、 <a href=https://easymock.org/>EasyMock</a>
+、
+<a href=http://jmock.org/>jMock</a>
+あたりでしょうか。
+Javascriptだと <a href=https://sinonjs.org/>Sinon.js</a>
+や <a href=https://github.com/testdouble/testdouble.js/>testdouble.js</a>
+が有名です。</p><h2 id=サンプルアプリケーション>サンプルアプリケーション
+<a class=anchor href=#%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3>#</a></h2><p>さて、ここからは具体的なアプリケーションをつかってテストの実装をやってみましょう。</p><p>サンプルアプリケーションは <a href=https://github.com/Onebase-Fujitsu/simple-todo-app>ここ</a>
+で公開してあります。</p><p><a href=https://github.com/Onebase-Fujitsu/simple-todo-app>https://github.com/Onebase-Fujitsu/simple-todo-app</a></p><p>まずはリポジトリをローカルにCloneしてみましょう。
 CloneしたらTerminalを2つ立ち上げて、フロントエンドとバックエンドを起動してみてください。
 実行にはJavaの実行環境と、Node.jsの実行環境が必要です。</p><p>リポジトリのClone</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>git clone https://github.com/Onebase-Fujitsu/simple-todo-app.git
 </span></span></code></pre></div><p>フロントエンドの起動(Mac/Linuxの場合)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>cd client
@@ -55,18 +61,32 @@ CloneしたらTerminalを2つ立ち上げて、フロントエンドとバック
 </span></span><span style=display:flex><span>SERVER_PORT<span style=color:#f92672>=</span><span style=color:#ae81ff>8080</span>
 </span></span><span style=display:flex><span>gradlew.bat bootRun
 </span></span></code></pre></div><p>まずは、このアプリケーションを動かしてみましょう。このアプリケーションはシンプルなToDo管理アプリケーションです。
-Clientは <a href=https://ja.reactjs.org/>React</a> で作っていて、開発言語に <a href=https://www.typescriptlang.org/>Typescript</a> を使用しています。
-またUIライブラリに <a href=https://material-ui.com/>Material-UI</a> を採用しています。</p><p>Serverは <a href=https://spring.io/>Spring Boot</a> で作っており、開発言語は <a href=https://www.java.com/ja/>Java</a> です。
-DBは <a href=https://www.h2database.com/html/main.html>H2 Database</a> を組み込んでいてインメモリで動かしています。
-またDBのマイグレーションツールの <a href=https://flywaydb.org/>Flyway</a> を使用しているのが一つポイントです。またDBをインメモリで動かしてますので、Serverアプリケーションを終了する度にデータは揮発します。</p><p>ServerとClientを起動した状態で、Webブラウザで <a href=http://localhost:3000>http://localhost:3000</a> にアクセスするとこのような画面が表示されるはずです。</p><p><img src=sampleApp1.jpg alt=SampleTodoApp1></p><p>タスク名や説明を入力してSaveをクリックすると、タスクが保存されますし、
-ブラウザをリロードしても状態が保存されていることがわかると思います。</p><p><img src=sampleApp2.jpg alt=SampleTodoApp2></p><p>タスクを完了したり、ゴミ箱ボタンをクリックすると削除したりすることができます。</p><p>ServerのAPIの仕様は <a href=https://swagger.io/specification/>OpenAPI Specification(OAS) 3.0</a> で公開してあります。
-OASはAPIの標準仕様で以前はSwaggerという名前で呼ばれていたので、そちらのほうが馴染みある方も多いかもしれません。</p><p>Serverを起動した状態で <a href=http://localhost:8080/v3/api-docs>http://localhost:8080/v3/api-docs</a> にアクセスするとOAS3.0の仕様を取得できます。
-また、このServerはSwagger UIも提供しているため <a href=http://localhost:8080/swagger-ui/>http://localhost:8080/swagger-ui/</a> にアクセスするとGUIで仕様を確かめたり、APIを実際に叩いてみたりすることができます。</p><p><img src=swagger.jpg alt=Swagger></p><p>また、DBはServerを起動した状態で <a href=http://localhost:8080/h2-console>http://localhost:8080/h2-console/</a> にアクセスするとログイン用のコンソールが表示されます。</p><p><img src=h2Console.jpg alt=H2Console></p><p>実環境用のDBは<code>jdbc:h2:mem:todo_db</code>で、User名は<code>sa</code>、パスワードはなしでDBに接続できます。
+Clientは <a href=https://ja.reactjs.org/>React</a>
+で作っていて、開発言語に <a href=https://www.typescriptlang.org/>Typescript</a>
+を使用しています。
+またUIライブラリに <a href=https://material-ui.com/>Material-UI</a>
+を採用しています。</p><p>Serverは <a href=https://spring.io/>Spring Boot</a>
+で作っており、開発言語は <a href=https://www.java.com/ja/>Java</a>
+です。
+DBは <a href=https://www.h2database.com/html/main.html>H2 Database</a>
+を組み込んでいてインメモリで動かしています。
+またDBのマイグレーションツールの <a href=https://flywaydb.org/>Flyway</a>
+を使用しているのが一つポイントです。またDBをインメモリで動かしてますので、Serverアプリケーションを終了する度にデータは揮発します。</p><p>ServerとClientを起動した状態で、Webブラウザで <a href=http://localhost:3000>http://localhost:3000</a>
+にアクセスするとこのような画面が表示されるはずです。</p><p><img src=/agile-dev-guide/docs/softwaretest/testdouble/sampleApp1.jpg alt=SampleTodoApp1></p><p>タスク名や説明を入力してSaveをクリックすると、タスクが保存されますし、
+ブラウザをリロードしても状態が保存されていることがわかると思います。</p><p><img src=/agile-dev-guide/docs/softwaretest/testdouble/sampleApp2.jpg alt=SampleTodoApp2></p><p>タスクを完了したり、ゴミ箱ボタンをクリックすると削除したりすることができます。</p><p>ServerのAPIの仕様は <a href=https://swagger.io/specification/>OpenAPI Specification(OAS) 3.0</a>
+で公開してあります。
+OASはAPIの標準仕様で以前はSwaggerという名前で呼ばれていたので、そちらのほうが馴染みある方も多いかもしれません。</p><p>Serverを起動した状態で <a href=http://localhost:8080/v3/api-docs>http://localhost:8080/v3/api-docs</a>
+にアクセスするとOAS3.0の仕様を取得できます。
+また、このServerはSwagger UIも提供しているため <a href=http://localhost:8080/swagger-ui/>http://localhost:8080/swagger-ui/</a>
+にアクセスするとGUIで仕様を確かめたり、APIを実際に叩いてみたりすることができます。</p><p><img src=/agile-dev-guide/docs/softwaretest/testdouble/swagger.jpg alt=Swagger></p><p>また、DBはServerを起動した状態で <a href=http://localhost:8080/h2-console>http://localhost:8080/h2-console/</a>
+にアクセスするとログイン用のコンソールが表示されます。</p><p><img src=/agile-dev-guide/docs/softwaretest/testdouble/h2Console.jpg alt=H2Console></p><p>実環境用のDBは<code>jdbc:h2:mem:todo_db</code>で、User名は<code>sa</code>、パスワードはなしでDBに接続できます。
 テスト中のDBの状態を確認したい場合は、任意の箇所にブレークポイントを設定して、<code>jdbc:h2:mem:todo_test_db</code>に接続してみましょう。
 コンソールにログインしたら任意のSQLを実行できる画面が表示されます。
-組み込みのインメモリで動かしている関係でこの方法でしかDBの状態を確認する方法がありませんので、気をつけてください。</p><p>さて、<a href=https://github.com/Onebase-Fujitsu/simple-todo-app/tree/main/server/src/test>ここの配下</a> を見てもらえると分かりますが、このアプリケーションにはテストが実装されていません。
+組み込みのインメモリで動かしている関係でこの方法でしかDBの状態を確認する方法がありませんので、気をつけてください。</p><p>さて、<a href=https://github.com/Onebase-Fujitsu/simple-todo-app/tree/main/server/src/test>ここの配下</a>
+を見てもらえると分かりますが、このアプリケーションにはテストが実装されていません。
 ということで一緒にハンズオン形式でテストを実装してみましょう。</p><h2 id=mockitoを使ったcontrollerのユニットテスト>Mockitoを使ったControllerのユニットテスト
-<a class=anchor href=#mockito%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%9fcontroller%e3%81%ae%e3%83%a6%e3%83%8b%e3%83%83%e3%83%88%e3%83%86%e3%82%b9%e3%83%88>#</a></h2><p>Spring Bootアプリケーションを新規に作るときは <a href=https://start.spring.io/>spring initializr</a> を使うんですが、
+<a class=anchor href=#mockito%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%9fcontroller%e3%81%ae%e3%83%a6%e3%83%8b%e3%83%83%e3%83%88%e3%83%86%e3%82%b9%e3%83%88>#</a></h2><p>Spring Bootアプリケーションを新規に作るときは <a href=https://start.spring.io/>spring initializr</a>
+を使うんですが、
 テストのために必要な様々なライブラリはデフォルトでついてきます。</p><p><a href=https://github.com/Onebase-Fujitsu/simple-todo-app/blob/main/server/build.gradle>build.gradle</a>
 を見ると以下のような設定パラメータを見ることができます。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-gradle data-lang=gradle><span style=display:flex><span>dependencies <span style=color:#f92672>{</span>
 </span></span><span style=display:flex><span>	implementation <span style=color:#e6db74>&#39;org.springframework.boot:spring-boot-starter-jdbc:2.5.3&#39;</span>
@@ -134,7 +154,8 @@ TodoAppService ..> ClockServiceInterface
 ClockService ..|> ClockServiceInterface
 </pre><p>TodoAppControllerはTodoAppControllerInterfaceに依存していて、TodoAppServiceはTodoAppServiceInterfaceに依存しています。
 そしてTodoAppServiceがTodoAppControllerInterfaceの実装をしており、同様にTodoAppRepositoryがTodoAppServiceInterfaceの実装をしています。
-これは <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>依存性逆転の原則(DIP)</a> に従ったものです。
+これは <a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/dip/>依存性逆転の原則(DIP)</a>
+に従ったものです。
 抽象に依存するようにして結合度を下げています。これについては後述します。</p><p>また、TodoAppServiceはClockServiceInterfaceにも依存しています。now()は現在時刻を返す実装になっています。
 Controllerの各メソッドは対応するServiceのメソッドを呼び出し、now()で現在時刻を取得して、DBの更新処理をよびだすという作りになっています。</p><h3 id=最初のテスト>最初のテスト
 <a class=anchor href=#%e6%9c%80%e5%88%9d%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>では早速getAllTask()のテストを書いていきましょう。
@@ -436,7 +457,9 @@ private ArgumentCaptor&lt;NewTask&gt; argCaptor;
 上記のテストを参考にして、他のメソッドのテストを皆さんで実装されてみてください。
 テストダブルを使用したテストはDIの仕組みも絡むため慣れるまでがけっこう大変です。
 より多くのテストを書いて慣れることがとにかく大事です。</p><h3 id=完成したテスト>完成したテスト
-<a class=anchor href=#%e5%ae%8c%e6%88%90%e3%81%97%e3%81%9f%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>完成したリポジトリは <a href=https://github.com/Onebase-Fujitsu/simple-todo-app/tree/unittest>ここで公開あります</a> ので、もしわからなくなったら見てみてください。</p><p><a href=https://github.com/Onebase-Fujitsu/simple-todo-app/blob/unittest/server/src/test/java/com/example/todoApp/controller/TodoAppControllerUnitTest.java>ユニットテストのソースコードはこちら</a> になります。</p><h2 id=mockitoを使ったインテグレーションテスト>Mockitoを使ったインテグレーションテスト
+<a class=anchor href=#%e5%ae%8c%e6%88%90%e3%81%97%e3%81%9f%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><p>完成したリポジトリは <a href=https://github.com/Onebase-Fujitsu/simple-todo-app/tree/unittest>ここで公開あります</a>
+ので、もしわからなくなったら見てみてください。</p><p><a href=https://github.com/Onebase-Fujitsu/simple-todo-app/blob/unittest/server/src/test/java/com/example/todoApp/controller/TodoAppControllerUnitTest.java>ユニットテストのソースコードはこちら</a>
+になります。</p><h2 id=mockitoを使ったインテグレーションテスト>Mockitoを使ったインテグレーションテスト
 <a class=anchor href=#mockito%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%9f%e3%82%a4%e3%83%b3%e3%83%86%e3%82%b0%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%83%86%e3%82%b9%e3%83%88>#</a></h2><p>さて、次は複数のモジュールを組み合わせたインテグレーションテストに挑戦してみましょう。
 Spring Bootでは擬似的にHTTP通信をおこなう、TestRestTemplateという機能が用意されています。
 これを使ってControllerの各メソッドに対してHTTPリクエストを発生させて、戻ってきたHttpResponseを評価してみましょう。</p><p>インテグレーションテストも本物の実装を使ったり、特定のクラスをモッキングしたり自由自在なテストを実装することができます。
@@ -764,7 +787,8 @@ public void タスクがあるとその情報を取得できる() {
 </span></span><span style=display:flex><span>  }
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>書けましたか？ここでまた見慣れない<code>@MockBean</code>という見慣れないアノテーションがでてきました。
-これはSpring Frameworkが提供しているアノテーションです。</p><p>Mockitoを使ったControllerのユニットテストの <a href=#%e6%9c%80%e5%88%9d%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>最初のテスト</a> では<code>@Mock</code>と<code>@InjectMocks</code>というMockitoの機能がでてきました。
+これはSpring Frameworkが提供しているアノテーションです。</p><p>Mockitoを使ったControllerのユニットテストの <a href=#%e6%9c%80%e5%88%9d%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>最初のテスト</a>
+では<code>@Mock</code>と<code>@InjectMocks</code>というMockitoの機能がでてきました。
 これは@Mockで作ったMockオブジェクトを@InjectMocksに注入する機能でした。</p><p><code>@MockBean</code>はそれをまとめてやってくれるSpring Frameworkの便利機能です。
 Mockを作ってDIコンテナに登録して、テストを実行するときに自動で@Autowiredしてくれます。
 めちゃくちゃ便利なんですがSpring Framework独自の機能だということに注意してください。</p><p>さてここで以下のような記述が登場しました。</p><pre tabindex=0><code>@BeforeEach
@@ -788,7 +812,8 @@ public void タスクがあるとその情報を取得できる() {
   assertThat(response.getBody()[0].updatedAt).isEqualTo(&#34;2021-08-19T15:00:00+09:00&#34;);
 }
 </code></pre><p>最後のテストで時間を評価していることがわかると思います。</p><p>ここまでできましたでしょうか？おめでとうございます！あなたは時間を自由自在にコントロールできました！</p><blockquote class="book-hint info"><p><strong>MockBeanのユースケース</strong></p><p>ここでは時間でしたが、世の中には様々な予測不可能なものがあります。</p><p>例えばバックエンドのServiceが外部のAPIを呼ぶようなケースはどうでしょう？
-気象庁は天気予報のAPIを公開していて <a href=https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json>https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json</a> にアクセスすると東京の天気予報をJSONで取得できます。</p><p>ではここで、気象庁の天気予報APIを使って商品の売上を予測するような業務ロジックを書いたとしましょう。
+気象庁は天気予報のAPIを公開していて <a href=https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json>https://www.jma.go.jp/bosai/forecast/data/overview_forecast/130000.json</a>
+にアクセスすると東京の天気予報をJSONで取得できます。</p><p>ではここで、気象庁の天気予報APIを使って商品の売上を予測するような業務ロジックを書いたとしましょう。
 しかし、本物のAPIをテストが呼び出してしまうと、日時はテストを実行する度に変わってしまいますし、
 天気もどんな内容が返ってくるかわからないですよね？</p><p>そこで今回覚えたMockです！APIのレスポンスをモッキングしてDIしてしまえば、どんなAPIのレスポンスでもテストで作れてしまうわけです！
 いかに便利で強力な仕組みか理解できましたか？</p></blockquote><h3 id=時間をコントロールする>時間をコントロールする
@@ -1162,7 +1187,9 @@ class DBアクセスエラー {
 なんでもいいよということですね。</p><p>例えば、any()ではなく、特定の値が引数で与えられたら例外をスローするといった挙動もStubすることができます！</p><p>ここまでで、できれば様々なテストが自分で実装できるはずです。
 まだ未テストのAPIがあると思いますので、自分で考えてAPIを実装してみてください。
 これもとにかく慣れるまで自分の手を動かして書いてみるのがとても大事です。</p><h3 id=完成したテスト-1>完成したテスト
-<a class=anchor href=#%e5%ae%8c%e6%88%90%e3%81%97%e3%81%9f%e3%83%86%e3%82%b9%e3%83%88-1>#</a></h3><p>完成したリポジトリは <a href=https://github.com/Onebase-Fujitsu/simple-todo-app/tree/integrationtest>ここで公開あります</a> ので、もしわからなくなったら見てみてください。</p><p><a href=https://github.com/Onebase-Fujitsu/simple-todo-app/blob/integrationtest/server/src/test/java/com/example/todoApp/controller/TodoAppControllerIntegrationTest.java>インテグレーションテストのソースコードはこちら</a> になります。</p><h2 id=テスト駆動開発とユニットテストインテグレーションテスト>テスト駆動開発とユニットテスト・インテグレーションテスト
+<a class=anchor href=#%e5%ae%8c%e6%88%90%e3%81%97%e3%81%9f%e3%83%86%e3%82%b9%e3%83%88-1>#</a></h3><p>完成したリポジトリは <a href=https://github.com/Onebase-Fujitsu/simple-todo-app/tree/integrationtest>ここで公開あります</a>
+ので、もしわからなくなったら見てみてください。</p><p><a href=https://github.com/Onebase-Fujitsu/simple-todo-app/blob/integrationtest/server/src/test/java/com/example/todoApp/controller/TodoAppControllerIntegrationTest.java>インテグレーションテストのソースコードはこちら</a>
+になります。</p><h2 id=テスト駆動開発とユニットテストインテグレーションテスト>テスト駆動開発とユニットテスト・インテグレーションテスト
 <a class=anchor href=#%e3%83%86%e3%82%b9%e3%83%88%e9%a7%86%e5%8b%95%e9%96%8b%e7%99%ba%e3%81%a8%e3%83%a6%e3%83%8b%e3%83%83%e3%83%88%e3%83%86%e3%82%b9%e3%83%88%e3%82%a4%e3%83%b3%e3%83%86%e3%82%b0%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%83%86%e3%82%b9%e3%83%88>#</a></h2><p>さて、ここまででMockitoを使ったMockオブジェクトで他のクラスに依存しない単体テストを書く方法や、
 様々なクラスを組み合わせたインテグレーションテストの書き方を見てきました。</p><p>さて、実際にテスト駆動開発で新規の機能を追加するとなったとき、どういったテストをかけばよいでしょうか？</p><ol><li>まずユニットテストを記述して、それをパスする実装をして、それが通ったらインテグレーションテストを書いて検証する</li><li>まずインテグレーションテストを記述して、それをパスする実装をして、その上でインテグレーションテストで検証が難しい部分をユニットテストで検証する</li></ol><p>選択肢はこの2つでしょうか。 さて、1の「ユニットテストから書き始める」と思った方はいますでしょうか？</p><p>.</p><p>..</p><p>&mldr;</p><p>残念ながら不正解です！「あれ？ウォーターフォールだって最初にPTをやってその次にITをやるじゃないか！」と思われる方も多いかもしれません。
 ですが、ちょっと考えてみてください。<strong>ユニットテストで実装できるテストはホワイトボックステスト</strong>です。

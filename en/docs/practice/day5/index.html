@@ -1,0 +1,644 @@
+<!doctype html><html lang=en dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content='
+  Day 5
+  #
+
+Now let&rsquo;s create the backend API that creates a Todo.
+
+  Task Creation Backend API
+  #
+
+
+  Tests
+  #
+
+First, let&rsquo;s write a server test.
+We will write a test that sends a request to POST /todos with JSON set in the body and checks the response code and response data.
+// TodoControllerTest.kt
+package com.fujitsu.todoappserver.controller
+
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
+import com.fujitsu.todoappserver.model.Todo
+import org.assertj.core.api.Assertions.assertThat
+import org.json.JSONObject
+import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.web.client.TestRestTemplate
+import org.springframework.http.*
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class TodoControllerTest {
+    @Autowired
+    lateinit var restTemplate: TestRestTemplate
+
+    @Test
+    fun タスク一覧を取得できる() {
+        val header = HttpHeaders()
+        header.contentType = MediaType.APPLICATION_JSON
+        val response = restTemplate.exchange("/todos", HttpMethod.GET, HttpEntity(null, header), String::class.java)
+        val mapper = jacksonObjectMapper()
+        val articles: List<Todo> = mapper.readValue(response.body!!)
+        assertThat(response.statusCode).isEqualTo(HttpStatus.OK)
+        assertThat(articles.size).isEqualTo(0)
+    }
+
+    @Test
+    fun タスクを新規作成できる() {
+        val newTodoJson = JSONObject()
+        newTodoJson.put("title", "test title")
+        val header = HttpHeaders()
+        header.contentType = MediaType.APPLICATION_JSON
+        val postResponse = restTemplate.exchange(
+            "/todos",
+            HttpMethod.POST,
+            HttpEntity(newTodoJson.toString(), header),
+            String::class.java
+        )
+        val mapper = jacksonObjectMapper()
+        val todo: Todo = mapper.readValue(postResponse.body!!)
+        assertThat(postResponse.statusCode).isEqualTo(HttpStatus.CREATED)
+        assertThat(todo.id).isEqualTo(1)
+        assertThat(todo.title).isEqualTo("test title")
+        assertThat(todo.completed).isEqualTo(false)
+    }
+}
+This is equivalent to the Get /Todos test we wrote the other day, so it should be fine.'><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/practice/day5/"><meta property="og:site_name" content="Fujitsu Agile Development Guide"><meta property="og:title" content="Day 5"><meta property="og:description" content='Day 5 # Now let’s create the backend API that creates a Todo.
+Task Creation Backend API # Tests # First, let’s write a server test. We will write a test that sends a request to POST /todos with JSON set in the body and checks the response code and response data.
+// TodoControllerTest.kt package com.fujitsu.todoappserver.controller import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper import com.fasterxml.jackson.module.kotlin.readValue import com.fujitsu.todoappserver.model.Todo import org.assertj.core.api.Assertions.assertThat import org.json.JSONObject import org.junit.jupiter.api.Test import org.springframework.beans.factory.annotation.Autowired import org.springframework.boot.test.context.SpringBootTest import org.springframework.boot.test.web.client.TestRestTemplate import org.springframework.http.* @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) class TodoControllerTest { @Autowired lateinit var restTemplate: TestRestTemplate @Test fun タスク一覧を取得できる() { val header = HttpHeaders() header.contentType = MediaType.APPLICATION_JSON val response = restTemplate.exchange("/todos", HttpMethod.GET, HttpEntity(null, header), String::class.java) val mapper = jacksonObjectMapper() val articles: List<Todo> = mapper.readValue(response.body!!) assertThat(response.statusCode).isEqualTo(HttpStatus.OK) assertThat(articles.size).isEqualTo(0) } @Test fun タスクを新規作成できる() { val newTodoJson = JSONObject() newTodoJson.put("title", "test title") val header = HttpHeaders() header.contentType = MediaType.APPLICATION_JSON val postResponse = restTemplate.exchange( "/todos", HttpMethod.POST, HttpEntity(newTodoJson.toString(), header), String::class.java ) val mapper = jacksonObjectMapper() val todo: Todo = mapper.readValue(postResponse.body!!) assertThat(postResponse.statusCode).isEqualTo(HttpStatus.CREATED) assertThat(todo.id).isEqualTo(1) assertThat(todo.title).isEqualTo("test title") assertThat(todo.completed).isEqualTo(false) } } This is equivalent to the Get /Todos test we wrote the other day, so it should be fine.'><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>Day 5 | Fujitsu Agile Development Guide</title><link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/practice/day5/><link rel=alternate hreflang=ja href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day5/ title=5日目><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/agile-dev-guide/en/><span>Fujitsu Agile Development Guide</span></a></h2><ul class=book-languages><li><input type=checkbox id=languages class=toggle>
+<label for=languages class="flex justify-between"><a role=button class="flex align-center"><img src=/agile-dev-guide/svg/translate.svg class=book-icon alt=Languages>
+English</a></label><ul><li><a href=/agile-dev-guide/docs/practice/day5/>日本語</a></li></ul></li></ul><ul><li><a href=/agile-dev-guide/en/docs/introduction/>Introduction</a></li><li><input type=checkbox id=section-26f8587d816918486e3411338e99965e class=toggle>
+<label for=section-26f8587d816918486e3411338e99965e class="flex justify-between"><a role=button>Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/agile/manifest/>Manifesto for Agile Software Development</a></li><li><a href=/agile-dev-guide/en/docs/agile/principle/>12 Principles of Agile Development</a></li><li><a href=/agile-dev-guide/en/docs/agile/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-3f7a3b5d22e80bae50acbf0bebe29b07 class=toggle>
+<label for=section-3f7a3b5d22e80bae50acbf0bebe29b07 class="flex justify-between"><a role=button>Scrum</a></label><ul><li><a href=/agile-dev-guide/en/docs/scrum/overview/>What is Scrum</a></li><li><a href=/agile-dev-guide/en/docs/scrum/roles/>Roles</a></li><li><a href=/agile-dev-guide/en/docs/scrum/products/>Artifacts</a></li><li><a href=/agile-dev-guide/en/docs/scrum/events/>Events</a></li><li><a href=/agile-dev-guide/en/docs/scrum/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-28ce590b98459d112a5e767cc6b3b04d class=toggle>
+<label for=section-28ce590b98459d112a5e767cc6b3b04d class="flex justify-between"><a role=button>Extreme Programming</a></label><ul><li><a href=/agile-dev-guide/en/docs/xp/overview/>What is Extreme Programming</a></li><li><a href=/agile-dev-guide/en/docs/xp/practice/>Extreme Programming Practices</a></li><li><a href=/agile-dev-guide/en/docs/xp/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-a3825c6f535b2464399db20dd841f3ac class=toggle>
+<label for=section-a3825c6f535b2464399db20dd841f3ac class="flex justify-between"><a role=button>Software Testing</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaretest/overview/>Getting Started with Software Testing</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/fizzbuzz/>Warming Up</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/bowlinggame/>Bowling Game</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/testdouble/>Test Doubles</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/e2e/>E2E Testing</a></li></ul></li><li><input type=checkbox id=section-d2676bcafbfd8f6850f60b777913e79b class=toggle>
+<label for=section-d2676bcafbfd8f6850f60b777913e79b class="flex justify-between"><a role=button>Software Design</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/about/>Software Design for Agile Development</a></li><li><input type=checkbox id=section-1d5d1d86d9abc5f3e1ff9ae3bf8dee3a class=toggle>
+<label for=section-1d5d1d86d9abc5f3e1ff9ae3bf8dee3a class="flex justify-between"><a role=button>SOLID Principles</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/srp/>Single Responsibility Principle (SRP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/ocp/>Open-Closed Principle (OCP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/lsp/>Liskov Substitution Principle (LSP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/dip/>Dependency Inversion Principle (DIP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/isp/>Interface Segregation Principle (ISP)</a></li></ul></li><li><input type=checkbox id=section-c82d883779a9175f08ed321f0a41c453 class=toggle>
+<label for=section-c82d883779a9175f08ed321f0a41c453 class="flex justify-between"><a role=button>Design Patterns</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/designpattern/designpattern/>Design Patterns</a></li></ul></li></ul></li><li><input type=checkbox id=section-c4e0d3ad193a9306b0791ca960be25bb class=toggle checked>
+<label for=section-c4e0d3ad193a9306b0791ca960be25bb class="flex justify-between"><a role=button>Agile in Practice</a></label><ul><li><a href=/agile-dev-guide/en/docs/practice/day1/>Day 1</a></li><li><a href=/agile-dev-guide/en/docs/practice/day2/>Day 2</a></li><li><a href=/agile-dev-guide/en/docs/practice/day3/>Day 3</a></li><li><a href=/agile-dev-guide/en/docs/practice/day4/>Day 4</a></li><li><a href=/agile-dev-guide/en/docs/practice/day5/ class=active>Day 5</a></li><li><a href=/agile-dev-guide/en/docs/practice/day6/>Day 6</a></li></ul></li><li><a href=/agile-dev-guide/en/docs/inclosing/>In Closing</a></li><li><a href=/agile-dev-guide/en/docs/recommendedbooks/>Recommended Books</a></li><li class=book-section-flat><span>Overall</span><ul><li><input type=checkbox id=section-49203faea468220b1d42544db4f42904 class=toggle>
+<label for=section-49203faea468220b1d42544db4f42904 class="flex justify-between"><a role=button>Lean Startup Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/overview/>Lean Startup Agile Flow</a></li><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/organization/>Structure and Roles</a></li><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/productvision/>Product Vision / Value Proposition</a></li></ul></li><li><input type=checkbox id=section-fbc99cb62f97af8f577e21318d383c53 class=toggle>
+<label for=section-fbc99cb62f97af8f577e21318d383c53 class="flex justify-between"><a role=button>Modernization Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/modernization/overview/>Modernization Agile Flow</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/organization/>Structure and Roles</a></li><li><input type=checkbox id=section-cb30e408eaf7a7ec013ed0dc4d3fb020 class=toggle>
+<label for=section-cb30e408eaf7a7ec013ed0dc4d3fb020 class="flex justify-between"><a role=button>Swift Method</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/overview/>What Is the Swift Method</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/eventstorming/>Event Storming</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/boris/>Boris</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/snape/>SnapE</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/slices/>Slices</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/techchoice/>Tech Choice</a></li></ul></li></ul></li></ul></li><li class=book-section-flat><span>Team</span><ul><li><a href=/agile-dev-guide/en/docs/team/workstyle/>How Our Team Works</a></li><li><a href=/agile-dev-guide/en/docs/team/balancedteam/>Balanced Team</a></li><li><input type=checkbox id=section-d6ef0f53ed2eae5373cce9f0cae94127 class=toggle>
+<label for=section-d6ef0f53ed2eae5373cce9f0cae94127 class="flex justify-between"><a role=button>Mindset</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/mindset/onebase/>ONEbase Values</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/psychologicalsafety/>Psychological Safety</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/xp/>XP Values</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/practice/>How to Adopt Practices</a></li></ul></li><li><a href=/agile-dev-guide/en/docs/team/teambuilding/>Team Building</a></li><li><a href=/agile-dev-guide/en/docs/team/remotework/>Remote Work</a></li><li><input type=checkbox id=section-ba58c7f3c79f8713fd38efabb55e90aa class=toggle>
+<label for=section-ba58c7f3c79f8713fd38efabb55e90aa class="flex justify-between"><a role=button>Team Activities</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/activities/officestandup/>Office Standup</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/teamstandup/>Team Standup</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/preipm/>Pre-IPM</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/ipm/>IPM</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/cl/>CL Meeting</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/retro/>Retrospective</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/salesmeeting/>Sales Sync Meeting</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/internalsync/>Internal Sync</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/riskmitigations/>Risks & Mitigations</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/feedback/>Feedback</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/icebreak/>Ice Break</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/teamhealthcheck/>Team Health Check</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/1on1/>1on1</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/exercise/>Radio Taiso</a></li></ul></li><li><input type=checkbox id=section-9283499da254b9f85e8a373a7c190a7e class=toggle>
+<label for=section-9283499da254b9f85e8a373a7c190a7e class="flex justify-between"><a role=button>Team Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/practices/facilitation/>Facilitation</a></li><li><a href=/agile-dev-guide/en/docs/team/practices/okrs/>OKRs</a></li></ul></li></ul></li><li class=book-section-flat><span>Designer</span><ul><li><a href=/agile-dev-guide/en/docs/designer/overview/>What Is a Designer</a></li><li><input type=checkbox id=section-b2cda318f2a04a4c6c2d6866191c7dd0 class=toggle>
+<label for=section-b2cda318f2a04a4c6c2d6866191c7dd0 class="flex justify-between"><a role=button>Designer Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/designer/practices/persona/>Persona</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/scenario/>Scenario</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/researchplanning/>Research Planning</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/prototyping/>Prototyping</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/script/>Script Creation</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/researchaction/>Conducting Research</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/synthesize/>Synthesize</a></li></ul></li></ul></li><li class=book-section-flat><span>Product Manager</span><ul><li><a href=/agile-dev-guide/en/docs/productmanager/overview/>What Is a Product Manager</a></li><li><input type=checkbox id=section-9026fc1a07f695d85c362dc4668a1edf class=toggle>
+<label for=section-9026fc1a07f695d85c362dc4668a1edf class="flex justify-between"><a role=button>Product Manager Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/productmanager/practices/roadmap/>Product Roadmap</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/mvp/>MVP</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/userstorymapping/>User Story Mapping</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/userstory/>User Story</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/2x2/>2×2</a></li></ul></li></ul></li><li class=book-section-flat><span>Developer</span><ul><li><a href=/agile-dev-guide/en/docs/developer/overview/>What Is a Developer</a></li><li><input type=checkbox id=section-9a270bfee03ee781c85e4c3c42434241 class=toggle>
+<label for=section-9a270bfee03ee781c85e4c3c42434241 class="flex justify-between"><a role=button>Developer Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/developer/practices/tdd/>TDD</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/cicd/>CI/CD</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/pairprogramming/>Pair Programming</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/soroprogramming/>Solo Programming</a></li></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu></label><h3>Day 5</h3><label for=toc-control><img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#task-creation-backend-api>Task Creation Backend API</a><ul><li><a href=#tests>Tests</a></li><li><a href=#implementation>Implementation</a></li><li><a href=#repeatable-tests>Repeatable Tests</a></li></ul></li><li><a href=#applying-a-design-to-the-task-screen>Applying a Design to the Task Screen</a></li><li><a href=#api-design>API Design</a><ul><li><a href=#what-is-a-good-api-design>What Is a Good API Design?</a></li><li><a href=#resource-oriented-design>Resource-Oriented Design</a></li><li><a href=#parameters>Parameters</a></li><li><a href=#response-design>Response Design</a></li><li><a href=#dont-cater-to-the-client>Don&rsquo;t Cater to the Client</a></li><li><a href=#swagger-oas-30>Swagger (OAS 3.0)</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=day-5>Day 5
+<a class=anchor href=#day-5>#</a></h1><p>Now let&rsquo;s create the backend API that creates a Todo.</p><h2 id=task-creation-backend-api>Task Creation Backend API
+<a class=anchor href=#task-creation-backend-api>#</a></h2><h3 id=tests>Tests
+<a class=anchor href=#tests>#</a></h3><p>First, let&rsquo;s write a server test.
+We will write a test that sends a request to <code>POST /todos</code> with JSON set in the body and checks the response code and response data.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoControllerTest.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fasterxml.jackson.module.kotlin.readValue
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.assertj.core.api.Assertions.assertThat
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.json.JSONObject
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.junit.jupiter.api.Test
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.beans.factory.annotation.Autowired
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.boot.test.context.SpringBootTest
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.boot.test.web.client.TestRestTemplate
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.http.*
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@SpringBootTest</span>(webEnvironment = <span style=color:#a6e22e>SpringBootTest</span>.<span style=color:#a6e22e>WebEnvironment</span>.RANDOM_PORT)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoControllerTest</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Autowired</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>lateinit</span> <span style=color:#66d9ef>var</span> restTemplate: TestRestTemplate
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>タスク一覧を取得できる</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> header = HttpHeaders()
+</span></span><span style=display:flex><span>        header.contentType = <span style=color:#a6e22e>MediaType</span>.APPLICATION_JSON
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> response = restTemplate.exchange(<span style=color:#e6db74>&#34;/todos&#34;</span>, <span style=color:#a6e22e>HttpMethod</span>.GET, HttpEntity(<span style=color:#66d9ef>null</span>, header), String<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> mapper = jacksonObjectMapper()
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> articles: List&lt;Todo&gt; = mapper.readValue(response.body<span style=color:#f92672>!!</span>)
+</span></span><span style=display:flex><span>        assertThat(response.statusCode).isEqualTo(<span style=color:#a6e22e>HttpStatus</span>.OK)
+</span></span><span style=display:flex><span>        assertThat(articles.size).isEqualTo(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>タスクを新規作成できる</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> newTodoJson = JSONObject()
+</span></span><span style=display:flex><span>        newTodoJson.put(<span style=color:#e6db74>&#34;title&#34;</span>, <span style=color:#e6db74>&#34;test title&#34;</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> header = HttpHeaders()
+</span></span><span style=display:flex><span>        header.contentType = <span style=color:#a6e22e>MediaType</span>.APPLICATION_JSON
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> postResponse = restTemplate.exchange(
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;/todos&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>HttpMethod</span>.POST,
+</span></span><span style=display:flex><span>            HttpEntity(newTodoJson.toString(), header),
+</span></span><span style=display:flex><span>            String<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> mapper = jacksonObjectMapper()
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> todo: Todo = mapper.readValue(postResponse.body<span style=color:#f92672>!!</span>)
+</span></span><span style=display:flex><span>        assertThat(postResponse.statusCode).isEqualTo(<span style=color:#a6e22e>HttpStatus</span>.CREATED)
+</span></span><span style=display:flex><span>        assertThat(todo.id).isEqualTo(<span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>        assertThat(todo.title).isEqualTo(<span style=color:#e6db74>&#34;test title&#34;</span>)
+</span></span><span style=display:flex><span>        assertThat(todo.completed).isEqualTo(<span style=color:#66d9ef>false</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>This is equivalent to the <code>Get /Todos</code> test we wrote the other day, so it should be fine.</p><h3 id=implementation>Implementation
+<a class=anchor href=#implementation>#</a></h3><p>This is also nearly identical to the <code>Get /Todos</code> we implemented the other day, so we will just show the code.</p><h4 id=model>Model
+<a class=anchor href=#model>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// NewTodo.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.model
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>data</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>NewTodo</span>(
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>val</span> title: String,
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><h4 id=controller-layer>Controller Layer
+<a class=anchor href=#controller-layer>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoControllerInterface.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.NewTodo  <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>TodoControllerInterface</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTodos</span>(): List&lt;Todo&gt;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>createTodo</span>(newTodo: NewTodo): Todo  <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>}
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoController.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.NewTodo
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.http.HttpStatus
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.web.bind.annotation.*
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@RestController</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoController</span>(<span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> todoService: TodoControllerInterface) {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@GetMapping</span>(<span style=color:#e6db74>&#34;/todos&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@ResponseStatus</span>(<span style=color:#a6e22e>HttpStatus</span>.OK)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTodos</span>(): List&lt;Todo&gt; {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> todoService.getTodos()
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>    <span style=color:#a6e22e>@PostMapping</span>(<span style=color:#e6db74>&#34;/todos&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@ResponseStatus</span>(<span style=color:#a6e22e>HttpStatus</span>.CREATED)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>createTodo</span>(<span style=color:#a6e22e>@RequestBody</span> newTodo: NewTodo): Todo {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> todoService.createTodo(newTodo)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h4 id=service-layer>Service Layer
+<a class=anchor href=#service-layer>#</a></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoServiceInterface.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.service
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.NewTodo  <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>TodoServiceInterface</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTodos</span>(): List&lt;Todo&gt;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>createTodo</span>(newTodo: NewTodo): Todo      <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>}
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoService.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.service
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.controller.TodoControllerInterface
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.NewTodo  <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.stereotype.Service
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Service</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoService</span>(<span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> todoRepository: TodoServiceInterface) : TodoControllerInterface {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTodos</span>(): List&lt;Todo&gt; {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> todoRepository.getTodos()
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>createTodo</span>(newTodo: NewTodo): Todo {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> todoRepository.createTodo(newTodo)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h5 id=repository-layer>Repository Layer
+<a class=anchor href=#repository-layer>#</a></h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoRepository.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.repository
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.NewTodo  <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.service.TodoServiceInterface
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.jdbc.core.JdbcTemplate
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.jdbc.support.GeneratedKeyHolder
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.stereotype.Repository
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> java.sql.ResultSet
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> java.sql.Statement
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Repository</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoRepository</span>(<span style=color:#66d9ef>val</span> jdbcTemplate: JdbcTemplate) : TodoServiceInterface {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTodos</span>(): List&lt;Todo&gt; {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> jdbcTemplate.query(
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;&#34;&#34;select id, title, completed from todo&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        ) { rs: ResultSet, _: Int <span style=color:#f92672>-&gt;</span>
+</span></span><span style=display:flex><span>            Todo(
+</span></span><span style=display:flex><span>                rs.getInt(<span style=color:#e6db74>&#34;id&#34;</span>),
+</span></span><span style=display:flex><span>                rs.getString(<span style=color:#e6db74>&#34;title&#34;</span>),
+</span></span><span style=display:flex><span>                rs.getBoolean(<span style=color:#e6db74>&#34;completed&#34;</span>)
+</span></span><span style=display:flex><span>            )
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>createTodo</span>(newTodo: NewTodo): Todo {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> keyHolder = GeneratedKeyHolder()
+</span></span><span style=display:flex><span>        jdbcTemplate.update({ connection <span style=color:#f92672>-&gt;</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>val</span> statement = connection.prepareStatement(
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;&#34;&#34;insert into todo(title, completed) values (?, false)&#34;&#34;&#34;</span>, <span style=color:#a6e22e>Statement</span>.RETURN_GENERATED_KEYS
+</span></span><span style=display:flex><span>            )
+</span></span><span style=display:flex><span>            statement.setString(<span style=color:#ae81ff>1</span>, newTodo.title)
+</span></span><span style=display:flex><span>            statement
+</span></span><span style=display:flex><span>        }, keyHolder)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> Todo(
+</span></span><span style=display:flex><span>            keyHolder.keys<span style=color:#f92672>!!</span>[<span style=color:#e6db74>&#34;id&#34;</span>] <span style=color:#66d9ef>as</span> Int,
+</span></span><span style=display:flex><span>            newTodo.title,
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>The repository does something slightly technical: when the insert statement is executed, it returns the incremented <code>id</code>, and uses that to build the return value.</p><p>This way, there is no need to issue another select statement after creating the data, which makes the response faster.</p><h3 id=repeatable-tests>Repeatable Tests
+<a class=anchor href=#repeatable-tests>#</a></h3><p>Now that the implementation is complete, we want to run the tests to verify it, but are these tests running without problems? These tests depend heavily on the state of the database, so they work for some people and not for others.
+Even if you were lucky enough to have the tests pass, running all the tests again should make them fail.</p><p>This is because every time the tests run, data is added to todo_db, and once data has been added to the todo table, the id will no longer be 1 from the second run onward. In other words, this test is not reproducible.</p><p>To deal with this problem, we can simply reset the DB every time the tests run, so let&rsquo;s configure that.</p><p>First, create a <code>resources</code> directory under src/test, and create <code>clear_db.sql</code> in it.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#75715e>/* clear_db.sql */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>truncate</span> <span style=color:#66d9ef>table</span> todo <span style=color:#66d9ef>restart</span> <span style=color:#66d9ef>identity</span> <span style=color:#66d9ef>cascade</span>;
+</span></span></code></pre></div><p>What it does is simple: it truncates the contents of the todo table and resets the id sequence. Then we just need to run this SQL every time the tests run, and this too can be achieved easily just by adding an annotation.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoControllerTest.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fasterxml.jackson.module.kotlin.readValue
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.assertj.core.api.Assertions.assertThat
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.json.JSONObject
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.junit.jupiter.api.Test
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.beans.factory.annotation.Autowired
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.boot.test.context.SpringBootTest
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.boot.test.web.client.TestRestTemplate
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.http.*
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.test.context.jdbc.Sql    <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@SpringBootTest</span>(webEnvironment = <span style=color:#a6e22e>SpringBootTest</span>.<span style=color:#a6e22e>WebEnvironment</span>.RANDOM_PORT)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Sql</span>(scripts = [<span style=color:#e6db74>&#34;/clear_db.sql&#34;</span>])       <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoControllerTest</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Autowired</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>lateinit</span> <span style=color:#66d9ef>var</span> restTemplate: TestRestTemplate
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>タスク一覧を取得できる</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> header = HttpHeaders()
+</span></span><span style=display:flex><span>        header.contentType = <span style=color:#a6e22e>MediaType</span>.APPLICATION_JSON
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> response = restTemplate.exchange(<span style=color:#e6db74>&#34;/todos&#34;</span>, <span style=color:#a6e22e>HttpMethod</span>.GET, HttpEntity(<span style=color:#66d9ef>null</span>, header), String<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> mapper = jacksonObjectMapper()
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> articles: List&lt;Todo&gt; = mapper.readValue(response.body<span style=color:#f92672>!!</span>)
+</span></span><span style=display:flex><span>        assertThat(response.statusCode).isEqualTo(<span style=color:#a6e22e>HttpStatus</span>.OK)
+</span></span><span style=display:flex><span>        assertThat(articles.size).isEqualTo(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>タスクを新規作成できる</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> newTodoJson = JSONObject()
+</span></span><span style=display:flex><span>        newTodoJson.put(<span style=color:#e6db74>&#34;title&#34;</span>, <span style=color:#e6db74>&#34;test title&#34;</span>)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> header = HttpHeaders()
+</span></span><span style=display:flex><span>        header.contentType = <span style=color:#a6e22e>MediaType</span>.APPLICATION_JSON
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> postResponse = restTemplate.exchange(
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;/todos&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>HttpMethod</span>.POST,
+</span></span><span style=display:flex><span>            HttpEntity(newTodoJson.toString(), header),
+</span></span><span style=display:flex><span>            String<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java
+</span></span><span style=display:flex><span>        )
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> mapper = jacksonObjectMapper()
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> todo: Todo = mapper.readValue(postResponse.body<span style=color:#f92672>!!</span>)
+</span></span><span style=display:flex><span>        assertThat(postResponse.statusCode).isEqualTo(<span style=color:#a6e22e>HttpStatus</span>.CREATED)
+</span></span><span style=display:flex><span>        assertThat(todo.id).isEqualTo(<span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>        assertThat(todo.title).isEqualTo(<span style=color:#e6db74>&#34;test title&#34;</span>)
+</span></span><span style=display:flex><span>        assertThat(todo.completed).isEqualTo(<span style=color:#66d9ef>false</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>The tests should now run. Since we can now add data, you may also want to add a test that adds data and then checks the response data with a GET.</p><p>The server source code up to this point
+is available at
+<a href=https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step10>https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step10</a>
+.</p><h2 id=applying-a-design-to-the-task-screen>Applying a Design to the Task Screen
+<a class=anchor href=#applying-a-design-to-the-task-screen>#</a></h2><p><img src=/agile-dev-guide/docs/practice/day5/NewTask.jpg alt=NewTask></p><p>If you connect the client now, you can see that tasks added on the NewTask screen are added to the Home screen. However, the design has not been applied yet, so let&rsquo;s apply it.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// TodoList.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>React</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>styled</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;styled-components&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>TodoContext</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../context/TodoContext&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Ul</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>ul</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  width: 100%;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  padding: 2rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  display: flex;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  flex-direction: column;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Li</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>li</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  width: 100%;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  display: flex;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  justify-content: center;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  align-items: center;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  padding-bottom: 1rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Div</span> <span style=color:#f92672>=</span><span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>div</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  width: 100%;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  display: flex;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  border-width: 2px;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  border-style: solid;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  border-color: #E5E7EB;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  border-radius: 0.5rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  padding: 1rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  box-shadow: 0 1px 5px 2px rgb(0 0 0 / 0.1);
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Label</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>label</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  display: inline-flex;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  align-items: center;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  margin-right: 1rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Input</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>input</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  height: 1.25rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  width: 1.25rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  color: #4B5563;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>P</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>p</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  font-size: 1.25rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  line-height: 1.75rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  font-weight: 700;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>TodoList</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>todoContext</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>React</span>.<span style=color:#a6e22e>useContext</span>(<span style=color:#a6e22e>TodoContext</span>)
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> (
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>Ul</span> <span style=color:#a6e22e>data-testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;TodoList&#34;</span>&gt;
+</span></span><span style=display:flex><span>      {<span style=color:#a6e22e>todoContext</span><span style=color:#f92672>?</span>.<span style=color:#a6e22e>todos</span>.<span style=color:#a6e22e>map</span>((<span style=color:#a6e22e>todo</span>) <span style=color:#f92672>=&gt;</span> (
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>Li</span> <span style=color:#a6e22e>key</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>todo</span>.<span style=color:#a6e22e>id</span>}&gt;
+</span></span><span style=display:flex><span>          &lt;<span style=color:#f92672>Div</span>&gt;
+</span></span><span style=display:flex><span>            &lt;<span style=color:#f92672>Label</span>&gt;
+</span></span><span style=display:flex><span>              &lt;<span style=color:#f92672>Input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;checkbox&#34;</span> <span style=color:#a6e22e>defaultChecked</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>todo</span>.<span style=color:#a6e22e>completed</span>}/&gt;
+</span></span><span style=display:flex><span>            &lt;/<span style=color:#f92672>Label</span>&gt;
+</span></span><span style=display:flex><span>            &lt;<span style=color:#f92672>P</span>&gt;{<span style=color:#a6e22e>todo</span>.<span style=color:#a6e22e>title</span>}&lt;/<span style=color:#f92672>P</span>&gt;
+</span></span><span style=display:flex><span>          &lt;/<span style=color:#f92672>Div</span>&gt;
+</span></span><span style=display:flex><span>        &lt;/<span style=color:#f92672>Li</span>&gt;
+</span></span><span style=display:flex><span>      ))}
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>Ul</span>&gt;
+</span></span><span style=display:flex><span>  )
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>TodoList</span>
+</span></span></code></pre></div><p>We applied a design to the task list.</p><p><img src=/agile-dev-guide/docs/practice/day5/DesignedTaskList.jpg alt=DesignedTaskList></p><p>The client source code up to this point
+is available at
+<a href=https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step11>https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step11</a>
+.</p><h2 id=api-design>API Design
+<a class=anchor href=#api-design>#</a></h2><p>So far we have implemented GET and POST handling for <code>/todos</code>. Let&rsquo;s take a short break here and briefly explain API design.</p><p>That said, API design is a deep subject that could fill an entire book on its own, so here we will only touch on the very basics. In modern web application development, API design skills are practically essential and cannot be avoided,
+so please read books such as <a href=https://www.oreilly.co.jp/books/9784873116860/>Web API: The Good Parts</a>
+on your own.</p><h3 id=what-is-a-good-api-design>What Is a Good API Design?
+<a class=anchor href=#what-is-a-good-api-design>#</a></h3><p>On Day 4, we wrote the following.</p><blockquote class=book-hint>The overhead of HTTP communication is incomparably larger than that of memory access or disk access. There is a term used to mock bad APIs: the "chatty API."
+In other words, an API design that requires calling the API over and over again just to render a screen is not good.</blockquote><p>That is a common example of bad API design, but conversely, what makes an API good?</p><p>The definition of a good API probably varies from person to person, but the author believes a good API is <strong>&ldquo;an API that developers can use naturally without reading the documentation.&rdquo;</strong> Being usable naturally means <strong>an API that follows web standards</strong>.
+In other words, you should design it according to the REST architecture.</p><h3 id=resource-oriented-design>Resource-Oriented Design
+<a class=anchor href=#resource-oriented-design>#</a></h3><p>The key concept of REST is <strong>operating on logically divided resources with HTTP methods (GET/POST/PUT/DELETE)</strong>.
+REST treats the URL part as a &ldquo;resource&rdquo; and interprets the combination of HTTP method and URL in the form of &ldquo;what (resource)&rdquo; and &ldquo;what to do (method).&rdquo;</p><h4 id=resources>Resources
+<a class=anchor href=#resources>#</a></h4><p>A resource is the target operated on by the API, represented by a URL. For example, in this application, a Todo is a resource.</p><h4 id=methods>Methods
+<a class=anchor href=#methods>#</a></h4><p>There are five main HTTP methods.</p><table><thead><tr><th style=text-align:left>Method</th><th style=text-align:left>Role</th></tr></thead><tbody><tr><td style=text-align:left>GET</td><td style=text-align:left>Retrieve a resource</td></tr><tr><td style=text-align:left>POST</td><td style=text-align:left>Create a new resource</td></tr><tr><td style=text-align:left>PATCH</td><td style=text-align:left>Partially update a resource</td></tr><tr><td style=text-align:left>PUT</td><td style=text-align:left>Replace a resource</td></tr><tr><td style=text-align:left>DELETE</td><td style=text-align:left>Delete a resource</td></tr></tbody></table><p>We use these methods to express operations on resources. For example, in this task management application, it looks like this:</p><ul><li>GET /todos<ul><li>Get the list of Todos</li></ul></li><li>GET /todos/1<ul><li>Get Todo#1</li></ul></li><li>POST /todos<ul><li>Create a new Todo</li></ul></li><li>PUT /todos/2<ul><li>Update Todo#2</li></ul></li><li>DELETE /todos/3<ul><li>Delete Todo#3</li></ul></li></ul><p>By making use of HTTP methods, REST lets a single endpoint, <code>/todos</code>, provide the main functionality. Instructions on a resource are expressed with HTTP methods.
+This way, you do not need to think about endpoint naming conventions, and the URL structure becomes clear and orderly.</p><p>What if a Todo has related data? For example, consider a resource where a single Todo consists of multiple tasks. In that case, it is natural to express it as follows:</p><ul><li>GET /todos/1/tasks<ul><li>Get the list of tasks belonging to Todo#1</li></ul></li><li>GET /todos/1/tasks/5<ul><li>Get task #5 belonging to Todo#1</li></ul></li><li>POST /todos/1/tasks<ul><li>Create a new task belonging to Todo#1</li></ul></li><li>PUT /todos/1/tasks/4<ul><li>Update task #4 belonging to Todo#1</li></ul></li><li>PATCH /todos/1<ul><li>Partially update the Todo#1 resource</li></ul></li><li>DELETE /todos/1/tasks/2<ul><li>Delete task #2 belonging to Todo#1</li></ul></li></ul><h3 id=parameters>Parameters
+<a class=anchor href=#parameters>#</a></h3><p>When the client makes an API request to the server, there are three kinds of parameters the client can pass to the server:</p><ul><li>Path parameters</li><li>Query parameters</li><li>Request body</li></ul><p>Let&rsquo;s explain how each of them should be used.</p><h4 id=query-parameters>Query Parameters
+<a class=anchor href=#query-parameters>#</a></h4><p>As the name &ldquo;query&rdquo; suggests, query parameters are <strong>used to filter resources</strong>.</p><pre tabindex=0><code>GET /todos?completed=false
+</code></pre><p>As shown here, you can pass parameters by appending them to the URL after <code>?</code>. The important point is that they should be used for filtering.</p><p>The <code>GET /todos</code> API returns a list of Todos, and query parameters are used to filter the elements of that list.
+The instruction <code>GET /todos?completed=false</code> asks the server to return a list of only the incomplete items in /todos.</p><p>Because they are used to filter the resources being retrieved, <strong>query parameters are naturally never used with methods other than GET.</strong></p><h4 id=path-parameters>Path Parameters
+<a class=anchor href=#path-parameters>#</a></h4><p><strong>Path parameters are used to specify a resource.</strong> Earlier we gave the example <code>GET /todos/1</code>, which was an instruction to get Todo#1. The <code>1</code>
+in this URL is a parameter that the client can specify; written generically, it can be expressed as <code>GET /todos/${id}</code>. You can see that putting it in the path makes it clear that the instruction targets a specific resource.</p><p>Query parameters could in principle be used only with the GET method, but path parameters can be used with any method. Also remember that on an endpoint that defines a path parameter, the path parameter is in principle required.
+In other words, a declaration like <code>GET /todos/</code> is not allowed.</p><h4 id=request-body>Request Body
+<a class=anchor href=#request-body>#</a></h4><p><strong>The request body describes the content when creating or replacing a resource.</strong></p><p>For example, the request body when calling the <code>POST /todos</code> API was as follows.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;Sample Title&#34;</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>In general, JSON is the common format. JSON documents are easy to handle on both the client and the server. When handling things like file uploads, a format such as multipart/form-data is used.</p><h3 id=response-design>Response Design
+<a class=anchor href=#response-design>#</a></h3><h4 id=response-status>Response Status
+<a class=anchor href=#response-status>#</a></h4><p>A very important thing in APIs is to make full use of HTTP response status codes. Even if you don&rsquo;t know what HTTP response status codes are, you have surely seen 404 Not
+Found displayed in a web browser.</p><p>An API needs to return an appropriate status code when it returns a response to the client.</p><table><thead><tr><th style=text-align:left>Status code</th><th style=text-align:left>Meaning</th></tr></thead><tbody><tr><td style=text-align:left>200 OK</td><td style=text-align:left>Request succeeded</td></tr><tr><td style=text-align:left>201 CREATED</td><td style=text-align:left>Request succeeded and a resource was created</td></tr><tr><td style=text-align:left>204 NO CONTENT</td><td style=text-align:left>Request succeeded, no content to return</td></tr><tr><td style=text-align:left>400 BAD REQUEST</td><td style=text-align:left>Malformed request (an error in the client&rsquo;s request)</td></tr><tr><td style=text-align:left>401 UNAUTHORIZED</td><td style=text-align:left>Unauthorized error</td></tr><tr><td style=text-align:left>403 FORBIDDEN</td><td style=text-align:left>Permission error</td></tr><tr><td style=text-align:left>404 NOT FOUND</td><td style=text-align:left>Resource not found</td></tr><tr><td style=text-align:left>500 Internal Server Error</td><td style=text-align:left>Server error</td></tr></tbody></table><p>These are the commonly used ones. By returning appropriate status codes, the client can tell whether a request succeeded, and why it failed if it failed, without looking at the response body.</p><p>To see what status codes exist, refer to
+<a href=https://developer.mozilla.org/ja/docs/Web/HTTP/Status>https://developer.mozilla.org/ja/docs/Web/HTTP/Status</a>
+and choose the appropriate one.</p><h4 id=designing-response-data>Designing Response Data
+<a class=anchor href=#designing-response-data>#</a></h4><h5 id=endpoints-that-return-lists>Endpoints That Return Lists
+<a class=anchor href=#endpoints-that-return-lists>#</a></h5><p>Response data should basically be returned as JSON. Until a while ago XML was also often used, but today JSON is the only choice you need. For example, when you access <code>GET /todos</code>,
+this endpoint returns a list, so it is good to design it to return a response like the following.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>[
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#1&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>  },
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>2</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#2&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>  },
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>3</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#3&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>]
+</span></span></code></pre></div><p>When designing a list endpoint, opinions differ on whether to wrap the list in an envelope. An envelope looks like this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;todos&#34;</span>: [
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>      <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>      <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#1&#34;</span>,
+</span></span><span style=display:flex><span>      <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>      <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>2</span>,
+</span></span><span style=display:flex><span>      <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#2&#34;</span>,
+</span></span><span style=display:flex><span>      <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>      <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>3</span>,
+</span></span><span style=display:flex><span>      <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#3&#34;</span>,
+</span></span><span style=display:flex><span>      <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  ]
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>However, the author thinks an envelope is unnecessary. The client is accessing <code>GET /todos</code> because it wants to get the list of Todos,
+so it is self-evident that the list is a list of Todos.</p><h5 id=endpoints-that-return-an-object>Endpoints That Return an Object
+<a class=anchor href=#endpoints-that-return-an-object>#</a></h5><p>For an endpoint that retrieves a specific resource, such as <code>GET /todos/1</code>,
+it is appropriate to return an object rather than an array.
+That is, it is good to return a response body like the following.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#1&#34;</span>,
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h4 id=the-difficulty-of-response-design>The Difficulty of Response Design
+<a class=anchor href=#the-difficulty-of-response-design>#</a></h4><p>So what response should be returned when the list of Todos is empty?
+Should it return 404? Or should it return an empty list with 200?</p><p>Opinions differ on this too, but the author thinks it should return an empty array with response status 200.</p><p>Then what about a request <code>GET /todos/13</code> when there is no matching Todo?</p><p>In this case, the author thinks returning 404 is appropriate. For a request that specifies and retrieves a resource, it is natural to respond that the resource does not exist.</p><p>Then what about a request <code>GET /todos?id=13</code> when there is no matching Todo?
+Is it appropriate to return 404 Not Found? Is it appropriate to return 400 Bad Request? Or is it correct to return an empty array with 200?</p><p>This is also a difficult one, but the author thinks returning an empty array with 200 is correct.
+The idea is that the request itself is correct, but the resulting array of the query happens to be empty.</p><p>As you can see, even a single GET request requires various considerations depending on the conditions.</p><h3 id=dont-cater-to-the-client>Don&rsquo;t Cater to the Client
+<a class=anchor href=#dont-cater-to-the-client>#</a></h3><p>One important point when designing API response data is not to cater to the client.
+What this means is <strong>returning a lot of information at once, in a general-purpose data representation</strong>.</p><h4 id=use-general-purpose-data-formats>Use General-Purpose Data Formats
+<a class=anchor href=#use-general-purpose-data-formats>#</a></h4><p>For example, suppose there is a requirement to display a Todo&rsquo;s creation date on the client screen in a Japanese format such as <code>2021年11月10日　13時20分</code> (November 10, 2021, 13:20).
+In this case, what data representation should the server use for the date and time information?</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>[
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#1&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#66d9ef>false</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;createdAt&#34;</span>: <span style=color:#e6db74>&#34;2021年11月10日　13時20分&#34;</span>
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>]
+</span></span></code></pre></div><p>A JSON response data design like this is inappropriate. The View is the part of an application that changes especially often.
+If you return a JSON response like this, then when you want to change how the date is displayed, not only the client but also the server is affected and has to be changed.
+The part responsible for receiving the data and deciding how to display it is the View, that is, the Client. The server must not cater to it.
+For date and time information, for example, it should be returned in a format defined in RFC 3339, such as <code>2021-11-10T04:20:00Z</code> or <code>2021-11-10T13:20:00+09:00</code>.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>[
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;title&#34;</span>: <span style=color:#e6db74>&#34;todo title#1&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;completed&#34;</span>: <span style=color:#66d9ef>false</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;createdAt&#34;</span>: <span style=color:#e6db74>&#34;2021-11-10T04:20:00Z&#34;</span>
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>]
+</span></span></code></pre></div><h4 id=return-a-lot-of-information-at-once>Return a Lot of Information at Once
+<a class=anchor href=#return-a-lot-of-information-at-once>#</a></h4><p>Returning a lot of information at once means returning the information related to a resource regardless of whether it is displayed on the screen.
+As mentioned earlier, a <strong>chatty API</strong> that requires many API requests to render a screen is a bad API.</p><p>HTTP overhead is large no matter what, so to improve performance, what matters is how much you can reduce the number of HTTP calls.
+It is humans who look at the screen, but <strong>it is programs, not humans, that process the JSON</strong>.
+If something is not needed to render the screen, the program can simply not use it.
+There is no need to hold back for a program. Return a lot of information at once.</p><h3 id=swagger-oas-30>Swagger (OAS 3.0)
+<a class=anchor href=#swagger-oas-30>#</a></h3><p><a href=https://swagger.io/>Swagger</a>
+is a standard specification for describing APIs.
+Swagger is the de facto standard for defining API specifications, and lets you describe an API specification in JSON or YAML.
+For the Swagger specification, see the following link.</p><p><a href=https://swagger.io/specification/>https://swagger.io/specification/</a></p><p>When designing an API, it is a good idea to use <a href=https://github.com/swagger-api/swagger-editor>Swagger Editor</a>
+.
+With Docker installed, you can start Swagger Editor by running the following commands.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>docker pull swaggerapi/swagger-editor
+</span></span><span style=display:flex><span>docker run -d -p 80:8080 swaggerapi/swagger-editor
+</span></span></code></pre></div><p><img src=/agile-dev-guide/docs/practice/day5/swaggerEditor.jpg alt=SwaggerEditor></p><p>For backend development, <strong>we strongly recommend a process in which you first design the specification using Swagger Editor, then review it or reach agreement within the team before developing.</strong>
+As an example, the backend API configuration for this Todo application is shown below.</p><p><a href=/agile-dev-guide/docs/practice/day5/openapi.yaml>openapi.yaml</a></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-YAML data-lang=YAML><span style=display:flex><span><span style=color:#f92672>openapi</span>: <span style=color:#ae81ff>3.0.1</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>info</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>title</span>: <span style=color:#ae81ff>Todo App</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>description</span>: <span style=color:#ae81ff>This is the backend API definition for the task management application.</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>termsOfService</span>: <span style=color:#ae81ff>https://onebase-fujitsu.github.io/agile-dev-guide/</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>license</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Creative Commons BY-NC-SA 4.0</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>url</span>: <span style=color:#ae81ff>https://creativecommons.org/licenses/by-nc-sa/4.0/</span>
+</span></span><span style=display:flex><span>  <span style=color:#f92672>version</span>: <span style=color:#ae81ff>1.0.0</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>servers</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>url</span>: <span style=color:#ae81ff>https://localhost:8080</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>tags</span>:
+</span></span><span style=display:flex><span>  - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>todos</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>description</span>: <span style=color:#ae81ff>API for managing todo</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>paths</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>/todos</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>get</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>tags</span>:
+</span></span><span style=display:flex><span>        - <span style=color:#ae81ff>todos</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>summary</span>: <span style=color:#ae81ff>Get all todo list</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>operationId</span>: <span style=color:#ae81ff>getTodos</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>responses</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>200</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>description</span>: <span style=color:#ae81ff>OK</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>content</span>:
+</span></span><span style=display:flex><span>            <span style=color:#f92672>application/json</span>:
+</span></span><span style=display:flex><span>              <span style=color:#f92672>schema</span>:
+</span></span><span style=display:flex><span>                <span style=color:#f92672>type</span>: <span style=color:#ae81ff>array</span>
+</span></span><span style=display:flex><span>                <span style=color:#f92672>items</span>:
+</span></span><span style=display:flex><span>                  <span style=color:#f92672>$ref</span>: <span style=color:#e6db74>&#39;#/components/schemas/Todo&#39;</span>
+</span></span><span style=display:flex><span>              <span style=color:#f92672>example</span>:
+</span></span><span style=display:flex><span>                [
+</span></span><span style=display:flex><span>                  {
+</span></span><span style=display:flex><span>                    <span style=color:#f92672>id</span>: <span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#f92672>title</span>: <span style=color:#e6db74>&#34;Tado Title#1&#34;</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#f92672>completed</span>: <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>                  }
+</span></span><span style=display:flex><span>                ]
+</span></span><span style=display:flex><span>    <span style=color:#f92672>post</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>tags</span>:
+</span></span><span style=display:flex><span>        - <span style=color:#ae81ff>todos</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>summary</span>: <span style=color:#ae81ff>Add a new todo</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>operationId</span>: <span style=color:#ae81ff>addTodos</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>requestBody</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>description</span>: <span style=color:#ae81ff>Pet object that needs to be added to the store</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>content</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>application/json</span>:
+</span></span><span style=display:flex><span>            <span style=color:#f92672>schema</span>:
+</span></span><span style=display:flex><span>              <span style=color:#f92672>type</span>: <span style=color:#ae81ff>object</span>
+</span></span><span style=display:flex><span>              <span style=color:#f92672>properties</span>:
+</span></span><span style=display:flex><span>                <span style=color:#f92672>title</span>:
+</span></span><span style=display:flex><span>                  <span style=color:#f92672>type</span>: <span style=color:#ae81ff>string</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>example</span>:
+</span></span><span style=display:flex><span>              {
+</span></span><span style=display:flex><span>                <span style=color:#f92672>title</span>: <span style=color:#e6db74>&#34;Todo Title&#34;</span>
+</span></span><span style=display:flex><span>              }
+</span></span><span style=display:flex><span>        <span style=color:#f92672>required</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>responses</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>201</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>description</span>: <span style=color:#ae81ff>Created</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>content</span>:
+</span></span><span style=display:flex><span>            <span style=color:#f92672>application/json</span>:
+</span></span><span style=display:flex><span>              <span style=color:#f92672>schema</span>:
+</span></span><span style=display:flex><span>                <span style=color:#f92672>$ref</span>: <span style=color:#e6db74>&#39;#/components/schemas/Todo&#39;</span>
+</span></span><span style=display:flex><span>              <span style=color:#f92672>example</span>:
+</span></span><span style=display:flex><span>                {
+</span></span><span style=display:flex><span>                  <span style=color:#f92672>id</span>: <span style=color:#ae81ff>1</span>,
+</span></span><span style=display:flex><span>                  <span style=color:#f92672>title</span>: <span style=color:#e6db74>&#34;Tado Title#1&#34;</span>,
+</span></span><span style=display:flex><span>                  <span style=color:#f92672>completed</span>: <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>        <span style=color:#f92672>400</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>description</span>: <span style=color:#ae81ff>Bad Request</span>
+</span></span><span style=display:flex><span>  <span style=color:#ae81ff>/todos/{id}:</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>patch</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>tags</span>:
+</span></span><span style=display:flex><span>        - <span style=color:#ae81ff>todos</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>summary</span>: <span style=color:#ae81ff>patch todo</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>parameters</span>:
+</span></span><span style=display:flex><span>        - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>id</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>in</span>: <span style=color:#ae81ff>path</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>schema</span>:
+</span></span><span style=display:flex><span>            <span style=color:#f92672>type</span>: <span style=color:#ae81ff>integer</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>format</span>: <span style=color:#ae81ff>int32</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>required</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>requestBody</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>content</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>application/json</span>:
+</span></span><span style=display:flex><span>            <span style=color:#f92672>schema</span>:
+</span></span><span style=display:flex><span>              <span style=color:#f92672>type</span>: <span style=color:#ae81ff>object</span>
+</span></span><span style=display:flex><span>              <span style=color:#f92672>properties</span>:
+</span></span><span style=display:flex><span>                <span style=color:#f92672>title</span>:
+</span></span><span style=display:flex><span>                  <span style=color:#f92672>type</span>: <span style=color:#ae81ff>string</span>
+</span></span><span style=display:flex><span>                <span style=color:#f92672>completed</span>:
+</span></span><span style=display:flex><span>                  <span style=color:#f92672>type</span>: <span style=color:#ae81ff>boolean</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>example</span>:
+</span></span><span style=display:flex><span>              {
+</span></span><span style=display:flex><span>                <span style=color:#f92672>completed</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>              }
+</span></span><span style=display:flex><span>      <span style=color:#f92672>responses</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>204</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>description</span>: <span style=color:#ae81ff>Resource Updated</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>400</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>description</span>: <span style=color:#ae81ff>Bad Request</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>404</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>description</span>: <span style=color:#ae81ff>Resource Not Found</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>delete</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>tags</span>:
+</span></span><span style=display:flex><span>        - <span style=color:#ae81ff>todos</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>summary</span>: <span style=color:#ae81ff>delete todo</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>parameters</span>:
+</span></span><span style=display:flex><span>        - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>id</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>in</span>: <span style=color:#ae81ff>path</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>schema</span>:
+</span></span><span style=display:flex><span>            <span style=color:#f92672>type</span>: <span style=color:#ae81ff>integer</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>format</span>: <span style=color:#ae81ff>int32</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>required</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>responses</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>204</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>description</span>: <span style=color:#ae81ff>Resource Deleted</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>400</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>description</span>: <span style=color:#ae81ff>Bad Request</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>404</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>description</span>: <span style=color:#ae81ff>Resource Not Found</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>components</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>schemas</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>Todo</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>type</span>: <span style=color:#ae81ff>object</span>
+</span></span><span style=display:flex><span>      <span style=color:#f92672>properties</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>id</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>type</span>: <span style=color:#ae81ff>integer</span>
+</span></span><span style=display:flex><span>          <span style=color:#f92672>format</span>: <span style=color:#ae81ff>int64</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>title</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>type</span>: <span style=color:#ae81ff>string</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>completed</span>:
+</span></span><span style=display:flex><span>          <span style=color:#f92672>type</span>: <span style=color:#ae81ff>boolean</span>
+</span></span></code></pre></div><p>Properly understanding API design and the Swagger specification is very important; when you publish an API externally, you publish this Swagger yaml.
+Publishing a poorly written specification only confuses external developers. You should not publish API specifications in any format other than Swagger (OAS 3.0).
+There are also tools such as <a href=https://swagger.io/tools/swagger-ui/>Swagger UI</a>
+for publishing Swagger specifications in a readable and easy-to-use way.</p><p><strong>When designing APIs, read the standard specifications carefully and build something that conforms to them.</strong>
+The people who read the API specifications you design and who use the APIs are developers, not general end users.
+If you build an API that is not easy for developers themselves to use, you will never get external developers to use it.
+First of all, <strong>aim for an API that developers themselves find easy to use.</strong></p><hr><p>Continued on Day 6</p><p><a href=/agile-dev-guide/en/docs/practice/day6/ class=book-btn>Day 6</a></p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#task-creation-backend-api>Task Creation Backend API</a><ul><li><a href=#tests>Tests</a></li><li><a href=#implementation>Implementation</a></li><li><a href=#repeatable-tests>Repeatable Tests</a></li></ul></li><li><a href=#applying-a-design-to-the-task-screen>Applying a Design to the Task Screen</a></li><li><a href=#api-design>API Design</a><ul><li><a href=#what-is-a-good-api-design>What Is a Good API Design?</a></li><li><a href=#resource-oriented-design>Resource-Oriented Design</a></li><li><a href=#parameters>Parameters</a></li><li><a href=#response-design>Response Design</a></li><li><a href=#dont-cater-to-the-client>Don&rsquo;t Cater to the Client</a></li><li><a href=#swagger-oas-30>Swagger (OAS 3.0)</a></li></ul></li></ul></nav></div></aside></main></body></html>

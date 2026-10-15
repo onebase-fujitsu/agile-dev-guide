@@ -1,0 +1,356 @@
+<!doctype html><html lang=en dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  Day 3
+  #
+
+By the end of Day 2, we had a frontend that requests the task list from the server and renders the task list on screen based on the response.
+However, there is still no backend that responds to those requests, so let&rsquo;s build it.
+
+  Initial Backend Setup
+  #
+
+
+  Creating the Spring Boot Project
+  #
+
+The easiest way to create a Spring Boot project is to select Spring Boot from IntelliJ&rsquo;s &ldquo;New Project&rdquo; wizard."><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/practice/day3/"><meta property="og:site_name" content="Fujitsu Agile Development Guide"><meta property="og:title" content="Day 3"><meta property="og:description" content="Day 3 # By the end of Day 2, we had a frontend that requests the task list from the server and renders the task list on screen based on the response. However, there is still no backend that responds to those requests, so let’s build it.
+Initial Backend Setup # Creating the Spring Boot Project # The easiest way to create a Spring Boot project is to select Spring Boot from IntelliJ’s “New Project” wizard."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>Day 3 | Fujitsu Agile Development Guide</title><link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/practice/day3/><link rel=alternate hreflang=ja href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day3/ title=3日目><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/agile-dev-guide/en/><span>Fujitsu Agile Development Guide</span></a></h2><ul class=book-languages><li><input type=checkbox id=languages class=toggle>
+<label for=languages class="flex justify-between"><a role=button class="flex align-center"><img src=/agile-dev-guide/svg/translate.svg class=book-icon alt=Languages>
+English</a></label><ul><li><a href=/agile-dev-guide/docs/practice/day3/>日本語</a></li></ul></li></ul><ul><li><a href=/agile-dev-guide/en/docs/introduction/>Introduction</a></li><li><input type=checkbox id=section-26f8587d816918486e3411338e99965e class=toggle>
+<label for=section-26f8587d816918486e3411338e99965e class="flex justify-between"><a role=button>Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/agile/manifest/>Manifesto for Agile Software Development</a></li><li><a href=/agile-dev-guide/en/docs/agile/principle/>12 Principles of Agile Development</a></li><li><a href=/agile-dev-guide/en/docs/agile/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-3f7a3b5d22e80bae50acbf0bebe29b07 class=toggle>
+<label for=section-3f7a3b5d22e80bae50acbf0bebe29b07 class="flex justify-between"><a role=button>Scrum</a></label><ul><li><a href=/agile-dev-guide/en/docs/scrum/overview/>What is Scrum</a></li><li><a href=/agile-dev-guide/en/docs/scrum/roles/>Roles</a></li><li><a href=/agile-dev-guide/en/docs/scrum/products/>Artifacts</a></li><li><a href=/agile-dev-guide/en/docs/scrum/events/>Events</a></li><li><a href=/agile-dev-guide/en/docs/scrum/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-28ce590b98459d112a5e767cc6b3b04d class=toggle>
+<label for=section-28ce590b98459d112a5e767cc6b3b04d class="flex justify-between"><a role=button>Extreme Programming</a></label><ul><li><a href=/agile-dev-guide/en/docs/xp/overview/>What is Extreme Programming</a></li><li><a href=/agile-dev-guide/en/docs/xp/practice/>Extreme Programming Practices</a></li><li><a href=/agile-dev-guide/en/docs/xp/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-a3825c6f535b2464399db20dd841f3ac class=toggle>
+<label for=section-a3825c6f535b2464399db20dd841f3ac class="flex justify-between"><a role=button>Software Testing</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaretest/overview/>Getting Started with Software Testing</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/fizzbuzz/>Warming Up</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/bowlinggame/>Bowling Game</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/testdouble/>Test Doubles</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/e2e/>E2E Testing</a></li></ul></li><li><input type=checkbox id=section-d2676bcafbfd8f6850f60b777913e79b class=toggle>
+<label for=section-d2676bcafbfd8f6850f60b777913e79b class="flex justify-between"><a role=button>Software Design</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/about/>Software Design for Agile Development</a></li><li><input type=checkbox id=section-1d5d1d86d9abc5f3e1ff9ae3bf8dee3a class=toggle>
+<label for=section-1d5d1d86d9abc5f3e1ff9ae3bf8dee3a class="flex justify-between"><a role=button>SOLID Principles</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/srp/>Single Responsibility Principle (SRP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/ocp/>Open-Closed Principle (OCP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/lsp/>Liskov Substitution Principle (LSP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/dip/>Dependency Inversion Principle (DIP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/isp/>Interface Segregation Principle (ISP)</a></li></ul></li><li><input type=checkbox id=section-c82d883779a9175f08ed321f0a41c453 class=toggle>
+<label for=section-c82d883779a9175f08ed321f0a41c453 class="flex justify-between"><a role=button>Design Patterns</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/designpattern/designpattern/>Design Patterns</a></li></ul></li></ul></li><li><input type=checkbox id=section-c4e0d3ad193a9306b0791ca960be25bb class=toggle checked>
+<label for=section-c4e0d3ad193a9306b0791ca960be25bb class="flex justify-between"><a role=button>Agile in Practice</a></label><ul><li><a href=/agile-dev-guide/en/docs/practice/day1/>Day 1</a></li><li><a href=/agile-dev-guide/en/docs/practice/day2/>Day 2</a></li><li><a href=/agile-dev-guide/en/docs/practice/day3/ class=active>Day 3</a></li><li><a href=/agile-dev-guide/en/docs/practice/day4/>Day 4</a></li><li><a href=/agile-dev-guide/en/docs/practice/day5/>Day 5</a></li><li><a href=/agile-dev-guide/en/docs/practice/day6/>Day 6</a></li></ul></li><li><a href=/agile-dev-guide/en/docs/inclosing/>In Closing</a></li><li><a href=/agile-dev-guide/en/docs/recommendedbooks/>Recommended Books</a></li><li class=book-section-flat><span>Overall</span><ul><li><input type=checkbox id=section-49203faea468220b1d42544db4f42904 class=toggle>
+<label for=section-49203faea468220b1d42544db4f42904 class="flex justify-between"><a role=button>Lean Startup Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/overview/>Lean Startup Agile Flow</a></li><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/organization/>Structure and Roles</a></li><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/productvision/>Product Vision / Value Proposition</a></li></ul></li><li><input type=checkbox id=section-fbc99cb62f97af8f577e21318d383c53 class=toggle>
+<label for=section-fbc99cb62f97af8f577e21318d383c53 class="flex justify-between"><a role=button>Modernization Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/modernization/overview/>Modernization Agile Flow</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/organization/>Structure and Roles</a></li><li><input type=checkbox id=section-cb30e408eaf7a7ec013ed0dc4d3fb020 class=toggle>
+<label for=section-cb30e408eaf7a7ec013ed0dc4d3fb020 class="flex justify-between"><a role=button>Swift Method</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/overview/>What Is the Swift Method</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/eventstorming/>Event Storming</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/boris/>Boris</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/snape/>SnapE</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/slices/>Slices</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/techchoice/>Tech Choice</a></li></ul></li></ul></li></ul></li><li class=book-section-flat><span>Team</span><ul><li><a href=/agile-dev-guide/en/docs/team/workstyle/>How Our Team Works</a></li><li><a href=/agile-dev-guide/en/docs/team/balancedteam/>Balanced Team</a></li><li><input type=checkbox id=section-d6ef0f53ed2eae5373cce9f0cae94127 class=toggle>
+<label for=section-d6ef0f53ed2eae5373cce9f0cae94127 class="flex justify-between"><a role=button>Mindset</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/mindset/onebase/>ONEbase Values</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/psychologicalsafety/>Psychological Safety</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/xp/>XP Values</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/practice/>How to Adopt Practices</a></li></ul></li><li><a href=/agile-dev-guide/en/docs/team/teambuilding/>Team Building</a></li><li><a href=/agile-dev-guide/en/docs/team/remotework/>Remote Work</a></li><li><input type=checkbox id=section-ba58c7f3c79f8713fd38efabb55e90aa class=toggle>
+<label for=section-ba58c7f3c79f8713fd38efabb55e90aa class="flex justify-between"><a role=button>Team Activities</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/activities/officestandup/>Office Standup</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/teamstandup/>Team Standup</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/preipm/>Pre-IPM</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/ipm/>IPM</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/cl/>CL Meeting</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/retro/>Retrospective</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/salesmeeting/>Sales Sync Meeting</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/internalsync/>Internal Sync</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/riskmitigations/>Risks & Mitigations</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/feedback/>Feedback</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/icebreak/>Ice Break</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/teamhealthcheck/>Team Health Check</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/1on1/>1on1</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/exercise/>Radio Taiso</a></li></ul></li><li><input type=checkbox id=section-9283499da254b9f85e8a373a7c190a7e class=toggle>
+<label for=section-9283499da254b9f85e8a373a7c190a7e class="flex justify-between"><a role=button>Team Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/practices/facilitation/>Facilitation</a></li><li><a href=/agile-dev-guide/en/docs/team/practices/okrs/>OKRs</a></li></ul></li></ul></li><li class=book-section-flat><span>Designer</span><ul><li><a href=/agile-dev-guide/en/docs/designer/overview/>What Is a Designer</a></li><li><input type=checkbox id=section-b2cda318f2a04a4c6c2d6866191c7dd0 class=toggle>
+<label for=section-b2cda318f2a04a4c6c2d6866191c7dd0 class="flex justify-between"><a role=button>Designer Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/designer/practices/persona/>Persona</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/scenario/>Scenario</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/researchplanning/>Research Planning</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/prototyping/>Prototyping</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/script/>Script Creation</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/researchaction/>Conducting Research</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/synthesize/>Synthesize</a></li></ul></li></ul></li><li class=book-section-flat><span>Product Manager</span><ul><li><a href=/agile-dev-guide/en/docs/productmanager/overview/>What Is a Product Manager</a></li><li><input type=checkbox id=section-9026fc1a07f695d85c362dc4668a1edf class=toggle>
+<label for=section-9026fc1a07f695d85c362dc4668a1edf class="flex justify-between"><a role=button>Product Manager Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/productmanager/practices/roadmap/>Product Roadmap</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/mvp/>MVP</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/userstorymapping/>User Story Mapping</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/userstory/>User Story</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/2x2/>2×2</a></li></ul></li></ul></li><li class=book-section-flat><span>Developer</span><ul><li><a href=/agile-dev-guide/en/docs/developer/overview/>What Is a Developer</a></li><li><input type=checkbox id=section-9a270bfee03ee781c85e4c3c42434241 class=toggle>
+<label for=section-9a270bfee03ee781c85e4c3c42434241 class="flex justify-between"><a role=button>Developer Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/developer/practices/tdd/>TDD</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/cicd/>CI/CD</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/pairprogramming/>Pair Programming</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/soroprogramming/>Solo Programming</a></li></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu></label><h3>Day 3</h3><label for=toc-control><img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#initial-backend-setup>Initial Backend Setup</a><ul><li><a href=#creating-the-spring-boot-project>Creating the Spring Boot Project</a></li><li><a href=#configuring-the-db>Configuring the DB</a></li><li><a href=#introducing-a-db-migration-tool>Introducing a DB Migration Tool</a></li></ul></li><li><a href=#implementing-get-todos>Implementing GET /todos</a><ul><li><a href=#testing-get-todos>Testing GET /todos</a></li><li><a href=#implementing-get-todos-1>Implementing GET /todos</a></li></ul></li><li><a href=#connecting-the-client-and-server>Connecting the Client and Server</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=day-3>Day 3
+<a class=anchor href=#day-3>#</a></h1><p>By the end of Day 2, we had a frontend that requests the task list from the server and renders the task list on screen based on the response.
+However, there is still no backend that responds to those requests, so let&rsquo;s build it.</p><h2 id=initial-backend-setup>Initial Backend Setup
+<a class=anchor href=#initial-backend-setup>#</a></h2><h3 id=creating-the-spring-boot-project>Creating the Spring Boot Project
+<a class=anchor href=#creating-the-spring-boot-project>#</a></h3><p>The easiest way to create a Spring Boot project is to select Spring Boot from IntelliJ&rsquo;s &ldquo;New Project&rdquo; wizard.</p><p><img src=/agile-dev-guide/docs/practice/day3/IntelliJ_newProject.png alt=IntelliJ_generate>
+<img src=/agile-dev-guide/docs/practice/day3/IntelliJ_generate1.png alt=IntelliJ_generate>
+<img src=/agile-dev-guide/docs/practice/day3/IntelliJ_generate2.png alt=IntelliJ_generate></p><p>Create it in a location alongside todo-app-client.
+This time we will use a Gradle Project, with Kotlin as the language.</p><p>For the Spring Boot version, it is a good idea to choose the stable version available at the time.</p><p>This time we named the Artifact todo-app-server.
+As for dependencies, you can add them later, so for now we added only Spring Web.</p><p>Now click Generate.</p><p>Note: You can also create the project with <a href=https://start.spring.io/>Spring Initializr</a>
+.</p><h3 id=configuring-the-db>Configuring the DB
+<a class=anchor href=#configuring-the-db>#</a></h3><p>As usual, the initial setup is the hardest part of building an app. Let&rsquo;s push through.
+First, let&rsquo;s configure the DB.</p><p>This time we will use <a href=https://www.postgresql.org/>PostgreSQL</a>
+as the DB.
+The sample application in the Software Testing chapter ran H2 in memory,
+but you would never do that in real development, so we will use PostgreSQL to stay closer to real-world development.</p><p>If you have not installed PostgreSQL yet, please install it.</p><p>Once you have confirmed that PostgreSQL is running locally as a service,
+run the <a href=https://www.postgresql.jp/document/9.4/html/app-createdb.html>createdb</a>
+command to create todo_db.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>createdb todo_db
+</span></span></code></pre></div><p>First, let&rsquo;s add the libraries needed to connect to the DB. Open build.gradle.kts and change dependencies as follows.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// build.gradle.kts
+</span></span></span><span style=display:flex><span>dependencies {
+</span></span><span style=display:flex><span>    implementation(<span style=color:#e6db74>&#34;org.springframework.boot:spring-boot-starter-web&#34;</span>)
+</span></span><span style=display:flex><span>    implementation(<span style=color:#e6db74>&#34;com.fasterxml.jackson.module:jackson-module-kotlin&#34;</span>)
+</span></span><span style=display:flex><span>    implementation(<span style=color:#e6db74>&#34;org.jetbrains.kotlin:kotlin-reflect&#34;</span>)
+</span></span><span style=display:flex><span>    implementation(<span style=color:#e6db74>&#34;org.jetbrains.kotlin:kotlin-stdlib-jdk8&#34;</span>)
+</span></span><span style=display:flex><span>    implementation(<span style=color:#e6db74>&#34;org.springframework.boot:spring-boot-starter-jdbc&#34;</span>)   <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>    runtimeOnly(<span style=color:#e6db74>&#34;org.postgresql:postgresql&#34;</span>)                              <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>    testImplementation(<span style=color:#e6db74>&#34;org.springframework.boot:spring-boot-starter-test&#34;</span>)
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Next, there is a file src/resources/application.properties, but writing it in YAML makes it easier to read,
+so rename this application.properties to application.yml.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#75715e>// application.yml</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>spring</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>datasource</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>url</span>: <span style=color:#ae81ff>jdbc:postgresql://localhost:5432/${DB_NAME:todo_db}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>username</span>: <span style=color:#ae81ff>onebase</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>password</span>:
+</span></span></code></pre></div><p>Change the configuration file like this. <strong>The username depends on the environment where you ran the <code>createdb</code> command, so change it to match your own environment.</strong>
+In this state, let&rsquo;s start the application.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>./gradlew bootRun
+</span></span></code></pre></div><pre tabindex=0><code>onebase@Onebase-Maguro todo-app-server % ./gradlew bootRun
+
+&gt; Task :bootRun
+
+  .   ____          _            __ _ _
+ /\\ / ___&#39;_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | &#39;_ | &#39;_| | &#39;_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  &#39;  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.5.4)
+
+2021-09-12 04:38:21.169  INFO 74012 --- [           main] c.f.t.TodoAppServerApplicationKt         : Starting TodoAppServerApplicationKt using Java 13.0.2 on Onebase-Maguro.local with PID 74012 (/Users/onebase/IdeaProjects/todo-app-server/build/classes/kotlin/main started by onebase in /Users/onebase/IdeaProjects/todo-app-server)
+2021-09-12 04:38:21.171  INFO 74012 --- [           main] c.f.t.TodoAppServerApplicationKt         : No active profile set, falling back to default profiles: default
+2021-09-12 04:38:22.054  INFO 74012 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-09-12 04:38:22.063  INFO 74012 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-09-12 04:38:22.064  INFO 74012 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.52]
+2021-09-12 04:38:22.122  INFO 74012 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-09-12 04:38:22.122  INFO 74012 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 910 ms
+2021-09-12 04:38:22.451  INFO 74012 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path &#39;&#39;
+2021-09-12 04:38:22.459  INFO 74012 --- [           main] c.f.t.TodoAppServerApplicationKt         : Started TodoAppServerApplicationKt in 1.844 seconds
+&lt;==========---&gt; 83% EXECUTING [16s]
+&gt; :bootRun
+</code></pre><p>If you see output like this, the connection between the server and the PostgreSQL DB is working, so press <code>Control+C</code> to stop the server for now.</p><h3 id=introducing-a-db-migration-tool>Introducing a DB Migration Tool
+<a class=anchor href=#introducing-a-db-migration-tool>#</a></h3><p>Let&rsquo;s introduce a DB migration tool.
+We created the DB with the <code>createdb</code> command earlier, but we have not created any tables yet.
+Managing a DB schema by hand is extremely painful, so introducing a migration tool lets you automate creating the schema and migrating data when the schema changes.</p><p>Here we will use <a href=https://flywaydb.org/>Flyway</a>
+.</p><p>Open build.gradle.kts again and add the following dependency.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// build.gradle.kts
+</span></span></span><span style=display:flex><span>dependencies {
+</span></span><span style=display:flex><span>    implementation(<span style=color:#e6db74>&#34;org.springframework.boot:spring-boot-starter-web&#34;</span>)
+</span></span><span style=display:flex><span>    implementation(<span style=color:#e6db74>&#34;com.fasterxml.jackson.module:jackson-module-kotlin&#34;</span>)
+</span></span><span style=display:flex><span>    implementation(<span style=color:#e6db74>&#34;org.jetbrains.kotlin:kotlin-reflect&#34;</span>)
+</span></span><span style=display:flex><span>    implementation(<span style=color:#e6db74>&#34;org.springframework.boot:spring-boot-starter-jdbc&#34;</span>)
+</span></span><span style=display:flex><span>    implementation(<span style=color:#e6db74>&#34;org.flywaydb:flyway-database-postgresql&#34;</span>)
+</span></span><span style=display:flex><span>    runtimeOnly(<span style=color:#e6db74>&#34;org.postgresql:postgresql&#34;</span>)
+</span></span><span style=display:flex><span>    testImplementation(<span style=color:#e6db74>&#34;org.springframework.boot:spring-boot-starter-test&#34;</span>)
+</span></span><span style=display:flex><span>    testImplementation(<span style=color:#e6db74>&#34;org.jetbrains.kotlin:kotlin-test-junit5&#34;</span>)
+</span></span><span style=display:flex><span>    testRuntimeOnly(<span style=color:#e6db74>&#34;org.junit.platform:junit-platform-launcher&#34;</span>)
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Next, open src/main/resources/application.yml again and add the Flyway settings.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#75715e>// application.yml</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>spring</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>datasource</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>url</span>: <span style=color:#ae81ff>jdbc:postgresql://localhost:5432/${DB_NAME:todo_db}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>username</span>: <span style=color:#ae81ff>onebase</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>password</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>flyway</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>baseline-on-migrate</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>url</span>: <span style=color:#ae81ff>jdbc:postgresql://localhost:5432/${DB_NAME:todo_db}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>user</span>: <span style=color:#ae81ff>onebase</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>password</span>:
+</span></span></code></pre></div><p>Now we are ready to use Flyway. Let&rsquo;s actually run a migration and create a table.
+Create a directory named db under src/main/resources, and then a directory named migration under it.
+Then create a new file named <code>VyyyyMMddHHmmss__CreateTodoTable.sql</code> under migration.
+Replace the &lsquo;yyyyMMddHHmmss&rsquo; part with the time when you actually create the file.
+It is very important that the file name follows this naming convention.</p><pre tabindex=0><code>src
+├── main
+│     ├── kotlin
+│     │     └── com
+│     │         └── fujitsu
+│     │             └── todoappserver
+│     │                 └── TodoAppServerApplication.kt
+│     └── resources
+│         ├── application.yml
+│         ├── db
+│         │     └── migration
+│         │         └── V20210912045400__CreateTodoTable.sql
+│         ├── static
+│         └── templates
+└── test
+    └── kotlin
+        └── com
+            └── fujitsu
+                └── todoappserver
+                    └── TodoAppServerApplicationTests.kt
+</code></pre><p>In the author&rsquo;s example, the file is named &ldquo;V20210912045400__CreateTodoTable.sql&rdquo;. (This document is being written at 4 a.m.)</p><p>Write the SQL for the migration in this file.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-sql data-lang=sql><span style=display:flex><span><span style=color:#66d9ef>create</span> <span style=color:#66d9ef>table</span> todo (
+</span></span><span style=display:flex><span>    id serial <span style=color:#66d9ef>primary</span> <span style=color:#66d9ef>key</span>,
+</span></span><span style=display:flex><span>    title varchar <span style=color:#66d9ef>not</span> <span style=color:#66d9ef>null</span>,
+</span></span><span style=display:flex><span>    completed boolean <span style=color:#66d9ef>not</span> <span style=color:#66d9ef>null</span> <span style=color:#66d9ef>default</span> <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>);
+</span></span></code></pre></div><p>This is the first SQL we wrote.
+In this state, let&rsquo;s start the application again.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>./gradlew bootRun
+</span></span></code></pre></div><p>Once it starts successfully, look at the state of todo_db with any tool you like.</p><p><img src=/agile-dev-guide/docs/practice/day3/flyway_migration.jpg alt="flyway migration"></p><p>If Flyway has created the todo table along with a table called flyway_schema_history, you have succeeded.
+When the application starts, Flyway checks the SQL files under the db/migration directory and runs the DB migration for you.</p><p>With this, the groundwork for backend development is in place. The source code up to this point is available at
+<a href=https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step5>https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step5</a>
+.</p><h2 id=implementing-get-todos>Implementing GET /todos
+<a class=anchor href=#implementing-get-todos>#</a></h2><h3 id=testing-get-todos>Testing GET /todos
+<a class=anchor href=#testing-get-todos>#</a></h3><p>First, let&rsquo;s write a test that, when a GET request is made to /todos, accesses the database and returns the Todo list in JSON format.
+Create a controller package under src/test/kotlin/com.fujitsu.todoappserver, and create <code>TodoApiControllerTest.kt</code> inside it.</p><pre tabindex=0><code>src
+├── main
+│     ├── kotlin
+│     │     └── com
+│     │         └── fujitsu
+│     │             └── todoappserver
+│     │                 └── TodoAppServerApplication.kt
+│     └── resources
+│         ├── application.yml
+│         ├── db
+│         │     └── migration
+│         │         └── V20210912045400__CreateTodoTable.sql
+│         ├── static
+│         └── templates
+└── test
+    └── kotlin
+        └── com
+            └── fujitsu
+                └── todoappserver
+                    ├── TodoAppServerApplicationTests.kt
+                    └── controller
+                        └── TodoApiControllerTest.kt    // created
+</code></pre><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoApiControllerTest.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fasterxml.jackson.module.kotlin.readValue
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.assertj.core.api.Assertions
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.junit.jupiter.api.Test
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.beans.factory.annotation.Autowired
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.boot.test.context.SpringBootTest
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.boot.test.web.client.TestRestTemplate
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.http.*
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@SpringBootTest</span>(webEnvironment = <span style=color:#a6e22e>SpringBootTest</span>.<span style=color:#a6e22e>WebEnvironment</span>.RANDOM_PORT)
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoApiControllerTest</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Autowired</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>lateinit</span> <span style=color:#66d9ef>var</span> restTemplate: TestRestTemplate
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>タスク一覧を取得できる</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> header = HttpHeaders()
+</span></span><span style=display:flex><span>        header.contentType = <span style=color:#a6e22e>MediaType</span>.APPLICATION_JSON
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> response = restTemplate.exchange(<span style=color:#e6db74>&#34;/todos&#34;</span>, <span style=color:#a6e22e>HttpMethod</span>.GET, HttpEntity(<span style=color:#66d9ef>null</span>, header), String<span style=color:#f92672>::</span><span style=color:#66d9ef>class</span>.java)
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> mapper = jacksonObjectMapper()
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>val</span> articles: List&lt;Todo&gt; = mapper.readValue(response.body<span style=color:#f92672>!!</span>)
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Assertions</span>.assertThat(response.statusCode).isEqualTo(<span style=color:#a6e22e>HttpStatus</span>.OK)
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Assertions</span>.assertThat(articles.size).isEqualTo(<span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>We wrote the first test like this. This area is explained in detail in the Software Testing chapter, so we will skip explaining the test here.
+Of course, Todo is not defined yet, so this test fails to compile.</p><h3 id=implementing-get-todos-1>Implementing GET /todos
+<a class=anchor href=#implementing-get-todos-1>#</a></h3><h4 id=implementing-the-model>Implementing the Model
+<a class=anchor href=#implementing-the-model>#</a></h4><p>The previous test failed because there was no Todo model, so let&rsquo;s define it.</p><p>Create the <code>model</code>, <code>controller</code>, <code>service</code>, and <code>repository</code> packages under src/main/kotlin/com.fujitsu.todoappserver.
+Then create Todo.kt under the <code>model</code> package.</p><pre tabindex=0><code>src
+├── main
+│     ├── kotlin
+│     │     └── com
+│     │         └── fujitsu
+│     │             └── todoappserver
+│     │                 ├── TodoAppServerApplication.kt
+│     │                 ├── controller
+│     │                 ├── model
+│     │                 │     └── Todo.kt       // created
+│     │                 ├── repository
+│     │                 └── service
+│     └── resources
+│         ├── application.yml
+│         ├── db
+│         │     └── migration
+│         │         └── V20210912045400__CreateTodoTable.sql
+│         ├── static
+│         └── templates
+└── test
+    └── kotlin
+        └── com
+            └── fujitsu
+                └── todoappserver
+                    ├── TodoAppServerApplicationTests.kt
+                    └── controller
+                        └── TodoControllerTest.kt
+</code></pre><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// Todo.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.model
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>data</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Todo</span>(
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>val</span> id: Int,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>val</span> title: String,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>val</span> completed: Boolean
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><p>In Kotlin, you can easily create a POJO by declaring a data class. You don&rsquo;t need the setters and getters that Java would require.
+Import this Todo model into the test you created earlier and run it.</p><p>It should now compile and send a GET request, but the test fails because 404 Not Found is returned.</p><h4 id=implementing-the-controller-layer>Implementing the Controller Layer
+<a class=anchor href=#implementing-the-controller-layer>#</a></h4><p>Let&rsquo;s implement the Controller layer. Create TodoControllerInterface.kt and TodoController.kt under the controller package.</p><p>In TodoControllerInterface, define the methods that TodoController wants to use (in other words, the methods it wants the Service to implement).</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoControllerInterface.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>TodoControllerInterface</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTodos</span>(): List&lt;Todo&gt;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>TodoController uses the service through the interface we just defined.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoController.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.controller
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.http.HttpStatus
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.web.bind.annotation.GetMapping
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.web.bind.annotation.ResponseStatus
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.web.bind.annotation.RestController
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@RestController</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoController</span>(<span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> todoService: TodoControllerInterface) {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@GetMapping</span>(<span style=color:#e6db74>&#34;/todos&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@ResponseStatus</span>(<span style=color:#a6e22e>HttpStatus</span>.OK)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTodos</span>() : List&lt;Todo&gt; {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> todoService.getTodos()
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Many of you may find it odd that the interface lives in the Controller layer rather than the Service layer.
+This is the Dependency Inversion Principle (DIP). Do you remember it?
+In the Dependency Inversion Principle, we <strong>also invert the ownership of the abstraction</strong>, right?</p><h4 id=implementing-the-service-layer>Implementing the Service Layer
+<a class=anchor href=#implementing-the-service-layer>#</a></h4><p>Let&rsquo;s implement the Service layer in the same way. Create TodoServiceInterface.kt and TodoService.kt under the service package.
+The Service layer simply passes the response from the Repository layer straight through to the Controller, so we will skip the explanation.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoServiceInterface.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.service
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>TodoServiceInterface</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTodos</span>(): List&lt;Todo&gt;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoService.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.service
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.controller.TodoControllerInterface
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.stereotype.Service
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Service</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoService</span>(<span style=color:#66d9ef>private</span> <span style=color:#66d9ef>val</span> todoRepository: TodoServiceInterface): TodoControllerInterface {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTodos</span>(): List&lt;Todo&gt; {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> todoRepository.getTodos()
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h4 id=implementing-the-repository-layer>Implementing the Repository Layer
+<a class=anchor href=#implementing-the-repository-layer>#</a></h4><p>Now implement the Repository layer. Create TodoRepository.kt under the repository package and implement TodoServiceInterface.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-kotlin data-lang=kotlin><span style=display:flex><span><span style=color:#75715e>// TodoRepository.kt
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>package</span> com.fujitsu.todoappserver.repository
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.model.Todo
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> com.fujitsu.todoappserver.service.TodoServiceInterface
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.jdbc.core.JdbcTemplate
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> org.springframework.stereotype.Repository
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> java.sql.ResultSet
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Repository</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TodoRepository</span>(<span style=color:#66d9ef>val</span> jdbcTemplate: JdbcTemplate) : TodoServiceInterface {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>override</span> <span style=color:#66d9ef>fun</span> <span style=color:#a6e22e>getTodos</span>(): List&lt;Todo&gt; {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> jdbcTemplate.query(
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;&#34;&#34;select id, title, completed from todo&#34;&#34;&#34;</span>
+</span></span><span style=display:flex><span>        ) {rs: ResultSet, _:Int <span style=color:#f92672>-&gt;</span>
+</span></span><span style=display:flex><span>            Todo(rs.getInt(<span style=color:#e6db74>&#34;id&#34;</span>),
+</span></span><span style=display:flex><span>                rs.getString(<span style=color:#e6db74>&#34;title&#34;</span>),
+</span></span><span style=display:flex><span>                rs.getBoolean(<span style=color:#e6db74>&#34;completed&#34;</span>)
+</span></span><span style=display:flex><span>            )
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>The Repository actually sends a query to the DB, creates Todo objects from the ResultSet, and returns them as a List.
+That completes the implementation. Let&rsquo;s run the tests!</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>./gradlew test
+</span></span></code></pre></div><pre tabindex=0><code>onebase@Onebase-Maguro todo-app-server % ./gradlew test
+
+&gt; Task :test
+2021-09-12 06:37:05.404  INFO 76511 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-09-12 06:37:05.408  INFO 76511 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+
+BUILD SUCCESSFUL in 4s
+4 actionable tasks: 1 executed, 3 up-to-date
+</code></pre><p>You should see the tests pass.</p><h2 id=connecting-the-client-and-server>Connecting the Client and Server
+<a class=anchor href=#connecting-the-client-and-server>#</a></h2><p>Now, keep the server running.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>./gradlew bootRun
+</span></span></code></pre></div><p>With the server running, start the client.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>npm run dev
+</span></span></code></pre></div><p>If you access <a href=http://localhost:5173/>http://localhost:5173/</a>
+in this state, you will see that the GET request for /todos is not being sent to the server we built,<br>and 304 is returned instead.
+<img src=/agile-dev-guide/docs/practice/day3/getTodos304.png alt=304></p><p>That is to be expected: the client is sending requests to localhost:5173/todos, while the server is running on port 8080.
+So we add a proxy setting to the client.</p><p>Open the client&rsquo;s <code>vite.config.ts</code>, add the following settings, and start the client again.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#66d9ef>import</span> { <span style=color:#a6e22e>defineConfig</span> } <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;vite&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>react</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@vitejs/plugin-react&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// https://vite.dev/config/
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>defineConfig</span>({
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>plugins</span><span style=color:#f92672>:</span> [<span style=color:#a6e22e>react</span>()],
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>server</span><span style=color:#f92672>:</span> {                                    <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>    <span style=color:#a6e22e>proxy</span><span style=color:#f92672>:</span> {                                   <span style=color:#75715e>// added    
+</span></span></span><span style=display:flex><span>      <span style=color:#e6db74>&#34;/todos&#34;</span><span style=color:#f92672>:</span> {                              <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>        <span style=color:#a6e22e>target</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;http://localhost:8080&#34;</span>,       <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>        <span style=color:#a6e22e>changeOrigin</span>: <span style=color:#66d9ef>true</span>                     <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>      }                                        <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>    }                                          <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>  }                                            <span style=color:#75715e>// added 
+</span></span></span><span style=display:flex><span>})
+</span></span></code></pre></div><p><img src=/agile-dev-guide/docs/practice/day3/getTodos200.png alt=200></p><p>Thanks to the proxy setting, the server can now respond, and you should see 200 being returned.</p><p>Congratulations! You have implemented your first application that connects a server API with a client!</p><p>The source code up to this point is available at
+<a href=https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step6>https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step6</a>
+.</p><hr><p>Continue to Day 4.</p><p><a href=/agile-dev-guide/en/docs/practice/day4/ class=book-btn>Day 4</a></p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#initial-backend-setup>Initial Backend Setup</a><ul><li><a href=#creating-the-spring-boot-project>Creating the Spring Boot Project</a></li><li><a href=#configuring-the-db>Configuring the DB</a></li><li><a href=#introducing-a-db-migration-tool>Introducing a DB Migration Tool</a></li></ul></li><li><a href=#implementing-get-todos>Implementing GET /todos</a><ul><li><a href=#testing-get-todos>Testing GET /todos</a></li><li><a href=#implementing-get-todos-1>Implementing GET /todos</a></li></ul></li><li><a href=#connecting-the-client-and-server>Connecting the Client and Server</a></li></ul></nav></div></aside></main></body></html>

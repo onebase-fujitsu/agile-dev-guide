@@ -1,0 +1,123 @@
+<!doctype html><html lang=en dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  The Single Responsibility Principle
+  #
+
+
+  What Is the Single Responsibility Principle (SRP)?
+  #
+
+The Single Responsibility Principle (SRP) states that there should never be more than one reason for a class to change.
+For example, consider the design shown below.
+
+
+
+
+  
+
+
+
+
+
+classDiagram
+Computational Geometry Application --> Rectangle
+Graphical Application --> Rectangle
+Graphical Application --> GUI
+Rectangle --> GUI
+class Rectangle {
+    +void draw()
+    +double area()
+}
+
+
+The Rectangle class has two methods: one draws a rectangle on the screen, and the other calculates the area of the rectangle.
+Here, two applications use the Rectangle class."><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/softwaredesign/solidprinciple/srp/"><meta property="og:site_name" content="Fujitsu Agile Development Guide"><meta property="og:title" content="Single Responsibility Principle (SRP)"><meta property="og:description" content="The Single Responsibility Principle # What Is the Single Responsibility Principle (SRP)? # The Single Responsibility Principle (SRP) states that there should never be more than one reason for a class to change.
+For example, consider the design shown below.
+classDiagram Computational Geometry Application --> Rectangle Graphical Application --> Rectangle Graphical Application --> GUI Rectangle --> GUI class Rectangle { +void draw() +double area() } The Rectangle class has two methods: one draws a rectangle on the screen, and the other calculates the area of the rectangle. Here, two applications use the Rectangle class."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>Single Responsibility Principle (SRP) | Fujitsu Agile Development Guide</title><link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/softwaredesign/solidprinciple/srp/><link rel=alternate hreflang=ja href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/ title=単一責任の原則(SRP)><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/agile-dev-guide/en/><span>Fujitsu Agile Development Guide</span></a></h2><ul class=book-languages><li><input type=checkbox id=languages class=toggle>
+<label for=languages class="flex justify-between"><a role=button class="flex align-center"><img src=/agile-dev-guide/svg/translate.svg class=book-icon alt=Languages>
+English</a></label><ul><li><a href=/agile-dev-guide/docs/softwaredesign/solidprinciple/srp/>日本語</a></li></ul></li></ul><ul><li><a href=/agile-dev-guide/en/docs/introduction/>Introduction</a></li><li><input type=checkbox id=section-26f8587d816918486e3411338e99965e class=toggle>
+<label for=section-26f8587d816918486e3411338e99965e class="flex justify-between"><a role=button>Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/agile/manifest/>Manifesto for Agile Software Development</a></li><li><a href=/agile-dev-guide/en/docs/agile/principle/>12 Principles of Agile Development</a></li><li><a href=/agile-dev-guide/en/docs/agile/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-3f7a3b5d22e80bae50acbf0bebe29b07 class=toggle>
+<label for=section-3f7a3b5d22e80bae50acbf0bebe29b07 class="flex justify-between"><a role=button>Scrum</a></label><ul><li><a href=/agile-dev-guide/en/docs/scrum/overview/>What is Scrum</a></li><li><a href=/agile-dev-guide/en/docs/scrum/roles/>Roles</a></li><li><a href=/agile-dev-guide/en/docs/scrum/products/>Artifacts</a></li><li><a href=/agile-dev-guide/en/docs/scrum/events/>Events</a></li><li><a href=/agile-dev-guide/en/docs/scrum/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-28ce590b98459d112a5e767cc6b3b04d class=toggle>
+<label for=section-28ce590b98459d112a5e767cc6b3b04d class="flex justify-between"><a role=button>Extreme Programming</a></label><ul><li><a href=/agile-dev-guide/en/docs/xp/overview/>What is Extreme Programming</a></li><li><a href=/agile-dev-guide/en/docs/xp/practice/>Extreme Programming Practices</a></li><li><a href=/agile-dev-guide/en/docs/xp/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-a3825c6f535b2464399db20dd841f3ac class=toggle>
+<label for=section-a3825c6f535b2464399db20dd841f3ac class="flex justify-between"><a role=button>Software Testing</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaretest/overview/>Getting Started with Software Testing</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/fizzbuzz/>Warming Up</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/bowlinggame/>Bowling Game</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/testdouble/>Test Doubles</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/e2e/>E2E Testing</a></li></ul></li><li><input type=checkbox id=section-d2676bcafbfd8f6850f60b777913e79b class=toggle checked>
+<label for=section-d2676bcafbfd8f6850f60b777913e79b class="flex justify-between"><a role=button>Software Design</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/about/>Software Design for Agile Development</a></li><li><input type=checkbox id=section-1d5d1d86d9abc5f3e1ff9ae3bf8dee3a class=toggle checked>
+<label for=section-1d5d1d86d9abc5f3e1ff9ae3bf8dee3a class="flex justify-between"><a role=button>SOLID Principles</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/srp/ class=active>Single Responsibility Principle (SRP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/ocp/>Open-Closed Principle (OCP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/lsp/>Liskov Substitution Principle (LSP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/dip/>Dependency Inversion Principle (DIP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/isp/>Interface Segregation Principle (ISP)</a></li></ul></li><li><input type=checkbox id=section-c82d883779a9175f08ed321f0a41c453 class=toggle>
+<label for=section-c82d883779a9175f08ed321f0a41c453 class="flex justify-between"><a role=button>Design Patterns</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/designpattern/designpattern/>Design Patterns</a></li></ul></li></ul></li><li><input type=checkbox id=section-c4e0d3ad193a9306b0791ca960be25bb class=toggle>
+<label for=section-c4e0d3ad193a9306b0791ca960be25bb class="flex justify-between"><a role=button>Agile in Practice</a></label><ul><li><a href=/agile-dev-guide/en/docs/practice/day1/>Day 1</a></li><li><a href=/agile-dev-guide/en/docs/practice/day2/>Day 2</a></li><li><a href=/agile-dev-guide/en/docs/practice/day3/>Day 3</a></li><li><a href=/agile-dev-guide/en/docs/practice/day4/>Day 4</a></li><li><a href=/agile-dev-guide/en/docs/practice/day5/>Day 5</a></li><li><a href=/agile-dev-guide/en/docs/practice/day6/>Day 6</a></li></ul></li><li><a href=/agile-dev-guide/en/docs/inclosing/>In Closing</a></li><li><a href=/agile-dev-guide/en/docs/recommendedbooks/>Recommended Books</a></li><li class=book-section-flat><span>Overall</span><ul><li><input type=checkbox id=section-49203faea468220b1d42544db4f42904 class=toggle>
+<label for=section-49203faea468220b1d42544db4f42904 class="flex justify-between"><a role=button>Lean Startup Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/overview/>Lean Startup Agile Flow</a></li><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/organization/>Structure and Roles</a></li><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/productvision/>Product Vision / Value Proposition</a></li></ul></li><li><input type=checkbox id=section-fbc99cb62f97af8f577e21318d383c53 class=toggle>
+<label for=section-fbc99cb62f97af8f577e21318d383c53 class="flex justify-between"><a role=button>Modernization Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/modernization/overview/>Modernization Agile Flow</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/organization/>Structure and Roles</a></li><li><input type=checkbox id=section-cb30e408eaf7a7ec013ed0dc4d3fb020 class=toggle>
+<label for=section-cb30e408eaf7a7ec013ed0dc4d3fb020 class="flex justify-between"><a role=button>Swift Method</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/overview/>What Is the Swift Method</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/eventstorming/>Event Storming</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/boris/>Boris</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/snape/>SnapE</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/slices/>Slices</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/techchoice/>Tech Choice</a></li></ul></li></ul></li></ul></li><li class=book-section-flat><span>Team</span><ul><li><a href=/agile-dev-guide/en/docs/team/workstyle/>How Our Team Works</a></li><li><a href=/agile-dev-guide/en/docs/team/balancedteam/>Balanced Team</a></li><li><input type=checkbox id=section-d6ef0f53ed2eae5373cce9f0cae94127 class=toggle>
+<label for=section-d6ef0f53ed2eae5373cce9f0cae94127 class="flex justify-between"><a role=button>Mindset</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/mindset/onebase/>ONEbase Values</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/psychologicalsafety/>Psychological Safety</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/xp/>XP Values</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/practice/>How to Adopt Practices</a></li></ul></li><li><a href=/agile-dev-guide/en/docs/team/teambuilding/>Team Building</a></li><li><a href=/agile-dev-guide/en/docs/team/remotework/>Remote Work</a></li><li><input type=checkbox id=section-ba58c7f3c79f8713fd38efabb55e90aa class=toggle>
+<label for=section-ba58c7f3c79f8713fd38efabb55e90aa class="flex justify-between"><a role=button>Team Activities</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/activities/officestandup/>Office Standup</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/teamstandup/>Team Standup</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/preipm/>Pre-IPM</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/ipm/>IPM</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/cl/>CL Meeting</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/retro/>Retrospective</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/salesmeeting/>Sales Sync Meeting</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/internalsync/>Internal Sync</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/riskmitigations/>Risks & Mitigations</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/feedback/>Feedback</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/icebreak/>Ice Break</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/teamhealthcheck/>Team Health Check</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/1on1/>1on1</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/exercise/>Radio Taiso</a></li></ul></li><li><input type=checkbox id=section-9283499da254b9f85e8a373a7c190a7e class=toggle>
+<label for=section-9283499da254b9f85e8a373a7c190a7e class="flex justify-between"><a role=button>Team Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/practices/facilitation/>Facilitation</a></li><li><a href=/agile-dev-guide/en/docs/team/practices/okrs/>OKRs</a></li></ul></li></ul></li><li class=book-section-flat><span>Designer</span><ul><li><a href=/agile-dev-guide/en/docs/designer/overview/>What Is a Designer</a></li><li><input type=checkbox id=section-b2cda318f2a04a4c6c2d6866191c7dd0 class=toggle>
+<label for=section-b2cda318f2a04a4c6c2d6866191c7dd0 class="flex justify-between"><a role=button>Designer Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/designer/practices/persona/>Persona</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/scenario/>Scenario</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/researchplanning/>Research Planning</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/prototyping/>Prototyping</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/script/>Script Creation</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/researchaction/>Conducting Research</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/synthesize/>Synthesize</a></li></ul></li></ul></li><li class=book-section-flat><span>Product Manager</span><ul><li><a href=/agile-dev-guide/en/docs/productmanager/overview/>What Is a Product Manager</a></li><li><input type=checkbox id=section-9026fc1a07f695d85c362dc4668a1edf class=toggle>
+<label for=section-9026fc1a07f695d85c362dc4668a1edf class="flex justify-between"><a role=button>Product Manager Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/productmanager/practices/roadmap/>Product Roadmap</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/mvp/>MVP</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/userstorymapping/>User Story Mapping</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/userstory/>User Story</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/2x2/>2×2</a></li></ul></li></ul></li><li class=book-section-flat><span>Developer</span><ul><li><a href=/agile-dev-guide/en/docs/developer/overview/>What Is a Developer</a></li><li><input type=checkbox id=section-9a270bfee03ee781c85e4c3c42434241 class=toggle>
+<label for=section-9a270bfee03ee781c85e4c3c42434241 class="flex justify-between"><a role=button>Developer Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/developer/practices/tdd/>TDD</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/cicd/>CI/CD</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/pairprogramming/>Pair Programming</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/soroprogramming/>Solo Programming</a></li></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu></label><h3>Single Responsibility Principle (SRP)</h3><label for=toc-control><img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#what-is-the-single-responsibility-principle-srp>What Is the Single Responsibility Principle (SRP)?</a></li><li><a href=#what-is-a-responsibility>What Is a Responsibility?</a></li><li><a href=#persistent-systems-and-the-single-responsibility-principle>Persistent Systems and the Single Responsibility Principle</a></li><li><a href=#summary>Summary</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=the-single-responsibility-principle>The Single Responsibility Principle
+<a class=anchor href=#the-single-responsibility-principle>#</a></h1><h2 id=what-is-the-single-responsibility-principle-srp>What Is the Single Responsibility Principle (SRP)?
+<a class=anchor href=#what-is-the-single-responsibility-principle-srp>#</a></h2><p>The Single Responsibility Principle (SRP) states that <strong>there should never be more than one reason for a class to change</strong>.</p><p>For example, consider the design shown below.</p><script src=/agile-dev-guide/mermaid.min.js></script><script>mermaid.initialize({flowchart:{useMaxWidth:!0},theme:"default"})</script><pre class=mermaid>
+classDiagram
+Computational Geometry Application --> Rectangle
+Graphical Application --> Rectangle
+Graphical Application --> GUI
+Rectangle --> GUI
+class Rectangle {
+    +void draw()
+    +double area()
+}
+</pre><p>The Rectangle class has two methods: one draws a rectangle on the screen, and the other calculates the area of the rectangle.
+Here, two applications use the Rectangle class.</p><p>One of them is an application that calculates the geometry of shapes.
+It uses the Rectangle class to perform geometric computations on shapes, but it never uses the feature that draws on the screen.</p><p>The other application handles graphics. It does some geometry calculations too, but it mainly uses Rectangle to draw rectangles on the screen.
+This design violates the Single Responsibility Principle, because the Rectangle class takes on two roles: geometric calculation and drawing on the screen.
+It is responsible both for providing a mathematical model of a rectangle&rsquo;s geometry and for rendering a rectangle in the GUI.</p><p>Violations of SRP like this cause various problems.</p><p>For example, if the application that handles geometric calculations is a console application,
+the unnecessary GUI gets linked into it, which wastes link time, compile time, and memory space.</p><p>Even worse, if a change to the graphical application forces a change to the Rectangle class,
+the geometry application, which has nothing to do with graphics, has to be rebuilt, retested, and reloaded.</p><p>To prevent this, split the Rectangle class into two, as shown below, and delegate the geometric computation of Rectangle to a GeometricRectangle class.
+That way, even if the way rectangles are filled changes, the application that handles geometric calculations is not affected.</p><pre class=mermaid>
+classDiagram
+Computational Geometry Application --> Geometric Rectangle
+Graphical Application --> Rectangle
+Graphical Application --> GUI
+Rectangle --> GUI
+Rectangle --> Geometric Rectangle
+class Rectangle {
+    +void draw()
+}
+class Geometric Rectangle {
+    +double area()
+}
+</pre><h2 id=what-is-a-responsibility>What Is a Responsibility?
+<a class=anchor href=#what-is-a-responsibility>#</a></h2><p>The Single Responsibility Principle defines <strong>&ldquo;a responsibility = a reason to change&rdquo;</strong>.
+If there is more than one reason to change a class, then that class has more than one responsibility.
+However, it is often very hard to tell whether a class has more than one responsibility.</p><p>For example, consider the following Modem interface.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>Modem</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>dial</span>(String pno);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>hangUp</span>();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>send</span>(<span style=color:#66d9ef>char</span> c);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>char</span> <span style=color:#a6e22e>recieve</span>();
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Most people would judge this to be a reasonable interface,
+because the four functions declared here are clearly &ldquo;modem features&rdquo;.</p><p>However, the <code>dial()</code> and <code>hangUp()</code> methods are responsible for &ldquo;connection management&rdquo;, while the <code>send()</code> and <code>recieve()</code> methods are responsible for &ldquo;data communication&rdquo;.</p><p>Should these two functions then be separated as shown below? That <strong>depends on how the application is going to change.</strong></p><pre class=mermaid>
+classDiagram
+ModemImplementation ..|> DataChannel
+ModemImplementation ..|> Connection
+class DataChannel {
+    +void send(char);
+    +char recieve();
+}
+class Connection {
+    +void dial(String);
+    +void hangUp();
+}
+</pre><p>If the connection management part is affected by changes to the application, separating the interfaces like this
+lets you avoid unnecessary recompiling and reloading.</p><p>On the other hand, if the two responsibilities always change at the same time, there is no need to separate them.
+<strong>Separating them would only make the design needlessly complex.</strong></p><p>Look again at the definition of SRP: the Single Responsibility Principle states that <strong>there should never be more than one reason for a class to change</strong>.
+In other words, <strong>it is not wise to apply the Single Responsibility Principle when there is no sign of change</strong>.</p><h2 id=persistent-systems-and-the-single-responsibility-principle>Persistent Systems and the Single Responsibility Principle
+<a class=anchor href=#persistent-systems-and-the-single-responsibility-principle>#</a></h2><p>Suppose we have the following design.</p><pre class=mermaid>
+classDiagram
+Employee --> Persistence Subsystem
+class Employee {
+    +int calculatePay()
+    +void store()
+}
+</pre><p>This is a clear violation of the Single Responsibility Principle: the Employee class contains both business rules and the persistence system (such as a database).</p><p>The persistence system rarely changes, whereas business rules change along the way, so the two must not be coupled.</p><h2 id=summary>Summary
+<a class=anchor href=#summary>#</a></h2><p>The Single Responsibility Principle (SRP) is one of the simplest principles, but it is also one of the hardest to apply correctly.
+As the Modem example shows, we tend to couple multiple responsibilities together at every turn.
+Finding coupled responsibilities and separating them is the essence of software design.</p><hr><p>Next, let&rsquo;s look at the Open-Closed Principle (OCP).</p><p><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/ocp/ class=book-btn>Open-Closed Principle</a></p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#what-is-the-single-responsibility-principle-srp>What Is the Single Responsibility Principle (SRP)?</a></li><li><a href=#what-is-a-responsibility>What Is a Responsibility?</a></li><li><a href=#persistent-systems-and-the-single-responsibility-principle>Persistent Systems and the Single Responsibility Principle</a></li><li><a href=#summary>Summary</a></li></ul></nav></div></aside></main></body></html>

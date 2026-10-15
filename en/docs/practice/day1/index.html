@@ -1,0 +1,460 @@
+<!doctype html><html lang=en dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  Day 1
+  #
+
+
+  Application Requirements
+  #
+
+Let&rsquo;s get started and build a working application with agile development.
+This time, we will build a task management app as a simple example.
+It is hard to say what exactly makes a hands-on exercise like this &ldquo;agile development,&rdquo;
+but we will proceed without doing a rigid design up front, adding the features we need as we go.
+Read on as if a new Story that adds a feature is added at each step."><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/practice/day1/"><meta property="og:site_name" content="Fujitsu Agile Development Guide"><meta property="og:title" content="Day 1"><meta property="og:description" content="Day 1 # Application Requirements # Let’s get started and build a working application with agile development. This time, we will build a task management app as a simple example. It is hard to say what exactly makes a hands-on exercise like this “agile development,” but we will proceed without doing a rigid design up front, adding the features we need as we go. Read on as if a new Story that adds a feature is added at each step."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>Day 1 | Fujitsu Agile Development Guide</title><link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/practice/day1/><link rel=alternate hreflang=ja href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day1/ title=1日目><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/agile-dev-guide/en/><span>Fujitsu Agile Development Guide</span></a></h2><ul class=book-languages><li><input type=checkbox id=languages class=toggle>
+<label for=languages class="flex justify-between"><a role=button class="flex align-center"><img src=/agile-dev-guide/svg/translate.svg class=book-icon alt=Languages>
+English</a></label><ul><li><a href=/agile-dev-guide/docs/practice/day1/>日本語</a></li></ul></li></ul><ul><li><a href=/agile-dev-guide/en/docs/introduction/>Introduction</a></li><li><input type=checkbox id=section-26f8587d816918486e3411338e99965e class=toggle>
+<label for=section-26f8587d816918486e3411338e99965e class="flex justify-between"><a role=button>Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/agile/manifest/>Manifesto for Agile Software Development</a></li><li><a href=/agile-dev-guide/en/docs/agile/principle/>12 Principles of Agile Development</a></li><li><a href=/agile-dev-guide/en/docs/agile/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-3f7a3b5d22e80bae50acbf0bebe29b07 class=toggle>
+<label for=section-3f7a3b5d22e80bae50acbf0bebe29b07 class="flex justify-between"><a role=button>Scrum</a></label><ul><li><a href=/agile-dev-guide/en/docs/scrum/overview/>What is Scrum</a></li><li><a href=/agile-dev-guide/en/docs/scrum/roles/>Roles</a></li><li><a href=/agile-dev-guide/en/docs/scrum/products/>Artifacts</a></li><li><a href=/agile-dev-guide/en/docs/scrum/events/>Events</a></li><li><a href=/agile-dev-guide/en/docs/scrum/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-28ce590b98459d112a5e767cc6b3b04d class=toggle>
+<label for=section-28ce590b98459d112a5e767cc6b3b04d class="flex justify-between"><a role=button>Extreme Programming</a></label><ul><li><a href=/agile-dev-guide/en/docs/xp/overview/>What is Extreme Programming</a></li><li><a href=/agile-dev-guide/en/docs/xp/practice/>Extreme Programming Practices</a></li><li><a href=/agile-dev-guide/en/docs/xp/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-a3825c6f535b2464399db20dd841f3ac class=toggle>
+<label for=section-a3825c6f535b2464399db20dd841f3ac class="flex justify-between"><a role=button>Software Testing</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaretest/overview/>Getting Started with Software Testing</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/fizzbuzz/>Warming Up</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/bowlinggame/>Bowling Game</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/testdouble/>Test Doubles</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/e2e/>E2E Testing</a></li></ul></li><li><input type=checkbox id=section-d2676bcafbfd8f6850f60b777913e79b class=toggle>
+<label for=section-d2676bcafbfd8f6850f60b777913e79b class="flex justify-between"><a role=button>Software Design</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/about/>Software Design for Agile Development</a></li><li><input type=checkbox id=section-1d5d1d86d9abc5f3e1ff9ae3bf8dee3a class=toggle>
+<label for=section-1d5d1d86d9abc5f3e1ff9ae3bf8dee3a class="flex justify-between"><a role=button>SOLID Principles</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/srp/>Single Responsibility Principle (SRP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/ocp/>Open-Closed Principle (OCP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/lsp/>Liskov Substitution Principle (LSP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/dip/>Dependency Inversion Principle (DIP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/isp/>Interface Segregation Principle (ISP)</a></li></ul></li><li><input type=checkbox id=section-c82d883779a9175f08ed321f0a41c453 class=toggle>
+<label for=section-c82d883779a9175f08ed321f0a41c453 class="flex justify-between"><a role=button>Design Patterns</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/designpattern/designpattern/>Design Patterns</a></li></ul></li></ul></li><li><input type=checkbox id=section-c4e0d3ad193a9306b0791ca960be25bb class=toggle checked>
+<label for=section-c4e0d3ad193a9306b0791ca960be25bb class="flex justify-between"><a role=button>Agile in Practice</a></label><ul><li><a href=/agile-dev-guide/en/docs/practice/day1/ class=active>Day 1</a></li><li><a href=/agile-dev-guide/en/docs/practice/day2/>Day 2</a></li><li><a href=/agile-dev-guide/en/docs/practice/day3/>Day 3</a></li><li><a href=/agile-dev-guide/en/docs/practice/day4/>Day 4</a></li><li><a href=/agile-dev-guide/en/docs/practice/day5/>Day 5</a></li><li><a href=/agile-dev-guide/en/docs/practice/day6/>Day 6</a></li></ul></li><li><a href=/agile-dev-guide/en/docs/inclosing/>In Closing</a></li><li><a href=/agile-dev-guide/en/docs/recommendedbooks/>Recommended Books</a></li><li class=book-section-flat><span>Overall</span><ul><li><input type=checkbox id=section-49203faea468220b1d42544db4f42904 class=toggle>
+<label for=section-49203faea468220b1d42544db4f42904 class="flex justify-between"><a role=button>Lean Startup Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/overview/>Lean Startup Agile Flow</a></li><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/organization/>Structure and Roles</a></li><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/productvision/>Product Vision / Value Proposition</a></li></ul></li><li><input type=checkbox id=section-fbc99cb62f97af8f577e21318d383c53 class=toggle>
+<label for=section-fbc99cb62f97af8f577e21318d383c53 class="flex justify-between"><a role=button>Modernization Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/modernization/overview/>Modernization Agile Flow</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/organization/>Structure and Roles</a></li><li><input type=checkbox id=section-cb30e408eaf7a7ec013ed0dc4d3fb020 class=toggle>
+<label for=section-cb30e408eaf7a7ec013ed0dc4d3fb020 class="flex justify-between"><a role=button>Swift Method</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/overview/>What Is the Swift Method</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/eventstorming/>Event Storming</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/boris/>Boris</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/snape/>SnapE</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/slices/>Slices</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/techchoice/>Tech Choice</a></li></ul></li></ul></li></ul></li><li class=book-section-flat><span>Team</span><ul><li><a href=/agile-dev-guide/en/docs/team/workstyle/>How Our Team Works</a></li><li><a href=/agile-dev-guide/en/docs/team/balancedteam/>Balanced Team</a></li><li><input type=checkbox id=section-d6ef0f53ed2eae5373cce9f0cae94127 class=toggle>
+<label for=section-d6ef0f53ed2eae5373cce9f0cae94127 class="flex justify-between"><a role=button>Mindset</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/mindset/onebase/>ONEbase Values</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/psychologicalsafety/>Psychological Safety</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/xp/>XP Values</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/practice/>How to Adopt Practices</a></li></ul></li><li><a href=/agile-dev-guide/en/docs/team/teambuilding/>Team Building</a></li><li><a href=/agile-dev-guide/en/docs/team/remotework/>Remote Work</a></li><li><input type=checkbox id=section-ba58c7f3c79f8713fd38efabb55e90aa class=toggle>
+<label for=section-ba58c7f3c79f8713fd38efabb55e90aa class="flex justify-between"><a role=button>Team Activities</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/activities/officestandup/>Office Standup</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/teamstandup/>Team Standup</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/preipm/>Pre-IPM</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/ipm/>IPM</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/cl/>CL Meeting</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/retro/>Retrospective</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/salesmeeting/>Sales Sync Meeting</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/internalsync/>Internal Sync</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/riskmitigations/>Risks & Mitigations</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/feedback/>Feedback</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/icebreak/>Ice Break</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/teamhealthcheck/>Team Health Check</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/1on1/>1on1</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/exercise/>Radio Taiso</a></li></ul></li><li><input type=checkbox id=section-9283499da254b9f85e8a373a7c190a7e class=toggle>
+<label for=section-9283499da254b9f85e8a373a7c190a7e class="flex justify-between"><a role=button>Team Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/practices/facilitation/>Facilitation</a></li><li><a href=/agile-dev-guide/en/docs/team/practices/okrs/>OKRs</a></li></ul></li></ul></li><li class=book-section-flat><span>Designer</span><ul><li><a href=/agile-dev-guide/en/docs/designer/overview/>What Is a Designer</a></li><li><input type=checkbox id=section-b2cda318f2a04a4c6c2d6866191c7dd0 class=toggle>
+<label for=section-b2cda318f2a04a4c6c2d6866191c7dd0 class="flex justify-between"><a role=button>Designer Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/designer/practices/persona/>Persona</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/scenario/>Scenario</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/researchplanning/>Research Planning</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/prototyping/>Prototyping</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/script/>Script Creation</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/researchaction/>Conducting Research</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/synthesize/>Synthesize</a></li></ul></li></ul></li><li class=book-section-flat><span>Product Manager</span><ul><li><a href=/agile-dev-guide/en/docs/productmanager/overview/>What Is a Product Manager</a></li><li><input type=checkbox id=section-9026fc1a07f695d85c362dc4668a1edf class=toggle>
+<label for=section-9026fc1a07f695d85c362dc4668a1edf class="flex justify-between"><a role=button>Product Manager Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/productmanager/practices/roadmap/>Product Roadmap</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/mvp/>MVP</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/userstorymapping/>User Story Mapping</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/userstory/>User Story</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/2x2/>2×2</a></li></ul></li></ul></li><li class=book-section-flat><span>Developer</span><ul><li><a href=/agile-dev-guide/en/docs/developer/overview/>What Is a Developer</a></li><li><input type=checkbox id=section-9a270bfee03ee781c85e4c3c42434241 class=toggle>
+<label for=section-9a270bfee03ee781c85e4c3c42434241 class="flex justify-between"><a role=button>Developer Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/developer/practices/tdd/>TDD</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/cicd/>CI/CD</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/pairprogramming/>Pair Programming</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/soroprogramming/>Solo Programming</a></li></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu></label><h3>Day 1</h3><label for=toc-control><img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#application-requirements>Application Requirements</a></li><li><a href=#choosing-the-architecture-programming-language-and-framework>Choosing the Architecture, Programming Language, and Framework</a></li><li><a href=#project-structure>Project Structure</a></li><li><a href=#setting-up-the-client-environment>Setting Up the Client Environment</a><ul><li><a href=#creating-the-react-app>Creating the React App</a></li><li><a href=#configuring-eslint>Configuring ESLint</a></li><li><a href=#configuring-prettier>Configuring Prettier</a></li><li><a href=#setting-up-css-in-js>Setting Up CSS-in-JS</a></li><li><a href=#setting-up-the-test-environment>Setting Up the Test Environment</a></li></ul></li><li><a href=#creating-the-header>Creating the Header</a><ul><li><a href=#writing-the-test>Writing the Test</a></li><li><a href=#implementing-the-header>Implementing the Header</a></li></ul></li><li><a href=#displaying-the-screen>Displaying the Screen</a></li><li><a href=#applying-the-design>Applying the Design</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=day-1>Day 1
+<a class=anchor href=#day-1>#</a></h1><h2 id=application-requirements>Application Requirements
+<a class=anchor href=#application-requirements>#</a></h2><p>Let&rsquo;s get started and build a working application with agile development.
+This time, we will build a task management app as a simple example.
+It is hard to say what exactly makes a hands-on exercise like this &ldquo;agile development,&rdquo;
+but we will proceed without doing a rigid design up front, adding the features we need as we go.
+Read on as if a new Story that adds a feature is added at each step.</p><h2 id=choosing-the-architecture-programming-language-and-framework>Choosing the Architecture, Programming Language, and Framework
+<a class=anchor href=#choosing-the-architecture-programming-language-and-framework>#</a></h2><p>In fact, the hardest part is often the project kickoff.
+In agile development, we follow programming techniques such as the SOLID principles so that we can accept any change.
+Even so, there are some things that are difficult to change once development is underway.</p><p>One is the programming language, and the other is the framework.</p><p>These two are extremely difficult to change later, so you need to understand the characteristics of the project and decide carefully.
+The more care you put in at the start, the easier things become later. Do not neglect the initial evaluation.</p><blockquote class="book-hint info"><p><strong>An example of changing the programming language</strong></p><p>JavaScript and its superset TypeScript can coexist within a project,
+so you can adopt a strategy of replacing one with the other gradually.
+Java and Kotlin also allow a gradual replacement strategy.
+In fact, my project originally adopted JavaScript and Java,
+but about a month and a half after starting development we switched to TypeScript and Kotlin.
+However, we were only able to make that move because development had just started and the codebase was not that large yet.</p><p>As the scale of software development grows, changes gradually become harder.
+You should choose your initial programming language carefully.</p></blockquote><h2 id=project-structure>Project Structure
+<a class=anchor href=#project-structure>#</a></h2><p>This time we will build a simple task management app.
+What we are going to build is an extremely simple SPA: the frontend uses React with TypeScript, the backend uses Spring Boot with Kotlin,
+and the frontend and backend exchange JSON over HTTP to render the screen.</p><p><img src=/agile-dev-guide/docs/practice/day1/arch.jpg alt=Architecture></p><p>We will use the following directory structure.</p><pre tabindex=0><code>todo-app
+├── e2e                 // Directory for e2e tests
+├── todo-app-client     // Directory for the client app
+└── todo-app-server     // Directory for the backend app
+</code></pre><p>First, create a todo-app directory in any location you like.</p><h2 id=setting-up-the-client-environment>Setting Up the Client Environment
+<a class=anchor href=#setting-up-the-client-environment>#</a></h2><blockquote class="book-hint warning"><p><strong>Before starting the hands-on</strong></p><p>We will build the application hands-on, presenting the source code in detail,
+but simply copying it is meaningless, and you will not learn anything from it.
+Merely looking at it will certainly not help you learn either.</p><p>This sample application uses Spring Framework (Spring Boot),
+React.js, and many other OSS libraries. It is very important to make an effort to understand anything you do not know by reading <strong>the official reference of each library or framework, or <a href=https://developer.mozilla.org/ja/docs/Web>MDN</a>
+</strong>, each time.</p><p>Keep in mind that <strong>there is no document anywhere on the web that is more useful than the official reference</strong>,
+and become able to read official references.</p><p>Engineers who can only write source code by copying and pasting tend to <strong>not try to read error messages</strong>, <strong>not try to read official documentation</strong>, and <strong>not try to read documentation in English</strong>.
+Let&rsquo;s not become like that.</p></blockquote><h3 id=creating-the-react-app>Creating the React App
+<a class=anchor href=#creating-the-react-app>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>npm create vite@latest todo-app-client -- --template react-ts
+</span></span></code></pre></div><p>This time we start from the TypeScript template.
+We created the client scaffold using <a href=https://vite.dev/guide/>vite</a>
+.</p><p>After running the command, the following log is displayed, so run the commands as instructed.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-console data-lang=console><span style=display:flex><span>Done. Now run:
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span>  cd todo-app-client
+</span></span><span style=display:flex><span>  npm install
+</span></span><span style=display:flex><span>  npm run dev
+</span></span></code></pre></div><p>Note: Run <code>npm run dev</code>, confirm that the app starts, and then stop it with Ctrl + C.</p><p>This template contains initial implementation we do not need, so for now we deleted all files except main.tsx, index.tsx, and vite-env.d.ts.<br>(Also remove any references to the deleted files.)</p><pre tabindex=0><code>src
+├── App.tsx
+├── main.tsx
+└── vite-env.d.ts
+</code></pre><h3 id=configuring-eslint>Configuring ESLint
+<a class=anchor href=#configuring-eslint>#</a></h3><p>The very first thing to do is configure lint. Lint is a library that checks whether code follows the coding conventions.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser
+</span></span><span style=display:flex><span>npx eslint --init
+</span></span></code></pre></div><p>Running the npx eslint &ndash;init command launches a configuration wizard, so answer it as follows.</p><pre tabindex=0><code>onebase@Onebase-Maguro todo-app-client % npx eslint --init  
+
+...(omitted)...
+
+✔ How would you like to use ESLint? · problems
+✔ What type of modules does your project use? · esm
+✔ Which framework does your project use? · react
+✔ Does your project use TypeScript? · typescript
+✔ Where does your code run? · browser
+The config that you&#39;ve selected requires the following dependencies:
+
+eslint, globals, @eslint/js, typescript-eslint, eslint-plugin-react
+✔ Would you like to install them now? · No / Yes
+✔ Which package manager do you want to use? · npm
+
+...(omitted)...
+</code></pre><p>The packages required for ESLint are installed. The ESLint configuration file can be either JavaScript or YAML,
+but this time we will use JavaScript.</p><p>Running <code>npx eslint --init</code> outputs eslint.config.js, which we will modify a little.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-Javascript data-lang=Javascript><span style=display:flex><span><span style=color:#75715e>// eslint.config.js
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>globals</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#34;globals&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>pluginJs</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#34;@eslint/js&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>tseslint</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#34;typescript-eslint&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>pluginReact</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#34;eslint-plugin-react&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>pluginReactJSXRuntime</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#34;eslint-plugin-react/configs/jsx-runtime.js&#34;</span>; <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/** @type {import(&#39;eslint&#39;).Linter.Config[]} */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> [
+</span></span><span style=display:flex><span>  {<span style=color:#a6e22e>files</span><span style=color:#f92672>:</span> [<span style=color:#e6db74>&#34;**/*.{js,mjs,cjs,ts,jsx,tsx}&#34;</span>]},
+</span></span><span style=display:flex><span>  {<span style=color:#a6e22e>languageOptions</span><span style=color:#f92672>:</span> { <span style=color:#a6e22e>globals</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>globals</span>.<span style=color:#a6e22e>browser</span> }},
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>pluginJs</span>.<span style=color:#a6e22e>configs</span>.<span style=color:#a6e22e>recommended</span>,
+</span></span><span style=display:flex><span>  ...<span style=color:#a6e22e>tseslint</span>.<span style=color:#a6e22e>configs</span>.<span style=color:#a6e22e>recommended</span>, 
+</span></span><span style=display:flex><span>    {                                               <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>        ...<span style=color:#a6e22e>pluginReact</span>.<span style=color:#a6e22e>configs</span>.<span style=color:#a6e22e>flat</span>.<span style=color:#a6e22e>recommended</span>,    <span style=color:#75715e>// ← changed from the original entry
+</span></span></span><span style=display:flex><span>        <span style=color:#a6e22e>settings</span><span style=color:#f92672>:</span> {                                 <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>            <span style=color:#a6e22e>react</span><span style=color:#f92672>:</span> {                                <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>                <span style=color:#a6e22e>version</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;detect&#34;</span>,                  <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>            },                                      <span style=color:#75715e>// added     
+</span></span></span><span style=display:flex><span>        },                                          <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>    },                                              <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>  <span style=color:#a6e22e>pluginReactJSXRuntime</span>                             <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>];
+</span></span></code></pre></div><p><strong>Note:</strong> After adding the entries above, the editor shows a wavy underline<br>with the message &ldquo;Cannot resolve symbol &rsquo;eslint-plugin-react/ configs/ jsx-runtime. js&rsquo;&rdquo;,<br>but this is required for running <code>npm run lint</code>, so ignore it.</p><p>Next, update the lint script in package.json.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;scripts&#34;</span>: {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;dev&#34;</span>: <span style=color:#e6db74>&#34;vite&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;build&#34;</span>: <span style=color:#e6db74>&#34;tsc -b &amp;&amp; vite build&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;lint&#34;</span>: <span style=color:#e6db74>&#34;eslint &#39;src/**/*.{js,jsx,ts,tsx}&#39;&#34;</span>, <span style=color:#75715e>// updated
+</span></span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;preview&#34;</span>: <span style=color:#e6db74>&#34;vite preview&#34;</span>
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>If you run <code>npm run lint</code> at this point, you should see various errors.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>onebase@Onebase-Maguro todo-app-client % npm run lint 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>&gt; todo-app-client@0.0.0 lint
+</span></span><span style=display:flex><span>&gt; eslint <span style=color:#e6db74>&#39;src/**/*.{js,jsx,ts,tsx}&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Warning: React version not specified in eslint-plugin-react settings. See https://github.com/jsx-eslint/eslint-plugin-react#configuration .
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>/Users/onebase/IdeaProject/todo-app-vite/todo-app-client/src/App.tsx
+</span></span><span style=display:flex><span>  10:9  error  Using target<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;_blank&#34;</span> without rel<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;noreferrer&#34;</span> <span style=color:#f92672>(</span>which implies rel<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;noopener&#34;</span><span style=color:#f92672>)</span> is a security risk in older browsers: see https://mathiasbynens.github.io/rel-noopener/#recommendations  react/jsx-no-target-blank
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>✖ <span style=color:#ae81ff>1</span> problem <span style=color:#f92672>(</span><span style=color:#ae81ff>1</span> error, <span style=color:#ae81ff>0</span> warnings<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>  <span style=color:#ae81ff>1</span> error and <span style=color:#ae81ff>0</span> warnings potentially fixable with the <span style=color:#e6db74>`</span>--fix<span style=color:#e6db74>`</span> option.
+</span></span></code></pre></div><h3 id=configuring-prettier>Configuring Prettier
+<a class=anchor href=#configuring-prettier>#</a></h3><p>Only pointing out problems is inconvenient, so we will introduce Prettier to fix them automatically.<br>First, install the extension that disables the ESLint rules that conflict with Prettier.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>npm install --save-dev eslint-config-prettier
+</span></span></code></pre></div><p>Add the eslint-config-prettier configuration to <code>eslint.config.js</code>.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>globals</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#34;globals&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>pluginJs</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#34;@eslint/js&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>tseslint</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#34;typescript-eslint&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>pluginReact</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#34;eslint-plugin-react&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>pluginReactJSXRuntime</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#34;eslint-plugin-react/configs/jsx-runtime.js&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>eslintConfigPrettier</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#34;eslint-config-prettier&#34;</span>;      <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/** @type {import(&#39;eslint&#39;).Linter.Config[]} */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> [
+</span></span><span style=display:flex><span>  {<span style=color:#a6e22e>files</span><span style=color:#f92672>:</span> [<span style=color:#e6db74>&#34;**/*.{js,mjs,cjs,ts,jsx,tsx}&#34;</span>]},
+</span></span><span style=display:flex><span>  {<span style=color:#a6e22e>languageOptions</span><span style=color:#f92672>:</span> { <span style=color:#a6e22e>globals</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>globals</span>.<span style=color:#a6e22e>browser</span> }},
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>pluginJs</span>.<span style=color:#a6e22e>configs</span>.<span style=color:#a6e22e>recommended</span>,
+</span></span><span style=display:flex><span>  ...<span style=color:#a6e22e>tseslint</span>.<span style=color:#a6e22e>configs</span>.<span style=color:#a6e22e>recommended</span>,
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    ...<span style=color:#a6e22e>pluginReact</span>.<span style=color:#a6e22e>configs</span>.<span style=color:#a6e22e>flat</span>.<span style=color:#a6e22e>recommended</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>settings</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>react</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>version</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;detect&#34;</span>,
+</span></span><span style=display:flex><span>      },
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>  },
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>pluginReactJSXRuntime</span>,
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>eslintConfigPrettier</span>,     <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>];
+</span></span></code></pre></div><p>Next, install Prettier.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>npm install --save-dev prettier
+</span></span></code></pre></div><p>Create a <code>.prettierrc</code> file under the <code>todo-app-client</code> directory.</p><pre tabindex=0><code>// .prettierrc
+{
+    &#34;singleQuote&#34;: true,
+    &#34;tabWidth&#34;: 2,
+    &#34;semi&#34;: false,
+    &#34;bracketSpacing&#34;: false,
+    &#34;bracketSameLine&#34;: true
+}
+</code></pre><p>Let&rsquo;s also add commands for fixing code to the scripts in package.json.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;scripts&#34;</span>: {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;dev&#34;</span>: <span style=color:#e6db74>&#34;vite&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;build&#34;</span>: <span style=color:#e6db74>&#34;tsc -b &amp;&amp; vite build&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;lint&#34;</span>: <span style=color:#e6db74>&#34;eslint &#39;src/**/*.{js,jsx,ts,tsx}&#39;&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;preview&#34;</span>: <span style=color:#e6db74>&#34;vite preview&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;format&#34;</span>: <span style=color:#e6db74>&#34;prettier --write &#39;src/**/*.{js,jsx,ts,tsx}&#39;&#34;</span>,  <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;lint:fix&#34;</span>: <span style=color:#e6db74>&#34;eslint --fix &#39;src/**/*.{js,jsx,ts,tsx}&#39;&#34;</span>,    <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;fix&#34;</span>: <span style=color:#e6db74>&#34;npm run format &amp;&amp; npm run lint:fix&#34;</span>               <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>That completes the configuration. Let&rsquo;s run <code>npm run fix</code>.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>onebase@Onebase-Tsurumi todo-app-client % npm run fix
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>&gt; todo-app-client@0.0.0 fix
+</span></span><span style=display:flex><span>&gt; npm run format <span style=color:#f92672>&amp;&amp;</span> npm run lint:fix
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>&gt; todo-app-client@0.0.0 format
+</span></span><span style=display:flex><span>&gt; prettier --write <span style=color:#e6db74>&#39;src/**/*.{js,jsx,ts,tsx}&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>src/App.tsx 28ms <span style=color:#f92672>(</span>unchanged<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>src/main.tsx 2ms <span style=color:#f92672>(</span>unchanged<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>src/vite-env.d.ts 1ms <span style=color:#f92672>(</span>unchanged<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>&gt; todo-app-client@0.0.0 lint:fix
+</span></span><span style=display:flex><span>&gt; eslint --fix <span style=color:#e6db74>&#39;src/**/*.{js,jsx,ts,tsx}&#39;</span>
+</span></span></code></pre></div><p>With these settings, errors are now fixed by Prettier.</p><p>The source code up to this point is available at <a href=https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step1>https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step1</a>
+.</p><h3 id=setting-up-css-in-js>Setting Up CSS-in-JS
+<a class=anchor href=#setting-up-css-in-js>#</a></h3><p>Next, we will decide how to write stylesheets. This is also hard to change later, so it needs to be decided carefully.
+The well-known options are probably these:</p><ul><li>Material UI</li><li>Tailwind CSS</li><li>styled-components</li><li>Chakra UI</li></ul><p>Material UI provides UI components with styles already applied, while Tailwind CSS, styled-components, and Chakra UI let you define styles inside JSX files.
+Because Material UI provides components, it is good for quickly building a good-looking app,
+but the drawback is that the app ends up looking obviously like &ldquo;Material UI.&rdquo;</p><p>Tailwind CSS and styled-components, on the other hand, let you design freely,
+but their coding styles differ greatly from each other.</p><p>This time we will introduce styled-components.</p><blockquote class="book-hint info"><p><strong>Advantages of styled-components</strong></p><p>A style defined with styled-components is itself a React component. Therefore, using styled-components eliminates the mapping between components and styles.</p><p>In addition, because the styles are locally scoped, the same name can be used in multiple components, and you no longer have to agonize over long names.</p><p>Another advantage is that styled-components lets you style components by writing CSS code, so the learning cost is lower than with other CSS frameworks.</p></blockquote><p>How to install styled-components is described <a href=https://styled-components.com/>here</a>
+, so let&rsquo;s follow it.</p><p>Installing styled-components is very easy; just run the following command.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>npm install --save styled-components @types/styled-components
+</span></span></code></pre></div><p>styled-components is now installed.
+Let&rsquo;s check that it was installed correctly.</p><p>Change App.tsx as follows and compile it.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#75715e>// App.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>styled</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;styled-components&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Div</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>div</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    color: red;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>App</span>() { 
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> <span style=color:#f92672>&lt;</span><span style=color:#a6e22e>Div</span><span style=color:#f92672>&gt;</span><span style=color:#a6e22e>test</span><span style=color:#f92672>&lt;</span><span style=color:#960050;background-color:#1e0010>/Div&gt;</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>App</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>npm run dev
+</span></span></code></pre></div><p><img src=/agile-dev-guide/docs/practice/day1/tailwind.jpg alt=tailwind></p><p>If you can see &ldquo;test&rdquo; displayed in red text in the browser, the installation is correct. Once you have confirmed this, restore App.tsx to its original state.</p><p>The source code up to this point is available at <a href=https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step2>https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step2</a>
+.</p><h3 id=setting-up-the-test-environment>Setting Up the Test Environment
+<a class=anchor href=#setting-up-the-test-environment>#</a></h3><p>Next, we will set up the test environment for the client.<br>Well-known React testing libraries include enzyme and React Testing Library.<br>Either would work, but enzyme currently supports only up to React 16,<br>so this time we will adopt React Testing Library.</p><p>Install the required packages:</p><ul><li>jest-environment-jsdom: required for testing DOM elements with Jest</li><li>@testing-library/react: required to use Testing Library with React</li><li>@testing-library/jest-dom: provides custom DOM element matchers for Jest</li><li>@testing-library/user-event: used for testing events</li></ul><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>npm install --save-dev jest @types/jest ts-jest
+</span></span><span style=display:flex><span>npm install --save-dev jest-environment-jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event
+</span></span></code></pre></div><p>Next, create the Jest configuration file.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>npx ts-jest config:init
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#75715e>// jest.config.js
+</span></span></span><span style=display:flex><span><span style=color:#75715e>/** @type {import(&#39;ts-jest&#39;).JestConfigWithTsJest} **/</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>transform</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;^.+.tsx?$&#34;</span><span style=color:#f92672>:</span> [<span style=color:#e6db74>&#34;ts-jest&#34;</span>,{}],
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>preset</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;ts-jest&#34;</span>,                          <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>    <span style=color:#a6e22e>testEnvironment</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;jest-environment-jsdom&#34;</span>,  <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>};
+</span></span></code></pre></div><p>Add settings to tsconfig.json.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;files&#34;</span>: [],
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;references&#34;</span>: [
+</span></span><span style=display:flex><span>    { <span style=color:#f92672>&#34;path&#34;</span>: <span style=color:#e6db74>&#34;./tsconfig.app.json&#34;</span> },
+</span></span><span style=display:flex><span>    { <span style=color:#f92672>&#34;path&#34;</span>: <span style=color:#e6db74>&#34;./tsconfig.node.json&#34;</span> }
+</span></span><span style=display:flex><span>  ],
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;compilerOptions&#34;</span>: {                      <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;jsx&#34;</span>: <span style=color:#e6db74>&#34;react-jsx&#34;</span>,                     <span style=color:#75715e>// added 
+</span></span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;esModuleInterop&#34;</span>: <span style=color:#66d9ef>true</span> ,               <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;types&#34;</span>: [<span style=color:#e6db74>&#34;@testing-library/jest-dom&#34;</span>]  <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>  }                                         <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Change the settings in tsconfig.app.json.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// (omitted)
+</span></span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;include&#34;</span>: [<span style=color:#e6db74>&#34;src&#34;</span>,<span style=color:#e6db74>&#34;test&#34;</span>]　 <span style=color:#75715e>// updated
+</span></span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Create <code>jest.setup.ts</code> directly under <code>todo-app-client</code> to set up Testing Library.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// jest.setup.ts
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#e6db74>&#34;@testing-library/jest-dom&#34;</span>;
+</span></span></code></pre></div><p>Update <code>jest.config.js</code> so that it loads <code>jest.setup.ts</code>.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#75715e>// jest.config.js
+</span></span></span><span style=display:flex><span><span style=color:#75715e>/** @type {import(&#39;ts-jest&#39;).JestConfigWithTsJest} **/</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>transform</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;^.+.tsx?$&#34;</span><span style=color:#f92672>:</span> [<span style=color:#e6db74>&#34;ts-jest&#34;</span>,{}],
+</span></span><span style=display:flex><span>    },
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>preset</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;ts-jest&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>testEnvironment</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;jest-environment-jsdom&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>setupFilesAfterEnv</span><span style=color:#f92672>:</span> [<span style=color:#e6db74>&#34;./jest.setup.ts&#34;</span>],        <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>};
+</span></span></code></pre></div><p>Add a test command to package.json.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;scripts&#34;</span>: {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;dev&#34;</span>: <span style=color:#e6db74>&#34;vite&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;build&#34;</span>: <span style=color:#e6db74>&#34;tsc -b &amp;&amp; vite build&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;lint&#34;</span>: <span style=color:#e6db74>&#34;eslint &#39;src/**/*.{js,jsx,ts,tsx}&#39;&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;preview&#34;</span>: <span style=color:#e6db74>&#34;vite preview&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;format&#34;</span>: <span style=color:#e6db74>&#34;prettier --write &#39;src/**/*.{js,jsx,ts,tsx}&#39;&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;lint:fix&#34;</span>: <span style=color:#e6db74>&#34;eslint --fix &#39;src/**/*.{js,jsx,ts,tsx}&#39;&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;fix&#34;</span>: <span style=color:#e6db74>&#34;npm run format &amp;&amp; npm run lint:fix&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f92672>&#34;test&#34;</span>: <span style=color:#e6db74>&#34;jest --watchAll&#34;</span>            <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>In this state, let&rsquo;s run <code>npm run test</code>. The test runner starts and begins watching for changes to files under src.
+From now on, it runs the tests every time a file changes.</p><p>Jest automatically runs tests if you either create a <code>__tests__</code> directory directly under the src directory,
+or create test files named in the <code>*.test.ts</code> format anywhere.</p><p>Either is fine, but this time we will use the latter format and create a <code>test</code> directory alongside the src directory.</p><h2 id=creating-the-header>Creating the Header
+<a class=anchor href=#creating-the-header>#</a></h2><h3 id=writing-the-test>Writing the Test
+<a class=anchor href=#writing-the-test>#</a></h3><p>Create a test directory directly under <code>todo-app-client</code>, create a components directory under it, and then create Header.test.tsx under that.</p><pre tabindex=0><code>├── src
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── vite-env.d.ts
+└── test
+    └── components
+        └── Header.test.tsx
+</code></pre><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// Header.test.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>render</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;@testing-library/react&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#34;Header&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cleanup</span>()
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#34;ヘッダーの初期表示&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>Header</span> /&gt;)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#39;Todo App&#39;</span>)).<span style=color:#a6e22e>toBeInTheDocument</span>()
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><p>This is our first test. It checks that the h1 element exists.</p><p>At this point the Header component has not been created, so the test naturally fails.
+When you run npm run test, you should see output like this.</p><pre tabindex=0><code>&gt; todo-app-client@0.0.0 test
+&gt; jest
+
+ FAIL  test/Header.test.tsx
+  ● Test suite failed to run
+
+    test/Header.test.tsx:10:17 - error TS2552: Cannot find name &#39;Header&#39;. Did you mean &#39;Headers&#39;?
+
+    10         render(&lt;Header /&gt;)
+                       ~~~~~~
+
+      node_modules/typescript/lib/lib.dom.d.ts:13175:13
+        13175 declare var Headers: {
+                          ~~~~~~~
+        &#39;Headers&#39; is declared here.
+
+Test Suites: 1 failed, 1 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        0.546 s
+Ran all test suites.
+</code></pre><h3 id=implementing-the-header>Implementing the Header
+<a class=anchor href=#implementing-the-header>#</a></h3><p>Create a components directory under src, and create Header.tsx under it.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// Header.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Header</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> (
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>h1</span>&gt;<span style=color:#a6e22e>Todo</span> <span style=color:#a6e22e>App</span>&lt;/<span style=color:#f92672>h1</span>&gt;
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>Header</span>
+</span></span></code></pre></div><p>Once you have created Header.tsx, open Header.test.tsx and import the Header component you just created.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>render</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;@testing-library/react&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Header</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../../src/components/Header&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#34;Header&#34;</span>, () <span style=color:#f92672>=&gt;</span> 
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cleanup</span>()
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#34;ヘッダーの初期表示&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>Header</span> /&gt;)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#39;Todo App&#39;</span>)).<span style=color:#a6e22e>toBeInTheDocument</span>()
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><p>If you save this file and run the tests, you will see that the test passes.</p><pre tabindex=0><code> PASS  test/components/Header.test.tsx
+  Header
+    ✓ ヘッダーの初期表示 (10 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        0.689 s
+Ran all test suites.
+</code></pre><p>Your first test passed! Congratulations.</p><h2 id=displaying-the-screen>Displaying the Screen
+<a class=anchor href=#displaying-the-screen>#</a></h2><p>We created the Header, but it has not been included in the React app yet, so nothing is displayed in the browser.
+Next, let&rsquo;s display it on the screen.</p><p>As with the component, create a pages directory under <strong>tests</strong> and create <code>Home.test.tsx</code>.
+Similarly, create <code>Home.tsx</code> under src/pages.</p><pre tabindex=0><code>├── src
+│        ├── App.tsx
+│        ├── components
+│        │       └── Header.tsx
+│        ├── main.tsx
+│        ├── pages
+│        │       └── Home.tsx
+│        └── vite-env.d.ts
+└── test
+         ├── components
+         │       └── Header.test.tsx
+         └── pages
+                 └── Home.test.tsx
+</code></pre><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// Home.test.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>render</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;@testing-library/react&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Home</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../../src/pages/Home&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#34;Home画面&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cleanup</span>()
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#34;ホーム画面の初期表示&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>Home</span> /&gt;)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#34;Todo App&#34;</span>)).<span style=color:#a6e22e>toBeInTheDocument</span>()
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// Home.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Header</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../components/Header&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Home</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> (
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>Header</span>/&gt;
+</span></span><span style=display:flex><span>  &lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>Home</span>
+</span></span></code></pre></div><p>We wrote Home.test.tsx and Home.tsx as shown above.
+Unlike the previous test, this one checks that the Header component is displayed.
+This should also pass without any problems.</p><p>Now change App.tsx as follows.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// App.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Home</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;./pages/Home&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>App</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> (
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;App&#34;</span>&gt;
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>Home</span> /&gt;
+</span></span><span style=display:flex><span>      &lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>App</span>
+</span></span></code></pre></div><p>Run <code>npm run dev</code> and access <a href=https://localhost:5173>https://localhost:5173</a>
+.</p><p><img src=/agile-dev-guide/docs/practice/day1/home_initial.jpg alt="Home screen"></p><p>If the string &ldquo;TodoApp&rdquo; is displayed, you have succeeded!</p><h2 id=applying-the-design>Applying the Design
+<a class=anchor href=#applying-the-design>#</a></h2><p>It looks a bit plain as it is, so let&rsquo;s apply a design to the Header.
+We will apply the design using styled-components.
+For how to use styled-components, see <a href=https://styled-components.com/docs/basics#getting-started>here</a>
+.</p><p>Let&rsquo;s actually apply the design to the header.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// Header.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>styled</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;styled-components&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Wrapper</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>div</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  display: flex;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  align-items: center;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  background-color: #10B981;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  padding: 1.5rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Title</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>h1</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  font-weight: 600;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  font-size: 1.25rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  line-height: 1.75rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  color: #ffffff;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  letter-spacing: -0.025em;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Header</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span>
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>Wrapper</span> <span style=color:#a6e22e>data-testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#39;Header&#39;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>Title</span>&gt;<span style=color:#a6e22e>Todo</span> <span style=color:#a6e22e>App</span>&lt;/<span style=color:#f92672>Title</span>&gt;
+</span></span><span style=display:flex><span>  &lt;/<span style=color:#f92672>Wrapper</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>Header</span>
+</span></span></code></pre></div><p>We changed Header.tsx as shown above.</p><p>Next, we will adjust React&rsquo;s default styles.</p><p>Create index.css directly under src</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-css data-lang=css><span style=display:flex><span><span style=color:#75715e>/* index.css */</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>body</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>margin</span>: <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>and load it in index.tsx to remove the default margin.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// index.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>React</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>ReactDOM</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-dom/client&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#e6db74>&#39;./index.css&#39;</span> <span style=color:#75715e>//added
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>App</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./App&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>reportWebVitals</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./reportWebVitals&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>root</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>ReactDOM</span>.<span style=color:#a6e22e>createRoot</span>(document.<span style=color:#a6e22e>getElementById</span>(<span style=color:#e6db74>&#39;root&#39;</span>) <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>HTMLElement</span>)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>root</span>.<span style=color:#a6e22e>render</span>(
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>React.StrictMode</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>App</span> /&gt;
+</span></span><span style=display:flex><span>  &lt;/<span style=color:#f92672>React.StrictMode</span>&gt;
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><p>That completes applying the styles.</p><p><img src=/agile-dev-guide/docs/practice/day1/home_apply_design.jpg alt="Design applied to the header"></p><p>We gave the header a background color and made the Header text white and larger.
+It suddenly looks much more vibrant.</p><p>The source code up to this point is available at <a href=https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step3>https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step3</a>
+.</p><blockquote class="book-hint warning"><p><strong>Points to note when using styled-components</strong></p><p>As you may have noticed while actually using styled-components, styled-components is a CSS framework with a very high degree of freedom.</p><p>Therefore, if each team member develops however they like, readability drops and it leads to bugs.
+For example, you cannot tell at a glance a component that only defines design from a component that has some functionality.
+It also becomes hard to grasp the overall picture of the components you have defined.</p><p>So when developing as a team, define rules such as the directory structure, file structure, and naming conventions before using it.</p></blockquote><hr><p>On Day 1, we set up the environment for the client app and got the first screen displayed.
+Setting up the environment is actually quite difficult unless it is done by someone experienced in building apps.
+This is because initial app setup is not something you do very often.</p><p>React in particular is difficult to set up initially, even though create-react-app has simplified it.
+We have also only touched the surface of the React framework so far.
+Do your best not to get stuck up to this point.</p><hr><p>Continued on Day 2.</p><p><a href=/agile-dev-guide/en/docs/practice/day2/ class=book-btn>Day 2</a></p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#application-requirements>Application Requirements</a></li><li><a href=#choosing-the-architecture-programming-language-and-framework>Choosing the Architecture, Programming Language, and Framework</a></li><li><a href=#project-structure>Project Structure</a></li><li><a href=#setting-up-the-client-environment>Setting Up the Client Environment</a><ul><li><a href=#creating-the-react-app>Creating the React App</a></li><li><a href=#configuring-eslint>Configuring ESLint</a></li><li><a href=#configuring-prettier>Configuring Prettier</a></li><li><a href=#setting-up-css-in-js>Setting Up CSS-in-JS</a></li><li><a href=#setting-up-the-test-environment>Setting Up the Test Environment</a></li></ul></li><li><a href=#creating-the-header>Creating the Header</a><ul><li><a href=#writing-the-test>Writing the Test</a></li><li><a href=#implementing-the-header>Implementing the Header</a></li></ul></li><li><a href=#displaying-the-screen>Displaying the Screen</a></li><li><a href=#applying-the-design>Applying the Design</a></li></ul></nav></div></aside></main></body></html>

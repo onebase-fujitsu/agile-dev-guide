@@ -8,10 +8,10 @@
   #
 
 まずe2eテスト用の環境を作成していきましょう。"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/"><meta property="og:site_name" content="Fujitsu Agile Development Guide"><meta property="og:title" content="6日目"><meta property="og:description" content="6日目 # クライアントとサーバを連携させてタスクを作成することができるようになったので、シナリオテストを作成していきましょう。
-e2eテストの環境構築 # まずe2eテスト用の環境を作成していきましょう。"><meta property="og:locale" content="ja"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>6日目 | Fujitsu Agile Development Guide</title><link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+e2eテストの環境構築 # まずe2eテスト用の環境を作成していきましょう。"><meta property="og:locale" content="ja"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>6日目 | Fujitsu Agile Development Guide</title><link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day6/><link rel=alternate hreflang=en href=https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/practice/day6/ title="Day 6"><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span></a></h2><ul class=book-languages><li><input type=checkbox id=languages class=toggle>
 <label for=languages class="flex justify-between"><a role=button class="flex align-center"><img src=/agile-dev-guide/svg/translate.svg class=book-icon alt=Languages>
-日本語</a></label><ul><li><a href=/agile-dev-guide/en/>English</a></li></ul></li></ul><ul><li><a href=/agile-dev-guide/docs/introduction/>はじめに</a></li><li><input type=checkbox id=section-fe72557a7878dded4efa0060e21abacc class=toggle>
+日本語</a></label><ul><li><a href=/agile-dev-guide/en/docs/practice/day6/>English</a></li></ul></li></ul><ul><li><a href=/agile-dev-guide/docs/introduction/>はじめに</a></li><li><input type=checkbox id=section-fe72557a7878dded4efa0060e21abacc class=toggle>
 <label for=section-fe72557a7878dded4efa0060e21abacc class="flex justify-between"><a role=button>アジャイル</a></label><ul><li><a href=/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a></li><li><a href=/agile-dev-guide/docs/agile/principle/>アジャイル開発12の原則</a></li><li><a href=/agile-dev-guide/docs/agile/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-60906829343241fe59efbb09409d99f8 class=toggle>
 <label for=section-60906829343241fe59efbb09409d99f8 class="flex justify-between"><a role=button>スクラム</a></label><ul><li><a href=/agile-dev-guide/docs/scrum/overview/>スクラムとは</a></li><li><a href=/agile-dev-guide/docs/scrum/roles/>ロール</a></li><li><a href=/agile-dev-guide/docs/scrum/products/>成果物</a></li><li><a href=/agile-dev-guide/docs/scrum/events/>イベント</a></li><li><a href=/agile-dev-guide/docs/scrum/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-8258873460fa80799dab8ced5b37f178 class=toggle>
 <label for=section-8258873460fa80799dab8ced5b37f178 class="flex justify-between"><a role=button>エクストリームプログラミング</a></label><ul><li><a href=/agile-dev-guide/docs/xp/overview/>エクストリームプログラミングとは</a></li><li><a href=/agile-dev-guide/docs/xp/practice/>エクストリームプログラミングのプラクティス</a></li><li><a href=/agile-dev-guide/docs/xp/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-ef522355473a56c6b477dd934de57bb8 class=toggle>
@@ -56,7 +56,7 @@ e2eテストの環境構築 # まずe2eテスト用の環境を作成してい�
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div><p>編集が完了したらe2eディレクトリで以下のコマンドを実行してみましょう。
 Chromeが起動し画像のような画面が一瞬起動して閉じると環境の準備は完了です。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>npm run test
-</span></span></code></pre></div><p><img src=testcafe.jpg alt=testcafe></p><p>ここまでのリポジトリは
+</span></span></code></pre></div><p><img src=/agile-dev-guide/docs/practice/day6/testcafe.jpg alt=testcafe></p><p>ここまでのリポジトリは
 <a href=https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step12>https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step12</a>
 においてあります。</p><h2 id=e2eテストの作成>e2eテストの作成
 <a class=anchor href=#e2e%e3%83%86%e3%82%b9%e3%83%88%e3%81%ae%e4%bd%9c%e6%88%90>#</a></h2><p>では早速e2eテストを作成していきましょう。まず、トップページが表示されることを確認しましょう。
@@ -116,7 +116,8 @@ test.jsを以下のように変更します。</p><div class=highlight><pre tabi
 一連のプロセスをE2Eテストするというところまで来ました。</p><p>しかし、Componentの分割粒度も曖昧なままです。
 複数人で開発をすすめるとどうしても開発者によってComponentの分割粒度にばらつきがでます。
 意図せず巨大なComponentができてしまうかもしれません。
-そこで取り入れたいのが <a href=https://bradfrost.com/blog/post/atomic-web-design/>Atomic Design</a> の考え方です。</p><p>アプリ開発はとにかく自由度が大きいです。アジャイル開発となれば開発に関する裁量は開発者に委ねられるため、
+そこで取り入れたいのが <a href=https://bradfrost.com/blog/post/atomic-web-design/>Atomic Design</a>
+の考え方です。</p><p>アプリ開発はとにかく自由度が大きいです。アジャイル開発となれば開発に関する裁量は開発者に委ねられるため、
 無数にある開発手法の中から最適なものを選択し、アーキテクチャを決定して、実装していかなければなりません。</p><p>そして、自由度が高くなればなるほどに、個人間での開発スタイルやスキルの"ブレ"が問題になってきます。
 <strong>チーム開発において最も大事なのは規約です。</strong>
 このハンズオンでも一番最初にやったのはeslintの設定でした。規約はとにかく大事です。</p><p>コンポーネントの分割粒度はこうする、バックエンドのAPIはこうするとチーム内でかならず合意形成をとり、

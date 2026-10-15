@@ -8,10 +8,10 @@
 
 ここまでソフトウェアの単体テストやインテグレーションテストのやり方を見てきました。
 しかし、ServerやClientがきちんと連携してシステムが正しく振る舞うことができるかどうかはまだわかりません。
-そこで実施するのがE2E(End to End)テストというシステム全体の通しテストです。受け入れテストと呼ばれる場合もあります。"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/"><meta property="og:site_name" content="Fujitsu Agile Development Guide"><meta property="og:title" content="E2Eテスト"><meta property="og:description" content="E2Eテスト # E2Eテストとは # ここまでソフトウェアの単体テストやインテグレーションテストのやり方を見てきました。 しかし、ServerやClientがきちんと連携してシステムが正しく振る舞うことができるかどうかはまだわかりません。 そこで実施するのがE2E(End to End)テストというシステム全体の通しテストです。受け入れテストと呼ばれる場合もあります。"><meta property="og:locale" content="ja"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>E2Eテスト | Fujitsu Agile Development Guide</title><link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+そこで実施するのがE2E(End to End)テストというシステム全体の通しテストです。受け入れテストと呼ばれる場合もあります。"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/"><meta property="og:site_name" content="Fujitsu Agile Development Guide"><meta property="og:title" content="E2Eテスト"><meta property="og:description" content="E2Eテスト # E2Eテストとは # ここまでソフトウェアの単体テストやインテグレーションテストのやり方を見てきました。 しかし、ServerやClientがきちんと連携してシステムが正しく振る舞うことができるかどうかはまだわかりません。 そこで実施するのがE2E(End to End)テストというシステム全体の通しテストです。受け入れテストと呼ばれる場合もあります。"><meta property="og:locale" content="ja"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>E2Eテスト | Fujitsu Agile Development Guide</title><link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/e2e/><link rel=alternate hreflang=en href=https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/softwaretest/e2e/ title="E2E Testing"><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
 <input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/agile-dev-guide/><span>Fujitsu Agile Development Guide</span></a></h2><ul class=book-languages><li><input type=checkbox id=languages class=toggle>
 <label for=languages class="flex justify-between"><a role=button class="flex align-center"><img src=/agile-dev-guide/svg/translate.svg class=book-icon alt=Languages>
-日本語</a></label><ul><li><a href=/agile-dev-guide/en/>English</a></li></ul></li></ul><ul><li><a href=/agile-dev-guide/docs/introduction/>はじめに</a></li><li><input type=checkbox id=section-fe72557a7878dded4efa0060e21abacc class=toggle>
+日本語</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaretest/e2e/>English</a></li></ul></li></ul><ul><li><a href=/agile-dev-guide/docs/introduction/>はじめに</a></li><li><input type=checkbox id=section-fe72557a7878dded4efa0060e21abacc class=toggle>
 <label for=section-fe72557a7878dded4efa0060e21abacc class="flex justify-between"><a role=button>アジャイル</a></label><ul><li><a href=/agile-dev-guide/docs/agile/manifest/>アジャイルソフトウェア開発宣言</a></li><li><a href=/agile-dev-guide/docs/agile/principle/>アジャイル開発12の原則</a></li><li><a href=/agile-dev-guide/docs/agile/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-60906829343241fe59efbb09409d99f8 class=toggle>
 <label for=section-60906829343241fe59efbb09409d99f8 class="flex justify-between"><a role=button>スクラム</a></label><ul><li><a href=/agile-dev-guide/docs/scrum/overview/>スクラムとは</a></li><li><a href=/agile-dev-guide/docs/scrum/roles/>ロール</a></li><li><a href=/agile-dev-guide/docs/scrum/products/>成果物</a></li><li><a href=/agile-dev-guide/docs/scrum/events/>イベント</a></li><li><a href=/agile-dev-guide/docs/scrum/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-8258873460fa80799dab8ced5b37f178 class=toggle>
 <label for=section-8258873460fa80799dab8ced5b37f178 class="flex justify-between"><a role=button>エクストリームプログラミング</a></label><ul><li><a href=/agile-dev-guide/docs/xp/overview/>エクストリームプログラミングとは</a></li><li><a href=/agile-dev-guide/docs/xp/practice/>エクストリームプログラミングのプラクティス</a></li><li><a href=/agile-dev-guide/docs/xp/conclude/>まとめ</a></li></ul></li><li><input type=checkbox id=section-ef522355473a56c6b477dd934de57bb8 class=toggle checked>
@@ -46,7 +46,8 @@ UI変更に弱く、変更が多い画面に不向きで修正コストが大き
 これはローカル環境だと自由に設定できるので問題ないのですが、
 <strong>CI/CDパイプライン上でE2Eテストをするときに大きなネックになることが多い</strong>ので、採用は慎重にしてください。</p><blockquote class="book-hint warning"><p><strong>CI/CDパイプラインでのネックとは</strong></p><p>使用するCI/CDパイプラインによっては使用できる仮想マシンの環境に制約があります。
 例えばgitlab CIは自由にDocker Imageをpullしてその上で、CI/CDスクリプトを実行できるため自由度が高いですが、
-Azure Pipelinesでは <a href="https://docs.microsoft.com/ja-jp/azure/devops/pipelines/agents/hosted?view=azure-devops">Azureが提供しているVM Image</a> しか使用することができません。</p><p>セットアップのスクリプトを組むこともできますが、その分パイプラインの実行に時間がかかるようになってしまうため要注意です。</p></blockquote><h3 id=cypress>Cypress
+Azure Pipelinesでは <a href="https://docs.microsoft.com/ja-jp/azure/devops/pipelines/agents/hosted?view=azure-devops">Azureが提供しているVM Image</a>
+しか使用することができません。</p><p>セットアップのスクリプトを組むこともできますが、その分パイプラインの実行に時間がかかるようになってしまうため要注意です。</p></blockquote><h3 id=cypress>Cypress
 <a class=anchor href=#cypress>#</a></h3><p><a href=https://www.cypress.io/>https://www.cypress.io/</a></p><p>ブラウザの裏でNode.jsのサーバープロセスを動かし、ブラウザ上のテストランナーとやり取りすることで、
 ブラウザ外の操作（例えばファイルシステムや、ネットワークのコントロールといった）ができます。
 導入も非常に簡単ですし、操作速度も非常に高速です。
@@ -55,7 +56,8 @@ Javascriptのテストではとても一般的に使用されている、Mocha�
 また、複数ブラウザウィンドウを同時操作するということもできないので、チャットのように2つのウィンドウを同時に操作みたいなテストケースには対応できません。
 以前はChromeのみでしたが、FirefoxやEdgeにも対応しました。</p><h3 id=testcafe>Testcafe
 <a class=anchor href=#testcafe>#</a></h3><p><a href=https://testcafe.io/>https://testcafe.io/</a></p><p>これもCypressと同じくNode.jsで動くテストランナーです。
-Testcafeは2016年頃登場した、比較的新しいツールで、CypressとTestcafeは特徴がよく似ているためよく比較されます。</p><p><a href=https://www.browserstack.com/>BrowserStack</a> に対応しているのはCypressにはない大きな利点です。
+Testcafeは2016年頃登場した、比較的新しいツールで、CypressとTestcafeは特徴がよく似ているためよく比較されます。</p><p><a href=https://www.browserstack.com/>BrowserStack</a>
+に対応しているのはCypressにはない大きな利点です。
 ブラウザ互換性を担保する必要があるプロジェクトでは重宝するでしょう。
 また2021年の2月にリリースされたv1.10.0複数ブラウザウィンドウテストがサポートされたこともCypressには無い大きな利点になります。</p><p>デメリットとしてはアサーションライブラリが独自のものになるため、習得にはすこし時間がかかることです。</p><h3 id=mabl>mabl
 <a class=anchor href=#mabl>#</a></h3><p><a href=https://www.mabl.com/>https://www.mabl.com/</a></p><p>AIを使った受け入れテストの自動化が可能という触れ込みです。
@@ -68,14 +70,16 @@ Chromeの拡張機能をつかってブラウザ操作を記憶してテスト�
 前述の通り後からの変更はかなり大変ですので、プロジェクトで慎重に吟味して決定してください。</p><h2 id=サンプルアプリケーション>サンプルアプリケーション
 <a class=anchor href=#%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3>#</a></h2><p>もし、前のテストダブルの節でリポジトリをクローンされていない方は以下のコマンドを実行してください。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>git clone -b https://github.com/Onebase-Fujitsu/simple-todo-app.git
 </span></span></code></pre></div><p>このアプリケーションはシンプルなタスク管理アプリケーションになります。
-<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/#%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3>アプリケーションの詳細な説明はこちら</a> で解説してありますので、ご一読ください。</p><p>ルートのディレクトリにe2eというディレクトリがありますので、まず以下のコマンドを実行してみてください。</p><p>e2eテストの起動(Mac/Linuxの場合)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>cd e2e
+<a href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/testdouble/#%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3>アプリケーションの詳細な説明はこちら</a>
+で解説してありますので、ご一読ください。</p><p>ルートのディレクトリにe2eというディレクトリがありますので、まず以下のコマンドを実行してみてください。</p><p>e2eテストの起動(Mac/Linuxの場合)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>cd e2e
 </span></span><span style=display:flex><span>npm install
 </span></span><span style=display:flex><span>npm run test
 </span></span></code></pre></div><p>e2eテストの起動(Windowsの場合)</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>chdir e2e
 </span></span><span style=display:flex><span>npm install
 </span></span><span style=display:flex><span>npm run test
 </span></span></code></pre></div><p><code>npm run test</code>コマンドを実行するとChromeのウィンドウが一瞬開いてすぐ閉じると思います。
-もしChromeをインストールされていない方は <a href=https://www.google.com/intl/ja_jp/chrome/>こちらからChromeをインストール</a> して試してみてください。</p><p><img src=testcafe.jpg alt=testcafe></p><p>この画面が出たらこのセクションを始める準備は大丈夫です。</p><h2 id=testcafeによるe2eテスト>testcafeによるE2Eテスト
+もしChromeをインストールされていない方は <a href=https://www.google.com/intl/ja_jp/chrome/>こちらからChromeをインストール</a>
+して試してみてください。</p><p><img src=/agile-dev-guide/docs/softwaretest/e2e/testcafe.jpg alt=testcafe></p><p>この画面が出たらこのセクションを始める準備は大丈夫です。</p><h2 id=testcafeによるe2eテスト>testcafeによるE2Eテスト
 <a class=anchor href=#testcafe%e3%81%ab%e3%82%88%e3%82%8be2e%e3%83%86%e3%82%b9%e3%83%88>#</a></h2><p>e2eディレクトリ配下のpackage.jsonをみてみましょう。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
 </span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;name&#34;</span>: <span style=color:#e6db74>&#34;e2e-test&#34;</span>,
 </span></span><span style=display:flex><span>  <span style=color:#f92672>&#34;version&#34;</span>: <span style=color:#e6db74>&#34;1.0.0&#34;</span>,
@@ -103,7 +107,7 @@ chromeを他のブラウザに変更すると他のブラウザでテストす�
 3. 作成したタスクをクリックすると完了済みの状態になる
 4. 完了済みのタスクを再度クリックすると未完了状態になる
 5. ゴミ場ボタンをクリックするとタスクが表示されなくなる
-</code></pre><p>その上でこのClientのHTMLの構造をみてみましょう。</p><p><img src=clientHTML.jpg alt=client></p><p>実際の画面と照らし合わせるとこんな感じです。</p><p><img src=clientHTML2.jpg alt=client2></p><p>このHTML文書の構造はE2Eテストを書く上でとても大事です。
+</code></pre><p>その上でこのClientのHTMLの構造をみてみましょう。</p><p><img src=/agile-dev-guide/docs/softwaretest/e2e/clientHTML.jpg alt=client></p><p>実際の画面と照らし合わせるとこんな感じです。</p><p><img src=/agile-dev-guide/docs/softwaretest/e2e/clientHTML2.jpg alt=client2></p><p>このHTML文書の構造はE2Eテストを書く上でとても大事です。
 というのもTestcafeではSelectorという命令をつかって要素を指定していきます。
 <strong>「どこに何があって」「どうすれば要素を一意に特定できるか」を考えながら書く</strong>のがとても大事です。</p><p>それではこのシナリオテストを順番に実装していってみましょう。</p><h3 id=最初のテスト>最初のテスト
 <a class=anchor href=#%e6%9c%80%e5%88%9d%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#75715e>// test.js
@@ -295,7 +299,9 @@ chromeを他のブラウザに変更すると他のブラウザでテストす�
 </span></span><span style=display:flex><span>        .<span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>Selector</span>(<span style=color:#e6db74>&#39;ul&#39;</span>).<span style=color:#a6e22e>child</span>().<span style=color:#a6e22e>nth</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>).<span style=color:#a6e22e>find</span>(<span style=color:#e6db74>&#39;p&#39;</span>).<span style=color:#a6e22e>withText</span>(<span style=color:#e6db74>&#39;description&#39;</span>).<span style=color:#a6e22e>exists</span>).<span style=color:#a6e22e>notOk</span>()
 </span></span><span style=display:flex><span>})
 </span></span></code></pre></div><p>存在しないことを確認したいので、作成したときに書いたテストの最後を<code>.ok()</code>から<code>.notOk()</code>に変更するだけです！</p><p>以上で予定していたシナリオをすべてスクリプトに書くことができました！お疲れさまです！</p><h2 id=まとめ>まとめ
-<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a></h2><p><a href=https://github.com/Onebase-Fujitsu/simple-todo-app/tree/e2etest>完成したテストを含むリポジトリはこちら</a> で公開しています。</p><p>また、<a href=https://github.com/Onebase-Fujitsu/simple-todo-app/blob/e2etest/e2e/test/test.js>テストスクリプトファイルはこちら</a> です。</p><p>testcafeによるE2Eテストはいかがでしょうか？
+<a class=anchor href=#%e3%81%be%e3%81%a8%e3%82%81>#</a></h2><p><a href=https://github.com/Onebase-Fujitsu/simple-todo-app/tree/e2etest>完成したテストを含むリポジトリはこちら</a>
+で公開しています。</p><p>また、<a href=https://github.com/Onebase-Fujitsu/simple-todo-app/blob/e2etest/e2e/test/test.js>テストスクリプトファイルはこちら</a>
+です。</p><p>testcafeによるE2Eテストはいかがでしょうか？
 新しく出てきたライブラリですので多少覚えることは多いかもしれませんが、
 手続き的に操作と評価を書くだけですので、やってることは非常に単純だということがおわかりいただけたのではないかと思います。</p><p>testcafeの素晴らしい所はなにより導入が簡単というところで、<code>npm install -D testcafe</code>コマンド一発で導入が完了します。
 headlessモードのChromeで動かせば、CI/CDパイプライン上でも簡単に動かすことができますし、

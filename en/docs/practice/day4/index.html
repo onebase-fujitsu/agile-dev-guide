@@ -1,0 +1,721 @@
+<!doctype html><html lang=en dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  Day 4
+  #
+
+By the end of Day 3, we were able to connect the frontend built with React to the backend built with Spring Boot.
+However, although we can display tasks, there is still no feature for adding tasks.
+From Day 4 on, let&rsquo;s keep adding features.
+
+  Building the Add Task Screen
+  #
+
+Right now, the Client application does not have a router yet.
+For example, accessing http://localhost:5173/
+ shows the Home screen,
+and accessing http://localhost:5173/hogehoge
+ also shows the Home screen."><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/practice/day4/"><meta property="og:site_name" content="Fujitsu Agile Development Guide"><meta property="og:title" content="Day 4"><meta property="og:description" content="Day 4 # By the end of Day 3, we were able to connect the frontend built with React to the backend built with Spring Boot. However, although we can display tasks, there is still no feature for adding tasks. From Day 4 on, let’s keep adding features.
+Building the Add Task Screen # Right now, the Client application does not have a router yet. For example, accessing http://localhost:5173/ shows the Home screen, and accessing http://localhost:5173/hogehoge also shows the Home screen."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>Day 4 | Fujitsu Agile Development Guide</title><link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/practice/day4/><link rel=alternate hreflang=ja href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/practice/day4/ title=4日目><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/agile-dev-guide/en/><span>Fujitsu Agile Development Guide</span></a></h2><ul class=book-languages><li><input type=checkbox id=languages class=toggle>
+<label for=languages class="flex justify-between"><a role=button class="flex align-center"><img src=/agile-dev-guide/svg/translate.svg class=book-icon alt=Languages>
+English</a></label><ul><li><a href=/agile-dev-guide/docs/practice/day4/>日本語</a></li></ul></li></ul><ul><li><a href=/agile-dev-guide/en/docs/introduction/>Introduction</a></li><li><input type=checkbox id=section-26f8587d816918486e3411338e99965e class=toggle>
+<label for=section-26f8587d816918486e3411338e99965e class="flex justify-between"><a role=button>Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/agile/manifest/>Manifesto for Agile Software Development</a></li><li><a href=/agile-dev-guide/en/docs/agile/principle/>12 Principles of Agile Development</a></li><li><a href=/agile-dev-guide/en/docs/agile/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-3f7a3b5d22e80bae50acbf0bebe29b07 class=toggle>
+<label for=section-3f7a3b5d22e80bae50acbf0bebe29b07 class="flex justify-between"><a role=button>Scrum</a></label><ul><li><a href=/agile-dev-guide/en/docs/scrum/overview/>What is Scrum</a></li><li><a href=/agile-dev-guide/en/docs/scrum/roles/>Roles</a></li><li><a href=/agile-dev-guide/en/docs/scrum/products/>Artifacts</a></li><li><a href=/agile-dev-guide/en/docs/scrum/events/>Events</a></li><li><a href=/agile-dev-guide/en/docs/scrum/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-28ce590b98459d112a5e767cc6b3b04d class=toggle>
+<label for=section-28ce590b98459d112a5e767cc6b3b04d class="flex justify-between"><a role=button>Extreme Programming</a></label><ul><li><a href=/agile-dev-guide/en/docs/xp/overview/>What is Extreme Programming</a></li><li><a href=/agile-dev-guide/en/docs/xp/practice/>Extreme Programming Practices</a></li><li><a href=/agile-dev-guide/en/docs/xp/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-a3825c6f535b2464399db20dd841f3ac class=toggle>
+<label for=section-a3825c6f535b2464399db20dd841f3ac class="flex justify-between"><a role=button>Software Testing</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaretest/overview/>Getting Started with Software Testing</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/fizzbuzz/>Warming Up</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/bowlinggame/>Bowling Game</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/testdouble/>Test Doubles</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/e2e/>E2E Testing</a></li></ul></li><li><input type=checkbox id=section-d2676bcafbfd8f6850f60b777913e79b class=toggle>
+<label for=section-d2676bcafbfd8f6850f60b777913e79b class="flex justify-between"><a role=button>Software Design</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/about/>Software Design for Agile Development</a></li><li><input type=checkbox id=section-1d5d1d86d9abc5f3e1ff9ae3bf8dee3a class=toggle>
+<label for=section-1d5d1d86d9abc5f3e1ff9ae3bf8dee3a class="flex justify-between"><a role=button>SOLID Principles</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/srp/>Single Responsibility Principle (SRP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/ocp/>Open-Closed Principle (OCP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/lsp/>Liskov Substitution Principle (LSP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/dip/>Dependency Inversion Principle (DIP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/isp/>Interface Segregation Principle (ISP)</a></li></ul></li><li><input type=checkbox id=section-c82d883779a9175f08ed321f0a41c453 class=toggle>
+<label for=section-c82d883779a9175f08ed321f0a41c453 class="flex justify-between"><a role=button>Design Patterns</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/designpattern/designpattern/>Design Patterns</a></li></ul></li></ul></li><li><input type=checkbox id=section-c4e0d3ad193a9306b0791ca960be25bb class=toggle checked>
+<label for=section-c4e0d3ad193a9306b0791ca960be25bb class="flex justify-between"><a role=button>Agile in Practice</a></label><ul><li><a href=/agile-dev-guide/en/docs/practice/day1/>Day 1</a></li><li><a href=/agile-dev-guide/en/docs/practice/day2/>Day 2</a></li><li><a href=/agile-dev-guide/en/docs/practice/day3/>Day 3</a></li><li><a href=/agile-dev-guide/en/docs/practice/day4/ class=active>Day 4</a></li><li><a href=/agile-dev-guide/en/docs/practice/day5/>Day 5</a></li><li><a href=/agile-dev-guide/en/docs/practice/day6/>Day 6</a></li></ul></li><li><a href=/agile-dev-guide/en/docs/inclosing/>In Closing</a></li><li><a href=/agile-dev-guide/en/docs/recommendedbooks/>Recommended Books</a></li><li class=book-section-flat><span>Overall</span><ul><li><input type=checkbox id=section-49203faea468220b1d42544db4f42904 class=toggle>
+<label for=section-49203faea468220b1d42544db4f42904 class="flex justify-between"><a role=button>Lean Startup Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/overview/>Lean Startup Agile Flow</a></li><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/organization/>Structure and Roles</a></li><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/productvision/>Product Vision / Value Proposition</a></li></ul></li><li><input type=checkbox id=section-fbc99cb62f97af8f577e21318d383c53 class=toggle>
+<label for=section-fbc99cb62f97af8f577e21318d383c53 class="flex justify-between"><a role=button>Modernization Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/modernization/overview/>Modernization Agile Flow</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/organization/>Structure and Roles</a></li><li><input type=checkbox id=section-cb30e408eaf7a7ec013ed0dc4d3fb020 class=toggle>
+<label for=section-cb30e408eaf7a7ec013ed0dc4d3fb020 class="flex justify-between"><a role=button>Swift Method</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/overview/>What Is the Swift Method</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/eventstorming/>Event Storming</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/boris/>Boris</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/snape/>SnapE</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/slices/>Slices</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/techchoice/>Tech Choice</a></li></ul></li></ul></li></ul></li><li class=book-section-flat><span>Team</span><ul><li><a href=/agile-dev-guide/en/docs/team/workstyle/>How Our Team Works</a></li><li><a href=/agile-dev-guide/en/docs/team/balancedteam/>Balanced Team</a></li><li><input type=checkbox id=section-d6ef0f53ed2eae5373cce9f0cae94127 class=toggle>
+<label for=section-d6ef0f53ed2eae5373cce9f0cae94127 class="flex justify-between"><a role=button>Mindset</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/mindset/onebase/>ONEbase Values</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/psychologicalsafety/>Psychological Safety</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/xp/>XP Values</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/practice/>How to Adopt Practices</a></li></ul></li><li><a href=/agile-dev-guide/en/docs/team/teambuilding/>Team Building</a></li><li><a href=/agile-dev-guide/en/docs/team/remotework/>Remote Work</a></li><li><input type=checkbox id=section-ba58c7f3c79f8713fd38efabb55e90aa class=toggle>
+<label for=section-ba58c7f3c79f8713fd38efabb55e90aa class="flex justify-between"><a role=button>Team Activities</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/activities/officestandup/>Office Standup</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/teamstandup/>Team Standup</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/preipm/>Pre-IPM</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/ipm/>IPM</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/cl/>CL Meeting</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/retro/>Retrospective</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/salesmeeting/>Sales Sync Meeting</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/internalsync/>Internal Sync</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/riskmitigations/>Risks & Mitigations</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/feedback/>Feedback</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/icebreak/>Ice Break</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/teamhealthcheck/>Team Health Check</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/1on1/>1on1</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/exercise/>Radio Taiso</a></li></ul></li><li><input type=checkbox id=section-9283499da254b9f85e8a373a7c190a7e class=toggle>
+<label for=section-9283499da254b9f85e8a373a7c190a7e class="flex justify-between"><a role=button>Team Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/practices/facilitation/>Facilitation</a></li><li><a href=/agile-dev-guide/en/docs/team/practices/okrs/>OKRs</a></li></ul></li></ul></li><li class=book-section-flat><span>Designer</span><ul><li><a href=/agile-dev-guide/en/docs/designer/overview/>What Is a Designer</a></li><li><input type=checkbox id=section-b2cda318f2a04a4c6c2d6866191c7dd0 class=toggle>
+<label for=section-b2cda318f2a04a4c6c2d6866191c7dd0 class="flex justify-between"><a role=button>Designer Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/designer/practices/persona/>Persona</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/scenario/>Scenario</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/researchplanning/>Research Planning</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/prototyping/>Prototyping</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/script/>Script Creation</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/researchaction/>Conducting Research</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/synthesize/>Synthesize</a></li></ul></li></ul></li><li class=book-section-flat><span>Product Manager</span><ul><li><a href=/agile-dev-guide/en/docs/productmanager/overview/>What Is a Product Manager</a></li><li><input type=checkbox id=section-9026fc1a07f695d85c362dc4668a1edf class=toggle>
+<label for=section-9026fc1a07f695d85c362dc4668a1edf class="flex justify-between"><a role=button>Product Manager Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/productmanager/practices/roadmap/>Product Roadmap</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/mvp/>MVP</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/userstorymapping/>User Story Mapping</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/userstory/>User Story</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/2x2/>2×2</a></li></ul></li></ul></li><li class=book-section-flat><span>Developer</span><ul><li><a href=/agile-dev-guide/en/docs/developer/overview/>What Is a Developer</a></li><li><input type=checkbox id=section-9a270bfee03ee781c85e4c3c42434241 class=toggle>
+<label for=section-9a270bfee03ee781c85e4c3c42434241 class="flex justify-between"><a role=button>Developer Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/developer/practices/tdd/>TDD</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/cicd/>CI/CD</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/pairprogramming/>Pair Programming</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/soroprogramming/>Solo Programming</a></li></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu></label><h3>Day 4</h3><label for=toc-control><img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#building-the-add-task-screen>Building the Add Task Screen</a><ul><li><a href=#introducing-a-router>Introducing a Router</a></li><li><a href=#building-out-the-header>Building Out the Header</a></li><li><a href=#creating-the-task-creation-screen>Creating the Task Creation Screen</a></li></ul></li><li><a href=#building-the-task-creation-feature>Building the Task Creation Feature</a><ul><li><a href=#creating-the-api>Creating the API</a></li><li><a href=#wiring-it-into-the-task-creation-form>Wiring It into the Task Creation Form</a></li></ul></li><li><a href=#changing-when-the-task-list-is-fetched>Changing When the Task List Is Fetched</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=day-4>Day 4
+<a class=anchor href=#day-4>#</a></h1><p>By the end of Day 3, we were able to connect the frontend built with React to the backend built with Spring Boot.
+However, although we can display tasks, there is still no feature for adding tasks.
+From Day 4 on, let&rsquo;s keep adding features.</p><h2 id=building-the-add-task-screen>Building the Add Task Screen
+<a class=anchor href=#building-the-add-task-screen>#</a></h2><p>Right now, the Client application does not have a router yet.
+For example, accessing <a href=http://localhost:5173/>http://localhost:5173/</a>
+shows the Home screen,
+and accessing <a href=http://localhost:5173/hogehoge>http://localhost:5173/hogehoge</a>
+also shows the Home screen.</p><p>That is not very nice, so let&rsquo;s implement a router.
+Here, we will make it so that accessing <a href=http://localhost:5173/>http://localhost:5173/</a>
+opens the Home screen,
+and accessing <a href=http://localhost:5173/newTask>http://localhost:5173/newTask</a>
+opens the task management screen.</p><h3 id=introducing-a-router>Introducing a Router
+<a class=anchor href=#introducing-a-router>#</a></h3><p>Implementing a router requires <a href=https://reactrouter.com/>react-router-dom</a>
+, so we will install it.
+It is a library that lets you declare even routing as part of the DOM.
+That description alone probably doesn&rsquo;t mean much, so it will be quicker to actually see what the implementation looks like.</p><p>First, install react-router-dom.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>npm install react-router-dom@^5.3.4 @types/react-router-dom@^5.3.3
+</span></span></code></pre></div><p>Then edit App.tsx as follows.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// App.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>BrowserRouter</span>, <span style=color:#a6e22e>Route</span>, <span style=color:#a6e22e>Switch</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-router-dom&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Home</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./pages/Home&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>App() {</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> (
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;App&#34;</span>&gt;
+</span></span><span style=display:flex><span>            &lt;<span style=color:#f92672>BrowserRouter</span>&gt;
+</span></span><span style=display:flex><span>                &lt;<span style=color:#f92672>Switch</span>&gt;
+</span></span><span style=display:flex><span>                    &lt;<span style=color:#f92672>Route</span> <span style=color:#a6e22e>path</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/&#34;</span> <span style=color:#a6e22e>exact</span> <span style=color:#a6e22e>render</span><span style=color:#f92672>=</span>{() <span style=color:#f92672>=&gt;</span> &lt;<span style=color:#f92672>Home</span> /&gt;} /&gt;
+</span></span><span style=display:flex><span>                &lt;/<span style=color:#f92672>Switch</span>&gt;
+</span></span><span style=display:flex><span>            &lt;/<span style=color:#f92672>BrowserRouter</span>&gt;
+</span></span><span style=display:flex><span>        &lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>    )
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>App</span>
+</span></span></code></pre></div><p>Next, edit main.tsx as follows.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// main.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>React</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>ReactDOM</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-dom/client&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#e6db74>&#39;./index.css&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>BrowserRouter</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-router-dom&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>App</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./App&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>TodoProvider</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./context/TodoContext&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>root</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>ReactDOM</span>.<span style=color:#a6e22e>createRoot</span>(document.<span style=color:#a6e22e>getElementById</span>(<span style=color:#e6db74>&#39;root&#39;</span>) <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>HTMLElement</span>)
+</span></span><span style=display:flex><span><span style=color:#a6e22e>root</span>.<span style=color:#a6e22e>render</span>(
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>React.StrictMode</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>TodoProvider</span>&gt;
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>BrowserRouter</span>&gt;
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>App</span> /&gt;
+</span></span><span style=display:flex><span>      &lt;/<span style=color:#f92672>BrowserRouter</span>&gt;
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>TodoProvider</span>&gt;
+</span></span><span style=display:flex><span>  &lt;/<span style=color:#f92672>React.StrictMode</span>&gt;
+</span></span><span style=display:flex><span>)
+</span></span></code></pre></div><p>In this state, accessing <a href=http://localhost:5173/>http://localhost:5173/</a>
+shows the Home screen. This is the same behavior as before.
+However, if you access <a href=http://localhost:5173/hoge>http://localhost:5173/hoge</a>
+, you should now see a blank white screen instead.</p><p>In other words, this is a setting that says &ldquo;if the path is <code>/</code>, display the Home component.&rdquo;</p><h3 id=building-out-the-header>Building Out the Header
+<a class=anchor href=#building-out-the-header>#</a></h3><p>Now let&rsquo;s build a menu into the header.<br>While we are at it, let&rsquo;s also work on the design here.</p><p>Start with the test.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// Header.test.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>render</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>  <span style=color:#75715e>// changed
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Header</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../src/components/Header&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;Header&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cleanup</span>()
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;ヘッダーの初期表示&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>Header</span> /&gt;)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#39;Todo App&#39;</span>)).<span style=color:#a6e22e>toBeInTheDocument</span>()
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#39;Home&#39;</span>).<span style=color:#a6e22e>closest</span>(<span style=color:#e6db74>&#39;a&#39;</span>)).<span style=color:#a6e22e>toHaveAttribute</span>(<span style=color:#e6db74>&#39;href&#39;</span>, <span style=color:#e6db74>&#39;/&#39;</span>)            <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#39;New Task&#39;</span>).<span style=color:#a6e22e>closest</span>(<span style=color:#e6db74>&#39;a&#39;</span>)).<span style=color:#a6e22e>toHaveAttribute</span>(<span style=color:#e6db74>&#39;href&#39;</span>, <span style=color:#e6db74>&#39;/newTask&#39;</span>) <span style=color:#75715e>// added
+</span></span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><p>We added a test that checks that the header has a link to <code>/</code> and a link to <code>/newTask</code>.</p><p>Once the test is written, add the implementation as well.
+This time we want to use icon images, so install <a href=https://styled-icons.dev/>Styled Icons</a>
+and then edit Header.tsx.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>npm install styled-icons
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// Header.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>styled</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;styled-components&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>Link</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-router-dom&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>Task</span>, <span style=color:#a6e22e>Home</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;styled-icons/material&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Wrapper</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>div</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  height: 100vh;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  width: 12rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  border-right-width: 1px;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  border-right-style: solid;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  border-right-color: #e5e7eb;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>H1</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>h1</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  padding: 1rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  font-size: 1.25rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  line-height: 1.75rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  letter-spacing: -0.025rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Div</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>div</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  display: flex;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  flex-direction: column;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  justify-content: flex-start;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  color: #6b7280;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>StyledLink</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>(<span style=color:#a6e22e>Link</span>)<span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  padding: 1rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  &amp;:hover {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    background-color: #f3f4f6;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    color: #374151;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>StyledHome</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>(<span style=color:#a6e22e>Home</span>)<span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  width: 1.25rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  margin-right: 0.75rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>StyledTask</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>(<span style=color:#a6e22e>Task</span>)<span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  width: 1.25rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  margin-right: 0.75rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>H2</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>h2</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  font-size: 0.875rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  display: flex;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  align-items: center;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Header</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> (
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>Wrapper</span> <span style=color:#a6e22e>data-testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Header&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>H1</span>&gt;<span style=color:#a6e22e>Todo</span> <span style=color:#a6e22e>App</span>&lt;/<span style=color:#f92672>H1</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>Div</span>&gt;
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>StyledLink</span> <span style=color:#a6e22e>to</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/&#34;</span>&gt;
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>H2</span>&gt;
+</span></span><span style=display:flex><span>          &lt;<span style=color:#f92672>StyledHome</span> /&gt;
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>Home</span>
+</span></span><span style=display:flex><span>        &lt;/<span style=color:#f92672>H2</span>&gt;
+</span></span><span style=display:flex><span>      &lt;/<span style=color:#f92672>StyledLink</span>&gt;
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>StyledLink</span> <span style=color:#a6e22e>to</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/newTask&#34;</span>&gt;
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>H2</span>&gt;
+</span></span><span style=display:flex><span>          &lt;<span style=color:#f92672>StyledTask</span> /&gt;
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>New</span> <span style=color:#a6e22e>Task</span>
+</span></span><span style=display:flex><span>        &lt;/<span style=color:#f92672>H2</span>&gt;
+</span></span><span style=display:flex><span>      &lt;/<span style=color:#f92672>StyledLink</span>&gt;
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>Div</span>&gt;
+</span></span><span style=display:flex><span>  &lt;/<span style=color:#f92672>Wrapper</span>&gt;
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>Header</span>
+</span></span></code></pre></div><p>However, this test fails at render time in the first place.</p><pre tabindex=0><code>  ● Header › ヘッダーの初期表示
+
+    Invariant failed: You should not use &lt;Link&gt; outside a &lt;Router&gt;
+
+      18 |     return &lt;Provider store={store}&gt;{children}&lt;/Provider&gt;
+      19 |   }
+    &gt; 20 |   return rtlRender(ui, {wrapper: Wrapper, ...renderOptions})
+         |          ^
+      21 | }
+      22 |
+      23 | export * from &#39;@testing-library/react&#39;
+</code></pre><p>This is because Link depends on the Router, but we tried to render it while ignoring that dependency.
+So let&rsquo;s add a rendering option to <code>Header.test.tsx</code>. We will also add the same rendering option to <code>Home.test.tsx</code>, which plays the role of an integration test.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// Header.test.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>render</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Header</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../src/components/Header&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>BrowserRouter</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;react-router-dom&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;Header&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cleanup</span>()
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;ヘッダーの初期表示&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>Header</span> /&gt;, {<span style=color:#a6e22e>wrapper</span>: <span style=color:#66d9ef>BrowserRouter</span>})            <span style=color:#75715e>// modified
+</span></span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#39;Todo App&#39;</span>)).<span style=color:#a6e22e>toBeInTheDocument</span>()
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#39;Home&#39;</span>).<span style=color:#a6e22e>closest</span>(<span style=color:#e6db74>&#39;a&#39;</span>)).<span style=color:#a6e22e>toHaveAttribute</span>(<span style=color:#e6db74>&#39;href&#39;</span>, <span style=color:#e6db74>&#39;/&#39;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#39;New Task&#39;</span>).<span style=color:#a6e22e>closest</span>(<span style=color:#e6db74>&#39;a&#39;</span>)).<span style=color:#a6e22e>toHaveAttribute</span>(<span style=color:#e6db74>&#39;href&#39;</span>, <span style=color:#e6db74>&#39;/newTask&#39;</span>)
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// Home.test.tsx
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// omitted
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;画面構成&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>onGet</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>).<span style=color:#a6e22e>reply</span>(<span style=color:#ae81ff>200</span>, [])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>act</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>Home</span> /&gt;, {<span style=color:#a6e22e>wrapper</span>: <span style=color:#66d9ef>BrowserRouter</span>})  <span style=color:#75715e>// modified
+</span></span></span><span style=display:flex><span>    })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByTestId</span>(<span style=color:#e6db74>&#39;Header&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByTestId</span>(<span style=color:#e6db74>&#39;TodoList&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// omitted
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>act</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>TodoProvider</span>&gt;&lt;<span style=color:#f92672>Home</span> /&gt;&lt;/<span style=color:#f92672>TodoProvider</span>&gt;, {<span style=color:#a6e22e>wrapper</span>: <span style=color:#66d9ef>BrowserRouter</span>})  <span style=color:#75715e>// modified
+</span></span></span><span style=display:flex><span>    })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#66d9ef>get</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>url</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#39;title&#39;</span>)).<span style=color:#a6e22e>toBeInTheDocument</span>()
+</span></span></code></pre></div><p>The tests should pass for now.</p><p><img src=/agile-dev-guide/docs/practice/day4/newMenu.jpg alt="New menu"></p><p>With the menu in place, the app no longer looks so unpolished. However, clicking New Task shows a blank white screen.</p><p>The source code up to this point
+is available at
+<a href=https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step7>https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step7</a>
+.</p><h3 id=creating-the-task-creation-screen>Creating the Task Creation Screen
+<a class=anchor href=#creating-the-task-creation-screen>#</a></h3><p>Next, let&rsquo;s create the task creation screen.</p><p>First, write a test for the task creation screen.
+Create <code>NewTask.test.tsx</code> under the <code>__test__/page</code> directory.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// NewTask.test.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>render</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>BrowserRouter</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-router-dom&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;タスク作成画面&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cleanup</span>()
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;画面構成&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>NewTask</span> /&gt;, {<span style=color:#a6e22e>wrapper</span>: <span style=color:#66d9ef>BrowserRouter</span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByTestId</span>(<span style=color:#e6db74>&#39;Header&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByTestId</span>(<span style=color:#e6db74>&#39;NewTaskForm&#39;</span>)).<span style=color:#a6e22e>toBeInTheDocument</span>()
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><p>The test checks that &ldquo;the screen consists of the Header and a Form component for entering a task.&rdquo;
+Of course, neither the NewTask component nor the NewTaskForm component exists yet, so this test fails.</p><p>First, let&rsquo;s create the NewTaskFrom component.
+Create <code>NewTaskForm.tsx</code> under the <code>components</code> directory.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// NewTaskFrom.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>NewTaskForm</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> (
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>form</span> <span style=color:#a6e22e>data-testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;NewTaskForm&#34;</span> /&gt;
+</span></span><span style=display:flex><span>  )
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>NewTaskForm</span>
+</span></span></code></pre></div><p>It is fine to leave it empty for now.</p><p>Then create <code>NewTask.tsx</code> under the <code>page</code> directory.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// NewTask.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Header</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../components/Header&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>NewTaskForm</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../components/NewTaskForm&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>NewTask</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> (
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>data-testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;NewTask&#34;</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;flex&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>Header</span>/&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>NewTaskForm</span>/&gt;
+</span></span><span style=display:flex><span>  &lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>NewTask</span>
+</span></span></code></pre></div><p>If you now add the import to NewTask.test.tsx, the test should pass for the time being.</p><p>Next, let&rsquo;s build out the Form component.
+It would be good for the NewTaskForm component to have a text box for entering the task and a button for sending it to the server, so let&rsquo;s test for that.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// NewTaskForm.test.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>fireEvent</span>, <span style=color:#a6e22e>render</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>NewTaskForm</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../../src/components/NewTaskForm&#34;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;NewEntryFormコンポーネント&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cleanup</span>()
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#34;初期表示&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>NewTaskForm</span>/&gt;)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByLabelText</span>(<span style=color:#e6db74>&#39;Title&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByTestId</span>(<span style=color:#e6db74>&#34;TitleInput&#34;</span>)).<span style=color:#a6e22e>toHaveValue</span>(<span style=color:#e6db74>&#39;&#39;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByText</span>(<span style=color:#e6db74>&#39;Send&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#34;タスク名を編集できる&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>NewTaskForm</span>/&gt;)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fireEvent</span>.<span style=color:#a6e22e>change</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByTestId</span>(<span style=color:#e6db74>&#39;TitleInput&#39;</span>), {<span style=color:#a6e22e>target</span><span style=color:#f92672>:</span> {<span style=color:#a6e22e>value</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title text&#39;</span>}})
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByTestId</span>(<span style=color:#e6db74>&#34;TitleInput&#34;</span>)).<span style=color:#a6e22e>toHaveValue</span>(<span style=color:#e6db74>&#39;title text&#39;</span>)
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><p>Now let&rsquo;s implement NewTaskForm to make this work.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// NewTaskForm.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>useState</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>NewTaskForm</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> [<span style=color:#a6e22e>taskInput</span>, <span style=color:#a6e22e>setTaskInput</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>useState</span>(<span style=color:#e6db74>&#39;&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> (
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>form</span> <span style=color:#a6e22e>data-testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;NewTaskForm&#34;</span>&gt;
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>label</span> <span style=color:#a6e22e>htmlFor</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;titleInput&#34;</span>&gt;<span style=color:#a6e22e>Title</span>
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;titleInput&#34;</span> <span style=color:#a6e22e>data-testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;TitleInput&#34;</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text&#34;</span> <span style=color:#a6e22e>value</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>taskInput</span>}
+</span></span><span style=display:flex><span>             <span style=color:#a6e22e>onChange</span><span style=color:#f92672>=</span>{(<span style=color:#a6e22e>event</span>) <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>setTaskInput</span>(<span style=color:#a6e22e>event</span>.<span style=color:#a6e22e>target</span>.<span style=color:#a6e22e>value</span>)}/&gt;
+</span></span><span style=display:flex><span>      &lt;/<span style=color:#f92672>label</span>&gt;
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>button</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;button&#34;</span>&gt;
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>Send</span>
+</span></span><span style=display:flex><span>      &lt;/<span style=color:#f92672>button</span>&gt;
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>form</span>&gt;
+</span></span><span style=display:flex><span>  )
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>NewTaskForm</span>
+</span></span></code></pre></div><p>Something like this. The tests should now pass.</p><p>However, at this point the NewTask screen has not been added to the Router yet, so clicking the menu still shows a blank white screen.
+Let&rsquo;s wire it into the menu.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// App.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>Route</span>, <span style=color:#a6e22e>Routes</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-router-dom&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Home</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./pages/Home&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>NewTask</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./pages/NewTask&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>App</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> (
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;App&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>Routes</span>&gt;
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>Route</span> <span style=color:#a6e22e>path</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/&#34;</span> <span style=color:#a6e22e>element</span><span style=color:#f92672>=</span>{&lt;<span style=color:#f92672>Home</span> /&gt;} /&gt;
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>Route</span> <span style=color:#a6e22e>path</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/newTask&#34;</span> <span style=color:#a6e22e>element</span><span style=color:#f92672>=</span>{&lt;<span style=color:#f92672>NewTask</span> /&gt;} /&gt;
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>Routes</span>&gt;
+</span></span><span style=display:flex><span>  &lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>App</span>
+</span></span></code></pre></div><p>We added the routing settings to App.tsx. In this state, clicking the menu should now switch screens.</p><p><img src=/agile-dev-guide/docs/practice/day4/newTaskInitial.png alt="newTask screen"></p><p>Let&rsquo;s apply a design to the form.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// NewTaskForm.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>useState</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>styled</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;styled-components&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Wrapper</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>form</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  width: 100%;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  padding: 2rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>DivForm</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>div</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  display: flex;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  flex-wrap: wrap;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  margin-left: -0.75rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  margin-right: -0.75rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  margin-bottom: 1.5rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>DivLabel</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>div</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  width: 100%;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  padding-left: 0.75rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  padding-right: 0.75rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Label</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>label</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  display: block;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  text-transform: uppercase;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  letter-spacing: 0.025em;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  color: #374151;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  font-size: 0.75rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  font-weight: 700;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  margin-bottom: 0.5rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Input</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>input</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  appearance: none;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  display: block;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  width: 100%;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  color: #374151;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  border-width: 1px;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  border-color: #E5E7EB;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  border-style: solid;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  border-radius: 0.25rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  padding: 0.75rem 1rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  margin-bottom: 0.75rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  line-height: 1.25;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  &amp;:focus {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    outline: 0;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    background-color: #ffffff;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    border-color: #6B7280;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Button</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>button</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  box-shadow: 0 1px 5px 2px rgb(0 0 0 / 0.1);
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  background-color: #4ADE80;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  &amp;:hover {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    background-color: #A7F3D0;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  &amp;:focus {
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>    outline: 0;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  }
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  color: #ffffff;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  font-weight: 700;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  padding: 0.5rem 1rem 0.5rem 1rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  border-radius: 0.25rem;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  border-style: none;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  cursor: pointer;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  font-family: inherit;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  font-size: 100%;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>NewTaskForm</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> [<span style=color:#a6e22e>taskInput</span>, <span style=color:#a6e22e>setTaskInput</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>useState</span>(<span style=color:#e6db74>&#39;&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> (
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>Wrapper</span> <span style=color:#a6e22e>data-testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;NewTaskForm&#34;</span>&gt;
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>DivForm</span>&gt;
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>DivLabel</span>&gt;
+</span></span><span style=display:flex><span>          &lt;<span style=color:#f92672>Label</span> <span style=color:#a6e22e>htmlFor</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;titleInput&#34;</span>&gt;<span style=color:#a6e22e>Title</span>
+</span></span><span style=display:flex><span>            &lt;<span style=color:#f92672>Input</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;titleInput&#34;</span> <span style=color:#a6e22e>data-testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;TitleInput&#34;</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text&#34;</span> <span style=color:#a6e22e>value</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>taskInput</span>}
+</span></span><span style=display:flex><span>                   <span style=color:#a6e22e>onChange</span><span style=color:#f92672>=</span>{(<span style=color:#a6e22e>event</span>) <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>setTaskInput</span>(<span style=color:#a6e22e>event</span>.<span style=color:#a6e22e>target</span>.<span style=color:#a6e22e>value</span>)}/&gt;
+</span></span><span style=display:flex><span>          &lt;/<span style=color:#f92672>Label</span>&gt;
+</span></span><span style=display:flex><span>        &lt;/<span style=color:#f92672>DivLabel</span>&gt;
+</span></span><span style=display:flex><span>      &lt;/<span style=color:#f92672>DivForm</span>&gt;
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>Button</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;button&#34;</span>&gt;
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>Send</span>
+</span></span><span style=display:flex><span>        &lt;/<span style=color:#f92672>Button</span>&gt;
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>Wrapper</span>&gt;
+</span></span><span style=display:flex><span>  )
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>NewTaskForm</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>/* NewTask.tsx */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>styled</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;styled-components&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Header</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../components/Header&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>NewTaskForm</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../components/NewTaskForm&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Div</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>div</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  display: flex;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>NewTask</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> (
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>Div</span> <span style=color:#a6e22e>data-testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;NewTask&#34;</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;flex&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>Header</span> /&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>NewTaskForm</span> /&gt;
+</span></span><span style=display:flex><span>  &lt;/<span style=color:#f92672>Div</span>&gt;
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>NewTask</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-css data-lang=css><span style=display:flex><span><span style=color:#75715e>/* index.css */</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>*</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>margin</span>: <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>box-sizing</span>: <span style=color:#66d9ef>border-box</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>a</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>color</span>: <span style=color:#66d9ef>inherit</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>text-decoration</span>: <span style=color:#66d9ef>inherit</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><img src=/agile-dev-guide/docs/practice/day4/newTaskDesigned.jpg alt="Design applied"></p><p>With the design applied, it looks much more like an app now.</p><p>The source code up to this point
+is available at
+<a href=https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step8>https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step8</a>
+.</p><h2 id=building-the-task-creation-feature>Building the Task Creation Feature
+<a class=anchor href=#building-the-task-creation-feature>#</a></h2><h3 id=creating-the-api>Creating the API
+<a class=anchor href=#creating-the-api>#</a></h3><p>First, let&rsquo;s write the test and implementation for the request to the API.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// TodoApi.test.ts
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>MockAdapter</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios-mock-adapter&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>axios</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>getTodos</span>, <span style=color:#a6e22e>postTodos</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../src/features/TodoApi&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;TodoApi&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  <span style=color:#75715e>// omitted
+</span></span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;post /todos&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>onPost</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>, {<span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title&#39;</span>}).<span style=color:#a6e22e>reply</span>(<span style=color:#ae81ff>201</span>,
+</span></span><span style=display:flex><span>      {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>1</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span>      })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>response</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>postTodos</span>(<span style=color:#e6db74>&#39;title&#39;</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#a6e22e>post</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>url</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#a6e22e>post</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>data</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#a6e22e>JSON</span>.<span style=color:#a6e22e>stringify</span>({<span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title&#39;</span>}))
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#a6e22e>post</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>headers</span><span style=color:#f92672>?</span>.[<span style=color:#e6db74>&#39;Content-Type&#39;</span>]).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#34;application/json&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#a6e22e>post</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>headers</span><span style=color:#f92672>?</span>.[<span style=color:#e6db74>&#39;X-Requested-With&#39;</span>]).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#34;XMLHttpRequest&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>id</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#ae81ff>1</span>)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>title</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;title&#39;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>completed</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#66d9ef>false</span>)
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><p>We wrote a test that checks that <code>postTodos()</code> receives a title as a parameter, formats it as JSON, and sends it.
+We also wrote a test that checks that <code>Content-Type: application/json</code> is set in the header.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// TodoApi.ts
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>axios</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>Todo</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>number</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>title</span>: <span style=color:#66d9ef>string</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>boolean</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>getTodos</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>response</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>axios</span>.<span style=color:#66d9ef>get</span>&lt;<span style=color:#f92672>Todo</span><span style=color:#960050;background-color:#1e0010>[]</span>&gt;(<span style=color:#e6db74>&#39;/todos&#39;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>data</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>postTodos</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>async</span> (<span style=color:#a6e22e>title</span>: <span style=color:#66d9ef>string</span>) <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>requestJson</span> <span style=color:#f92672>=</span> {<span style=color:#a6e22e>title</span>}
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>headers</span> <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#39;X-Requested-With&#39;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;XMLHttpRequest&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#39;Content-Type&#39;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;application/json&#39;</span>,
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>response</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>axios</span>.<span style=color:#a6e22e>post</span>&lt;<span style=color:#f92672>Todo</span>&gt;(
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#39;/todos&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>JSON</span>.<span style=color:#a6e22e>stringify</span>(<span style=color:#a6e22e>requestJson</span>),
+</span></span><span style=display:flex><span>        {<span style=color:#a6e22e>headers</span>},
+</span></span><span style=display:flex><span>    )
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>data</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>An implementation that satisfies this test looks like this. With this, the code for calling the API is in place.</p><h3 id=wiring-it-into-the-task-creation-form>Wiring It into the Task Creation Form
+<a class=anchor href=#wiring-it-into-the-task-creation-form>#</a></h3><p>Next, let&rsquo;s write the code that calls this when the create button is pressed.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// NewTaskForm.test.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>fireEvent</span>, <span style=color:#a6e22e>render</span>, <span style=color:#a6e22e>screen</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>NewTaskForm</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#34;../../src/components/NewTaskForm&#34;</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>MockAdapter</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios-mock-adapter&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>axios</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;NewEntryFormコンポーネント&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>mock</span>: <span style=color:#66d9ef>MockAdapter</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>beforeEach</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>mock</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>MockAdapter</span>(<span style=color:#a6e22e>axios</span>)
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>reset</span>()
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cleanup</span>()
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#34;初期表示&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>NewTaskForm</span>/&gt;)
+</span></span><span style=display:flex><span>      
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByLabelText</span>(<span style=color:#e6db74>&#39;Title&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByTestId</span>(<span style=color:#e6db74>&#34;TitleInput&#34;</span>)).<span style=color:#a6e22e>toHaveValue</span>(<span style=color:#e6db74>&#39;&#39;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByText</span>(<span style=color:#e6db74>&#39;Send&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>()
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#34;タスク名を編集できる&#34;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>NewTaskForm</span>/&gt;)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fireEvent</span>.<span style=color:#a6e22e>change</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByTestId</span>(<span style=color:#e6db74>&#39;TitleInput&#39;</span>), {<span style=color:#a6e22e>target</span><span style=color:#f92672>:</span> {<span style=color:#a6e22e>value</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title text&#39;</span>}})
+</span></span><span style=display:flex><span>      
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByTestId</span>(<span style=color:#e6db74>&#34;TitleInput&#34;</span>)).<span style=color:#a6e22e>toHaveValue</span>(<span style=color:#e6db74>&#39;title text&#39;</span>)
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#34;作成ボタンを押したら、作成がリクエストされる&#34;</span>,  () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>NewTaskForm</span> /&gt;)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fireEvent</span>.<span style=color:#a6e22e>change</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByTestId</span>(<span style=color:#e6db74>&#39;TitleInput&#39;</span>), {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>target</span><span style=color:#f92672>:</span> {<span style=color:#a6e22e>value</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title text&#39;</span>},
+</span></span><span style=display:flex><span>    })
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fireEvent</span>.<span style=color:#a6e22e>click</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>getByText</span>(<span style=color:#e6db74>&#39;Send&#39;</span>))
+</span></span><span style=display:flex><span>      
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#a6e22e>post</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>url</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#a6e22e>post</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>data</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#a6e22e>JSON</span>.<span style=color:#a6e22e>stringify</span>({<span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title text&#39;</span>}))
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><p>We added a test that checks that when you type text into the task name field and click the Send button, JSON is POSTed to <code>/todos</code>.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// NewTaskForm.tsx
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// omitted
+</span></span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>NewTaskForm</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> [<span style=color:#a6e22e>taskInput</span>, <span style=color:#a6e22e>setTaskInput</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>useState</span>(<span style=color:#e6db74>&#39;&#39;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>todoContext</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>useContext</span>(<span style=color:#a6e22e>TodoContext</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>handleSend</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>postTodos</span>(<span style=color:#a6e22e>taskInput</span>)
+</span></span><span style=display:flex><span>            .<span style=color:#a6e22e>then</span>((<span style=color:#a6e22e>res</span>) <span style=color:#f92672>=&gt;</span>
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>todoContext</span><span style=color:#f92672>?</span>.<span style=color:#a6e22e>setTodos</span>([
+</span></span><span style=display:flex><span>                    ...<span style=color:#a6e22e>todoContext</span>.<span style=color:#a6e22e>todos</span>,
+</span></span><span style=display:flex><span>                    {
+</span></span><span style=display:flex><span>                        <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>res.id</span>,
+</span></span><span style=display:flex><span>                        <span style=color:#a6e22e>title</span>: <span style=color:#66d9ef>res.title</span>,
+</span></span><span style=display:flex><span>                        <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>res.completed</span>,
+</span></span><span style=display:flex><span>                    },
+</span></span><span style=display:flex><span>                ]),
+</span></span><span style=display:flex><span>            )
+</span></span><span style=display:flex><span>            .<span style=color:#66d9ef>catch</span>(() <span style=color:#f92672>=&gt;</span> {})
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> (
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>Wrapper</span> <span style=color:#a6e22e>data-testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;NewTaskForm&#34;</span>&gt;
+</span></span><span style=display:flex><span>            &lt;<span style=color:#f92672>DivForm</span>&gt;
+</span></span><span style=display:flex><span>                &lt;<span style=color:#f92672>DivLabel</span>&gt;
+</span></span><span style=display:flex><span>                    &lt;<span style=color:#f92672>Label</span> <span style=color:#a6e22e>htmlFor</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;titleInput&#34;</span>&gt;
+</span></span><span style=display:flex><span>                        <span style=color:#a6e22e>Title</span>
+</span></span><span style=display:flex><span>                        &lt;<span style=color:#f92672>Input</span>
+</span></span><span style=display:flex><span>                            <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;titleInput&#34;</span>
+</span></span><span style=display:flex><span>                            <span style=color:#a6e22e>data-testid</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;TitleInput&#34;</span>
+</span></span><span style=display:flex><span>                            <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text&#34;</span>
+</span></span><span style=display:flex><span>                            <span style=color:#a6e22e>value</span><span style=color:#f92672>=</span>{<span style=color:#a6e22e>taskInput</span>}
+</span></span><span style=display:flex><span>                            <span style=color:#a6e22e>onChange</span><span style=color:#f92672>=</span>{(<span style=color:#a6e22e>event</span>) <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>setTaskInput</span>(<span style=color:#a6e22e>event</span>.<span style=color:#a6e22e>target</span>.<span style=color:#a6e22e>value</span>)}
+</span></span><span style=display:flex><span>                        /&gt;
+</span></span><span style=display:flex><span>                    &lt;/<span style=color:#f92672>Label</span>&gt;
+</span></span><span style=display:flex><span>                &lt;/<span style=color:#f92672>DivLabel</span>&gt;
+</span></span><span style=display:flex><span>            &lt;/<span style=color:#f92672>DivForm</span>&gt;
+</span></span><span style=display:flex><span>            &lt;<span style=color:#f92672>Button</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;button&#34;</span> <span style=color:#a6e22e>onClick</span><span style=color:#f92672>=</span>{() <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>handleSend</span>()}&gt;
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>Send</span>
+</span></span><span style=display:flex><span>            &lt;/<span style=color:#f92672>Button</span>&gt;
+</span></span><span style=display:flex><span>        &lt;/<span style=color:#f92672>Wrapper</span>&gt;
+</span></span><span style=display:flex><span>    )
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>NewTaskForm</span>
+</span></span></code></pre></div><p>The implementation looks like this. When the button&rsquo;s onClick fires, it calls handleSend, which in turn calls postTodos.
+It is also designed as an incremental update that adds the value returned from the server to the existing TodoContext. The fact that it is an incremental update is quite important. API design is explained later in <a href=https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/practice/day5/#api-design>API Design</a>
+.</p><p><img src=/agile-dev-guide/docs/practice/day4/postTodos.jpg alt=postTodo></p><p>If you render the screen, open the creation screen, and click the Send button, you can see that the task is sent.</p><h2 id=changing-when-the-task-list-is-fetched>Changing When the Task List Is Fetched
+<a class=anchor href=#changing-when-the-task-list-is-fetched>#</a></h2><p>In the current implementation, all tasks are fetched every time the task list screen is opened.
+Calling the fetch-all API every time a screen is opened is inefficient.
+Fetching everything once at the start is enough; after that, incremental updates make processing more efficient.</p><p>The overhead of HTTP communication is incomparably larger than that of memory access or disk access.
+There is a term used to mock bad APIs: the &ldquo;chatty API.&rdquo;
+In other words, an API design that requires calling the API over and over again just to render a screen is not good.</p><p>Making the created task update the state incrementally earlier was also meant to avoid unnecessary communication.
+If <code>POST /todos</code> returned nothing, the client would have to call the fetch-all API just to find out the ID.</p><p>Since we have already implemented incremental updates on a successful POST,
+let&rsquo;s change the processing from fetching all tasks every time the task list is opened to fetching all tasks only once when the app is opened.</p><p>That said, this is very easy: just move the useEffect logic from Home.tsx to App.tsx.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// App.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>Route</span>, <span style=color:#a6e22e>Routes</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-router-dom&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>useContext</span>, <span style=color:#a6e22e>useEffect</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Home</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./pages/Home&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>NewTask</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./pages/NewTask&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>TodoContext</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./context/TodoContext&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>getTodos</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;./features/TodoApi&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>App</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>todoContext</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>useContext</span>(<span style=color:#a6e22e>TodoContext</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>useEffect</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>fetchData</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>response</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>getTodos</span>()
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>todoContext</span><span style=color:#f92672>?</span>.<span style=color:#a6e22e>setTodos</span>(<span style=color:#a6e22e>response</span>)
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fetchData</span>()
+</span></span><span style=display:flex><span>  }, [])
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>return</span> (
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>className</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;App&#34;</span>&gt;
+</span></span><span style=display:flex><span>      &lt;<span style=color:#f92672>Routes</span>&gt;
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>Route</span> <span style=color:#a6e22e>path</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/&#34;</span> <span style=color:#a6e22e>element</span><span style=color:#f92672>=</span>{&lt;<span style=color:#f92672>Home</span> /&gt;} /&gt;
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>Route</span> <span style=color:#a6e22e>path</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/newTask&#34;</span> <span style=color:#a6e22e>element</span><span style=color:#f92672>=</span>{&lt;<span style=color:#f92672>NewTask</span> /&gt;} /&gt;
+</span></span><span style=display:flex><span>      &lt;/<span style=color:#f92672>Routes</span>&gt;
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>  )
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>App</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// Home.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>React</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>styled</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;styled-components&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>TodoList</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../components/TodoList&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Header</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../components/Header&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Div</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>styled</span>.<span style=color:#a6e22e>div</span><span style=color:#e6db74>`
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>  display: flex;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#a6e22e>Home</span> <span style=color:#f92672>=</span> () <span style=color:#f92672>=&gt;</span> (
+</span></span><span style=display:flex><span>  &lt;<span style=color:#f92672>Div</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>Header</span> /&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>TodoList</span> /&gt;
+</span></span><span style=display:flex><span>  &lt;/<span style=color:#f92672>Div</span>&gt;
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#a6e22e>Home</span>
+</span></span></code></pre></div><p>Home.tsx is now much cleaner.</p><p>Let&rsquo;s update the tests accordingly.</p><p>Since the logic was moved out of Home.tsx,<br>we moved the corresponding test from Home.test.tsx and created a new test for App.tsx.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// Home.test.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>cleanup</span>, <span style=color:#a6e22e>render</span>, <span style=color:#a6e22e>screen</span>, <span style=color:#a6e22e>waitFor</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>BrowserRouter</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-router-dom&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>Home</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../../pages/Home&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;Home画面&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>cleanup</span>()
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;画面構成&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>Home</span> /&gt;, {<span style=color:#a6e22e>wrapper</span>: <span style=color:#66d9ef>BrowserRouter</span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>waitFor</span>(() <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByTestId</span>(<span style=color:#e6db74>&#39;Header&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>())
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>await</span> <span style=color:#a6e22e>waitFor</span>(() <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>screen</span>.<span style=color:#a6e22e>queryByTestId</span>(<span style=color:#e6db74>&#39;TodoList&#39;</span>)).<span style=color:#a6e22e>toBeTruthy</span>())
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-typescript data-lang=typescript><span style=display:flex><span><span style=color:#75715e>// App.test.tsx
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>axios</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>MockAdapter</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;axios-mock-adapter&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>render</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;@testing-library/react&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> {<span style=color:#a6e22e>BrowserRouter</span>} <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;react-router-dom&#39;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>App</span> <span style=color:#66d9ef>from</span> <span style=color:#e6db74>&#39;../App&#39;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>describe</span>(<span style=color:#e6db74>&#39;App&#39;</span>, () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>mock</span>: <span style=color:#66d9ef>MockAdapter</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>beforeEach</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>mock</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>MockAdapter</span>(<span style=color:#a6e22e>axios</span>)
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>afterEach</span>(() <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>reset</span>()
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>it</span>(<span style=color:#e6db74>&#39;ホーム画面の初期表示&#39;</span>, <span style=color:#66d9ef>async</span> () <span style=color:#f92672>=&gt;</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>onGet</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>).<span style=color:#a6e22e>reply</span>(<span style=color:#ae81ff>200</span>, [
+</span></span><span style=display:flex><span>      {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>id</span>: <span style=color:#66d9ef>1</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>title</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;title&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>completed</span>: <span style=color:#66d9ef>false</span>,
+</span></span><span style=display:flex><span>      },
+</span></span><span style=display:flex><span>    ])
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>render</span>(&lt;<span style=color:#f92672>App</span> /&gt;, {<span style=color:#a6e22e>wrapper</span>: <span style=color:#66d9ef>BrowserRouter</span>})
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>expect</span>(<span style=color:#a6e22e>mock</span>.<span style=color:#a6e22e>history</span>.<span style=color:#66d9ef>get</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>url</span>).<span style=color:#a6e22e>toEqual</span>(<span style=color:#e6db74>&#39;/todos&#39;</span>)
+</span></span><span style=display:flex><span>  })
+</span></span><span style=display:flex><span>})
+</span></span></code></pre></div><p>The tests should now pass.
+If you check the behavior in the browser, you should see that a GET to /todos happens only once, when the application is first opened,
+and that navigating between pages from the menu does not trigger a GET to /todos.</p><p>The source code up to this point
+is available at
+<a href=https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step9>https://github.com/onebase-fujitsu/todo-app-vite/tree/feature/step9</a>
+.</p><hr><p>Continued on Day 5</p><p><a href=/agile-dev-guide/en/docs/practice/day5/ class=book-btn>Day 5</a></p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#building-the-add-task-screen>Building the Add Task Screen</a><ul><li><a href=#introducing-a-router>Introducing a Router</a></li><li><a href=#building-out-the-header>Building Out the Header</a></li><li><a href=#creating-the-task-creation-screen>Creating the Task Creation Screen</a></li></ul></li><li><a href=#building-the-task-creation-feature>Building the Task Creation Feature</a><ul><li><a href=#creating-the-api>Creating the API</a></li><li><a href=#wiring-it-into-the-task-creation-form>Wiring It into the Task Creation Form</a></li></ul></li><li><a href=#changing-when-the-task-list-is-fetched>Changing When the Task List Is Fetched</a></li></ul></nav></div></aside></main></body></html>

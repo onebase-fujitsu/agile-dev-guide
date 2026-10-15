@@ -1,0 +1,717 @@
+<!doctype html><html lang=en dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  Bowling Game
+  #
+
+In the first step, we wrote FizzBuzz as a warm-up.
+Here, as a slightly harder and more practical example, let&rsquo;s write a program that calculates bowling scores.
+This is also a very famous problem, the BowlingGameKata
+, proposed by the well-known software developer Robert C. Martin.
+We&rsquo;ll write it in Java here, but feel free to try it in your favorite language.
+If you get stuck along the way, the finished code is available in the Completion
+ section,
+so take a look there."><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/softwaretest/bowlinggame/"><meta property="og:site_name" content="Fujitsu Agile Development Guide"><meta property="og:title" content="Bowling Game"><meta property="og:description" content="Bowling Game # In the first step, we wrote FizzBuzz as a warm-up. Here, as a slightly harder and more practical example, let’s write a program that calculates bowling scores.
+This is also a very famous problem, the BowlingGameKata , proposed by the well-known software developer Robert C. Martin. We’ll write it in Java here, but feel free to try it in your favorite language.
+If you get stuck along the way, the finished code is available in the Completion section, so take a look there."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>Bowling Game | Fujitsu Agile Development Guide</title><link rel=icon href=/agile-dev-guide/favicon.png><link rel=manifest href=/agile-dev-guide/manifest.json><link rel=canonical href=https://onebase-fujitsu.github.io/agile-dev-guide/en/docs/softwaretest/bowlinggame/><link rel=alternate hreflang=ja href=https://onebase-fujitsu.github.io/agile-dev-guide/docs/softwaretest/bowlinggame/ title=ボウリングゲーム><link rel=stylesheet href=/agile-dev-guide/book.min.6c8b9d2a1fc95075ed7da46ca81060b39add8fff6741ac51259f768929281e2c.css integrity="sha256-bIudKh/JUHXtfaRsqBBgs5rdj/9nQaxRJZ92iSkoHiw=" crossorigin=anonymous></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/agile-dev-guide/en/><span>Fujitsu Agile Development Guide</span></a></h2><ul class=book-languages><li><input type=checkbox id=languages class=toggle>
+<label for=languages class="flex justify-between"><a role=button class="flex align-center"><img src=/agile-dev-guide/svg/translate.svg class=book-icon alt=Languages>
+English</a></label><ul><li><a href=/agile-dev-guide/docs/softwaretest/bowlinggame/>日本語</a></li></ul></li></ul><ul><li><a href=/agile-dev-guide/en/docs/introduction/>Introduction</a></li><li><input type=checkbox id=section-26f8587d816918486e3411338e99965e class=toggle>
+<label for=section-26f8587d816918486e3411338e99965e class="flex justify-between"><a role=button>Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/agile/manifest/>Manifesto for Agile Software Development</a></li><li><a href=/agile-dev-guide/en/docs/agile/principle/>12 Principles of Agile Development</a></li><li><a href=/agile-dev-guide/en/docs/agile/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-3f7a3b5d22e80bae50acbf0bebe29b07 class=toggle>
+<label for=section-3f7a3b5d22e80bae50acbf0bebe29b07 class="flex justify-between"><a role=button>Scrum</a></label><ul><li><a href=/agile-dev-guide/en/docs/scrum/overview/>What is Scrum</a></li><li><a href=/agile-dev-guide/en/docs/scrum/roles/>Roles</a></li><li><a href=/agile-dev-guide/en/docs/scrum/products/>Artifacts</a></li><li><a href=/agile-dev-guide/en/docs/scrum/events/>Events</a></li><li><a href=/agile-dev-guide/en/docs/scrum/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-28ce590b98459d112a5e767cc6b3b04d class=toggle>
+<label for=section-28ce590b98459d112a5e767cc6b3b04d class="flex justify-between"><a role=button>Extreme Programming</a></label><ul><li><a href=/agile-dev-guide/en/docs/xp/overview/>What is Extreme Programming</a></li><li><a href=/agile-dev-guide/en/docs/xp/practice/>Extreme Programming Practices</a></li><li><a href=/agile-dev-guide/en/docs/xp/conclude/>Summary</a></li></ul></li><li><input type=checkbox id=section-a3825c6f535b2464399db20dd841f3ac class=toggle checked>
+<label for=section-a3825c6f535b2464399db20dd841f3ac class="flex justify-between"><a role=button>Software Testing</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaretest/overview/>Getting Started with Software Testing</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/fizzbuzz/>Warming Up</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/bowlinggame/ class=active>Bowling Game</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/testdouble/>Test Doubles</a></li><li><a href=/agile-dev-guide/en/docs/softwaretest/e2e/>E2E Testing</a></li></ul></li><li><input type=checkbox id=section-d2676bcafbfd8f6850f60b777913e79b class=toggle>
+<label for=section-d2676bcafbfd8f6850f60b777913e79b class="flex justify-between"><a role=button>Software Design</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/about/>Software Design for Agile Development</a></li><li><input type=checkbox id=section-1d5d1d86d9abc5f3e1ff9ae3bf8dee3a class=toggle>
+<label for=section-1d5d1d86d9abc5f3e1ff9ae3bf8dee3a class="flex justify-between"><a role=button>SOLID Principles</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/srp/>Single Responsibility Principle (SRP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/ocp/>Open-Closed Principle (OCP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/lsp/>Liskov Substitution Principle (LSP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/dip/>Dependency Inversion Principle (DIP)</a></li><li><a href=/agile-dev-guide/en/docs/softwaredesign/solidprinciple/isp/>Interface Segregation Principle (ISP)</a></li></ul></li><li><input type=checkbox id=section-c82d883779a9175f08ed321f0a41c453 class=toggle>
+<label for=section-c82d883779a9175f08ed321f0a41c453 class="flex justify-between"><a role=button>Design Patterns</a></label><ul><li><a href=/agile-dev-guide/en/docs/softwaredesign/designpattern/designpattern/>Design Patterns</a></li></ul></li></ul></li><li><input type=checkbox id=section-c4e0d3ad193a9306b0791ca960be25bb class=toggle>
+<label for=section-c4e0d3ad193a9306b0791ca960be25bb class="flex justify-between"><a role=button>Agile in Practice</a></label><ul><li><a href=/agile-dev-guide/en/docs/practice/day1/>Day 1</a></li><li><a href=/agile-dev-guide/en/docs/practice/day2/>Day 2</a></li><li><a href=/agile-dev-guide/en/docs/practice/day3/>Day 3</a></li><li><a href=/agile-dev-guide/en/docs/practice/day4/>Day 4</a></li><li><a href=/agile-dev-guide/en/docs/practice/day5/>Day 5</a></li><li><a href=/agile-dev-guide/en/docs/practice/day6/>Day 6</a></li></ul></li><li><a href=/agile-dev-guide/en/docs/inclosing/>In Closing</a></li><li><a href=/agile-dev-guide/en/docs/recommendedbooks/>Recommended Books</a></li><li class=book-section-flat><span>Overall</span><ul><li><input type=checkbox id=section-49203faea468220b1d42544db4f42904 class=toggle>
+<label for=section-49203faea468220b1d42544db4f42904 class="flex justify-between"><a role=button>Lean Startup Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/overview/>Lean Startup Agile Flow</a></li><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/organization/>Structure and Roles</a></li><li><a href=/agile-dev-guide/en/docs/framework/leanstartup/productvision/>Product Vision / Value Proposition</a></li></ul></li><li><input type=checkbox id=section-fbc99cb62f97af8f577e21318d383c53 class=toggle>
+<label for=section-fbc99cb62f97af8f577e21318d383c53 class="flex justify-between"><a role=button>Modernization Agile</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/modernization/overview/>Modernization Agile Flow</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/organization/>Structure and Roles</a></li><li><input type=checkbox id=section-cb30e408eaf7a7ec013ed0dc4d3fb020 class=toggle>
+<label for=section-cb30e408eaf7a7ec013ed0dc4d3fb020 class="flex justify-between"><a role=button>Swift Method</a></label><ul><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/overview/>What Is the Swift Method</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/eventstorming/>Event Storming</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/boris/>Boris</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/snape/>SnapE</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/slices/>Slices</a></li><li><a href=/agile-dev-guide/en/docs/framework/modernization/swift/techchoice/>Tech Choice</a></li></ul></li></ul></li></ul></li><li class=book-section-flat><span>Team</span><ul><li><a href=/agile-dev-guide/en/docs/team/workstyle/>How Our Team Works</a></li><li><a href=/agile-dev-guide/en/docs/team/balancedteam/>Balanced Team</a></li><li><input type=checkbox id=section-d6ef0f53ed2eae5373cce9f0cae94127 class=toggle>
+<label for=section-d6ef0f53ed2eae5373cce9f0cae94127 class="flex justify-between"><a role=button>Mindset</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/mindset/onebase/>ONEbase Values</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/psychologicalsafety/>Psychological Safety</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/xp/>XP Values</a></li><li><a href=/agile-dev-guide/en/docs/team/mindset/practice/>How to Adopt Practices</a></li></ul></li><li><a href=/agile-dev-guide/en/docs/team/teambuilding/>Team Building</a></li><li><a href=/agile-dev-guide/en/docs/team/remotework/>Remote Work</a></li><li><input type=checkbox id=section-ba58c7f3c79f8713fd38efabb55e90aa class=toggle>
+<label for=section-ba58c7f3c79f8713fd38efabb55e90aa class="flex justify-between"><a role=button>Team Activities</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/activities/officestandup/>Office Standup</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/teamstandup/>Team Standup</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/preipm/>Pre-IPM</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/ipm/>IPM</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/cl/>CL Meeting</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/retro/>Retrospective</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/salesmeeting/>Sales Sync Meeting</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/internalsync/>Internal Sync</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/riskmitigations/>Risks & Mitigations</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/feedback/>Feedback</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/icebreak/>Ice Break</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/teamhealthcheck/>Team Health Check</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/1on1/>1on1</a></li><li><a href=/agile-dev-guide/en/docs/team/activities/exercise/>Radio Taiso</a></li></ul></li><li><input type=checkbox id=section-9283499da254b9f85e8a373a7c190a7e class=toggle>
+<label for=section-9283499da254b9f85e8a373a7c190a7e class="flex justify-between"><a role=button>Team Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/team/practices/facilitation/>Facilitation</a></li><li><a href=/agile-dev-guide/en/docs/team/practices/okrs/>OKRs</a></li></ul></li></ul></li><li class=book-section-flat><span>Designer</span><ul><li><a href=/agile-dev-guide/en/docs/designer/overview/>What Is a Designer</a></li><li><input type=checkbox id=section-b2cda318f2a04a4c6c2d6866191c7dd0 class=toggle>
+<label for=section-b2cda318f2a04a4c6c2d6866191c7dd0 class="flex justify-between"><a role=button>Designer Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/designer/practices/persona/>Persona</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/scenario/>Scenario</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/researchplanning/>Research Planning</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/prototyping/>Prototyping</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/script/>Script Creation</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/researchaction/>Conducting Research</a></li><li><a href=/agile-dev-guide/en/docs/designer/practices/synthesize/>Synthesize</a></li></ul></li></ul></li><li class=book-section-flat><span>Product Manager</span><ul><li><a href=/agile-dev-guide/en/docs/productmanager/overview/>What Is a Product Manager</a></li><li><input type=checkbox id=section-9026fc1a07f695d85c362dc4668a1edf class=toggle>
+<label for=section-9026fc1a07f695d85c362dc4668a1edf class="flex justify-between"><a role=button>Product Manager Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/productmanager/practices/roadmap/>Product Roadmap</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/mvp/>MVP</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/userstorymapping/>User Story Mapping</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/userstory/>User Story</a></li><li><a href=/agile-dev-guide/en/docs/productmanager/practices/2x2/>2×2</a></li></ul></li></ul></li><li class=book-section-flat><span>Developer</span><ul><li><a href=/agile-dev-guide/en/docs/developer/overview/>What Is a Developer</a></li><li><input type=checkbox id=section-9a270bfee03ee781c85e4c3c42434241 class=toggle>
+<label for=section-9a270bfee03ee781c85e4c3c42434241 class="flex justify-between"><a role=button>Developer Practices</a></label><ul><li><a href=/agile-dev-guide/en/docs/developer/practices/tdd/>TDD</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/cicd/>CI/CD</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/pairprogramming/>Pair Programming</a></li><li><a href=/agile-dev-guide/en/docs/developer/practices/soroprogramming/>Solo Programming</a></li></ul></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/agile-dev-guide/svg/menu.svg class=book-icon alt=Menu></label><h3>Bowling Game</h3><label for=toc-control><img src=/agile-dev-guide/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#the-rules-of-bowling>The Rules of Bowling</a></li><li><a href=#creating-the-project>Creating the Project</a></li><li><a href=#the-structure-of-the-bowling-game>The Structure of the Bowling Game</a></li><li><a href=#the-frame-class>The Frame Class</a><ul><li><a href=#the-first-test>The First Test</a></li><li><a href=#the-first-implementation>The First Implementation</a></li></ul></li><li><a href=#what-about-strikes-and-spares>What About Strikes and Spares?</a><ul><li><a href=#the-class-structure>The Class Structure</a></li><li><a href=#the-first-test-for-game>The First Test for Game</a></li><li><a href=#the-first-implementation-for-game>The First Implementation for Game</a></li><li><a href=#playing-a-full-game>Playing a Full Game</a></li><li><a href=#the-spare-test>The Spare Test</a></li><li><a href=#implementing-the-spare>Implementing the Spare</a></li><li><a href=#the-strike-test>The Strike Test</a></li><li><a href=#implementing-the-strike>Implementing the Strike</a></li></ul></li><li><a href=#filling-in-the-tests>Filling In the Tests</a></li><li><a href=#completion>Completion</a></li><li><a href=#what-is-a-kata>What Is a Kata?</a></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=bowling-game>Bowling Game
+<a class=anchor href=#bowling-game>#</a></h1><p>In the first step, we wrote FizzBuzz as a warm-up.
+Here, as a slightly harder and more practical example, let&rsquo;s write a program that calculates bowling scores.</p><p>This is also a very famous problem, the <a href=http://butunclebob.com/ArticleS.UncleBob.TheBowlingGameKata>BowlingGameKata</a>
+, proposed by the well-known software developer Robert C. Martin.
+We&rsquo;ll write it in Java here, but feel free to try it in your favorite language.</p><p>If you get stuck along the way, the finished code is available in the <a href=#completion>Completion</a>
+section,
+so take a look there.</p><h2 id=the-rules-of-bowling>The Rules of Bowling
+<a class=anchor href=#the-rules-of-bowling>#</a></h2><p>If you already know the rules of bowling, feel free to skip this section.</p><p>Bowling is a game in which you throw a ball at 10 pins with the goal of knocking down as many pins as possible.
+There are 10 frames, and in each frame you get up to 2 throws to knock down as many of the 10 pins as you can.</p><p>A bowling score is basically the number of pins knocked down through the 10th frame, but there are a few special conditions.</p><p>If you knock down all 10 pins with the first throw of a frame, it is a strike.
+When you get a strike, in addition to the 10 points for the pins knocked down, the number of pins knocked down in the next 2 throws is added as a bonus.
+When you get a strike, the frame ends and there is no second throw.</p><p>If you knock down all remaining pins with the second throw of a frame, it is a spare.
+When you get a spare, in addition to the 10 points for the pins knocked down, the number of pins knocked down in the next throw is added as a bonus.</p><p>Only the last, 10th frame is special: if you get a strike in the 10th frame, you get 2 additional throws, and if you get a spare, you get 1 additional throw.
+In other words, only in the 10th frame you can throw 3 times if you get a strike or spare; otherwise the frame ends after 2 throws.</p><p>For details, see <a href=http://www.tokibow.com/tbchp/score.htm>Bowling score calculation (in Japanese)</a>
+.</p><h2 id=creating-the-project>Creating the Project
+<a class=anchor href=#creating-the-project>#</a></h2><p>This is the same as for FizzBuzz. Create a new Gradle project named BowlingGame.</p><p><img src=/agile-dev-guide/docs/softwaretest/bowlinggame/newpj1.png alt="Creating a new project"></p><p><img src=/agile-dev-guide/docs/softwaretest/bowlinggame/newpj2.png alt="Creating a new project"></p><p><img src=/agile-dev-guide/docs/softwaretest/bowlinggame/newpj3.png alt="Creating a new project"></p><h2 id=the-structure-of-the-bowling-game>The Structure of the Bowling Game
+<a class=anchor href=#the-structure-of-the-bowling-game>#</a></h2><p>First, let&rsquo;s express the bowling game as classes.</p><script src=/agile-dev-guide/mermaid.min.js></script><script>mermaid.initialize({flowchart:{useMaxWidth:!0},theme:"default"})</script><pre class=mermaid>
+classDiagram
+Game "1" --> "10" Frame
+Frame "1" --> "1..3" Throw
+</pre><p>We drew a simple class diagram. A game consists of 10 Frame objects,
+and a frame consists of 1 to 3 Throw objects.</p><h2 id=the-frame-class>The Frame Class
+<a class=anchor href=#the-frame-class>#</a></h2><h3 id=the-first-test>The First Test
+<a class=anchor href=#the-first-test>#</a></h3><p>Let&rsquo;s write the first test.
+What behavior would the Throw class have?
+It would only hold the number of pins the player knocked down (in other words, it would be a POJO).
+If it just holds the number of pins, this class has no real &ldquo;behavior.&rdquo;
+Since it has no behavior, let&rsquo;s move one step up the dependency chain and focus on Frame.</p><p>It seems like it would be nice for a Frame object to hold the score and have methods that tell us the number of pins knocked down,
+or whether the frame was a strike or a spare.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// FrameTest.java</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FrameTest</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>ピンを倒してなければそのフレームのスコアは0</span>() {
+</span></span><span style=display:flex><span>        Frame f <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Frame();
+</span></span><span style=display:flex><span>        assertThat(f.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(0);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>ピンを1回倒したらその本数がスコアになる</span>() {
+</span></span><span style=display:flex><span>        Frame f <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Frame();
+</span></span><span style=display:flex><span>        f.<span style=color:#a6e22e>add</span>(5);
+</span></span><span style=display:flex><span>        assertThat(f.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(5);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>First, we wrote a simple test that the frame holds the number of pins knocked down as its score.
+At this point, the Frame class, the add() method, and the getScore() method don&rsquo;t exist, so of course it fails.</p><h3 id=the-first-implementation>The First Implementation
+<a class=anchor href=#the-first-implementation>#</a></h3><p>Let&rsquo;s think of the minimum implementation that satisfies this.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Frame.java</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Frame</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> score <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getScore</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>score</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>int</span> pins) {
+</span></span><span style=display:flex><span>        score <span style=color:#f92672>+=</span> pins;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>We created a Frame.java like this. For now, the tests pass.</p><h2 id=what-about-strikes-and-spares>What About Strikes and Spares?
+<a class=anchor href=#what-about-strikes-and-spares>#</a></h2><h3 id=the-class-structure>The Class Structure
+<a class=anchor href=#the-class-structure>#</a></h3><p>So, we can now hold a score in Frame, but with this approach, how to handle the scores of strikes and spares is a difficult problem.
+It would be the Game object that ties different Frames together,
+but then Game depends on Frame, and Frame also depends on Game.</p><pre class=mermaid>
+classDiagram
+    Game --> Frame
+    Frame --> Game
+    Frame --> Throw
+</pre><p>As a class diagram, it ends up like this. That&rsquo;s not good. Game and Frame are tightly coupled.
+One way to solve this is to make Frame a linked list.
+In other words, each Frame holds pointers to the previous and next frames, and when calculating a Frame&rsquo;s score,
+it gets the number of pins in later frames by following the linked list.</p><pre class=mermaid>
+graph LR
+    Frame1 --> Frame2
+    Frame2 --> Frame3
+    Frame3 --> Frame4
+    Frame4 --> ...
+</pre><p>This feels like it would become a rather complicated program.
+For example, if you got 3 strikes in a row, calculating the score of the first Frame would require logic like:
+follow the linked list to the next Frame; if that Frame is a strike, follow the linked list to the Frame after that;
+get the score of that Frame&rsquo;s first throw&mldr; and so on.</p><p>Let&rsquo;s pause what we&rsquo;ve done so far and try managing the throws on the Game side.
+If, while working on Game, we find we need a linked list of Frames, we&rsquo;ll reconsider then.</p><h3 id=the-first-test-for-game>The First Test for Game
+<a class=anchor href=#the-first-test-for-game>#</a></h3><p>We wrote a test for Game. That said, it does the same thing as the earlier Frame test.
+Only the test titles, the class name, and the variable names have changed.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameTest</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>ピンを倒してなければゲームのスコアは0</span>() {
+</span></span><span style=display:flex><span>        Game game <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Game();
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(0);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>ピンを1回倒したらそれがゲームのスコアになる</span>() {
+</span></span><span style=display:flex><span>        Game game <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Game();
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>add</span>(5);
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(5);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=the-first-implementation-for-game>The First Implementation for Game
+<a class=anchor href=#the-first-implementation-for-game>#</a></h3><p>After confirming that the test fails, let&rsquo;s implement the Game class. This is also the same as Frame.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> score <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getScore</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>score</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>int</span> pins) {
+</span></span><span style=display:flex><span>        score <span style=color:#f92672>+=</span> pins;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h3 id=playing-a-full-game>Playing a Full Game
+<a class=anchor href=#playing-a-full-game>#</a></h3><p>The current tests only throw the ball once, but it looks like the code already handles multiple throws.
+Let&rsquo;s strengthen the tests and play a full game.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameTest</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>すべて0本だったら最終スコアは0</span>() {
+</span></span><span style=display:flex><span>        Game game <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Game();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> 20; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            game.<span style=color:#a6e22e>add</span>(0);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(0);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>ピンを毎回1本倒したらゲームのスコアは20</span>() {
+</span></span><span style=display:flex><span>        Game game <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Game();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> 20; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            game.<span style=color:#a6e22e>add</span>(1);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(20);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Now the ball is thrown 20 times. The tests pass without any problem.</p><h3 id=the-spare-test>The Spare Test
+<a class=anchor href=#the-spare-test>#</a></h3><p>Now let&rsquo;s try spares. First, we write a test.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameTest</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>すべて0本だったら最終スコアは0</span>() {
+</span></span><span style=display:flex><span>        Game game <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Game();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> 20; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            game.<span style=color:#a6e22e>add</span>(0);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(0);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>ピンを毎回1本倒したらゲームのスコアは20</span>() {
+</span></span><span style=display:flex><span>        Game game <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Game();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> 20; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            game.<span style=color:#a6e22e>add</span>(1);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(20);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>スペアを1回だすと次の投球がボーナスとして加算される</span>() {
+</span></span><span style=display:flex><span>        Game game <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Game();
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>add</span>(5);
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>add</span>(5);
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>add</span>(3);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> 17; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            game.<span style=color:#a6e22e>add</span>(0);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(16);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>The test looks like this.
+Creating a Game instance every time and repeating the same throw many times is getting a bit tedious.
+Also, the method name add on Game feels a bit off.
+Let&rsquo;s do some light refactoring.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.BeforeEach;
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameTest</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> Game game;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@BeforeEach</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setUp</span>() {
+</span></span><span style=display:flex><span>        game <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Game();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>rollsMany</span>(<span style=color:#66d9ef>int</span> times, <span style=color:#66d9ef>int</span> pins) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> times; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            game.<span style=color:#a6e22e>roll</span>(pins);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>すべて0本だったら最終スコアは0</span>() {
+</span></span><span style=display:flex><span>        rollsMany(20, 0);
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(0);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>ピンを毎回1本倒したらゲームのスコアは20</span>() {
+</span></span><span style=display:flex><span>        rollsMany(20, 1);
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(20);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>スペアを1回だすと次の投球がボーナスとして加算される</span>() {
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(5);
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(5);
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(3);
+</span></span><span style=display:flex><span>        rollsMany(17, 0);
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(16);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>We changed the tests like this.
+The add() method was renamed to roll().
+We also added a private function called rollsMany so we can easily make many throws.
+In addition, we used @BeforeEach to create the Game instance before each test.</p><p>If you run the tests now, only the last test, for the spare, fails.
+Let&rsquo;s implement it.</p><h3 id=implementing-the-spare>Implementing the Spare
+<a class=anchor href=#implementing-the-spare>#</a></h3><p>Currently, the Game implementation looks like this.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> score <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getScore</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>score</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>roll</span>(<span style=color:#66d9ef>int</span> pins) {
+</span></span><span style=display:flex><span>        score <span style=color:#f92672>+=</span> pins;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Looking closely, roll() is calculating the score, which doesn&rsquo;t match its name.
+Also, getScore() is where the score is retrieved, but it seems this is really where the score should be calculated.
+Let&rsquo;s refactor the Game class a bit here as well.</p><p>For now, comment out the spare test.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.BeforeEach;
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameTest</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> Game game;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@BeforeEach</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setUp</span>() {
+</span></span><span style=display:flex><span>        game <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Game();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>rollsMany</span>(<span style=color:#66d9ef>int</span> times, <span style=color:#66d9ef>int</span> pins) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> times; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            game.<span style=color:#a6e22e>roll</span>(pins);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>すべて0本だったら最終スコアは0</span>() {
+</span></span><span style=display:flex><span>        rollsMany(20, 0);
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(0);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>ピンを毎回1本倒したらゲームのスコアは20</span>() {
+</span></span><span style=display:flex><span>        rollsMany(20, 1);
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(20);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//    @Test</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//    public void スペアを1回だすと次の投球がボーナスとして加算される() {</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//        game.roll(5);</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//        game.roll(5);</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//        game.roll(3);</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//        rollsMany(17, 0);</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//        assertThat(game.getScore()).isEqualTo(16);</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//    }</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Now let&rsquo;s refactor Game.
+To fix this, it seems good to make roll() a method that purely records the number of pins knocked down,
+and change getScore() to calculate the score.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getScore</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> score <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> rolls.<span style=color:#a6e22e>length</span>; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            score <span style=color:#f92672>+=</span> rolls<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> score;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>roll</span>(<span style=color:#66d9ef>int</span> pins) {
+</span></span><span style=display:flex><span>        rolls<span style=color:#f92672>[</span>currentRoll<span style=color:#f92672>++]</span> <span style=color:#f92672>=</span> pins;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Done. The original tests pass, so let&rsquo;s uncomment the spare test.
+Now, let&rsquo;s get into implementing the spare.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getScore</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> score <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> rolls.<span style=color:#a6e22e>length</span>; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (rolls<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span> <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>i<span style=color:#f92672>+</span>1<span style=color:#f92672>]</span> <span style=color:#f92672>==</span> 10) { <span style=color:#75715e>// spare</span>
+</span></span><span style=display:flex><span>                score <span style=color:#f92672>+=</span> rolls<span style=color:#f92672>[</span>i<span style=color:#f92672>+</span>1<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            score <span style=color:#f92672>+=</span> rolls<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> score;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>roll</span>(<span style=color:#66d9ef>int</span> pins) {
+</span></span><span style=display:flex><span>        rolls<span style=color:#f92672>[</span>currentRoll<span style=color:#f92672>++]</span> <span style=color:#f92672>=</span> pins;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>First, we wrote this logic. At first glance it seems fine.
+But written this way, if, for example, the second throw of frame 1 and the first throw of frame 2 add up to 10, it would be judged as a spare.
+That&rsquo;s not the behavior we want to implement.
+We can see that implementing strikes and spares requires the concept of a frame.</p><p>Let&rsquo;s refactor again. Comment out the spare test once more.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getScore</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> score <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> frame <span style=color:#f92672>=</span> 0; frame <span style=color:#f92672>&lt;</span> 10; frame<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            score <span style=color:#f92672>+=</span> rolls<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span> <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>i<span style=color:#f92672>+</span>1<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>            i <span style=color:#f92672>+=</span> 2;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> score;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>roll</span>(<span style=color:#66d9ef>int</span> pins) {
+</span></span><span style=display:flex><span>        rolls<span style=color:#f92672>[</span>currentRoll<span style=color:#f92672>++]</span> <span style=color:#f92672>=</span> pins;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>We implemented the getScore() method like this.
+We created a variable i that holds the position of the first throw of each frame.
+The score of each frame is the sum of the pins knocked down at position i and at position i+1.</p><p>The original tests now pass, so let&rsquo;s take another shot at implementing the spare. Uncomment the spare test.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getScore</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> score <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> frame <span style=color:#f92672>=</span> 0; frame <span style=color:#f92672>&lt;</span> 10; frame<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (rolls<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span> <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>i <span style=color:#f92672>+</span> 1<span style=color:#f92672>]</span> <span style=color:#f92672>==</span> 10) { <span style=color:#75715e>// spare</span>
+</span></span><span style=display:flex><span>                score <span style=color:#f92672>+=</span> 10 <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>i <span style=color:#f92672>+</span> 2<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>                score <span style=color:#f92672>+=</span> rolls<span style=color:#f92672>[</span>i<span style=color:#f92672>]</span> <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>i <span style=color:#f92672>+</span> 1<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            i <span style=color:#f92672>+=</span> 2;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> score;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>roll</span>(<span style=color:#66d9ef>int</span> pins) {
+</span></span><span style=display:flex><span>        rolls<span style=color:#f92672>[</span>currentRoll<span style=color:#f92672>++]</span> <span style=color:#f92672>=</span> pins;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>We implemented getScore() like this.
+For a spare, it adds the array element two positions after i.</p><p>Now we can calculate spares! And the tests pass!!
+Is the spare implementation done now?</p><p>Someone who didn&rsquo;t write this function can&rsquo;t tell at a glance what role the variable named i plays,
+and there&rsquo;s a comment where the spare is detected, but logic that can&rsquo;t be read without a comment isn&rsquo;t great in the first place.
+So let&rsquo;s refactor.</p><p>First, rename i to something easier to understand.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getScore</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> score <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> frameIndex <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> frame <span style=color:#f92672>=</span> 0; frame <span style=color:#f92672>&lt;</span> 10; frame<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (rolls<span style=color:#f92672>[</span>frameIndex<span style=color:#f92672>]</span> <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex <span style=color:#f92672>+</span> 1<span style=color:#f92672>]</span> <span style=color:#f92672>==</span> 10) { <span style=color:#75715e>// spare</span>
+</span></span><span style=display:flex><span>                score <span style=color:#f92672>+=</span> 10 <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex <span style=color:#f92672>+</span> 2<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>                score <span style=color:#f92672>+=</span> rolls<span style=color:#f92672>[</span>frameIndex<span style=color:#f92672>]</span> <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex <span style=color:#f92672>+</span> 1<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            frameIndex <span style=color:#f92672>+=</span> 2;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> score;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>roll</span>(<span style=color:#66d9ef>int</span> pins) {
+</span></span><span style=display:flex><span>        rolls<span style=color:#f92672>[</span>currentRoll<span style=color:#f92672>++]</span> <span style=color:#f92672>=</span> pins;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>It&rsquo;s now named frameIndex. What should we do about detecting spares?
+Here, it seems good to create a private method like isSpare() that returns a boolean.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getScore</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> score <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> frameIndex <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> frame <span style=color:#f92672>=</span> 0; frame <span style=color:#f92672>&lt;</span> 10; frame<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (isSpare(frameIndex)) {
+</span></span><span style=display:flex><span>                score <span style=color:#f92672>+=</span> 10 <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex <span style=color:#f92672>+</span> 2<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>                score <span style=color:#f92672>+=</span> rolls<span style=color:#f92672>[</span>frameIndex<span style=color:#f92672>]</span> <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex <span style=color:#f92672>+</span> 1<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>            frameIndex <span style=color:#f92672>+=</span> 2;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> score;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>roll</span>(<span style=color:#66d9ef>int</span> pins) {
+</span></span><span style=display:flex><span>        rolls<span style=color:#f92672>[</span>currentRoll<span style=color:#f92672>++]</span> <span style=color:#f92672>=</span> pins;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>isSpare</span>(<span style=color:#66d9ef>int</span> frameIndex) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> rolls<span style=color:#f92672>[</span>frameIndex<span style=color:#f92672>]</span> <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex<span style=color:#f92672>]</span> <span style=color:#f92672>==</span> 10;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>We did it like this. The variable names are clearer, and the branch for handling a spare is obvious at a glance!</p><p>At this point, we can roughly see that we can implement this by keeping the score in Game, without making Frame a linked list.
+Let&rsquo;s delete Frame.java and FrameTest.java.</p><h3 id=the-strike-test>The Strike Test
+<a class=anchor href=#the-strike-test>#</a></h3><p>Next, let&rsquo;s write a test for strikes.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.BeforeEach;
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameTest</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> Game game;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@BeforeEach</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setUp</span>() {
+</span></span><span style=display:flex><span>        game <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Game();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>rollsMany</span>(<span style=color:#66d9ef>int</span> times, <span style=color:#66d9ef>int</span> pins) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> times; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            game.<span style=color:#a6e22e>roll</span>(pins);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>すべて0本だったら最終スコアは0</span>() {
+</span></span><span style=display:flex><span>        rollsMany(20, 0);
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(0);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>ピンを毎回1本倒したらゲームのスコアは20</span>() {
+</span></span><span style=display:flex><span>        rollsMany(20, 1);
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(20);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>スペアを1回だすと次の投球がボーナスとして加算される</span>() {
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(5);
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(5);
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(3);
+</span></span><span style=display:flex><span>        rollsMany(17, 0);
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(16);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>ストライクを1回出すと次の投球と更に次の投球がボーナスとして加算される</span>() {
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(10);
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(3);
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(4);
+</span></span><span style=display:flex><span>        rollsMany(16, 0);
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(24);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>We wrote it like this. Looking at it now, it&rsquo;s a little hard to tell from the source code that</p><pre tabindex=0><code>game.roll(5);
+game.roll(5);
+</code></pre><p>means a spare, or that</p><pre tabindex=0><code>game.roll(10);
+</code></pre><p>means a strike. Let&rsquo;s refactor this too.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.BeforeEach;
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameTest</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> Game game;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@BeforeEach</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setUp</span>() {
+</span></span><span style=display:flex><span>        game <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Game();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>rollsMany</span>(<span style=color:#66d9ef>int</span> times, <span style=color:#66d9ef>int</span> pins) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> times; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            game.<span style=color:#a6e22e>roll</span>(pins);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>rollSpare</span>() {
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(5);
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(5);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>rollStrike</span>() {
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(10);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>すべて0本だったら最終スコアは0</span>() {
+</span></span><span style=display:flex><span>        rollsMany(20, 0);
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(0);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>ピンを毎回1本倒したらゲームのスコアは20</span>() {
+</span></span><span style=display:flex><span>        rollsMany(20, 1);
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(20);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>スペアを1回だすと次の投球がボーナスとして加算される</span>() {
+</span></span><span style=display:flex><span>        rollSpare();
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(3);
+</span></span><span style=display:flex><span>        rollsMany(17, 0);
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(16);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>ストライクを1回出すと次の投球と更に次の投球がボーナスとして加算される</span>() {
+</span></span><span style=display:flex><span>        rollStrike();
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(3);
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(4);
+</span></span><span style=display:flex><span>        rollsMany(16, 0);
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(24);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>This looks good. Now let&rsquo;s implement it.</p><h3 id=implementing-the-strike>Implementing the Strike
+<a class=anchor href=#implementing-the-strike>#</a></h3><p>Since we&rsquo;ve done spares, it looks like we can implement strikes the same way.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// Game.java</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getScore</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> score <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> frameIndex <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> frame <span style=color:#f92672>=</span> 0; frame <span style=color:#f92672>&lt;</span> 10; frame<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (rolls<span style=color:#f92672>[</span>frameIndex<span style=color:#f92672>]</span> <span style=color:#f92672>==</span> 10) { <span style=color:#75715e>// Strike</span>
+</span></span><span style=display:flex><span>                score <span style=color:#f92672>+=</span> 10 <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex<span style=color:#f92672>+</span>1<span style=color:#f92672>]</span> <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex<span style=color:#f92672>+</span>2<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>                frameIndex <span style=color:#f92672>+=</span> 1;
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (isSpare(frameIndex)) {
+</span></span><span style=display:flex><span>                score <span style=color:#f92672>+=</span> 10 <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex <span style=color:#f92672>+</span> 2<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>                frameIndex <span style=color:#f92672>+=</span> 2;
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>                score <span style=color:#f92672>+=</span> rolls<span style=color:#f92672>[</span>frameIndex<span style=color:#f92672>]</span> <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex <span style=color:#f92672>+</span> 1<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>                frameIndex <span style=color:#f92672>+=</span> 2;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> score;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>roll</span>(<span style=color:#66d9ef>int</span> pins) {
+</span></span><span style=display:flex><span>        rolls<span style=color:#f92672>[</span>currentRoll<span style=color:#f92672>++]</span> <span style=color:#f92672>=</span> pins;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>isSpare</span>(<span style=color:#66d9ef>int</span> frameIndex) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> rolls<span style=color:#f92672>[</span>frameIndex<span style=color:#f92672>]</span> <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex<span style=color:#f92672>]</span> <span style=color:#f92672>==</span> 10;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>We implemented it like this. The tests pass as well.
+Let&rsquo;s do the same refactoring here and extract the strike detection.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Game</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> rolls <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[</span>21<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> currentRoll <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getScore</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> score <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> frameIndex <span style=color:#f92672>=</span> 0;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> frame <span style=color:#f92672>=</span> 0; frame <span style=color:#f92672>&lt;</span> 10; frame<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> (isStrike(frameIndex)) {
+</span></span><span style=display:flex><span>                score <span style=color:#f92672>+=</span> 10 <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex <span style=color:#f92672>+</span> 1<span style=color:#f92672>]</span> <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex <span style=color:#f92672>+</span> 2<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>                frameIndex <span style=color:#f92672>+=</span> 1;
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (isSpare(frameIndex)) {
+</span></span><span style=display:flex><span>                score <span style=color:#f92672>+=</span> 10 <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex <span style=color:#f92672>+</span> 2<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>                frameIndex <span style=color:#f92672>+=</span> 2;
+</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>                score <span style=color:#f92672>+=</span> rolls<span style=color:#f92672>[</span>frameIndex<span style=color:#f92672>]</span> <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex <span style=color:#f92672>+</span> 1<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>                frameIndex <span style=color:#f92672>+=</span> 2;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> score;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>roll</span>(<span style=color:#66d9ef>int</span> pins) {
+</span></span><span style=display:flex><span>        rolls<span style=color:#f92672>[</span>currentRoll<span style=color:#f92672>++]</span> <span style=color:#f92672>=</span> pins;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>isSpare</span>(<span style=color:#66d9ef>int</span> frameIndex) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> rolls<span style=color:#f92672>[</span>frameIndex<span style=color:#f92672>]</span> <span style=color:#f92672>+</span> rolls<span style=color:#f92672>[</span>frameIndex<span style=color:#f92672>]</span> <span style=color:#f92672>==</span> 10;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>isStrike</span>(<span style=color:#66d9ef>int</span> frameIndex) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> rolls<span style=color:#f92672>[</span>frameIndex<span style=color:#f92672>]</span> <span style=color:#f92672>==</span> 10;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Looks good. Let&rsquo;s add the finishing touches.</p><h2 id=filling-in-the-tests>Filling In the Tests
+<a class=anchor href=#filling-in-the-tests>#</a></h2><p>We have a test for getting one strike and a test for getting one spare.
+There are no tests for getting them multiple times, so let&rsquo;s write one.</p><p>It&rsquo;s well known that the maximum score in bowling is 300, so let&rsquo;s add a test that checks this.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>// GameTest.java</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.BeforeEach;
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.junit.jupiter.api.Test;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import static</span> org.assertj.core.api.AssertionsForClassTypes.assertThat;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>GameTest</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> Game game;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@BeforeEach</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setUp</span>() {
+</span></span><span style=display:flex><span>        game <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Game();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>rollsMany</span>(<span style=color:#66d9ef>int</span> times, <span style=color:#66d9ef>int</span> pins) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0; i <span style=color:#f92672>&lt;</span> times; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>            game.<span style=color:#a6e22e>roll</span>(pins);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>rollSpare</span>() {
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(5);
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(5);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>rollStrike</span>() {
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(10);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>すべて0本だったら最終スコアは0</span>() {
+</span></span><span style=display:flex><span>        rollsMany(20, 0);
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(0);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>ピンを毎回1本倒したらゲームのスコアは20</span>() {
+</span></span><span style=display:flex><span>        rollsMany(20, 1);
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(20);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>スペアを1回だすと次の投球がボーナスとして加算される</span>() {
+</span></span><span style=display:flex><span>        rollSpare();
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(3);
+</span></span><span style=display:flex><span>        rollsMany(17, 0);
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(16);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>ストライクを1回出すと次の投球と更に次の投球がボーナスとして加算される</span>() {
+</span></span><span style=display:flex><span>        rollStrike();
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(3);
+</span></span><span style=display:flex><span>        game.<span style=color:#a6e22e>roll</span>(4);
+</span></span><span style=display:flex><span>        rollsMany(16, 0);
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(24);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>すべてストライクを出すとスコアが300になる</span>() {
+</span></span><span style=display:flex><span>        rollsMany(12, 10);
+</span></span><span style=display:flex><span>        assertThat(game.<span style=color:#a6e22e>getScore</span>()).<span style=color:#a6e22e>isEqualTo</span>(300);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>The implementation already handles consecutive strikes and consecutive spares, so the test passes as is.</p><h2 id=completion>Completion
+<a class=anchor href=#completion>#</a></h2><p>The bowling score calculation program is now complete! Congratulations!!
+The finished source code is <a href=https://github.com/Onebase-Fujitsu/bowlingGameKata>available here</a>
+.
+Refer to it if you get stuck.</p><hr><h2 id=what-is-a-kata>What Is a Kata?
+<a class=anchor href=#what-is-a-kata>#</a></h2><p>How was it? Did you get a sense of the flow of building a program with test-driven development?
+At the beginning, we mentioned that this problem is a famous one called &ldquo;BowlingGameKata.&rdquo;
+So what is this &ldquo;Kata&rdquo;?</p><p>Yes, it comes from the &ldquo;kata&rdquo; (forms) of karate and judo.
+Programming practices are not something you master after doing them once.
+What matters is doing them over and over until they become second nature.</p><p>BowlingGameKata is a famous problem used as a kata for test-driven development.
+Another famous set of katas is <a href=http://codekata.com/>CodeKata</a>
+.
+It features a variety of programming exercises.</p><p>Find some time to work through them. It might also be fun to find some colleagues and do them together.
+By repeating even the same kata, you should be able to feel your programming skills improving.</p><hr><p>Next, let&rsquo;s learn about test doubles.</p><p><a href=/agile-dev-guide/en/docs/softwaretest/testdouble/ class=book-btn>Test Doubles</a></p></article><footer class=book-footer><div class="flex flex-wrap justify-between"></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#the-rules-of-bowling>The Rules of Bowling</a></li><li><a href=#creating-the-project>Creating the Project</a></li><li><a href=#the-structure-of-the-bowling-game>The Structure of the Bowling Game</a></li><li><a href=#the-frame-class>The Frame Class</a><ul><li><a href=#the-first-test>The First Test</a></li><li><a href=#the-first-implementation>The First Implementation</a></li></ul></li><li><a href=#what-about-strikes-and-spares>What About Strikes and Spares?</a><ul><li><a href=#the-class-structure>The Class Structure</a></li><li><a href=#the-first-test-for-game>The First Test for Game</a></li><li><a href=#the-first-implementation-for-game>The First Implementation for Game</a></li><li><a href=#playing-a-full-game>Playing a Full Game</a></li><li><a href=#the-spare-test>The Spare Test</a></li><li><a href=#implementing-the-spare>Implementing the Spare</a></li><li><a href=#the-strike-test>The Strike Test</a></li><li><a href=#implementing-the-strike>Implementing the Strike</a></li></ul></li><li><a href=#filling-in-the-tests>Filling In the Tests</a></li><li><a href=#completion>Completion</a></li><li><a href=#what-is-a-kata>What Is a Kata?</a></li></ul></nav></div></aside></main></body></html>
