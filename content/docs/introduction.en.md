@@ -32,6 +32,5 @@ We look forward to hearing from you.
 ---
 
 Now, let's start by learning the concept of what agile is.
-(The following chapters are currently available in Japanese only.)
 
-<a href="{{< relref path="/docs/agile/manifest" lang="ja" >}}" class="book-btn">What is Agile (Japanese)</a>
+{{% button relref="/docs/agile/manifest" %}}What is Agile{{% /button %}}

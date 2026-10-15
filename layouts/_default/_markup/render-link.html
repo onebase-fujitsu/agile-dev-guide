@@ -1,0 +1,8 @@
+{{- $href := .Destination -}}
+{{- $isRemote := or (in $href ":") (strings.HasPrefix $href "//") (strings.HasPrefix $href "/") (strings.HasPrefix $href "#") -}}
+{{- if not $isRemote -}}
+  {{- with .Page.Resources.GetMatch $href -}}
+    {{- $href = .RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+<a href="{{ $href | safeURL }}"{{ with .Title}} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>
