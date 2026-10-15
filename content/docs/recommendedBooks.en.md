@@ -21,7 +21,7 @@ In agile development, we do not write documentation about the product (not only 
 Readable code itself becomes the documentation.
 Be sure to read it before joining product development so that you can write readable code.
 
-## The Great ScrumMaster (SCRUM MASTER THE BOOK)
+## The Great ScrumMaster: #ScrumMasterWay (SCRUMMASTER THE BOOK)
 
 [https://www.amazon.co.jp/dp/4798166855/](https://www.amazon.co.jp/dp/4798166855/)
 

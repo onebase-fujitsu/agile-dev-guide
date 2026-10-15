@@ -8,7 +8,7 @@ bookToc: true
 
 What was declared in the [Manifesto for Agile Software Development]({{% ref "/docs/agile/manifest" %}})
 described the mindset that matters in agile development.
-Now let's look at the [12 Principles of Agile Development](https://agilemanifesto.org/iso/ja/principles.html) that form its background. There is a link to them on the Manifesto for Agile Software Development page mentioned earlier.
+Now let's look at the [12 Principles of Agile Development](https://agilemanifesto.org/iso/en/principles.html) that form its background. There is a link to them on the Manifesto for Agile Software Development page mentioned earlier.
 
 ```
 Principles behind the Agile Manifesto

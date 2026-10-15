@@ -8,7 +8,7 @@ bookToc: true
 
 If we were to give a concise answer to the question of what agile development is, it would be:
 **"Development that is grounded in the mindset of the Manifesto for Agile Software Development and follows the 12 Principles of Agile Development."**
-Let's start by reading through the [Manifesto for Agile Software Development](https://agilemanifesto.org/iso/ja/manifesto.html).
+Let's start by reading through the [Manifesto for Agile Software Development](https://agilemanifesto.org/iso/en/manifesto.html).
 
 ```
 Manifesto for Agile Software Development
