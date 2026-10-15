@@ -13,8 +13,6 @@ draft: false
 Fujitsu Limited (hereinafter "Fujitsu") has compiled its in-house knowledge of agile development
 and publishes it here for the purpose of developing talent within the company.
 
-The English version is a work in progress. Pages that have not been translated yet are available in Japanese only.
-
 ## Source code
 
 The source code of this guidebook is available at [https://github.com/Onebase-Fujitsu/agile-dev-guide](https://github.com/Onebase-Fujitsu/agile-dev-guide).
